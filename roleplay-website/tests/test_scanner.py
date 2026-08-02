@@ -1,6 +1,6 @@
 from pathlib import Path
 import json
-from scanner import scan_library
+from scanner import scan_library, annotate_states
 
 
 def make_level(parent: Path, name: str, *, demo=False, performance=False, title=None):
@@ -65,3 +65,56 @@ def test_scan_ignores_stray_files_at_chapter_level(tmp_path):
     make_level(root / "01-c", "01-s", demo=True)
     chapters = scan_library(root)
     assert len(chapters[0]["levels"]) == 1
+
+
+def lib_with(*specs, tmp_path):
+    """specs: tuples of (chapter, level, has_performance). Returns scanned+annotated."""
+    root = tmp_path / "lib"
+    for ch, lv, perf in specs:
+        make_level(root / ch, lv, demo=True, performance=perf)
+    return annotate_states(scan_library(root))
+
+
+def _flat(chapters):
+    return [lv for ch in chapters for lv in ch["levels"]]
+
+
+def test_first_level_is_unlocked_and_current(tmp_path):
+    chapters = lib_with(("01-c", "01-s", False), tmp_path=tmp_path)
+    lv = _flat(chapters)[0]
+    assert lv["state"] == "unlocked"
+    assert lv["current"] is True
+
+
+def test_completed_level_marks_next_unlocked_current(tmp_path):
+    chapters = lib_with(
+        ("01-c", "01-s", True), ("01-c", "02-s", False), tmp_path=tmp_path)
+    flat = _flat(chapters)
+    assert flat[0]["state"] == "completed"
+    assert flat[1]["state"] == "unlocked"
+    assert flat[1]["current"] is True
+    assert flat[0].get("current", False) is False
+
+
+def test_locked_when_previous_not_completed(tmp_path):
+    chapters = lib_with(
+        ("01-c", "01-s", False), ("01-c", "02-s", False), tmp_path=tmp_path)
+    flat = _flat(chapters)
+    assert flat[0]["state"] == "unlocked"
+    assert flat[1]["state"] == "locked"
+
+
+def test_state_carries_across_chapters(tmp_path):
+    chapters = lib_with(
+        ("01-c", "01-s", True), ("02-c", "01-s", False), tmp_path=tmp_path)
+    flat = _flat(chapters)
+    assert flat[0]["state"] == "completed"
+    assert flat[1]["state"] == "unlocked"
+    assert flat[1]["chapter"] == "02-c"
+
+
+def test_all_completed_has_no_current(tmp_path):
+    chapters = lib_with(("01-c", "01-s", True), tmp_path=tmp_path)
+    flat = _flat(chapters)
+    assert flat[0]["state"] == "completed"
+    assert flat[0].get("current", False) is False

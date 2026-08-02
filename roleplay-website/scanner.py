@@ -35,3 +35,29 @@ def _read_title(level_dir: Path) -> str:
             "title", level_dir.name)
     except (json.JSONDecodeError, OSError):
         return level_dir.name
+
+
+def annotate_states(chapters: list[dict]) -> list[dict]:
+    """Set each level's state (locked/unlocked/completed) and mark current.
+
+    Walks levels in global order. First level is unlocked. Each later level is
+    unlocked iff the previous level has a performance video. Completed iff
+    has_performance. The first unlocked-but-not-completed level is 'current'.
+    Mutates and returns the input.
+    """
+    flat = [lv for ch in chapters for lv in ch["levels"]]
+    prev_completed = True  # the first level has nothing required before it
+    current_set = False
+    for lv in flat:
+        if lv["has_performance"]:
+            lv["state"] = "completed"
+            lv["current"] = False
+        elif prev_completed:
+            lv["state"] = "unlocked"
+            lv["current"] = not current_set
+            current_set = True
+        else:
+            lv["state"] = "locked"
+            lv["current"] = False
+        prev_completed = lv["has_performance"]
+    return chapters

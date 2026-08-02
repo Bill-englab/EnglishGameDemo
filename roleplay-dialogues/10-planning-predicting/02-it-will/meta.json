@@ -1,0 +1,44 @@
+{
+  "title": "It will rain, you know.",
+  "title_zh": "预测",
+  "scene": "他凭观察预测要下雨。",
+  "patterns": [
+    "It will ___",
+    "I think ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Child",
+      "line": "It will rain, you know."
+    },
+    {
+      "speaker": "Dad",
+      "line": "The sky's clear."
+    },
+    {
+      "speaker": "Child",
+      "line": "I think I smelled it."
+    },
+    {
+      "speaker": "Dad",
+      "line": "You smelled rain?"
+    },
+    {
+      "speaker": "Child",
+      "line": "Wet dirt. I think it's close."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Maybe."
+    },
+    {
+      "speaker": "Child",
+      "line": "It will pour, I think."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Let's see if you're right."
+    }
+  ],
+  "variations": "\"rain\" 换 \"get cold\"；\"smelled it\" 换 \"felt it\"。"
+}

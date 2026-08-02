@@ -1,0 +1,44 @@
+{
+  "title": "It's stuck, the zipper.",
+  "title_zh": "卡住了",
+  "scene": "拉链卡住，够不着也看不清。",
+  "patterns": [
+    "It's stuck",
+    "I can't reach ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Child",
+      "line": "It's stuck, the zipper."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Pull from the bottom."
+    },
+    {
+      "speaker": "Child",
+      "line": "I can't reach the bottom part."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Stand on the step."
+    },
+    {
+      "speaker": "Child",
+      "line": "The fabric's in it now."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Hold it flat, then pull. There."
+    },
+    {
+      "speaker": "Child",
+      "line": "Got it. Thanks."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Zippers are sneaky."
+    }
+  ],
+  "variations": "\"zipper\" 换 \"button\"；\"reach\" 换 \"see\"。"
+}

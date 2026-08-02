@@ -1,0 +1,44 @@
+{
+  "title": "Good. I went to her garden.",
+  "title_zh": "复述去了哪",
+  "scene": "回家被问今天怎么样，讲奶奶的菜园。",
+  "patterns": [
+    "I went ___",
+    "It was ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "How was the visit to Grandma's?"
+    },
+    {
+      "speaker": "Child",
+      "line": "Good. I went to her garden."
+    },
+    {
+      "speaker": "Dad",
+      "line": "What did you see?"
+    },
+    {
+      "speaker": "Child",
+      "line": "It was full of tomatoes."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Did you pick any?"
+    },
+    {
+      "speaker": "Child",
+      "line": "One big red one. I went to show Grandma."
+    },
+    {
+      "speaker": "Dad",
+      "line": "She must've liked that."
+    },
+    {
+      "speaker": "Child",
+      "line": "She said it was her favorite kind."
+    }
+  ],
+  "variations": "\"Grandma's garden\" 换 \"the park\"；\"tomatoes\" 换 \"ducks\"。"
+}

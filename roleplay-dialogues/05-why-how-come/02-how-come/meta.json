@@ -1,0 +1,43 @@
+{
+  "title": "How come?",
+  "title_zh": "问原因",
+  "scene": "今晚没甜点，他追问。",
+  "patterns": [
+    "How come ___?"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "We're not having dessert tonight."
+    },
+    {
+      "speaker": "Child",
+      "line": "How come?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "We had treats at the party."
+    },
+    {
+      "speaker": "Child",
+      "line": "That doesn't count."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Sugar is sugar."
+    },
+    {
+      "speaker": "Child",
+      "line": "How come you get to decide?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Because I'm the dad, and you had enough today."
+    },
+    {
+      "speaker": "Child",
+      "line": "Hmph. Tomorrow then?"
+    }
+  ],
+  "variations": "\"dessert\" 换 \"story time\"；\"treats\" 换 \"soda\"。"
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Can you help me open this?",
+  "title_zh": "请帮忙",
+  "scene": "打不开某样东西，反复试。",
+  "patterns": [
+    "Can you help me ___?",
+    "I can't ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Child",
+      "line": "Can you help me open this?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Twist it the other way."
+    },
+    {
+      "speaker": "Child",
+      "line": "I can't, it's too tight."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Push up while you twist."
+    },
+    {
+      "speaker": "Child",
+      "line": "Like this?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Yeah. There it goes."
+    },
+    {
+      "speaker": "Child",
+      "line": "I did it! Sort of."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Counts as doing it."
+    }
+  ],
+  "variations": "\"open this\" 换 \"tie this\"；\"too tight\" 换 \"too tricky\"。"
+}

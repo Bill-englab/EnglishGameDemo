@@ -1,0 +1,44 @@
+{
+  "title": "I don't want to go yet.",
+  "title_zh": "不想现在做",
+  "scene": "该出门，他拖延、挑鞋。",
+  "patterns": [
+    "I don't want to ___",
+    "not yet"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "Time to put on shoes."
+    },
+    {
+      "speaker": "Child",
+      "line": "I don't want to go yet."
+    },
+    {
+      "speaker": "Dad",
+      "line": "We're already late."
+    },
+    {
+      "speaker": "Child",
+      "line": "Five more minutes?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Two. And shoes first."
+    },
+    {
+      "speaker": "Child",
+      "line": "Can I wear the boots? I don't want to bend down."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Boots it is. Two minutes, then we go."
+    },
+    {
+      "speaker": "Child",
+      "line": "Deal."
+    }
+  ],
+  "variations": "\"go\" 换 \"get dressed\"；\"bend down\" 换 \"tie laces\"。"
+}

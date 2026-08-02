@@ -1,0 +1,40 @@
+{
+  "title": "We drew monsters, and then we showed the teacher.",
+  "title_zh": "复述做了啥",
+  "scene": "问他和朋友今天干了啥。",
+  "patterns": [
+    "We ___",
+    "and then ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "What did you do with Sam?"
+    },
+    {
+      "speaker": "Child",
+      "line": "We drew monsters, and then we showed the teacher."
+    },
+    {
+      "speaker": "Dad",
+      "line": "What did she say?"
+    },
+    {
+      "speaker": "Child",
+      "line": "She said mine was the scariest."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Was it?"
+    },
+    {
+      "speaker": "Child",
+      "line": "It had three eyes."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Of course it did."
+    }
+  ],
+  "variations": "\"drew monsters\" 换 \"built a fort\"；\"showed the teacher\" 换 \"showed Mom\"。"
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Mom said dinner's at seven, but I'm hungry now.",
+  "title_zh": "转述家人",
+  "scene": "妈妈说七点吃饭，他现在就饿。",
+  "patterns": [
+    "Mom said ___",
+    "but ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Child",
+      "line": "Mom said dinner's at seven, but I'm hungry now."
+    },
+    {
+      "speaker": "Dad",
+      "line": "You just had a snack."
+    },
+    {
+      "speaker": "Child",
+      "line": "Mom said a small snack."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Was it small?"
+    },
+    {
+      "speaker": "Child",
+      "line": "It was small... for me."
+    },
+    {
+      "speaker": "Dad",
+      "line": "For you, maybe."
+    },
+    {
+      "speaker": "Child",
+      "line": "Can I have one more?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Ask Mom."
+    }
+  ],
+  "variations": "\"dinner's at seven\" 换 \"no TV till six\"；\"a small snack\" 换 \"one cookie\"。"
+}

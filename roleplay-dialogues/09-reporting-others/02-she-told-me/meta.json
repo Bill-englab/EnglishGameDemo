@@ -1,0 +1,43 @@
+{
+  "title": "She told me to add more color.",
+  "title_zh": "转述指令",
+  "scene": "老师让他在画上加东西。",
+  "patterns": [
+    "She told me to ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "What did the teacher say about your drawing?"
+    },
+    {
+      "speaker": "Child",
+      "line": "She told me to add more color."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Did you?"
+    },
+    {
+      "speaker": "Child",
+      "line": "I added blue to the sky."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Better?"
+    },
+    {
+      "speaker": "Child",
+      "line": "She told me to show the class tomorrow."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Big deal."
+    },
+    {
+      "speaker": "Child",
+      "line": "She said it pops now."
+    }
+  ],
+  "variations": "\"add more color\" 换 \"draw it bigger\"；\"blue to the sky\" 换 \"a sun in the corner\"。"
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Let me try first.",
+  "title_zh": "自己来",
+  "scene": "要自己倒水，怕他洒。",
+  "patterns": [
+    "Let me try",
+    "I can do it ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "Here, I'll pour it."
+    },
+    {
+      "speaker": "Child",
+      "line": "Let me try first."
+    },
+    {
+      "speaker": "Dad",
+      "line": "It's heavy."
+    },
+    {
+      "speaker": "Child",
+      "line": "I can do it with two hands."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Two hands, then. On the low shelf."
+    },
+    {
+      "speaker": "Child",
+      "line": "See? Only a little spill."
+    },
+    {
+      "speaker": "Dad",
+      "line": "A little's fine. Next time, even less."
+    },
+    {
+      "speaker": "Child",
+      "line": "I can do it myself next time."
+    }
+  ],
+  "variations": "\"pour it\" 换 \"carry it\"；\"two hands\" 换 \"slow steps\"。"
+}

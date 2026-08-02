@@ -1,0 +1,40 @@
+{
+  "title": "I need the scissors for this.",
+  "title_zh": "表达需要",
+  "scene": "做手工时他要某样工具。",
+  "patterns": [
+    "I need ___",
+    "Can I ___?"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Child",
+      "line": "I need the scissors for this."
+    },
+    {
+      "speaker": "Dad",
+      "line": "They're in the drawer. The blue ones."
+    },
+    {
+      "speaker": "Child",
+      "line": "Can I cut by myself?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "If you sit down."
+    },
+    {
+      "speaker": "Child",
+      "line": "I'm sitting. See?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "I see. Go ahead. Slow and steady."
+    },
+    {
+      "speaker": "Child",
+      "line": "Look, only wobbled twice."
+    }
+  ],
+  "variations": "\"scissors\" 换 \"glue\"；\"cut\" 换 \"glue it\"。"
+}

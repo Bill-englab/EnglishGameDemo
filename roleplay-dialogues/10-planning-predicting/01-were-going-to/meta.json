@@ -1,0 +1,48 @@
+{
+  "title": "We're going to the pool, right?",
+  "title_zh": "计划",
+  "scene": "周末计划，他一项项确认。",
+  "patterns": [
+    "We're going to ___",
+    "after ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "What's the plan Saturday?"
+    },
+    {
+      "speaker": "Child",
+      "line": "We're going to the pool, right?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "After lunch."
+    },
+    {
+      "speaker": "Child",
+      "line": "The big one or the small one?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "The big one."
+    },
+    {
+      "speaker": "Child",
+      "line": "Are we bringing floats?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "The small one. After the pool, maybe ice cream."
+    },
+    {
+      "speaker": "Child",
+      "line": "We're going to be tired after."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Then ice cream is likely."
+    }
+  ],
+  "variations": "\"the pool\" 换 \"the park\"；\"after lunch\" 换 \"after nap\"。"
+}

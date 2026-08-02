@@ -1,0 +1,40 @@
+{
+  "title": "Where's my blue sock?",
+  "title_zh": "找东西",
+  "scene": "找不着袜子，翻几个地方。",
+  "patterns": [
+    "Where's ___?",
+    "I can't find ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Child",
+      "line": "Where's my blue sock?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Check under the bed."
+    },
+    {
+      "speaker": "Child",
+      "line": "I can't find it there."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Try the laundry basket."
+    },
+    {
+      "speaker": "Child",
+      "line": "Oh! It was inside a shirt."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Socks hide."
+    },
+    {
+      "speaker": "Child",
+      "line": "This shirt ate it."
+    }
+  ],
+  "variations": "\"blue sock\" 换 \"red shoe\"；\"under the bed\" 换 \"in the closet\"。"
+}

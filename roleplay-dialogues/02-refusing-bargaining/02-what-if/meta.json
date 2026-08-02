@@ -1,0 +1,48 @@
+{
+  "title": "What if I watch half of the next one?",
+  "title_zh": "讲条件",
+  "scene": "看动画片到点，他谈条件、自己定规则。",
+  "patterns": [
+    "What if ___?",
+    "just one more ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "Last episode, then off."
+    },
+    {
+      "speaker": "Child",
+      "line": "What if I watch half of the next one?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Half isn't a thing."
+    },
+    {
+      "speaker": "Child",
+      "line": "Just one more, then I turn it off."
+    },
+    {
+      "speaker": "Dad",
+      "line": "You said that last time."
+    },
+    {
+      "speaker": "Child",
+      "line": "I'll set a timer this time."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Five minutes."
+    },
+    {
+      "speaker": "Child",
+      "line": "Just one more, promise."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Set it. Go."
+    }
+  ],
+  "variations": "\"episode\" 换 \"song\"；\"set a timer\" 换 \"count to fifty\"。"
+}

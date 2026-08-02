@@ -1,0 +1,44 @@
+{
+  "title": "Can we go to the park after this?",
+  "title_zh": "想做某事",
+  "scene": "他提议等下做某件事，并补充理由。",
+  "patterns": [
+    "Can we ___?",
+    "I want to ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Child",
+      "line": "Can we go to the park after this?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Maybe, if it doesn't rain."
+    },
+    {
+      "speaker": "Child",
+      "line": "I want to feed the ducks."
+    },
+    {
+      "speaker": "Dad",
+      "line": "We don't have bread."
+    },
+    {
+      "speaker": "Child",
+      "line": "Then we stop for bread first."
+    },
+    {
+      "speaker": "Dad",
+      "line": "That's an extra stop."
+    },
+    {
+      "speaker": "Child",
+      "line": "Please? The brown one waits by the bench."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Fine. Bread, then park."
+    }
+  ],
+  "variations": "\"the park\" 换 \"the library\"；\"feed the ducks\" 换 \"read a book\"。"
+}

@@ -1,0 +1,48 @@
+{
+  "title": "I'd rather do it after dinner.",
+  "title_zh": "婉拒 / 偏好",
+  "scene": "叫他练某样，他用偏好推后，并提出替代。",
+  "patterns": [
+    "I'd rather ___",
+    "not now"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "Let's practice counting."
+    },
+    {
+      "speaker": "Child",
+      "line": "I'd rather do it after dinner."
+    },
+    {
+      "speaker": "Dad",
+      "line": "You said that yesterday."
+    },
+    {
+      "speaker": "Child",
+      "line": "Not now, my brain's full."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Full of what?"
+    },
+    {
+      "speaker": "Child",
+      "line": "Full of playing."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Ten minutes of play, then we count."
+    },
+    {
+      "speaker": "Child",
+      "line": "Can I count the blocks I built?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "That works."
+    }
+  ],
+  "variations": "\"counting\" 换 \"reading\"；\"after dinner\" 换 \"tomorrow\"。"
+}

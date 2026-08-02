@@ -1,0 +1,40 @@
+{
+  "title": "First shoes, then water bottles.",
+  "title_zh": "安排顺序",
+  "scene": "出门前问要带啥。",
+  "patterns": [
+    "First ___, then ___",
+    "as soon as ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "What do we need before the park?"
+    },
+    {
+      "speaker": "Child",
+      "line": "First shoes, then water bottles."
+    },
+    {
+      "speaker": "Dad",
+      "line": "And?"
+    },
+    {
+      "speaker": "Child",
+      "line": "Hats. As soon as we're ready, we go."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Then hurry up."
+    },
+    {
+      "speaker": "Child",
+      "line": "I'm hurrying the slow way."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Shoes, then."
+    }
+  ],
+  "variations": "\"shoes/water bottles\" 换 \"snacks/hats\"；\"we go\" 换 \"we leave\"。"
+}

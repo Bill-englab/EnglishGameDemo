@@ -5,7 +5,8 @@ import json
 def scan_library(root: Path) -> list[dict]:
     """Walk the library root, return chapters (each with levels) in order.
 
-    Each level: { chapter, level, title, has_demo, has_performance }.
+    Each level: { chapter, level, title, scene, patterns, dialogue, variations,
+                  has_demo, has_performance }.
     Directories must be zero-prefixed so string sort matches intended order.
     """
     chapters: list[dict] = []
@@ -14,10 +15,15 @@ def scan_library(root: Path) -> list[dict]:
     for chapter_dir in sorted(p for p in root.iterdir() if p.is_dir()):
         levels = []
         for level_dir in sorted(p for p in chapter_dir.iterdir() if p.is_dir()):
+            meta = _read_meta(level_dir)
             levels.append({
                 "chapter": chapter_dir.name,
                 "level": level_dir.name,
-                "title": _read_title(level_dir),
+                "title": meta.get("title", level_dir.name),
+                "scene": meta.get("scene", ""),
+                "patterns": meta.get("patterns", []),
+                "dialogue": meta.get("dialogue", []),
+                "variations": meta.get("variations", ""),
                 "has_demo": (level_dir / "demo.mp4").exists(),
                 "has_performance": (level_dir / "performance.mp4").exists(),
             })
@@ -26,15 +32,14 @@ def scan_library(root: Path) -> list[dict]:
     return chapters
 
 
-def _read_title(level_dir: Path) -> str:
+def _read_meta(level_dir: Path) -> dict:
     meta = level_dir / "meta.json"
     if not meta.exists():
-        return level_dir.name
+        return {}
     try:
-        return json.loads(meta.read_text(encoding="utf-8")).get(
-            "title", level_dir.name)
+        return json.loads(meta.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
-        return level_dir.name
+        return {}
 
 
 def annotate_states(chapters: list[dict]) -> list[dict]:

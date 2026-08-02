@@ -3,12 +3,17 @@ import json
 from scanner import scan_library, annotate_states
 
 
-def make_level(parent: Path, name: str, *, demo=False, performance=False, title=None):
+def make_level(parent: Path, name: str, *, demo=False, performance=False,
+               title=None, scene=None):
     d = parent / name
     d.mkdir(parents=True)
+    meta = {}
     if title is not None:
-        (d / "meta.json").write_text(
-            json.dumps({"title": title}), encoding="utf-8")
+        meta["title"] = title
+    if scene is not None:
+        meta["scene"] = scene
+    if meta:
+        (d / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
     if demo:
         (d / "demo.mp4").write_bytes(b"")
     if performance:
@@ -56,6 +61,39 @@ def test_scan_records_performance_presence(tmp_path):
     make_level(root / "01-c", "01-s", demo=True, performance=True)
     chapters = scan_library(root)
     assert chapters[0]["levels"][0]["has_performance"] is True
+
+
+def test_scan_reads_scene_from_meta(tmp_path):
+    root = tmp_path / "lib"
+    make_level(root / "01-c", "01-s", demo=True, title="Scene One",
+               scene="Snack time. He picks which snack.")
+    chapters = scan_library(root)
+    assert chapters[0]["levels"][0]["scene"] == "Snack time. He picks which snack."
+
+
+def test_scan_scene_defaults_to_empty_when_absent(tmp_path):
+    root = tmp_path / "lib"
+    make_level(root / "01-c", "01-s", demo=True, title="Scene One")
+    chapters = scan_library(root)
+    assert chapters[0]["levels"][0]["scene"] == ""
+
+
+def test_scan_passes_through_dialogue_and_patterns(tmp_path):
+    root = tmp_path / "lib"
+    d = root / "01-c" / "01-s"
+    d.mkdir(parents=True)
+    (d / "meta.json").write_text(json.dumps({
+        "title": "Can I have the apple one?",
+        "scene": "Snack time.",
+        "patterns": ["Can I have ___?", "I want ___"],
+        "dialogue": [{"speaker": "Dad", "line": "Pick one."},
+                     {"speaker": "Child", "line": "Can I have the apple one?"}],
+        "variations": "apple -> banana",
+    }), encoding="utf-8")
+    lv = scan_library(root)[0]["levels"][0]
+    assert lv["patterns"] == ["Can I have ___?", "I want ___"]
+    assert lv["dialogue"][1] == {"speaker": "Child", "line": "Can I have the apple one?"}
+    assert lv["variations"] == "apple -> banana"
 
 
 def test_scan_ignores_stray_files_at_chapter_level(tmp_path):

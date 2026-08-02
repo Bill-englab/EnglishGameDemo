@@ -1,0 +1,43 @@
+{
+  "title": "Why do I have to brush twice?",
+  "title_zh": "问规则原因",
+  "scene": "叫他刷牙，他追问几次。",
+  "patterns": [
+    "Why do I have to ___?"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "Brush your teeth now."
+    },
+    {
+      "speaker": "Child",
+      "line": "Why do I have to brush twice?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Once in the morning, once at night."
+    },
+    {
+      "speaker": "Child",
+      "line": "But nothing happened to them today."
+    },
+    {
+      "speaker": "Dad",
+      "line": "That's the point — keep it that way."
+    },
+    {
+      "speaker": "Child",
+      "line": "Why do I have to use toothpaste?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "It scrubs better than water."
+    },
+    {
+      "speaker": "Child",
+      "line": "Okay, but I'm counting fast."
+    }
+  ],
+  "variations": "\"brush twice\" 换 \"go to bed now\"；\"toothpaste\" 换 \"the foam one\"。"
+}

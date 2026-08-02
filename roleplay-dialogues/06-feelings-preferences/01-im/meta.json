@@ -1,0 +1,44 @@
+{
+  "title": "I'm tired because I slept late.",
+  "title_zh": "说情绪",
+  "scene": "走路拖着脚，又累又无聊。",
+  "patterns": [
+    "I'm ___",
+    "because ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "You're dragging your feet. Okay?"
+    },
+    {
+      "speaker": "Child",
+      "line": "I'm tired because I slept late."
+    },
+    {
+      "speaker": "Dad",
+      "line": "You did stay up."
+    },
+    {
+      "speaker": "Child",
+      "line": "And I'm bored of walking."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Bored or tired?"
+    },
+    {
+      "speaker": "Child",
+      "line": "Both. Can I have a piggyback?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "Only to the corner."
+    },
+    {
+      "speaker": "Child",
+      "line": "Deal."
+    }
+  ],
+  "variations": "\"tired\" 换 \"hungry\"；\"bored of walking\" 换 \"hot\"。"
+}

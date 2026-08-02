@@ -1,0 +1,40 @@
+{
+  "title": "Because the chair wobbles, so I moved.",
+  "title_zh": "解释选择",
+  "scene": "他不坐椅子坐地上，并催爸爸修。",
+  "patterns": [
+    "because ___",
+    "so ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "Why'd you sit on the floor?"
+    },
+    {
+      "speaker": "Child",
+      "line": "Because the chair wobbles, so I moved."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Smart."
+    },
+    {
+      "speaker": "Child",
+      "line": "Can you fix it?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "I'll tighten it tonight."
+    },
+    {
+      "speaker": "Child",
+      "line": "So I can sit tomorrow?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "So you can sit tomorrow."
+    }
+  ],
+  "variations": "\"sit on the floor\" 换 \"stand by the window\"；\"wobbles\" 换 \"creaks\"。"
+}

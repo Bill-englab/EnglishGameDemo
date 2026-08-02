@@ -1,0 +1,47 @@
+{
+  "title": "Yeah. Even though it was wet, I still had fun.",
+  "title_zh": "让步",
+  "scene": "下雨还跑出去玩，回来爸爸数落。",
+  "patterns": [
+    "even though ___, I still ___"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "You went out in the rain?"
+    },
+    {
+      "speaker": "Child",
+      "line": "Yeah. Even though it was wet, I still had fun."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Did you get soaked?"
+    },
+    {
+      "speaker": "Child",
+      "line": "Just my feet. The puddles were worth it."
+    },
+    {
+      "speaker": "Dad",
+      "line": "You'll catch a cold."
+    },
+    {
+      "speaker": "Child",
+      "line": "I feel fine. Can I go out again tomorrow?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "If it's not pouring, maybe."
+    },
+    {
+      "speaker": "Child",
+      "line": "Promise?"
+    },
+    {
+      "speaker": "Dad",
+      "line": "We'll see."
+    }
+  ],
+  "variations": "\"rain\" 换 \"dark\"；\"wet\" 换 \"scary\"。"
+}

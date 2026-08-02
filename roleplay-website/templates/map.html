@@ -2,15 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Role-Play Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>My English Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <main id="map"></main>
-  <div id="player" class="modal">
-    <video id="player-video" controls></video>
-    <button id="player-close" type="button">&#10005;</button>
+  <!-- per-chapter painted backgrounds (cross-fade on scroll) -->
+  <div id="bg-fade" aria-hidden="true"></div>
+  <div id="grain" aria-hidden="true"></div>
+
+  <div id="app">
+    <!-- MAP VIEW -->
+    <main id="map-view" class="view">
+      <header class="topbar">
+        <div class="title">My English Adventure</div>
+        <div class="progress"><span id="star-count">0</span><span class="slash">/</span><span id="star-total">30</span> stars</div>
+      </header>
+      <div id="map-scroll">
+        <svg id="path-svg" class="path-layer" aria-hidden="true"></svg>
+        <div id="map"></div>
+      </div>
+    </main>
+
+    <!-- LEVEL DETAIL VIEW -->
+    <section id="detail-view" class="view hidden">
+      <div class="detail-card">
+        <button id="back-btn" class="back-btn" type="button">&#8592; Map</button>
+        <div id="detail-chapter" class="chip"></div>
+        <h1 id="detail-title"></h1>
+        <div id="detail-patterns" class="patterns-row"></div>
+        <p id="detail-scene" class="scene"></p>
+        <div class="block-label">Watch &amp; learn</div>
+        <div id="detail-demo" class="demo-wrap"></div>
+        <div id="detail-star" class="star-row"></div>
+        <div id="detail-perf" class="perf-wrap"></div>
+        <div class="block-label">Read together</div>
+        <div id="detail-dialogue" class="dialogue"></div>
+        <div id="detail-variations" class="variations"></div>
+      </div>
+    </section>
   </div>
   <script src="/static/app.js"></script>
 </body>

@@ -1,0 +1,40 @@
+{
+  "title": "I'd rather have banana.",
+  "title_zh": "偏好选择",
+  "scene": "水果二选一，他坚持偏好。",
+  "patterns": [
+    "I'd rather ___",
+    "I like ___ better"
+  ],
+  "dialogue": [
+    {
+      "speaker": "Dad",
+      "line": "Apple or banana?"
+    },
+    {
+      "speaker": "Child",
+      "line": "I'd rather have banana."
+    },
+    {
+      "speaker": "Dad",
+      "line": "You had banana yesterday."
+    },
+    {
+      "speaker": "Child",
+      "line": "I like banana better."
+    },
+    {
+      "speaker": "Dad",
+      "line": "You'll get tired of it."
+    },
+    {
+      "speaker": "Child",
+      "line": "Not yet."
+    },
+    {
+      "speaker": "Dad",
+      "line": "Banana it is."
+    }
+  ],
+  "variations": "\"banana\" 换 \"grapes\"；\"apple\" 换 \"pear\"。"
+}

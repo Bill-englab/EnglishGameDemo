@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+
+# child performance videos — local only, never committed (privacy + size)
+roleplay-dialogues/**/performance.mp4
+.claude/

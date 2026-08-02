@@ -27,30 +27,35 @@ function prettyChapter(raw) {
 
 // ===== svg bits =====
 const MASCOT_SVG = `
-<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M90 96 q22 -4 18 -26" fill="#ff9a3c" stroke="#3a2a1a" stroke-width="3" stroke-linecap="round"/>
-  <ellipse cx="60" cy="106" rx="35" ry="30" fill="#ff9a3c" stroke="#3a2a1a" stroke-width="3"/>
-  <path d="M33 114 q27 18 54 0 l-4 -14 q-23 10 -46 0 z" fill="#ffd83d" stroke="#3a2a1a" stroke-width="3"/>
-  <path d="M44 104 q4 10 2 20" stroke="#3a2a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <path d="M76 104 q-4 10 -2 20" stroke="#3a2a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <circle cx="60" cy="52" r="34" fill="#ff9a3c" stroke="#3a2a1a" stroke-width="3"/>
-  <circle cx="34" cy="28" r="11" fill="#ff9a3c" stroke="#3a2a1a" stroke-width="3"/>
-  <circle cx="86" cy="28" r="11" fill="#ff9a3c" stroke="#3a2a1a" stroke-width="3"/>
-  <circle cx="34" cy="29" r="5" fill="#ff5d73"/>
-  <circle cx="86" cy="29" r="5" fill="#ff5d73"/>
-  <path d="M44 26 q4 9 2 17" stroke="#3a2a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <path d="M60 22 v18" stroke="#3a2a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <path d="M76 26 q-4 9 -2 17" stroke="#3a2a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <circle cx="40" cy="60" r="7" fill="#ffb3a0" opacity="0.85"/>
-  <circle cx="80" cy="60" r="7" fill="#ffb3a0" opacity="0.85"/>
-  <circle cx="48" cy="50" r="6" fill="#2a1a0a"/>
-  <circle cx="72" cy="50" r="6" fill="#2a1a0a"/>
-  <circle cx="50" cy="48" r="2" fill="#fff"/>
-  <circle cx="74" cy="48" r="2" fill="#fff"/>
-  <ellipse cx="60" cy="64" rx="10" ry="7" fill="#fff1e0"/>
-  <circle cx="60" cy="61" r="2.6" fill="#3a2a1a"/>
-  <path d="M60 64 q0 4 -4 5" stroke="#3a2a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <path d="M60 64 q0 4 4 5" stroke="#3a2a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <ellipse cx="36" cy="110" rx="13" ry="9" fill="#ffae5c" stroke="#4a3327" stroke-width="3.5"/>
+  <ellipse cx="84" cy="110" rx="13" ry="9" fill="#ffae5c" stroke="#4a3327" stroke-width="3.5"/>
+  <circle cx="60" cy="56" r="44" fill="#ffae5c" stroke="#4a3327" stroke-width="3.5"/>
+  <circle cx="29" cy="24" r="15" fill="#ffae5c" stroke="#4a3327" stroke-width="3.5"/>
+  <circle cx="91" cy="24" r="15" fill="#ffae5c" stroke="#4a3327" stroke-width="3.5"/>
+  <circle cx="29" cy="26" r="7" fill="#ff7a9d"/>
+  <circle cx="91" cy="26" r="7" fill="#ff7a9d"/>
+  <path d="M45 17 q3 11 1 20" stroke="#4a3327" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M60 12 v22" stroke="#4a3327" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M75 17 q-3 11 -1 20" stroke="#4a3327" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M15 50 h13" stroke="#4a3327" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <path d="M92 50 h13" stroke="#4a3327" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <path d="M17 62 h10" stroke="#4a3327" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <path d="M93 62 h10" stroke="#4a3327" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="35" cy="68" rx="9" ry="6" fill="#ff8fa8" opacity="0.7"/>
+  <ellipse cx="85" cy="68" rx="9" ry="6" fill="#ff8fa8" opacity="0.7"/>
+  <ellipse cx="60" cy="72" rx="22" ry="15" fill="#fff3e2"/>
+  <ellipse cx="45" cy="55" rx="8" ry="10" fill="#2a1a0a"/>
+  <ellipse cx="75" cy="55" rx="8" ry="10" fill="#2a1a0a"/>
+  <circle cx="47.5" cy="51" r="3" fill="#fff"/>
+  <circle cx="77.5" cy="51" r="3" fill="#fff"/>
+  <path d="M55 66 q5 -5 10 0 q-1 4 -5 4 q-4 0 -5 -4 z" fill="#3a2a1a"/>
+  <path d="M60 70 q-5 6 -11 3" stroke="#3a2a1a" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <path d="M60 70 q5 6 11 3" stroke="#3a2a1a" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <path d="M40 71 q-11 -1 -17 -4" stroke="#4a3327" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".55"/>
+  <path d="M40 75 q-11 2 -17 2" stroke="#4a3327" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".55"/>
+  <path d="M80 71 q11 -1 17 -4" stroke="#4a3327" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".55"/>
+  <path d="M80 75 q11 2 17 2" stroke="#4a3327" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".55"/>
 </svg>`;
 
 const STAR_PATH = "M12 17.27 L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z";
@@ -123,21 +128,21 @@ function renderScenery(section, ci, p) {
   for (let i = 0; i < groundN; i++) {
     const type = pool[Math.floor(rand() * pool.length)];
     const svg = type === "flower" ? flower(p.accent) : SCENERY[type];
-    placeScenery(section, { svg, cls: "ground " + type, side: rand() > .5 ? "left" : "right", x: 1 + rand() * 13, top: 8 + rand() * 72, w: (44 + rand() * 40) * s, delay: rand() * 4, flip: rand() > .5 });
+    placeScenery(section, { svg, cls: "ground " + type, side: rand() > .5 ? "left" : "right", x: 1 + rand() * 16, top: 8 + rand() * 72, w: (52 + rand() * 48) * s, delay: rand() * 4, flip: rand() > .5 });
   }
 
   if (night) {
-    placeScenery(section, { svg: SCENERY.moon, cls: "floater moon", side: rand() > .5 ? "left" : "right", x: 5 + rand() * 8, top: 3 + rand() * 7, w: 52 * s, delay: 0 });
+    placeScenery(section, { svg: SCENERY.moon, cls: "floater moon", side: rand() > .5 ? "left" : "right", x: 4 + rand() * 13, top: 3 + rand() * 7, w: 60 * s, delay: 0 });
     const stars = vw < 520 ? 4 : 8;
-    for (let i = 0; i < stars; i++) placeScenery(section, { svg: SCENERY.star, cls: "twinkle", side: rand() > .5 ? "left" : "right", x: 2 + rand() * 17, top: 3 + rand() * 45, w: (9 + rand() * 12) * s, delay: rand() * 3 });
+    for (let i = 0; i < stars; i++) placeScenery(section, { svg: SCENERY.star, cls: "twinkle", side: rand() > .5 ? "left" : "right", x: 2 + rand() * 16, top: 3 + rand() * 45, w: (11 + rand() * 14) * s, delay: rand() * 3 });
     const flies = vw < 520 ? 2 : 4;
-    for (let i = 0; i < flies; i++) placeScenery(section, { svg: SCENERY.firefly, cls: "firefly", side: rand() > .5 ? "left" : "right", x: 3 + rand() * 15, top: 22 + rand() * 55, w: (10 + rand() * 6) * s, delay: rand() * 3 });
+    for (let i = 0; i < flies; i++) placeScenery(section, { svg: SCENERY.firefly, cls: "firefly", side: rand() > .5 ? "left" : "right", x: 3 + rand() * 14, top: 22 + rand() * 55, w: (12 + rand() * 8) * s, delay: rand() * 3 });
   } else {
-    if (ci % 2 === 1) placeScenery(section, { svg: SCENERY.sun, cls: "floater sun", side: rand() > .5 ? "left" : "right", x: 4 + rand() * 8, top: 2 + rand() * 6, w: 58 * s, delay: 0 });
+    if (ci % 2 === 1) placeScenery(section, { svg: SCENERY.sun, cls: "floater sun", side: rand() > .5 ? "left" : "right", x: 3 + rand() * 13, top: 2 + rand() * 6, w: 68 * s, delay: 0 });
     const clouds = vw < 520 ? 1 : 2;
-    for (let i = 0; i < clouds; i++) placeScenery(section, { svg: SCENERY.cloud, cls: "cloud", side: rand() > .5 ? "left" : "right", x: 2 + rand() * 13, top: 5 + rand() * 16, w: (72 + rand() * 44) * s, delay: rand() * 5 });
+    for (let i = 0; i < clouds; i++) placeScenery(section, { svg: SCENERY.cloud, cls: "cloud", side: rand() > .5 ? "left" : "right", x: 2 + rand() * 12, top: 5 + rand() * 16, w: (84 + rand() * 52) * s, delay: rand() * 5 });
     const flies = vw < 520 ? 1 : 2;
-    for (let i = 0; i < flies; i++) placeScenery(section, { svg: butterfly(p.accent), cls: "butterfly", side: rand() > .5 ? "left" : "right", x: 4 + rand() * 13, top: 24 + rand() * 46, w: (26 + rand() * 10) * s, delay: rand() * 3 });
+    for (let i = 0; i < flies; i++) placeScenery(section, { svg: butterfly(p.accent), cls: "butterfly", side: rand() > .5 ? "left" : "right", x: 3 + rand() * 13, top: 24 + rand() * 46, w: (30 + rand() * 12) * s, delay: rand() * 3 });
   }
 }
 
@@ -213,7 +218,7 @@ function renderMap(library) {
   currentNodes = [];
   chapterSections = [];
 
-  const amp = Math.min(150, Math.max(34, window.innerWidth * 0.2));
+  const amp = Math.min(300, Math.max(50, window.innerWidth * 0.3));
   const total = library.reduce((n, ch) => n + ch.levels.length, 0);
   const done = library.reduce((n, ch) => n + ch.levels.filter(l => l.has_performance).length, 0);
   document.getElementById("star-total").textContent = total;
@@ -240,7 +245,8 @@ function renderMap(library) {
       const wrap = document.createElement("button");
       wrap.type = "button";
       wrap.className = "node-wrap" + (level.current ? " current" : "");
-      wrap.style.setProperty("--zig", (Math.sin(i * 0.8) * amp).toFixed(1) + "px");
+      const zig = Math.sin(i * 0.8) * amp;
+      wrap.style.setProperty("--zig", zig.toFixed(1) + "px");
       wrap.style.setProperty("--d", (inChapter++ * 0.07).toFixed(2) + "s");
       wrap.setAttribute("aria-label", level.title);
 
@@ -270,7 +276,7 @@ function renderMap(library) {
       }
 
       const label = document.createElement("span");
-      label.className = "node-label";
+      label.className = "node-label " + (zig > 0 ? "label-left" : "label-right");
       label.textContent = level.title;
 
       wrap.appendChild(node);
@@ -279,7 +285,7 @@ function renderMap(library) {
         const mascot = document.createElement("span");
         mascot.className = "mascot";
         mascot.innerHTML = MASCOT_SVG;
-        wrap.appendChild(mascot);
+        node.appendChild(mascot);
       }
 
       wrap.addEventListener("click", () => openDetail(level));

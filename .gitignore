@@ -2,6 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 
-# child performance videos — local only, never committed (privacy + size)
-roleplay-dialogues/**/performance.mp4
+# all roleplay-dialogues videos are local-only (size + privacy) — only meta.json/text is tracked
+roleplay-dialogues/**/*.mp4
 .claude/

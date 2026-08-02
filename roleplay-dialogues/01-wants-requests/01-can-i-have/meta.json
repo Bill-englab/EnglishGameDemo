@@ -1,0 +1,15 @@
+{
+  "title": "Can I have the apple one?",
+  "scene": "Snack time. He picks which snack and how many.",
+  "patterns": ["Can I have ___?", "I want ___"],
+  "dialogue": [
+    {"speaker": "Dad",   "line": "Snack's on the table. Pick one."},
+    {"speaker": "Child", "line": "Can I have the apple one?"},
+    {"speaker": "Dad",   "line": "Sure. Just one."},
+    {"speaker": "Child", "line": "But I want two. My tummy says two."},
+    {"speaker": "Dad",   "line": "One now, one after the park."},
+    {"speaker": "Child", "line": "Fine. But I pick the later one."},
+    {"speaker": "Dad",   "line": "Deal. Wash your hands first."}
+  ],
+  "variations": "apple one -> banana one; after the park -> after nap"
+}

@@ -1,5 +1,5 @@
 {
-  "title": "He said he's coming to my house.",
+  "title": "He said he is coming over to my house.",
   "title_zh": "转述同伴",
   "scene": "朋友说来家里玩，时间没定死。",
   "patterns": [
@@ -8,35 +8,35 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "What did Leo say today?"
+      "line": "What did Leo say to you today?"
     },
     {
       "speaker": "Child",
-      "line": "He said he's coming to my house."
+      "line": "He said he is coming over to my house."
     },
     {
       "speaker": "Dad",
-      "line": "Did he ask his mom?"
+      "line": "Did he ask his mom about it first?"
     },
     {
       "speaker": "Child",
-      "line": "He said she said yes."
+      "line": "Yes, he said that she said yes."
     },
     {
       "speaker": "Dad",
-      "line": "When?"
+      "line": "When is he going to come over?"
     },
     {
       "speaker": "Child",
-      "line": "He said maybe Saturday."
+      "line": "He said maybe on Saturday he can come."
     },
     {
       "speaker": "Dad",
-      "line": "Tell him to bring a toy."
+      "line": "Tell him he should bring a toy to share."
     },
     {
       "speaker": "Child",
-      "line": "He said he'll bring the truck."
+      "line": "He said he will bring his big truck."
     }
   ],
   "variations": "\"Leo\" 换 \"Mia\"；\"coming to my house\" 换 \"bringing a toy\"。"

@@ -1,5 +1,5 @@
 {
-  "title": "Can you help me open this?",
+  "title": "Can you help me open this jar?",
   "title_zh": "请帮忙",
   "scene": "打不开某样东西，反复试。",
   "patterns": [
@@ -9,35 +9,35 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "Can you help me open this?"
+      "line": "Can you help me open this jar?"
     },
     {
       "speaker": "Dad",
-      "line": "Twist it the other way."
+      "line": "Try twisting the lid the other way."
     },
     {
       "speaker": "Child",
-      "line": "I can't, it's too tight."
+      "line": "I can't do it, because it is too tight for me."
     },
     {
       "speaker": "Dad",
-      "line": "Push up while you twist."
+      "line": "Push up with your thumb while you twist it."
     },
     {
       "speaker": "Child",
-      "line": "Like this?"
+      "line": "Is it like this, Dad?"
     },
     {
       "speaker": "Dad",
-      "line": "Yeah. There it goes."
+      "line": "Yeah, that's it — there it goes!"
     },
     {
       "speaker": "Child",
-      "line": "I did it! Sort of."
+      "line": "I did it all by myself! Well, sort of."
     },
     {
       "speaker": "Dad",
-      "line": "Counts as doing it."
+      "line": "That still counts as doing it yourself."
     }
   ],
   "variations": "\"open this\" 换 \"tie this\"；\"too tight\" 换 \"too tricky\"。"

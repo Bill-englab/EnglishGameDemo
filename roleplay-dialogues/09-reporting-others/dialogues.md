@@ -10,14 +10,14 @@
 
 **目标句式：** `He said ___`（他说）
 
-> **F:** What did Leo say today?
-> **C:** **He said** he's coming to my house.
-> **F:** Did he ask his mom?
-> **C:** **He said** she said yes.
-> **F:** When?
-> **C:** **He said** maybe Saturday.
-> **F:** Tell him to bring a toy.
-> **C:** **He said** he'll bring the truck.
+> **F:** What did Leo say to you today?
+> **C:** **He said** he is coming over to my house.
+> **F:** Did he ask his mom about it first?
+> **C:** Yes, **he said** that she said yes.
+> **F:** When is he going to come over?
+> **C:** **He said** maybe on Saturday he can come.
+> **F:** Tell him he should bring a toy to share.
+> **C:** **He said** he will bring his big truck.
 
 **换样重演：** "Leo" 换 "Mia"；"coming to my house" 换 "bringing a toy"。
 
@@ -29,14 +29,14 @@
 
 **目标句式：** `She told me to ___`（她叫我…）
 
-> **F:** What did the teacher say about your drawing?
-> **C:** **She told me to** add more color.
-> **F:** Did you?
-> **C:** I added blue to the sky.
-> **F:** Better?
-> **C:** **She told me to** show the class tomorrow.
-> **F:** Big deal.
-> **C:** She said it pops now.
+> **F:** What did the teacher say about your drawing today?
+> **C:** **She told me to** add some more color to it.
+> **F:** Did you add more color, then?
+> **C:** I added some blue to the sky part.
+> **F:** Does it look better now?
+> **C:** Yes! And **she told me to** show the whole class tomorrow.
+> **F:** That is a very big deal!
+> **C:** She said that my drawing really pops now.
 
 **换样重演：** "add more color" 换 "draw it bigger"；"blue to the sky" 换 "a sun in the corner"。
 
@@ -48,13 +48,13 @@
 
 **目标句式：** `Mom said ___`（妈说）+ `but ___`（转折）
 
-> **C:** **Mom said** dinner's at seven, **but** I'm hungry now.
-> **F:** You just had a snack.
-> **C:** **Mom said** a small snack.
-> **F:** Was it small?
-> **C:** It was small... for me.
-> **F:** For you, maybe.
-> **C:** Can I have one more?
-> **F:** Ask Mom.
+> **C:** **Mom said** dinner is at seven, **but** I'm already hungry now.
+> **F:** But you just had a snack a little while ago.
+> **C:** **Mom said** I could only have a small snack.
+> **F:** Well, was your snack actually small?
+> **C:** It was small... at least, small for me.
+> **F:** For you, maybe that is true.
+> **C:** So can I please have just one more?
+> **F:** You will have to go ask Mom about that.
 
 **换样重演：** "dinner's at seven" 换 "no TV till six"；"a small snack" 换 "one cookie"。

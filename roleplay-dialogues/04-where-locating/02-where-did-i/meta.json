@@ -1,5 +1,5 @@
 {
-  "title": "Where did I put my water bottle?",
+  "title": "Where did I put my water bottle? I forgot.",
   "title_zh": "忘了放哪",
   "scene": "水壶不知放哪了，问爸爸看见没。",
   "patterns": [
@@ -9,31 +9,31 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "Where did I put my water bottle?"
+      "line": "Where did I put my water bottle? I forgot."
     },
     {
       "speaker": "Dad",
-      "line": "Did you bring it inside?"
+      "line": "Did you remember to bring it inside the house?"
     },
     {
       "speaker": "Child",
-      "line": "Did you see it in the car?"
+      "line": "Did you see it sitting in the car?"
     },
     {
       "speaker": "Dad",
-      "line": "I think so, on the seat."
+      "line": "I think I did, it was on the seat."
     },
     {
       "speaker": "Child",
-      "line": "I'll go check."
+      "line": "Okay, I will go out and check the car."
     },
     {
       "speaker": "Dad",
-      "line": "Bring mine too, would you?"
+      "line": "While you're there, can you bring mine too?"
     },
     {
       "speaker": "Child",
-      "line": "If I find mine, maybe."
+      "line": "Maybe I will, if I can find mine first."
     }
   ],
   "variations": "\"water bottle\" 换 \"jacket\"；\"in the car\" 换 \"by the door\"。"

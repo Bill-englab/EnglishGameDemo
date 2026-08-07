@@ -10,14 +10,14 @@
 
 **目标句式：** `I went ___`（去了）· `It was ___`（评价·过去）
 
-> **F:** How was the visit to Grandma's?
-> **C:** Good. **I went** to her garden.
-> **F:** What did you see?
-> **C:** **It was** full of tomatoes.
-> **F:** Did you pick any?
-> **C:** One big red one. **I went** to show Grandma.
-> **F:** She must've liked that.
-> **C:** She said it was her favorite kind.
+> **F:** How was your visit to Grandma's house today?
+> **C:** It was good. **I went** out to her garden.
+> **F:** What did you see out there?
+> **C:** **It was** completely full of tomatoes.
+> **F:** Did you pick any of them?
+> **C:** I picked one big red one, and **I went** to show it to Grandma.
+> **F:** She must have really liked that.
+> **C:** She told me it was her favorite kind of tomato.
 
 **换样重演：** "Grandma's garden" 换 "the park"；"tomatoes" 换 "ducks"。
 
@@ -29,13 +29,13 @@
 
 **目标句式：** `We ___`（我们·过去）· `and then ___`（然后）
 
-> **F:** What did you do with Sam?
-> **C:** **We** drew monsters, **and then** we showed the teacher.
-> **F:** What did she say?
-> **C:** She said mine was the scariest.
-> **F:** Was it?
-> **C:** It had three eyes.
-> **F:** Of course it did.
+> **F:** What did you and Sam do together today?
+> **C:** **We** drew lots of monsters, **and then** we showed them to the teacher.
+> **F:** What did she say about your monster?
+> **C:** She said that mine was the scariest one.
+> **F:** Was it really the scariest?
+> **C:** Yes, because mine had three eyes on it.
+> **F:** Of course it did, silly.
 
 **换样重演：** "drew monsters" 换 "built a fort"；"showed the teacher" 换 "showed Mom"。
 
@@ -47,11 +47,11 @@
 
 **目标句式：** `but then ___`（但后来）· `I didn't ___`（过去否定）
 
-> **F:** You look happy today.
-> **C:** I tripped at recess, **but then** I didn't cry.
-> **F:** Were you okay?
-> **C:** **I didn't** even need a bandage.
-> **F:** Tough kid.
-> **C:** Just a small scrape.
+> **F:** You look really happy today.
+> **C:** I tripped while running at recess, **but then** I didn't cry.
+> **F:** Were you okay after you fell?
+> **C:** I was fine, and **I didn't** even need a bandage.
+> **F:** You are one tough kid.
+> **C:** It was just a small scrape on my knee.
 
 **换样重演：** "tripped" 换 "dropped my lunch"；"cry" 换 "give up"。

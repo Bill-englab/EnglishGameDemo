@@ -1,5 +1,5 @@
 {
-  "title": "Let me try first.",
+  "title": "No, let me try it first by myself.",
   "title_zh": "自己来",
   "scene": "要自己倒水，怕他洒。",
   "patterns": [
@@ -9,35 +9,35 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "Here, I'll pour it."
+      "line": "Here, let me pour the water for you."
     },
     {
       "speaker": "Child",
-      "line": "Let me try first."
+      "line": "No, let me try it first by myself."
     },
     {
       "speaker": "Dad",
-      "line": "It's heavy."
+      "line": "But the pitcher is too heavy for you."
     },
     {
       "speaker": "Child",
-      "line": "I can do it with two hands."
+      "line": "I can do it if I use both of my hands."
     },
     {
       "speaker": "Dad",
-      "line": "Two hands, then. On the low shelf."
+      "line": "Two hands, then. Set the cup on the low shelf."
     },
     {
       "speaker": "Child",
-      "line": "See? Only a little spill."
+      "line": "See, Dad? I only spilled a little bit."
     },
     {
       "speaker": "Dad",
-      "line": "A little's fine. Next time, even less."
+      "line": "A little spill is fine. Next time you can spill even less."
     },
     {
       "speaker": "Child",
-      "line": "I can do it myself next time."
+      "line": "I can do it all by myself next time."
     }
   ],
   "variations": "\"pour it\" 换 \"carry it\"；\"two hands\" 换 \"slow steps\"。"

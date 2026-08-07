@@ -1,5 +1,5 @@
 {
-  "title": "I tripped at recess, but then I didn't cry.",
+  "title": "I tripped while running at recess, but then I didn't cry.",
   "title_zh": "复述小意外",
   "scene": "课间摔了一跤，讲经过。",
   "patterns": [
@@ -9,27 +9,27 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "You look happy today."
+      "line": "You look really happy today."
     },
     {
       "speaker": "Child",
-      "line": "I tripped at recess, but then I didn't cry."
+      "line": "I tripped while running at recess, but then I didn't cry."
     },
     {
       "speaker": "Dad",
-      "line": "Were you okay?"
+      "line": "Were you okay after you fell?"
     },
     {
       "speaker": "Child",
-      "line": "I didn't even need a bandage."
+      "line": "I was fine, and I didn't even need a bandage."
     },
     {
       "speaker": "Dad",
-      "line": "Tough kid."
+      "line": "You are one tough kid."
     },
     {
       "speaker": "Child",
-      "line": "Just a small scrape."
+      "line": "It was just a small scrape on my knee."
     }
   ],
   "variations": "\"tripped\" 换 \"dropped my lunch\"；\"cry\" 换 \"give up\"。"

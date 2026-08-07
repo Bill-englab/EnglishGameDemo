@@ -10,15 +10,15 @@
 
 **目标句式：** `We're going to ___`（要去）· `after ___`（在…之后）
 
-> **F:** What's the plan Saturday?
-> **C:** **We're going to** the pool, right?
-> **F:** **After** lunch.
-> **C:** The big one or the small one?
-> **F:** The big one.
-> **C:** Are we bringing floats?
-> **F:** The small one. **After** the pool, maybe ice cream.
-> **C:** **We're going to** be tired **after**.
-> **F:** Then ice cream is likely.
+> **F:** What is the plan for this Saturday?
+> **C:** **We're going to** the swimming pool, right?
+> **F:** Yes, but only **after** we eat lunch.
+> **C:** The big pool or the small pool?
+> **F:** We are going to the big one.
+> **C:** Are we bringing our floats with us?
+> **F:** Just the small float. And **after** the pool, maybe we can get ice cream.
+> **C:** **We're going to** be really tired **after** all that.
+> **F:** Then ice cream is very likely, I think.
 
 **换样重演：** "the pool" 换 "the park"；"after lunch" 换 "after nap"。
 
@@ -30,14 +30,14 @@
 
 **目标句式：** `It will ___`（将会）· `I think ___`（我觉得）
 
-> **C:** **It will** rain, you know.
-> **F:** The sky's clear.
-> **C:** **I think** I smelled it.
-> **F:** You smelled rain?
-> **C:** Wet dirt. **I think** it's close.
-> **F:** Maybe.
-> **C:** **It will** pour, **I think**.
-> **F:** Let's see if you're right.
+> **C:** **It will** rain today, you know.
+> **F:** But the sky is completely clear right now.
+> **C:** But **I think** I smelled the rain coming.
+> **F:** You actually smelled the rain?
+> **C:** It smells like wet dirt, and **I think** it's close.
+> **F:** Well, maybe you are right.
+> **C:** **It will** really pour, **I think**.
+> **F:** We will see if you are right about it.
 
 **换样重演：** "rain" 换 "get cold"；"smelled it" 换 "felt it"。
 
@@ -49,12 +49,12 @@
 
 **目标句式：** `First ___, then ___`（先…再…）· `as soon as ___`（一…就…）
 
-> **F:** What do we need before the park?
-> **C:** **First** shoes, **then** water bottles.
-> **F:** And?
-> **C:** Hats. **As soon as** we're ready, we go.
-> **F:** Then hurry up.
-> **C:** I'm hurrying the slow way.
-> **F:** Shoes, then.
+> **F:** What do we need to bring before the park?
+> **C:** **First** we need our shoes, **then** our water bottles.
+> **F:** And what else do we need?
+> **C:** We need our hats, too. **As soon as** we're ready, we can go.
+> **F:** Then you should hurry up and get ready.
+> **C:** I am hurrying, just the slow way.
+> **F:** Okay then, shoes on first.
 
 **换样重演：** "shoes/water bottles" 换 "snacks/hats"；"we go" 换 "we leave"。

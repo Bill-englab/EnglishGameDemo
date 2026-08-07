@@ -1,5 +1,5 @@
 {
-  "title": "First shoes, then water bottles.",
+  "title": "First we need our shoes, then our water bottles.",
   "title_zh": "安排顺序",
   "scene": "出门前问要带啥。",
   "patterns": [
@@ -9,31 +9,31 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "What do we need before the park?"
+      "line": "What do we need to bring before the park?"
     },
     {
       "speaker": "Child",
-      "line": "First shoes, then water bottles."
+      "line": "First we need our shoes, then our water bottles."
     },
     {
       "speaker": "Dad",
-      "line": "And?"
+      "line": "And what else do we need?"
     },
     {
       "speaker": "Child",
-      "line": "Hats. As soon as we're ready, we go."
+      "line": "We need our hats, too. As soon as we're ready, we can go."
     },
     {
       "speaker": "Dad",
-      "line": "Then hurry up."
+      "line": "Then you should hurry up and get ready."
     },
     {
       "speaker": "Child",
-      "line": "I'm hurrying the slow way."
+      "line": "I am hurrying, just the slow way."
     },
     {
       "speaker": "Dad",
-      "line": "Shoes, then."
+      "line": "Okay then, shoes on first."
     }
   ],
   "variations": "\"shoes/water bottles\" 换 \"snacks/hats\"；\"we go\" 换 \"we leave\"。"

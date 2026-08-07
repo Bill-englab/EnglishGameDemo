@@ -1,5 +1,5 @@
 {
-  "title": "It will rain, you know.",
+  "title": "It will rain today, you know.",
   "title_zh": "预测",
   "scene": "他凭观察预测要下雨。",
   "patterns": [
@@ -9,35 +9,35 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "It will rain, you know."
+      "line": "It will rain today, you know."
     },
     {
       "speaker": "Dad",
-      "line": "The sky's clear."
+      "line": "But the sky is completely clear right now."
     },
     {
       "speaker": "Child",
-      "line": "I think I smelled it."
+      "line": "But I think I smelled the rain coming."
     },
     {
       "speaker": "Dad",
-      "line": "You smelled rain?"
+      "line": "You actually smelled the rain?"
     },
     {
       "speaker": "Child",
-      "line": "Wet dirt. I think it's close."
+      "line": "It smells like wet dirt, and I think it's close."
     },
     {
       "speaker": "Dad",
-      "line": "Maybe."
+      "line": "Well, maybe you are right."
     },
     {
       "speaker": "Child",
-      "line": "It will pour, I think."
+      "line": "It will really pour, I think."
     },
     {
       "speaker": "Dad",
-      "line": "Let's see if you're right."
+      "line": "We will see if you are right about it."
     }
   ],
   "variations": "\"rain\" 换 \"get cold\"；\"smelled it\" 换 \"felt it\"。"

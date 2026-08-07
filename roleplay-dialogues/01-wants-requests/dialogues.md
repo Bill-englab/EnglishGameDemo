@@ -10,13 +10,13 @@
 
 **目标句式：** `Can I have ___?`（请求）· `I want ___`（想要）
 
-> **F:** Snack's on the table. Pick one.
-> **C:** **Can I have** the apple one?
-> **F:** Sure. Just one.
-> **C:** But **I want** two. My tummy says two.
-> **F:** One now, one after the park.
-> **C:** Fine. But I pick the later one.
-> **F:** Deal. Wash your hands first.
+> **F:** The snacks are on the table, and you can pick one for yourself.
+> **C:** **Can I have** the apple one, please?
+> **F:** Sure, you can have the apple one. But just one snack, okay?
+> **C:** But **I want** two of them. My tummy says I need two.
+> **F:** You can have one now, and you can have another one after we go to the park.
+> **C:** Okay, that's fine. But I get to pick which one I eat later.
+> **F:** It's a deal. But you need to wash your hands first.
 
 **换样重演：** "apple one" 换 "banana one"；"after the park" 换 "after nap"。
 
@@ -28,13 +28,13 @@
 
 **目标句式：** `I need ___`（需要）· `Can I ___?`（请求许可）
 
-> **C:** **I need** the scissors for this.
-> **F:** They're in the drawer. The blue ones.
-> **C:** **Can I** cut by myself?
-> **F:** If you sit down.
-> **C:** I'm sitting. See?
-> **F:** I see. Go ahead. Slow and steady.
-> **C:** Look, only wobbled twice.
+> **C:** **I need** the scissors to cut this paper.
+> **F:** They are in the drawer, and the blue ones are the ones for you.
+> **C:** **Can I** try cutting it all by myself?
+> **F:** You can, as long as you sit down while you cut.
+> **C:** I'm sitting down now, look at me.
+> **F:** I see you. You can go ahead, but go slow and steady.
+> **C:** Look, I only wobbled the paper twice.
 
 **换样重演：** "scissors" 换 "glue"；"cut" 换 "glue it"。
 
@@ -46,13 +46,13 @@
 
 **目标句式：** `Can we ___?`（提议请求）· `I want to ___`（想做）
 
-> **C:** **Can we** go to the park after this?
-> **F:** Maybe, if it doesn't rain.
-> **C:** **I want to** feed the ducks.
-> **F:** We don't have bread.
-> **C:** Then we stop for bread first.
-> **F:** That's an extra stop.
-> **C:** Please? The brown one waits by the bench.
-> **F:** Fine. Bread, then park.
+> **C:** **Can we** go to the park after we finish this?
+> **F:** Maybe we can, if it doesn't rain today.
+> **C:** **I want to** feed the ducks at the pond.
+> **F:** But we don't have any bread for them.
+> **C:** Then we can stop for some bread first.
+> **F:** That would be an extra stop for us, though.
+> **C:** Please, Dad? The brown duck always waits by the bench.
+> **F:** Okay, fine. We will get bread, and then we go to the park.
 
 **换样重演：** "the park" 换 "the library"；"feed the ducks" 换 "read a book"。

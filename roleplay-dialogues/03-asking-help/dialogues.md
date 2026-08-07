@@ -10,14 +10,14 @@
 
 **目标句式：** `Can you help me ___?`（求助）· `I can't ___`（做不到）
 
-> **C:** **Can you help me** open this?
-> **F:** Twist it the other way.
-> **C:** **I can't**, it's too tight.
-> **F:** Push up while you twist.
-> **C:** Like this?
-> **F:** Yeah. There it goes.
-> **C:** I did it! Sort of.
-> **F:** Counts as doing it.
+> **C:** **Can you help me** open this jar?
+> **F:** Try twisting the lid the other way.
+> **C:** **I can't** do it, because it is too tight for me.
+> **F:** Push up with your thumb while you twist it.
+> **C:** Is it like this, Dad?
+> **F:** Yeah, that's it — there it goes!
+> **C:** I did it all by myself! Well, sort of.
+> **F:** That still counts as doing it yourself.
 
 **换样重演：** "open this" 换 "tie this"；"too tight" 换 "too tricky"。
 
@@ -29,14 +29,14 @@
 
 **目标句式：** `It's stuck`（卡住）· `I can't reach ___`（够不着）
 
-> **C:** **It's stuck**, the zipper.
-> **F:** Pull from the bottom.
-> **C:** **I can't reach** the bottom part.
-> **F:** Stand on the step.
-> **C:** The fabric's in it now.
-> **F:** Hold it flat, then pull. There.
-> **C:** Got it. Thanks.
-> **F:** Zippers are sneaky.
+> **C:** **It's stuck**, Dad — the zipper won't move.
+> **F:** Try pulling it down from the bottom part.
+> **C:** But **I can't reach** the bottom part of it.
+> **F:** You can stand on the little step stool.
+> **C:** Oh no, the fabric is caught in it now.
+> **F:** Hold the fabric flat, and then pull it. There, it's free!
+> **C:** I got it, thanks Dad.
+> **F:** You're welcome. Zippers can be sneaky sometimes.
 
 **换样重演：** "zipper" 换 "button"；"reach" 换 "see"。
 
@@ -48,13 +48,13 @@
 
 **目标句式：** `Let me try`（让我试）· `I can do it ___`（我能行）
 
-> **F:** Here, I'll pour it.
-> **C:** **Let me try** first.
-> **F:** It's heavy.
-> **C:** **I can do it** with two hands.
-> **F:** Two hands, then. On the low shelf.
-> **C:** See? Only a little spill.
-> **F:** A little's fine. Next time, even less.
-> **C:** **I can do it** myself next time.
+> **F:** Here, let me pour the water for you.
+> **C:** No, **let me try** it first by myself.
+> **F:** But the pitcher is too heavy for you.
+> **C:** **I can do it** if I use both of my hands.
+> **F:** Two hands, then. Set the cup on the low shelf.
+> **C:** See, Dad? I only spilled a little bit.
+> **F:** A little spill is fine. Next time you can spill even less.
+> **C:** **I can do it** all by myself next time.
 
 **换样重演：** "pour it" 换 "carry it"；"two hands" 换 "slow steps"。

@@ -1,5 +1,5 @@
 {
-  "title": "Is my hat in the bag?",
+  "title": "Is my hat in this bag?",
   "title_zh": "位置确认",
   "scene": "找帽子，逐处确认在不在。",
   "patterns": [
@@ -9,31 +9,31 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "Is my hat in the bag?"
+      "line": "Is my hat in this bag?"
     },
     {
       "speaker": "Dad",
-      "line": "Which bag?"
+      "line": "Which bag are you looking in?"
     },
     {
       "speaker": "Child",
-      "line": "The red one. It's not here."
+      "line": "The red one. But it's not in here."
     },
     {
       "speaker": "Dad",
-      "line": "Try the closet hook."
+      "line": "You can try the hook in the closet."
     },
     {
       "speaker": "Child",
-      "line": "There it is. How'd it get there?"
+      "line": "There it is! How did it get all the way up there?"
     },
     {
       "speaker": "Dad",
-      "line": "Magic."
+      "line": "I guess it was a little bit of magic."
     },
     {
       "speaker": "Child",
-      "line": "More like I forgot again."
+      "line": "It's more like I forgot again, I think."
     }
   ],
   "variations": "\"hat\" 换 \"gloves\"；\"in the bag\" 换 \"on the shelf\"。"

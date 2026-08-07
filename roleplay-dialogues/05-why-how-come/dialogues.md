@@ -10,14 +10,14 @@
 
 **目标句式：** `Why do I have to ___?`（为什么得…）
 
-> **F:** Brush your teeth now.
-> **C:** **Why do I have to** brush twice?
-> **F:** Once in the morning, once at night.
-> **C:** But nothing happened to them today.
-> **F:** That's the point — keep it that way.
-> **C:** **Why do I have to** use toothpaste?
-> **F:** It scrubs better than water.
-> **C:** Okay, but I'm counting fast.
+> **F:** It's time to brush your teeth now.
+> **C:** **Why do I have to** brush them two times?
+> **F:** You brush once in the morning and once at night.
+> **C:** But nothing bad happened to them today.
+> **F:** That's exactly the point — we want to keep them that way.
+> **C:** And **why do I have to** use the toothpaste too?
+> **F:** Because it scrubs your teeth much better than water.
+> **C:** Okay, I will do it, but I'm counting fast.
 
 **换样重演：** "brush twice" 换 "go to bed now"；"toothpaste" 换 "the foam one"。
 
@@ -29,14 +29,14 @@
 
 **目标句式：** `How come ___?`（怎么/为什么·口语）
 
-> **F:** We're not having dessert tonight.
-> **C:** **How come**?
-> **F:** We had treats at the party.
-> **C:** That doesn't count.
-> **F:** Sugar is sugar.
-> **C:** **How come** you get to decide?
-> **F:** Because I'm the dad, and you had enough today.
-> **C:** Hmph. Tomorrow then?
+> **F:** We are not having any dessert tonight.
+> **C:** **How come** we can't have dessert?
+> **F:** Because we already had lots of treats at the party.
+> **C:** But those don't count, I think.
+> **F:** Sugar is still sugar, no matter what.
+> **C:** **How come** you get to decide for me?
+> **F:** Because I'm the dad, and you have had enough sugar today.
+> **C:** Hmph. Can I have some tomorrow, then?
 
 **换样重演：** "dessert" 换 "story time"；"treats" 换 "soda"。
 
@@ -48,13 +48,13 @@
 
 **目标句式：** `How do you ___?`（怎么做）· `Why does ___?`（为什么…）
 
-> **C:** **How do you** know it's going to rain?
-> **F:** The sky's getting dark and heavy.
-> **C:** **Why does** that mean rain?
-> **F:** The clouds hold water, and they look heavy.
-> **C:** **How do you** know all this?
-> **F:** I've watched a lot of skies.
-> **C:** So the sky is a big puddle?
-> **F:** Sort of. Bring a coat.
+> **C:** **How do you** know that it's going to rain?
+> **F:** The sky is getting dark and heavy with clouds.
+> **C:** But **why does** that mean it will rain?
+> **F:** Because the clouds hold water, and they look heavy.
+> **C:** **How do you** know all of this stuff?
+> **F:** I have watched a lot of skies in my life.
+> **C:** So the sky is like a giant puddle up there?
+> **F:** Sort of, yes. That's why you should bring a coat.
 
 **换样重演：** "rain" 换 "get dark"；"clouds" 换 "sun"。

@@ -1,5 +1,5 @@
 {
-  "title": "How do you know it's going to rain?",
+  "title": "How do you know that it's going to rain?",
   "title_zh": "问方法",
   "scene": "他问爸爸怎么预判下雨。",
   "patterns": [
@@ -9,35 +9,35 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "How do you know it's going to rain?"
+      "line": "How do you know that it's going to rain?"
     },
     {
       "speaker": "Dad",
-      "line": "The sky's getting dark and heavy."
+      "line": "The sky is getting dark and heavy with clouds."
     },
     {
       "speaker": "Child",
-      "line": "Why does that mean rain?"
+      "line": "But why does that mean it will rain?"
     },
     {
       "speaker": "Dad",
-      "line": "The clouds hold water, and they look heavy."
+      "line": "Because the clouds hold water, and they look heavy."
     },
     {
       "speaker": "Child",
-      "line": "How do you know all this?"
+      "line": "How do you know all of this stuff?"
     },
     {
       "speaker": "Dad",
-      "line": "I've watched a lot of skies."
+      "line": "I have watched a lot of skies in my life."
     },
     {
       "speaker": "Child",
-      "line": "So the sky is a big puddle?"
+      "line": "So the sky is like a giant puddle up there?"
     },
     {
       "speaker": "Dad",
-      "line": "Sort of. Bring a coat."
+      "line": "Sort of, yes. That's why you should bring a coat."
     }
   ],
   "variations": "\"rain\" 换 \"get dark\"；\"clouds\" 换 \"sun\"。"

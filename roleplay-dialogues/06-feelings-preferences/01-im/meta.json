@@ -1,5 +1,5 @@
 {
-  "title": "I'm tired because I slept late.",
+  "title": "I'm feeling tired because I went to sleep late.",
   "title_zh": "说情绪",
   "scene": "走路拖着脚，又累又无聊。",
   "patterns": [
@@ -9,35 +9,35 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "You're dragging your feet. Okay?"
+      "line": "You're dragging your feet today. Are you okay?"
     },
     {
       "speaker": "Child",
-      "line": "I'm tired because I slept late."
+      "line": "I'm feeling tired because I went to sleep late."
     },
     {
       "speaker": "Dad",
-      "line": "You did stay up."
+      "line": "You did stay up late last night."
     },
     {
       "speaker": "Child",
-      "line": "And I'm bored of walking."
+      "line": "And I'm also bored of walking so much."
     },
     {
       "speaker": "Dad",
-      "line": "Bored or tired?"
+      "line": "Are you bored, or are you tired?"
     },
     {
       "speaker": "Child",
-      "line": "Both. Can I have a piggyback?"
+      "line": "I think I'm both. Can I have a piggyback ride?"
     },
     {
       "speaker": "Dad",
-      "line": "Only to the corner."
+      "line": "You can have one, but only up to the corner."
     },
     {
       "speaker": "Child",
-      "line": "Deal."
+      "line": "Okay, that's a deal."
     }
   ],
   "variations": "\"tired\" 换 \"hungry\"；\"bored of walking\" 换 \"hot\"。"

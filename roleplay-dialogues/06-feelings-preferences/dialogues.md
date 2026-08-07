@@ -10,14 +10,14 @@
 
 **目标句式：** `I'm ___`（情绪）· `because ___`（原因）
 
-> **F:** You're dragging your feet. Okay?
-> **C:** **I'm** tired **because** I slept late.
-> **F:** You did stay up.
-> **C:** And **I'm** bored of walking.
-> **F:** Bored or tired?
-> **C:** Both. Can I have a piggyback?
-> **F:** Only to the corner.
-> **C:** Deal.
+> **F:** You're dragging your feet today. Are you okay?
+> **C:** **I'm** feeling tired **because** I went to sleep late.
+> **F:** You did stay up late last night.
+> **C:** And **I'm** also bored of walking so much.
+> **F:** Are you bored, or are you tired?
+> **C:** I think I'm both. Can I have a piggyback ride?
+> **F:** You can have one, but only up to the corner.
+> **C:** Okay, that's a deal.
 
 **换样重演：** "tired" 换 "hungry"；"bored of walking" 换 "hot"。
 
@@ -29,13 +29,13 @@
 
 **目标句式：** `I don't like ___`（不喜欢）· `It's too ___`（太…）
 
-> **C:** **I don't like** this soup.
-> **F:** You used to.
-> **C:** **It's too** salty now.
-> **F:** Try it with bread.
-> **C:** Bread makes it less salty?
-> **F:** Worth a try.
-> **C:** Okay, a little better.
+> **C:** **I don't like** this soup, Dad.
+> **F:** But you used to like it a lot.
+> **C:** Well, **it's too** salty for me now.
+> **F:** Try eating it together with some bread.
+> **C:** Does bread really make it less salty?
+> **F:** I'm not sure, but it's worth a try.
+> **C:** Okay, it tastes a little better now.
 
 **换样重演：** "soup" 换 "rice"；"salty" 换 "dry"。
 
@@ -47,12 +47,12 @@
 
 **目标句式：** `I'd rather ___`（宁可）· `I like ___ better`（更喜欢）
 
-> **F:** Apple or banana?
-> **C:** **I'd rather** have banana.
-> **F:** You had banana yesterday.
-> **C:** **I like** banana **better**.
-> **F:** You'll get tired of it.
-> **C:** Not yet.
-> **F:** Banana it is.
+> **F:** Do you want an apple or a banana?
+> **C:** **I'd rather** have the banana, please.
+> **F:** But you already had a banana yesterday.
+> **C:** I know, but **I like** banana **better**.
+> **F:** You will get tired of them if you eat too many.
+> **C:** I'm not tired of them yet, though.
+> **F:** Okay then, banana it is for you.
 
 **换样重演：** "banana" 换 "grapes"；"apple" 换 "pear"。

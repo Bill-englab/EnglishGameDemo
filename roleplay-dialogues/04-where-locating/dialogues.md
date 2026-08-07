@@ -10,13 +10,13 @@
 
 **目标句式：** `Where's ___?`（在哪）· `I can't find ___`（找不到）
 
-> **C:** **Where's** my blue sock?
-> **F:** Check under the bed.
-> **C:** **I can't find** it there.
-> **F:** Try the laundry basket.
-> **C:** Oh! It was inside a shirt.
-> **F:** Socks hide.
-> **C:** This shirt ate it.
+> **C:** **Where's** my blue sock, Dad? I can't see it.
+> **F:** You should check under your bed first.
+> **C:** I looked, and **I can't find** it under there.
+> **F:** Next you can try the laundry basket.
+> **C:** Oh, I found it! It was hiding inside a shirt.
+> **F:** Socks always like to hide, don't they?
+> **C:** I think this shirt ate my sock!
 
 **换样重演：** "blue sock" 换 "red shoe"；"under the bed" 换 "in the closet"。
 
@@ -28,13 +28,13 @@
 
 **目标句式：** `Where did I put ___?`（我放哪了）· `Did you see ___?`（你看见了吗）
 
-> **C:** **Where did I put** my water bottle?
-> **F:** Did you bring it inside?
-> **C:** **Did you see** it in the car?
-> **F:** I think so, on the seat.
-> **C:** I'll go check.
-> **F:** Bring mine too, would you?
-> **C:** If I find mine, maybe.
+> **C:** **Where did I put** my water bottle? I forgot.
+> **F:** Did you remember to bring it inside the house?
+> **C:** **Did you see** it sitting in the car?
+> **F:** I think I did, it was on the seat.
+> **C:** Okay, I will go out and check the car.
+> **F:** While you're there, can you bring mine too?
+> **C:** Maybe I will, if I can find mine first.
 
 **换样重演：** "water bottle" 换 "jacket"；"in the car" 换 "by the door"。
 
@@ -46,12 +46,12 @@
 
 **目标句式：** `Is ___ in/on ___?`（在…里/上吗）· `It's not ___`（不在）
 
-> **C:** **Is** my hat **in** the bag?
-> **F:** Which bag?
-> **C:** The red one. **It's not** here.
-> **F:** Try the closet hook.
-> **C:** There it is. How'd it get there?
-> **F:** Magic.
-> **C:** More like I forgot again.
+> **C:** **Is** my hat **in** this bag?
+> **F:** Which bag are you looking in?
+> **C:** The red one. But **it's not** in here.
+> **F:** You can try the hook in the closet.
+> **C:** There it is! How did it get all the way up there?
+> **F:** I guess it was a little bit of magic.
+> **C:** It's more like I forgot again, I think.
 
 **换样重演：** "hat" 换 "gloves"；"in the bag" 换 "on the shelf"。

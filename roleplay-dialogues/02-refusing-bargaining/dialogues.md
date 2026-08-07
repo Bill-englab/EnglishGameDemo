@@ -10,14 +10,14 @@
 
 **目标句式：** `I don't want to ___`（拒绝）· `not yet`（还没）
 
-> **F:** Time to put on shoes.
-> **C:** **I don't want to** go **yet**.
-> **F:** We're already late.
-> **C:** Five more minutes?
-> **F:** Two. And shoes first.
-> **C:** Can I wear the boots? **I don't want to** bend down.
-> **F:** Boots it is. Two minutes, then we go.
-> **C:** Deal.
+> **F:** It's time to put on your shoes so we can go.
+> **C:** **I don't want to** go outside **yet**.
+> **F:** But we are already late, you know.
+> **C:** Can I have five more minutes, please?
+> **F:** You can have two more minutes, and then shoes go on first.
+> **C:** Can I wear my boots instead? **I don't want to** bend down to tie shoes.
+> **F:** Boots it is, then. You have two minutes, and then we go.
+> **C:** Okay, it's a deal.
 
 **换样重演：** "go" 换 "get dressed"；"bend down" 换 "tie laces"。
 
@@ -29,15 +29,15 @@
 
 **目标句式：** `What if ___?`（反提议）· `just one more ___`（再来一个）
 
-> **F:** Last episode, then off.
-> **C:** **What if** I watch half of the next one?
-> **F:** Half isn't a thing.
-> **C:** **Just one** more, then I turn it off.
-> **F:** You said that last time.
-> **C:** I'll set a timer this time.
-> **F:** Five minutes.
-> **C:** **Just one** more, promise.
-> **F:** Set it. Go.
+> **F:** This is the last episode, and then the TV goes off.
+> **C:** **What if** I just watch half of the next episode?
+> **F:** Half an episode isn't really a thing, buddy.
+> **C:** **Just one** more episode, and then I will turn it off myself.
+> **F:** You said the same thing last time, remember?
+> **C:** But I will set a timer this time, I promise.
+> **F:** Okay, you can have five more minutes.
+> **C:** **Just one** more, I promise.
+> **F:** Then set the timer, and you can go.
 
 **换样重演：** "episode" 换 "song"；"set a timer" 换 "count to fifty"。
 
@@ -49,14 +49,14 @@
 
 **目标句式：** `I'd rather ___`（偏好婉拒）· `not now`（现在不）
 
-> **F:** Let's practice counting.
-> **C:** **I'd rather** do it after dinner.
-> **F:** You said that yesterday.
-> **C:** **Not now**, my brain's full.
-> **F:** Full of what?
-> **C:** Full of playing.
-> **F:** Ten minutes of play, then we count.
-> **C:** Can I count the blocks I built?
-> **F:** That works.
+> **F:** Let's practice counting together for a little while.
+> **C:** **I'd rather** do it after we eat dinner.
+> **F:** You said that same thing yesterday, too.
+> **C:** **Not now**, please — my brain is too full.
+> **F:** What is your brain full of, then?
+> **C:** It is full of all the playing I did today.
+> **F:** You can play for ten more minutes, and then we will count.
+> **C:** Can I count the blocks that I built?
+> **F:** That is a great idea, it works for me.
 
 **换样重演：** "counting" 换 "reading"；"after dinner" 换 "tomorrow"。

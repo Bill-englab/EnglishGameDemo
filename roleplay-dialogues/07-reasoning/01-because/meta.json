@@ -1,5 +1,5 @@
 {
-  "title": "Because the chair wobbles, so I moved.",
+  "title": "Because the chair wobbles, so I moved to the floor.",
   "title_zh": "解释选择",
   "scene": "他不坐椅子坐地上，并催爸爸修。",
   "patterns": [
@@ -9,31 +9,31 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "Why'd you sit on the floor?"
+      "line": "Why did you sit down on the floor?"
     },
     {
       "speaker": "Child",
-      "line": "Because the chair wobbles, so I moved."
+      "line": "Because the chair wobbles, so I moved to the floor."
     },
     {
       "speaker": "Dad",
-      "line": "Smart."
+      "line": "That was a smart idea."
     },
     {
       "speaker": "Child",
-      "line": "Can you fix it?"
+      "line": "Can you fix the wobbly chair for me?"
     },
     {
       "speaker": "Dad",
-      "line": "I'll tighten it tonight."
+      "line": "I will tighten it up for you tonight."
     },
     {
       "speaker": "Child",
-      "line": "So I can sit tomorrow?"
+      "line": "So I can sit in it again tomorrow?"
     },
     {
       "speaker": "Dad",
-      "line": "So you can sit tomorrow."
+      "line": "Yes, so you can sit in it tomorrow."
     }
   ],
   "variations": "\"sit on the floor\" 换 \"stand by the window\"；\"wobbles\" 换 \"creaks\"。"

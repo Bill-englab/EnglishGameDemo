@@ -1,5 +1,5 @@
 {
-  "title": "I'd rather do it after dinner.",
+  "title": "I'd rather do it after we eat dinner.",
   "title_zh": "婉拒 / 偏好",
   "scene": "叫他练某样，他用偏好推后，并提出替代。",
   "patterns": [
@@ -9,39 +9,39 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "Let's practice counting."
+      "line": "Let's practice counting together for a little while."
     },
     {
       "speaker": "Child",
-      "line": "I'd rather do it after dinner."
+      "line": "I'd rather do it after we eat dinner."
     },
     {
       "speaker": "Dad",
-      "line": "You said that yesterday."
+      "line": "You said that same thing yesterday, too."
     },
     {
       "speaker": "Child",
-      "line": "Not now, my brain's full."
+      "line": "Not now, please — my brain is too full."
     },
     {
       "speaker": "Dad",
-      "line": "Full of what?"
+      "line": "What is your brain full of, then?"
     },
     {
       "speaker": "Child",
-      "line": "Full of playing."
+      "line": "It is full of all the playing I did today."
     },
     {
       "speaker": "Dad",
-      "line": "Ten minutes of play, then we count."
+      "line": "You can play for ten more minutes, and then we will count."
     },
     {
       "speaker": "Child",
-      "line": "Can I count the blocks I built?"
+      "line": "Can I count the blocks that I built?"
     },
     {
       "speaker": "Dad",
-      "line": "That works."
+      "line": "That is a great idea, it works for me."
     }
   ],
   "variations": "\"counting\" 换 \"reading\"；\"after dinner\" 换 \"tomorrow\"。"

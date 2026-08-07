@@ -1,5 +1,5 @@
 {
-  "title": "I don't like this soup.",
+  "title": "I don't like this soup, Dad.",
   "title_zh": "表达不喜欢",
   "scene": "不爱这顿汤，嫌咸。",
   "patterns": [
@@ -9,31 +9,31 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "I don't like this soup."
+      "line": "I don't like this soup, Dad."
     },
     {
       "speaker": "Dad",
-      "line": "You used to."
+      "line": "But you used to like it a lot."
     },
     {
       "speaker": "Child",
-      "line": "It's too salty now."
+      "line": "Well, it's too salty for me now."
     },
     {
       "speaker": "Dad",
-      "line": "Try it with bread."
+      "line": "Try eating it together with some bread."
     },
     {
       "speaker": "Child",
-      "line": "Bread makes it less salty?"
+      "line": "Does bread really make it less salty?"
     },
     {
       "speaker": "Dad",
-      "line": "Worth a try."
+      "line": "I'm not sure, but it's worth a try."
     },
     {
       "speaker": "Child",
-      "line": "Okay, a little better."
+      "line": "Okay, it tastes a little better now."
     }
   ],
   "variations": "\"soup\" 换 \"rice\"；\"salty\" 换 \"dry\"。"

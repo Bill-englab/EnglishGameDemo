@@ -10,13 +10,13 @@
 
 **目标句式：** `because ___`（因为）· `so ___`（所以）
 
-> **F:** Why'd you sit on the floor?
-> **C:** **Because** the chair wobbles, **so** I moved.
-> **F:** Smart.
-> **C:** Can you fix it?
-> **F:** I'll tighten it tonight.
-> **C:** **So** I can sit tomorrow?
-> **F:** **So** you can sit tomorrow.
+> **F:** Why did you sit down on the floor?
+> **C:** **Because** the chair wobbles, **so** I moved to the floor.
+> **F:** That was a smart idea.
+> **C:** Can you fix the wobbly chair for me?
+> **F:** I will tighten it up for you tonight.
+> **C:** **So** I can sit in it again tomorrow?
+> **F:** Yes, **so** you can sit in it tomorrow.
 
 **换样重演：** "sit on the floor" 换 "stand by the window"；"wobbles" 换 "creaks"。
 
@@ -28,13 +28,13 @@
 
 **目标句式：** `That's why ___`（所以才）· `so ___`（所以）
 
-> **F:** You brought an extra sweater?
-> **C:** **That's why** — it gets cold at night.
-> **F:** Thoughtful.
-> **C:** **So** you don't have to come back for me.
-> **F:** Appreciated.
-> **C:** I'm prepared.
-> **F:** Famous last words.
+> **F:** Did you bring an extra sweater with you?
+> **C:** **That's why** I brought it — it gets cold at night.
+> **F:** That was very thoughtful of you.
+> **C:** **So** you don't have to come all the way back for me.
+> **F:** I really appreciate it, thank you.
+> **C:** See, I came prepared today.
+> **F:** Those sound like famous last words to me.
 
 **换样重演：** "extra sweater" 换 "extra water"；"cold at night" 换 "thirsty on the way"。
 
@@ -46,14 +46,14 @@
 
 **目标句式：** `even though ___, I still ___`（尽管…我仍…）
 
-> **F:** You went out in the rain?
-> **C:** Yeah. **Even though** it was wet, **I still** had fun.
-> **F:** Did you get soaked?
-> **C:** Just my feet. The puddles were worth it.
-> **F:** You'll catch a cold.
-> **C:** I feel fine. Can I go out again tomorrow?
-> **F:** If it's not pouring, maybe.
-> **C:** Promise?
-> **F:** We'll see.
+> **F:** You actually went outside in the rain?
+> **C:** Yeah! **Even though** it was wet outside, **I still** had lots of fun.
+> **F:** Did you get completely soaked out there?
+> **C:** Just my feet got wet. The puddles were totally worth it.
+> **F:** You are going to catch a cold like that.
+> **C:** But I feel totally fine. Can I go out again tomorrow?
+> **F:** Maybe you can, if it's not pouring rain.
+> **C:** Do you promise, Dad?
+> **F:** We will see about it.
 
 **换样重演：** "rain" 换 "dark"；"wet" 换 "scary"。

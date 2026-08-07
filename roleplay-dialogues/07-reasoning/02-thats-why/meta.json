@@ -1,5 +1,5 @@
 {
-  "title": "That's why — it gets cold at night.",
+  "title": "That's why I brought it — it gets cold at night.",
   "title_zh": "解释原因",
   "scene": "他多带一件衣服，解释考虑。",
   "patterns": [
@@ -9,31 +9,31 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "You brought an extra sweater?"
+      "line": "Did you bring an extra sweater with you?"
     },
     {
       "speaker": "Child",
-      "line": "That's why — it gets cold at night."
+      "line": "That's why I brought it — it gets cold at night."
     },
     {
       "speaker": "Dad",
-      "line": "Thoughtful."
+      "line": "That was very thoughtful of you."
     },
     {
       "speaker": "Child",
-      "line": "So you don't have to come back for me."
+      "line": "So you don't have to come all the way back for me."
     },
     {
       "speaker": "Dad",
-      "line": "Appreciated."
+      "line": "I really appreciate it, thank you."
     },
     {
       "speaker": "Child",
-      "line": "I'm prepared."
+      "line": "See, I came prepared today."
     },
     {
       "speaker": "Dad",
-      "line": "Famous last words."
+      "line": "Those sound like famous last words to me."
     }
   ],
   "variations": "\"extra sweater\" 换 \"extra water\"；\"cold at night\" 换 \"thirsty on the way\"。"

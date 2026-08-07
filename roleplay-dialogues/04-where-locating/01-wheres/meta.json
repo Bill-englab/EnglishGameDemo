@@ -1,5 +1,5 @@
 {
-  "title": "Where's my blue sock?",
+  "title": "Where's my blue sock, Dad? I can't see it.",
   "title_zh": "找东西",
   "scene": "找不着袜子，翻几个地方。",
   "patterns": [
@@ -9,31 +9,31 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "Where's my blue sock?"
+      "line": "Where's my blue sock, Dad? I can't see it."
     },
     {
       "speaker": "Dad",
-      "line": "Check under the bed."
+      "line": "You should check under your bed first."
     },
     {
       "speaker": "Child",
-      "line": "I can't find it there."
+      "line": "I looked, and I can't find it under there."
     },
     {
       "speaker": "Dad",
-      "line": "Try the laundry basket."
+      "line": "Next you can try the laundry basket."
     },
     {
       "speaker": "Child",
-      "line": "Oh! It was inside a shirt."
+      "line": "Oh, I found it! It was hiding inside a shirt."
     },
     {
       "speaker": "Dad",
-      "line": "Socks hide."
+      "line": "Socks always like to hide, don't they?"
     },
     {
       "speaker": "Child",
-      "line": "This shirt ate it."
+      "line": "I think this shirt ate my sock!"
     }
   ],
   "variations": "\"blue sock\" 换 \"red shoe\"；\"under the bed\" 换 \"in the closet\"。"

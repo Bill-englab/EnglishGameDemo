@@ -1,23 +1,40 @@
 # Video Prompts — Sora demo-video 生成提示词
 
-为 `roleplay-dialogues/` 里**每个对话**生成开箱即用的 Sora 提示词。
-每个对话拆成 **a / b 两段**(各 3–5 句台词、约 8 秒,节奏从容),按 `a → b` 顺序生成后拼接,就是该关的 `demo.mp4`。
+为 `roleplay-dialogues/` 里**每个对话**生成两段开箱即用的 Sora 提示词(**两段式**)。
+每个对话拆成 **两段**:`D{1,2,3}a.txt`(前半台词)+ `D{1,2,3}b.txt`(后半台词),各粘进 Sora 单独生成。两段合起来 = 原来的整段台词,一句不少;拆两段是为了让 Sora 念得更慢、更从容(治"一段式说太快")。
 
 ## 怎么用
 
-1. 打开对应对话的 `D_a.txt` → 全选复制粘进 Sora → 生成;再开 `D_b.txt` 同样生成。
-2. 两段按 a → b 顺序拼起来(剪映/CapCut 首尾相接),导出即 `demo.mp4`,放进 `roleplay-dialogues/<章>/<关>/`。
+1. 对每个对话,分别打开 `D{1,2,3}a.txt` 和 `D{1,2,3}b.txt` → 各粘进 Sora → 各生成一段。
+2. 把两段按 **a → b** 顺序拼成 **`demo.mp4`**,放进 `roleplay-dialogues/<章>/<关>/`。两段同编码可直接流拷贝拼接:
 
-> 文件名约定:每个对话 = `D1` / `D2` / `D3`(对齐 `dialogues.md`),各自拆成 `D1a` + `D1b` 两个文件。字母 a/b 同时就是**生成与拼接顺序**。例:`01-wants-requests/D1a.txt` + `D1b.txt`。
+```bash
+printf "file 'a.mp4'\nfile 'b.mp4'\n" > list.txt
+ffmpeg -f concat -safe 0 -i list.txt -c copy demo.mp4
+```
+
+> 文件名对齐 `dialogues.md` 的 D1/D2/D3。例:`01-wants-requests/D1a.txt` + `D1b.txt` ↔ 关卡 `01-wants-requests/01-can-i-have/`(标题 "Can I have the apple one?")。
 
 ## 角色设定(每份提示都自带,逐字一致,保证角色稳定)
 
 - **爸爸** = 卡通狗(温棕色、大垂耳、橄榄绿 T 恤)
 - **孩子** = 卡通小老虎(4 岁、橙底黑条纹、黄 T 恤、粗短 toddler 身形)
-- 风格统一:**Pixar 式 3D 卡通 / 暖光 / 粉彩 / 萌系家庭向**;镜头:**锁机中景双人、轻微漂移、16:9、每段约 8 秒**。
+- 风格统一:**Pixar 式 3D 卡通 / 暖光 / 粉彩 / 萌系家庭向**;镜头:**锁机中景双人、轻微漂移、16:9**。
 
+## 节奏:两段式 + 慢速(本版核心)
+
+为治"一段式说太快",**每个对话默认拆成两段生成**;两段都自带 **慢速、句间带停顿** 的念白指令,并按各自台词句数给时长:
+
+| 单段台词句数 | 目标时长 |
+|---|---|
+| 3 句 | 约 10 秒 |
+| 4 句 | 约 12 秒 |
+| 5 句 | 约 14 秒 |
+
+- 拆法:按台词轮次从中点切,前半进 a、后半进 b(如 7 句 → a 3 句 + b 4 句;8 句 → 4+4;9 句 → 4+5)。
+- 关键指令(**两段都有**):`speak slowly and calmly, with natural little pauses between each line — never rushed` + 结尾 `Slow, unhurried dialogue delivery with small pauses`。
+> Sora 单条生成有时会卡在 10–12s 上限;真正控制语速的是上面那句"慢速 + 停顿"指令。若某段仍嫌快,把**该段**结尾秒数改大即可——两段各自调,互不影响。
 > 若某句 AI 英文发音不地道(娃在学英文),把该段静音、你自己读那两句配上即可。
-> 每段控制在 3–5 句,语速才不赶;若想再慢,把结尾 `about 8 seconds` 改大。
 
 ## 索引
 

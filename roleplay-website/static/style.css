@@ -57,8 +57,14 @@ body {
 
 /* ---------- map + dashed connector ---------- */
 #map-scroll { position: relative; padding: 0 0 80px; }
+/*
+   Stacking ladder (shares #map-scroll's context because .chapter-world no
+   longer isolates): chapter gradient/circles (z0) < side scenery (z1) <
+   route path (z2) < chapter-main nodes (z3). This paints the dashed route
+   BEHIND the nodes but ABOVE each chapter's gradient, per spec §4.3.
+*/
 .path-layer {
-  position: absolute; inset: 0; z-index: 4;
+  position: absolute; inset: 0; z-index: 2;
   width: 100%; height: 100%; pointer-events: none; overflow: visible;
 }
 .path-layer .trail {
@@ -76,8 +82,11 @@ body {
   min-height: 780px;
   background: var(--chapter-gradient);
   overflow: hidden;
-  isolation: isolate;
-  opacity: 0; transition: opacity .55s ease;
+  /* NOTE: no isolation:isolate — the route path (z2) and nodes (z3) must
+     share #map-scroll's stacking context so the dashed trail can sit
+     BETWEEN the chapter gradient (z0/z1) and the nodes (z3). overflow:hidden
+     still clips the decorative circles and scenery to the chapter bounds. */
+  opacity: 0; transition: opacity .8s ease;
 }
 .chapter-world.seen { opacity: 1; }
 
@@ -183,6 +192,11 @@ body {
 .level-node--locked .lock { width: 44px; height: 44px; opacity: .5; }
 
 /* current: white + orange glow + 72px play button */
+.level-node-wrap--current {
+  /* Drives the breathing halo size so it stays centered when the node shrinks
+     in the responsive breakpoints below. */
+  --current-node-size: 184px;
+}
 .level-node-wrap--current .level-node { width: 184px; height: 184px; }
 .level-node--current {
   background: #fff;
@@ -190,6 +204,25 @@ body {
               0 12px 30px rgba(255,150,50,.45),
               0 0 60px rgba(255,170,60,.30);
 }
+/* Soft breathing halo behind the current node. Lives on the WRAP's ::before
+   (which doesn't clip — unlike the node, whose overflow:hidden would crop a
+   ring) and sits BEHIND the node (z-index:0 under the node's z-index:1) so it
+   reads as a glow around the node, not over it. Only opacity/scale pulse —
+   the node itself never moves. */
+.level-node-wrap--current::before {
+  content: ""; position: absolute;
+  /* Center the halo on the node (which leads the wrap's flex column). */
+  top: calc(var(--current-node-size) / 2);
+  left: 50%;
+  width: calc(var(--current-node-size) * 1.2);
+  height: calc(var(--current-node-size) * 1.2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(circle, rgba(255,170,60,.45), rgba(255,170,60,0) 68%);
+  animation: glowBreath 2s ease-in-out infinite;
+}
+/* Lift the node above its own breathing halo. */
+.level-node-wrap--current .level-node { position: relative; z-index: 1; }
 .level-node--current .play-btn {
   width: 72px; height: 72px; border-radius: 50%;
   background: var(--accent);
@@ -223,8 +256,15 @@ body {
   position: absolute; top: -10px; right: -10px;
   width: 40px; height: 40px; z-index: 2;
   filter: drop-shadow(0 3px 4px rgba(120,70,20,.4));
+  /* Entrance: starts hidden and pops in once the node reveals. */
+  transform: scale(0); opacity: 0;
 }
 .level-node__star svg { width: 100%; height: 100%; display: block; }
+/* Pop the star in (scale + opacity) the first time its node enters view. */
+.level-node-wrap.seen .level-node__star {
+  animation: starPop 360ms cubic-bezier(.2,1.4,.4,1) forwards;
+  animation-delay: 180ms;
+}
 
 /* hover / active scale — preserve the completed polaroid tilt */
 .level-node-wrap:hover .level-node { transform: scale(1.05); }
@@ -356,6 +396,19 @@ body {
   50%      { transform: translate(-46%, -50%) scale(var(--scale, 1)); }
 }
 
+/* ---------- current-node glow breathing + completed star entrance ---------- */
+/* Pulses only the halo ring's opacity/scale — the node itself never moves. */
+@keyframes glowBreath {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.06); }
+}
+/* Star pops in (scale 0→1 with a touch of overshoot) on first reveal. */
+@keyframes starPop {
+  0%   { transform: scale(0);    opacity: 0; }
+  70%  { transform: scale(1.2);  opacity: 1; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 600px) {
   .chapter-world { grid-template-columns: 14% 72% 14%; min-height: 660px; }
@@ -363,6 +416,7 @@ body {
   .chapter-main { padding: 20px 8px 10px; }
   .chapter-levels { max-width: 180px; }
   .level-node { width: 128px; height: 128px; }
+  .level-node-wrap--current { --current-node-size: 140px; }
   .level-node-wrap--current .level-node { width: 140px; height: 140px; }
   .level-node-wrap { width: 160px; }
 }
@@ -370,6 +424,7 @@ body {
 @media (max-width: 380px) {
   .level-node { width: 108px; height: 108px; }
   .level-node-wrap { width: 140px; margin: 22px auto; }
+  .level-node-wrap--current { --current-node-size: 120px; }
   .level-node-wrap--current .level-node { width: 120px; height: 120px; }
   .level-node--current .play-btn { width: 58px; height: 58px; }
   .level-node--current .play-btn svg { width: 28px; height: 28px; }
@@ -378,6 +433,14 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .level-node, .level-node-wrap, .chapter-world, .detail-card, .back-btn { transition: none; }
+  /* Kill all motion (ambient loops + translated/opacity reveals), but
+     PRESERVE visibility — force every reveal target to its final state so
+     chapters and nodes stay on screen instead of freezing at opacity:0. */
+  .level-node, .level-node-wrap, .chapter-world, .detail-card, .back-btn { transition: none !important; }
   .scene-prop { animation: none !important; }
+  .level-node-wrap--current::before,
+  .level-node-wrap.seen .level-node__star { animation: none !important; }
+  /* Force the "revealed" end-state so nothing stays hidden without motion. */
+  .chapter-world, .level-node-wrap, .level-node-wrap .level-node { opacity: 1 !important; }
+  .level-node__star { transform: scale(1) !important; opacity: 1 !important; }
 }

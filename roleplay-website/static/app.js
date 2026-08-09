@@ -5,6 +5,7 @@
 
 import { getChapterTheme, getLevelVisualState, getStableRotation, isFrameDark } from "./map-model.mjs";
 import { buildSceneSpec, renderChapterScenery } from "./map-scenes.mjs";
+import { buildSmoothPath } from "./map-path.mjs";
 
 function prettyChapter(raw) {
   const s = raw.replace(/^\d+-/, "");
@@ -70,7 +71,6 @@ function extractSafeCover(level, theme, ratio = 0.2) {
 }
 
 // ===== map rendering =====
-let currentNodes = [];
 let revealObserver = null;
 let mapScrollY = 0;
 
@@ -114,6 +114,10 @@ function createLevelNode(level, index, theme) {
         cover.classList.add("level-node--fallback");
         cover.style.setProperty("--fallback-accent", theme.accent);
       }
+      // Covers don't change node geometry, but a redraw once they resolve is
+      // cheap insurance against any incidental layout shift and keeps the
+      // trail locked to the final rendered centers.
+      requestAnimationFrame(drawMapPath);
     });
   } else if (state === "current") {
     node.innerHTML = `<span class="play-btn">${PLAY_BTN_SVG}</span>`;
@@ -135,7 +139,6 @@ function createLevelNode(level, index, theme) {
 function renderMap(library) {
   const map = document.getElementById("map");
   map.innerHTML = "";
-  currentNodes = [];
 
   const total = library.reduce((n, ch) => n + ch.levels.length, 0);
   const done = library.reduce((n, ch) => n + ch.levels.filter(l => l.has_performance).length, 0);
@@ -175,7 +178,6 @@ function renderMap(library) {
       const wrap = createLevelNode(level, i, theme);
       wrap.style.setProperty("--d", (inChapter++ * 0.07).toFixed(2) + "s");
       levelsCol.appendChild(wrap);
-      currentNodes.push({ node: wrap.querySelector(".level-node"), level });
     }
 
     main.appendChild(levelsCol);
@@ -194,7 +196,7 @@ function renderMap(library) {
   }
 
   requestAnimationFrame(() => {
-    drawPath();
+    drawMapPath();
     observeReveal();
   });
 }
@@ -212,10 +214,16 @@ function observeReveal() {
   document.querySelectorAll(".chapter-world, .level-node-wrap").forEach(el => revealObserver.observe(el));
 }
 
-function drawPath() {
+// Reads every .level-node center in DOM order and draws ONE continuous smooth
+// path across all chapters. Centers are measured from raw layout — .level-node
+// carries no ambient transform, so hover/scene animations can never shift the
+// measured points. Re-runs after render, on document.fonts.ready, after cover
+// resolution settles, and on debounced resize.
+function drawMapPath() {
   const svg = document.getElementById("path-svg");
   const scroll = document.getElementById("map-scroll");
-  if (!scroll) return;
+  if (!svg || !scroll) return;
+
   const w = scroll.clientWidth, h = scroll.scrollHeight;
   svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
   svg.setAttribute("width", w);
@@ -223,27 +231,19 @@ function drawPath() {
 
   const base = scroll.getBoundingClientRect();
   const pts = [];
-  for (const { node } of currentNodes) {
+  // querySelectorAll returns DOM order, so the route flows chapter 1 → 10
+  // and level 1 → N within each chapter (the same order the nodes render).
+  for (const node of scroll.querySelectorAll(".level-node")) {
     const r = node.getBoundingClientRect();
-    pts.push([r.left + r.width / 2 - base.left + scroll.scrollLeft,
-              r.top + r.height / 2 - base.top + scroll.scrollTop]);
+    if (!r.width && !r.height) continue;
+    pts.push({
+      x: r.left + r.width / 2 - base.left + scroll.scrollLeft,
+      y: r.top + r.height / 2 - base.top + scroll.scrollTop,
+    });
   }
-  if (pts.length >= 2) svg.innerHTML = `<path class="trail" d="${smoothPath(pts)}"/>`;
-  else svg.innerHTML = "";
-}
 
-function smoothPath(pts) {
-  if (pts.length < 2) return "";
-  if (pts.length === 2) return `M ${pts[0][0]} ${pts[0][1]} L ${pts[1][0]} ${pts[1][1]}`;
-  let d = `M ${pts[0][0]} ${pts[0][1]}`;
-  const t = 0.16;
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
-    const c1x = p1[0] + (p2[0] - p0[0]) * t, c1y = p1[1] + (p2[1] - p0[1]) * t;
-    const c2x = p2[0] - (p3[0] - p1[0]) * t, c2y = p2[1] - (p3[1] - p1[1]) * t;
-    d += ` C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
-  }
-  return d;
+  const d = buildSmoothPath(pts);
+  svg.innerHTML = d ? `<path class="trail" d="${d}"/>` : "";
 }
 
 // ===== level detail view =====
@@ -336,7 +336,7 @@ function closeDetail() {
   view.classList.add("hidden");
   document.getElementById("map-view").classList.remove("hidden");
   requestAnimationFrame(() => {
-    drawPath();
+    drawMapPath();
     window.scrollTo(0, mapScrollY);
   });
 }
@@ -347,13 +347,13 @@ async function init() {
   renderMap(library);
   document.getElementById("back-btn").addEventListener("click", closeDetail);
 
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawPath);
-  setTimeout(drawPath, 700);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawMapPath);
+  setTimeout(drawMapPath, 700);
 
   let rt;
   window.addEventListener("resize", () => {
     clearTimeout(rt);
-    rt = setTimeout(drawPath, 120);
+    rt = setTimeout(drawMapPath, 120);
   });
 }
 init();

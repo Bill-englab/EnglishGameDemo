@@ -62,3 +62,16 @@ def test_map_shell_has_module_entry_and_resilient_states(client):
     assert '<script type="module" src="/static/app.js"></script>' in html
     for element_id in ("map-view", "map-scroll", "path-svg", "map", "map-loading", "map-error", "map-retry", "detail-view"):
         assert f'id="{element_id}"' in html
+
+
+def test_app_registers_retryable_library_loading(client):
+    javascript = client.get("/static/app.js").get_data(as_text=True)
+    assert 'fetch("/api/library", { cache: "no-store" })' in javascript
+    assert 'getElementById("map-retry").addEventListener("click", loadLibrary)' in javascript
+    assert 'showOnly("map-error")' in javascript
+
+
+def test_map_static_modules_are_served(client):
+    for path in ("/static/app.js", "/static/map-model.mjs", "/static/map-scenes.mjs", "/static/map-path.mjs", "/static/style.css"):
+        response = client.get(path)
+        assert response.status_code == 200

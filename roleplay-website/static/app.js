@@ -341,10 +341,30 @@ function closeDetail() {
   });
 }
 
+// ===== resilient library loading (loading / error / retry) =====
+// toggles ONLY these three; never hides the detail view
+function showOnly(id) {
+  for (const el of ["map-loading", "map-error", "map-scroll"]) {
+    document.getElementById(el).classList.toggle("hidden", el !== id);
+  }
+}
+async function loadLibrary() {
+  showOnly("map-loading");
+  try {
+    const response = await fetch("/api/library", { cache: "no-store" });
+    if (!response.ok) throw new Error(`library ${response.status}`);
+    const library = await response.json();
+    renderMap(library);
+    showOnly("map-scroll");
+  } catch (error) {
+    console.error("Unable to load library", error);
+    showOnly("map-error");
+  }
+}
+document.getElementById("map-retry").addEventListener("click", loadLibrary);
+
 // ===== init =====
 async function init() {
-  const library = await (await fetch("/api/library")).json();
-  renderMap(library);
   document.getElementById("back-btn").addEventListener("click", closeDetail);
 
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawMapPath);
@@ -355,5 +375,7 @@ async function init() {
     clearTimeout(rt);
     rt = setTimeout(drawMapPath, 120);
   });
+
+  loadLibrary();
 }
 init();

@@ -14,10 +14,15 @@
     <!-- MAP VIEW -->
     <main id="map-view" class="view">
       <header class="topbar">
-        <div class="title">My English Adventure</div>
-        <div class="progress"><span id="star-count">0</span><span class="slash">/</span><span id="star-total">30</span></div>
+        <h1>My English Adventure</h1>
+        <div class="progress" aria-label="Completed levels"><span id="star-count">0</span>/<span id="star-total">30</span></div>
       </header>
-      <div id="map-scroll">
+      <div id="map-loading" class="status-card" role="status">Loading your adventure…</div>
+      <div id="map-error" class="status-card hidden" role="alert">
+        <strong>The map is taking a nap.</strong>
+        <button id="map-retry" type="button">Try again</button>
+      </div>
+      <div id="map-scroll" class="hidden">
         <svg id="path-svg" class="path-layer" aria-hidden="true"></svg>
         <div id="map"></div>
       </div>
@@ -41,6 +46,6 @@
       </div>
     </section>
   </div>
-  <script src="/static/app.js"></script>
+  <script type="module" src="/static/app.js"></script>
 </body>
 </html>

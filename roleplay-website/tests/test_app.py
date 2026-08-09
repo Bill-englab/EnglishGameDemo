@@ -53,3 +53,12 @@ def test_video_route_404_for_missing_performance(client):
 def test_video_route_404_for_unknown_kind(client):
     res = client.get("/video/01-c/01-s/sneaky")
     assert res.status_code == 404
+
+
+def test_map_shell_has_module_entry_and_resilient_states(client):
+    response = client.get("/")
+    html = response.get_data(as_text=True)
+    assert response.status_code == 200
+    assert '<script type="module" src="/static/app.js"></script>' in html
+    for element_id in ("map-view", "map-scroll", "path-svg", "map", "map-loading", "map-error", "map-retry", "detail-view"):
+        assert f'id="{element_id}"' in html

@@ -43,6 +43,7 @@ body {
   font-size: clamp(20px, 5vw, 27px); font-weight: 700;
   color: var(--ink); line-height: 1;
   text-shadow: 0 2px 0 rgba(255,255,255,.6);
+  margin: 0;
 }
 .topbar .progress {
   font-family: "Fredoka", system-ui, sans-serif;
@@ -53,7 +54,6 @@ body {
   white-space: nowrap;
 }
 .topbar .progress #star-count { color: var(--accent-deep); font-weight: 700; }
-.topbar .progress .slash { margin: 0 2px; opacity: .5; }
 
 /* ---------- loading / error status cards ---------- */
 .status-card {

@@ -5,3 +5,4 @@ __pycache__/
 # all roleplay-dialogues videos are local-only (size + privacy) — only meta.json/text is tracked
 roleplay-dialogues/**/*.mp4
 .claude/
+.superpowers/

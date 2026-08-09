@@ -1,5 +1,6 @@
 /* ============================================================
-   My English Adventure — minimal glassmorphism map
+   My English Adventure — chapter-world map
+   Ten deterministic chapter worlds, each a 3-column grid.
    ============================================================ */
 
 :root {
@@ -21,7 +22,7 @@ body {
   font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  /* single warm gradient — light orange → warm yellow */
+  /* neutral warm fallback — each chapter-world paints its own gradient over this */
   background: linear-gradient(180deg, var(--warm-1) 0%, var(--warm-2) 48%, var(--warm-3) 100%);
   background-attachment: fixed;
 }
@@ -55,87 +56,106 @@ body {
 .topbar .progress .slash { margin: 0 2px; opacity: .5; }
 
 /* ---------- map + dashed connector ---------- */
-#map-scroll { position: relative; padding: 6px 0 120px; }
+#map-scroll { position: relative; padding: 0 0 80px; }
 .path-layer {
-  position: absolute; inset: 0; z-index: 1;
+  position: absolute; inset: 0; z-index: 4;
   width: 100%; height: 100%; pointer-events: none; overflow: visible;
 }
 .path-layer .trail {
   fill: none; stroke: #fff; stroke-width: 11;
   stroke-linecap: round; stroke-dasharray: 1 24;
   opacity: .9;
+  filter: drop-shadow(0 2px 3px rgba(90,58,26,.25));
 }
 
-/* ---------- chapter signpost (minimal) ---------- */
-.chapter { position: relative; }
-.chapter-label {
-  display: flex; align-items: baseline; justify-content: center; gap: 8px;
-  font-family: "Fredoka", system-ui, sans-serif;
-  font-weight: 600; font-size: 14px; letter-spacing: .3px;
-  color: var(--ink-soft);
-  margin: 14px auto 4px; max-width: 320px; text-align: center;
-  opacity: 0; transition: opacity .5s ease;
-}
-.chapter-label .ch-no { opacity: .5; }
-.chapter-label .ch-name { color: var(--ink); }
-.chapter.seen .chapter-label { opacity: 1; }
-
-/* ---------- big start point at the top ---------- */
-.start-hero {
-  position: relative; z-index: 2;
-  display: flex; flex-direction: column; align-items: center;
-  margin: 18px auto 8px; cursor: pointer;
-  opacity: 0; transition: opacity .5s ease;
-}
-.start-hero.seen { opacity: 1; }
-.start-medal {
+/* ---------- chapter world — 3-column grid ---------- */
+.chapter-world {
+  display: grid;
+  grid-template-columns: 23% 54% 23%;
   position: relative;
-  width: 150px; height: 150px; border-radius: 50%;
-  background: #fff;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 0 8px rgba(255,255,255,.5),
-              0 16px 40px rgba(255,150,50,.42),
-              0 0 70px rgba(255,170,60,.30);
-  animation: bob 3.2s ease-in-out infinite;
+  min-height: 780px;
+  background: var(--chapter-gradient);
+  overflow: hidden;
+  isolation: isolate;
+  opacity: 0; transition: opacity .55s ease;
 }
-.start-medal::before {
-  content: ""; position: absolute; inset: -16px; border-radius: 50%;
-  border: 3px solid rgba(255,157,77,.45);
-  animation: pulseRing 2.6s ease-out infinite;
+.chapter-world.seen { opacity: 1; }
+
+/* soft rounded transition between chapters: big circles on alternating edges */
+.chapter-world::before,
+.chapter-world::after {
+  content: ""; position: absolute; z-index: 0;
+  width: 70vmax; height: 70vmax; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.10);
+  pointer-events: none;
 }
-.start-medal::after {
-  content: ""; position: absolute; inset: -16px; border-radius: 50%;
-  border: 3px solid rgba(255,157,77,.35);
-  animation: pulseRing 2.6s ease-out infinite .9s;
-}
-.start-medal .mascot { width: 116px; height: 116px; }
-.start-medal .mascot svg { width: 100%; height: 100%; display: block; animation: wave 3.2s ease-in-out infinite; transform-origin: 50% 80%; }
-.start-cap {
-  margin-top: 16px;
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 18px;
-  color: var(--accent-deep); letter-spacing: .3px;
-  text-shadow: 0 2px 0 rgba(255,255,255,.6);
+.chapter-world:nth-child(odd)::before  { top: -35vmax; right: -20vmax; }
+.chapter-world:nth-child(odd)::after   { bottom: -35vmax; left: -20vmax; background: rgba(255,255,255,0.06); }
+.chapter-world:nth-child(even)::before { top: -35vmax; left: -20vmax; }
+.chapter-world:nth-child(even)::after  { bottom: -35vmax; right: -20vmax; background: rgba(255,255,255,0.06); }
+
+.chapter-main {
+  position: relative; z-index: 3;
+  display: flex; flex-direction: column;
+  padding: 26px 16px 12px;
 }
 
-/* ---------- side scenery (decorative, animated) ---------- */
-.scenery { position: absolute; z-index: 0; pointer-events: none; }
-.scenery svg { width: 100%; height: auto; display: block; }
-.scenery.flip svg { transform: scaleX(-1); }
-.scenery.ground { transform-origin: 50% 100%; }
-.scenery.tree, .scenery.bush, .scenery.flower, .scenery.mushroom, .scenery.grass, .scenery.rock {
-  animation: sway 5s ease-in-out infinite; animation-delay: var(--d, 0s);
+.chapter-heading {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 10px; flex: none;
+  margin: 0 auto 8px;
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-weight: 600; font-size: 16px; letter-spacing: .3px;
+  color: var(--ink); text-align: center;
+  text-shadow: 0 2px 0 rgba(255,255,255,.55);
 }
-.scenery.cloud { animation: drift 16s ease-in-out infinite; animation-delay: var(--d, 0s); }
-.scenery.sun { animation: sunPulse 4.5s ease-in-out infinite; transform-origin: 50% 50%; }
-.scenery.butterfly { animation: flap 2.2s ease-in-out infinite, bob 3s ease-in-out infinite; animation-delay: var(--d, 0s); transform-origin: 50% 50%; }
+.chapter-heading .ch-no {
+  font-weight: 700; color: var(--chapter-accent, var(--accent-deep));
+  background: rgba(255,255,255,.7);
+  padding: 3px 10px; border-radius: 999px;
+  border: 2px solid rgba(255,255,255,.9);
+}
+.chapter-heading .ch-name { color: var(--ink); }
 
-/* ---------- node wrap (zig wiggle + reveal) ---------- */
+.chapter-levels {
+  position: relative; z-index: 3;
+  display: flex; flex-direction: column;
+  align-items: center;
+  margin: 14px auto 0;
+  width: 100%; max-width: 220px;
+}
+
+/* ---------- side scenery — decorative scene props ---------- */
+.chapter-side {
+  position: relative; z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.scene-prop {
+  position: absolute;
+  left: calc(var(--x, 50) * 1%);
+  top: calc(var(--y, 50) * 1%);
+  width: clamp(54px, 6vw, 88px);
+  transform: translate(-50%, -50%) scale(var(--scale, 1));
+  transform-origin: 50% 60%;
+  pointer-events: none;
+  opacity: 0.92;
+  filter: drop-shadow(0 6px 6px rgba(80,50,20,.16));
+  animation: sceneBob 10s ease-in-out infinite;
+  animation-delay: calc(var(--delay, 0) * 1s);
+}
+.scene-prop svg { width: 100%; height: auto; display: block; }
+/* give each scene prop a slightly different ambient loop for variety */
+.scene-prop:nth-child(2n)   { animation-name: sceneSway; animation-duration: 12s; }
+.scene-prop:nth-child(3n)   { animation-name: sceneBob;  animation-duration: 14s; }
+.scene-prop:nth-child(4n)   { animation-name: sceneDrift; animation-duration: 13s; }
+
+/* ---------- node wrap (reveal only — no zig wobble in the grid) ---------- */
 .node-wrap {
   position: relative; z-index: 2;
   display: flex; flex-direction: column; align-items: center;
-  width: 158px; margin: 42px auto; padding: 0;
+  width: 158px; margin: 30px auto; padding: 0;
   background: none; border: none; font: inherit; color: inherit; cursor: pointer;
-  transform: translateX(var(--zig, 0px));
   opacity: 0; transition: opacity .5s ease; transition-delay: var(--d, 0s);
 }
 .node-wrap.seen { opacity: 1; }
@@ -298,29 +318,38 @@ body {
 
 .variations { margin-top: 16px; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
 
-/* ---------- keyframes ---------- */
-@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-@keyframes wave { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
-@keyframes pulseRing { 0% { transform: scale(.92); opacity: .55; } 100% { transform: scale(1.32); opacity: 0; } }
-@keyframes sway { 0%, 100% { transform: rotate(-2.4deg); } 50% { transform: rotate(2.4deg); } }
-@keyframes drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(20px); } }
-@keyframes sunPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-@keyframes flap { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.62); } }
+/* ---------- ambient keyframes for scene props ---------- */
+@keyframes sceneBob {
+  0%, 100% { transform: translate(-50%, -50%) scale(var(--scale, 1)); }
+  50%      { transform: translate(-50%, -54%) scale(var(--scale, 1)); }
+}
+@keyframes sceneSway {
+  0%, 100% { transform: translate(-50%, -50%) scale(var(--scale, 1)) rotate(-2.4deg); }
+  50%      { transform: translate(-50%, -50%) scale(var(--scale, 1)) rotate(2.4deg); }
+}
+@keyframes sceneDrift {
+  0%, 100% { transform: translate(-50%, -50%) scale(var(--scale, 1)); }
+  50%      { transform: translate(-46%, -50%) scale(var(--scale, 1)); }
+}
 
 /* ---------- responsive ---------- */
+@media (max-width: 600px) {
+  .chapter-world { grid-template-columns: 14% 72% 14%; min-height: 660px; }
+  .scene-prop:nth-child(n+3) { display: none; }
+  .chapter-main { padding: 20px 8px 10px; }
+  .chapter-levels { max-width: 180px; }
+}
+
 @media (max-width: 380px) {
   .node { width: 104px; height: 104px; }
-  .node-wrap { width: 140px; margin: 34px auto; }
+  .node-wrap { width: 140px; margin: 22px auto; }
   .node.current .play-btn { width: 58px; height: 58px; }
   .node.current .play-btn svg { width: 28px; height: 28px; }
   .node.locked .lock { width: 38px; height: 38px; }
   .node.completed .node-inner { border-radius: 15px; }
-  .start-medal { width: 124px; height: 124px; }
-  .start-medal .mascot { width: 96px; height: 96px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .node, .node-wrap, .chapter-label, .detail-card, .back-btn { transition: none; }
-  .start-medal, .start-medal::before, .start-medal::after,
-  .start-medal .mascot svg, .scenery { animation: none !important; }
+  .node, .node-wrap, .chapter-world, .detail-card, .back-btn { transition: none; }
+  .scene-prop { animation: none !important; }
 }

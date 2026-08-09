@@ -41,3 +41,8 @@ test("detects nearly black video frames", () => {
   assert.equal(isFrameDark(new Uint8ClampedArray([0, 0, 0, 255, 8, 8, 8, 255])), true);
   assert.equal(isFrameDark(new Uint8ClampedArray([230, 120, 60, 255, 250, 220, 180, 255])), false);
 });
+
+test("ignores transparent pixels while evaluating frame darkness", () => {
+  const transparentBlackAndBright = new Uint8ClampedArray([0, 0, 0, 0, 240, 180, 80, 255]);
+  assert.equal(isFrameDark(transparentBlackAndBright), false);
+});

@@ -20,10 +20,14 @@ export const getLayoutForWidth = width => width <= 600
 export const getStableRotation = index => ((index * 53) % 7) - 3;
 export function isFrameDark(data, threshold = 28, ratio = 0.92) {
   let darkPixels = 0;
-  const pixels = data.length / 4;
+  let opaquePixels = 0;
   for (let offset = 0; offset < data.length; offset += 4) {
+    // Skip fully/transparent pixels — do not count them as dark
+    // and do not include them in the denominator.
+    if (data[offset + 3] < 16) continue;
+    opaquePixels += 1;
     const luminance = 0.2126 * data[offset] + 0.7152 * data[offset + 1] + 0.0722 * data[offset + 2];
     if (luminance < threshold) darkPixels += 1;
   }
-  return pixels > 0 && darkPixels / pixels >= ratio;
+  return opaquePixels > 0 && darkPixels / opaquePixels >= ratio;
 }

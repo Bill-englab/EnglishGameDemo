@@ -3,7 +3,7 @@
 // Ten deterministic chapter worlds; each is a 3-column grid.
 // ============================================================
 
-import { getChapterTheme } from "./map-model.mjs";
+import { getChapterTheme, getLevelVisualState, getStableRotation, isFrameDark } from "./map-model.mjs";
 import { buildSceneSpec, renderChapterScenery } from "./map-scenes.mjs";
 
 function prettyChapter(raw) {
@@ -26,15 +26,19 @@ const starSVG = (lit) => {
 };
 
 // ===== frame extraction for the child's face cover =====
+// Seeks to 20% of the performance video, draws to a canvas, inspects pixels,
+// and only returns a JPEG data URL when isFrameDark is false. Resolves null
+// on timeout, media error, zero dimensions, canvas/tainted error, OR a dark frame.
 const frameCache = new Map();
 const frameKey = (ch, lv, kind) => `${ch}/${lv}/${kind}`;
-function extractFrame(chapter, level, kind, ratio = 0.2) {
-  const key = frameKey(chapter, level, kind);
+function extractSafeCover(level, theme, ratio = 0.2) {
+  const key = frameKey(level.chapter, level.level, "performance");
   if (frameCache.has(key)) return Promise.resolve(frameCache.get(key));
   return new Promise(resolve => {
     const v = document.createElement("video");
     v.muted = true; v.preload = "auto"; v.playsInline = true;
-    v.src = videoURL(chapter, level, kind);
+    v.crossOrigin = "anonymous";
+    v.src = videoURL(level.chapter, level.level, "performance");
     let done = false;
     const finish = (val) => {
       if (done) return; done = true; clearTimeout(to);
@@ -43,17 +47,22 @@ function extractFrame(chapter, level, kind, ratio = 0.2) {
     };
     const to = setTimeout(() => finish(null), 4500);
     v.addEventListener("loadedmetadata", () => {
+      if (!v.videoWidth || !v.videoHeight) { finish(null); return; }
       const d = v.duration || 1;
       v.currentTime = Math.min(Math.max(0.3, d * ratio), d - 0.05);
     });
     v.addEventListener("seeked", () => {
       try {
-        const w = v.videoWidth || 320, h = v.videoHeight || 240;
+        const w = v.videoWidth, h = v.videoHeight;
+        if (!w || !h) { finish(null); return; }
         const scale = Math.min(1, 280 / Math.max(w, h));
         const cv = document.createElement("canvas");
         cv.width = Math.round(w * scale); cv.height = Math.round(h * scale);
-        cv.getContext("2d").drawImage(v, 0, 0, cv.width, cv.height);
-        finish(cv.toDataURL("image/jpeg", 0.72));
+        const ctx = cv.getContext("2d");
+        ctx.drawImage(v, 0, 0, cv.width, cv.height);
+        const imageData = ctx.getImageData(0, 0, cv.width, cv.height);
+        if (isFrameDark(imageData.data)) { finish(null); return; }
+        finish(cv.toDataURL("image/jpeg", 0.82));
       } catch (_) { finish(null); }
     });
     v.addEventListener("error", () => finish(null));
@@ -65,10 +74,62 @@ let currentNodes = [];
 let revealObserver = null;
 let mapScrollY = 0;
 
-function nodeState(level) {
-  if (level.has_performance) return "completed";
-  if (level.current) return "current";
-  return "locked";
+// Gold star badge for completed nodes. Placed OUTSIDE the cover-clipping layer
+// on the overflow:visible .level-node so it is never cropped.
+const STAR_BADGE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="${STAR_PATH}" fill="#ffd23f" stroke="#f0a500" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
+
+// Builds the level node for every state (completed / current / locked).
+// Returns a <button class="level-node-wrap level-node-wrap--STATE"> with an
+// inner .level-node (sized via CSS) and a .level-title beneath it. Every state
+// is clickable (no disabled attribute) and opens the detail view.
+function createLevelNode(level, index, theme) {
+  const state = getLevelVisualState(level);
+
+  const wrap = document.createElement("button");
+  wrap.type = "button";
+  wrap.className = `level-node-wrap level-node-wrap--${state}`;
+  wrap.setAttribute("aria-label", level.title);
+
+  const node = document.createElement("span");
+  node.className = `level-node level-node--${state}`;
+
+  if (state === "completed") {
+    node.style.setProperty("--polaroid-rotation", getStableRotation(index) + "deg");
+
+    const cover = document.createElement("span");
+    cover.className = "level-node__cover";
+    node.appendChild(cover);
+
+    // Gold star sits OUTSIDE the cover-clipping layer (the .level-node has
+    // overflow:visible; only the __cover layer clips).
+    const star = document.createElement("span");
+    star.className = "level-node__star";
+    star.innerHTML = STAR_BADGE_SVG;
+    node.appendChild(star);
+
+    extractSafeCover(level, theme).then(url => {
+      if (url) {
+        cover.style.backgroundImage = `url("${url}")`;
+      } else {
+        cover.classList.add("level-node--fallback");
+        cover.style.setProperty("--fallback-accent", theme.accent);
+      }
+    });
+  } else if (state === "current") {
+    node.innerHTML = `<span class="play-btn">${PLAY_BTN_SVG}</span>`;
+  } else {
+    node.innerHTML = LOCK_SVG;
+  }
+
+  const title = document.createElement("span");
+  title.className = "level-title";
+  title.textContent = level.title;
+
+  wrap.appendChild(node);
+  wrap.appendChild(title);
+  wrap.addEventListener("click", () => openDetail(level));
+
+  return wrap;
 }
 
 function renderMap(library) {
@@ -111,43 +172,10 @@ function renderMap(library) {
     let inChapter = 0;
     for (const level of chapter.levels) {
       const i = gIdx++;
-      const state = nodeState(level);
-
-      const wrap = document.createElement("button");
-      wrap.type = "button";
-      wrap.className = "node-wrap" + (level.current ? " current" : "");
+      const wrap = createLevelNode(level, i, theme);
       wrap.style.setProperty("--d", (inChapter++ * 0.07).toFixed(2) + "s");
-      wrap.setAttribute("aria-label", level.title);
-
-      const node = document.createElement("span");
-      node.className = "node " + state;
-      if (state === "completed") {
-        node.style.setProperty("--rot", ((((i * 53) % 7)) - 3) + "deg");
-      }
-
-      const inner = document.createElement("span");
-      inner.className = "node-inner";
-      node.appendChild(inner);
-
-      if (state === "completed") {
-        extractFrame(level.chapter, level.level, "performance").then(url => {
-          if (url) inner.style.backgroundImage = `url("${url}")`;
-        });
-      } else if (state === "current") {
-        inner.innerHTML = `<span class="play-btn">${PLAY_BTN_SVG}</span>`;
-      } else {
-        inner.innerHTML = LOCK_SVG;
-      }
-
-      const label = document.createElement("span");
-      label.className = "node-label";
-      label.textContent = level.title;
-
-      wrap.appendChild(node);
-      wrap.appendChild(label);
-      wrap.addEventListener("click", () => openDetail(level));
       levelsCol.appendChild(wrap);
-      currentNodes.push({ node, level });
+      currentNodes.push({ node: wrap.querySelector(".level-node"), level });
     }
 
     main.appendChild(levelsCol);
@@ -181,7 +209,7 @@ function observeReveal() {
       }
     }
   }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
-  document.querySelectorAll(".chapter-world, .node-wrap").forEach(el => revealObserver.observe(el));
+  document.querySelectorAll(".chapter-world, .level-node-wrap").forEach(el => revealObserver.observe(el));
 }
 
 function drawPath() {

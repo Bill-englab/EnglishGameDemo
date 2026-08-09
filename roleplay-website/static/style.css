@@ -151,77 +151,101 @@ body {
 .scene-prop:nth-child(4n)   { animation-name: sceneDrift; animation-duration: 13s; }
 
 /* ---------- node wrap (reveal only — no zig wobble in the grid) ---------- */
-.node-wrap {
+.level-node-wrap {
   position: relative; z-index: 2;
   display: flex; flex-direction: column; align-items: center;
-  width: 158px; margin: 30px auto; padding: 0;
+  width: 200px; margin: 30px auto; padding: 0;
   background: none; border: none; font: inherit; color: inherit; cursor: pointer;
   opacity: 0; transition: opacity .5s ease; transition-delay: var(--d, 0s);
 }
-.node-wrap.seen { opacity: 1; }
-.node-wrap:focus-visible { outline: none; }
-.node-wrap:focus-visible .node { box-shadow: 0 0 0 4px var(--accent); }
+.level-node-wrap.seen { opacity: 1; }
+.level-node-wrap:focus-visible { outline: none; }
+.level-node-wrap:focus-visible .level-node {
+  box-shadow: 0 0 0 4px var(--accent), 0 12px 30px rgba(255,150,50,.35);
+}
 
-/* ---------- the node — 24px radius, three states ---------- */
-.node {
+/* ---------- the level node — 28px radius, three states ---------- */
+.level-node {
   position: relative;
-  width: 120px; height: 120px; border-radius: 24px;
+  width: 168px; height: 168px; border-radius: 28px;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
-  transition: transform .16s cubic-bezier(.2,1.5,.4,1), box-shadow .2s ease;
-}
-.node-inner {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  background-size: cover; background-position: center;
+  transition: transform 160ms ease, box-shadow 240ms ease;
 }
 
 /* locked: glassmorphism + minimal gray lock */
-.node.locked {
+.level-node--locked {
   background: rgba(255,255,255,.42);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255,255,255,.75);
   box-shadow: 0 8px 20px rgba(180,120,40,.12);
 }
-.node.locked .lock { width: 44px; height: 44px; opacity: .5; }
+.level-node--locked .lock { width: 44px; height: 44px; opacity: .5; }
 
-/* current: white + orange glow + big play button */
-.node.current {
+/* current: white + orange glow + 72px play button */
+.level-node-wrap--current .level-node { width: 184px; height: 184px; }
+.level-node--current {
   background: #fff;
   box-shadow: 0 0 0 6px rgba(255,255,255,.55),
               0 12px 30px rgba(255,150,50,.45),
               0 0 60px rgba(255,170,60,.30);
 }
-.node.current .play-btn {
-  width: 66px; height: 66px; border-radius: 50%;
+.level-node--current .play-btn {
+  width: 72px; height: 72px; border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 6px 14px rgba(240,119,43,.45);
   display: flex; align-items: center; justify-content: center;
 }
-.node.current .play-btn svg { width: 32px; height: 32px; margin-left: 4px; }
+.level-node--current .play-btn svg { width: 34px; height: 34px; margin-left: 4px; }
 
 /* completed: video cover + polaroid frame + slight tilt */
-.node.completed {
+.level-node-wrap--completed .level-node {
   background: #fff;
-  border: 7px solid #fff;
+  border: 8px solid #fff;
   box-shadow: 0 14px 28px rgba(120,70,20,.26);
-  transform: rotate(var(--rot, 0deg));
+  transform: rotate(var(--polaroid-rotation, 0deg));
+  overflow: visible; /* the cover clips separately; star sits outside */
 }
-.node.completed .node-inner { border-radius: 17px; }
+.level-node__cover {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border-radius: 20px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background-size: cover; background-position: center;
+  background-color: #fff;
+}
+/* fallback chip when no safe cover could be extracted — colored with theme.accent */
+.level-node__cover.level-node--fallback {
+  background: var(--fallback-accent, var(--accent));
+}
+/* gold star badge — OUTSIDE the cover-clipping layer (lives on overflow:visible node) */
+.level-node__star {
+  position: absolute; top: -10px; right: -10px;
+  width: 40px; height: 40px; z-index: 2;
+  filter: drop-shadow(0 3px 4px rgba(120,70,20,.4));
+}
+.level-node__star svg { width: 100%; height: 100%; display: block; }
 
-/* hover / active scale — preserve the polaroid tilt */
-.node-wrap:hover .node { transform: scale(1.06); }
-.node-wrap:active .node { transform: scale(.95); }
-.node-wrap:hover .node.completed { transform: rotate(var(--rot, 0deg)) scale(1.06); }
-.node-wrap:active .node.completed { transform: rotate(var(--rot, 0deg)) scale(.95); }
+/* hover / active scale — preserve the completed polaroid tilt */
+.level-node-wrap:hover .level-node { transform: scale(1.05); }
+.level-node-wrap:active .level-node { transform: scale(.96); }
+.level-node-wrap--completed:hover .level-node {
+  transform: rotate(var(--polaroid-rotation, 0deg)) scale(1.05);
+}
+.level-node-wrap--completed:active .level-node {
+  transform: rotate(var(--polaroid-rotation, 0deg)) scale(.96);
+}
 
-/* ---------- title (clean, minimal, under the node) ---------- */
-.node-label {
-  margin-top: 14px; max-width: 158px;
+/* ---------- title (clean, minimal, two-line clamp, readable over gradients) ---------- */
+.level-title {
+  margin-top: 14px; max-width: 200px;
   font-family: "Fredoka", system-ui, sans-serif;
   font-size: 14px; font-weight: 600; line-height: 1.25;
   text-align: center; color: var(--ink);
-  text-shadow: 0 1px 0 rgba(255,255,255,.6);
+  display: -webkit-box; -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+  /* keep readable over any chapter gradient */
+  text-shadow: 0 1px 0 rgba(255,255,255,.7), 0 0 6px rgba(255,255,255,.55);
 }
 
 /* ============================================================
@@ -338,18 +362,22 @@ body {
   .scene-prop:nth-child(n+3) { display: none; }
   .chapter-main { padding: 20px 8px 10px; }
   .chapter-levels { max-width: 180px; }
+  .level-node { width: 128px; height: 128px; }
+  .level-node-wrap--current .level-node { width: 140px; height: 140px; }
+  .level-node-wrap { width: 160px; }
 }
 
 @media (max-width: 380px) {
-  .node { width: 104px; height: 104px; }
-  .node-wrap { width: 140px; margin: 22px auto; }
-  .node.current .play-btn { width: 58px; height: 58px; }
-  .node.current .play-btn svg { width: 28px; height: 28px; }
-  .node.locked .lock { width: 38px; height: 38px; }
-  .node.completed .node-inner { border-radius: 15px; }
+  .level-node { width: 108px; height: 108px; }
+  .level-node-wrap { width: 140px; margin: 22px auto; }
+  .level-node-wrap--current .level-node { width: 120px; height: 120px; }
+  .level-node--current .play-btn { width: 58px; height: 58px; }
+  .level-node--current .play-btn svg { width: 28px; height: 28px; }
+  .level-node--locked .lock { width: 38px; height: 38px; }
+  .level-node__cover { border-radius: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .node, .node-wrap, .chapter-world, .detail-card, .back-btn { transition: none; }
+  .level-node, .level-node-wrap, .chapter-world, .detail-card, .back-btn { transition: none; }
   .scene-prop { animation: none !important; }
 }

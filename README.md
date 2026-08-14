@@ -1,98 +1,146 @@
 # My English Adventure
 
-把父子线下英语 role-play 的录像，排成一条「章 → 关」的闯关地图。每过一关，地图上那个点就亮起来，变成孩子自己录像里的画面。
+<p>
+  <strong>英语 Role-play 闯关地图</strong>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/Bill-englab/EnglishGameDemo/releases/tag/v0.1.0"><img alt="version" src="https://img.shields.io/badge/version-v0.1.0-blue"></a>
+  &nbsp;
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-green">
+  &nbsp;
+  <img alt="platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey">
+  &nbsp;
+  <img alt="status" src="https://img.shields.io/badge/status-WIP%20(7%2F30%20demo)-orange">
+</p>
 
-这是一个本地运行的小网站——不是在线教学平台，是孩子的「表演回放柜」。
+---
 
-## 工作原理
+## 这是什么
 
-- **10 章 × 3 关 = 30 关**，每章对应一个英语语言主题（wants-requests、refusing-bargaining、asking-help 等）。
-- 每关两段视频：`demo.mp4`（AI 生成的演示动画，给孩子看样板）+ `performance.mp4`（孩子照着练后录的表演）。
-- **放一个 `performance.mp4` 进去，这关就点亮，下一关解锁。** 点亮的关卡圆点变成孩子录像的画面，点击回放。
-- 地图上每章一幅背景插画，关卡节点沿蜿蜒路排列，背景随滚动交叉淡入淡出。
+一个给 **4 岁孩子**用的英语闯关地图网站。
 
-## Quick Start
+孩子和爸爸一起做英语 role-play，练熟一段对话后录下表演。把录像放进网站，地图上对应的关卡就亮起来——亮的不是星星，是**孩子自己录像里的画面**。孩子可以反复点开回看自己的表演。
+
+> 真正的奖励不是星星，是回头看自己的表演。
+
+### 为什么这样做
+
+- 孩子能交流，但句式偏基础。想通过反复 role-play 练习来丰富句式。
+- 4 岁孩子对抽象的星星没感觉，认的是**自己的画面**。
+- 网站不教英语——教学在线下发生。网站只做两件事：**把进度变成游戏般的地图**，**让孩子反复回看自己的表演**。
+
+---
+
+## 怎么用
+
+整个流程是一个父子一起的循环，每关重复一次：
+
+```
+  ┌─────────────────────────────────────────────────────┐
+  │                                                     │
+  │   ①  孩子点开当前关                                  │
+  │       播放 demo 动画，看这段对话怎么演                 │
+  │              │                                      │
+  │              ▼                                      │
+  │   ②  父子一起线下 role-play                          │
+  │       照着 demo 反复练                               │
+  │              │                                      │
+  │              ▼                                      │
+  │   ③  录下孩子的表演                                  │
+  │       存成 performance.mp4                           │
+  │              │                                      │
+  │              ▼                                      │
+  │   ④  在详情页点「Add performance」上传               │
+  │       （或手动拖进 recordings/ 文件夹）               │
+  │              │                                      │
+  │              ▼                                      │
+  │   ⑤  页面自动刷新，关卡点亮 ✨                        │
+  │       圆点变成孩子录像的画面                          │
+  │       下一关解锁                                     │
+  │              │                                      │
+  │              ▼                                      │
+  │   ⑥  孩子点自己的画面，回看表演                       │
+  │       想看多少次都行                                 │
+  │              │                                      │
+  │              ▼                                      │
+  │      回到 ①，进入下一关                               │
+  │                                                     │
+  └─────────────────────────────────────────────────────┘
+```
+
+### 启动网站
+
+**Windows**：双击 `run.bat`，自动打开浏览器。
+
+**命令行**（所有系统）：
 
 ```bash
 cd app
-python -m venv .venv
-.venv/Scripts/python -m pip install -r requirements.txt   # Windows
-# macOS/Linux:  .venv/bin/python -m pip install -r requirements.txt
-
-.venv/Scripts/python app.py
+.venv/Scripts/python app.py      # Windows
+# macOS/Linux:  .venv/bin/python app.py
 ```
 
-打开 http://127.0.0.1:5000 。Windows 也可双击根目录 `run.bat`。
+然后打开 http://127.0.0.1:5000 。
 
-## 内容结构
+> 网站只在本地运行，不需要联网（字体已内置）。上传的视频直接存在你电脑上，不传到任何服务器。
 
-文案和视频分开放：
+---
 
-```
-content/        课程文案（meta.json + dialogues.md，入库）
-demo/           AI 演示视频（本地，gitignored）
-recordings/     孩子表演录像（本地，gitignored）
-prompts/        Sora 视频生成提示词（入库）
-app/            Flask 网站
-tools/          脚本
-docs/           设计文档
-```
+## 地图长什么样
 
-三棵内容树的 `<章>/<关>` 目录名必须一致。文件夹名零填充前缀（`01-`…`10-`），排序即闯关顺序。
+- **10 章 × 3 关 = 30 关**，从下往上排成一条蜿蜒的路。
+- 每章一幅背景插画（Pixar 风绘本），滚动时背景交叉淡入淡出。
+- 关卡三种状态：
 
-**上传视频**：在详情页点「Add demo / Add performance」按钮选文件即可，文件自动写到对应目录。也可手动拖文件到 `demo/` 或 `recordings/` 再刷新。Chrome 下会记住上次打开的文件夹。
+  | 状态 | 长什么样 | 含义 |
+  | --- | --- | --- |
+  | 🔒 锁住 | 灰色锁图标 | 上一关还没完成，但如果有 demo 可以点进去预习 |
+  | ▶️ 当前 | 白色发光按钮 | 该练这关了 |
+  | 🌟 已完成 | 孩子录像的画面 + 金星 | 通关了，随时可以回看 |
 
-## meta.json
+---
 
-```json
-{
-  "title": "Can I have the apple one, please?",
-  "title_zh": "想要某样东西",
-  "scene": "零食时间，他挑要哪个、要几个。",
-  "patterns": ["Can I have ___?", "I want ___"],
-  "dialogue": [
-    {"speaker": "Dad", "line": "..."},
-    {"speaker": "Child", "line": "..."}
-  ],
-  "variations": "\"apple one\" 换 \"banana one\"；..."
-}
-```
+## 课程内容
 
-编辑 `content/<章>/dialogues.md` 后跑 `python tools/scaffold_levels.py` 生成 meta.json（已有 demo 的关不会被覆盖）。
+30 关覆盖 10 个英语语言主题，按难度递进：
 
-## 技术栈
+| 章 | 主题 | 学什么 |
+| --- | --- | --- |
+| 1 | wants-requests | Can I have ___? / I want ___ |
+| 2 | refusing-bargaining | I don't want to ___ / What if ___ |
+| 3 | asking-help | Can you help me ___? / It's stuck |
+| 4 | where-locating | Where's ___? / Is ___ in/on ___? |
+| 5 | why-how-come | Why do I ___? / How come ___? |
+| 6 | feelings-preferences | I'm ___ / I don't like ___ |
+| 7 | reasoning | because ___ / That's why ___ |
+| 8 | recounting-day | I went ___ / and then ___ |
+| 9 | reporting-others | He said ___ / She told me ___ |
+| 10 | planning-predicting | We're going to ___ / First ___, then ___ |
 
-Flask 单文件后端，文件系统即数据库。前端原生 ES Modules，无构建步骤、无 npm 依赖。字体自托管，离线可用。
+每关都有一段完整对话（Dad + Child 轮流说）、目标句式、换样重演提示。demo 动画由 AI（Sora）生成，角色固定：爸爸 = 卡通狗，孩子 = 卡通小老虎。
 
-| 路由 | 作用 |
+---
+
+## 当前进度
+
+| 项 | 进度 |
 | --- | --- |
-| `GET /` | 地图页 |
-| `GET /api/library` | 章/关树（带状态标注，JSON） |
-| `GET /video/<chapter>/<level>/<kind>` | 视频流（demo 或 performance，支持 Range） |
-| `POST /upload/<chapter>/<level>/<kind>` | 上传视频到对应目录（流式写盘，500MB 上限） |
+| 课程文案 | 30/30 ✅ |
+| 背景插画 | 8/10 |
+| demo 动画 | 7/30 |
+| Sora 提示词 | 60/60 ✅ |
 
-### 测试
+详细进度见 [`demo/PROGRESS.md`](demo/PROGRESS.md)。
 
-```bash
-cd app
-.venv/Scripts/python -m pytest     # Python
-npm test                            # JS（零依赖，仅 node --test）
-```
+---
 
-## 进度
+## 给开发者
 
-- 关卡文案：30/30
-- 背景插画：8/10
-- demo 视频：7/30（见 `demo/PROGRESS.md`）
-- Sora 提示词：60 份
+如果你要改代码或贡献内容，详见 [`AGENTS.md`](AGENTS.md)（完整的开发约定、目录结构、测试方法）。
 
-## 设计原则
+技术栈：Flask + 原生 ES Modules，无构建步骤，无数据库。Python 和 JS 测试各一套。
 
-- 不做教学引擎——教学在线下发生
-- 不做星级评分——二元判定（有/没有 performance.mp4）
-- 不部署公网——仅本地
-- 不引入构建工具/数据库
+---
 
 ## License
 
-个人项目，未开源授权。
+[MIT](LICENSE)

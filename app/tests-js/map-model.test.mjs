@@ -5,32 +5,23 @@ import {
   CHAPTER_THEMES,
   getChapterTheme,
   getLevelVisualState,
-  getLayoutForWidth,
   getStableRotation,
   isFrameDark,
 } from "../static/map-model.mjs";
 
-test("defines ten distinct chapter worlds", () => {
+test("defines ten distinct chapter worlds with accent colors", () => {
   assert.equal(Object.keys(CHAPTER_THEMES).length, 10);
   assert.equal(new Set(Object.values(CHAPTER_THEMES).map(theme => theme.world)).size, 10);
   for (const theme of Object.values(CHAPTER_THEMES)) {
-    assert.match(theme.gradient, /^linear-gradient\(/);
+    assert.ok(typeof theme.world === "string" && theme.world.length > 0);
     assert.ok(theme.accent.startsWith("#"));
-    assert.ok(theme.props.length >= 3 && theme.props.length <= 5);
-    assert.equal(theme.heroes.length, 2);
   }
-  assert.equal(new Set(Object.values(CHAPTER_THEMES).flatMap(theme => theme.heroes)).size, 20);
 });
 
 test("selects visual state without disabling locked levels", () => {
   assert.equal(getLevelVisualState({ has_performance: true, current: false }), "completed");
   assert.equal(getLevelVisualState({ has_performance: false, current: true }), "current");
   assert.equal(getLevelVisualState({ has_performance: false, current: false }), "locked");
-});
-
-test("uses approved desktop and mobile proportions", () => {
-  assert.deepEqual(getLayoutForWidth(1440), { left: 18, main: 64, right: 18, node: 220, currentNode: 244 });
-  assert.deepEqual(getLayoutForWidth(390), { left: 12, main: 76, right: 12, node: 140, currentNode: 152 });
 });
 
 test("completed-card rotation is stable and bounded", () => {

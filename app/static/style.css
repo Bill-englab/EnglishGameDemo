@@ -131,59 +131,44 @@ body {
 #map-retry:hover { background: var(--accent-deep); transform: translateY(-1px); }
 #map-retry:active { transform: translateY(0); }
 
-/* ---------- map + dashed connector ---------- */
+/* ---------- map + solid route path ---------- */
 #map-scroll { position: relative; padding: 0 0 80px; }
 /*
-   Stacking ladder (shares #map-scroll's context because .chapter-world no
-   longer isolates): chapter gradient/circles (z0) < side scenery (z1) <
-   route path (z2) < chapter-main nodes (z3). This paints the dashed route
-   BEHIND the nodes but ABOVE each chapter's gradient, per spec 搂4.3.
+   Stacking: background image (z0) < route path (z2) < chapter-main nodes (z3).
+   The trail sits ABOVE the background image but BEHIND the level nodes.
 */
 .path-layer {
   position: absolute; inset: 0; z-index: 2;
   width: 100%; height: 100%; pointer-events: none; overflow: visible;
 }
 .path-layer .trail {
-  fill: none; stroke: #fff; stroke-width: 11;
-  stroke-linecap: round; stroke-dasharray: 1 24;
-  opacity: .9;
-  filter: drop-shadow(0 2px 3px rgba(90,58,26,.25));
+  fill: none; stroke: #fff; stroke-width: 14;
+  stroke-linecap: round; stroke-dasharray: none;
+  opacity: .88;
+  filter: drop-shadow(0 3px 5px rgba(90,58,26,.3));
 }
 
-/* ---------- chapter world —3-column grid ---------- */
+/* ---------- chapter world — full background illustration ---------- */
 .chapter-world {
-  display: grid;
-  grid-template-columns: 18% 64% 18%;
   position: relative;
   min-height: 930px;
-  background: var(--chapter-gradient);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   overflow: hidden;
-  /* NOTE: no isolation:isolate —the route path (z2) and nodes (z3) must
-     share #map-scroll's stacking context so the dashed trail can sit
-     BETWEEN the chapter gradient (z0/z1) and the nodes (z3). overflow:hidden
-     still clips the decorative circles and scenery to the chapter bounds. */
   opacity: 1;
-  transition: background .8s ease;
 }
-.chapter-world.seen { opacity: 1; }
-
-/* soft rounded transition between chapters: big circles on alternating edges */
-.chapter-world::before,
-.chapter-world::after {
-  content: ""; position: absolute; z-index: 0;
-  width: 70vmax; height: 70vmax; border-radius: 50%;
-  background: rgba(255, 255, 255, 0.10);
-  pointer-events: none;
+/* Fallback when the background image doesn't exist yet (chapters without art). */
+.chapter-world--no-bg {
+  background-image: none !important;
+  background-color: color-mix(in srgb, var(--chapter-accent, #cc8a4a) 28%, var(--warm-1));
 }
-.chapter-world:nth-child(odd)::before  { top: -35vmax; right: -20vmax; }
-.chapter-world:nth-child(odd)::after   { bottom: -35vmax; left: -20vmax; background: rgba(255,255,255,0.06); }
-.chapter-world:nth-child(even)::before { top: -35vmax; left: -20vmax; }
-.chapter-world:nth-child(even)::after  { bottom: -35vmax; right: -20vmax; background: rgba(255,255,255,0.06); }
 
 .chapter-main {
   position: relative; z-index: 3;
   display: flex; flex-direction: column;
-  min-width: 0;
+  align-items: center;
   padding: 34px 16px 24px;
 }
 
@@ -227,86 +212,7 @@ body {
   width: 100%; max-width: 680px;
 }
 
-/* ---------- side scenery —decorative scene props ---------- */
-.chapter-side {
-  position: relative; z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-.scene-hero {
-  position: absolute;
-  z-index: 1;
-  bottom: 1%;
-  width: clamp(230px, 24vw, 390px);
-  pointer-events: none;
-  filter: drop-shadow(0 18px 18px rgba(67,45,31,.18));
-}
-.scene-hero--left { left: -24%; top: 38%; bottom: auto; }
-.scene-hero--right { right: -24%; }
-.scene-hero svg { display: block; width: 100%; height: auto; overflow: visible; }
-.chapter-world:nth-child(2n) .scene-hero { bottom: 4%; }
-.chapter-world:nth-child(3n) .scene-hero { bottom: -2%; }
-.chapter-side::before,
-.chapter-side::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-}
-.chapter-side::before {
-  z-index: 0;
-  width: 145%; height: 58%;
-  bottom: 10%;
-  background:
-    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--chapter-accent) 40%, transparent) 0 42%, transparent 43%),
-    radial-gradient(ellipse at 12% 100%, rgba(255,255,255,.23) 0 34%, transparent 35%);
-  opacity: .78;
-  filter: saturate(.82);
-}
-.chapter-side::after {
-  z-index: 2;
-  width: 165%; height: 35%;
-  bottom: -8%;
-  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
-  background:
-    radial-gradient(ellipse at 72% 20%, rgba(255,255,255,.22) 0 8%, transparent 9%),
-    color-mix(in srgb, var(--chapter-accent) 55%, rgba(83,83,96,.22));
-  opacity: .48;
-  box-shadow: inset 0 18px 34px rgba(255,255,255,.12), 0 -12px 36px rgba(91,58,34,.08);
-}
-.chapter-side--left::before { left: -48%; border-radius: 0 70% 46% 0; }
-.chapter-side--right::before { right: -48%; border-radius: 70% 0 0 46%; transform: scaleX(-1); }
-.chapter-side--left::after { left: -76%; transform: rotate(5deg); }
-.chapter-side--right::after { right: -76%; transform: rotate(-5deg); }
-.chapter-world:nth-child(3n + 2) .chapter-side::before {
-  bottom: 24%; height: 46%; opacity: .64;
-}
-.chapter-world:nth-child(3n) .chapter-side::before {
-  bottom: 3%; height: 70%; opacity: .72;
-}
-.chapter-world:nth-child(even) .chapter-side::after {
-  bottom: -13%; height: 44%; opacity: .54;
-}
-.scene-prop {
-  position: absolute; z-index: 1;
-  left: calc(var(--x, 50) * 1%);
-  top: calc(var(--y, 50) * 1%);
-  width: clamp(92px, 10vw, 150px);
-  transform: translate(-50%, -50%) scale(var(--scale, 1));
-  transform-origin: 50% 60%;
-  pointer-events: none;
-  display: none;
-  opacity: 0.72;
-  filter: drop-shadow(0 6px 6px rgba(80,50,20,.16));
-  animation: sceneBob 14s ease-in-out infinite;
-  animation-delay: calc(var(--delay, 0) * 1s);
-}
-.scene-prop svg { width: 100%; height: auto; display: block; }
-/* give each scene prop a slightly different ambient loop for variety */
-.scene-prop:nth-child(2n)   { animation-name: sceneSway; animation-duration: 17s; }
-.scene-prop:nth-child(3n)   { animation-name: sceneBob;  animation-duration: 19s; }
-.scene-prop:nth-child(4n)   { animation-name: sceneDrift; animation-duration: 18s; }
-
-/* ---------- node wrap (reveal only —no zig wobble in the grid) ---------- */
+/* ---------- node wrap (reveal + zigzag sweep) ---------- */
 .level-node-wrap {
   position: relative; z-index: 2;
   display: flex; flex-direction: column; align-items: center;
@@ -314,13 +220,7 @@ body {
   background: none; border: none; font: inherit; color: inherit; cursor: pointer;
   opacity: 0; transition: opacity .5s ease; transition-delay: var(--d, 0s);
 }
-.scene-prop--cloud,
-.scene-prop--small-cloud,
-.scene-prop--question-cloud,
-.scene-prop--light-dot,
-.scene-prop--star,
-.scene-prop--light-band,
-.scene-prop--flight-line { display: block; }
+/* Zigzag: odd nodes drift left, even nodes drift right — gives the path its sweep. */
 .chapter-world:nth-child(odd) .level-node-wrap:nth-child(odd),
 .chapter-world:nth-child(even) .level-node-wrap:nth-child(even) {
   transform: translateX(clamp(-150px, -10vw, -104px));
@@ -544,19 +444,7 @@ body {
 
 .variations { margin-top: 16px; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
 
-/* ---------- ambient keyframes for scene props ---------- */
-@keyframes sceneBob {
-  0%, 100% { transform: translate(-50%, -50%) scale(var(--scale, 1)); }
-  50%      { transform: translate(-50%, -54%) scale(var(--scale, 1)); }
-}
-@keyframes sceneSway {
-  0%, 100% { transform: translate(-50%, -50%) scale(var(--scale, 1)) rotate(-2.4deg); }
-  50%      { transform: translate(-50%, -50%) scale(var(--scale, 1)) rotate(2.4deg); }
-}
-@keyframes sceneDrift {
-  0%, 100% { transform: translate(-50%, -50%) scale(var(--scale, 1)); }
-  50%      { transform: translate(-46%, -50%) scale(var(--scale, 1)); }
-}
+/* ---------- title readability over dark backgrounds ---------- */
 .chapter-world[data-world="memory-town"] .level-title,
 .chapter-world[data-world="planning-camp"] .level-title {
   color: #fff8e5;
@@ -566,44 +454,6 @@ body {
   color: #4b3d63;
   background: rgba(255,248,229,.82);
 }
-
-@keyframes heroSpin { to { transform: rotate(360deg); } }
-@keyframes heroSpinReverse { to { transform: rotate(-360deg); } }
-@keyframes heroSway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
-@keyframes heroBreath { 0%, 100% { transform: scale(.96); } 50% { transform: scale(1.04); } }
-@keyframes heroFloat { 0%, 100% { transform: translateY(0); opacity: .75; } 50% { transform: translateY(-14px); opacity: 1; } }
-@keyframes heroDrift { 0%, 100% { transform: translateX(-8px); } 50% { transform: translateX(12px); } }
-@keyframes heroLift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(42px); } }
-@keyframes heroFirefly {
-  0%, 100% { opacity: .25; transform: translate(0, 0) scale(.8); }
-  35% { opacity: 1; transform: translate(9px, -13px) scale(1.2); }
-  70% { opacity: .5; transform: translate(-7px, -22px) scale(.9); }
-}
-@keyframes heroWater { to { stroke-dashoffset: -70; } }
-@keyframes heroSmoke { 0%, 100% { transform: translateY(9px) scale(.92); opacity: .35; } 50% { transform: translateY(-18px) translateX(8px) scale(1.08); opacity: .66; } }
-@keyframes heroPlane { 0%, 100% { transform: translate(-18px, 14px) rotate(-4deg); } 50% { transform: translate(24px, -22px) rotate(5deg); } }
-@keyframes heroFlame { 0%, 100% { transform: scaleY(.92) rotate(-2deg); } 50% { transform: scaleY(1.08) rotate(2deg); } }
-@keyframes heroStars { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
-
-.scene-hero .hero-spin { animation: heroSpin 18s linear infinite; }
-.scene-hero .hero-spin-reverse { animation: heroSpinReverse 22s linear infinite; }
-.scene-hero .hero-sway,
-.scene-hero .hero-crown,
-.scene-hero .hero-canopy,
-.scene-hero .hero-vines { animation: heroSway 12s ease-in-out infinite; transform-origin: 50% 100%; }
-.scene-hero .hero-bloom { animation: heroBreath 10s ease-in-out infinite; }
-.scene-hero .hero-sign { animation: heroSway 11s ease-in-out infinite; transform-origin: 124px 58px; }
-.scene-hero .hero-lift { animation: heroLift 15s ease-in-out infinite; }
-.scene-hero .hero-firefly { animation: heroFirefly 9s ease-in-out infinite; }
-.scene-hero .hero-cloud-drift { animation: heroDrift 18s ease-in-out infinite; }
-.scene-hero .hero-orbit { animation: heroSpin 20s linear infinite; }
-.scene-hero .hero-water path { stroke-dasharray: 12 18; animation: heroWater 10s linear infinite; }
-.scene-hero .hero-window { animation: heroBreath 13s ease-in-out infinite; transform-origin: center; }
-.scene-hero .hero-smoke { animation: heroSmoke 14s ease-in-out infinite; transform-origin: 50% 100%; }
-.scene-hero .hero-plane { animation: heroPlane 15s ease-in-out infinite; }
-.scene-hero .hero-envelope { animation: heroFloat 13s ease-in-out infinite; }
-.scene-hero .hero-flame { animation: heroFlame 3.2s ease-in-out infinite; transform-origin: 50% 100%; }
-.scene-hero .hero-stars { animation: heroStars 7s ease-in-out infinite; }
 
 /* ---------- current-node glow breathing + completed star entrance ---------- */
 /* Pulses only the halo ring's opacity/scale —the node itself never moves. */
@@ -620,7 +470,7 @@ body {
 
 /* ---------- responsive ---------- */
 @media (max-width: 600px) {
-  .chapter-world { grid-template-columns: 12% 76% 12%; min-height: 790px; }
+  .chapter-world { min-height: 790px; background-attachment: scroll; }
   .chapter-main { padding: 22px 4px 16px; }
   .chapter-heading {
     gap: 7px; width: min(100%, 310px); margin-bottom: 5px;
@@ -642,12 +492,6 @@ body {
     transform: translateX(clamp(34px, 10vw, 46px));
   }
   .level-title { max-width: 190px; margin-top: 12px; font-size: 14px; }
-  .scene-hero { width: 180px; bottom: 0; opacity: .92; }
-  .scene-hero--left { left: -112px; top: 35%; bottom: auto; }
-  .scene-hero--right { right: -112px; }
-  .scene-prop { display: none; }
-  .chapter-side::before { width: 190%; }
-  .chapter-side::after { width: 210%; }
 }
 
 @media (max-width: 380px) {
@@ -662,11 +506,61 @@ body {
      PRESERVE visibility —force every reveal target to its final state so
      chapters and nodes stay on screen instead of freezing at opacity:0. */
   .level-node, .level-node-wrap, .chapter-world, .detail-card, .back-btn { transition: none !important; }
-  .scene-prop { animation: none !important; }
-  .scene-hero * { animation: none !important; }
   .level-node-wrap--current::before,
   .level-node-wrap.seen .level-node__star { animation: none !important; }
   /* Force the "revealed" end-state so nothing stays hidden without motion. */
   .chapter-world, .level-node-wrap, .level-node-wrap .level-node { opacity: 1 !important; }
   .level-node__star { transform: scale(1) !important; opacity: 1 !important; }
 }
+
+/* ---------- demo badge on locked nodes ---------- */
+.level-node__demo-badge {
+  position: absolute;
+  top: -6px; right: -6px;
+  width: 38px; height: 38px;
+  z-index: 2;
+  filter: drop-shadow(0 3px 4px rgba(60,40,15,.35));
+}
+.level-node__demo-badge svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- recording path hint (for dad) ---------- */
+.rec-path {
+  width: 100%;
+  margin-top: 8px;
+  font-family: "Nunito", "Segoe UI", monospace;
+  font-size: 12px; font-weight: 600;
+  color: var(--ink-soft); opacity: .7;
+  word-break: break-all;
+  user-select: all; cursor: text;
+}
+
+/* ---------- detail prev/next navigation ---------- */
+.detail-nav {
+  display: flex; justify-content: space-between; gap: 12px;
+  margin-top: 24px; padding-top: 18px;
+  border-top: 1.5px solid rgba(138,106,74,.18);
+}
+.nav-btn {
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 15px;
+  color: var(--accent-deep); background: rgba(255,255,255,.7);
+  border: 2px solid rgba(255,255,255,.9);
+  padding: 10px 20px; border-radius: 999px; cursor: pointer;
+  transition: transform .12s ease, background .2s ease;
+}
+.nav-btn:hover:not(:disabled) { background: #fff; transform: translateY(-1px); }
+.nav-btn:active:not(:disabled) { transform: translateY(0); }
+.nav-btn:disabled { opacity: .35; cursor: default; }
+.nav-btn--next { margin-left: auto; }
+
+/* ---------- upload button (low-key, for dad) ---------- */
+.upload-btn {
+  align-self: flex-start;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 500; font-size: 13px;
+  color: var(--ink-soft); background: rgba(255,255,255,.55);
+  border: 1.5px solid rgba(138,106,74,.25);
+  padding: 6px 14px; border-radius: 999px; cursor: pointer;
+  margin-top: 10px;
+  transition: background .15s ease, color .15s ease;
+}
+.upload-btn:hover:not(:disabled) { background: rgba(255,255,255,.85); color: var(--accent-deep); }
+.upload-btn:disabled { opacity: .5; cursor: default; }

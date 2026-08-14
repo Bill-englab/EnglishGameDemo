@@ -1,10 +1,9 @@
 // ============================================================
 // My English Adventure — chapter-world map
-// Ten deterministic chapter worlds; each is a 3-column grid.
+// Ten chapter worlds, each painted by a full background illustration.
 // ============================================================
 
 import { getChapterTheme, getLevelVisualState, getStableRotation, isFrameDark } from "./map-model.mjs";
-import { buildSceneSpec, renderChapterScenery } from "./map-scenes.mjs";
 import { buildSmoothPath } from "./map-path.mjs";
 
 function prettyChapter(raw) {
@@ -14,6 +13,113 @@ function prettyChapter(raw) {
 }
 const chapterIndex = (name) => parseInt((name.match(/^(\d+)/) || [0, 1])[1], 10);
 const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}`;
+const uploadURL = (chapter, level, kind) => `/upload/${chapter}/${level}/${kind}`;
+
+// ===== upload helpers (File System Access API + IndexedDB folder memory) =====
+// Chrome/Edge support showOpenFilePicker / showDirectoryPicker. The directory
+// handle is persisted in IndexedDB so the picker reopens at the same folder
+// next time. Falls back to a plain <input type="file"> on unsupported browsers.
+const DIR_DB_NAME = "english-adventure";
+const DIR_STORE = "handles";
+const DIR_KEY = "source-dir";
+
+function openHandleDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DIR_DB_NAME, 1);
+    req.onupgradeneeded = () => req.result.createObjectStore(DIR_STORE);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+async function loadSavedDirHandle() {
+  if (!("indexedDB" in window)) return null;
+  try {
+    const db = await openHandleDB();
+    const tx = db.transaction(DIR_STORE, "readonly");
+    const req = tx.objectStore(DIR_STORE).get(DIR_KEY);
+    return await new Promise(resolve => { req.onsuccess = () => resolve(req.result || null); req.onerror = () => resolve(null); });
+  } catch (_) { return null; }
+}
+async function saveDirHandle(handle) {
+  if (!("indexedDB" in window)) return;
+  try {
+    const db = await openHandleDB();
+    const tx = db.transaction(DIR_STORE, "readwrite");
+    tx.objectStore(DIR_STORE).put(handle, DIR_KEY);
+  } catch (_) { /* non-fatal */ }
+}
+
+// Pick a single video file. Tries the saved directory first (reopens there),
+// then falls back to a system file picker. Returns a File or null.
+async function pickVideoFile() {
+  // Fast path: File System Access API with a remembered directory.
+  if ("showOpenFilePicker" in window) {
+    try {
+      let dirHandle = await loadSavedDirHandle();
+      if (!dirHandle && "showDirectoryPicker" in window) {
+        dirHandle = await window.showDirectoryPicker({ mode: "read" });
+        await saveDirHandle(dirHandle);
+      }
+      const startIn = dirHandle ? dirHandle : undefined;
+      const [handle] = await window.showOpenFilePicker({
+        types: [{ description: "Video", accept: { "video/*": [".mp4", ".mov", ".webm", ".avi"] } }],
+        multiple: false,
+        ...(startIn ? { startIn } : {}),
+      });
+      return await handle.getFile();
+    } catch (e) {
+      if (e.name === "AbortError") return null;  // user cancelled
+      // fall through to <input> fallback
+    }
+  }
+  // Fallback: plain file input (Firefox / Safari / picker failure).
+  return new Promise(resolve => {
+    const input = document.createElement("input");
+    input.type = "file"; input.accept = "video/*";
+    input.onchange = () => resolve(input.files[0] || null);
+    input.onerror = () => resolve(null);
+    input.click();
+  });
+}
+
+// Upload a File to the given chapter/level/kind. Returns true on success.
+async function uploadVideo(level, kind) {
+  const file = await pickVideoFile();
+  if (!file) return false;
+  const fd = new FormData();
+  fd.append("file", file, file.name);
+  const res = await fetch(uploadURL(level.chapter, level.level, kind), { method: "POST", body: fd });
+  if (!res.ok) throw new Error(`upload ${res.status}`);
+  return true;
+}
+
+// Build a small "Replace / Add" button for the demo or performance area.
+// Low-key styling — meant for dad, not the kid.
+function makeUploadButton(label, level, kind, onDone) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "upload-btn";
+  btn.textContent = label;
+  btn.disabled = false;
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = "Uploading…";
+    try {
+      await uploadVideo(level, kind, onDone);
+      await loadLibrary();  // refresh the library so has_demo/has_performance updates
+      onDone();             // re-open detail to show the new video
+    } catch (e) {
+      console.error("Upload failed", e);
+      btn.textContent = "Failed — retry";
+      setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2000);
+      return;
+    }
+    btn.textContent = "Done!";
+    setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 1500);
+  });
+  return btn;
+}
 
 // ===== svg bits =====
 const PLAY_BTN_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>`;
@@ -73,10 +179,15 @@ function extractSafeCover(level, theme, ratio = 0.2) {
 // ===== map rendering =====
 let revealObserver = null;
 let mapScrollY = 0;
+let currentLibrary = [];        // full chapter tree, kept for detail navigation
+let flatLevels = [];            // flattened level list with chapter context for prev/next
 
 // Gold star badge for completed nodes. Placed OUTSIDE the cover-clipping layer
 // on the overflow:visible .level-node so it is never cropped.
 const STAR_BADGE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="${STAR_PATH}" fill="#ffd23f" stroke="#f0a500" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
+
+// Small play badge shown on locked nodes that still have a demo to preview.
+const DEMO_BADGE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#fff" opacity=".92"/><path d="M9.5 7.5v9l7-4.5z" fill="#ff9d4d"/></svg>`;
 
 // Builds the level node for every state (completed / current / locked).
 // Returns a <button class="level-node-wrap level-node-wrap--STATE"> with an
@@ -123,6 +234,14 @@ function createLevelNode(level, index, theme) {
     node.innerHTML = `<span class="play-btn">${PLAY_BTN_SVG}</span>`;
   } else {
     node.innerHTML = LOCK_SVG;
+    // A locked level that already has a demo gets a small play badge so kids
+    // (and dad) can see "there's something to preview in here."
+    if (level.has_demo) {
+      const badge = document.createElement("span");
+      badge.className = "level-node__demo-badge";
+      badge.innerHTML = DEMO_BADGE_SVG;
+      node.appendChild(badge);
+    }
   }
 
   const title = document.createElement("span");
@@ -136,9 +255,26 @@ function createLevelNode(level, index, theme) {
   return wrap;
 }
 
+// Background image URL for a chapter, keyed by the chapter directory name.
+// If the image file doesn't exist (chapters without art yet), the section
+// falls back to a solid accent-color background via the .chapter-world--no-bg class.
+const worldImageURL = chapterName => `/static/worlds/${chapterName}.jpg`;
+const bgImageCache = new Set();
+function preloadWorldImage(url, section, accent) {
+  if (bgImageCache.has(url)) { section.classList.remove("chapter-world--no-bg"); return; }
+  const img = new Image();
+  img.onload = () => { bgImageCache.add(url); section.classList.remove("chapter-world--no-bg"); };
+  img.onerror = () => { section.classList.add("chapter-world--no-bg"); section.style.setProperty("--chapter-accent", accent); };
+  img.src = url;
+}
+
 function renderMap(library) {
   const map = document.getElementById("map");
   map.innerHTML = "";
+
+  // Keep the library for detail-view navigation (prev/next).
+  currentLibrary = library;
+  flatLevels = library.flatMap(ch => ch.levels.map(lv => ({ ...lv, chapter: ch.name })));
 
   const total = library.reduce((n, ch) => n + ch.levels.length, 0);
   const done = library.reduce((n, ch) => n + ch.levels.filter(l => l.has_performance).length, 0);
@@ -150,16 +286,14 @@ function renderMap(library) {
   for (const chapter of library) {
     const ci = chapterIndex(chapter.name);
     const theme = getChapterTheme(chapter.name);
+    const bgURL = worldImageURL(chapter.name);
 
     const section = document.createElement("section");
     section.className = "chapter-world";
-    section.style.setProperty("--chapter-gradient", theme.gradient);
+    section.style.backgroundImage = `url("${bgURL}")`;
     section.style.setProperty("--chapter-accent", theme.accent);
     section.dataset.world = theme.world;
-
-    const leftSide = document.createElement("div");
-    leftSide.className = "chapter-side chapter-side--left";
-    leftSide.setAttribute("aria-hidden", "true");
+    preloadWorldImage(bgURL, section, theme.accent);
 
     const main = document.createElement("div");
     main.className = "chapter-main";
@@ -181,17 +315,7 @@ function renderMap(library) {
     }
 
     main.appendChild(levelsCol);
-
-    const rightSide = document.createElement("div");
-    rightSide.className = "chapter-side chapter-side--right";
-    rightSide.setAttribute("aria-hidden", "true");
-
-    section.appendChild(leftSide);
     section.appendChild(main);
-    section.appendChild(rightSide);
-
-    renderChapterScenery(leftSide, rightSide, buildSceneSpec(chapter.name, ci * 7919 + 13));
-
     map.appendChild(section);
   }
 
@@ -279,6 +403,12 @@ function openDetail(level) {
   } else {
     demoWrap.innerHTML = `<div class="coming-soon">Demo coming soon</div>`;
   }
+  // Upload button for demo (dad replaces/adds the demo video).
+  demoWrap.appendChild(makeUploadButton(
+    level.has_demo ? "Replace demo" : "Add demo",
+    level, "demo",
+    () => reopenDetail(level.chapter, level.level),
+  ));
 
   const lit = level.has_performance;
   const starRow = document.getElementById("detail-star");
@@ -294,6 +424,14 @@ function openDetail(level) {
   starRow.appendChild(star);
   starRow.appendChild(cap);
 
+  // Show the recording target path for dad (only when not yet completed).
+  if (!lit) {
+    const pathHint = document.createElement("div");
+    pathHint.className = "rec-path";
+    pathHint.textContent = `recordings/${level.chapter}/${level.level}/performance.mp4`;
+    starRow.appendChild(pathHint);
+  }
+
   const perfWrap = document.getElementById("detail-perf");
   perfWrap.innerHTML = "";
   if (level.has_performance) {
@@ -307,6 +445,12 @@ function openDetail(level) {
     perfWrap.appendChild(lbl);
     perfWrap.appendChild(v);
   }
+  // Upload button for performance (dad adds/replaces the child's recording).
+  perfWrap.appendChild(makeUploadButton(
+    level.has_performance ? "Replace show" : "Add performance",
+    level, "performance",
+    () => reopenDetail(level.chapter, level.level),
+  ));
 
   const dialogueEl = document.getElementById("detail-dialogue");
   dialogueEl.innerHTML = "";
@@ -321,10 +465,35 @@ function openDetail(level) {
 
   document.getElementById("detail-variations").textContent = level.variations || "";
 
+  // Prev / Next navigation — find this level in the flat list and wire buttons.
+  const navWrap = document.getElementById("detail-nav");
+  navWrap.innerHTML = "";
+  const idx = flatLevels.findIndex(lv => lv.chapter === level.chapter && lv.level === level.level);
+  if (idx >= 0) {
+    const makeBtn = (label, offset, disabled) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = `nav-btn nav-btn--${offset < 0 ? "prev" : "next"}`;
+      btn.textContent = label;
+      if (disabled) { btn.disabled = true; }
+      else { btn.addEventListener("click", () => openDetail(flatLevels[idx + offset])); }
+      return btn;
+    };
+    navWrap.appendChild(makeBtn("\u2190 Prev", -1, idx <= 0));
+    navWrap.appendChild(makeBtn("Next \u2192", 1, idx >= flatLevels.length - 1));
+  }
+
   document.getElementById("map-view").classList.add("hidden");
   view.classList.remove("hidden");
   view.classList.add("open");
   window.scrollTo(0, 0);
+}
+
+// Re-open detail for the same level after an upload refreshes the library.
+// Finds the updated level object in flatLevels (which loadLibrary repopulated).
+function reopenDetail(chapter, level) {
+  const fresh = flatLevels.find(lv => lv.chapter === chapter && lv.level === level);
+  if (fresh) openDetail(fresh);
 }
 
 function closeDetail() {

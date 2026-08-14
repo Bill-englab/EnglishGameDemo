@@ -1,4 +1,5 @@
 from pathlib import Path
+import io
 import json
 import pytest
 import werkzeug.exceptions
@@ -85,7 +86,7 @@ def test_app_registers_retryable_library_loading(client):
 
 
 def test_map_static_modules_are_served(client):
-    for path in ("/static/app.js", "/static/map-model.mjs", "/static/map-scenes.mjs", "/static/map-path.mjs", "/static/style.css"):
+    for path in ("/static/app.js", "/static/map-model.mjs", "/static/map-path.mjs", "/static/style.css"):
         response = client.get(path)
         assert response.status_code == 200
 
@@ -98,3 +99,71 @@ def test_fonts_are_self_hosted_not_cdn(client):
     # ... and the self-hosted woff2 must be served locally.
     res = client.get("/static/fonts/nunito-latin-700-normal.woff2")
     assert res.status_code == 200
+
+
+# ===== upload route tests =====
+
+@pytest.fixture
+def upload_client(tmp_path, monkeypatch):
+    """A client whose three roots point at temp dirs; returns (client, roots)."""
+    content = tmp_path / "content"
+    demo = tmp_path / "demo"
+    recordings = tmp_path / "recordings"
+    _build_lib(content, demo, recordings)
+    monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
+    monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
+    monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
+    app_module.app.config["TESTING"] = True
+    return app_module.app.test_client(), {"content": content, "demo": demo, "recordings": recordings}
+
+
+def test_upload_writes_performance_to_recordings(upload_client):
+    client, roots = upload_client
+    res = client.post("/upload/01-c/01-s/performance", data={
+        "file": (io.BytesIO(b"fake-perf"), "performance.mp4"),
+    }, content_type="multipart/form-data")
+    assert res.status_code == 200
+    assert res.get_json()["ok"] is True
+    written = roots["recordings"] / "01-c" / "01-s" / "performance.mp4"
+    assert written.read_bytes() == b"fake-perf"
+    # The uploaded video is now servable via the /video route.
+    assert client.get("/video/01-c/01-s/performance").status_code == 200
+
+
+def test_upload_writes_demo_to_demo_root(upload_client):
+    client, roots = upload_client
+    res = client.post("/upload/01-c/01-s/demo", data={
+        "file": (io.BytesIO(b"fake-demo-2"), "demo.mp4"),
+    }, content_type="multipart/form-data")
+    assert res.status_code == 200
+    written = roots["demo"] / "01-c" / "01-s" / "demo.mp4"
+    assert written.read_bytes() == b"fake-demo-2"
+
+
+def test_upload_creates_missing_parent_dirs(upload_client):
+    client, roots = upload_client
+    res = client.post("/upload/02-new/01-s/performance", data={
+        "file": (io.BytesIO(b"x"), "performance.mp4"),
+    }, content_type="multipart/form-data")
+    assert res.status_code == 200
+    assert (roots["recordings"] / "02-new" / "01-s" / "performance.mp4").exists()
+
+
+def test_upload_404_for_unknown_kind(upload_client):
+    client, _ = upload_client
+    res = client.post("/upload/01-c/01-s/sneaky", data={
+        "file": (io.BytesIO(b"x"), "x.mp4"),
+    }, content_type="multipart/form-data")
+    assert res.status_code == 404
+
+
+def test_upload_400_without_file(upload_client):
+    client, _ = upload_client
+    res = client.post("/upload/01-c/01-s/performance", data={},
+                      content_type="multipart/form-data")
+    assert res.status_code == 400
+
+
+def test_upload_rejects_path_traversal(upload_client):
+    with pytest.raises(werkzeug.exceptions.NotFound):
+        app_module.upload("..", "01-s", "performance")

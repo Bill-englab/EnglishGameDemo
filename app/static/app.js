@@ -255,17 +255,110 @@ function createLevelNode(level, index, theme) {
   return wrap;
 }
 
-// Background image URL for a chapter, keyed by the chapter directory name.
-// If the image file doesn't exist (chapters without art yet), the section
-// falls back to a solid accent-color background via the .chapter-world--no-bg class.
-const worldImageURL = chapterName => `/static/worlds/${chapterName}.jpg`;
-const bgImageCache = new Set();
-function preloadWorldImage(url, section, accent) {
-  if (bgImageCache.has(url)) { section.classList.remove("chapter-world--no-bg"); return; }
-  const img = new Image();
-  img.onload = () => { bgImageCache.add(url); section.classList.remove("chapter-world--no-bg"); };
-  img.onerror = () => { section.classList.add("chapter-world--no-bg"); section.style.setProperty("--chapter-accent", accent); };
-  img.src = url;
+// Background images live on a fixed layer (parallax: bg stays put while content scrolls).
+// Images are probed at startup; chapters without their own image cycle through
+// the available ones (index % count) so the map always has a painted background.
+const bgImageCache = new Set();  // URLs known to load successfully
+const EXTENSIONS = ["jpg", "png", "webp"];
+
+// Probe a single chapter image (tries .jpg, .png, .webp). Resolves to URL or null.
+function probeChapterImage(chapterName) {
+  for (const ext of EXTENSIONS) {
+    const url = `/static/worlds/${chapterName}.${ext}`;
+    if (bgImageCache.has(url)) return url;
+  }
+  return null;  // not yet probed — caller should async-probe
+}
+
+// Async-probe one chapter; returns the working URL or null (caches result).
+function asyncProbeChapterImage(chapterName) {
+  const cached = probeChapterImage(chapterName);
+  if (cached) return Promise.resolve(cached);
+  // Try each extension in order; first hit wins.
+  return new Promise(resolve => {
+    let i = 0;
+    const tryNext = () => {
+      if (i >= EXTENSIONS.length) return resolve(null);
+      const ext = EXTENSIONS[i++];
+      const url = `/static/worlds/${chapterName}.${ext}`;
+      const img = new Image();
+      img.onload = () => { bgImageCache.add(url); resolve(url); };
+      img.onerror = tryNext;
+      img.src = url;
+    };
+    tryNext();
+  });
+}
+
+let bgScrollTicking = false;
+let activeChapter = null;
+function buildBgLayer(library) {
+  const layer = document.getElementById("bg-layer");
+  layer.innerHTML = "";
+  const slides = [];
+
+  // Phase 1: create all slides immediately (placeholder by default).
+  for (const chapter of library) {
+    const theme = getChapterTheme(chapter.name);
+    const slide = document.createElement("div");
+    slide.className = "bg-layer__slide bg-layer__slide--placeholder";
+    slide.dataset.chapter = chapter.name;
+    slide.style.setProperty("--slide-accent", theme.accent);
+    layer.appendChild(slide);
+    slides.push(slide);
+  }
+
+  // Phase 2: probe each chapter's own image. Chapters that have one get it
+  // directly. Chapters that don't will cycle through the ones that do.
+  const probePromises = library.map(ch => asyncProbeChapterImage(ch.name));
+  Promise.all(probePromises).then(urls => {
+    const available = urls.filter(Boolean);  // URLs that loaded successfully
+    if (available.length === 0) return;      // no images at all — keep placeholders
+
+    library.forEach((chapter, idx) => {
+      const slide = slides[idx];
+      const ownUrl = urls[idx];
+      // Use the chapter's own image if it exists; otherwise cycle through
+      // available images by index (so every chapter gets a painted bg).
+      const url = ownUrl || available[idx % available.length];
+      slide.classList.remove("bg-layer__slide--placeholder");
+      slide.style.backgroundImage = `url("${url}")`;
+    });
+  });
+
+  return slides;
+}
+
+// Background cross-fade: on scroll, find which chapter section's vertical
+// span contains the viewport center point, and activate its slide. Using a
+// scroll listener (not IntersectionObserver) because IO only reports *changed*
+// entries per callback — it can miss the chapter that's still closest to center,
+// causing mid-chapter flicker.
+function updateBgOnScroll(slides) {
+  const centerY = window.innerHeight / 2;
+  const sections = document.querySelectorAll(".chapter-world");
+  let found = null;
+  for (const s of sections) {
+    const r = s.getBoundingClientRect();
+    // Chapter is "active" if the viewport center falls within its bounds.
+    if (centerY >= r.top && centerY <= r.bottom) { found = s.dataset.chapter; break; }
+  }
+  if (found && found !== activeChapter) {
+    slides.forEach(s => s.classList.toggle("is-active", s.dataset.chapter === found));
+    activeChapter = found;
+  }
+}
+
+function observeBgSwitch(slides) {
+  activeChapter = null;
+  // Run once immediately to set the initial slide.
+  updateBgOnScroll(slides);
+  // Throttled scroll listener via requestAnimationFrame.
+  window.addEventListener("scroll", () => {
+    if (bgScrollTicking) return;
+    bgScrollTicking = true;
+    requestAnimationFrame(() => { updateBgOnScroll(slides); bgScrollTicking = false; });
+  }, { passive: true });
 }
 
 function renderMap(library) {
@@ -286,14 +379,12 @@ function renderMap(library) {
   for (const chapter of library) {
     const ci = chapterIndex(chapter.name);
     const theme = getChapterTheme(chapter.name);
-    const bgURL = worldImageURL(chapter.name);
 
     const section = document.createElement("section");
     section.className = "chapter-world";
-    section.style.backgroundImage = `url("${bgURL}")`;
+    section.dataset.chapter = chapter.name;
     section.style.setProperty("--chapter-accent", theme.accent);
     section.dataset.world = theme.world;
-    preloadWorldImage(bgURL, section, theme.accent);
 
     const main = document.createElement("div");
     main.className = "chapter-main";
@@ -319,9 +410,13 @@ function renderMap(library) {
     map.appendChild(section);
   }
 
+  // Build the fixed background layer and wire cross-fade on scroll.
+  const slides = buildBgLayer(library);
+
   requestAnimationFrame(() => {
     drawMapPath();
     observeReveal();
+    observeBgSwitch(slides);
   });
 }
 

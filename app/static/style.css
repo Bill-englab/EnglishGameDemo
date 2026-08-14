@@ -148,22 +148,39 @@ body {
   filter: drop-shadow(0 3px 5px rgba(90,58,26,.3));
 }
 
-/* ---------- chapter world — full background illustration ---------- */
+/* ---------- fixed background layer (parallax: bg stays, content scrolls) ---------- */
+#bg-layer {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--warm-1) 0%, var(--warm-2) 48%, var(--warm-3) 100%);
+}
+.bg-layer__slide {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.bg-layer__slide.is-active { opacity: 1; }
+/* Placeholder slide for chapters without art — uses accent tint gradient. */
+.bg-layer__slide--placeholder {
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--slide-accent, #cc8a4a) 22%, var(--warm-1)) 0%,
+      var(--warm-1) 40%,
+      color-mix(in srgb, var(--slide-accent, #cc8a4a) 18%, var(--warm-2)) 100%);
+}
+
+/* ---------- chapter world (transparent — bg is on the fixed layer) ---------- */
 .chapter-world {
   position: relative;
   min-height: 930px;
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   overflow: hidden;
   opacity: 1;
 }
-/* Fallback when the background image doesn't exist yet (chapters without art). */
-.chapter-world--no-bg {
-  background-image: none !important;
-  background-color: color-mix(in srgb, var(--chapter-accent, #cc8a4a) 28%, var(--warm-1));
-}
+/* Fallback class kept for compatibility but bg is now on the fixed layer. */
+.chapter-world--no-bg { /* no-op; placeholder handled by bg-layer slide */ }
 
 .chapter-main {
   position: relative; z-index: 3;
@@ -250,6 +267,7 @@ body {
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255,255,255,.75);
   box-shadow: 0 8px 20px rgba(180,120,40,.12);
+  overflow: visible; /* let the demo badge peek outside the node */
 }
 .level-node--locked .lock { width: 44px; height: 44px; opacity: .5; }
 
@@ -470,7 +488,7 @@ body {
 
 /* ---------- responsive ---------- */
 @media (max-width: 600px) {
-  .chapter-world { min-height: 790px; background-attachment: scroll; }
+  .chapter-world { min-height: 790px; }
   .chapter-main { padding: 22px 4px 16px; }
   .chapter-heading {
     gap: 7px; width: min(100%, 310px); margin-bottom: 5px;

@@ -11,7 +11,7 @@
 ### 背景
 
 - **服务对象**:一个 4 岁、已具备基础英语交流能力的孩子。
-- **教学者**:父亲(英语流利),长期与孩子用英文 role-play,按主题积累了大量对话素材,已整理成 10 个主题目录(`roleplay-dialogues/`)。
+- **教学者**:父亲(英语流利),长期与孩子用英文 role-play,按主题积累了大量对话素材,已整理成 10 个主题目录(`content/`)。
 - **痛点**:孩子能交流,但**句式偏基础、不够丰富**。
 
 ### 目的
@@ -50,10 +50,10 @@ Ch.01 wants-requests        ★ ★ ★          ← 已通关,常回来回味
 
 每个关卡包含**两段视频**,各司其职,对应标准教学闭环 **样板 → 练 → 演 → 录**(I-do / We-do / You-do):
 
-| 视频 | 来源 | 作用 |
-| --- | --- | --- |
-| `demo.mp4` | 备课阶段 AI 生成的动画 | 给孩子「看样板」——演示这段对话怎么演 |
-| `performance.mp4` | 父子照 demo 排练后,录下孩子的表演 | 给孩子「看自己」——这才是真正的奖励 |
+| 视频 | 来源 | 存放 | 作用 |
+| --- | --- | --- | --- |
+| `demo.mp4` | 备课阶段 AI 生成的动画 | `demo/<章>/<关>/` | 给孩子「看样板」——演示这段对话怎么演 |
+| `performance.mp4` | 父子照 demo 排练后,录下孩子的表演 | `recordings/<章>/<关>/` | 给孩子「看自己」——这才是真正的奖励 |
 
 ### 关卡状态(三态)
 
@@ -76,7 +76,7 @@ Ch.01 wants-requests        ★ ★ ★          ← 已通关,常回来回味
 1. 孩子点开当前关(或父亲代点)→ 播 `demo.mp4`,看这段怎么演。
 2. 父子照 demo,线下反复 role-play。
 3. 练熟,录一段 `performance.mp4`。
-4. 父亲把视频拖进这关文件夹。
+4. 父亲把视频拖进 `recordings/<章>/<关>/`。
 5. 刷新页面 → 网站检测到文件 → 这关点亮 → 孩子点自己的画面,回看那段表演。
 
 > ⚠️ **录像应是游戏的自然高潮,不是另加的小考。** 4 岁孩子一旦感到被测,会开始躲避。留意他是否开始找借口躲。
@@ -84,13 +84,14 @@ Ch.01 wants-requests        ★ ★ ★          ← 已通关,常回来回味
 ### 本地运行
 
 ```bash
-cd roleplay-website
-.venv/Scripts/python app.py
+cd app
+.venv/Scripts/python app.py      # Windows
+# macOS/Linux:  .venv/bin/python app.py
 ```
 
-浏览器打开 **http://127.0.0.1:5000**。
+浏览器打开 **http://127.0.0.1:5000**。或从仓库根双击 `run.bat`(Windows,自动开浏览器)。
 
-- 内容根目录默认是 `../roleplay-dialogues`(相对 `app.py`),可用环境变量 `LIBRARY_ROOT` 覆盖(用于测试或挂载别的内容库)。
+- 三棵内容树默认相对仓库根:`content/`(文案)、`demo/`(演示视频)、`recordings/`(表演录像)。可用环境变量 `CONTENT_ROOT` / `DEMO_ROOT` / `RECORDINGS_ROOT` 分别覆盖(用于测试或挂载别的内容库)。
 - 仅本地运行,**不部署公网**。
 
 ### 两个阶段
@@ -104,26 +105,31 @@ cd roleplay-website
 
 ---
 
-## 4. 内容结构
+## 4. 内容结构(三棵树分离)
 
-### 文件夹约定(章 → 关 两层)
+文案、演示视频、表演录像**分开放**,各居其位:
 
 ```
-roleplay-dialogues/
-  01-wants-requests/              ← 章(主题)
-    01-can-i-have/                ← 关(场景)
-      meta.json                   ← 关卡文案(备课写)
-      demo.mp4                    ← AI 演示(备课放)
-      performance.mp4             ← 孩子表演;此文件存在 = 通关点亮
-    02-i-need/
-      meta.json
-      demo.mp4
-  02-refusing-bargaining/         ← 下一章
-    ...
+content/                        # 课程文案(入库)
+  01-wants-requests/
+    dialogues.md                # 本章对话源(scaffold_levels.py 的输入)
+    01-can-i-have/
+      meta.json                 # 关卡文案(备课写)
+    02-i-need/  03-can-we/
+
+demo/                           # AI 演示视频(本地 only,可再生)
+  01-wants-requests/01-can-i-have/demo.mp4
+
+recordings/                     # 孩子表演录像(本地 only,珍贵不可再生)
+  01-wants-requests/01-can-i-have/performance.mp4
+
+prompts/                        # 每关的 Sora demo 提示词(两段式 a/b,入库)
+  01-wants-requests/D1a.txt, D1b.txt …
 ```
 
 - 文件夹名必须**零填充前缀**(`01-`、`02-` … `10-`),这样字符串排序就是预期顺序。
-- 每关:`meta.json` 必填;`demo.mp4` 备课时放;`performance.mp4` 由父亲手动放入(存在即点亮)。
+- 三棵树的 `<章>/<关>` 目录名必须一致(同一关卡在三处同名)。
+- 每关:`meta.json` 在 `content/` 必填;`demo.mp4` 备课时放 `demo/`;`performance.mp4` 由父亲放 `recordings/`(存在即点亮)。
 
 ### `meta.json` 结构
 
@@ -141,12 +147,14 @@ roleplay-dialogues/
 }
 ```
 
-### `demo.mp4` 生成流水线(`video-prompt/`)
+> `title_zh` 仅备课参考,前端不显示。`speaker` 只认 `Dad` / `Child`。
+
+### `demo.mp4` 生成流水线(`prompts/`)
 
 为每关提供两段开箱即用的 Sora 提示词(**两段式**,治「一段式说太快」):
 
 - 每个对话拆成 `D{N}a.txt`(前半台词)+ `D{N}b.txt`(后半台词),分别粘进 Sora 各生成一段,自带「慢速 + 句间停顿」指令。
-- 两段按 **a → b** 用 ffmpeg 流拷贝拼成 `demo.mp4`:
+- 两段按 **a → b** 用 ffmpeg 流拷贝拼成 `demo.mp4`,放进 `demo/<章>/<关>/`:
 
   ```bash
   printf "file 'a.mp4'\nfile 'b.mp4'\n" > list.txt
@@ -155,27 +163,30 @@ roleplay-dialogues/
 
 - **角色设定**(每份提示逐字一致,保证角色稳定):爸爸 = 卡通狗(温棕色、大垂耳、橄榄绿 T 恤);孩子 = 卡通小老虎(4 岁、橙底黑条纹、黄 T 恤)。风格统一 Pixar 式 3D 卡通 / 暖光 / 粉彩 / 萌系家庭向。
 
-详见 [`video-prompt/README.md`](video-prompt/README.md)。
+详见 [`prompts/README.md`](prompts/README.md);demo 生产进度见 [`demo/PROGRESS.md`](demo/PROGRESS.md)。
 
 ---
 
 ## 5. 技术架构
 
-**单文件 Python/Flask 后端,文件系统即数据库**:无数据库、无上传接口。「上传」= 父亲手动把 `performance.mp4` 拖进对应文件夹。前端是原生 HTML/CSS/JS,无构建步骤。
+**单文件 Python/Flask 后端,文件系统即数据库**:无数据库、无上传接口。「上传」= 父亲手动把 `performance.mp4` 拖进 `recordings/<章>/<关>/`。前端是原生 HTML/CSS/JS,无构建步骤。
 
 | 文件 | 职责 |
 | --- | --- |
-| `roleplay-website/app.py` | Flask 路由:`/` 地图页、`/api/library` 数据、`/video/<chapter>/<level>/<kind>` 视频流 |
-| `roleplay-website/scanner.py` | 纯逻辑:扫目录树 + 算关卡状态(locked/unlocked/completed/current) |
-| `roleplay-website/templates/map.html` | 地图页外壳(地图视图 + 关卡详情视图) |
-| `roleplay-website/static/app.js` | 拉取数据、渲染地图与详情、播放视频 |
-| `roleplay-website/static/style.css` | 童趣大节点样式(绘本风地图) |
-| `scaffold_levels.py` | 关卡脚手架脚本 |
+| `app/app.py` | Flask 路由:`/` 地图页、`/api/library` 数据、`/video/<chapter>/<level>/<kind>` 视频流(按 kind 分流到 demo/ 或 recordings/) |
+| `app/scanner.py` | 纯逻辑:扫 `content/` + 查 `demo/`、`recordings/` 算关卡状态(locked/unlocked/completed/current) |
+| `app/templates/map.html` | 地图页外壳(地图视图 + 关卡详情视图) |
+| `app/static/app.js` | 拉取数据、渲染地图与详情、播放视频 |
+| `app/static/map-model.mjs` | 10 章主题、视觉状态、布局、帧暗检测(纯函数) |
+| `app/static/map-scenes.mjs` | 确定性场景规格 + 内联 SVG 工厂(纯模块) |
+| `app/static/map-path.mjs` | Catmull-Rom 平滑路径(纯函数) |
+| `app/static/style.css` | 童趣大节点样式(绘本风地图) + 自托管字体 |
+| `tools/scaffold_levels.py` | 关卡脚手架脚本 |
 
 **接口**:
 - `GET /` → 渲染地图页
 - `GET /api/library` → 返回带状态标注的章/关树(JSON)
-- `GET /video/<chapter>/<level>/<kind>` → 返回对应 `demo.mp4` / `performance.mp4`(kind 只允许 `demo`、`performance`,否则 404)
+- `GET /video/<chapter>/<level>/<kind>` → `kind` 为 `demo` 查 `demo/`、`performance` 查 `recordings/`;非法 kind / 路径越界 / 文件不存在均 404
 
 **前端两层视图**:地图视图(点亮的关用孩子表演视频的画面当封面,点击回放)与关卡详情视图(标题、场景、目标句式、demo 视频、对话全文、变体)。demo 默认 0.75 倍速播放,更慢更清楚。
 
@@ -186,12 +197,14 @@ roleplay-dialogues/
 | 项 | 进度 |
 | --- | --- |
 | 网站骨架(地图 + 状态逻辑 + 详情页 + 视频播放) | ✅ 完成 |
+| 动态章节世界(大型动画主景 + 平滑路线) | ✅ 完成 |
 | 关卡文案 `meta.json` | ✅ 30 / 30(全 10 章 × 3 关) |
-| AI 演示视频 `demo.mp4` | ⚠️ 4 / 30(仅第一章及少量) |
+| AI 演示视频 `demo.mp4` | ⚠️ 7 / 30(见 `demo/PROGRESS.md`) |
 | 孩子表演 `performance.mp4` | 1 / 30(仅 `01-wants-requests/01-can-i-have`,即唯一真正贯通的关) |
 | Sora demo 提示词 | ✅ 60 份(每关 a/b 两段) |
+| 字体 | ✅ 自托管(Fredoka/Nunito woff2),离线可用 |
 
-**当前瓶颈**:demo 视频备课(4/30);真正「贯通」的只有第一章第一关。地图会随备课进度缓慢生长,需留意「备课节奏跟不上闯关节奏」导致地图断更。
+**当前瓶颈**:demo 视频备课(7/30);真正「贯通」的只有第一章第一关。地图会随备课进度缓慢生长,需留意「备课节奏跟不上闯关节奏」导致地图断更。
 
 ---
 
@@ -202,6 +215,7 @@ roleplay-dialogues/
 - ❌ **1/2/3 星分级**——一颗星,二元(分级需要一个尚未定义的评判轴,且与「练到熟练才记录」自相矛盾)。
 - ❌ **公网部署**——本地跑。
 - ❌ **用星星追踪「句式高级度」**——那是线下目标,不量化显示。
+- ❌ **构建工具 / npm 依赖**——原生 ES Modules,无打包。
 
 ---
 
@@ -209,15 +223,19 @@ roleplay-dialogues/
 
 ```
 D:/TaviusProject/
-  roleplay-dialogues/        # 内容库(文件系统即数据库);视频被 gitignore
-  video-prompt/              # 每关的 Sora demo 提示词(两段式)
-  roleplay-website/          # Flask 网站(后端 + 前端 + 测试)
-  scaffold_levels.py         # 关卡脚手架
-  TwoDots参考.jpeg            # Two Dots 风格参考图
-  .vibe/                     # 设计备忘与实现计划(冻结的设计基线)
-    memos/memo-original-request.md
-    design-proposal.md
-    plan/first_round_plan.md
+  README.md                      # 产品文档(本文件)
+  AGENTS.md                      # 给 AI agent 的操作手册
+  run.bat                        # Windows 一键启动
+  .gitignore / .gitattributes
+  app/                           # Flask 网站(后端 + 前端 + 测试)
+  content/                       # 课程文案(文件系统即数据库);入库
+  demo/                          # AI 演示视频;本地 only(gitignore *.mp4)
+  recordings/                    # 孩子表演录像;本地 only,珍贵
+  prompts/                       # 每关的 Sora demo 提示词(两段式);入库
+  tools/                         # 脚本(scaffold_levels.py)
+  docs/                          # 设计文档(specs / plans / archive / 参考图)
 ```
 
-> `performance.mp4` 是孩子的影像,出于体积与隐私,**所有 roleplay-dialogues 下的视频均不入库**(见 `.gitignore`),只跟踪 `meta.json` 等文案。
+每个顶层目录都有各自的 `README.md` 作为索引。详见 [`AGENTS.md`](AGENTS.md) 的完整目录树与开发约定。
+
+> `performance.mp4` 是孩子的影像,出于体积与隐私,**所有 `demo/`、`recordings/` 下的视频均不入库**(见 `.gitignore`),只跟踪 `content/` 的 `meta.json`/`dialogues.md`、`prompts/` 的提示词等文案。克隆后本地没有视频,地图上对应关卡会显示空状态——这是预期的。

@@ -1,19 +1,19 @@
 # Video Prompts — Sora demo-video 生成提示词
 
-为 `roleplay-dialogues/` 里**每个对话**生成两段开箱即用的 Sora 提示词(**两段式**)。
+为 `content/` 里**每个对话**生成两段开箱即用的 Sora 提示词(**两段式**)。
 每个对话拆成 **两段**:`D{1,2,3}a.txt`(前半台词)+ `D{1,2,3}b.txt`(后半台词),各粘进 Sora 单独生成。两段合起来 = 原来的整段台词,一句不少;拆两段是为了让 Sora 念得更慢、更从容(治"一段式说太快")。
 
 ## 怎么用
 
 1. 对每个对话,分别打开 `D{1,2,3}a.txt` 和 `D{1,2,3}b.txt` → 各粘进 Sora → 各生成一段。
-2. 把两段按 **a → b** 顺序拼成 **`demo.mp4`**,放进 `roleplay-dialogues/<章>/<关>/`。两段同编码可直接流拷贝拼接:
+2. 把两段按 **a → b** 顺序拼成 **`demo.mp4`**,放进 `demo/<章>/<关>/`。两段同编码可直接流拷贝拼接:
 
 ```bash
 printf "file 'a.mp4'\nfile 'b.mp4'\n" > list.txt
 ffmpeg -f concat -safe 0 -i list.txt -c copy demo.mp4
 ```
 
-> 文件名对齐 `dialogues.md` 的 D1/D2/D3。例:`01-wants-requests/D1a.txt` + `D1b.txt` ↔ 关卡 `01-wants-requests/01-can-i-have/`(标题 "Can I have the apple one?")。
+> 文件名对齐 `content/<章>/dialogues.md` 的 D1/D2/D3。例:`prompts/01-wants-requests/D1a.txt` + `D1b.txt` ↔ 关卡 `content/01-wants-requests/01-can-i-have/`(标题 "Can I have the apple one?"),拼成的 `demo.mp4` 放进 `demo/01-wants-requests/01-can-i-have/`。
 
 ## 角色设定(每份提示都自带,逐字一致,保证角色稳定)
 

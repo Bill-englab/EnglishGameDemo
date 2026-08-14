@@ -17,7 +17,9 @@ test("defines ten distinct chapter worlds", () => {
     assert.match(theme.gradient, /^linear-gradient\(/);
     assert.ok(theme.accent.startsWith("#"));
     assert.ok(theme.props.length >= 3 && theme.props.length <= 5);
+    assert.equal(theme.heroes.length, 2);
   }
+  assert.equal(new Set(Object.values(CHAPTER_THEMES).flatMap(theme => theme.heroes)).size, 20);
 });
 
 test("selects visual state without disabling locked levels", () => {
@@ -27,8 +29,8 @@ test("selects visual state without disabling locked levels", () => {
 });
 
 test("uses approved desktop and mobile proportions", () => {
-  assert.deepEqual(getLayoutForWidth(1440), { left: 23, main: 54, right: 23, node: 168, currentNode: 184 });
-  assert.deepEqual(getLayoutForWidth(390), { left: 14, main: 72, right: 14, node: 128, currentNode: 140 });
+  assert.deepEqual(getLayoutForWidth(1440), { left: 18, main: 64, right: 18, node: 220, currentNode: 244 });
+  assert.deepEqual(getLayoutForWidth(390), { left: 12, main: 76, right: 12, node: 140, currentNode: 152 });
 });
 
 test("completed-card rotation is stable and bounded", () => {

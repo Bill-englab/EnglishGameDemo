@@ -12,6 +12,8 @@ test("builds stable, balanced scenery for all ten chapters", () => {
     assert.ok(first.left.length >= 2 && first.left.length <= 3);
     assert.ok(first.right.length >= 2 && first.right.length <= 3);
     assert.ok([...first.left, ...first.right].every(prop => prop.x >= 4 && prop.x <= 88));
+    assert.equal(first.heroes.length, 2);
+    assert.deepEqual(first.heroes.map(hero => hero.side), ["left", "right"]);
   }
 });
 

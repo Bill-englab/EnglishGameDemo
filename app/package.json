@@ -1,0 +1,9 @@
+{
+  "name": "my-english-adventure",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local chapter→level English role-play map. Flask backend + native ES modules frontend.",
+  "scripts": {
+    "test": "node --test tests-js/*.test.mjs"
+  }
+}

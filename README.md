@@ -1,77 +1,41 @@
 # My English Adventure
 
 <p>
-  <strong>英语 Role-play 闯关地图</strong>
-  &nbsp;·&nbsp;
   <a href="https://github.com/Bill-englab/EnglishGameDemo/releases/tag/v0.1.0"><img alt="version" src="https://img.shields.io/badge/version-v0.1.0-blue"></a>
-  &nbsp;
   <img alt="license" src="https://img.shields.io/badge/license-MIT-green">
-  &nbsp;
   <img alt="platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey">
-  &nbsp;
   <img alt="status" src="https://img.shields.io/badge/status-WIP%20(7%2F30%20demo)-orange">
 </p>
 
----
+An interactive adventure map that turns parent-child English role-play into a visual journey. Every completed performance lights up a node on the map — not with a star, but with a frame from the child's own video.
 
-## 这是什么
-
-一个给 **4 岁孩子**用的英语闯关地图网站。
-
-孩子和爸爸一起做英语 role-play，练熟一段对话后录下表演。把录像放进网站，地图上对应的关卡就亮起来——亮的不是星星，是**孩子自己录像里的画面**。孩子可以反复点开回看自己的表演。
-
-> 真正的奖励不是星星，是回头看自己的表演。
-
-### 为什么这样做
-
-- 孩子能交流，但句式偏基础。想通过反复 role-play 练习来丰富句式。
-- 4 岁孩子对抽象的星星没感觉，认的是**自己的画面**。
-- 网站不教英语——教学在线下发生。网站只做两件事：**把进度变成游戏般的地图**，**让孩子反复回看自己的表演**。
+Built for a 4-year-old, designed around one insight: **the real reward isn't a badge — it's watching yourself perform.**
 
 ---
 
-## 怎么用
+## Why This Exists
 
-整个流程是一个父子一起的循环，每关重复一次：
+Children who can already communicate in English still need richer sentence patterns. The traditional fix — flashcards, apps, quizzes — doesn't stick with a 4-year-old. What does stick is **performing**.
 
-```
-  ┌─────────────────────────────────────────────────────┐
-  │                                                     │
-  │   ①  孩子点开当前关                                  │
-  │       播放 demo 动画，看这段对话怎么演                 │
-  │              │                                      │
-  │              ▼                                      │
-  │   ②  父子一起线下 role-play                          │
-  │       照着 demo 反复练                               │
-  │              │                                      │
-  │              ▼                                      │
-  │   ③  录下孩子的表演                                  │
-  │       存成 performance.mp4                           │
-  │              │                                      │
-  │              ▼                                      │
-  │   ④  在详情页点「Add performance」上传               │
-  │       （或手动拖进 recordings/ 文件夹）               │
-  │              │                                      │
-  │              ▼                                      │
-  │   ⑤  页面自动刷新，关卡点亮 ✨                        │
-  │       圆点变成孩子录像的画面                          │
-  │       下一关解锁                                     │
-  │              │                                      │
-  │              ▼                                      │
-  │   ⑥  孩子点自己的画面，回看表演                       │
-  │       想看多少次都行                                 │
-  │              │                                      │
-  │              ▼                                      │
-  │      回到 ①，进入下一关                               │
-  │                                                     │
-  └─────────────────────────────────────────────────────┘
-```
+This project makes role-play feel like a game:
 
-### 启动网站
+- **No teaching engine.** Learning happens offline, face-to-face. The website never grades or corrects.
+- **No star ratings.** A level is either done or not — there's a `performance.mp4`, or there isn't.
+- **The child's own face is the reward.** A completed level doesn't show a star; it shows a still from the child's recording. That's what keeps them coming back.
 
-**Windows**：双击 `run.bat`，自动打开浏览器。
+---
 
-**命令行**（所有系统）：
+## How It Works
+
+Each level follows the same loop — watch, practice, perform, record, replay:
+
+<img src="docs/attach/process.jpg" alt="Role-play workflow: watch demo, practice together, record performance, upload, level lights up, replay" width="100%">
+
+### Starting the App
+
+**Windows:** Double-click `run.bat` — it launches the server and opens the browser.
+
+**Command line (any OS):**
 
 ```bash
 cd app
@@ -79,34 +43,34 @@ cd app
 # macOS/Linux:  .venv/bin/python app.py
 ```
 
-然后打开 http://127.0.0.1:5000 。
+Then open http://127.0.0.1:5000.
 
-> 网站只在本地运行，不需要联网（字体已内置）。上传的视频直接存在你电脑上，不传到任何服务器。
-
----
-
-## 地图长什么样
-
-- **10 章 × 3 关 = 30 关**，从下往上排成一条蜿蜒的路。
-- 每章一幅背景插画（Pixar 风绘本），滚动时背景交叉淡入淡出。
-- 关卡三种状态：
-
-  | 状态 | 长什么样 | 含义 |
-  | --- | --- | --- |
-  | 🔒 锁住 | 灰色锁图标 | 上一关还没完成，但如果有 demo 可以点进去预习 |
-  | ▶️ 当前 | 白色发光按钮 | 该练这关了 |
-  | 🌟 已完成 | 孩子录像的画面 + 金星 | 通关了，随时可以回看 |
+The app runs entirely on your machine. No internet required (fonts are bundled), and uploaded videos stay on your disk — nothing is sent to any server.
 
 ---
 
-## 课程内容
+## The Map
 
-30 关覆盖 10 个英语语言主题，按难度递进：
+**10 chapters × 3 levels = 30 levels**, arranged as a winding path climbing upward through ten illustrated worlds.
 
-| 章 | 主题 | 学什么 |
+Each chapter has its own full-bleed background illustration (Pixar-style storybook art). As you scroll, backgrounds cross-fade smoothly while the path and nodes stay in motion — a parallax effect that makes the journey feel continuous.
+
+| State | Appearance | Meaning |
+| --- | --- | --- |
+| 🔒 Locked | Gray lock icon | Previous level not yet completed. If a demo exists, a small play badge invites a sneak peek. |
+| ▶️ Current | White glowing button | This is the level to practice now. |
+| 🌟 Completed | Child's video frame + gold star | Done. Click to replay the performance anytime. |
+
+---
+
+## Curriculum
+
+Thirty levels across ten language themes, progressing in difficulty:
+
+| Ch | Theme | Patterns |
 | --- | --- | --- |
 | 1 | wants-requests | Can I have ___? / I want ___ |
-| 2 | refusing-bargaining | I don't want to ___ / What if ___ |
+| 2 | refusing-bargaining | I don't want to ___ / What if ___? |
 | 3 | asking-help | Can you help me ___? / It's stuck |
 | 4 | where-locating | Where's ___? / Is ___ in/on ___? |
 | 5 | why-how-come | Why do I ___? / How come ___? |
@@ -116,28 +80,28 @@ cd app
 | 9 | reporting-others | He said ___ / She told me ___ |
 | 10 | planning-predicting | We're going to ___ / First ___, then ___ |
 
-每关都有一段完整对话（Dad + Child 轮流说）、目标句式、换样重演提示。demo 动画由 AI（Sora）生成，角色固定：爸爸 = 卡通狗，孩子 = 卡通小老虎。
+Every level includes a full dialogue (Dad + Child alternating), target patterns, and variation prompts for re-enactment. Demo animations are AI-generated (Sora) with fixed characters: Dad = cartoon dog, Child = cartoon tiger cub.
 
 ---
 
-## 当前进度
+## Progress
 
-| 项 | 进度 |
+| Component | Status |
 | --- | --- |
-| 课程文案 | 30/30 ✅ |
-| 背景插画 | 8/10 |
-| demo 动画 | 7/30 |
-| Sora 提示词 | 60/60 ✅ |
+| Curriculum scripts | 30/30 ✅ |
+| Background illustrations | 8/10 |
+| Demo animations | 7/30 |
+| Sora prompts | 60/60 ✅ |
 
-详细进度见 [`demo/PROGRESS.md`](demo/PROGRESS.md)。
+See [`demo/PROGRESS.md`](demo/PROGRESS.md) for detailed production tracking.
 
 ---
 
-## 给开发者
+## For Developers
 
-如果你要改代码或贡献内容，详见 [`AGENTS.md`](AGENTS.md)（完整的开发约定、目录结构、测试方法）。
+Tech stack: Flask + vanilla ES Modules. No build step, no database, no npm dependencies. Fonts self-hosted. Python and JS test suites included.
 
-技术栈：Flask + 原生 ES Modules，无构建步骤，无数据库。Python 和 JS 测试各一套。
+See [`AGENTS.md`](AGENTS.md) for full development guide — directory layout, testing, conventions, and architecture notes.
 
 ---
 

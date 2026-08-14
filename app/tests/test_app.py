@@ -1,22 +1,28 @@
 from pathlib import Path
 import json
 import pytest
+import werkzeug.exceptions
 import app as app_module
 from scanner import scan_library, annotate_states
 
 
-def _build_lib(root: Path):
-    (root / "01-c" / "01-s").mkdir(parents=True)
-    (root / "01-c" / "01-s" / "meta.json").write_text(
+def _build_lib(content: Path, demo: Path, recordings: Path):
+    (content / "01-c" / "01-s").mkdir(parents=True)
+    (content / "01-c" / "01-s" / "meta.json").write_text(
         json.dumps({"title": "S1"}), encoding="utf-8")
-    (root / "01-c" / "01-s" / "demo.mp4").write_bytes(b"fake-demo")
+    (demo / "01-c" / "01-s").mkdir(parents=True)
+    (demo / "01-c" / "01-s" / "demo.mp4").write_bytes(b"fake-demo")
 
 
 @pytest.fixture
 def client(tmp_path, monkeypatch):
-    lib = tmp_path / "lib"
-    _build_lib(lib)
-    monkeypatch.setattr(app_module, "ROOT", lib)
+    content = tmp_path / "content"
+    demo = tmp_path / "demo"
+    recordings = tmp_path / "recordings"
+    _build_lib(content, demo, recordings)
+    monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
+    monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
+    monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
     app_module.app.config["TESTING"] = True
     return app_module.app.test_client()
 
@@ -55,6 +61,13 @@ def test_video_route_404_for_unknown_kind(client):
     assert res.status_code == 404
 
 
+def test_video_route_rejects_path_traversal(client):
+    # A ".." chapter segment must resolve outside its root and be refused,
+    # even if a file of that name happened to exist elsewhere.
+    with pytest.raises(werkzeug.exceptions.NotFound):
+        app_module.video("..", "01-s", "demo")
+
+
 def test_map_shell_has_module_entry_and_resilient_states(client):
     response = client.get("/")
     html = response.get_data(as_text=True)
@@ -75,3 +88,13 @@ def test_map_static_modules_are_served(client):
     for path in ("/static/app.js", "/static/map-model.mjs", "/static/map-scenes.mjs", "/static/map-path.mjs", "/static/style.css"):
         response = client.get(path)
         assert response.status_code == 200
+
+
+def test_fonts_are_self_hosted_not_cdn(client):
+    # The map shell must not depend on Google Fonts CDN ...
+    html = client.get("/").get_data(as_text=True)
+    assert "fonts.googleapis.com" not in html
+    assert "fonts.gstatic.com" not in html
+    # ... and the self-hosted woff2 must be served locally.
+    res = client.get("/static/fonts/nunito-latin-700-normal.woff2")
+    assert res.status_code == 200

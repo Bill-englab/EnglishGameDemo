@@ -2,30 +2,35 @@ from pathlib import Path
 import json
 
 
-def scan_library(root: Path) -> list[dict]:
-    """Walk the library root, return chapters (each with levels) in order.
+def scan_library(content_root: Path, demo_root: Path, recordings_root: Path) -> list[dict]:
+    """Walk the content root, return chapters (each with levels) in order.
+
+    Curriculum text (meta.json) lives under content_root/<chapter>/<level>/.
+    Videos live in separate trees: demo_root/<chapter>/<level>/demo.mp4 and
+    recordings_root/<chapter>/<level>/performance.mp4. Directories must be
+    zero-prefixed so string sort matches intended order.
 
     Each level: { chapter, level, title, scene, patterns, dialogue, variations,
                   has_demo, has_performance }.
-    Directories must be zero-prefixed so string sort matches intended order.
     """
     chapters: list[dict] = []
-    if not root.exists():
+    if not content_root.exists():
         return chapters
-    for chapter_dir in sorted(p for p in root.iterdir() if p.is_dir()):
+    for chapter_dir in sorted(p for p in content_root.iterdir() if p.is_dir()):
         levels = []
         for level_dir in sorted(p for p in chapter_dir.iterdir() if p.is_dir()):
             meta = _read_meta(level_dir)
+            chapter, level = chapter_dir.name, level_dir.name
             levels.append({
-                "chapter": chapter_dir.name,
-                "level": level_dir.name,
-                "title": meta.get("title", level_dir.name),
+                "chapter": chapter,
+                "level": level,
+                "title": meta.get("title", level),
                 "scene": meta.get("scene", ""),
                 "patterns": meta.get("patterns", []),
                 "dialogue": meta.get("dialogue", []),
                 "variations": meta.get("variations", ""),
-                "has_demo": (level_dir / "demo.mp4").exists(),
-                "has_performance": (level_dir / "performance.mp4").exists(),
+                "has_demo": (demo_root / chapter / level / "demo.mp4").exists(),
+                "has_performance": (recordings_root / chapter / level / "performance.mp4").exists(),
             })
         if levels:
             chapters.append({"name": chapter_dir.name, "levels": levels})

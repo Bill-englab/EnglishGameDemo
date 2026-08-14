@@ -15,7 +15,8 @@ import json
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent / "roleplay-dialogues"
+ROOT = Path(__file__).resolve().parent.parent / "content"
+DEMO_ROOT = Path(__file__).resolve().parent.parent / "demo"
 
 HEAD = re.compile(r"^##\s*D(\d+)\s*[｜|]\s*(.+?)\s*$", re.M)
 TURN = re.compile(r"^>\s*\*\*(F|C):\*\*\s*(.*)$")
@@ -86,8 +87,9 @@ def main() -> None:
         for lv in parse(md_file.read_text(encoding="utf-8")):
             folder = chapter_dir / f"{lv['n']:02d}-{lv['slug']}"
             folder.mkdir(parents=True, exist_ok=True)
-            # never clobber an activated level (one you've added a demo for)
-            if (folder / "demo.mp4").exists():
+            # never clobber an activated level (one you've added a demo for);
+            # demo videos now live in the demo/ tree, not next to meta.json
+            if (DEMO_ROOT / chapter_dir.name / folder.name / "demo.mp4").exists():
                 skipped += 1
                 continue
             (folder / "meta.json").write_text(

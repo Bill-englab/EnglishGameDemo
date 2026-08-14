@@ -1,4 +1,4 @@
-// roleplay-website/tests-js/map-path.test.mjs
+// app/tests-js/map-path.test.mjs
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildSmoothPath } from "../static/map-path.mjs";

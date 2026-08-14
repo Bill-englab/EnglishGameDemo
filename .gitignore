@@ -1,8 +1,12 @@
 __pycache__/
 *.pyc
 .venv/
+node_modules/
 
-# all roleplay-dialogues videos are local-only (size + privacy) — only meta.json/text is tracked
-roleplay-dialogues/**/*.mp4
+# videos are local-only (size + privacy) — only text/meta is tracked
+demo/**/*.mp4
+recordings/**/*.mp4
+
 .claude/
 .superpowers/
+.zcode/

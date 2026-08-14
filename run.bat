@@ -5,15 +5,15 @@ REM  Double-click this file, or run it from any terminal.
 REM  Stop: press Ctrl+C, or just close this window.
 REM ============================================================
 
-cd /d "%~dp0roleplay-website"
+cd /d "%~dp0app"
 
 if not exist ".venv\Scripts\python.exe" (
-    echo.
-    echo  [error] Virtualenv not found at .venv\Scripts\python.exe
-    echo          Create it inside roleplay-website first.
-    echo.
-    pause
-    exit /b 1
+  echo.
+  echo  [error] Virtualenv not found at .venv\Scripts\python.exe
+  echo          Create it inside app first.
+  echo.
+  pause
+  exit /b 1
 )
 
 echo.

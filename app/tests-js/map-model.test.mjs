@@ -1,4 +1,4 @@
-// roleplay-website/tests-js/map-model.test.mjs
+// app/tests-js/map-model.test.mjs
 import test from "node:test";
 import assert from "node:assert/strict";
 import {

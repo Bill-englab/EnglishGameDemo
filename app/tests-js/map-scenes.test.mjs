@@ -1,4 +1,4 @@
-// roleplay-website/tests-js/map-scenes.test.mjs
+// app/tests-js/map-scenes.test.mjs
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildSceneSpec } from "../static/map-scenes.mjs";

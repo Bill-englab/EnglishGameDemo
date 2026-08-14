@@ -76,8 +76,9 @@ Ch.01 wants-requests        ★ ★ ★          ← 已通关,常回来回味
 1. 孩子点开当前关(或父亲代点)→ 播 `demo.mp4`,看这段怎么演。
 2. 父子照 demo,线下反复 role-play。
 3. 练熟,录一段 `performance.mp4`。
-4. 父亲把视频拖进 `recordings/<章>/<关>/`。
-5. 刷新页面 → 网站检测到文件 → 这关点亮 → 孩子点自己的画面,回看那段表演。
+4. 父亲在详情页点「Add performance」按钮选文件 → 自动上传到位 → 页面自动刷新 → 这关点亮 → 孩子点自己的画面,回看那段表演。
+
+> 也可以手动把文件拖进 `recordings/<章>/<关>/` 再刷新,效果一样。页面内上传只是省去翻目录的麻烦,文件实际复制到同一位置。
 
 > ⚠️ **录像应是游戏的自然高潮,不是另加的小考。** 4 岁孩子一旦感到被测,会开始躲避。留意他是否开始找借口躲。
 
@@ -169,26 +170,29 @@ prompts/                        # 每关的 Sora demo 提示词(两段式 a/b,�
 
 ## 5. 技术架构
 
-**单文件 Python/Flask 后端,文件系统即数据库**:无数据库、无上传接口。「上传」= 父亲手动把 `performance.mp4` 拖进 `recordings/<章>/<关>/`。前端是原生 HTML/CSS/JS,无构建步骤。
+**单文件 Python/Flask 后端,文件系统即数据库**:无数据库。前端是原生 HTML/CSS/JS,无构建步骤。每章一幅整幅背景插画(Pixar 风绘本),路和关卡节点叠加在插画上。
 
 | 文件 | 职责 |
 | --- | --- |
-| `app/app.py` | Flask 路由:`/` 地图页、`/api/library` 数据、`/video/<chapter>/<level>/<kind>` 视频流(按 kind 分流到 demo/ 或 recordings/) |
+| `app/app.py` | Flask 路由:`/` 地图页、`/api/library` 数据、`/video/...` 视频流、`/upload/...` 上传(流式写盘) |
 | `app/scanner.py` | 纯逻辑:扫 `content/` + 查 `demo/`、`recordings/` 算关卡状态(locked/unlocked/completed/current) |
-| `app/templates/map.html` | 地图页外壳(地图视图 + 关卡详情视图) |
-| `app/static/app.js` | 拉取数据、渲染地图与详情、播放视频 |
-| `app/static/map-model.mjs` | 10 章主题、视觉状态、布局、帧暗检测(纯函数) |
-| `app/static/map-scenes.mjs` | 确定性场景规格 + 内联 SVG 工厂(纯模块) |
+| `app/templates/map.html` | 地图页外壳(地图视图 + 关卡详情视图 + 导航) |
+| `app/static/app.js` | 拉数据、渲染地图与详情、播放视频、上传 UI(File System Access API) |
+| `app/static/map-model.mjs` | 10 章主题(world + accent)、视觉状态、旋转、帧暗检测(纯函数) |
 | `app/static/map-path.mjs` | Catmull-Rom 平滑路径(纯函数) |
-| `app/static/style.css` | 童趣大节点样式(绘本风地图) + 自托管字体 |
+| `app/static/style.css` | 绘本风样式(背景插画 + 节点三态 + 详情页) + 自托管字体 |
+| `app/static/worlds/` | 每章背景插画(`<章节名>.jpg`) |
 | `tools/scaffold_levels.py` | 关卡脚手架脚本 |
 
 **接口**:
 - `GET /` → 渲染地图页
 - `GET /api/library` → 返回带状态标注的章/关树(JSON)
 - `GET /video/<chapter>/<level>/<kind>` → `kind` 为 `demo` 查 `demo/`、`performance` 查 `recordings/`;非法 kind / 路径越界 / 文件不存在均 404
+- `POST /upload/<chapter>/<level>/<kind>` → 上传视频到对应树(流式写盘,500MB 上限,路径越界守卫)
 
-**前端两层视图**:地图视图(点亮的关用孩子表演视频的画面当封面,点击回放)与关卡详情视图(标题、场景、目标句式、demo 视频、对话全文、变体)。demo 默认 0.75 倍速播放,更慢更清楚。
+**前端两层视图**:
+- **地图视图**:每章一幅背景插画,关卡节点沿之字形蜿蜒排列,一条粗白实路连接所有关卡。点亮的关用孩子表演视频的画面当封面(点击回放);锁住但有 demo 的关带小播放标记(可点进去预习 demo);当前关发光呼吸。
+- **关卡详情视图**:标题、场景、目标句式、demo 视频(0.75 倍速)、完成星 + 录像路径提示、performance 视频、对话全文、变体。底部有上一关/下一关导航。demo 和 performance 区域各有一个低调的上传按钮(给父亲用,Chrome 文件夹记忆)。
 
 ---
 
@@ -211,10 +215,10 @@ prompts/                        # 每关的 Sora demo 提示词(两段式 a/b,�
 ## 7. 设计原则(明确排除的事)
 
 - ❌ **教学引擎 / AI 对话搭档**——教学在线下发生。
-- ❌ **上传页 / 后端上传接口**——手动放文件,保持极简。
 - ❌ **1/2/3 星分级**——一颗星,二元(分级需要一个尚未定义的评判轴,且与「练到熟练才记录」自相矛盾)。
 - ❌ **公网部署**——本地跑。
 - ❌ **用星星追踪「句式高级度」**——那是线下目标,不量化显示。
+- ❌ **构建工具 / npm 依赖**——原生 ES Modules,无打包。
 - ❌ **构建工具 / npm 依赖**——原生 ES Modules,无打包。
 
 ---

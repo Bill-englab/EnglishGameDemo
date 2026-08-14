@@ -18,7 +18,6 @@
 ### 明确排除的事（别去实现）
 
 - ❌ 教学引擎 / AI 对话搭档
-- ❌ 上传页 / 后端上传接口（「上传」= 手动把 `performance.mp4` 拖进 `recordings/<章>/<关>/`）
 - ❌ 1/2/3 星分级（一颗星，二元）
 - ❌ 公网部署（仅本地跑）
 - ❌ 用星星追踪「句式高级度」
@@ -38,19 +37,19 @@ D:/TaviusProject/                      # 仓库根（git: master 分支）
 ├── app/                               # Flask 网站（后端 + 前端 + 测试）—— 代码核心
 │   ├── README.md                      # 如何运行/测试
 │   ├── package.json                   # 零依赖，仅挂 "test" 脚本（npm test）
-│   ├── app.py                         # Flask 路由 + 三棵内容根
+│   ├── app.py                         # Flask 路由 + 三棵内容根 + 上传
 │   ├── scanner.py                     # 纯逻辑：扫 content/ + 算关卡三态
 │   ├── requirements.txt               # flask>=3.0, pytest
-│   ├── templates/map.html             # 地图页外壳
+│   ├── templates/map.html             # 地图页外壳 + 详情导航
 │   ├── static/
-│   │   ├── app.js                     # 主逻辑（唯一有 DOM 副作用的）
-│   │   ├── map-model.mjs              # 纯：10 章主题、视觉状态、布局、帧暗检测
-│   │   ├── map-scenes.mjs             # 纯：确定性场景 + 内联 SVG 工厂
+│   │   ├── app.js                     # 主逻辑：渲染、详情导航、上传 UI、封面抽取
+│   │   ├── map-model.mjs              # 纯：10 章主题(world+accent)、视觉状态、旋转、帧暗检测
 │   │   ├── map-path.mjs               # 纯：Catmull-Rom 平滑路径
-│   │   ├── style.css                  # 绘本风样式 + 自托管 @font-face
-│   │   └── fonts/                     # 自托管 woff2（Fredoka/Nunito，离线可用）
-│   ├── tests/                         # pytest：test_scanner.py, test_app.py
-│   ├── tests-js/                      # node --test：map-model/path/scenes .test.mjs
+│   │   ├── style.css                  # 绘本风样式（背景插画+节点+详情）+ 自托管 @font-face
+│   │   ├── fonts/                     # 自托管 woff2（Fredoka/Nunito，离线可用）
+│   │   └── worlds/                    # 每章背景插画（<章节名>.jpg，竖版 9:16）
+│   ├── tests/                         # pytest：test_scanner.py, test_app.py（含上传）
+│   ├── tests-js/                      # node --test：map-model/path .test.mjs
 │   └── .venv/                         # 本地虚拟环境（gitignored）
 │
 ├── content/                           # 课程文案 —— 文件系统即数据库，入库
@@ -94,7 +93,7 @@ D:/TaviusProject/                      # 仓库根（git: master 分支）
 
 | 层 | 技术 | 关键约束 |
 | --- | --- | --- |
-| 后端 | Python / Flask（单文件 `app/app.py`） | 无数据库、无上传接口、无构建 |
+| 后端 | Python / Flask（单文件 `app/app.py`） | 无数据库、无构建；有页面内上传（流式写盘） |
 | 数据 | 文件系统（三棵树 = 数据库） | 文件夹名零填充前缀，字符串排序即预期顺序；三棵树的 `<章>/<关>` 同名 |
 | 前端 | 原生 HTML/CSS/JS（ES Modules） | **无构建步骤、无打包器、无 npm 依赖**。`.mjs` 直接由浏览器加载 |
 | 字体 | 自托管 woff2（`app/static/fonts/`） | 离线可用，不走 Google CDN |
@@ -174,8 +173,8 @@ node --test tests-js/map-path.test.mjs # 单文件
 ### 当前测试覆盖什么
 
 - `test_scanner.py`：扫描排序、`meta.json` 回退、`has_demo`/`has_performance` 跨树检测、三态机、跨章状态传递、全完成无 current。
-- `test_app.py`：三个路由、视频 404 边界（缺文件 / 非法 kind / 路径越界）、HTML 外壳含所有关键 `id`、可重试加载逻辑、静态模块可 serve、字体自托管（无 CDN、woff2 可取）。
-- `tests-js/*.test.mjs`：10 章 10 个不同世界、视觉状态、布局比例、旋转稳定有界、暗帧检测、平滑路径、场景规格稳定平衡、章世界各不相同。
+- `test_app.py`：三个 GET 路由、视频 404 边界（缺文件 / 非法 kind / 路径越界）、上传路由（写盘 / 路径越界 / 非法 kind / 无文件 / 建目录）、HTML 外壳含所有关键 `id`、可重试加载逻辑、静态模块可 serve、字体自托管。
+- `tests-js/*.test.mjs`：10 章 10 个不同 world + hex accent、视觉状态、旋转稳定有界、暗帧检测、平滑路径。
 
 ### 改代码时的自检顺序
 
@@ -204,6 +203,7 @@ RECORDINGS_ROOT = Path(os.environ.get("RECORDINGS_ROOT", _PROJECT / "recordings"
 | `GET /` | 渲染 `map.html` |
 | `GET /api/library` | `annotate_states(scan_library(CONTENT_ROOT, DEMO_ROOT, RECORDINGS_ROOT))` → JSON |
 | `GET /video/<chapter>/<level>/<kind>` | `kind=="demo"` 查 `DEMO_ROOT/<ch>/<lv>/demo.mp4`；`kind=="performance"` 查 `RECORDINGS_ROOT/<ch>/<lv>/performance.mp4`。**路径越界守卫**：resolve 后 `is_relative_to(对应根)`，否则 404。非法 kind / 文件不存在也 404 |
+| `POST /upload/<chapter>/<level>/<kind>` | 接收视频文件，流式写盘到对应树（同路径守卫）。`MAX_CONTENT_LENGTH=500MB`。无文件→400，非法 kind/越界→404 |
 
 URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落点）。
 
@@ -238,10 +238,9 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 | 文件 | 角色 | 依赖 |
 | --- | --- | --- |
-| `map-model.mjs` | **纯数据/纯函数**：`CHAPTER_THEMES`（10 章：world、渐变、accent、props、heroes）、`getChapterTheme`、`getLevelVisualState`、`getLayoutForWidth`、`getStableRotation`、`isFrameDark` | 无 |
+| `map-model.mjs` | **纯数据/纯函数**：`CHAPTER_THEMES`（10 章：world + accent）、`getChapterTheme`、`getLevelVisualState`、`getStableRotation`、`isFrameDark` | 无 |
 | `map-path.mjs` | **纯函数**：`buildSmoothPath(points)`，绝不修改输入数组 | 无 |
-| `map-scenes.mjs` | **确定性场景**：`buildSceneSpec`（mulberry32 PRNG）、`renderChapterScenery`、`SVG_FACTORIES`、`HERO_FACTORIES` | map-model |
-| `app.js` | **编排层**（唯一有 DOM 副作用的）：拉 `/api/library`、渲染地图、抽取封面、画路径、开关详情、可重试加载 | 上面三个全依赖 |
+| `app.js` | **编排层**（唯一有 DOM 副作用的）：拉 `/api/library`、渲染背景插画地图、抽取封面、画路径、开关详情+导航、上传 UI（File System Access API + IndexedDB 文件夹记忆） | 上面两个全依赖 |
 
 ### 两层视图
 
@@ -250,12 +249,14 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ### 关键实现细节（改时注意）
 
-- **封面抽取** `extractSafeCover()`：seek 到 performance 视频 20% 处，画 canvas，`isFrameDark` 检测暗帧（跳过透明像素）。暗帧/超时/出错 → fallback 渐变。有 `frameCache`。
-- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，`buildSmoothPath` 画一条连续 SVG 路径。render 后、`document.fonts.ready` 后、封面 resolve 后、debounced resize 后都重画。`.level-node` 不带 ambient transform，hover/场景动画不漂移测点。
-- **确定性场景**：`buildSceneSpec(name, seed)` 用 mulberry32，相同输入必出相同场景。未知 prop kind → 中性圆球，**永不抛异常**。
+- **背景插画**：每章 section 设 `backgroundImage = url("/static/worlds/<章节名>.jpg")`。`preloadWorldImage` 用 `new Image()` 预加载，`onerror` 时加 `.chapter-world--no-bg` class 用 accent 色兜底。图缺失不报错、不白屏。
+- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，`buildSmoothPath` 画一条连续粗白实线。之字形偏移在 CSS（`.level-node-wrap` 奇偶 translateX），给路蜿蜒弧度。render 后、fonts ready 后、封面 resolve 后、debounced resize 后都重画。
+- **详情导航**：`openDetail` 在底部渲染 Prev/Next 按钮，从 `flatLevels`（library 扁平化）找相邻关卡。上传后 `reopenDetail` 从刷新后的 flatLevels 重新打开当前关。
+- **demo 标记**：locked 关如果有 demo，节点上加 `.level-node__demo-badge` 小播放标记，让孩子知道可以预习。
+- **上传 UI**：`pickVideoFile` 优先用 File System Access API（Chrome），首次 `showDirectoryPicker` 选源文件夹存 IndexedDB，后续默认停在那。不支持时回退 `<input type="file">`。`uploadVideo` 用 FormData POST 到 `/upload/...`，成功后 `loadLibrary()` 刷新。
 - **可重试加载**：`loadLibrary()` 在 loading/error/scroll 三态切换，`fetch("/api/library", { cache: "no-store" })`。
-- **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`，map.html 不再连 Google Fonts CDN。
-- **动效约束**：场景动画 10–20s 缓慢柔和；只动 SVG 内部零件；`prefers-reduced-motion: reduce` 关闭；场景 `pointer-events: none`。
+- **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`，map.html 不连 Google Fonts CDN。
+- **动效约束**：current 关发光呼吸；`prefers-reduced-motion: reduce` 关闭。
 
 ### 布局比例（测试钉死，别乱改）
 
@@ -313,7 +314,7 @@ ffmpeg -f concat -safe 0 -i list.txt -c copy demo.mp4
 | 9 | `09-reporting-others` | messenger-post | 转述他人 |
 | 10 | `10-planning-predicting` | planning-camp | 计划 / 预测 |
 
-主题视觉定义在 `app/static/map-model.mjs` 的 `CHAPTER_THEMES`。测试要求：10 个 world 名互不相同、20 个 hero 名互不相同、每章 props 3–5 个、heroes 恰好 2 个。**加新章或改 world 名会破测试。**
+主题视觉定义在 `app/static/map-model.mjs` 的 `CHAPTER_THEMES`（每章只有 `world` 和 `accent`）。测试要求：10 个 world 名互不相同、每个 accent 是 hex 色。背景图 URL 从章节名派生（`/static/worlds/<章节名>.jpg`），不存进主题。**加新章或改 world 名会破测试。**
 
 ---
 
@@ -379,7 +380,7 @@ refactor: split content, demo, and recordings into separate trees
 | 关卡不解锁 | 上一关没有 `performance.mp4`（在 `recordings/<章>/<关>/`）；放进去刷新 |
 | 改了 `app.py` 不生效 | debug 模式应自动重载；没重载就重启 `app.py` |
 | 封面显示不出来 | `extractSafeCover` 检测到暗帧或 canvas 被污染会回退；检查视频是否同源可读 |
-| 改 `CHAPTER_THEMES` 后 JS 测试红 | 测试钉死了 10 个唯一 world、20 个唯一 hero、props 3–5、heroes 2；同步改测试或符合约束 |
+| 改 `CHAPTER_THEMES` 后 JS 测试红 | 测试钉死了 10 个唯一 world + hex accent；同步改测试或符合约束 |
 | `scaffold_levels.py` 没更新某关 | 那关 `demo/<章>/<关>/demo.mp4` 已存在（被视作已激活，脚本故意跳过保护 meta） |
 | venv 失效 | `app/` 被重命名后 venv 绝对路径失效；删 `app/.venv` 重建（见 `app/README.md`） |
 
@@ -388,10 +389,10 @@ refactor: split content, demo, and recordings into separate trees
 ## 13. 给后续 agent 的速记
 
 - **先跑两套测试**（`npm test` + `pytest -q`）确认基线绿，再动手。
-- **纯逻辑放模块、副作用放 app.js**：`map-model`/`map-path`/`map-scenes` 是纯的、有测试的；新增纯逻辑优先进这些模块并配测试。
+- **纯逻辑放模块、副作用放 app.js**：`map-model`/`map-path` 是纯的、有测试的；新增纯逻辑优先进这些模块并配测试。
 - **改状态机（`annotate_states`）= 改产品规则**，三思，并更新 `test_scanner.py`。
 - **三棵树同名**：`content/<章>/<关>`、`demo/<章>/<关>`、`recordings/<章>/<关>` 的章关目录名必须一致。
-- **别引入构建工具/npm 依赖/数据库/上传接口/公网部署**——设计上明确排除。
+- **别引入构建工具/npm 依赖/数据库/公网部署**——设计上明确排除。（页面内上传是本地功能，不是在线上传平台。）
 - **视频和 `.claude`/`.superpowers`/`.zcode` 不入库**。
 - **产品语言**：文档可中英混排（README 中文为主），代码与 commit 用英文；面向孩子的 UI 文案要简单温暖。
 - **设计文档在 `docs/`**（specs/plans/archive）——拿不准方向时回去读。

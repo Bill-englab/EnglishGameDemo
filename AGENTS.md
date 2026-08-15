@@ -12,7 +12,7 @@
 ### 必须先理解的三个产品认知（违反这些会做错方向）
 
 1. **网站不是教学引擎，是「奖杯陈列柜」。** 真正的英语教学发生在线下父子 role-play。网站只做两件事：把完成的 role-play 可视化成进度；让孩子反复回看自己的表演录像。
-2. **给孩子多巴胺的不是星星，是回头看自己的表演。** 星星只是入口，「我的表演回放」才是主舞台。所以点亮的关卡，圆点直接变成那段表演视频的画面。
+2. **给孩子多巴胺的不是星星，是回头看自己的表演。** 星星只是入口，「我的表演回放」才是主舞台。所以点亮的关卡，圆点变成 demo 动画的画面，点击进入详情页看表演录像。
 3. **句式高级度不由网站量化。** 那是线下目标。网站只做二元判定：有没有 `performance.mp4`。
 
 ### 明确排除的事（别去实现）
@@ -244,18 +244,20 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ### 两层视图
 
-1. **地图视图**（`#map-view`）：10 个 `.chapter-world` section 自上而下，每个三列网格。关卡节点按 `getLevelVisualState` 分三态：`completed`（封面 + 金星）、`current`（播放按钮）、`locked`（锁）。每个状态都可点，点击打开详情。
-2. **详情视图**（`#detail-view`）：标题、句式 pills、场景、demo 视频（**0.75 倍速**）、完成星、performance 视频（1.0 倍速）、对话全文、变体。
+1. **地图视图**（`#map-view`）：10 个 `.chapter-world` section 自上而下。关卡节点按 `getLevelVisualState` 分三态：`completed`（demo 动画封面 + 金星）、`current`（播放按钮）、`locked`（锁，有 demo 时带小播放标记）。每个状态都可点，点击打开详情。
+2. **详情视图**（`#detail-view`）：三区域布局——顶部两个视频并排（Watch & Learn demo + Your Turn performance，16:9 等大），下方对话 + 变体并排，底部 Prev/Next 跨全宽。VideoGen 面板在右下角默认展开，内含 Part A/B 可折叠的 prompt 文本（带 Copy 按钮）。视频未上传时显示 `+` 空白封面，点击即上传。
 
 ### 关键实现细节（改时注意）
 
-- **背景插画**：每章 section 设 `backgroundImage = url("/static/worlds/<章节名>.jpg")`。`preloadWorldImage` 用 `new Image()` 预加载，`onerror` 时加 `.chapter-world--no-bg` class 用 accent 色兜底。图缺失不报错、不白屏。
-- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，`buildSmoothPath` 画一条连续粗白实线。之字形偏移在 CSS（`.level-node-wrap` 奇偶 translateX），给路蜿蜒弧度。render 后、fonts ready 后、封面 resolve 后、debounced resize 后都重画。
-- **详情导航**：`openDetail` 在底部渲染 Prev/Next 按钮，从 `flatLevels`（library 扁平化）找相邻关卡。上传后 `reopenDetail` 从刷新后的 flatLevels 重新打开当前关。
-- **demo 标记**：locked 关如果有 demo，节点上加 `.level-node__demo-badge` 小播放标记，让孩子知道可以预习。
-- **上传 UI**：`pickVideoFile` 优先用 File System Access API（Chrome），首次 `showDirectoryPicker` 选源文件夹存 IndexedDB，后续默认停在那。不支持时回退 `<input type="file">`。`uploadVideo` 用 FormData POST 到 `/upload/...`，成功后 `loadLibrary()` 刷新。
-- **可重试加载**：`loadLibrary()` 在 loading/error/scroll 三态切换，`fetch("/api/library", { cache: "no-store" })`。
-- **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`，map.html 不连 Google Fonts CDN。
+- **背景插画**：固定背景层 `#bg-layer`（parallax，不随滚动移动），每章一个 slide，scroll 时交叉淡入淡出（1.5s）。图从 `/static/worlds/<章节名>.jpg|.png` 探测，缺失时循环用已有图。详情页有自己的灰白背景覆盖地图暖色。
+- **封面抽取** `extractSafeCover()`：seek 到 **demo** 视频 20% 处（不是 performance），画 canvas，`isFrameDark` 检测暗帧。暗帧/超时/出错 → fallback 渐变。
+- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，`buildSmoothPath` 画连续粗白实线。之字形偏移在 CSS。
+- **详情导航**：`openDetail` 底部渲染 Prev/Next（跨全宽），从 `flatLevels` 找相邻关卡。上传后 `reopenDetail` 重新打开当前关。
+- **demo 标记**：locked 关如果有 demo，节点加 `.level-node__demo-badge` 小播放标记。
+- **上传 UI**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。视频区域的 `+` 空白封面点击即触发上传。
+- **VideoGen**：`GET /api/prompts/<chapter>/<level>` 返回 Sora prompt a/b 文本。Part A/B 是可折叠 `<details>`，summary 里有 Copy 按钮（`stopPropagation` 防止点 copy 触发折叠）。
+- **可重试加载**：`loadLibrary()` 三态切换，`fetch("/api/library", { cache: "no-store" })`。
+- **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`。
 - **动效约束**：current 关发光呼吸；`prefers-reduced-motion: reduce` 关闭。
 
 ### 布局比例（测试钉死，别乱改）
@@ -289,7 +291,7 @@ ffmpeg -f concat -safe 0 -i list.txt -c copy demo.mp4
 
 ### 使用流程（父子一起，别自动化）
 
-看 demo → 线下练 → 录 performance.mp4 → 父亲拖进 `recordings/<章>/<关>/` → 刷新 → 关卡点亮 → 孩子点自己的画面回看。
+看 demo → 线下练 → 录 performance.mp4 → 详情页点 `+` 上传或拖进 `recordings/<章>/<关>/` → 刷新 → 关卡点亮 → 孩子点封面回看表演。
 
 > 录像应是游戏自然高潮，不是小考。4 岁孩子一旦感到被测会躲避。
 

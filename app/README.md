@@ -38,6 +38,7 @@ cd app
 | GET | `/api/library` | 带状态标注的章/关树（JSON） |
 | GET | `/video/<chapter>/<level>/<kind>` | `demo` 或 `performance` 视频（非法 kind / 路径越界 / 文件不存在均 404） |
 | POST | `/upload/<chapter>/<level>/<kind>` | 上传视频到对应树（流式写盘，500MB 上限，同样有路径越界守卫） |
+| GET | `/api/prompts/<chapter>/<level>` | 返回该关的 Sora prompt 文本（Part A + Part B，JSON） |
 
 上传后前端自动刷新 library，关卡状态实时更新。
 

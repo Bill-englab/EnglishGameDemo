@@ -7,7 +7,7 @@
   <img alt="status" src="https://img.shields.io/badge/status-WIP%20(7%2F30%20demo)-orange">
 </p>
 
-An interactive adventure map that turns parent-child English role-play into a visual journey. Every completed performance lights up a node on the map — not with a star, but with a frame from the child's own video.
+An interactive adventure map that turns parent-child English role-play into a visual journey. Every completed performance lights up a node on the map — not with a star, but with a frame from the demo animation.
 
 Built for a 4-year-old, designed around one insight: **the real reward isn't a badge — it's watching yourself perform.**
 
@@ -21,7 +21,7 @@ This project makes role-play feel like a game:
 
 - **No teaching engine.** Learning happens offline, face-to-face. The website never grades or corrects.
 - **No star ratings.** A level is either done or not — there's a `performance.mp4`, or there isn't.
-- **The child's own face is the reward.** A completed level doesn't show a star; it shows a still from the child's recording. That's what keeps them coming back.
+- **The child's own performance is the reward.** A completed level shows a frame from the demo animation as its cover. The performance video is always one click away.
 
 ---
 
@@ -59,7 +59,21 @@ Each chapter has its own full-bleed background illustration (Pixar-style storybo
 | --- | --- | --- |
 | 🔒 Locked | Gray lock icon | Previous level not yet completed. If a demo exists, a small play badge invites a sneak peek. |
 | ▶️ Current | White glowing button | This is the level to practice now. |
-| 🌟 Completed | Child's video frame + gold star | Done. Click to replay the performance anytime. |
+| 🌟 Completed | Demo animation frame + gold star | Done. Click to replay the performance anytime. |
+
+---
+
+## The Detail Page
+
+Each level opens to a three-panel detail view:
+
+- **Watch & Learn** — the demo animation video (0.75× speed for clarity). Upload or replace directly by clicking the video area.
+- **Your Turn** — the child's performance video. Empty slots show a `+` placeholder; click to upload.
+- **Read Together** — the full dialogue (Dad + Child chat bubbles) and variation prompts.
+
+A **VideoGen** panel in the bottom-right reveals the Sora prompt text (Part A / Part B) used to generate the demo, each with a one-click **Copy** button.
+
+Prev / Next navigation spans the full width at the bottom, letting kids move between levels without returning to the map.
 
 ---
 

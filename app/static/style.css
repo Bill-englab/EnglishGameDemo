@@ -433,26 +433,27 @@ body {
   padding: 3px 10px; border-radius: 999px;
 }
 
-/* VideoGen toggle — top-right expandable */
-.videogen-toggle {
-  flex: none; position: relative;
-}
+/* VideoGen toggle — inline expandable block in the right column */
+.videogen-toggle { margin-top: 12px; }
 .videogen-toggle summary {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;
-  color: var(--ink-3); background: var(--surface-2);
-  border: 1px solid var(--line);
-  padding: 6px 14px; border-radius: 999px; cursor: pointer;
-  user-select: none; white-space: nowrap;
-  transition: all .15s ease;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 11px;
+  color: var(--ink-3); letter-spacing: .12em; text-transform: uppercase;
+  cursor: pointer; user-select: none;
+  display: flex; align-items: center; gap: 8px;
+  list-style: none;
 }
-.videogen-toggle summary:hover { color: var(--ink); border-color: var(--line-strong); }
-.videogen-toggle[open] summary { color: var(--ink); border-color: var(--accent); }
+.videogen-toggle summary::-webkit-details-marker { display: none; }
+.videogen-toggle summary::before {
+  content: ""; width: 4px; height: 14px; border-radius: 2px;
+  background: var(--accent);
+}
+.videogen-toggle summary::after {
+  content: "\25B8"; margin-left: auto; color: var(--ink-3); font-size: 10px;
+  transition: transform .15s ease;
+}
+.videogen-toggle[open] summary::after { transform: rotate(90deg); }
 .videogen-toggle .prompt-section {
-  position: absolute; top: calc(100% + 8px); right: 0;
-  width: 460px; max-width: 90vw; max-height: 60vh; overflow-y: auto;
-  background: var(--surface); border: 1px solid var(--line-strong);
-  border-radius: 12px; box-shadow: 0 12px 32px rgba(20,22,26,.14);
-  padding: 12px; z-index: 20;
+  margin-top: 10px; max-height: 300px; overflow-y: auto;
 }
 
 /* Body: vertical stack — video row, text row, full-width nav */
@@ -659,7 +660,6 @@ body {
   /* Detail view: collapse to single column on mobile */
   .video-row, .text-row { grid-template-columns: 1fr; }
   .detail-card { max-width: 100%; }
-  .videogen-toggle .prompt-section { position: static; width: 100%; }
   .chapter-world { min-height: 790px; }
   .chapter-main { padding: 22px 4px 16px; }
   .chapter-heading {

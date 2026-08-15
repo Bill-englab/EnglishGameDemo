@@ -35,30 +35,29 @@
         </div>
 
         <div class="detail-body">
-          <!-- Left column: videos (primary focus) -->
-          <div class="detail-col detail-col--video">
+          <!-- Col 1: demo video -->
+          <div class="detail-col detail-col--demo">
             <h1 id="detail-title"></h1>
             <div id="detail-patterns" class="patterns-row"></div>
             <p id="detail-scene" class="scene"></p>
-
             <div class="section-label">Demo Video</div>
-            <div id="detail-demo" class="demo-wrap"></div>
+            <div id="detail-demo" class="video-slot-wrap"></div>
+          </div>
 
+          <!-- Col 2: performance video + nav -->
+          <div class="detail-col detail-col--perf">
             <div class="section-label">Performance Video</div>
+            <div id="detail-perf" class="video-slot-wrap"></div>
             <div id="detail-star" class="star-row"></div>
-            <div id="detail-perf" class="perf-wrap"></div>
-
             <div id="detail-nav" class="detail-nav"></div>
           </div>
 
-          <!-- Right column: text content -->
+          <!-- Col 3: dialogue + variations + prompts -->
           <div class="detail-col detail-col--text">
             <div class="section-label">Dialogue</div>
             <div id="detail-dialogue" class="dialogue"></div>
-
             <div class="section-label">Variations</div>
             <div id="detail-variations" class="variations"></div>
-
             <div class="section-label">Sora Prompts</div>
             <div id="detail-prompts" class="prompt-section"></div>
           </div>

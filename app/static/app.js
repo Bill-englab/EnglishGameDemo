@@ -487,26 +487,38 @@ function openDetail(level) {
   sceneEl.textContent = level.scene || "";
   sceneEl.style.display = level.scene ? "" : "none";
 
+  // --- Demo video slot: video if present, else clickable + placeholder ---
   const demoWrap = document.getElementById("detail-demo");
   demoWrap.innerHTML = "";
   if (level.has_demo) {
     const v = document.createElement("video");
     v.src = videoURL(level.chapter, level.level, "demo");
     v.controls = true; v.preload = "auto"; v.playsInline = true;
-    // Set playbackRate after metadata loads — setting it before causes some
-    // browsers to show a perpetual loading spinner on large MP4s.
     v.addEventListener("loadedmetadata", () => { v.playbackRate = 0.75; });
     demoWrap.appendChild(v);
+    // Subtle replace button below the video for dad.
+    demoWrap.appendChild(makeUploadButton("Replace", level, "demo",
+      () => reopenDetail(level.chapter, level.level)));
   } else {
-    demoWrap.innerHTML = `<div class="coming-soon">Demo coming soon</div>`;
+    // Empty placeholder: click anywhere to trigger upload.
+    const slot = document.createElement("div");
+    slot.className = "video-slot--empty";
+    slot.innerHTML = `<span class="plus">+</span>`;
+    slot.addEventListener("click", async () => {
+      slot.style.opacity = "0.5";
+      try {
+        await uploadVideo(level, "demo");
+        await loadLibrary();
+        reopenDetail(level.chapter, level.level);
+      } catch (e) {
+        console.error("Demo upload failed", e);
+        slot.style.opacity = "1";
+      }
+    });
+    demoWrap.appendChild(slot);
   }
-  // Upload button for demo (dad replaces/adds the demo video).
-  demoWrap.appendChild(makeUploadButton(
-    level.has_demo ? "Replace demo" : "Add demo",
-    level, "demo",
-    () => reopenDetail(level.chapter, level.level),
-  ));
 
+  // --- Star + recording path (between perf video and nav) ---
   const lit = level.has_performance;
   const starRow = document.getElementById("detail-star");
   starRow.innerHTML = "";
@@ -516,12 +528,10 @@ function openDetail(level) {
   const cap = document.createElement("span");
   cap.className = "star-cap";
   cap.textContent = lit
-    ? "You did it! Your show is saved below."
-    : "Practice together, then add performance.mp4 to light the star!";
+    ? "You did it! Your show is saved."
+    : "Practice together, then upload your show!";
   starRow.appendChild(star);
   starRow.appendChild(cap);
-
-  // Show the recording target path for dad (only when not yet completed).
   if (!lit) {
     const pathHint = document.createElement("div");
     pathHint.className = "rec-path";
@@ -529,6 +539,7 @@ function openDetail(level) {
     starRow.appendChild(pathHint);
   }
 
+  // --- Performance video slot: video if present, else clickable + placeholder ---
   const perfWrap = document.getElementById("detail-perf");
   perfWrap.innerHTML = "";
   if (level.has_performance) {
@@ -541,13 +552,25 @@ function openDetail(level) {
     v.addEventListener("loadedmetadata", () => { v.playbackRate = 1.0; });
     perfWrap.appendChild(lbl);
     perfWrap.appendChild(v);
+    perfWrap.appendChild(makeUploadButton("Replace", level, "performance",
+      () => reopenDetail(level.chapter, level.level)));
+  } else {
+    const slot = document.createElement("div");
+    slot.className = "video-slot--empty";
+    slot.innerHTML = `<span class="plus">+</span>`;
+    slot.addEventListener("click", async () => {
+      slot.style.opacity = "0.5";
+      try {
+        await uploadVideo(level, "performance");
+        await loadLibrary();
+        reopenDetail(level.chapter, level.level);
+      } catch (e) {
+        console.error("Performance upload failed", e);
+        slot.style.opacity = "1";
+      }
+    });
+    perfWrap.appendChild(slot);
   }
-  // Upload button for performance (dad adds/replaces the child's recording).
-  perfWrap.appendChild(makeUploadButton(
-    level.has_performance ? "Replace show" : "Add performance",
-    level, "performance",
-    () => reopenDetail(level.chapter, level.level),
-  ));
 
   const dialogueEl = document.getElementById("detail-dialogue");
   dialogueEl.innerHTML = "";

@@ -590,12 +590,14 @@ function openDetail(level) {
       }
       const makeBlock = (label, text) => {
         if (!text) return null;
-        const wrap = document.createElement("details");
-        wrap.className = "prompt-block";
-        wrap.open = true;
-        const pre = document.createElement("pre");
-        pre.textContent = text;
-        // Copy button inside the summary, next to the label.
+        const block = document.createElement("div");
+        block.className = "prompt-block";
+        // Header row: label + copy button
+        const header = document.createElement("div");
+        header.className = "prompt-block__header";
+        const labelEl = document.createElement("span");
+        labelEl.className = "prompt-block__label";
+        labelEl.textContent = label;
         const copyBtn = document.createElement("button");
         copyBtn.className = "prompt-copy-btn";
         copyBtn.type = "button";
@@ -607,10 +609,11 @@ function openDetail(level) {
             setTimeout(() => { copyBtn.textContent = "Copy"; }, 1500);
           });
         });
-        const summary = document.createElement("summary");
-        summary.append(label, copyBtn);
-        wrap.append(summary, pre);
-        return wrap;
+        header.append(labelEl, copyBtn);
+        const pre = document.createElement("pre");
+        pre.textContent = text;
+        block.append(header, pre);
+        return block;
       };
       const a = makeBlock("Part A", data.a);
       const b = makeBlock("Part B", data.b);

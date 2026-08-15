@@ -132,20 +132,20 @@ const starSVG = (lit) => {
   return `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="${STAR_PATH}" fill="${fill}" stroke="${stroke}" stroke-width="1" stroke-linejoin="round"/></svg>`;
 };
 
-// ===== frame extraction for the child's face cover =====
-// Seeks to 20% of the performance video, draws to a canvas, inspects pixels,
+// ===== frame extraction for the level cover =====
+// Seeks to 20% of the demo video, draws to a canvas, inspects pixels,
 // and only returns a JPEG data URL when isFrameDark is false. Resolves null
 // on timeout, media error, zero dimensions, canvas/tainted error, OR a dark frame.
 const frameCache = new Map();
 const frameKey = (ch, lv, kind) => `${ch}/${lv}/${kind}`;
 function extractSafeCover(level, theme, ratio = 0.2) {
-  const key = frameKey(level.chapter, level.level, "performance");
+  const key = frameKey(level.chapter, level.level, "demo");
   if (frameCache.has(key)) return Promise.resolve(frameCache.get(key));
   return new Promise(resolve => {
     const v = document.createElement("video");
     v.muted = true; v.preload = "auto"; v.playsInline = true;
     v.crossOrigin = "anonymous";
-    v.src = videoURL(level.chapter, level.level, "performance");
+    v.src = videoURL(level.chapter, level.level, "demo");
     let done = false;
     const finish = (val) => {
       if (done) return; done = true; clearTimeout(to);
@@ -592,10 +592,24 @@ function openDetail(level) {
         if (!text) return null;
         const wrap = document.createElement("details");
         wrap.className = "prompt-block";
+        wrap.open = true;
         wrap.innerHTML = `<summary>${label}</summary>`;
         const pre = document.createElement("pre");
         pre.textContent = text;
         wrap.appendChild(pre);
+        // Copy button
+        const copyBtn = document.createElement("button");
+        copyBtn.className = "prompt-copy-btn";
+        copyBtn.type = "button";
+        copyBtn.textContent = "Copy";
+        copyBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          navigator.clipboard.writeText(text).then(() => {
+            copyBtn.textContent = "Copied!";
+            setTimeout(() => { copyBtn.textContent = "Copy"; }, 1500);
+          });
+        });
+        wrap.appendChild(copyBtn);
         return wrap;
       };
       const a = makeBlock("Part A", data.a);

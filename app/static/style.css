@@ -390,7 +390,7 @@ body {
   box-shadow: 0 12px 40px rgba(20,22,26,.08);
   transform: translateY(24px) scale(.96); opacity: 0;
   transition: transform .5s cubic-bezier(.2,1.3,.4,1), opacity .4s ease;
-  overflow: hidden;
+  overflow: visible;
 }
 #detail-view.open .detail-card { transform: translateY(0) scale(1); opacity: 1; }
 
@@ -449,16 +449,16 @@ body {
 .videogen-toggle[open] summary { color: var(--ink); border-color: var(--accent); }
 .videogen-toggle .prompt-section {
   position: absolute; top: calc(100% + 8px); right: 0;
-  width: 420px; max-width: 90vw; max-height: 400px; overflow-y: auto;
+  width: 460px; max-width: 90vw; max-height: 60vh; overflow-y: auto;
   background: var(--surface); border: 1px solid var(--line-strong);
   border-radius: 12px; box-shadow: 0 12px 32px rgba(20,22,26,.14);
-  padding: 12px; z-index: 10;
+  padding: 12px; z-index: 20;
 }
 
-/* Three-column body — card-style columns with gaps */
+/* Two video columns wider, text column narrower */
 .detail-body {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.2fr 1.2fr 1fr;
   gap: 16px;
   padding: 20px;
 }

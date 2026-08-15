@@ -49,17 +49,13 @@ async function saveDirHandle(handle) {
   } catch (_) { /* non-fatal */ }
 }
 
-// Pick a single video file. Tries the saved directory first (reopens there),
-// then falls back to a system file picker. Returns a File or null.
+// Pick a single video file. Uses showOpenFilePicker (Chrome) with a remembered
+// start directory, or falls back to <input type=file>. One step — no folder picker.
 async function pickVideoFile() {
-  // Fast path: File System Access API with a remembered directory.
   if ("showOpenFilePicker" in window) {
     try {
-      let dirHandle = await loadSavedDirHandle();
-      if (!dirHandle && "showDirectoryPicker" in window) {
-        dirHandle = await window.showDirectoryPicker({ mode: "read" });
-        await saveDirHandle(dirHandle);
-      }
+      // Try to load a saved directory handle so the picker reopens at the same spot.
+      const dirHandle = await loadSavedDirHandle();
       const opts = {
         multiple: false,
         types: [{
@@ -74,16 +70,21 @@ async function pickVideoFile() {
       };
       if (dirHandle) opts.startIn = dirHandle;
       const [handle] = await window.showOpenFilePicker(opts);
+      // Remember the parent directory of the picked file for next time.
+      try {
+        const parent = await handle.getParent();
+        await saveDirHandle(parent);
+      } catch (_) { /* getParent not supported everywhere */ }
       return await handle.getFile();
     } catch (e) {
       if (e.name === "AbortError") return null;  // user cancelled
       // fall through to <input> fallback
     }
   }
-  // Fallback: plain file input (Firefox / Safari / picker failure).
+  // Fallback: plain file input.
   return new Promise(resolve => {
     const input = document.createElement("input");
-    input.type = "file"; input.accept = "video/*";
+    input.type = "file"; input.accept = ".mp4,.mov,.webm,.avi,video/*";
     input.onchange = () => resolve(input.files[0] || null);
     input.onerror = () => resolve(null);
     input.click();
@@ -95,7 +96,7 @@ async function uploadVideo(level, kind) {
   const file = await pickVideoFile();
   if (!file) return false;
   const fd = new FormData();
-  fd.append("file", file, file.name);
+  fd.append("file", file, file.name || "video.mp4");
   const res = await fetch(uploadURL(level.chapter, level.level, kind), { method: "POST", body: fd });
   if (!res.ok) throw new Error(`upload ${res.status}`);
   return true;
@@ -114,7 +115,7 @@ function makeUploadButton(label, level, kind, onDone) {
     const orig = btn.textContent;
     btn.textContent = "Uploading…";
     try {
-      await uploadVideo(level, kind, onDone);
+      await uploadVideo(level, kind);
       await loadLibrary();  // refresh the library so has_demo/has_performance updates
       onDone();             // re-open detail to show the new video
     } catch (e) {
@@ -170,9 +171,8 @@ function extractSafeCover(level, theme, ratio = 0.2) {
       try {
         const w = v.videoWidth, h = v.videoHeight;
         if (!w || !h) { finish(null); return; }
-        const scale = Math.min(1, 640 / Math.max(w, h));
         const cv = document.createElement("canvas");
-        cv.width = Math.round(w * scale); cv.height = Math.round(h * scale);
+        cv.width = w; cv.height = h;
         const ctx = cv.getContext("2d");
         ctx.drawImage(v, 0, 0, cv.width, cv.height);
         const imageData = ctx.getImageData(0, 0, cv.width, cv.height);

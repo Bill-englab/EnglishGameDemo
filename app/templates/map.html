@@ -30,36 +30,40 @@
     <section id="detail-view" class="view hidden">
       <div class="detail-card">
         <div class="detail-header">
-          <button id="back-btn" class="back-btn" type="button">&#8592; Map</button>
-          <div id="detail-chapter" class="chip"></div>
+          <div class="detail-header__left">
+            <button id="back-btn" class="back-btn" type="button">&#8592; Map</button>
+            <div class="detail-title-area">
+              <h1 id="detail-title"></h1>
+              <div class="detail-meta">
+                <span id="detail-chapter" class="chip"></span>
+                <div id="detail-patterns" class="patterns-row"></div>
+              </div>
+            </div>
+          </div>
+          <details class="videogen-toggle">
+            <summary>VideoGen</summary>
+            <div id="detail-prompts" class="prompt-section"></div>
+          </details>
         </div>
 
         <div class="detail-body">
-          <!-- Col 1: demo video -->
           <div class="detail-col detail-col--demo">
-            <h1 id="detail-title"></h1>
-            <div id="detail-patterns" class="patterns-row"></div>
-            <p id="detail-scene" class="scene"></p>
-            <div class="section-label">Demo Video</div>
+            <div class="section-label">Watch &amp; Learn</div>
             <div id="detail-demo" class="video-slot-wrap"></div>
           </div>
 
-          <!-- Col 2: performance video + nav -->
           <div class="detail-col detail-col--perf">
-            <div class="section-label">Performance Video</div>
+            <div class="section-label">Your Turn</div>
             <div id="detail-perf" class="video-slot-wrap"></div>
             <div id="detail-star" class="star-row"></div>
             <div id="detail-nav" class="detail-nav"></div>
           </div>
 
-          <!-- Col 3: dialogue + variations + prompts -->
           <div class="detail-col detail-col--text">
-            <div class="section-label">Dialogue</div>
+            <div class="section-label">Read Together</div>
             <div id="detail-dialogue" class="dialogue"></div>
-            <div class="section-label">Variations</div>
+            <div class="section-label">Try This</div>
             <div id="detail-variations" class="variations"></div>
-            <div class="section-label">Sora Prompts</div>
-            <div id="detail-prompts" class="prompt-section"></div>
           </div>
         </div>
       </div>

@@ -483,10 +483,6 @@ function openDetail(level) {
   });
   patterns.style.display = (level.patterns && level.patterns.length) ? "" : "none";
 
-  const sceneEl = document.getElementById("detail-scene");
-  sceneEl.textContent = level.scene || "";
-  sceneEl.style.display = level.scene ? "" : "none";
-
   // --- Demo video slot: video if present, else clickable + placeholder ---
   const demoWrap = document.getElementById("detail-demo");
   demoWrap.innerHTML = "";
@@ -606,8 +602,8 @@ function openDetail(level) {
         wrap.appendChild(pre);
         return wrap;
       };
-      const a = makeBlock("Prompt A (first half)", data.a);
-      const b = makeBlock("Prompt B (second half)", data.b);
+      const a = makeBlock("Part A", data.a);
+      const b = makeBlock("Part B", data.b);
       if (a) promptWrap.appendChild(a);
       if (b) promptWrap.appendChild(b);
     })

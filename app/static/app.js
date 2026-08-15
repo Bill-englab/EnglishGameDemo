@@ -60,12 +60,20 @@ async function pickVideoFile() {
         dirHandle = await window.showDirectoryPicker({ mode: "read" });
         await saveDirHandle(dirHandle);
       }
-      const startIn = dirHandle ? dirHandle : undefined;
-      const [handle] = await window.showOpenFilePicker({
-        types: [{ description: "Video", accept: { "video/*": [".mp4", ".mov", ".webm", ".avi"] } }],
+      const opts = {
         multiple: false,
-        ...(startIn ? { startIn } : {}),
-      });
+        types: [{
+          description: "Video files",
+          accept: {
+            "video/mp4": [".mp4"],
+            "video/quicktime": [".mov"],
+            "video/webm": [".webm"],
+            "video/x-msvideo": [".avi"],
+          },
+        }],
+      };
+      if (dirHandle) opts.startIn = dirHandle;
+      const [handle] = await window.showOpenFilePicker(opts);
       return await handle.getFile();
     } catch (e) {
       if (e.name === "AbortError") return null;  // user cancelled
@@ -162,7 +170,7 @@ function extractSafeCover(level, theme, ratio = 0.2) {
       try {
         const w = v.videoWidth, h = v.videoHeight;
         if (!w || !h) { finish(null); return; }
-        const scale = Math.min(1, 280 / Math.max(w, h));
+        const scale = Math.min(1, 640 / Math.max(w, h));
         const cv = document.createElement("canvas");
         cv.width = Math.round(w * scale); cv.height = Math.round(h * scale);
         const ctx = cv.getContext("2d");

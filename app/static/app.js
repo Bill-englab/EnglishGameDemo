@@ -590,11 +590,11 @@ function openDetail(level) {
       }
       const makeBlock = (label, text) => {
         if (!text) return null;
-        const block = document.createElement("div");
-        block.className = "prompt-block";
-        // Header row: label + copy button
-        const header = document.createElement("div");
-        header.className = "prompt-block__header";
+        const wrap = document.createElement("details");
+        wrap.className = "prompt-block";
+        // Summary acts as the collapsible header: label + copy button.
+        // Clicking copy won't toggle (e.stopPropagation), only label toggles.
+        const summary = document.createElement("summary");
         const labelEl = document.createElement("span");
         labelEl.className = "prompt-block__label";
         labelEl.textContent = label;
@@ -604,16 +604,17 @@ function openDetail(level) {
         copyBtn.textContent = "Copy";
         copyBtn.addEventListener("click", (e) => {
           e.preventDefault();
+          e.stopPropagation();
           navigator.clipboard.writeText(text).then(() => {
             copyBtn.textContent = "Copied!";
             setTimeout(() => { copyBtn.textContent = "Copy"; }, 1500);
           });
         });
-        header.append(labelEl, copyBtn);
+        summary.append(labelEl, copyBtn);
         const pre = document.createElement("pre");
         pre.textContent = text;
-        block.append(header, pre);
-        return block;
+        wrap.append(summary, pre);
+        return wrap;
       };
       const a = makeBlock("Part A", data.a);
       const b = makeBlock("Part B", data.b);

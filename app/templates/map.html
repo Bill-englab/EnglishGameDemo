@@ -33,27 +33,36 @@
           <button id="back-btn" class="back-btn" type="button">&#8592; Map</button>
           <div id="detail-chapter" class="chip"></div>
         </div>
-        <h1 id="detail-title"></h1>
-        <div id="detail-patterns" class="patterns-row"></div>
-        <p id="detail-scene" class="scene"></p>
 
-        <div class="section-label">Demo Video</div>
-        <div id="detail-demo" class="demo-wrap"></div>
+        <div class="detail-body">
+          <!-- Left column: videos (primary focus) -->
+          <div class="detail-col detail-col--video">
+            <h1 id="detail-title"></h1>
+            <div id="detail-patterns" class="patterns-row"></div>
+            <p id="detail-scene" class="scene"></p>
 
-        <div class="section-label">Performance Video</div>
-        <div id="detail-star" class="star-row"></div>
-        <div id="detail-perf" class="perf-wrap"></div>
+            <div class="section-label">Demo Video</div>
+            <div id="detail-demo" class="demo-wrap"></div>
 
-        <div class="section-label">Dialogue</div>
-        <div id="detail-dialogue" class="dialogue"></div>
+            <div class="section-label">Performance Video</div>
+            <div id="detail-star" class="star-row"></div>
+            <div id="detail-perf" class="perf-wrap"></div>
 
-        <div class="section-label">Variations</div>
-        <div id="detail-variations" class="variations"></div>
+            <div id="detail-nav" class="detail-nav"></div>
+          </div>
 
-        <div class="section-label">Sora Prompts</div>
-        <div id="detail-prompts" class="prompt-section"></div>
+          <!-- Right column: text content -->
+          <div class="detail-col detail-col--text">
+            <div class="section-label">Dialogue</div>
+            <div id="detail-dialogue" class="dialogue"></div>
 
-        <div id="detail-nav" class="detail-nav"></div>
+            <div class="section-label">Variations</div>
+            <div id="detail-variations" class="variations"></div>
+
+            <div class="section-label">Sora Prompts</div>
+            <div id="detail-prompts" class="prompt-section"></div>
+          </div>
+        </div>
       </div>
     </section>
   </div>

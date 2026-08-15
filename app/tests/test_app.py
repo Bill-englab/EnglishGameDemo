@@ -7,12 +7,15 @@ import app as app_module
 from scanner import scan_library, annotate_states
 
 
-def _build_lib(content: Path, demo: Path, recordings: Path):
+def _build_lib(content: Path, demo: Path, recordings: Path, prompts: Path):
     (content / "01-c" / "01-s").mkdir(parents=True)
     (content / "01-c" / "01-s" / "meta.json").write_text(
         json.dumps({"title": "S1"}), encoding="utf-8")
     (demo / "01-c" / "01-s").mkdir(parents=True)
     (demo / "01-c" / "01-s" / "demo.mp4").write_bytes(b"fake-demo")
+    (prompts / "01-c").mkdir(parents=True)
+    (prompts / "01-c" / "D1a.txt").write_text("prompt A text", encoding="utf-8")
+    (prompts / "01-c" / "D1b.txt").write_text("prompt B text", encoding="utf-8")
 
 
 @pytest.fixture
@@ -20,10 +23,12 @@ def client(tmp_path, monkeypatch):
     content = tmp_path / "content"
     demo = tmp_path / "demo"
     recordings = tmp_path / "recordings"
-    _build_lib(content, demo, recordings)
+    prompts = tmp_path / "prompts"
+    _build_lib(content, demo, recordings, prompts)
     monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
     monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
     monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
+    monkeypatch.setattr(app_module, "PROMPTS_ROOT", prompts)
     app_module.app.config["TESTING"] = True
     return app_module.app.test_client()
 
@@ -109,10 +114,12 @@ def upload_client(tmp_path, monkeypatch):
     content = tmp_path / "content"
     demo = tmp_path / "demo"
     recordings = tmp_path / "recordings"
-    _build_lib(content, demo, recordings)
+    prompts = tmp_path / "prompts"
+    _build_lib(content, demo, recordings, prompts)
     monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
     monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
     monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
+    monkeypatch.setattr(app_module, "PROMPTS_ROOT", prompts)
     app_module.app.config["TESTING"] = True
     return app_module.app.test_client(), {"content": content, "demo": demo, "recordings": recordings}
 
@@ -167,3 +174,33 @@ def test_upload_400_without_file(upload_client):
 def test_upload_rejects_path_traversal(upload_client):
     with pytest.raises(werkzeug.exceptions.NotFound):
         app_module.upload("..", "01-s", "performance")
+
+
+# ===== prompts API tests =====
+
+def test_prompts_returns_a_and_b_text(client):
+    res = client.get("/api/prompts/01-c/01-s")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["a"] == "prompt A text"
+    assert data["b"] == "prompt B text"
+
+
+def test_prompts_404_for_missing_chapter(client):
+    res = client.get("/api/prompts/99-nope/01-s")
+    assert res.status_code == 404
+
+
+def test_prompts_404_for_missing_level(client):
+    res = client.get("/api/prompts/01-c/99-nope")
+    assert res.status_code == 404
+
+
+def test_prompts_rejects_path_traversal(client):
+    with pytest.raises(werkzeug.exceptions.NotFound):
+        app_module.api_prompts("..", "01-s")
+
+
+def test_map_shell_has_detail_prompts_element(client):
+    html = client.get("/").get_data(as_text=True)
+    assert 'id="detail-prompts"' in html

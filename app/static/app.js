@@ -492,8 +492,10 @@ function openDetail(level) {
   if (level.has_demo) {
     const v = document.createElement("video");
     v.src = videoURL(level.chapter, level.level, "demo");
-    v.controls = true; v.preload = "metadata"; v.playsInline = true;
-    v.playbackRate = 0.75;
+    v.controls = true; v.preload = "auto"; v.playsInline = true;
+    // Set playbackRate after metadata loads — setting it before causes some
+    // browsers to show a perpetual loading spinner on large MP4s.
+    v.addEventListener("loadedmetadata", () => { v.playbackRate = 0.75; });
     demoWrap.appendChild(v);
   } else {
     demoWrap.innerHTML = `<div class="coming-soon">Demo coming soon</div>`;
@@ -535,8 +537,8 @@ function openDetail(level) {
     lbl.textContent = "Your show";
     const v = document.createElement("video");
     v.src = videoURL(level.chapter, level.level, "performance");
-    v.controls = true; v.preload = "metadata"; v.playsInline = true;
-    v.playbackRate = 1.0;
+    v.controls = true; v.preload = "auto"; v.playsInline = true;
+    v.addEventListener("loadedmetadata", () => { v.playbackRate = 1.0; });
     perfWrap.appendChild(lbl);
     perfWrap.appendChild(v);
   }
@@ -559,6 +561,34 @@ function openDetail(level) {
   dialogueEl.style.display = (level.dialogue && level.dialogue.length) ? "" : "none";
 
   document.getElementById("detail-variations").textContent = level.variations || "";
+
+  // Fetch and render Sora prompts (a + b) for this level.
+  const promptWrap = document.getElementById("detail-prompts");
+  promptWrap.innerHTML = `<div class="prompt-loading">Loading prompts…</div>`;
+  fetch(`/api/prompts/${level.chapter}/${level.level}`)
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      promptWrap.innerHTML = "";
+      if (!data || (!data.a && !data.b)) {
+        promptWrap.innerHTML = `<div class="prompt-empty">No prompts available</div>`;
+        return;
+      }
+      const makeBlock = (label, text) => {
+        if (!text) return null;
+        const wrap = document.createElement("details");
+        wrap.className = "prompt-block";
+        wrap.innerHTML = `<summary>${label}</summary>`;
+        const pre = document.createElement("pre");
+        pre.textContent = text;
+        wrap.appendChild(pre);
+        return wrap;
+      };
+      const a = makeBlock("Prompt A (first half)", data.a);
+      const b = makeBlock("Prompt B (second half)", data.b);
+      if (a) promptWrap.appendChild(a);
+      if (b) promptWrap.appendChild(b);
+    })
+    .catch(() => { promptWrap.innerHTML = `<div class="prompt-empty">No prompts available</div>`; });
 
   // Prev / Next navigation — find this level in the flat list and wire buttons.
   const navWrap = document.getElementById("detail-nav");

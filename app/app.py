@@ -8,6 +8,7 @@ _PROJECT = Path(__file__).resolve().parent.parent
 CONTENT_ROOT = Path(os.environ.get("CONTENT_ROOT", _PROJECT / "content"))
 DEMO_ROOT = Path(os.environ.get("DEMO_ROOT", _PROJECT / "demo"))
 RECORDINGS_ROOT = Path(os.environ.get("RECORDINGS_ROOT", _PROJECT / "recordings"))
+PROMPTS_ROOT = Path(os.environ.get("PROMPTS_ROOT", _PROJECT / "prompts"))
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 500 * 1024 * 1024  # 500 MB upload cap
@@ -60,6 +61,37 @@ def upload(chapter, level, kind):
     target.parent.mkdir(parents=True, exist_ok=True)
     f.save(target)
     return jsonify({"ok": True, "path": str(target.relative_to(root))})
+
+
+@app.route("/api/prompts/<chapter>/<level>")
+def api_prompts(chapter, level):
+    """Return the Sora prompt text (a + b) for a given level.
+
+    Derives the dialogue number (D1/D2/D3) from the level's sorted position
+    within its chapter in the content tree.
+    """
+    chapter_dir = (CONTENT_ROOT / chapter).resolve()
+    if not chapter_dir.is_relative_to(CONTENT_ROOT.resolve()):
+        abort(404)
+    if not chapter_dir.is_dir():
+        abort(404)
+    level_dirs = sorted(p for p in chapter_dir.iterdir() if p.is_dir())
+    try:
+        n = level_dirs.index((chapter_dir / level).resolve()) + 1
+    except (ValueError, FileNotFoundError):
+        abort(404)
+
+    prompts_dir = (PROMPTS_ROOT / chapter).resolve()
+    if not prompts_dir.is_relative_to(PROMPTS_ROOT.resolve()):
+        abort(404)
+
+    def _read(suffix):
+        f = prompts_dir / f"D{n}{suffix}"
+        if not f.is_file():
+            return ""
+        return f.read_text(encoding="utf-8")
+
+    return jsonify({"a": _read("a.txt"), "b": _read("b.txt")})
 
 
 if __name__ == "__main__":

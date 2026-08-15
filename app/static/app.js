@@ -102,12 +102,11 @@ async function uploadVideo(level, kind) {
   return true;
 }
 
-// Build a small "Replace / Add" button for the demo or performance area.
-// Low-key styling — meant for dad, not the kid.
-function makeUploadButton(label, level, kind, onDone) {
+// Build a small "Replace" button for the demo area (dad's tool, not the kid's).
+function makeActionButton(label, level, kind, onDone) {
   const btn = document.createElement("button");
   btn.type = "button";
-  btn.className = "upload-btn";
+  btn.className = "action-btn";
   btn.textContent = label;
   btn.disabled = false;
   btn.addEventListener("click", async () => {
@@ -128,6 +127,239 @@ function makeUploadButton(label, level, kind, onDone) {
     setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 1500);
   });
   return btn;
+}
+
+// ===== in-browser recording (getUserMedia + MediaRecorder) =====
+// The child performs in front of the PC's webcam. One button toggles start/stop
+// (red circle → square). A 5-minute hard cap auto-stops to prevent OOM and
+// oversize uploads. After stop, the recording plays back immediately with
+// Redo / Save buttons — no grading, just "keep it or try again".
+const MAX_RECORD_MS = 5 * 60 * 1000;
+
+// Pick the best MIME type the browser's MediaRecorder actually supports.
+// Chrome/Firefox → video/webm; Safari → video/mp4. The chosen type is logged
+// to the console and sent to the server so it stores the right extension.
+function pickRecorderMime() {
+  const candidates = [
+    "video/webm;codecs=vp9,opus",
+    "video/webm;codecs=vp8,opus",
+    "video/webm",
+    "video/mp4",
+  ];
+  for (const mt of candidates) {
+    if (MediaRecorder.isTypeSupported(mt)) return mt;
+  }
+  return "";
+}
+
+// Start a full recording session inside the given container element.
+// Replaces the container's contents with: camera preview → record button →
+// (on stop) playback + Redo/Save.
+async function startRecordingSession(level, container) {
+  container.innerHTML = "";
+
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: true,
+    });
+  } catch (err) {
+    renderRecordError(container, level, err);
+    return;
+  }
+
+  renderRecordingUI(container, stream, level);
+}
+
+function renderRecordingUI(container, stream, level) {
+  container.innerHTML = "";
+
+  // Live camera preview (muted so there's no echo from the mic).
+  const preview = document.createElement("video");
+  preview.className = "record-preview";
+  preview.srcObject = stream;
+  preview.muted = true;
+  preview.playsInline = true;
+  preview.autoplay = true;
+  container.appendChild(preview);
+
+  // Recording indicator: blinking red dot + timer (hidden until recording).
+  const indicator = document.createElement("div");
+  indicator.className = "record-indicator hidden";
+  indicator.innerHTML = `<span class="rec-dot"></span><span class="rec-timer">00:00</span>`;
+
+  // One button, two states: red circle (idle) → square (recording).
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "record-btn";  // starts as red circle via CSS
+  btn.setAttribute("aria-label", "Start recording");
+
+  const controls = document.createElement("div");
+  controls.className = "record-controls";
+  controls.append(indicator, btn);
+  container.appendChild(controls);
+
+  let mediaRecorder = null;
+  let chunks = [];
+  let timerInterval = null;
+  let startTime = 0;
+  let autoStopTimer = null;
+  let chosenMime = "";
+
+  btn.addEventListener("click", () => {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  });
+
+  function startRecording() {
+    chosenMime = pickRecorderMime();
+    console.log("[recorder] MediaRecorder mimeType:", chosenMime);
+
+    try {
+      mediaRecorder = new MediaRecorder(stream, chosenMime ? { mimeType: chosenMime } : {});
+    } catch (e) {
+      console.error("[recorder] cannot create MediaRecorder:", e);
+      return;
+    }
+
+    chunks = [];
+    mediaRecorder.ondataavailable = e => { if (e.data && e.data.size > 0) chunks.push(e.data); };
+    mediaRecorder.onstop = () => {
+      const blobType = chosenMime || "video/webm";
+      const blob = new Blob(chunks, { type: blobType });
+      console.log("[recorder] recorded blob:", blob.size, "bytes, type:", blob.type);
+      renderPlayback(container, blob, stream, level, blobType);
+    };
+
+    mediaRecorder.start();
+    btn.classList.add("recording");  // circle → square
+    btn.setAttribute("aria-label", "Stop recording");
+    indicator.classList.remove("hidden");
+
+    startTime = Date.now();
+    timerInterval = setInterval(updateTimer, 250);
+
+    autoStopTimer = setTimeout(() => {
+      console.log("[recorder] auto-stop at 5 min");
+      stopRecording();
+    }, MAX_RECORD_MS);
+  }
+
+  function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+      mediaRecorder.stop();
+    }
+    clearInterval(timerInterval);
+    clearTimeout(autoStopTimer);
+    btn.classList.remove("recording");
+  }
+
+  function updateTimer() {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const mm = String(Math.floor(elapsed / 60)).padStart(2, "0");
+    const ss = String(elapsed % 60).padStart(2, "0");
+    indicator.querySelector(".rec-timer").textContent = `${mm}:${ss}`;
+  }
+}
+
+// After recording stops: play back the recording with Redo / Save.
+function renderPlayback(container, blob, stream, level, mimeType) {
+  // Release the camera — we're done recording.
+  stream.getTracks().forEach(t => t.stop());
+
+  container.innerHTML = "";
+
+  const video = document.createElement("video");
+  video.className = "record-playback";
+  video.src = URL.createObjectURL(blob);
+  video.controls = true;
+  video.playsInline = true;
+  video.autoplay = true;
+  container.appendChild(video);
+
+  const actions = document.createElement("div");
+  actions.className = "record-actions";
+
+  const redoBtn = document.createElement("button");
+  redoBtn.type = "button";
+  redoBtn.className = "record-action record-action--redo";
+  redoBtn.textContent = "⟲ Redo";
+  redoBtn.addEventListener("click", () => {
+    URL.revokeObjectURL(video.src);
+    startRecordingSession(level, container);
+  });
+
+  const saveBtn = document.createElement("button");
+  saveBtn.type = "button";
+  saveBtn.className = "record-action record-action--save";
+  saveBtn.textContent = "✓ Save";
+  saveBtn.addEventListener("click", async () => {
+    saveBtn.disabled = true;
+    redoBtn.disabled = true;
+    saveBtn.textContent = "Saving…";
+    try {
+      await uploadRecording(level, blob, mimeType);
+      await loadLibrary();
+      reopenDetail(level.chapter, level.level);
+    } catch (e) {
+      console.error("Save failed", e);
+      saveBtn.textContent = "Failed — retry";
+      saveBtn.disabled = false;
+      redoBtn.disabled = false;
+    }
+  });
+
+  actions.append(redoBtn, saveBtn);
+  container.appendChild(actions);
+}
+
+// Upload a recorded blob to the server. Sends the actual MIME type so the
+// backend stores the correct extension (.webm / .mp4).
+async function uploadRecording(level, blob, mimeType) {
+  const fd = new FormData();
+  const ext = mimeType.includes("mp4") ? "mp4" : "webm";
+  fd.append("file", blob, `performance.${ext}`);
+  fd.append("mimeType", mimeType);
+  const res = await fetch(uploadURL(level.chapter, level.level, "performance"), {
+    method: "POST",
+    body: fd,
+  });
+  if (!res.ok) throw new Error(`upload ${res.status}`);
+  return true;
+}
+
+// When the camera is blocked or missing, show a friendly message and a
+// fallback button to upload a video file instead.
+function renderRecordError(container, level, err) {
+  container.innerHTML = "";
+  const msg = document.createElement("div");
+  msg.className = "record-error";
+  if (err.name === "NotAllowedError") {
+    msg.innerHTML = `<p>Camera access was blocked.</p><p class="record-error__hint">Allow camera in your browser, or upload a file instead.</p>`;
+  } else if (err.name === "NotFoundError") {
+    msg.innerHTML = `<p>No camera found.</p><p class="record-error__hint">Upload a video file instead.</p>`;
+  } else {
+    msg.innerHTML = `<p>Couldn't start the camera.</p><p class="record-error__hint">Upload a video file instead.</p>`;
+  }
+  const fallback = document.createElement("button");
+  fallback.type = "button";
+  fallback.className = "action-btn";
+  fallback.textContent = "Choose file";
+  fallback.addEventListener("click", async () => {
+    try {
+      await uploadVideo(level, "performance");
+      await loadLibrary();
+      reopenDetail(level.chapter, level.level);
+    } catch (e) {
+      console.error("File upload fallback failed", e);
+    }
+  });
+  msg.appendChild(fallback);
+  container.appendChild(msg);
 }
 
 // ===== svg bits =====
@@ -189,6 +421,7 @@ let revealObserver = null;
 let mapScrollY = 0;
 let currentLibrary = [];        // full chapter tree, kept for detail navigation
 let flatLevels = [];            // flattened level list with chapter context for prev/next
+let bgSlides = [];              // background slides, kept so closeDetail can refresh them
 
 // Gold star badge for completed nodes. Placed OUTSIDE the cover-clipping layer
 // on the overflow:visible .level-node so it is never cropped.
@@ -198,9 +431,8 @@ const STAR_BADGE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/s
 const DEMO_BADGE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#fff" opacity=".92"/><path d="M9.5 7.5v9l7-4.5z" fill="#ff9d4d"/></svg>`;
 
 // Builds the level node for every state (completed / current / locked).
-// Returns a <button class="level-node-wrap level-node-wrap--STATE"> with an
-// inner .level-node (sized via CSS) and a .level-title beneath it. Every state
-// is clickable (no disabled attribute) and opens the detail view.
+// Any state with a demo shows the demo screenshot as its cover; the
+// state-specific overlay (star / play button / lock) sits on top.
 function createLevelNode(level, index, theme) {
   const state = getLevelVisualState(level);
 
@@ -212,19 +444,12 @@ function createLevelNode(level, index, theme) {
   const node = document.createElement("span");
   node.className = `level-node level-node--${state}`;
 
-  if (state === "completed") {
-    node.style.setProperty("--polaroid-rotation", getStableRotation(index) + "deg");
-
+  // Demo screenshot cover — shown for any state that has a demo so
+  // uncompleted levels aren't just blank white.
+  if (level.has_demo) {
     const cover = document.createElement("span");
     cover.className = "level-node__cover";
     node.appendChild(cover);
-
-    // Gold star sits OUTSIDE the cover-clipping layer (the .level-node has
-    // overflow:visible; only the __cover layer clips).
-    const star = document.createElement("span");
-    star.className = "level-node__star";
-    star.innerHTML = STAR_BADGE_SVG;
-    node.appendChild(star);
 
     extractSafeCover(level, theme).then(url => {
       if (url) {
@@ -233,17 +458,38 @@ function createLevelNode(level, index, theme) {
         cover.classList.add("level-node--fallback");
         cover.style.setProperty("--fallback-accent", theme.accent);
       }
-      // Covers don't change node geometry, but a redraw once they resolve is
-      // cheap insurance against any incidental layout shift and keeps the
-      // trail locked to the final rendered centers.
       requestAnimationFrame(drawMapPath);
     });
+  }
+
+  if (state === "completed") {
+    node.style.setProperty("--polaroid-rotation", getStableRotation(index) + "deg");
+    // Star wrapper (positioning + slow rotation) holds the inner star element
+    // (pop + twinkle). Splitting transforms across two elements lets rotation
+    // and scale coexist without fighting each other.
+    const starWrap = document.createElement("span");
+    starWrap.className = "level-node__star-wrap";
+    const star = document.createElement("span");
+    star.className = "level-node__star";
+    star.innerHTML = STAR_BADGE_SVG;
+    starWrap.appendChild(star);
+    node.appendChild(starWrap);
   } else if (state === "current") {
-    node.innerHTML = `<span class="play-btn">${PLAY_BTN_SVG}</span>`;
+    const playBtn = document.createElement("span");
+    playBtn.className = "play-btn";
+    playBtn.innerHTML = PLAY_BTN_SVG;
+    node.appendChild(playBtn);
   } else {
-    node.innerHTML = LOCK_SVG;
-    // A locked level that already has a demo gets a small play badge so kids
-    // (and dad) can see "there's something to preview in here."
+    // locked — dim overlay sits between cover and lock
+    if (level.has_demo) {
+      const dim = document.createElement("span");
+      dim.className = "level-node__dim";
+      node.appendChild(dim);
+    }
+    const lockWrap = document.createElement("span");
+    lockWrap.className = "lock-wrap";
+    lockWrap.innerHTML = LOCK_SVG;
+    node.appendChild(lockWrap);
     if (level.has_demo) {
       const badge = document.createElement("span");
       badge.className = "level-node__demo-badge";
@@ -419,12 +665,12 @@ function renderMap(library) {
   }
 
   // Build the fixed background layer and wire cross-fade on scroll.
-  const slides = buildBgLayer(library);
+  bgSlides = buildBgLayer(library);
 
   requestAnimationFrame(() => {
     drawMapPath();
     observeReveal();
-    observeBgSwitch(slides);
+    observeBgSwitch(bgSlides);
   });
 }
 
@@ -441,11 +687,12 @@ function observeReveal() {
   document.querySelectorAll(".chapter-world, .level-node-wrap").forEach(el => revealObserver.observe(el));
 }
 
-// Reads every .level-node center in DOM order and draws ONE continuous smooth
-// path across all chapters. Centers are measured from raw layout — .level-node
-// carries no ambient transform, so hover/scene animations can never shift the
-// measured points. Re-runs after render, on document.fonts.ready, after cover
-// resolution settles, and on debounced resize.
+// Reads every .level-node center in DOM order and draws the trail. The path
+// splits at the first locked level: the "traveled" segment (completed +
+// current levels) is golden and glowing; the "upcoming" segment (locked
+// levels) stays white and dimmer. Centers are measured from raw layout —
+// .level-node carries no ambient transform, so hover/scene animations can
+// never shift the measured points.
 function drawMapPath() {
   const svg = document.getElementById("path-svg");
   const scroll = document.getElementById("map-scroll");
@@ -457,20 +704,41 @@ function drawMapPath() {
   svg.setAttribute("height", h);
 
   const base = scroll.getBoundingClientRect();
+  const nodes = scroll.querySelectorAll(".level-node");
   const pts = [];
-  // querySelectorAll returns DOM order, so the route flows chapter 1 → 10
-  // and level 1 → N within each chapter (the same order the nodes render).
-  for (const node of scroll.querySelectorAll(".level-node")) {
+  let splitIdx = nodes.length;  // index of first locked level (default: no split)
+
+  nodes.forEach((node, i) => {
     const r = node.getBoundingClientRect();
-    if (!r.width && !r.height) continue;
+    if (!r.width && !r.height) return;
     pts.push({
       x: r.left + r.width / 2 - base.left + scroll.scrollLeft,
       y: r.top + r.height / 2 - base.top + scroll.scrollTop,
     });
-  }
+    // The first locked node marks where "upcoming" begins.
+    if (splitIdx === nodes.length && node.classList.contains("level-node--locked")) {
+      splitIdx = i;
+    }
+  });
 
-  const d = buildSmoothPath(pts);
-  svg.innerHTML = d ? `<path class="trail" d="${d}"/>` : "";
+  if (pts.length < 2) { svg.innerHTML = ""; return; }
+
+  // Traveled = pts[0 .. splitIdx-1] — stops at the current level, does NOT
+  //   include the first locked level (so the connector to the next locked
+  //   level stays white).
+  // Upcoming = pts[splitIdx-1 .. end] — starts at the current level so the
+  //   two segments visually connect at the current node.
+  const traveledPts = pts.slice(0, splitIdx);
+  const upcomingPts = pts.slice(splitIdx > 0 ? splitIdx - 1 : 0);
+
+  let html = "";
+  if (traveledPts.length >= 2) {
+    html += `<path class="trail trail--done" d="${buildSmoothPath(traveledPts)}"/>`;
+  }
+  if (upcomingPts.length >= 2) {
+    html += `<path class="trail trail--todo" d="${buildSmoothPath(upcomingPts)}"/>`;
+  }
+  svg.innerHTML = html;
 }
 
 // ===== level detail view =====
@@ -501,7 +769,7 @@ function openDetail(level) {
     v.addEventListener("loadedmetadata", () => { v.playbackRate = 0.75; });
     demoWrap.appendChild(v);
     // Subtle replace button below the video for dad.
-    demoWrap.appendChild(makeUploadButton("Replace", level, "demo",
+    demoWrap.appendChild(makeActionButton("Replace", level, "demo",
       () => reopenDetail(level.chapter, level.level)));
   } else {
     // Empty placeholder: click anywhere to trigger upload.
@@ -522,7 +790,7 @@ function openDetail(level) {
     demoWrap.appendChild(slot);
   }
 
-  // --- Star + recording path (between perf video and nav) ---
+  // --- Star row (no path hint — that moved to the "?" tooltip) ---
   const lit = level.has_performance;
   const starRow = document.getElementById("detail-star");
   starRow.innerHTML = "";
@@ -536,14 +804,14 @@ function openDetail(level) {
     : "Practice together, then upload your show!";
   starRow.appendChild(star);
   starRow.appendChild(cap);
-  if (!lit) {
-    const pathHint = document.createElement("div");
-    pathHint.className = "rec-path";
-    pathHint.textContent = `recordings/${level.chapter}/${level.level}/performance.mp4`;
-    starRow.appendChild(pathHint);
+
+  // --- "?" tooltip on "Your Turn" shows where the recording file lives ---
+  const tooltipTrigger = document.querySelector(".rec-tooltip-trigger");
+  if (tooltipTrigger) {
+    tooltipTrigger.title = `recordings/${level.chapter}/${level.level}/performance.mp4`;
   }
 
-  // --- Performance video slot: video if present, else clickable + placeholder ---
+  // --- Performance video slot: recording if empty, playback if present ---
   const perfWrap = document.getElementById("detail-perf");
   perfWrap.innerHTML = "";
   if (level.has_performance) {
@@ -552,23 +820,19 @@ function openDetail(level) {
     v.controls = true; v.preload = "auto"; v.playsInline = true;
     v.addEventListener("loadedmetadata", () => { v.playbackRate = 1.0; });
     perfWrap.appendChild(v);
-    perfWrap.appendChild(makeUploadButton("Replace", level, "performance",
-      () => reopenDetail(level.chapter, level.level)));
+    // "Record again" triggers the in-browser recorder (not file upload).
+    const redoBtn = document.createElement("button");
+    redoBtn.type = "button";
+    redoBtn.className = "action-btn";
+    redoBtn.textContent = "Record again";
+    redoBtn.addEventListener("click", () => startRecordingSession(level, perfWrap));
+    perfWrap.appendChild(redoBtn);
   } else {
+    // Empty slot: click + to start the camera and record directly.
     const slot = document.createElement("div");
     slot.className = "video-slot--empty";
     slot.innerHTML = `<span class="plus">+</span>`;
-    slot.addEventListener("click", async () => {
-      slot.style.opacity = "0.5";
-      try {
-        await uploadVideo(level, "performance");
-        await loadLibrary();
-        reopenDetail(level.chapter, level.level);
-      } catch (e) {
-        console.error("Performance upload failed", e);
-        slot.style.opacity = "1";
-      }
-    });
+    slot.addEventListener("click", () => startRecordingSession(level, perfWrap));
     perfWrap.appendChild(slot);
   }
 
@@ -673,6 +937,11 @@ function closeDetail() {
   requestAnimationFrame(() => {
     drawMapPath();
     window.scrollTo(0, mapScrollY);
+    // Force-refresh the background: while the map was display:none the
+    // scroll listener couldn't detect the active chapter. Reset and
+    // re-detect now that layout is restored.
+    activeChapter = null;
+    updateBgOnScroll(bgSlides);
   });
 }
 

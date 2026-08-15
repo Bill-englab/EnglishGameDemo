@@ -91,6 +91,17 @@ def test_scan_detects_demo_and_performance_in_separate_trees(tmp_path):
     assert lv["has_performance"] is True
 
 
+def test_scan_detects_webm_performance(tmp_path):
+    """The in-browser recorder produces .webm; scanner must recognize it."""
+    roots = make_roots(tmp_path)
+    (roots.content / "01-c" / "01-s").mkdir(parents=True)
+    r = roots.recordings / "01-c" / "01-s"
+    r.mkdir(parents=True)
+    (r / "performance.webm").write_bytes(b"")
+    lv = scan(roots)[0]["levels"][0]
+    assert lv["has_performance"] is True
+
+
 def test_scan_reads_scene_from_meta(tmp_path):
     roots = make_roots(tmp_path)
     make_level(roots, "01-c", "01-s", demo=True, title="Scene One",

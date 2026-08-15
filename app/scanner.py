@@ -1,14 +1,25 @@
 from pathlib import Path
 import json
 
+# Supported video file extensions. The in-browser recorder (MediaRecorder)
+# produces .webm on Chrome/Firefox and .mp4 on Safari; legacy file uploads
+# are .mp4. Both are recognized so a level lights up regardless of format.
+VIDEO_EXTENSIONS = (".mp4", ".webm")
+
+
+def _has_video(root: Path, chapter: str, level: str, name: str) -> bool:
+    """True if a video file of any supported extension exists for this kind."""
+    d = root / chapter / level
+    return any((d / f"{name}{ext}").exists() for ext in VIDEO_EXTENSIONS)
+
 
 def scan_library(content_root: Path, demo_root: Path, recordings_root: Path) -> list[dict]:
     """Walk the content root, return chapters (each with levels) in order.
 
     Curriculum text (meta.json) lives under content_root/<chapter>/<level>/.
-    Videos live in separate trees: demo_root/<chapter>/<level>/demo.mp4 and
-    recordings_root/<chapter>/<level>/performance.mp4. Directories must be
-    zero-prefixed so string sort matches intended order.
+    Videos live in separate trees: demo_root/<chapter>/<level>/demo.<ext> and
+    recordings_root/<chapter>/<level>/performance.<ext> (ext = mp4 or webm).
+    Directories must be zero-prefixed so string sort matches intended order.
 
     Each level: { chapter, level, title, scene, patterns, dialogue, variations,
                   has_demo, has_performance }.
@@ -29,8 +40,8 @@ def scan_library(content_root: Path, demo_root: Path, recordings_root: Path) -> 
                 "patterns": meta.get("patterns", []),
                 "dialogue": meta.get("dialogue", []),
                 "variations": meta.get("variations", ""),
-                "has_demo": (demo_root / chapter / level / "demo.mp4").exists(),
-                "has_performance": (recordings_root / chapter / level / "performance.mp4").exists(),
+                "has_demo": _has_video(demo_root, chapter, level, "demo"),
+                "has_performance": _has_video(recordings_root, chapter, level, "performance"),
             })
         if levels:
             chapters.append({"name": chapter_dir.name, "levels": levels})

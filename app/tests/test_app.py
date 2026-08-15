@@ -156,6 +156,49 @@ def test_upload_creates_missing_parent_dirs(upload_client):
     assert (roots["recordings"] / "02-new" / "01-s" / "performance.mp4").exists()
 
 
+def test_upload_webm_stores_correct_extension(upload_client):
+    """The recorder sends mimeType=video/webm; server must save as .webm."""
+    client, roots = upload_client
+    res = client.post("/upload/01-c/01-s/performance", data={
+        "file": (io.BytesIO(b"fake-webm"), "performance.webm"),
+        "mimeType": "video/webm",
+    }, content_type="multipart/form-data")
+    assert res.status_code == 200
+    assert res.get_json()["ext"] == ".webm"
+    written = roots["recordings"] / "01-c" / "01-s" / "performance.webm"
+    assert written.read_bytes() == b"fake-webm"
+    # No .mp4 should be created.
+    assert not (roots["recordings"] / "01-c" / "01-s" / "performance.mp4").exists()
+
+
+def test_upload_webm_served_with_correct_mimetype(upload_client):
+    client, roots = upload_client
+    client.post("/upload/01-c/01-s/performance", data={
+        "file": (io.BytesIO(b"fake-webm"), "performance.webm"),
+        "mimeType": "video/webm",
+    }, content_type="multipart/form-data")
+    res = client.get("/video/01-c/01-s/performance")
+    assert res.status_code == 200
+    assert res.mimetype == "video/webm"
+
+
+def test_upload_webm_replaces_existing_mp4(upload_client):
+    """Re-recording in webm should delete the old .mp4 so only one file remains."""
+    client, roots = upload_client
+    # First upload as mp4.
+    client.post("/upload/01-c/01-s/performance", data={
+        "file": (io.BytesIO(b"old-mp4"), "performance.mp4"),
+    }, content_type="multipart/form-data")
+    assert (roots["recordings"] / "01-c" / "01-s" / "performance.mp4").exists()
+    # Re-record as webm.
+    client.post("/upload/01-c/01-s/performance", data={
+        "file": (io.BytesIO(b"new-webm"), "performance.webm"),
+        "mimeType": "video/webm",
+    }, content_type="multipart/form-data")
+    assert (roots["recordings"] / "01-c" / "01-s" / "performance.webm").exists()
+    assert not (roots["recordings"] / "01-c" / "01-s" / "performance.mp4").exists()
+
+
 def test_upload_404_for_unknown_kind(upload_client):
     client, _ = upload_client
     res = client.post("/upload/01-c/01-s/sneaky", data={

@@ -31,6 +31,8 @@ Each level follows the same loop — watch, practice, perform, record, replay:
 
 <img src="docs/attach/process.jpg" alt="Role-play workflow: watch demo, practice together, record performance, upload, level lights up, replay" width="100%">
 
+The performance is recorded **in-browser** using the PC's webcam — no phone transfer, no file copying. The child performs in front of the screen, hits stop, watches the instant replay, and saves. The level lights up immediately.
+
 ### Starting the App
 
 **Windows:** Double-click `run.bat` — it launches the server and opens the browser.
@@ -45,7 +47,20 @@ cd app
 
 Then open http://127.0.0.1:5000.
 
-The app runs entirely on your machine. No internet required (fonts are bundled), and uploaded videos stay on your disk — nothing is sent to any server.
+The app runs entirely on your machine. No internet required (fonts are bundled), and recorded videos stay on your disk — nothing is sent to any server.
+
+### Recording a Performance
+
+1. Open a level's detail page.
+2. In the **Your Turn** panel, click the `+` (or "Record again" if replacing).
+3. The browser asks for camera + microphone permission (grant once).
+4. A live camera preview appears (mirrored, so the child sees themselves).
+5. Click the red circle to start recording → it becomes a square, a red dot blinks, and a timer runs.
+6. Click again (or wait 5 minutes) to stop.
+7. The recording plays back immediately. Click **Redo** to try again, or **Save** to keep it.
+8. The level lights up on the map.
+
+Recordings are saved as `.webm` (Chrome/Firefox) or `.mp4` (Safari) — the app handles both formats automatically.
 
 ---
 
@@ -57,9 +72,11 @@ Each chapter has its own full-bleed background illustration (Pixar-style storybo
 
 | State | Appearance | Meaning |
 | --- | --- | --- |
-| 🔒 Locked | Gray lock icon | Previous level not yet completed. If a demo exists, a small play badge invites a sneak peek. |
-| ▶️ Current | White glowing button | This is the level to practice now. |
-| 🌟 Completed | Demo animation frame + gold star | Done. Click to replay the performance anytime. |
+| 🔒 Locked | Gray lock over dimmed demo screenshot | Previous level not yet completed. If a demo exists, a small play badge invites a sneak peek. |
+| ▶️ Current | Demo screenshot with breathing glow + scaling cover + play button | This is the level to practice now. The cover gently pulses to draw attention. |
+| 🌟 Completed | Demo screenshot + gold star (spinning + twinkling) + golden glow | Done. Click to replay the performance anytime. |
+
+The winding path changes color as you progress: **traveled segments turn golden** (completed + current levels), while upcoming segments stay white. The transition happens at the current level — a visual trail of how far you've come.
 
 ---
 
@@ -68,7 +85,7 @@ Each chapter has its own full-bleed background illustration (Pixar-style storybo
 Each level opens to a three-panel detail view:
 
 - **Watch & Learn** — the demo animation video (0.75× speed for clarity). Upload or replace directly by clicking the video area.
-- **Your Turn** — the child's performance video. Empty slots show a `+` placeholder; click to upload.
+- **Your Turn** — the child's performance video. Empty slots show a `+` placeholder; click to start the in-browser recorder. Hover the `?` next to "Your Turn" to see where the file is stored.
 - **Read Together** — the full dialogue (Dad + Child chat bubbles) and variation prompts.
 
 A **VideoGen** panel in the bottom-right reveals the Sora prompt text (Part A / Part B) used to generate the demo, each with a one-click **Copy** button.
@@ -106,6 +123,7 @@ Every level includes a full dialogue (Dad + Child alternating), target patterns,
 | Background illustrations | 8/10 |
 | Demo animations | 7/30 |
 | Sora prompts | 60/60 ✅ |
+| In-browser webcam recording | ✅ |
 
 See [`demo/PROGRESS.md`](demo/PROGRESS.md) for detailed production tracking.
 

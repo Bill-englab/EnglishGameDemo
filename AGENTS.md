@@ -13,7 +13,7 @@
 
 1. **网站不是教学引擎，是「奖杯陈列柜」。** 真正的英语教学发生在线下父子 role-play。网站只做两件事：把完成的 role-play 可视化成进度；让孩子反复回看自己的表演录像。
 2. **给孩子多巴胺的不是星星，是回头看自己的表演。** 星星只是入口，「我的表演回放」才是主舞台。所以点亮的关卡，圆点变成 demo 动画的画面，点击进入详情页看表演录像。
-3. **句式高级度不由网站量化。** 那是线下目标。网站只做二元判定：有没有 `performance.mp4`。
+3. **句式高级度不由网站量化。** 那是线下目标。网站只做二元判定：有没有 `performance` 视频（`.mp4` 或 `.webm`）。
 
 ### 明确排除的事（别去实现）
 
@@ -42,7 +42,7 @@ D:/TaviusProject/                      # 仓库根（git: master 分支）
 │   ├── requirements.txt               # flask>=3.0, pytest
 │   ├── templates/map.html             # 地图页外壳 + 详情导航
 │   ├── static/
-│   │   ├── app.js                     # 主逻辑：渲染、详情导航、上传 UI、封面抽取
+│   │   ├── app.js                     # 主逻辑：渲染、详情导航、PC 摄像头录制、封面抽取
 │   │   ├── map-model.mjs              # 纯：10 章主题(world+accent)、视觉状态、旋转、帧暗检测
 │   │   ├── map-path.mjs               # 纯：Catmull-Rom 平滑路径
 │   │   ├── style.css                  # 绘本风样式（背景插画+节点+详情）+ 自托管 @font-face
@@ -172,8 +172,8 @@ node --test tests-js/map-path.test.mjs # 单文件
 
 ### 当前测试覆盖什么
 
-- `test_scanner.py`：扫描排序、`meta.json` 回退、`has_demo`/`has_performance` 跨树检测、三态机、跨章状态传递、全完成无 current。
-- `test_app.py`：三个 GET 路由、视频 404 边界（缺文件 / 非法 kind / 路径越界）、上传路由（写盘 / 路径越界 / 非法 kind / 无文件 / 建目录）、HTML 外壳含所有关键 `id`、可重试加载逻辑、静态模块可 serve、字体自托管。
+- `test_scanner.py`：扫描排序、`meta.json` 回退、`has_demo`/`has_performance` 跨树检测、**webm 格式检测**、三态机、跨章状态传递、全完成无 current。
+- `test_app.py`：三个 GET 路由、视频 404 边界（缺文件 / 非法 kind / 路径越界）、上传路由（写盘 / 路径越界 / 非法 kind / 无文件 / 建目录）、**webm 上传存正确扩展名 + serve 正确 mimetype + 重录换格式删旧文件**、HTML 外壳含所有关键 `id`、可重试加载逻辑、静态模块可 serve、字体自托管。
 - `tests-js/*.test.mjs`：10 章 10 个不同 world + hex accent、视觉状态、旋转稳定有界、暗帧检测、平滑路径。
 
 ### 改代码时的自检顺序
@@ -202,8 +202,8 @@ RECORDINGS_ROOT = Path(os.environ.get("RECORDINGS_ROOT", _PROJECT / "recordings"
 | --- | --- |
 | `GET /` | 渲染 `map.html` |
 | `GET /api/library` | `annotate_states(scan_library(CONTENT_ROOT, DEMO_ROOT, RECORDINGS_ROOT))` → JSON |
-| `GET /video/<chapter>/<level>/<kind>` | `kind=="demo"` 查 `DEMO_ROOT/<ch>/<lv>/demo.mp4`；`kind=="performance"` 查 `RECORDINGS_ROOT/<ch>/<lv>/performance.mp4`。**路径越界守卫**：resolve 后 `is_relative_to(对应根)`，否则 404。非法 kind / 文件不存在也 404 |
-| `POST /upload/<chapter>/<level>/<kind>` | 接收视频文件，流式写盘到对应树（同路径守卫）。`MAX_CONTENT_LENGTH=500MB`。无文件→400，非法 kind/越界→404 |
+| `GET /video/<chapter>/<level>/<kind>` | `kind=="demo"` 查 `DEMO_ROOT/<ch>/<lv>/demo.{mp4\|webm}`；`kind=="performance"` 查 `RECORDINGS_ROOT/<ch>/<lv>/performance.{mp4\|webm}`。按实际文件扩展名返回对应 mimetype（`video/mp4` 或 `video/webm`）。**路径越界守卫**：resolve 后 `is_relative_to(对应根)`，否则 404。非法 kind / 文件不存在也 404 |
+| `POST /upload/<chapter>/<level>/<kind>` | 接收视频文件，流式写盘到对应树（同路径守卫）。`mimeType` form 字段决定存 `.mp4` 还是 `.webm`（浏览器录制传 `video/webm`，旧文件传 `video/mp4`）。重录换格式时自动删旧文件。`MAX_CONTENT_LENGTH=500MB`。无文件→400，非法 kind/越界→404 |
 
 URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落点）。
 
@@ -211,10 +211,10 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 两个函数，**纯逻辑、可单测**（`annotate_states` 就地修改并返回输入）：
 
-- **`scan_library(content_root, demo_root, recordings_root) -> list[dict]`**：遍历 `content_root` 的章/关读 `meta.json`；`has_demo` 查 `demo_root/<ch>/<lv>/demo.mp4`；`has_performance` 查 `recordings_root/<ch>/<lv>/performance.mp4`。`meta.json` 缺失/损坏 → 空 dict，title 回退为目录名。
+- **`scan_library(content_root, demo_root, recordings_root) -> list[dict]`**：遍历 `content_root` 的章/关读 `meta.json`；`has_demo` 查 `demo_root/<ch>/<lv>/demo.{mp4|webm}`（`_has_video` helper 检查两种扩展名）；`has_performance` 查 `recordings_root/<ch>/<lv>/performance.{mp4|webm}`。`meta.json` 缺失/损坏 → 空 dict，title 回退为目录名。
 - **`annotate_states(chapters) -> list[dict]`**：扁平化后按全局顺序算状态：
 
-  > **三态规则（三句话）**：关卡顺序 = 文件夹名前缀排序；关卡解锁 = 上一关存在 `performance.mp4`；关卡点亮 = 当前关存在 `performance.mp4`。
+  > **三态规则（三句话）**：关卡顺序 = 文件夹名前缀排序；关卡解锁 = 上一关存在 `performance` 视频；关卡点亮 = 当前关存在 `performance` 视频。
 
   - 第一关永远 `unlocked`。`has_performance` → `completed`。否则上一关 `completed` → `unlocked`，否则 `locked`。第一个 `unlocked` 且未完成的关标 `current=True`。全完成则无 current。
 
@@ -240,21 +240,23 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 | --- | --- | --- |
 | `map-model.mjs` | **纯数据/纯函数**：`CHAPTER_THEMES`（10 章：world + accent）、`getChapterTheme`、`getLevelVisualState`、`getStableRotation`、`isFrameDark` | 无 |
 | `map-path.mjs` | **纯函数**：`buildSmoothPath(points)`，绝不修改输入数组 | 无 |
-| `app.js` | **编排层**（唯一有 DOM 副作用的）：拉 `/api/library`、渲染背景插画地图、抽取封面、画路径、开关详情+导航、上传 UI（File System Access API + IndexedDB 文件夹记忆） | 上面两个全依赖 |
+| `app.js` | **编排层**（唯一有 DOM 副作用的）：拉 `/api/library`、渲染背景插画地图、抽取封面、画路径、开关详情+导航、**PC 摄像头录制**（`getUserMedia` + `MediaRecorder`）、demo 文件上传（File System Access API + IndexedDB 文件夹记忆） | 上面两个全依赖 |
 
 ### 两层视图
 
-1. **地图视图**（`#map-view`）：10 个 `.chapter-world` section 自上而下。关卡节点按 `getLevelVisualState` 分三态：`completed`（demo 动画封面 + 金星）、`current`（播放按钮）、`locked`（锁，有 demo 时带小播放标记）。每个状态都可点，点击打开详情。
-2. **详情视图**（`#detail-view`）：三区域布局——顶部两个视频并排（Watch & Learn demo + Your Turn performance，16:9 等大），下方对话 + 变体并排，底部 Prev/Next 跨全宽。VideoGen 面板在右下角默认展开，内含 Part A/B 可折叠的 prompt 文本（带 Copy 按钮）。视频未上传时显示 `+` 空白封面，点击即上传。
+1. **地图视图**（`#map-view`）：10 个 `.chapter-world` section 自上而下。关卡节点按 `getLevelVisualState` 分三态：`completed`（demo 截图封面 + 金星，金星慢旋 + 闪烁 + 金色光晕呼吸）、`current`（demo 截图封面 + 双层橙色光晕呼吸 + 封面缩放呼吸 + 播放按钮）、`locked`（暗化 demo 截图 + 锁，有 demo 时带小播放标记）。每个状态都可点，点击打开详情。路径分两段：走过的路金色发光，未走的路白色。
+2. **详情视图**（`#detail-view`）：三区域布局——顶部两个视频并排（Watch & Learn demo + Your Turn performance，16:9 等大），下方对话 + 变体并排，底部 Prev/Next 跨全宽。VideoGen 面板在右下角默认展开，内含 Part A/B 可折叠的 prompt 文本（带 Copy 按钮）。performance 未录时显示 `+` 空白封面，点击触发 PC 摄像头录制；"Your Turn"标签旁有 `?` 图标，悬停显示文件路径。
 
 ### 关键实现细节（改时注意）
 
 - **背景插画**：固定背景层 `#bg-layer`（parallax，不随滚动移动），每章一个 slide，scroll 时交叉淡入淡出（1.5s）。图从 `/static/worlds/<章节名>.jpg|.png` 探测，缺失时循环用已有图。详情页有自己的灰白背景覆盖地图暖色。
-- **封面抽取** `extractSafeCover()`：seek 到 **demo** 视频 20% 处（不是 performance），画 canvas，`isFrameDark` 检测暗帧。暗帧/超时/出错 → fallback 渐变。
-- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，`buildSmoothPath` 画连续粗白实线。之字形偏移在 CSS。
+- **封面抽取** `extractSafeCover()`：seek 到 **demo** 视频 20% 处（不是 performance），画 canvas，`isFrameDark` 检测暗帧。暗帧/超时/出错 → fallback 渐变。所有有 demo 的状态都用 demo 截图当封面（不只是 completed）。
+- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，`buildSmoothPath` 画平滑路径。路径在第一个锁定关处断开：走过的段（completed + current）`.trail--done` 金色发光，未走的段 `.trail--todo` 白色暗淡。之字形偏移在 CSS。
+- **录制** `startRecordingSession()`：`getUserMedia` 开摄像头+麦克风 → 镜像预览 → 一钮两态（红圆开始/方块停止）+ 闪红计时 + 5 分钟硬上限自动停 → `MediaRecorder` 产 webm → 现场回放 + Redo/Save。Save 时 `uploadRecording()` 把 blob + mimeType POST 到 `/upload`，后端按 mimeType 存 `.webm`/`.mp4`。`pickRecorderMime()` 探测浏览器支持的最佳格式（Chrome→webm，Safari→mp4），console 打印实际 mimeType。摄像头被拒/缺失时回退到文件上传。
 - **详情导航**：`openDetail` 底部渲染 Prev/Next（跨全宽），从 `flatLevels` 找相邻关卡。上传后 `reopenDetail` 重新打开当前关。
 - **demo 标记**：locked 关如果有 demo，节点加 `.level-node__demo-badge` 小播放标记。
-- **上传 UI**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。视频区域的 `+` 空白封面点击即触发上传。
+- **demo 上传**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。demo 视频区域的 `+` 空白封面点击即触发上传。
+- **背景图刷新**：`closeDetail` 返回地图时强制重置 `activeChapter` 并调 `updateBgOnScroll(bgSlides)`，修了从详情页返回时背景图不显示的 bug（`#map-view` 被 `display:none` 期间 scroll listener 检测不到章节）。
 - **VideoGen**：`GET /api/prompts/<chapter>/<level>` 返回 Sora prompt a/b 文本。Part A/B 是可折叠 `<details>`，summary 里有 Copy 按钮（`stopPropagation` 防止点 copy 触发折叠）。
 - **可重试加载**：`loadLibrary()` 三态切换，`fetch("/api/library", { cache: "no-store" })`。
 - **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`。
@@ -291,7 +293,7 @@ ffmpeg -f concat -safe 0 -i list.txt -c copy demo.mp4
 
 ### 使用流程（父子一起，别自动化）
 
-看 demo → 线下练 → 录 performance.mp4 → 详情页点 `+` 上传或拖进 `recordings/<章>/<关>/` → 刷新 → 关卡点亮 → 孩子点封面回看表演。
+看 demo → 线下练 → 详情页点 `+` 用 PC 摄像头录 → 回放确认 → Save → 关卡点亮 → 孩子点封面回看表演。也可手动拖文件进 `recordings/<章>/<关>/` 再刷新。
 
 > 录像应是游戏自然高潮，不是小考。4 岁孩子一旦感到被测会躲避。
 
@@ -360,13 +362,16 @@ refactor: split content, demo, and recordings into separate trees
 - 关卡文案 `meta.json`：**30 / 30**。
 - Sora demo 提示词：**60 份**。
 - AI 演示 `demo.mp4`：**7 / 30**（见 `demo/PROGRESS.md`）。
-- 孩子表演 `performance.mp4`：1 / 30（仅第一章第一关）。
+- 孩子表演 `performance.mp4`/`.webm`：0 / 30。
 
 **瓶颈**：demo 视频备课跟不上闯关节奏。
 
 ### 代码状态
 
 - 地图骨架 + 动态章节世界（大型动画主景 + 平滑路线 + 响应式节点）：完成。
+- PC 摄像头实时录制（`getUserMedia` + `MediaRecorder`，一钮两态 + 5 分钟上限 + 回放 + Redo/Save）：完成。
+- 路径进度可视化（走过的路金色，未走白色）、已完成金星旋转闪烁 + 金色光晕、当前关封面缩放呼吸 + 双层光晕：完成。
+- webm/mp4 双格式支持（scanner + 路由 + 上传）：完成。
 - 字体自托管、三棵树分离、视频路由越界守卫：完成。
 - 下一组 demo：`03-asking-help/02-its-stuck`（见 `demo/PROGRESS.md`）。
 
@@ -379,9 +384,11 @@ refactor: split content, demo, and recordings into separate trees
 | `node --test tests-js/` 失败 | 用 `npm test` 或 glob `node --test tests-js/*.test.mjs` |
 | 克隆后地图很多关卡空着 | 视频被 gitignore，本地没有是正常的；放回 `demo/`、`recordings/` 即恢复 |
 | 关卡顺序乱了 | 文件夹名没零填充前缀（`01-`、`02-`…），排序靠它 |
-| 关卡不解锁 | 上一关没有 `performance.mp4`（在 `recordings/<章>/<关>/`）；放进去刷新 |
+| 关卡不解锁 | 上一关没有 `performance` 视频（`.mp4` 或 `.webm`，在 `recordings/<章>/<关>/`）；放进去刷新 |
 | 改了 `app.py` 不生效 | debug 模式应自动重载；没重载就重启 `app.py` |
 | 封面显示不出来 | `extractSafeCover` 检测到暗帧或 canvas 被污染会回退；检查视频是否同源可读 |
+| 从详情页返回背景图消失 | 已修复：`closeDetail` 强制重置 `activeChapter` 并刷新 `updateBgOnScroll` |
+| 录制后关卡没亮 | 检查 console 打印的 mimeType；确认 `/upload` 返回 `ext`；scanner 认 `.mp4`+`.webm` |
 | 改 `CHAPTER_THEMES` 后 JS 测试红 | 测试钉死了 10 个唯一 world + hex accent；同步改测试或符合约束 |
 | `scaffold_levels.py` 没更新某关 | 那关 `demo/<章>/<关>/demo.mp4` 已存在（被视作已激活，脚本故意跳过保护 meta） |
 | venv 失效 | `app/` 被重命名后 venv 绝对路径失效；删 `app/.venv` 重建（见 `app/README.md`） |

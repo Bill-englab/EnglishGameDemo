@@ -149,10 +149,20 @@ body {
   width: 100%; height: 100%; pointer-events: none; overflow: visible;
 }
 .path-layer .trail {
-  fill: none; stroke: #fff; stroke-width: 14;
+  fill: none; stroke-width: 14;
   stroke-linecap: round; stroke-dasharray: none;
-  opacity: .88;
-  filter: drop-shadow(0 3px 5px rgba(90,58,26,.3));
+}
+/* Traveled path — golden, glowing, like a trail of footprints. */
+.path-layer .trail--done {
+  stroke: #ffc857;
+  opacity: .92;
+  filter: drop-shadow(0 2px 6px rgba(255,180,50,.5));
+}
+/* Upcoming path — white, dimmer, waiting to be walked. */
+.path-layer .trail--todo {
+  stroke: #fff;
+  opacity: .5;
+  filter: drop-shadow(0 3px 5px rgba(90,58,26,.2));
 }
 
 /* ---------- fixed background layer (parallax: bg stays, content scrolls) ---------- */
@@ -276,20 +286,30 @@ body {
   box-shadow: 0 8px 20px rgba(180,120,40,.12);
   overflow: visible; /* let the demo badge peek outside the node */
 }
-.level-node--locked .lock { width: 44px; height: 44px; opacity: .5; }
+.level-node--locked .lock { width: 44px; height: 44px; opacity: .7; }
+/* Lock + dim overlay sit above the cover. */
+.level-node--locked .lock-wrap {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+}
+/* Dim overlay between cover and lock — mutes the demo screenshot. */
+.level-node__dim {
+  position: absolute; inset: 0; z-index: 1;
+  border-radius: 27px;
+  background: rgba(80, 65, 45, .48);
+}
 
-/* current: white + orange glow + 72px play button */
+/* current: white + orange glow + play button on demo cover */
 .level-node-wrap--current {
-  /* Drives the breathing halo size so it stays centered when the node shrinks
-     in the responsive breakpoints below. */
   --current-node-size: 244px;
 }
 .level-node-wrap--current .level-node { width: 244px; height: 244px; }
 .level-node--current {
   background: #fff;
-  box-shadow: 0 0 0 6px rgba(255,255,255,.55),
-              0 12px 30px rgba(255,150,50,.45),
-              0 0 60px rgba(255,170,60,.30);
+  box-shadow: 0 0 0 6px rgba(255,255,255,.60),
+              0 14px 36px rgba(255,150,50,.50),
+              0 0 80px rgba(255,170,60,.35);
+  overflow: visible;
 }
 /* Soft breathing halo behind the current node. Lives on the WRAP's ::before
    (which doesn't clip —unlike the node, whose overflow:hidden would crop a
@@ -298,19 +318,37 @@ body {
    the node itself never moves. */
 .level-node-wrap--current::before {
   content: ""; position: absolute;
-  /* Center the halo on the node (which leads the wrap's flex column). */
   top: calc(var(--current-node-size) / 2);
   left: 50%;
-  width: calc(var(--current-node-size) * 1.2);
-  height: calc(var(--current-node-size) * 1.2);
+  width: calc(var(--current-node-size) * 1.5);
+  height: calc(var(--current-node-size) * 1.5);
   transform: translate(-50%, -50%);
   border-radius: 50%; pointer-events: none; z-index: 0;
-  background: radial-gradient(circle, rgba(255,170,60,.45), rgba(255,170,60,0) 68%);
-  animation: glowBreath 2s ease-in-out infinite;
+  background: radial-gradient(circle,
+    rgba(255,180,70,.55) 0%,
+    rgba(255,160,50,.35) 35%,
+    rgba(255,140,40,0) 70%);
+  animation: glowBreath 2.4s ease-in-out infinite;
 }
-/* Lift the node above its own breathing halo. */
+/* Second tighter glow layer for extra punch — a brighter core ring close
+   to the node edge, layered on the WRAP's ::after. */
+.level-node-wrap--current::after {
+  content: ""; position: absolute;
+  top: calc(var(--current-node-size) / 2);
+  left: 50%;
+  width: calc(var(--current-node-size) * 1.15);
+  height: calc(var(--current-node-size) * 1.15);
+  transform: translate(-50%, -50%);
+  border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(circle,
+    rgba(255,200,90,.30) 0%,
+    rgba(255,170,60,0) 65%);
+  animation: glowBreath 2.4s ease-in-out infinite;
+  animation-delay: .3s;
+}
 .level-node-wrap--current .level-node { position: relative; z-index: 1; }
 .level-node--current .play-btn {
+  position: relative; z-index: 2;  /* sit above the cover */
   width: 72px; height: 72px; border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 6px 14px rgba(240,119,43,.45);
@@ -326,6 +364,23 @@ body {
   transform: rotate(var(--polaroid-rotation, 0deg));
   overflow: visible; /* the cover clips separately; star sits outside */
 }
+/* Gentle golden glow pulse on completed nodes — subtler than the current
+   node's orange breathing, reads as a warm "trophy" shimmer. Only the
+   box-shadow animates so it never fights the rotation transform. */
+.level-node-wrap--completed.seen .level-node {
+  animation: completedGlow 3s ease-in-out infinite;
+  animation-delay: 600ms;
+}
+@keyframes completedGlow {
+  0%, 100% {
+    box-shadow: 0 14px 28px rgba(120,70,20,.26),
+                0 0 0 rgba(255,200,50,0);
+  }
+  50% {
+    box-shadow: 0 14px 28px rgba(120,70,20,.26),
+                0 0 22px rgba(255,200,50,.35);
+  }
+}
 .level-node__cover {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -338,19 +393,62 @@ body {
 .level-node__cover.level-node--fallback {
   background: var(--fallback-accent, var(--accent));
 }
+/* Current level: the demo cover gently breathes (scale up/down) to draw
+   the child's eye — "this one is alive, come play." Subtler than the
+   outer glow, gives the screenshot itself a pulse. Only on current. */
+.level-node-wrap--current.seen .level-node__cover {
+  animation: coverBreath 2.4s ease-in-out infinite;
+  animation-delay: 400ms;
+}
+@keyframes coverBreath {
+  0%, 100% { transform: scale(1);    }
+  50%      { transform: scale(1.06); }
+}
 /* gold star badge —OUTSIDE the cover-clipping layer (lives on overflow:visible node) */
-.level-node__star {
+/* Outer wrapper handles positioning + slow rotation; inner star handles pop + twinkle.
+   Splitting transforms avoids two animations fighting over `transform`. */
+.level-node__star-wrap {
   position: absolute; top: -10px; right: -10px;
   width: 40px; height: 40px; z-index: 2;
+  opacity: 0;  /* set visible by the pop animation on the inner star */
+}
+.level-node__star {
+  width: 100%; height: 100%; display: block;
   filter: drop-shadow(0 3px 4px rgba(120,70,20,.4));
-  /* Entrance: starts hidden and pops in once the node reveals. */
-  transform: scale(0); opacity: 0;
+  transform: scale(0);
 }
 .level-node__star svg { width: 100%; height: 100%; display: block; }
 /* Pop the star in (scale + opacity) the first time its node enters view. */
 .level-node-wrap.seen .level-node__star {
   animation: starPop 360ms cubic-bezier(.2,1.4,.4,1) forwards;
   animation-delay: 180ms;
+}
+/* Slow rotation on the wrapper — only kicks in for completed (seen) nodes.
+   Also fades the wrapper in (opacity 0→1) since pop only animates the inner star. */
+.level-node-wrap--completed.seen .level-node__star-wrap {
+  animation: starWrapIn 360ms ease forwards,
+             starSpin 8s linear infinite;
+  animation-delay: 180ms, 600ms;
+}
+@keyframes starWrapIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+/* Star twinkle — after the pop, the gold star periodically catches light. */
+.level-node-wrap--completed.seen .level-node__star {
+  animation: starPop 360ms cubic-bezier(.2,1.4,.4,1) forwards,
+             starTwinkle 2.8s ease-in-out infinite;
+  animation-delay: 180ms, 700ms;
+}
+@keyframes starTwinkle {
+  0%, 100% { filter: drop-shadow(0 3px 4px rgba(120,70,20,.4)); }
+  45%      { filter: drop-shadow(0 2px 6px rgba(255,210,80,.7)); }
+  50%      { filter: drop-shadow(0 2px 10px rgba(255,220,100,.85)); }
+  55%      { filter: drop-shadow(0 2px 6px rgba(255,210,80,.7)); }
+}
+@keyframes starSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 /* hover / active scale —preserve the completed polaroid tilt */
@@ -523,6 +621,88 @@ body {
   line-height: 1; user-select: none;
 }
 .video-slot--empty:hover .plus { color: var(--accent); }
+
+/* ===== in-browser recording UI ===== */
+/* Camera preview — fills the 16:9 slot like a normal video. */
+.record-preview {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 10px; background: #000; display: block;
+  transform: scaleX(-1); /* mirror so the child sees themselves naturally */
+}
+/* Playback of the just-recorded clip — same 16:9 slot, no mirror. */
+.record-playback {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 10px; background: #000; display: block;
+}
+
+/* Controls row: indicator (left) + record button (centered). */
+.record-controls {
+  display: flex; align-items: center; justify-content: center;
+  gap: 14px; padding: 10px 0 2px;
+}
+/* Blinking red dot + timer — hidden until recording starts. */
+.record-indicator {
+  display: flex; align-items: center; gap: 6px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
+  font-size: 14px; color: #d33;
+}
+.record-indicator.hidden { display: none; }
+.rec-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: #d33;
+  animation: recBlink 1s ease-in-out infinite;
+}
+@keyframes recBlink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+
+/* One button, two states: red circle (idle) → square (recording). */
+.record-btn {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: #d33; border: 4px solid #fff;
+  cursor: pointer; padding: 0;
+  box-shadow: 0 4px 14px rgba(200,40,40,.4);
+  transition: border-radius 180ms ease, background 180ms ease;
+}
+.record-btn:hover { background: #c11; }
+.record-btn.recording {
+  border-radius: 14px;     /* circle → square */
+  background: #d33;
+  width: 44px; height: 44px;
+}
+.record-btn:active { transform: scale(.94); }
+
+/* Redo / Save actions shown after recording stops. */
+.record-actions {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; padding: 10px 0 2px;
+}
+.record-action {
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 14px;
+  border: none; border-radius: 999px; cursor: pointer;
+  padding: 9px 22px;
+  transition: transform .12s ease, opacity .15s ease;
+}
+.record-action:active { transform: scale(.96); }
+.record-action:disabled { opacity: .45; cursor: default; }
+.record-action--redo {
+  color: var(--ink-2); background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+}
+.record-action--save {
+  color: #fff; background: var(--accent);
+  box-shadow: 0 4px 12px rgba(240,119,43,.35);
+}
+.record-action--save:hover:not(:disabled) { background: var(--accent-deep); }
+
+/* Camera-permission error message. */
+.record-error {
+  aspect-ratio: 16 / 9;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; padding: 16px; text-align: center;
+  border: 2px dashed var(--line-strong); border-radius: 10px;
+  background: var(--surface);
+  font-family: "Fredoka", system-ui, sans-serif; font-size: 14px; color: var(--ink-2);
+}
+.record-error__hint { font-size: 12px; color: var(--ink-3); margin: 0; }
+
 .perf-cap {
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;
   color: var(--accent-deep);
@@ -536,12 +716,15 @@ body {
 .big-star { width: 24px; height: 24px; flex: none; }
 .big-star svg { width: 100%; height: 100%; display: block; }
 .star-cap { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
-.rec-path {
-  width: 100%; margin-top: 2px;
-  font-family: "Nunito", "Segoe UI", monospace;
-  font-size: 10px; font-weight: 600;
-  color: var(--ink-3);
-  word-break: break-all; user-select: all; cursor: text;
+
+/* "?" next to "Your Turn" — hover shows where the recording file lives */
+.rec-tooltip-trigger {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; margin-left: 6px;
+  border-radius: 50%; background: var(--ink-3);
+  color: #fff; font-family: "Fredoka", system-ui, sans-serif;
+  font-size: 10px; font-weight: 700; line-height: 1;
+  cursor: help; flex: none;
 }
 
 /* Dialogue — chat bubbles */
@@ -625,18 +808,21 @@ body {
 .nav-btn:disabled { opacity: .35; cursor: default; }
 .nav-btn--next { margin-left: auto; }
 
-/* Upload button */
-.upload-btn {
+/* Secondary action button (Replace / Record again) — dad's tool, sits below a video */
+.action-btn {
   align-self: flex-start;
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 500; font-size: 11px;
-  color: var(--ink-3); background: var(--surface);
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;
+  color: var(--ink-2); background: var(--surface);
   border: 1px solid var(--line);
-  padding: 4px 10px; border-radius: 999px; cursor: pointer;
+  padding: 6px 14px; border-radius: 8px; cursor: pointer;
   margin-top: 4px;
   transition: all .15s ease;
 }
-.upload-btn:hover:not(:disabled) { color: var(--accent-deep); border-color: var(--accent-deep); }
-.upload-btn:disabled { opacity: .5; cursor: default; }
+.action-btn:hover:not(:disabled) {
+  color: var(--accent-deep); border-color: var(--accent-deep);
+  background: rgba(255,157,77,.04);
+}
+.action-btn:disabled { opacity: .5; cursor: default; }
 
 /* ---------- title readability over dark backgrounds ---------- */
 .chapter-world[data-world="memory-town"] .level-title,
@@ -652,14 +838,15 @@ body {
 /* ---------- current-node glow breathing + completed star entrance ---------- */
 /* Pulses only the halo ring's opacity/scale —the node itself never moves. */
 @keyframes glowBreath {
-  0%, 100% { opacity: .55; transform: scale(1); }
-  50%      { opacity: 1;   transform: scale(1.06); }
+  0%, 100% { opacity: .40; transform: translate(-50%, -50%) scale(.94); }
+  50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
 }
-/* Star pops in (scale 0鈫? with a touch of overshoot) on first reveal. */
+/* Star pops in (scale 0→1 with overshoot) on first reveal. Opacity is handled
+   by the wrapper's starWrapIn so the inner star only owns its scale transform. */
 @keyframes starPop {
-  0%   { transform: scale(0);    opacity: 0; }
-  70%  { transform: scale(1.2);  opacity: 1; }
-  100% { transform: scale(1);    opacity: 1; }
+  0%   { transform: scale(0);    }
+  70%  { transform: scale(1.2);  }
+  100% { transform: scale(1);    }
 }
 
 /* ---------- responsive ---------- */
@@ -704,10 +891,15 @@ body {
      chapters and nodes stay on screen instead of freezing at opacity:0. */
   .level-node, .level-node-wrap, .chapter-world, .detail-card, .back-btn { transition: none !important; }
   .level-node-wrap--current::before,
+  .level-node-wrap--current::after,
+  .level-node-wrap--current.seen .level-node__cover,
+  .level-node-wrap--completed.seen .level-node,
+  .level-node-wrap--completed.seen .level-node__star-wrap,
   .level-node-wrap.seen .level-node__star { animation: none !important; }
   /* Force the "revealed" end-state so nothing stays hidden without motion. */
   .chapter-world, .level-node-wrap, .level-node-wrap .level-node { opacity: 1 !important; }
-  .level-node__star { transform: scale(1) !important; opacity: 1 !important; }
+  .level-node__star { transform: scale(1) !important; }
+  .level-node__star-wrap { opacity: 1 !important; }
 }
 
 /* ---------- demo badge on locked nodes ---------- */

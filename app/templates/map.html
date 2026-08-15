@@ -62,13 +62,16 @@
 
           <!-- Bottom row: dialogue + variations side by side -->
           <div class="text-row">
-            <div class="text-col text-col--dialogue">
+            <div class="text-col-wrap">
               <div class="section-label">Read Together</div>
-              <div id="detail-dialogue" class="dialogue"></div>
+              <div class="text-col text-col--dialogue">
+                <div id="detail-dialogue" class="dialogue"></div>
+              </div>
             </div>
-            <div class="text-col text-col--vars">
-              <div class="section-label">Try This</div>
-              <div id="detail-variations" class="variations"></div>
+            <div class="text-col-wrap">
+              <div class="text-col text-col--vars">
+                <div id="detail-variations" class="variations"></div>
+              </div>
             </div>
           </div>
 

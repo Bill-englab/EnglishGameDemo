@@ -539,14 +539,10 @@ function openDetail(level) {
   const perfWrap = document.getElementById("detail-perf");
   perfWrap.innerHTML = "";
   if (level.has_performance) {
-    const lbl = document.createElement("div");
-    lbl.className = "perf-cap";
-    lbl.textContent = "Your show";
     const v = document.createElement("video");
     v.src = videoURL(level.chapter, level.level, "performance");
     v.controls = true; v.preload = "auto"; v.playsInline = true;
     v.addEventListener("loadedmetadata", () => { v.playbackRate = 1.0; });
-    perfWrap.appendChild(lbl);
     perfWrap.appendChild(v);
     perfWrap.appendChild(makeUploadButton("Replace", level, "performance",
       () => reopenDetail(level.chapter, level.level)));

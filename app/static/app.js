@@ -593,11 +593,9 @@ function openDetail(level) {
         const wrap = document.createElement("details");
         wrap.className = "prompt-block";
         wrap.open = true;
-        wrap.innerHTML = `<summary>${label}</summary>`;
         const pre = document.createElement("pre");
         pre.textContent = text;
-        wrap.appendChild(pre);
-        // Copy button
+        // Copy button inside the summary, next to the label.
         const copyBtn = document.createElement("button");
         copyBtn.className = "prompt-copy-btn";
         copyBtn.type = "button";
@@ -609,7 +607,9 @@ function openDetail(level) {
             setTimeout(() => { copyBtn.textContent = "Copy"; }, 1500);
           });
         });
-        wrap.appendChild(copyBtn);
+        const summary = document.createElement("summary");
+        summary.append(label, copyBtn);
+        wrap.append(summary, pre);
         return wrap;
       };
       const a = makeBlock("Part A", data.a);

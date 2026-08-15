@@ -455,19 +455,35 @@ body {
   padding: 12px; z-index: 20;
 }
 
-/* Two video columns wider, text column narrower */
-.detail-body {
+/* Body: vertical stack — video row, text row, full-width nav */
+.detail-body { padding: 20px; }
+
+/* Top row: two videos side by side, each takes half width */
+.video-row {
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
-  padding: 20px;
+  margin-bottom: 16px;
 }
-.detail-col {
+.video-col {
   background: var(--surface-2);
   border-radius: 14px;
-  padding: 16px;
+  padding: 14px;
 }
-.detail-col--text { overflow-y: auto; }
+
+/* Bottom row: dialogue + variations side by side */
+.text-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
+.text-col {
+  background: var(--surface-2);
+  border-radius: 14px;
+  padding: 14px;
+  max-height: 280px;
+  overflow-y: auto;
+}
 
 /* Section labels */
 .section-label {
@@ -480,19 +496,17 @@ body {
   content: ""; width: 4px; height: 14px; border-radius: 2px;
   background: var(--accent);
 }
-.detail-col .section-label:first-child { margin-top: 0; }
 
-/* Video slots — fixed aspect ratio so both videos are equal size */
+/* Video slots — fixed 16:9, fills column width */
 .video-slot-wrap { display: flex; flex-direction: column; gap: 8px; }
 .video-slot-wrap video {
   width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
-  border-radius: 12px; background: #000; display: block;
-  border: 1px solid var(--line);
+  border-radius: 10px; background: #000; display: block;
 }
 .video-slot--empty {
   aspect-ratio: 16 / 9;
   display: flex; align-items: center; justify-content: center;
-  border: 2px dashed var(--line-strong); border-radius: 12px;
+  border: 2px dashed var(--line-strong); border-radius: 10px;
   background: var(--surface);
   cursor: pointer;
   transition: border-color .15s ease, background .15s ease;
@@ -502,25 +516,25 @@ body {
   background: rgba(255,157,77,.04);
 }
 .video-slot--empty .plus {
-  font-size: 38px; font-weight: 300; color: var(--ink-3);
+  font-size: 36px; font-weight: 300; color: var(--ink-3);
   line-height: 1; user-select: none;
 }
 .video-slot--empty:hover .plus { color: var(--accent); }
 .perf-cap {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;
   color: var(--accent-deep);
 }
 
 /* Star + recording path */
 .star-row {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
-  padding: 12px 0 0;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 8px 0 0;
 }
-.big-star { width: 28px; height: 28px; flex: none; }
+.big-star { width: 24px; height: 24px; flex: none; }
 .big-star svg { width: 100%; height: 100%; display: block; }
-.star-cap { font-size: 13px; color: var(--ink-2); line-height: 1.4; }
+.star-cap { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
 .rec-path {
-  width: 100%; margin-top: 4px;
+  width: 100%; margin-top: 2px;
   font-family: "Nunito", "Segoe UI", monospace;
   font-size: 10px; font-weight: 600;
   color: var(--ink-3);
@@ -528,7 +542,7 @@ body {
 }
 
 /* Dialogue — chat bubbles */
-.dialogue { display: flex; flex-direction: column; gap: 6px; }
+.dialogue { display: flex; flex-direction: column; gap: 5px; }
 .turn { display: flex; flex-direction: column; max-width: 85%; }
 .turn.child { align-self: flex-end; align-items: flex-end; }
 .turn.dad { align-self: flex-start; align-items: flex-start; }
@@ -549,7 +563,7 @@ body {
   font-size: 13px; line-height: 1.6;
 }
 
-/* Prompt blocks (inside VideoGen popup) */
+/* Prompt blocks (inside VideoGen popup) — no overflow:hidden so content shows */
 .prompt-section { display: flex; flex-direction: column; gap: 8px; }
 .prompt-loading, .prompt-empty {
   color: var(--ink-3); font-size: 13px; padding: 8px 0;
@@ -557,7 +571,7 @@ body {
 .prompt-block {
   background: var(--surface-2);
   border: 1px solid var(--line);
-  border-radius: 8px; overflow: hidden;
+  border-radius: 8px;
 }
 .prompt-block summary {
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;
@@ -571,17 +585,17 @@ body {
   white-space: pre-wrap; word-break: break-word;
 }
 
-/* Prev/Next nav */
+/* Prev/Next nav — full width, spans bottom of card */
 .detail-nav {
   display: flex; justify-content: space-between; gap: 8px;
-  margin: 14px 0 0; padding-top: 14px;
+  margin-top: 16px; padding-top: 16px;
   border-top: 1px solid var(--line);
 }
 .nav-btn {
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
   color: var(--ink); background: var(--surface);
   border: 1px solid var(--line-strong);
-  padding: 7px 14px; border-radius: 999px; cursor: pointer;
+  padding: 8px 18px; border-radius: 999px; cursor: pointer;
   transition: all .15s ease;
 }
 .nav-btn:hover:not(:disabled) { border-color: var(--accent-deep); color: var(--accent-deep); }
@@ -627,8 +641,8 @@ body {
 
 /* ---------- responsive ---------- */
 @media (max-width: 600px) {
-  /* Detail view: collapse three-column to single column on mobile */
-  .detail-body { grid-template-columns: 1fr; }
+  /* Detail view: collapse to single column on mobile */
+  .video-row, .text-row { grid-template-columns: 1fr; }
   .detail-card { max-width: 100%; }
   .videogen-toggle .prompt-section { position: static; width: 100%; }
   .chapter-world { min-height: 790px; }

@@ -47,24 +47,33 @@
         </div>
 
         <div class="detail-body">
-          <div class="detail-col detail-col--demo">
-            <div class="section-label">Watch &amp; Learn</div>
-            <div id="detail-demo" class="video-slot-wrap"></div>
+          <!-- Top row: two videos side by side, large -->
+          <div class="video-row">
+            <div class="video-col">
+              <div class="section-label">Watch &amp; Learn</div>
+              <div id="detail-demo" class="video-slot-wrap"></div>
+            </div>
+            <div class="video-col">
+              <div class="section-label">Your Turn</div>
+              <div id="detail-perf" class="video-slot-wrap"></div>
+              <div id="detail-star" class="star-row"></div>
+            </div>
           </div>
 
-          <div class="detail-col detail-col--perf">
-            <div class="section-label">Your Turn</div>
-            <div id="detail-perf" class="video-slot-wrap"></div>
-            <div id="detail-star" class="star-row"></div>
-            <div id="detail-nav" class="detail-nav"></div>
+          <!-- Bottom row: dialogue + variations side by side -->
+          <div class="text-row">
+            <div class="text-col text-col--dialogue">
+              <div class="section-label">Read Together</div>
+              <div id="detail-dialogue" class="dialogue"></div>
+            </div>
+            <div class="text-col text-col--vars">
+              <div class="section-label">Try This</div>
+              <div id="detail-variations" class="variations"></div>
+            </div>
           </div>
 
-          <div class="detail-col detail-col--text">
-            <div class="section-label">Read Together</div>
-            <div id="detail-dialogue" class="dialogue"></div>
-            <div class="section-label">Try This</div>
-            <div id="detail-variations" class="variations"></div>
-          </div>
+          <!-- Nav spans full width -->
+          <div id="detail-nav" class="detail-nav"></div>
         </div>
       </div>
     </section>

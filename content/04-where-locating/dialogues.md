@@ -24,7 +24,7 @@
 
 ## D2｜忘了放哪
 
-**背景：** 水壶不知放哪了，问爸爸看见没。
+**背景：** 水壶不知放哪了，问爸爸看见没，两人一起去找。
 
 **目标句式：** `Where did I put ___?`（我放哪了）· `Did you see ___?`（你看见了吗）
 
@@ -32,9 +32,9 @@
 > **F:** Did you remember to bring it inside the house?
 > **C:** **Did you see** it sitting in the car?
 > **F:** I think I did, it was on the seat.
-> **C:** Okay, I will go out and check the car.
-> **F:** While you're there, can you bring mine too?
-> **C:** Maybe I will, if I can find mine first.
+> **C:** Can we go out and check the car together?
+> **F:** Good idea, let's both go look for it.
+> **C:** Maybe I can help you find yours too.
 
 **换样重演：** "water bottle" 换 "jacket"；"in the car" 换 "by the door"。
 

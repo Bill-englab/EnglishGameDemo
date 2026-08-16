@@ -25,15 +25,15 @@
 
 ## D2｜卡住了
 
-**背景：** 拉链卡住，够不着也看不清。
+**背景：** 拉链头卡在领口高处，孩子够不着也看不清，站凳子凑近才发现布料夹住了。
 
 **目标句式：** `It's stuck`（卡住）· `I can't reach ___`（够不着）
 
-> **C:** **It's stuck**, Dad — the zipper won't move.
-> **F:** Try pulling it down from the bottom part.
-> **C:** But **I can't reach** the bottom part of it.
-> **F:** You can stand on the little step stool.
-> **C:** Oh no, the fabric is caught in it now.
+> **C:** **It's stuck**, Dad — the zipper won't move up at the top.
+> **F:** The pull is stuck way up by your collar.
+> **C:** But **I can't reach** it up there, it's too high for me.
+> **F:** You can stand on the little step stool to get closer.
+> **C:** Oh no, now I can see it — the fabric is caught in it.
 > **F:** Hold the fabric flat, and then pull it. There, it's free!
 > **C:** I got it, thanks Dad.
 > **F:** You're welcome. Zippers can be sneaky sometimes.

@@ -6,12 +6,14 @@
 
 ## 审查标准
 
-每关必须同时满足两条：
+每关必须同时满足四条（第二轮收紧后的标准）：
 
 1. **包含该关的目标句式**（教学目标，本次一律不动）。
-2. **对话的因果/物理链条符合生活常理**——父子真演能演得顺。
+2. **对话的因果/物理链条符合人之常情**——父子真演能演得顺，不能只为凑句式硬编动作。
+3. **场景自然、不依赖道具**——用日常会出现的场景，不要靠一堆特定道具才成立；能靠对话本身演绎。
+4. **符合爸爸+儿子的对话口吻**——动作要是一个爸爸对 4 岁孩子会做的事（比如把孩子托起来，而不是叫他自己搬凳子爬）。
 
-第 2 条是本次重点。之前若干关只为凑句式而硬编场景，动作之间没有真实因果，roleplay 时演不顺（典型就是 03-D2 那关：只顾塞进 `It's stuck` / `I can't reach`，没人在乎动作合不合物理）。
+> 第二轮发现第一轮的 03-D2 修正仍不达标：把卡点挪到「领口高处」后，拉链在孩子自己穿的夹克上——**孩子够不着自己的领口、凳子也帮不上够自己身上的东西**，`I can't reach` 对自身衣物根本不成立。第二轮改成夹克挂在门边高挂钩上（够不着成立）+ 爸爸把孩子托起来（不依赖凳子道具）。详见下文 03-D2 条目。
 
 ## 审查方法
 
@@ -20,22 +22,25 @@
 
 ## 发现并修正的问题
 
-### 1. 03-asking-help / D2「卡住了」—— 因果链断裂 + 物理方向反了 【改对话 + 两段提示词】
+### 1. 03-asking-help / D2「卡住了」—— 因果链断裂 +「够不着」对自身衣物不成立 【改对话 + 两段提示词，两轮修正】
 
-**原问题：**
-- 拉链卡住的真因（后半段才揭示）是「布料夹进拉链」，但前半段花在「够不着底部 → 站凳子」这条身高支线上，和真因毫无关系，是干扰项。
-- 更糟的是方向反了：孩子要够的是拉链「底部」（低处），而「站凳子」是让人变高去够高处——站上去反而离底部更远。物理上讲不通。
+**原问题（两处，第二轮又挖出更深的一处）：**
+- 原版卡住真因是「布料夹进拉链」，前半段却花在「够不着底部 → 站凳子」这条身高支线上，与真因无关，是干扰项；且方向反了——要够的是拉链「底部」（低处），站凳子是够高处，站上去反而离底部更远。
+- **第一轮修正（不达标）**：把卡点挪到领口高处。但这仍有更深漏洞：**拉链在孩子自己穿的夹克上，挂钩/拉链在孩子自己身上，站凳子并不能让他「够到自己的领口」**——凳子只帮够外部物体，不帮够自己身上的东西。`I can't reach` 对「自己身上的拉链」根本不成立，且叫 4 岁孩子自己搬凳子爬也不符合爸爸会对孩子做的事。
 
-**修正思路：** 把卡住点改到领口高处。这样「够不着 → 站凳子凑近 → 凑近后才看清是布料夹住」串成一条因果链：身高不再是干扰项，而是推动发现真因的关键。两个目标句式 `It's stuck` / `I can't reach ___` 都保留。
+**最终修正思路（第二轮）：** 把夹克从「穿在身上」改成**挂在门边的高挂钩上**——挂钩在成人高度，4 岁孩子确实够不着，`I can't reach` 这才名副其实。**去掉 step stool 道具**，改成**爸爸把孩子托起来**（爸爸天天做的事，最合人之常情，且不依赖道具）。托起后孩子凑近才看清：拉链挂在了挂钩上。因果链：卡住（拿不下来）→ 够不着看 → 爸爸托起 → 看清拉链挂住 → 弄下来 → 解决。场景只有门边 + 挂钩 + 夹克（家家户户都有），靠对话就能演。两个目标句式 `It's stuck` / `I can't reach ___` 都保留且都真实。
 
-**改后关键几句：**
-- C: It's stuck, Dad — the zipper won't move **up at the top**.
-- F: The pull is stuck way up by your collar.
-- C: But I can't reach it up there, it's too high for me.
-- F: You can stand on the little step stool to get closer.
-- C: Oh no, **now I can see it** — the fabric is caught in it.
+**改后对话：**
+- C: It's stuck, Dad — my jacket won't come off the hook.
+- F: What's caught up there?
+- C: I can't reach it — the hook is too high for me to see.
+- F: Here, let me lift you up so you can look.
+- C: Oh! The zipper is caught on the hook.
+- F: Lift the jacket up a little, and pull it off. There, it's free!
+- C: I got it, thanks Dad.
+- F: You're welcome. Zippers can be sneaky sometimes.
 
-提示词 `D2a.txt` / `D2b.txt` 的 Setting 与 Action 同步重写（Setting 改为「zipper stuck up near the collar」；动作改为 reaching up / climbs onto the stool and peers close）。
+提示词 `D2a.txt` / `D2b.txt` 的 Setting 改为「a jacket hanging on a high wall hook」，动作改为 reaches up / dad lifts the cub up to the hook（**无 step stool**）。
 
 ### 2. 04-where-locating / D2「忘了放哪」—— 让 4 岁孩子独自去车里 + 捎爸爸的水壶 【改对话 + D2b 提示词】
 

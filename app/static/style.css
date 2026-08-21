@@ -479,6 +479,7 @@ body {
 #detail-view {
   padding: 0 16px 80px;
   background: linear-gradient(180deg, #f7f8fa 0%, #eef0f4 100%);
+  z-index: 1;
 }
 .detail-card {
   max-width: 1100px; margin: 22px auto 0;

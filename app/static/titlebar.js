@@ -15,40 +15,41 @@
     .detail-header .window-controls,
     .detail-header .videogen-toggle { -webkit-app-region: no-drag; }
 
-    /* Window control buttons — Windows-style with icons */
+    /* Window control buttons — polished Windows 11 style */
     .window-controls {
       -webkit-app-region: no-drag;
-      display: flex; gap: 2px; align-items: center;
-      flex: none;
+      display: flex; gap: 0; align-items: center;
+      flex: none; height: 36px;
     }
     .window-controls button {
-      width: 32px; height: 28px;
-      border: none; cursor: pointer; padding: 0;
+      width: 40px; height: 36px;
+      border: none; cursor: default; padding: 0;
       display: flex; align-items: center; justify-content: center;
       background: transparent;
-      transition: background .15s ease;
+      transition: background .12s ease;
     }
-    .window-controls button:hover { background: rgba(0,0,0,.08); }
-    .window-controls .wc-close:hover { background: #e8554e; }
-    .window-controls .wc-close:hover svg { fill: #fff; }
+    .window-controls button:hover { background: rgba(0,0,0,.07); }
+    .window-controls button:active { background: rgba(0,0,0,.14); }
+    .window-controls .wc-close:hover { background: #c42b1c; }
+    .window-controls .wc-close:hover svg { stroke: #fff; }
     .window-controls svg {
-      width: 11px; height: 11px; fill: var(--ink-2, #5a6070);
+      width: 12px; height: 12px;
       pointer-events: none;
     }
 
-    /* On map topbar (dark bg), place controls at the right edge */
+    /* On map topbar, place controls at the right edge */
     .topbar .window-controls { margin-left: auto; order: 99; }
-    /* On detail header (light bg), also at right */
+    /* On detail header, also at right */
     .detail-header .window-controls { margin-left: auto; order: 99; }
   `;
   const style = document.createElement("style");
   style.textContent = css;
   document.head.appendChild(style);
 
-  // SVG icons for the three buttons
-  const ICON_MIN = `<svg viewBox="0 0 12 12"><rect x="1" y="5.5" width="10" height="1" rx=".5"/></svg>`;
-  const ICON_MAX = `<svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1"/></svg>`;
-  const ICON_CLOSE = `<svg viewBox="0 0 12 12"><path d="M2 2L10 10M10 2L2 10" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>`;
+  // SVG icons — clean stroke-based, Windows 11 style
+  const ICON_MIN = `<svg viewBox="0 0 12 12" fill="none" stroke="#555" stroke-width="1.2"><line x1="2" y1="6" x2="10" y2="6" stroke-linecap="round"/></svg>`;
+  const ICON_MAX = `<svg viewBox="0 0 12 12" fill="none" stroke="#555" stroke-width="1.2"><rect x="2.5" y="2.5" width="7" height="7" rx="1"/></svg>`;
+  const ICON_CLOSE = `<svg viewBox="0 0 12 12" fill="none" stroke="#555" stroke-width="1.3"><path d="M3 3L9 9M9 3L3 9" stroke-linecap="round"/></svg>`;
 
   function makeControls() {
     const controls = document.createElement("div");

@@ -78,13 +78,17 @@ body {
   color: var(--ink);
   font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  /* neutral warm fallback —each chapter-world paints its own gradient over this */
-  background: linear-gradient(180deg, var(--warm-1) 0%, var(--warm-2) 48%, var(--warm-3) 100%);
-  background-attachment: fixed;
+  overflow: hidden;  /* kill scrollbars — app is a fixed viewport */
+  background: #f7f8fa;
 }
 
 .view { min-height: 100vh; position: relative; }
+#map-view { height: 100vh; overflow-y: auto; overflow-x: hidden; }
+#detail-view { height: 100vh; overflow-y: auto; overflow-x: hidden; }
+/* Hide scrollbars but keep scrolling */
+#map-view::-webkit-scrollbar,
+#detail-view::-webkit-scrollbar { width: 0; display: none; }
+#map-view, #detail-view { scrollbar-width: none; }
 .hidden { display: none !important; }
 
 /* ---------- top bar ---------- */
@@ -478,12 +482,11 @@ body {
    ============================================================ */
 #detail-view {
   padding: 0 16px 80px;
-  background-color: #f7f8fa;
-  background-image: linear-gradient(180deg, #f7f8fa 0%, #eef0f4 100%);
+  background: #f7f8fa;
   z-index: 1;
 }
 .detail-card {
-  max-width: 1100px; margin: 22px auto 0;
+  max-width: none; margin: 0;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 20px; padding: 0;

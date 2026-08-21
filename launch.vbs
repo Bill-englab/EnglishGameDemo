@@ -81,9 +81,13 @@ If Not ready Then
 End If
 
 ' ===== 4. Open Chrome in app mode and WAIT until it closes =====
+' Point --app directly at the HTTP URL so theme-color meta and other
+' web-platform features work correctly. The favicon is served by Flask
+' from /static/favicon.ico so no wrapper HTML is needed.
+
 If chromePath <> "" Then
-    ' wait=True blocks until our Chrome instance exits.
-    chromeCmd = q & chromePath & q & " --app=" & url & _
+    chromeCmd = q & chromePath & q & _
+                " --app=" & url & _
                 " --start-maximized --user-data-dir=" & q & profileDir & q
     sh.Run chromeCmd, 1, True
 Else

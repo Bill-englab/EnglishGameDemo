@@ -64,6 +64,8 @@ async function createWindow() {
     height: 800,
     frame: false,
     show: false,
+    minWidth: 800,
+    minHeight: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
@@ -73,7 +75,7 @@ async function createWindow() {
 
   mainWindow.loadURL(URL);
   mainWindow.once("ready-to-show", () => {
-    mainWindow.maximize();
+    mainWindow.maximize();  // start maximized (fills the screen)
     mainWindow.show();
   });
 

@@ -1,10 +1,9 @@
 ' ============================================================
 '  My English Adventure -- desktop shortcut installer
-'  (install-shortcut.vbs)
 '
 '  Creates a "My English Adventure" shortcut on the Desktop that
-'  runs launch.vbs via wscript.exe (no console window). The
-'  shortcut uses the app's favicon.ico as its icon when available.
+'  launches the Electron app directly. The shortcut uses the app's
+'  favicon.ico as its icon.
 '
 '  Run once by double-clicking, or:  wscript install-shortcut.vbs
 '  After that, drag the shortcut to the taskbar to pin it.
@@ -12,20 +11,23 @@
 Option Explicit
 
 Dim fso, sh
-Dim repoRoot, launchVbs, faviconIco, desktopPath, lnkPath
-Dim lnk
+Dim repoRoot, appDir, electronExe, electronMain, faviconIco
+Dim desktopPath, lnkPath, lnk
 
 Set fso = CreateObject("Scripting.FileSystemObject")
 Set sh  = CreateObject("WScript.Shell")
 
 ' Derive paths from THIS script's location (the repo root).
-repoRoot   = fso.GetParentFolderName(WScript.ScriptFullName)
-launchVbs  = fso.BuildPath(repoRoot, "launch.vbs")
-faviconIco = fso.BuildPath(repoRoot, "app\static\favicon.ico")
+repoRoot    = fso.GetParentFolderName(WScript.ScriptFullName)
+appDir      = fso.BuildPath(repoRoot, "app")
+electronExe = fso.BuildPath(appDir, "node_modules\electron\dist\electron.exe")
+electronMain = fso.BuildPath(repoRoot, "electron\main.cjs")
+faviconIco  = fso.BuildPath(appDir, "static\favicon.ico")
 
-If Not fso.FileExists(launchVbs) Then
-    MsgBox "launch.vbs was not found next to this installer:" & vbCrLf & _
-           launchVbs, vbCritical, "My English Adventure"
+If Not fso.FileExists(electronExe) Then
+    MsgBox "Electron binary not found at:" & vbCrLf & vbCrLf & _
+           electronExe & vbCrLf & vbCrLf & _
+           "Run:  cd app && npm install", vbCritical, "My English Adventure"
     WScript.Quit(1)
 End If
 
@@ -33,16 +35,12 @@ desktopPath = sh.SpecialFolders("Desktop")
 lnkPath     = fso.BuildPath(desktopPath, "My English Adventure.lnk")
 
 Set lnk = sh.CreateShortcut(lnkPath)
-' wscript.exe runs .vbs with NO console window (cscript would show one).
-lnk.TargetPath       = sh.ExpandEnvironmentStrings("%SystemRoot%") & _
-                       "\System32\wscript.exe"
-lnk.Arguments        = """" & launchVbs & """"
+lnk.TargetPath       = electronExe
+lnk.Arguments        = """" & electronMain & """"
 lnk.WorkingDirectory = repoRoot
-lnk.WindowStyle      = 7   ' minimized (wscript has no window anyway)
+lnk.WindowStyle      = 1
 lnk.Description      = "Launch My English Adventure"
 
-' Use the custom icon if we generated one; otherwise fall back to a
-' friendly shell icon (44 = a star).
 If fso.FileExists(faviconIco) Then
     lnk.IconLocation = faviconIco & ",0"
 Else
@@ -53,6 +51,6 @@ lnk.Save
 
 MsgBox "Shortcut created on your Desktop:" & vbCrLf & vbCrLf & _
        lnkPath & vbCrLf & vbCrLf & _
-       "Double-click it to start the app in a desktop window." & vbCrLf & _
-       "Tip: drag it onto the taskbar to pin it for one-click launch.", _
+       "Double-click it to start the app." & vbCrLf & _
+       "Tip: right-click it and 'Pin to taskbar' for one-click launch.", _
        vbInformation, "My English Adventure"

@@ -478,7 +478,8 @@ body {
    ============================================================ */
 #detail-view {
   padding: 0 16px 80px;
-  background: linear-gradient(180deg, #f7f8fa 0%, #eef0f4 100%);
+  background-color: #f7f8fa;
+  background-image: linear-gradient(180deg, #f7f8fa 0%, #eef0f4 100%);
   z-index: 1;
 }
 .detail-card {

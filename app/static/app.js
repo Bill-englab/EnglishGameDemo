@@ -914,6 +914,7 @@ function openDetail(level) {
   }
 
   document.getElementById("map-view").classList.add("hidden");
+  document.getElementById("bg-layer").classList.add("hidden");
   view.classList.remove("hidden");
   view.classList.add("open");
   window.scrollTo(0, 0);
@@ -934,6 +935,7 @@ function closeDetail() {
   view.classList.remove("open");
   view.classList.add("hidden");
   document.getElementById("map-view").classList.remove("hidden");
+  document.getElementById("bg-layer").classList.remove("hidden");
   requestAnimationFrame(() => {
     drawMapPath();
     window.scrollTo(0, mapScrollY);

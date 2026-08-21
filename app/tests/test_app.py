@@ -91,7 +91,7 @@ def test_app_registers_retryable_library_loading(client):
 
 
 def test_map_static_modules_are_served(client):
-    for path in ("/static/app.js", "/static/map-model.mjs", "/static/map-path.mjs", "/static/style.css"):
+    for path in ("/static/app.js", "/static/map-model.mjs", "/static/map-path.mjs", "/static/style.css", "/static/titlebar.js"):
         response = client.get(path)
         assert response.status_code == 200
 

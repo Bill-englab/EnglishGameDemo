@@ -101,7 +101,7 @@ body {
 }
 .topbar .title {
   font-family: "Fredoka", system-ui, sans-serif;
-  font-size: clamp(20px, 5vw, 27px); font-weight: 700;
+  font-size: clamp(24px, 5vw, 32px); font-weight: 700;
   color: var(--ink); line-height: 1;
   text-shadow: 0 2px 0 rgba(255,255,255,.6);
   margin: 0;
@@ -217,7 +217,7 @@ body {
   margin: 0 auto 12px;
   padding: 9px 15px 9px 10px;
   font-family: "Fredoka", system-ui, sans-serif;
-  font-weight: 700; font-size: clamp(20px, 2.25vw, 29px); letter-spacing: .2px;
+  font-weight: 700; font-size: clamp(24px, 2.5vw, 34px); letter-spacing: .2px;
   color: var(--ink); text-align: center;
   text-shadow: 0 2px 0 rgba(255,255,255,.65);
   background: rgba(255,255,255,.68);
@@ -276,7 +276,7 @@ body {
 /* ---------- the level node —28px radius, three states ---------- */
 .level-node {
   position: relative;
-  width: 220px; height: 220px; border-radius: 36px;
+  width: 280px; height: 280px; border-radius: 42px;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   transition: transform 160ms ease, box-shadow 240ms ease;
@@ -305,9 +305,9 @@ body {
 
 /* current: white + orange glow + play button on demo cover */
 .level-node-wrap--current {
-  --current-node-size: 244px;
+  --current-node-size: 308px;
 }
-.level-node-wrap--current .level-node { width: 244px; height: 244px; }
+.level-node-wrap--current .level-node { width: 308px; height: 308px; }
 .level-node--current {
   background: #fff;
   box-shadow: 0 0 0 6px rgba(255,255,255,.60),
@@ -467,9 +467,9 @@ body {
 
 /* ---------- title (clean, minimal, two-line clamp, readable over gradients) ---------- */
 .level-title {
-  margin-top: 16px; max-width: 280px;
+  margin-top: 18px; max-width: 320px;
   font-family: "Fredoka", system-ui, sans-serif;
-  font-size: 17px; font-weight: 700; line-height: 1.22;
+  font-size: 20px; font-weight: 700; line-height: 1.22;
   text-align: center; color: var(--ink);
   display: -webkit-box; -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
@@ -515,22 +515,22 @@ body {
 .back-btn:hover { border-color: var(--accent-deep); color: var(--accent-deep); }
 
 .chip {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 11px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 13px;
   color: var(--accent-deep); letter-spacing: .08em; text-transform: uppercase;
-  padding: 3px 9px; background: rgba(255,157,77,.10);
+  padding: 4px 10px; background: rgba(255,157,77,.10);
   border-radius: 6px; flex: none;
 }
 
 #detail-title {
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
-  font-size: clamp(20px, 3vw, 26px); line-height: 1.25;
+  font-size: clamp(24px, 3vw, 32px); line-height: 1.25;
   color: var(--ink); margin: 0;
 }
 .detail-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
 
 .patterns-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .pattern-pill {
-  font-family: "Fredoka", system-ui, sans-serif; font-size: 12px; font-weight: 600;
+  font-family: "Fredoka", system-ui, sans-serif; font-size: 14px; font-weight: 600;
   color: var(--ink-2); background: rgba(45,91,255,.05);
   border: 1px solid rgba(45,91,255,.15);
   padding: 3px 10px; border-radius: 999px;
@@ -593,7 +593,7 @@ body {
 
 /* Section labels */
 .section-label {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 11px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 13px;
   color: var(--ink-3); letter-spacing: .12em; text-transform: uppercase;
   margin: 0 0 10px;
   display: flex; align-items: center; gap: 8px;
@@ -720,7 +720,7 @@ body {
 }
 .big-star { width: 24px; height: 24px; flex: none; }
 .big-star svg { width: 100%; height: 100%; display: block; }
-.star-cap { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
+.star-cap { font-size: 14px; color: var(--ink-2); line-height: 1.4; }
 
 /* "?" next to "Your Turn" — hover shows where the recording file lives */
 .rec-tooltip-trigger {
@@ -738,20 +738,20 @@ body {
 .turn.child { align-self: flex-end; align-items: flex-end; }
 .turn.dad { align-self: flex-start; align-items: flex-start; }
 .turn .who {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 10px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;
   color: var(--ink-3); margin: 0 4px 2px;
 }
 .turn .bubble {
   background: var(--surface); color: var(--ink);
-  font-size: 13px; line-height: 1.5;
-  padding: 8px 12px; border-radius: 10px;
+  font-size: 15px; line-height: 1.5;
+  padding: 10px 14px; border-radius: 10px;
   border: 1px solid var(--line);
 }
 .turn.child .bubble { background: var(--accent); color: #fff; border-color: transparent; }
 
 .variations {
   padding: 0; color: var(--ink-2);
-  font-size: 13px; line-height: 1.6;
+  font-size: 15px; line-height: 1.6;
 }
 
 /* Prompt blocks (inside VideoGen popup) — no overflow:hidden so content shows */
@@ -868,10 +868,10 @@ body {
   }
   .chapter-heading .ch-no { padding: 6px 8px; letter-spacing: .4px; }
   .chapter-levels { max-width: 300px; }
-  .level-node { width: 140px; height: 140px; border-radius: 28px; }
-  .level-node-wrap--current { --current-node-size: 152px; }
-  .level-node-wrap--current .level-node { width: 152px; height: 152px; }
-  .level-node-wrap { width: 190px; margin: 30px auto; }
+  .level-node { width: 160px; height: 160px; border-radius: 30px; }
+  .level-node-wrap--current { --current-node-size: 176px; }
+  .level-node-wrap--current .level-node { width: 176px; height: 176px; }
+  .level-node-wrap { width: 210px; margin: 30px auto; }
   .chapter-world:nth-child(odd) .level-node-wrap:nth-child(odd),
   .chapter-world:nth-child(even) .level-node-wrap:nth-child(even) {
     transform: translateX(clamp(-46px, -10vw, -34px));

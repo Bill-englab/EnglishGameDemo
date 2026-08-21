@@ -32,5 +32,16 @@ End If
 
 ' ===== Launch Electron (blocks until window closes) =====
 ' Electron main.cjs handles Flask startup and cleanup internally.
-sh.CurrentDirectory = appDir
-sh.Run "cmd /c npx electron ..", 0, True
+' Use the electron binary directly — npx can be unreliable in some environments.
+Dim electronExe, electronMain
+electronExe  = fso.BuildPath(appDir, "node_modules\electron\dist\electron.exe")
+electronMain = fso.BuildPath(repoRoot, "electron\main.cjs")
+
+If Not fso.FileExists(electronExe) Then
+    MsgBox "Electron binary not found at:" & vbCrLf & vbCrLf & _
+           electronExe & vbCrLf & vbCrLf & _
+           "Run:  cd app && npm install", vbCritical, "My English Adventure"
+    WScript.Quit(1)
+End If
+
+sh.Run q & electronExe & q & " " & q & electronMain & q, 0, True

@@ -6,7 +6,7 @@
   "main": "../electron/main.cjs",
   "scripts": {
     "test": "node --test tests-js/*.test.mjs",
-    "start": "electron .."
+    "start": "node_modules/electron/dist/electron.exe ../electron/main.cjs"
   },
   "devDependencies": {
     "electron": "^31"

@@ -644,12 +644,16 @@ function observeBgSwitch(slides) {
   activeChapter = null;
   // Run once immediately to set the initial slide.
   updateBgOnScroll(slides);
-  // Throttled scroll listener via requestAnimationFrame.
-  window.addEventListener("scroll", () => {
+  // Throttled scroll listener — listen on #map-view (the actual scroll container)
+  // AND window (fallback for non-Electron browsers where body scrolls).
+  const scrollHandler = () => {
     if (bgScrollTicking) return;
     bgScrollTicking = true;
     requestAnimationFrame(() => { updateBgOnScroll(slides); bgScrollTicking = false; });
-  }, { passive: true });
+  };
+  const mapView = document.getElementById("map-view");
+  if (mapView) mapView.addEventListener("scroll", scrollHandler, { passive: true });
+  window.addEventListener("scroll", scrollHandler, { passive: true });
 }
 
 function renderMap(library) {

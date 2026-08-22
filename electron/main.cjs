@@ -13,7 +13,8 @@ function serverIsUp(url) {
   return new Promise(resolve => {
     const req = http.get(url, res => {
       res.destroy();
-      resolve(res.statusCode === 200);
+      // Any HTTP response (200, 302, etc.) means the server is running.
+      resolve(res.statusCode !== undefined && res.statusCode < 500);
     });
     req.on("error", () => resolve(false));
     req.setTimeout(1000, () => { req.destroy(); resolve(false); });

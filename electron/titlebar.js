@@ -18,10 +18,9 @@
     .detail-header .videogen-toggle,
     .detail-header .window-controls { -webkit-app-region: no-drag; }
 
-    /* Login page — brand panel is draggable */
+    /* Login page — brand panel is draggable, form panel is not */
     .login-brand { -webkit-app-region: drag; }
-    .login-brand img, .login-brand .window-controls { -webkit-app-region: no-drag; }
-    /* Form panel not draggable (inputs need interaction) */
+    .login-brand img, .login-brand__deco { -webkit-app-region: no-drag; }
     .login-form-panel { -webkit-app-region: no-drag; }
 
     /* Window control buttons — polished Windows 11 style */
@@ -29,6 +28,11 @@
       -webkit-app-region: no-drag;
       display: flex; gap: 0; align-items: center;
       flex: none; height: 36px;
+    }
+    /* Fixed overlay for login/standalone pages — sits at window top-right */
+    .window-controls--overlay {
+      position: fixed; top: 0; right: 0; z-index: 9999;
+      -webkit-app-region: no-drag;
     }
     .window-controls button {
       width: 40px; height: 36px;
@@ -96,21 +100,31 @@
   function injectInto(selector) {
     const el = document.querySelector(selector);
     if (!el || el.querySelector(".window-controls")) return false;
+    el.appendChild(makeControls());
+    return true;
+  }
+
+  // For login page: inject a fixed-position overlay at the window's top-right
+  function injectLoginOverlay() {
+    if (document.querySelector(".window-controls--overlay")) return false;
     const controls = makeControls();
-    // For login-brand, position at top-right corner
-    if (selector === ".login-brand") {
-      controls.style.position = "absolute";
-      controls.style.top = "12px";
-      controls.style.right = "12px";
-    }
-    el.appendChild(controls);
+    controls.classList.add("window-controls--overlay");
+    document.body.appendChild(controls);
     return true;
   }
 
   function injectAll() {
-    injectInto(".topbar");
-    injectInto(".detail-header");
-    injectInto(".login-brand");
+    // Check if we're on the login page (no .topbar or .detail-header)
+    const hasTopbar = document.querySelector(".topbar");
+    const hasDetailHeader = document.querySelector(".detail-header");
+    if (hasTopbar) {
+      injectInto(".topbar");
+    } else if (hasDetailHeader) {
+      injectInto(".detail-header");
+    } else {
+      // Login page or other standalone page — use fixed overlay
+      injectLoginOverlay();
+    }
   }
 
   // Try immediately, on DOMContentLoaded, and after delays (dynamic rendering)

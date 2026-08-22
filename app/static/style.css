@@ -481,21 +481,20 @@ body {
    Level detail view — modern card layout (reference.html style)
    ============================================================ */
 #detail-view {
-  padding: 0 16px 80px;
+  padding: 0;
   background: #f7f8fa;
   z-index: 1;
 }
 .detail-card {
   max-width: none; margin: 0;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 20px; padding: 0;
-  box-shadow: 0 12px 40px rgba(20,22,26,.08);
-  transform: translateY(24px) scale(.96); opacity: 0;
-  transition: transform .5s cubic-bezier(.2,1.3,.4,1), opacity .4s ease;
+  background: transparent;
+  border: none; border-radius: 0; padding: 0;
+  box-shadow: none;
+  transform: none; opacity: 1;
+  transition: none;
   overflow: visible;
 }
-#detail-view.open .detail-card { transform: translateY(0) scale(1); opacity: 1; }
+#detail-view.open .detail-card { transform: none; opacity: 1; }
 
 /* Header: title left, VideoGen toggle right */
 .detail-header {
@@ -560,7 +559,11 @@ body {
 }
 
 /* Body: vertical stack — video row, text row, full-width nav */
-.detail-body { padding: 20px; }
+.detail-body {
+  padding: 20px;
+  display: flex; flex-direction: column;
+  min-height: calc(100vh - 100px); /* minus header height */
+}
 
 /* Top row: two videos side by side, each takes half width */
 .video-row {
@@ -568,12 +571,15 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 16px;
+  flex: 1; /* videos fill remaining vertical space */
 }
 .video-col {
   background: var(--surface-2);
   border-radius: 14px;
   padding: 14px;
+  display: flex; flex-direction: column;
 }
+.video-slot-wrap { flex: 1; }
 
 /* Bottom row: dialogue + variations side by side */
 .text-row {
@@ -606,11 +612,11 @@ body {
 /* Video slots — fixed 16:9, fills column width */
 .video-slot-wrap { display: flex; flex-direction: column; gap: 8px; }
 .video-slot-wrap video {
-  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  width: 100%; flex: 1; object-fit: contain; min-height: 200px;
   border-radius: 10px; background: #000; display: block;
 }
 .video-slot--empty {
-  aspect-ratio: 16 / 9;
+  flex: 1; min-height: 200px;
   display: flex; align-items: center; justify-content: center;
   border: 2px dashed var(--line-strong); border-radius: 10px;
   background: var(--surface);

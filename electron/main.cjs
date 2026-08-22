@@ -40,9 +40,10 @@ function startFlask() {
     cwd: APP_DIR,
     windowsHide: true,
     shell: false,
+    env: { ...process.env, FLASK_DEBUG: "0" },
   });
-  flaskProcess.stdout.on("data", () => {});
-  flaskProcess.stderr.on("data", () => {});
+  flaskProcess.stdout.on("data", (d) => console.log("[flask]", d.toString().trim()));
+  flaskProcess.stderr.on("data", (d) => console.error("[flask]", d.toString().trim()));
   return true;
 }
 
@@ -71,12 +72,18 @@ async function createWindow() {
       preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
       nodeIntegration: false,
+      sandbox: false,
     },
   });
 
   mainWindow.loadURL(URL);
   mainWindow.once("ready-to-show", () => {
     mainWindow.maximize();
+  });
+
+  // Log any load errors for debugging
+  mainWindow.webContents.on("did-fail-load", (e, code, desc) => {
+    console.error("Page load failed:", code, desc);
   });
 
   mainWindow.on("closed", () => { mainWindow = null; });

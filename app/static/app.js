@@ -422,7 +422,6 @@ function extractSafeCover(level, theme, ratio = 0.2) {
   return new Promise(resolve => {
     const v = document.createElement("video");
     v.muted = true; v.preload = "auto"; v.playsInline = true;
-    v.crossOrigin = "anonymous";
     v.src = videoURL(level.chapter, level.level, "demo");
     let done = false;
     const finish = (val) => {

@@ -114,13 +114,12 @@
   }
 
   function injectAll() {
-    // Check if we're on the login page (no .topbar or .detail-header)
-    const hasTopbar = document.querySelector(".topbar");
-    const hasDetailHeader = document.querySelector(".detail-header");
-    if (hasTopbar) {
-      injectInto(".topbar");
-    } else if (hasDetailHeader) {
+    // Detail view open? inject into detail-header (topbar is hidden but still in DOM)
+    const detailVisible = document.querySelector("#detail-view:not(.hidden)");
+    if (detailVisible) {
       injectInto(".detail-header");
+    } else if (document.querySelector(".topbar")) {
+      injectInto(".topbar");
     } else {
       // Login page or other standalone page — use fixed overlay
       injectLoginOverlay();
@@ -137,6 +136,8 @@
   setTimeout(injectAll, 3000);
 
   // Re-inject when detail view opens (the header is re-rendered each time)
-  const observer = new MutationObserver(() => injectAll());
-  observer.observe(document.body, { childList: true, subtree: true });
+  try {
+    const observer = new MutationObserver(() => injectAll());
+    observer.observe(document.body, { childList: true, subtree: true });
+  } catch(e) { /* MutationObserver not supported */ }
 })();

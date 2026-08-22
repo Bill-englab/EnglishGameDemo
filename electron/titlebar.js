@@ -127,6 +127,9 @@
     }
   }
 
+  // Expose for app.js to call after openDetail renders
+  window.__injectTitlebar = injectAll;
+
   // Try immediately, on DOMContentLoaded, and after delays (dynamic rendering)
   injectAll();
   document.addEventListener("DOMContentLoaded", injectAll);

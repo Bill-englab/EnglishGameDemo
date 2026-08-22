@@ -1,7 +1,10 @@
 // Inject custom titlebar buttons when running inside Electron.
 // In a regular browser, this script does nothing.
 (function () {
-  if (!window.electronAPI) return;
+  // Detect Electron: check electronAPI (from preload), or userAgent, or process.versions
+  var isElectron = !!window.electronAPI ||
+                   (typeof navigator !== "undefined" && navigator.userAgent.toLowerCase().indexOf(" electron/") >= 0);
+  if (!isElectron) return;
 
   const css = `
     /* Map view topbar — draggable */
@@ -57,6 +60,13 @@
   const ICON_MAX = `<svg viewBox="0 0 12 12" fill="none" stroke="#555" stroke-width="1.2"><rect x="2.5" y="2.5" width="7" height="7" rx="1"/></svg>`;
   const ICON_CLOSE = `<svg viewBox="0 0 12 12" fill="none" stroke="#555" stroke-width="1.3"><path d="M3 3L9 9M9 3L3 9" stroke-linecap="round"/></svg>`;
 
+  // Safe wrapper — works even if preload didn't expose electronAPI
+  function winAction(method) {
+    if (window.electronAPI && window.electronAPI[method]) {
+      window.electronAPI[method]();
+    }
+  }
+
   function makeControls() {
     const controls = document.createElement("div");
     controls.className = "window-controls";
@@ -65,19 +75,19 @@
     min.className = "wc-minimize";
     min.title = "Minimize";
     min.innerHTML = ICON_MIN;
-    min.addEventListener("click", () => window.electronAPI.minimize());
+    min.addEventListener("click", () => winAction("minimize"));
 
     const max = document.createElement("button");
     max.className = "wc-maximize";
     max.title = "Maximize";
     max.innerHTML = ICON_MAX;
-    max.addEventListener("click", () => window.electronAPI.maximize());
+    max.addEventListener("click", () => winAction("maximize"));
 
     const close = document.createElement("button");
     close.className = "wc-close";
     close.title = "Close";
     close.innerHTML = ICON_CLOSE;
-    close.addEventListener("click", () => window.electronAPI.close());
+    close.addEventListener("click", () => winAction("close"));
 
     controls.append(min, max, close);
     return controls;

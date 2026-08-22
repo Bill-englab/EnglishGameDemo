@@ -61,6 +61,8 @@ function killFlask() {
 }
 
 async function createWindow() {
+  const preloadPath = path.join(__dirname, "preload.cjs");
+  console.log("preload path:", preloadPath, "exists:", require("fs").existsSync(preloadPath));
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 800,
@@ -70,7 +72,7 @@ async function createWindow() {
     minHeight: 600,
     icon: path.join(APP_DIR, "static", "favicon.ico"),
     webPreferences: {
-      preload: path.join(__dirname, "preload.cjs"),
+      preload: preloadPath,
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false,
@@ -80,6 +82,14 @@ async function createWindow() {
   mainWindow.loadURL(URL);
   mainWindow.once("ready-to-show", () => {
     mainWindow.maximize();
+  });
+  // Debug: check preload on every navigation
+  mainWindow.webContents.on("did-navigate", () => {
+    setTimeout(() => {
+      mainWindow.webContents.executeJavaScript("!!window.electronAPI").then(has => {
+        console.log("electronAPI on", mainWindow.webContents.getURL(), ":", has);
+      }).catch(e => console.log("check error:", e.message));
+    }, 500);
   });
 
   // Log any load errors for debugging

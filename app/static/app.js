@@ -91,15 +91,28 @@ async function pickVideoFile() {
   });
 }
 
-// Upload a File to the given chapter/level/kind. Returns true on success.
-async function uploadVideo(level, kind) {
+// Upload a File to the given chapter/level/kind with progress reporting.
+// Returns true on success. onProgress(percent) is called during upload.
+async function uploadVideo(level, kind, onProgress) {
   const file = await pickVideoFile();
   if (!file) return false;
   const fd = new FormData();
   fd.append("file", file, file.name || "video.mp4");
-  const res = await fetch(uploadURL(level.chapter, level.level, kind), { method: "POST", body: fd });
-  if (!res.ok) throw new Error(`upload ${res.status}`);
-  return true;
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", uploadURL(level.chapter, level.level, kind));
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable && onProgress) {
+        onProgress(Math.round((e.loaded / e.total) * 100));
+      }
+    };
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) resolve(true);
+      else reject(new Error(`upload ${xhr.status}`));
+    };
+    xhr.onerror = () => reject(new Error("upload network error"));
+    xhr.send(fd);
+  });
 }
 
 // Build a small "Replace" button for the demo area (dad's tool, not the kid's).
@@ -112,11 +125,21 @@ function makeActionButton(label, level, kind, onDone) {
   btn.addEventListener("click", async () => {
     btn.disabled = true;
     const orig = btn.textContent;
-    btn.textContent = "Uploading…";
+    // Replace button text with a progress bar
+    const bar = document.createElement("div");
+    bar.className = "upload-progress";
+    bar.innerHTML = `<div class="upload-progress__fill" style="width:0%"></div><span class="upload-progress__text">0%</span>`;
+    btn.textContent = "";
+    btn.appendChild(bar);
+    const fill = bar.querySelector(".upload-progress__fill");
+    const text = bar.querySelector(".upload-progress__text");
     try {
-      await uploadVideo(level, kind);
-      await loadLibrary();  // refresh the library so has_demo/has_performance updates
-      onDone();             // re-open detail to show the new video
+      await uploadVideo(level, kind, (pct) => {
+        fill.style.width = pct + "%";
+        text.textContent = pct + "%";
+      });
+      await loadLibrary();
+      onDone();
     } catch (e) {
       console.error("Upload failed", e);
       btn.textContent = "Failed — retry";
@@ -957,7 +980,7 @@ function showOnly(id) {
 async function loadLibrary() {
   showOnly("map-loading");
   try {
-    const response = await fetch("/api/library", { cache: "no-store" });
+    const response = await fetch("/api/library", { cache: "no-store", credentials: "same-origin" });
     if (!response.ok) throw new Error(`library ${response.status}`);
     const library = await response.json();
     renderMap(library);
@@ -969,9 +992,104 @@ async function loadLibrary() {
 }
 document.getElementById("map-retry").addEventListener("click", loadLibrary);
 
+// ===== admin user management (popup) =====
+async function loadAdminUsers() {
+  try {
+    const res = await fetch("/api/admin/users", { credentials: "same-origin" });
+    const data = await res.json();
+    const list = document.getElementById("admin-user-list");
+    if (!list) return;
+    list.innerHTML = "";
+    for (const u of data.users) {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${u}</span>`;
+      const del = document.createElement("button");
+      del.className = "del-user";
+      del.textContent = "Delete";
+      del.addEventListener("click", async () => {
+        const r = await fetch("/api/admin/users", {
+          method: "POST", credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "delete", username: u }),
+        });
+        if (r.ok) loadAdminUsers();
+      });
+      li.appendChild(del);
+      list.appendChild(li);
+    }
+  } catch (e) { console.error("Failed to load admin users", e); }
+}
+
 // ===== init =====
 async function init() {
+  // Check login status before loading the app
+  try {
+    const res = await fetch("/api/me", { credentials: "same-origin" });
+    const data = await res.json();
+    if (!data.username) {
+      window.location.href = "/login";
+      return;
+    }
+  // Show username in menu trigger
+  const userEl = document.getElementById("user-name");
+  if (userEl) userEl.textContent = data.username;
+  if (data.isAdmin) {
+    const adminSection = document.getElementById("admin-section");
+    if (adminSection) adminSection.style.display = "";
+  }
+  } catch (_) {
+    window.location.href = "/login";
+    return;
+  }
+
   document.getElementById("back-btn").addEventListener("click", closeDetail);
+
+  // User menu popup — toggle on click, close on outside click
+  const menuTrigger = document.getElementById("user-menu-trigger");
+  const menuPopup = document.getElementById("user-menu-popup");
+  if (menuTrigger && menuPopup) {
+    menuTrigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menuPopup.style.display = menuPopup.style.display === "none" ? "block" : "none";
+    });
+    document.addEventListener("click", (e) => {
+      if (!menuPopup.contains(e.target) && !menuTrigger.contains(e.target)) {
+        menuPopup.style.display = "none";
+      }
+    });
+  }
+
+  // Logout
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) logoutBtn.addEventListener("click", () => {
+    fetch("/logout", { credentials: "same-origin" }).then(() => {
+      window.location.href = "/login";
+    });
+  });
+
+  // Admin: manage users in popup
+  const adminBtn = document.getElementById("admin-btn");
+  const adminPanel = document.getElementById("admin-panel");
+  if (adminBtn && adminPanel) {
+    adminBtn.addEventListener("click", () => {
+      adminPanel.style.display = adminPanel.style.display === "none" ? "block" : "none";
+      if (adminPanel.style.display === "block") loadAdminUsers();
+    });
+  }
+  const adminAddBtn = document.getElementById("admin-add-btn");
+  if (adminAddBtn) adminAddBtn.addEventListener("click", async () => {
+    const u = document.getElementById("admin-username").value.trim();
+    const p = document.getElementById("admin-password").value;
+    if (!u || !p) return;
+    const fd = new FormData();
+    fd.append("action", "add"); fd.append("username", u); fd.append("password", p);
+    const res = await fetch("/admin", { method: "POST", body: fd, credentials: "same-origin" });
+    if (res.ok) {
+      document.getElementById("admin-username").value = "";
+      document.getElementById("admin-password").value = "";
+      loadAdminUsers();
+    }
+  });
 
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawMapPath);
   setTimeout(drawMapPath, 700);

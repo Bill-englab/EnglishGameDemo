@@ -3,10 +3,35 @@ __pycache__/
 .venv/
 node_modules/
 
-# videos are local-only (size + privacy) — only text/meta is tracked
+# All videos are local-only (size + privacy) — never commit any video format.
+# demo/ and recordings/ trees contain mp4, webm, mov, avi — ignore all of them.
 demo/**/*.mp4
+demo/**/*.webm
+demo/**/*.mov
+demo/**/*.avi
 recordings/**/*.mp4
+recordings/**/*.webm
+recordings/**/*.mov
+recordings/**/*.avi
 
 .claude/
 .superpowers/
 .zcode/
+.env
+.env.*
+
+# Sensitive config — never commit. Created locally on each deployment.
+app/config.json
+app/users.json
+
+# Electron binary cache — local only
+app/node_modules/electron/dist/
+
+# Design workspace temp files
+design/verify-*.png
+design/inspect-*.png
+design/detail-*.png
+design/top-*.png
+design/map-loaded.png
+design/yellow-bar.png
+launch-debug.log

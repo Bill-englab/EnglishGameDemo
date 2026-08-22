@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f7e8d6">
+  <title>My English Adventure — Sign In</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" type="image/png" sizes="256x256" href="/static/icon.png">
+  <link rel="icon" href="/static/favicon.ico">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    .login-page { display: flex; min-height: 100vh; }
+    /* Left panel: brand + illustration */
+    .login-brand {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #fdf2e4 0%, #f7e0c8 40%, #f0d4a8 100%);
+      padding: 48px; position: relative;
+    }
+    .login-brand__logo {
+      width: 96px; height: 96px; border-radius: 24px;
+      box-shadow: 0 12px 32px rgba(120,70,20,.18); margin-bottom: 24px;
+    }
+    .login-brand__title {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
+      font-size: 36px; color: #3a2a1a; text-align: center; line-height: 1.2;
+    }
+    .login-brand__subtitle {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 500;
+      font-size: 16px; color: #8a6a4a; margin-top: 12px; text-align: center; max-width: 320px;
+    }
+    .login-brand__deco { margin-top: 40px; display: flex; gap: 16px; }
+    .login-brand__deco span { width: 10px; height: 10px; border-radius: 50%; }
+    .login-brand__deco span:nth-child(1) { background: #f5a623; }
+    .login-brand__deco span:nth-child(2) { background: #4caf50; }
+    .login-brand__deco span:nth-child(3) { background: #2d5bff; }
+    /* Right panel: form */
+    .login-form-panel {
+      width: 420px; display: flex; align-items: center; justify-content: center;
+      background: #fff; padding: 48px 40px;
+    }
+    .login-form { width: 100%; max-width: 300px; }
+    .login-form h2 {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
+      font-size: 22px; color: #14161a; margin-bottom: 6px;
+    }
+    .login-form__hint { font-size: 14px; color: #8a92a0; margin-bottom: 28px; }
+    .login-field { margin-bottom: 18px; }
+    .login-field label {
+      display: block; font-family: "Fredoka", system-ui, sans-serif;
+      font-weight: 600; font-size: 13px; color: #5a6070; margin-bottom: 6px;
+    }
+    .login-field input {
+      width: 100%; padding: 12px 14px; font-size: 15px; font-family: inherit;
+      border: 1.5px solid #e4e7ee; border-radius: 10px; color: #14161a;
+      transition: border-color .15s; outline: none;
+    }
+    .login-field input:focus { border-color: #f5a623; }
+    .login-form button {
+      width: 100%; padding: 13px; border: none; border-radius: 10px;
+      background: linear-gradient(135deg, #f5a623, #e89b15);
+      color: #fff; font-size: 16px; font-weight: 700;
+      font-family: "Fredoka", system-ui, sans-serif; cursor: pointer;
+      transition: transform .12s; margin-top: 8px;
+    }
+    .login-form button:hover { transform: translateY(-1px); }
+    .login-form button:active { transform: translateY(0); }
+    .login-error {
+      color: #c42b1c; background: #fef0ee; border: 1px solid #f5c6c0;
+      border-radius: 8px; padding: 10px 14px; margin-bottom: 16px;
+      font-size: 14px; text-align: center;
+    }
+    @media (max-width: 768px) {
+      .login-page { flex-direction: column; }
+      .login-brand { padding: 32px 24px; }
+      .login-brand__logo { width: 64px; height: 64px; }
+      .login-brand__title { font-size: 26px; }
+      .login-form-panel { width: 100%; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-brand">
+      <img class="login-brand__logo" src="/static/icon.png" alt="My English Adventure">
+      <div class="login-brand__title">My English Adventure</div>
+      <div class="login-brand__subtitle">A storybook adventure map for English role-play. Watch, practice, perform, and replay.</div>
+      <div class="login-brand__deco"><span></span><span></span><span></span></div>
+    </div>
+    <div class="login-form-panel">
+      <form class="login-form" method="post" action="/login">
+        <h2>Welcome back</h2>
+        <p class="login-form__hint">Sign in to continue your adventure.</p>
+        {% if error %}<div class="login-error">{{ error }}</div>{% endif %}
+        <div class="login-field">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+        </div>
+        <div class="login-field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
+  </div>
+  <script src="/static/titlebar.js"></script>
+</body>
+</html>

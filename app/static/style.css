@@ -78,13 +78,17 @@ body {
   color: var(--ink);
   font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  /* neutral warm fallback —each chapter-world paints its own gradient over this */
-  background: linear-gradient(180deg, var(--warm-1) 0%, var(--warm-2) 48%, var(--warm-3) 100%);
-  background-attachment: fixed;
+  overflow: hidden;  /* kill scrollbars — app is a fixed viewport */
+  background: #f7f8fa;
 }
 
 .view { min-height: 100vh; position: relative; }
+#map-view { height: 100vh; overflow-y: auto; overflow-x: hidden; }
+#detail-view { height: 100vh; overflow-y: auto; overflow-x: hidden; }
+/* Hide scrollbars but keep scrolling */
+#map-view::-webkit-scrollbar,
+#detail-view::-webkit-scrollbar { width: 0; display: none; }
+#map-view, #detail-view { scrollbar-width: none; }
 .hidden { display: none !important; }
 
 /* ---------- top bar ---------- */
@@ -97,7 +101,7 @@ body {
 }
 .topbar .title {
   font-family: "Fredoka", system-ui, sans-serif;
-  font-size: clamp(20px, 5vw, 27px); font-weight: 700;
+  font-size: clamp(24px, 5vw, 32px); font-weight: 700;
   color: var(--ink); line-height: 1;
   text-shadow: 0 2px 0 rgba(255,255,255,.6);
   margin: 0;
@@ -111,6 +115,66 @@ body {
   white-space: nowrap;
 }
 .topbar .progress #star-count { color: var(--accent-deep); font-weight: 700; }
+
+/* User menu — trigger button + popup bubble */
+.user-menu { position: relative; flex: none; -webkit-app-region: no-drag; }
+.user-menu__trigger {
+  display: flex; align-items: center; gap: 6px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 14px;
+  color: var(--ink-soft); background: rgba(255,255,255,.6);
+  border: 1px solid rgba(255,255,255,.8); border-radius: 999px;
+  padding: 6px 12px; cursor: pointer;
+  transition: all .15s ease;
+}
+.user-menu__trigger:hover { background: #fff; color: var(--ink); }
+.user-menu__trigger svg { color: var(--ink-3); }
+#user-name { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.user-menu__popup {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 220px; background: #fff;
+  border: 1px solid var(--line-strong); border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(20,22,26,.14);
+  padding: 8px; z-index: 100;
+}
+.user-menu__item {
+  display: block; width: 100%; text-align: left;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 14px;
+  color: var(--ink); background: none; border: none;
+  padding: 10px 14px; border-radius: 8px; cursor: pointer;
+  transition: background .12s;
+}
+.user-menu__item:hover { background: var(--surface-2); }
+.user-menu__item--logout { color: #e8554e; }
+.user-menu__item--logout:hover { background: #fef0ee; }
+.user-menu__section { border-bottom: 1px solid var(--line); margin-bottom: 4px; padding-bottom: 4px; }
+
+/* Admin panel inside the popup */
+.user-menu__admin-panel { padding: 8px 4px 4px; }
+.admin-add { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.admin-add input {
+  font-family: "Fredoka", system-ui, sans-serif; font-size: 13px;
+  padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; outline: none;
+}
+.admin-add input:focus { border-color: var(--accent); }
+.admin-add button {
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
+  color: #fff; background: var(--accent); border: none; border-radius: 8px;
+  padding: 8px; cursor: pointer;
+}
+.admin-add button:hover { background: var(--accent-deep); }
+.admin-user-list { list-style: none; padding: 0; margin: 0; }
+.admin-user-list li {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 10px; font-size: 13px; color: var(--ink);
+  border-radius: 6px; margin-bottom: 2px;
+}
+.admin-user-list li:hover { background: var(--surface-2); }
+.admin-user-list .del-user {
+  font-size: 11px; color: #e8554e; background: none; border: 1px solid var(--line);
+  border-radius: 999px; padding: 2px 8px; cursor: pointer;
+}
+.admin-user-list .del-user:hover { border-color: #e8554e; }
 
 /* ---------- loading / error status cards ---------- */
 .status-card {
@@ -213,7 +277,7 @@ body {
   margin: 0 auto 12px;
   padding: 9px 15px 9px 10px;
   font-family: "Fredoka", system-ui, sans-serif;
-  font-weight: 700; font-size: clamp(20px, 2.25vw, 29px); letter-spacing: .2px;
+  font-weight: 700; font-size: clamp(24px, 2.5vw, 34px); letter-spacing: .2px;
   color: var(--ink); text-align: center;
   text-shadow: 0 2px 0 rgba(255,255,255,.65);
   background: rgba(255,255,255,.68);
@@ -272,7 +336,7 @@ body {
 /* ---------- the level node —28px radius, three states ---------- */
 .level-node {
   position: relative;
-  width: 220px; height: 220px; border-radius: 36px;
+  width: 280px; height: 280px; border-radius: 42px;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   transition: transform 160ms ease, box-shadow 240ms ease;
@@ -301,9 +365,9 @@ body {
 
 /* current: white + orange glow + play button on demo cover */
 .level-node-wrap--current {
-  --current-node-size: 244px;
+  --current-node-size: 308px;
 }
-.level-node-wrap--current .level-node { width: 244px; height: 244px; }
+.level-node-wrap--current .level-node { width: 308px; height: 308px; }
 .level-node--current {
   background: #fff;
   box-shadow: 0 0 0 6px rgba(255,255,255,.60),
@@ -463,9 +527,9 @@ body {
 
 /* ---------- title (clean, minimal, two-line clamp, readable over gradients) ---------- */
 .level-title {
-  margin-top: 16px; max-width: 280px;
+  margin-top: 18px; max-width: 320px;
   font-family: "Fredoka", system-ui, sans-serif;
-  font-size: 17px; font-weight: 700; line-height: 1.22;
+  font-size: 20px; font-weight: 700; line-height: 1.22;
   text-align: center; color: var(--ink);
   display: -webkit-box; -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
@@ -477,21 +541,20 @@ body {
    Level detail view — modern card layout (reference.html style)
    ============================================================ */
 #detail-view {
-  padding: 0 16px 80px;
-  background: linear-gradient(180deg, #f7f8fa 0%, #eef0f4 100%);
+  padding: 0;
+  background: #f7f8fa;
   z-index: 1;
 }
 .detail-card {
-  max-width: 1100px; margin: 22px auto 0;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 20px; padding: 0;
-  box-shadow: 0 12px 40px rgba(20,22,26,.08);
-  transform: translateY(24px) scale(.96); opacity: 0;
-  transition: transform .5s cubic-bezier(.2,1.3,.4,1), opacity .4s ease;
+  max-width: none; margin: 0;
+  background: transparent;
+  border: none; border-radius: 0; padding: 0;
+  box-shadow: none;
+  transform: none; opacity: 1;
+  transition: none;
   overflow: visible;
 }
-#detail-view.open .detail-card { transform: translateY(0) scale(1); opacity: 1; }
+#detail-view.open .detail-card { transform: none; opacity: 1; }
 
 /* Header: title left, VideoGen toggle right */
 .detail-header {
@@ -511,22 +574,22 @@ body {
 .back-btn:hover { border-color: var(--accent-deep); color: var(--accent-deep); }
 
 .chip {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 11px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 13px;
   color: var(--accent-deep); letter-spacing: .08em; text-transform: uppercase;
-  padding: 3px 9px; background: rgba(255,157,77,.10);
+  padding: 4px 10px; background: rgba(255,157,77,.10);
   border-radius: 6px; flex: none;
 }
 
 #detail-title {
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
-  font-size: clamp(20px, 3vw, 26px); line-height: 1.25;
+  font-size: clamp(24px, 3vw, 32px); line-height: 1.25;
   color: var(--ink); margin: 0;
 }
 .detail-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
 
 .patterns-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .pattern-pill {
-  font-family: "Fredoka", system-ui, sans-serif; font-size: 12px; font-weight: 600;
+  font-family: "Fredoka", system-ui, sans-serif; font-size: 14px; font-weight: 600;
   color: var(--ink-2); background: rgba(45,91,255,.05);
   border: 1px solid rgba(45,91,255,.15);
   padding: 3px 10px; border-radius: 999px;
@@ -556,7 +619,11 @@ body {
 }
 
 /* Body: vertical stack — video row, text row, full-width nav */
-.detail-body { padding: 20px; }
+.detail-body {
+  padding: 20px;
+  display: flex; flex-direction: column;
+  min-height: calc(100vh - 100px); /* minus header height */
+}
 
 /* Top row: two videos side by side, each takes half width */
 .video-row {
@@ -564,12 +631,15 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 16px;
+  flex: 1; /* videos fill remaining vertical space */
 }
 .video-col {
   background: var(--surface-2);
   border-radius: 14px;
   padding: 14px;
+  display: flex; flex-direction: column;
 }
+.video-slot-wrap { flex: 1; }
 
 /* Bottom row: dialogue + variations side by side */
 .text-row {
@@ -589,7 +659,7 @@ body {
 
 /* Section labels */
 .section-label {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 11px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; font-size: 13px;
   color: var(--ink-3); letter-spacing: .12em; text-transform: uppercase;
   margin: 0 0 10px;
   display: flex; align-items: center; gap: 8px;
@@ -602,11 +672,11 @@ body {
 /* Video slots — fixed 16:9, fills column width */
 .video-slot-wrap { display: flex; flex-direction: column; gap: 8px; }
 .video-slot-wrap video {
-  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  width: 100%; flex: 1; object-fit: contain; min-height: 200px;
   border-radius: 10px; background: #000; display: block;
 }
 .video-slot--empty {
-  aspect-ratio: 16 / 9;
+  flex: 1; min-height: 200px;
   display: flex; align-items: center; justify-content: center;
   border: 2px dashed var(--line-strong); border-radius: 10px;
   background: var(--surface);
@@ -716,7 +786,7 @@ body {
 }
 .big-star { width: 24px; height: 24px; flex: none; }
 .big-star svg { width: 100%; height: 100%; display: block; }
-.star-cap { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
+.star-cap { font-size: 14px; color: var(--ink-2); line-height: 1.4; }
 
 /* "?" next to "Your Turn" — hover shows where the recording file lives */
 .rec-tooltip-trigger {
@@ -734,20 +804,20 @@ body {
 .turn.child { align-self: flex-end; align-items: flex-end; }
 .turn.dad { align-self: flex-start; align-items: flex-start; }
 .turn .who {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 10px;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;
   color: var(--ink-3); margin: 0 4px 2px;
 }
 .turn .bubble {
   background: var(--surface); color: var(--ink);
-  font-size: 13px; line-height: 1.5;
-  padding: 8px 12px; border-radius: 10px;
+  font-size: 15px; line-height: 1.5;
+  padding: 10px 14px; border-radius: 10px;
   border: 1px solid var(--line);
 }
 .turn.child .bubble { background: var(--accent); color: #fff; border-color: transparent; }
 
 .variations {
   padding: 0; color: var(--ink-2);
-  font-size: 13px; line-height: 1.6;
+  font-size: 15px; line-height: 1.6;
 }
 
 /* Prompt blocks (inside VideoGen popup) — no overflow:hidden so content shows */
@@ -825,6 +895,20 @@ body {
 }
 .action-btn:disabled { opacity: .5; cursor: default; }
 
+/* Upload progress bar (shown inside action button during upload) */
+.upload-progress {
+  display: flex; align-items: center; gap: 8px;
+  min-width: 120px;
+}
+.upload-progress__fill {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: var(--accent); transition: width .2s ease;
+}
+.upload-progress__text {
+  font-family: "Fredoka", system-ui, sans-serif; font-size: 11px; font-weight: 600;
+  color: var(--ink-2); flex: none; min-width: 28px; text-align: right;
+}
+
 /* ---------- title readability over dark backgrounds ---------- */
 .chapter-world[data-world="memory-town"] .level-title,
 .chapter-world[data-world="planning-camp"] .level-title {
@@ -864,10 +948,10 @@ body {
   }
   .chapter-heading .ch-no { padding: 6px 8px; letter-spacing: .4px; }
   .chapter-levels { max-width: 300px; }
-  .level-node { width: 140px; height: 140px; border-radius: 28px; }
-  .level-node-wrap--current { --current-node-size: 152px; }
-  .level-node-wrap--current .level-node { width: 152px; height: 152px; }
-  .level-node-wrap { width: 190px; margin: 30px auto; }
+  .level-node { width: 160px; height: 160px; border-radius: 30px; }
+  .level-node-wrap--current { --current-node-size: 176px; }
+  .level-node-wrap--current .level-node { width: 176px; height: 176px; }
+  .level-node-wrap { width: 210px; margin: 30px auto; }
   .chapter-world:nth-child(odd) .level-node-wrap:nth-child(odd),
   .chapter-world:nth-child(even) .level-node-wrap:nth-child(even) {
     transform: translateX(clamp(-46px, -10vw, -34px));

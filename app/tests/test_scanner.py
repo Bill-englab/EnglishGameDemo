@@ -102,6 +102,31 @@ def test_scan_detects_webm_performance(tmp_path):
     assert lv["has_performance"] is True
 
 
+def test_scan_with_username_isolates_performance(tmp_path):
+    """When a username is given, performance is read from
+    recordings_root/<username>/<chapter>/<level>/ — so userA's recording is
+    invisible to userB, and None falls back to the shared layout."""
+    roots = make_roots(tmp_path)
+    make_level(roots, "01-c", "01-s", demo=True)  # no shared performance
+    # Only userA has a performance video, under their own folder.
+    r = roots.recordings / "userA" / "01-c" / "01-s"
+    r.mkdir(parents=True)
+    (r / "performance.mp4").write_bytes(b"")
+
+    # userA sees their recording.
+    chapters = scan_library(roots.content, roots.demo, roots.recordings,
+                            username="userA")
+    assert chapters[0]["levels"][0]["has_performance"] is True
+    # userB does not — recordings are isolated per user.
+    chapters = scan_library(roots.content, roots.demo, roots.recordings,
+                            username="userB")
+    assert chapters[0]["levels"][0]["has_performance"] is False
+    # Backward compat: username=None looks at the shared recordings layout
+    # (no <username> layer), where no performance file exists.
+    chapters = scan_library(roots.content, roots.demo, roots.recordings)
+    assert chapters[0]["levels"][0]["has_performance"] is False
+
+
 def test_scan_reads_scene_from_meta(tmp_path):
     roots = make_roots(tmp_path)
     make_level(roots, "01-c", "01-s", demo=True, title="Scene One",

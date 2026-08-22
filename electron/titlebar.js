@@ -7,13 +7,19 @@
     /* Map view topbar — draggable */
     .topbar { -webkit-app-region: drag; }
     .topbar button, .topbar .progress, .topbar a,
-    .topbar .window-controls { -webkit-app-region: no-drag; }
+    .topbar .user-menu, .topbar .window-controls { -webkit-app-region: no-drag; }
 
     /* Detail view header — also draggable */
     .detail-header { -webkit-app-region: drag; }
     .detail-header button, .detail-header .chip,
-    .detail-header .window-controls,
-    .detail-header .videogen-toggle { -webkit-app-region: no-drag; }
+    .detail-header .videogen-toggle,
+    .detail-header .window-controls { -webkit-app-region: no-drag; }
+
+    /* Login page — brand panel is draggable */
+    .login-brand { -webkit-app-region: drag; }
+    .login-brand img, .login-brand .window-controls { -webkit-app-region: no-drag; }
+    /* Form panel not draggable (inputs need interaction) */
+    .login-form-panel { -webkit-app-region: no-drag; }
 
     /* Window control buttons — polished Windows 11 style */
     .window-controls {
@@ -80,13 +86,21 @@
   function injectInto(selector) {
     const el = document.querySelector(selector);
     if (!el || el.querySelector(".window-controls")) return false;
-    el.appendChild(makeControls());
+    const controls = makeControls();
+    // For login-brand, position at top-right corner
+    if (selector === ".login-brand") {
+      controls.style.position = "absolute";
+      controls.style.top = "12px";
+      controls.style.right = "12px";
+    }
+    el.appendChild(controls);
     return true;
   }
 
   function injectAll() {
     injectInto(".topbar");
     injectInto(".detail-header");
+    injectInto(".login-brand");
   }
 
   // Try immediately, on DOMContentLoaded, and after delays (dynamic rendering)

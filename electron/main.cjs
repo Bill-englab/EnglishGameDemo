@@ -63,7 +63,7 @@ async function createWindow() {
     width: 1280,
     height: 800,
     frame: false,
-    show: false,
+    show: true,
     minWidth: 800,
     minHeight: 600,
     webPreferences: {
@@ -75,8 +75,7 @@ async function createWindow() {
 
   mainWindow.loadURL(URL);
   mainWindow.once("ready-to-show", () => {
-    mainWindow.maximize();  // start maximized (fills the screen)
-    mainWindow.show();
+    mainWindow.maximize();
   });
 
   mainWindow.on("closed", () => { mainWindow = null; });

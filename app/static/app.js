@@ -373,12 +373,26 @@ function renderRecordError(container, level, err) {
   fallback.className = "action-btn";
   fallback.textContent = "Choose file";
   fallback.addEventListener("click", async () => {
+    // Show progress bar inside the button
+    fallback.disabled = true;
+    const bar = document.createElement("div");
+    bar.className = "upload-progress";
+    bar.innerHTML = `<div class="upload-progress__fill" style="width:0%"></div><span class="upload-progress__text">0%</span>`;
+    fallback.textContent = "";
+    fallback.appendChild(bar);
+    const fill = bar.querySelector(".upload-progress__fill");
+    const text = bar.querySelector(".upload-progress__text");
     try {
-      await uploadVideo(level, "performance");
+      await uploadVideo(level, "performance", (pct) => {
+        fill.style.width = pct + "%";
+        text.textContent = pct + "%";
+      });
       await loadLibrary();
       reopenDetail(level.chapter, level.level);
     } catch (e) {
       console.error("File upload fallback failed", e);
+      fallback.textContent = "Choose file";
+      fallback.disabled = false;
     }
   });
   msg.appendChild(fallback);
@@ -630,12 +644,16 @@ function observeBgSwitch(slides) {
   activeChapter = null;
   // Run once immediately to set the initial slide.
   updateBgOnScroll(slides);
-  // Throttled scroll listener via requestAnimationFrame.
-  window.addEventListener("scroll", () => {
+  // Throttled scroll listener — listen on #map-view (the actual scroll container)
+  // AND window (fallback for non-Electron browsers where body scrolls).
+  const scrollHandler = () => {
     if (bgScrollTicking) return;
     bgScrollTicking = true;
     requestAnimationFrame(() => { updateBgOnScroll(slides); bgScrollTicking = false; });
-  }, { passive: true });
+  };
+  const mapView = document.getElementById("map-view");
+  if (mapView) mapView.addEventListener("scroll", scrollHandler, { passive: true });
+  window.addEventListener("scroll", scrollHandler, { passive: true });
 }
 
 function renderMap(library) {
@@ -800,13 +818,20 @@ function openDetail(level) {
     slot.className = "video-slot--empty";
     slot.innerHTML = `<span class="plus">+</span>`;
     slot.addEventListener("click", async () => {
-      slot.style.opacity = "0.5";
+      // Replace + with progress bar
+      slot.innerHTML = `<div class="upload-progress"><div class="upload-progress__fill" style="width:0%"></div><span class="upload-progress__text">0%</span></div>`;
+      const fill = slot.querySelector(".upload-progress__fill");
+      const text = slot.querySelector(".upload-progress__text");
       try {
-        await uploadVideo(level, "demo");
+        await uploadVideo(level, "demo", (pct) => {
+          fill.style.width = pct + "%";
+          text.textContent = pct + "%";
+        });
         await loadLibrary();
         reopenDetail(level.chapter, level.level);
       } catch (e) {
         console.error("Demo upload failed", e);
+        slot.innerHTML = `<span class="plus">+</span>`;
         slot.style.opacity = "1";
       }
     });
@@ -941,6 +966,8 @@ function openDetail(level) {
   view.classList.remove("hidden");
   view.classList.add("open");
   window.scrollTo(0, 0);
+  // Re-inject window controls into the freshly-rendered detail header
+  if (window.__injectTitlebar) window.__injectTitlebar();
 }
 
 // Re-open detail for the same level after an upload refreshes the library.
@@ -962,11 +989,9 @@ function closeDetail() {
   requestAnimationFrame(() => {
     drawMapPath();
     window.scrollTo(0, mapScrollY);
-    // Force-refresh the background: while the map was display:none the
-    // scroll listener couldn't detect the active chapter. Reset and
-    // re-detect now that layout is restored.
     activeChapter = null;
-    updateBgOnScroll(bgSlides);
+    // Delay bg refresh slightly so scroll position is restored first
+    setTimeout(() => updateBgOnScroll(bgSlides), 50);
   });
 }
 

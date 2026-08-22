@@ -631,15 +631,17 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 16px;
-  flex: 1; /* videos fill remaining vertical space */
+  align-items: stretch; /* both columns same height */
 }
 .video-col {
   background: var(--surface-2);
+  border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 14px;
+  padding: 16px;
   display: flex; flex-direction: column;
+  min-height: 280px;
 }
-.video-slot-wrap { flex: 1; }
+.video-slot-wrap { flex: 1; display: flex; flex-direction: column; }
 
 /* Bottom row: dialogue + variations side by side */
 .text-row {

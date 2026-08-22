@@ -91,15 +91,28 @@ async function pickVideoFile() {
   });
 }
 
-// Upload a File to the given chapter/level/kind. Returns true on success.
-async function uploadVideo(level, kind) {
+// Upload a File to the given chapter/level/kind with progress reporting.
+// Returns true on success. onProgress(percent) is called during upload.
+async function uploadVideo(level, kind, onProgress) {
   const file = await pickVideoFile();
   if (!file) return false;
   const fd = new FormData();
   fd.append("file", file, file.name || "video.mp4");
-  const res = await fetch(uploadURL(level.chapter, level.level, kind), { method: "POST", body: fd });
-  if (!res.ok) throw new Error(`upload ${res.status}`);
-  return true;
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", uploadURL(level.chapter, level.level, kind));
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable && onProgress) {
+        onProgress(Math.round((e.loaded / e.total) * 100));
+      }
+    };
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) resolve(true);
+      else reject(new Error(`upload ${xhr.status}`));
+    };
+    xhr.onerror = () => reject(new Error("upload network error"));
+    xhr.send(fd);
+  });
 }
 
 // Build a small "Replace" button for the demo area (dad's tool, not the kid's).
@@ -112,11 +125,21 @@ function makeActionButton(label, level, kind, onDone) {
   btn.addEventListener("click", async () => {
     btn.disabled = true;
     const orig = btn.textContent;
-    btn.textContent = "Uploading…";
+    // Replace button text with a progress bar
+    const bar = document.createElement("div");
+    bar.className = "upload-progress";
+    bar.innerHTML = `<div class="upload-progress__fill" style="width:0%"></div><span class="upload-progress__text">0%</span>`;
+    btn.textContent = "";
+    btn.appendChild(bar);
+    const fill = bar.querySelector(".upload-progress__fill");
+    const text = bar.querySelector(".upload-progress__text");
     try {
-      await uploadVideo(level, kind);
-      await loadLibrary();  // refresh the library so has_demo/has_performance updates
-      onDone();             // re-open detail to show the new video
+      await uploadVideo(level, kind, (pct) => {
+        fill.style.width = pct + "%";
+        text.textContent = pct + "%";
+      });
+      await loadLibrary();
+      onDone();
     } catch (e) {
       console.error("Upload failed", e);
       btn.textContent = "Failed — retry";

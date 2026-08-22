@@ -116,31 +116,65 @@ body {
 }
 .topbar .progress #star-count { color: var(--accent-deep); font-weight: 700; }
 
-/* User area — username + logout button */
-.user-area {
-  display: flex; align-items: center; gap: 8px; flex: none;
-  -webkit-app-region: no-drag;
-}
-#user-name {
+/* User menu — trigger button + popup bubble */
+.user-menu { position: relative; flex: none; -webkit-app-region: no-drag; }
+.user-menu__trigger {
+  display: flex; align-items: center; gap: 6px;
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 14px;
-  color: var(--ink-soft);
-}
-.logout-btn {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
-  color: var(--ink-2); background: rgba(255,255,255,.7);
-  border: 1px solid var(--line-strong);
-  padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  color: var(--ink-soft); background: rgba(255,255,255,.6);
+  border: 1px solid rgba(255,255,255,.8); border-radius: 999px;
+  padding: 6px 12px; cursor: pointer;
   transition: all .15s ease;
 }
-.logout-btn:hover { color: #e8554e; border-color: #e8554e; }
-.admin-link {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
-  color: var(--ink-2); text-decoration: none;
-  padding: 5px 12px; border-radius: 999px;
-  border: 1px solid var(--line-strong);
-  transition: all .15s ease;
+.user-menu__trigger:hover { background: #fff; color: var(--ink); }
+.user-menu__trigger svg { color: var(--ink-3); }
+#user-name { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.user-menu__popup {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 220px; background: #fff;
+  border: 1px solid var(--line-strong); border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(20,22,26,.14);
+  padding: 8px; z-index: 100;
 }
-.admin-link:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
+.user-menu__item {
+  display: block; width: 100%; text-align: left;
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 14px;
+  color: var(--ink); background: none; border: none;
+  padding: 10px 14px; border-radius: 8px; cursor: pointer;
+  transition: background .12s;
+}
+.user-menu__item:hover { background: var(--surface-2); }
+.user-menu__item--logout { color: #e8554e; }
+.user-menu__item--logout:hover { background: #fef0ee; }
+.user-menu__section { border-bottom: 1px solid var(--line); margin-bottom: 4px; padding-bottom: 4px; }
+
+/* Admin panel inside the popup */
+.user-menu__admin-panel { padding: 8px 4px 4px; }
+.admin-add { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.admin-add input {
+  font-family: "Fredoka", system-ui, sans-serif; font-size: 13px;
+  padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; outline: none;
+}
+.admin-add input:focus { border-color: var(--accent); }
+.admin-add button {
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
+  color: #fff; background: var(--accent); border: none; border-radius: 8px;
+  padding: 8px; cursor: pointer;
+}
+.admin-add button:hover { background: var(--accent-deep); }
+.admin-user-list { list-style: none; padding: 0; margin: 0; }
+.admin-user-list li {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 10px; font-size: 13px; color: var(--ink);
+  border-radius: 6px; margin-bottom: 2px;
+}
+.admin-user-list li:hover { background: var(--surface-2); }
+.admin-user-list .del-user {
+  font-size: 11px; color: #e8554e; background: none; border: 1px solid var(--line);
+  border-radius: 999px; padding: 2px 8px; cursor: pointer;
+}
+.admin-user-list .del-user:hover { border-color: #e8554e; }
 
 /* ---------- loading / error status cards ---------- */
 .status-card {

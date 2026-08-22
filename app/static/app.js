@@ -992,6 +992,34 @@ async function loadLibrary() {
 }
 document.getElementById("map-retry").addEventListener("click", loadLibrary);
 
+// ===== admin user management (popup) =====
+async function loadAdminUsers() {
+  try {
+    const res = await fetch("/api/admin/users", { credentials: "same-origin" });
+    const data = await res.json();
+    const list = document.getElementById("admin-user-list");
+    if (!list) return;
+    list.innerHTML = "";
+    for (const u of data.users) {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${u}</span>`;
+      const del = document.createElement("button");
+      del.className = "del-user";
+      del.textContent = "Delete";
+      del.addEventListener("click", async () => {
+        const r = await fetch("/api/admin/users", {
+          method: "POST", credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "delete", username: u }),
+        });
+        if (r.ok) loadAdminUsers();
+      });
+      li.appendChild(del);
+      list.appendChild(li);
+    }
+  } catch (e) { console.error("Failed to load admin users", e); }
+}
+
 // ===== init =====
 async function init() {
   // Check login status before loading the app
@@ -1002,13 +1030,13 @@ async function init() {
       window.location.href = "/login";
       return;
     }
-    // Show username + logout in topbar
-    const userEl = document.getElementById("user-name");
-    if (userEl) userEl.textContent = data.username;
-    if (data.isAdmin) {
-      const adminLink = document.getElementById("admin-link");
-      if (adminLink) adminLink.style.display = "";
-    }
+  // Show username in menu trigger
+  const userEl = document.getElementById("user-name");
+  if (userEl) userEl.textContent = data.username;
+  if (data.isAdmin) {
+    const adminSection = document.getElementById("admin-section");
+    if (adminSection) adminSection.style.display = "";
+  }
   } catch (_) {
     window.location.href = "/login";
     return;
@@ -1016,12 +1044,51 @@ async function init() {
 
   document.getElementById("back-btn").addEventListener("click", closeDetail);
 
-  // Wire logout button
+  // User menu popup — toggle on click, close on outside click
+  const menuTrigger = document.getElementById("user-menu-trigger");
+  const menuPopup = document.getElementById("user-menu-popup");
+  if (menuTrigger && menuPopup) {
+    menuTrigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menuPopup.style.display = menuPopup.style.display === "none" ? "block" : "none";
+    });
+    document.addEventListener("click", (e) => {
+      if (!menuPopup.contains(e.target) && !menuTrigger.contains(e.target)) {
+        menuPopup.style.display = "none";
+      }
+    });
+  }
+
+  // Logout
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) logoutBtn.addEventListener("click", () => {
     fetch("/logout", { credentials: "same-origin" }).then(() => {
       window.location.href = "/login";
     });
+  });
+
+  // Admin: manage users in popup
+  const adminBtn = document.getElementById("admin-btn");
+  const adminPanel = document.getElementById("admin-panel");
+  if (adminBtn && adminPanel) {
+    adminBtn.addEventListener("click", () => {
+      adminPanel.style.display = adminPanel.style.display === "none" ? "block" : "none";
+      if (adminPanel.style.display === "block") loadAdminUsers();
+    });
+  }
+  const adminAddBtn = document.getElementById("admin-add-btn");
+  if (adminAddBtn) adminAddBtn.addEventListener("click", async () => {
+    const u = document.getElementById("admin-username").value.trim();
+    const p = document.getElementById("admin-password").value;
+    if (!u || !p) return;
+    const fd = new FormData();
+    fd.append("action", "add"); fd.append("username", u); fd.append("password", p);
+    const res = await fetch("/admin", { method: "POST", body: fd, credentials: "same-origin" });
+    if (res.ok) {
+      document.getElementById("admin-username").value = "";
+      document.getElementById("admin-password").value = "";
+      loadAdminUsers();
+    }
   });
 
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawMapPath);

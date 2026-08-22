@@ -137,7 +137,7 @@ def api_me():
 @app.route("/admin", methods=["GET", "POST"])
 @admin_required
 def admin():
-    """Admin user management — add/list/delete users."""
+    """Admin user management — add/list/delete users (HTML page, kept for backward compat)."""
     if request.method == "POST":
         action = request.form.get("action", "")
         if action == "add":
@@ -164,6 +164,47 @@ def admin():
                 return render_template("admin.html", users=load_users(), success=f"User '{username}' deleted.")
             return render_template("admin.html", users=load_users(), error=f"User '{username}' not found.")
     return render_template("admin.html", users=load_users(), error=None, success=None)
+
+
+@app.route("/api/admin/users")
+@admin_required
+def api_admin_users():
+    """Return user list as JSON for the popup menu."""
+    users = load_users()
+    return jsonify({"users": [u for u in users.keys() if u != ADMIN_USERNAME]})
+
+
+@app.route("/api/admin/users", methods=["POST"])
+@admin_required
+def api_admin_users_action():
+    """Add or delete a user via JSON (for the popup menu AJAX)."""
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
+    action = data.get("action", "")
+    username = data.get("username", "").strip()
+    if action == "add":
+        password = data.get("password", "")
+        if not _valid_username(username):
+            return jsonify({"error": "Invalid username"}), 400
+        if len(password) < 4:
+            return jsonify({"error": "Password too short"}), 400
+        users = load_users()
+        if username in users:
+            return jsonify({"error": "User already exists"}), 400
+        users[username] = generate_password_hash(password)
+        save_users(users)
+        return jsonify({"ok": True, "users": [u for u in users.keys() if u != ADMIN_USERNAME]})
+    elif action == "delete":
+        if username == ADMIN_USERNAME or not _valid_username(username):
+            return jsonify({"error": "Cannot delete this user"}), 400
+        users = load_users()
+        if username in users:
+            del users[username]
+            save_users(users)
+            return jsonify({"ok": True, "users": [u for u in users.keys() if u != ADMIN_USERNAME]})
+        return jsonify({"error": "User not found"}), 404
+    return jsonify({"error": "Unknown action"}), 400
 
 
 @app.route("/")

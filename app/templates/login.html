@@ -3,63 +3,111 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f7f8fa">
+  <meta name="theme-color" content="#f7e8d6">
   <title>My English Adventure — Sign In</title>
   <link rel="stylesheet" href="/static/style.css">
-  <link rel="icon" type="image/png" sizes="128x128" href="/static/icon.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="/static/icon.png">
   <link rel="icon" href="/static/favicon.ico">
   <style>
-    /* Login page is self-contained: reuse style.css only for the self-hosted
-       @font-face definitions (Fredoka/Nunito), so it stays offline-capable. */
-    .login-wrap {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; padding: 24px;
-      background: linear-gradient(160deg, #fdf2e4 0%, #f7e8d6 100%);
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
     }
-    .login-card {
-      background: #fff; border-radius: 22px;
-      box-shadow: 0 12px 34px rgba(60, 40, 20, 0.16);
-      padding: 36px 30px; max-width: 360px; width: 100%; text-align: center;
+    .login-page { display: flex; min-height: 100vh; }
+    /* Left panel: brand + illustration */
+    .login-brand {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #fdf2e4 0%, #f7e0c8 40%, #f0d4a8 100%);
+      padding: 48px; position: relative;
     }
-    .login-card h1 {
-      font-family: 'Fredoka', sans-serif; font-size: 30px; margin: 0 0 8px;
-      color: #3a2a1a;
+    .login-brand__logo {
+      width: 96px; height: 96px; border-radius: 24px;
+      box-shadow: 0 12px 32px rgba(120,70,20,.18); margin-bottom: 24px;
     }
-    .login-card .subtitle { color: #7a6a5a; margin: 0 0 22px; font-size: 15px; }
-    .login-card label {
-      display: block; text-align: left; font-size: 13px; color: #5a4a3a;
-      margin: 12px 0 4px;
+    .login-brand__title {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
+      font-size: 36px; color: #3a2a1a; text-align: center; line-height: 1.2;
     }
-    .login-card input {
-      width: 100%; box-sizing: border-box; padding: 12px 14px;
-      border: 2px solid #e8ddcf; border-radius: 12px; font-size: 16px;
-      font-family: inherit; color: #3a2a1a;
+    .login-brand__subtitle {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 500;
+      font-size: 16px; color: #8a6a4a; margin-top: 12px; text-align: center; max-width: 320px;
     }
-    .login-card input:focus { outline: none; border-color: #f5a623; }
-    .login-card button {
-      margin-top: 22px; width: 100%; padding: 14px; border: none;
-      border-radius: 12px; background: #f5a623; color: #fff; font-size: 17px;
-      font-weight: 700; font-family: 'Fredoka', sans-serif; cursor: pointer;
+    .login-brand__deco { margin-top: 40px; display: flex; gap: 16px; }
+    .login-brand__deco span { width: 10px; height: 10px; border-radius: 50%; }
+    .login-brand__deco span:nth-child(1) { background: #f5a623; }
+    .login-brand__deco span:nth-child(2) { background: #4caf50; }
+    .login-brand__deco span:nth-child(3) { background: #2d5bff; }
+    /* Right panel: form */
+    .login-form-panel {
+      width: 420px; display: flex; align-items: center; justify-content: center;
+      background: #fff; padding: 48px 40px;
     }
-    .login-card button:hover { background: #e89b15; }
+    .login-form { width: 100%; max-width: 300px; }
+    .login-form h2 {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
+      font-size: 22px; color: #14161a; margin-bottom: 6px;
+    }
+    .login-form__hint { font-size: 14px; color: #8a92a0; margin-bottom: 28px; }
+    .login-field { margin-bottom: 18px; }
+    .login-field label {
+      display: block; font-family: "Fredoka", system-ui, sans-serif;
+      font-weight: 600; font-size: 13px; color: #5a6070; margin-bottom: 6px;
+    }
+    .login-field input {
+      width: 100%; padding: 12px 14px; font-size: 15px; font-family: inherit;
+      border: 1.5px solid #e4e7ee; border-radius: 10px; color: #14161a;
+      transition: border-color .15s; outline: none;
+    }
+    .login-field input:focus { border-color: #f5a623; }
+    .login-form button {
+      width: 100%; padding: 13px; border: none; border-radius: 10px;
+      background: linear-gradient(135deg, #f5a623, #e89b15);
+      color: #fff; font-size: 16px; font-weight: 700;
+      font-family: "Fredoka", system-ui, sans-serif; cursor: pointer;
+      transition: transform .12s; margin-top: 8px;
+    }
+    .login-form button:hover { transform: translateY(-1px); }
+    .login-form button:active { transform: translateY(0); }
     .login-error {
-      color: #c0392b; background: #fdecea; border-radius: 10px;
-      padding: 10px; margin-bottom: 12px; font-size: 14px;
+      color: #c42b1c; background: #fef0ee; border: 1px solid #f5c6c0;
+      border-radius: 8px; padding: 10px 14px; margin-bottom: 16px;
+      font-size: 14px; text-align: center;
+    }
+    @media (max-width: 768px) {
+      .login-page { flex-direction: column; }
+      .login-brand { padding: 32px 24px; }
+      .login-brand__logo { width: 64px; height: 64px; }
+      .login-brand__title { font-size: 26px; }
+      .login-form-panel { width: 100%; padding: 32px 24px; }
     }
   </style>
 </head>
 <body>
-  <div class="login-wrap">
-    <form class="login-card" method="post" action="/login">
-      <h1>My English Adventure</h1>
-      <p class="subtitle">Sign in to start your adventure.</p>
-      {% if error %}<div class="login-error">{{ error }}</div>{% endif %}
-      <label for="username">Username</label>
-      <input id="username" name="username" type="text" autocomplete="username" required autofocus>
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" autocomplete="current-password" required>
-      <button type="submit">Let's go!</button>
-    </form>
+  <div class="login-page">
+    <div class="login-brand">
+      <img class="login-brand__logo" src="/static/icon.png" alt="My English Adventure">
+      <div class="login-brand__title">My English Adventure</div>
+      <div class="login-brand__subtitle">A storybook adventure map for English role-play. Watch, practice, perform, and replay.</div>
+      <div class="login-brand__deco"><span></span><span></span><span></span></div>
+    </div>
+    <div class="login-form-panel">
+      <form class="login-form" method="post" action="/login">
+        <h2>Welcome back</h2>
+        <p class="login-form__hint">Sign in to continue your adventure.</p>
+        {% if error %}<div class="login-error">{{ error }}</div>{% endif %}
+        <div class="login-field">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+        </div>
+        <div class="login-field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>

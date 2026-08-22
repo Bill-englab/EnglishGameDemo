@@ -16,14 +16,26 @@ RECORDINGS_ROOT = Path(os.environ.get("RECORDINGS_ROOT", _PROJECT / "recordings"
 PROMPTS_ROOT = Path(os.environ.get("PROMPTS_ROOT", _PROJECT / "prompts"))
 USERS_FILE = _PROJECT / "app" / "users.json"
 
-# Admin account — hardcoded, password can be changed here.
-# Admin can add/remove users via the /admin page (no need to edit users.json manually).
+# Sensitive config (admin password, secret key) read from config.json — NOT in the repo.
+# Copy config.example.json to config.json and edit before deploying.
+# config.json is gitignored and never committed.
+_CONFIG_FILE = _PROJECT / "app" / "config.json"
+_CONFIG_EXAMPLE = _PROJECT / "app" / "config.example.json"
+
+def _load_config():
+    """Load config.json. If missing, fall back to config.example.json with a warning."""
+    f = _CONFIG_FILE if _CONFIG_FILE.exists() else _CONFIG_EXAMPLE
+    try:
+        return json.loads(f.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {"admin_password": "admin123", "secret_key": "dev-fallback-change-me"}
+
+_cfg = _load_config()
 ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "admin123"  # change this before deploying!
+ADMIN_PASSWORD = _cfg.get("admin_password", "admin123")
 
 app = Flask(__name__)
-# Fixed secret key — no environment variable needed. Unique enough for session signing.
-app.secret_key = "mea-2026-secret-key-7f3a9b2e8c5d1a4f6e0b3d9c7a2f5e8d"
+app.secret_key = _cfg.get("secret_key", "dev-fallback-change-me")
 app.config["MAX_CONTENT_LENGTH"] = 500 * 1024 * 1024  # 500 MB upload cap
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"

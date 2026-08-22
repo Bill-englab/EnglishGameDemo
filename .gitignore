@@ -10,3 +10,9 @@ recordings/**/*.mp4
 .claude/
 .superpowers/
 .zcode/
+.env
+.env.*
+
+# Sensitive config — never commit. Copy config.example.json to config.json and edit locally.
+app/config.json
+app/users.json

@@ -48,4 +48,4 @@ sh.CurrentDirectory = repoRoot
 Dim q
 q = Chr(34)   ' double-quote for safely quoting paths
 
-sh.Run q & electronExe & q & " " & q & electronMain & q, 0, True
+sh.Run q & electronExe & q & " " & q & electronMain & q, 1, True

@@ -68,7 +68,7 @@ async function createWindow() {
     show: true,
     minWidth: 800,
     minHeight: 600,
-    icon: path.join(APP_DIR, "static", "icon.png"),
+    icon: path.join(APP_DIR, "static", "favicon.ico"),
     webPreferences: {
       preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,

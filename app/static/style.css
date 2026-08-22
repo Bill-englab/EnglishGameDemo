@@ -133,6 +133,14 @@ body {
   transition: all .15s ease;
 }
 .logout-btn:hover { color: #e8554e; border-color: #e8554e; }
+.admin-link {
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
+  color: var(--ink-2); text-decoration: none;
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  transition: all .15s ease;
+}
+.admin-link:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
 
 /* ---------- loading / error status cards ---------- */
 .status-card {

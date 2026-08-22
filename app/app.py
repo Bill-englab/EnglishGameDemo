@@ -14,10 +14,16 @@ CONTENT_ROOT = Path(os.environ.get("CONTENT_ROOT", _PROJECT / "content"))
 DEMO_ROOT = Path(os.environ.get("DEMO_ROOT", _PROJECT / "demo"))
 RECORDINGS_ROOT = Path(os.environ.get("RECORDINGS_ROOT", _PROJECT / "recordings"))
 PROMPTS_ROOT = Path(os.environ.get("PROMPTS_ROOT", _PROJECT / "prompts"))
-USERS_FILE = Path(os.environ.get("USERS_FILE", _PROJECT / "app" / "users.json"))
+USERS_FILE = _PROJECT / "app" / "users.json"
+
+# Admin account — hardcoded, password can be changed here.
+# Admin can add/remove users via the /admin page (no need to edit users.json manually).
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "admin123"  # change this before deploying!
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-change-me")
+# Fixed secret key — no environment variable needed. Unique enough for session signing.
+app.secret_key = "mea-2026-secret-key-7f3a9b2e8c5d1a4f6e0b3d9c7a2f5e8d"
 app.config["MAX_CONTENT_LENGTH"] = 500 * 1024 * 1024  # 500 MB upload cap
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
@@ -39,13 +45,47 @@ def _valid_username(name):
 
 
 def load_users():
-    """Read the users.json file → {username: password_hash}. Missing/corrupt → {}."""
-    if not USERS_FILE.exists():
-        return {}
-    try:
-        return json.loads(USERS_FILE.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return {}
+    """Read users.json → {username: password_hash}. Admin is always included.
+    Missing/corrupt file → only admin is available."""
+    users = {}
+    if USERS_FILE.exists():
+        try:
+            users = json.loads(USERS_FILE.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            users = {}
+    # Admin is always present, password stored in plaintext (hardcoded).
+    # Regular users have hashed passwords in users.json.
+    users[ADMIN_USERNAME] = {"plaintext": ADMIN_PASSWORD}
+    return users
+
+
+def save_users(users):
+    """Write users.json (admin excluded — it's hardcoded)."""
+    to_save = {k: v for k, v in users.items() if k != ADMIN_USERNAME}
+    USERS_FILE.write_text(json.dumps(to_save, indent=2), encoding="utf-8")
+
+
+def verify_password(username, password):
+    """Check if username/password combo is valid. Handles both admin (plaintext)
+    and regular users (hashed)."""
+    users = load_users()
+    stored = users.get(username)
+    if not stored:
+        return False
+    if isinstance(stored, dict) and "plaintext" in stored:
+        return stored["plaintext"] == password
+    # Hashed password (string stored directly in users.json)
+    return check_password_hash(stored, password)
+
+
+def admin_required(f):
+    """Require the logged-in user to be admin."""
+    @functools.wraps(f)
+    def wrapped(*args, **kwargs):
+        if session.get("username") != ADMIN_USERNAME:
+            return redirect(url_for("index"))
+        return f(*args, **kwargs)
+    return wrapped
 
 
 def login_required(f):
@@ -60,17 +100,10 @@ def login_required(f):
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Render the sign-in form (GET) or authenticate (POST).
-
-    On success the username is stored in the session and the user is sent to
-    the map. On failure the form is re-rendered with an error message.
-    """
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
-        users = load_users()
-        stored = users.get(username)
-        if stored and check_password_hash(stored, password):
+        if _valid_username(username) and verify_password(username, password):
             session["username"] = username
             return redirect(url_for("index"))
         return render_template("login.html", error="Wrong username or password.")
@@ -85,8 +118,40 @@ def logout():
 
 @app.route("/api/me")
 def api_me():
-    """Let the frontend check login state. No auth: returns null when logged out."""
-    return jsonify({"username": session.get("username")})
+    username = session.get("username")
+    return jsonify({"username": username, "isAdmin": username == ADMIN_USERNAME})
+
+
+@app.route("/admin", methods=["GET", "POST"])
+@admin_required
+def admin():
+    """Admin user management — add/list/delete users."""
+    if request.method == "POST":
+        action = request.form.get("action", "")
+        if action == "add":
+            username = request.form.get("username", "").strip()
+            password = request.form.get("password", "")
+            if not _valid_username(username):
+                return render_template("admin.html", users=load_users(), error="Invalid username. Use letters, numbers, dash, underscore only.")
+            if len(password) < 4:
+                return render_template("admin.html", users=load_users(), error="Password too short (min 4 characters).")
+            users = load_users()
+            if username in users and username != ADMIN_USERNAME:
+                return render_template("admin.html", users=load_users(), error=f"User '{username}' already exists.")
+            users[username] = generate_password_hash(password)
+            save_users(users)
+            return render_template("admin.html", users=load_users(), success=f"User '{username}' added.")
+        elif action == "delete":
+            username = request.form.get("username", "").strip()
+            if username == ADMIN_USERNAME:
+                return render_template("admin.html", users=load_users(), error="Cannot delete admin.")
+            users = load_users()
+            if username in users:
+                del users[username]
+                save_users(users)
+                return render_template("admin.html", users=load_users(), success=f"User '{username}' deleted.")
+            return render_template("admin.html", users=load_users(), error=f"User '{username}' not found.")
+    return render_template("admin.html", users=load_users(), error=None, success=None)
 
 
 @app.route("/")

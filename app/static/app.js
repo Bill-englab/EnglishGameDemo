@@ -982,6 +982,10 @@ async function init() {
     // Show username + logout in topbar
     const userEl = document.getElementById("user-name");
     if (userEl) userEl.textContent = data.username;
+    if (data.isAdmin) {
+      const adminLink = document.getElementById("admin-link");
+      if (adminLink) adminLink.style.display = "";
+    }
   } catch (_) {
     window.location.href = "/login";
     return;

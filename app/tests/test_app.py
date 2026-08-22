@@ -317,7 +317,9 @@ def test_login_rejects_wrong_password(app_env):
 
 
 def test_api_me_reports_null_when_logged_out(app_env):
-    assert app_env.get("/api/me").get_json() == {"username": None}
+    me = app_env.get("/api/me").get_json()
+    assert me["username"] is None
+    assert me["isAdmin"] is False
 
 
 def test_logout_clears_session(client):
@@ -385,3 +387,68 @@ def test_performance_isolated_between_users(tmp_path, monkeypatch):
     assert (recordings / "userA" / "01-c" / "01-s" / "performance.mp4").exists()
     assert not (recordings / "userB" / "01-c" / "01-s").exists()
     assert not (recordings / "01-c" / "01-s" / "performance.mp4").exists()
+
+
+# ===== admin tests =====
+
+@pytest.fixture
+def admin_client(app_env):
+    """A test client logged in as admin."""
+    _login(app_env, username="admin", password=app_module.ADMIN_PASSWORD)
+    return app_env
+
+
+def test_admin_login_works(app_env):
+    res = _login(app_env, username="admin", password=app_module.ADMIN_PASSWORD)
+    assert res.status_code == 302
+    me = app_env.get("/api/me").get_json()
+    assert me["username"] == "admin"
+    assert me["isAdmin"] is True
+
+
+def test_admin_page_requires_admin(client):
+    """Non-admin user redirected away from /admin."""
+    res = client.get("/admin")
+    assert res.status_code == 302
+    assert res.headers["Location"].endswith("/")
+
+
+def test_admin_page_accessible_by_admin(admin_client):
+    res = admin_client.get("/admin")
+    assert res.status_code == 200
+    assert b"User Management" in res.data
+
+
+def test_admin_can_add_user(admin_client):
+    res = admin_client.post("/admin", data={
+        "action": "add", "username": "newuser", "password": "newpass123"})
+    assert res.status_code == 200
+    assert b"newuser" in res.data
+    # New user can log in
+    assert _login(admin_client, username="newuser", password="newpass123").status_code == 302
+
+
+def test_admin_can_delete_user(admin_client):
+    # Add then delete
+    admin_client.post("/admin", data={
+        "action": "add", "username": "tempuser", "password": "temppass"})
+    res = admin_client.post("/admin", data={
+        "action": "delete", "username": "tempuser"})
+    assert res.status_code == 200
+    assert b"deleted" in res.data
+    # Verify the user is gone from users.json
+    import json
+    users = json.loads(app_module.USERS_FILE.read_text(encoding="utf-8"))
+    assert "tempuser" not in users
+
+
+def test_admin_cannot_be_deleted(admin_client):
+    res = admin_client.post("/admin", data={
+        "action": "delete", "username": "admin"})
+    assert b"Cannot delete admin" in res.data
+
+
+def test_admin_me_reports_isAdmin(app_env):
+    _login(app_env, username="admin", password=app_module.ADMIN_PASSWORD)
+    me = app_env.get("/api/me").get_json()
+    assert me["isAdmin"] is True

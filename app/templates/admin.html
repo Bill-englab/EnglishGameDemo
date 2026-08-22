@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — My English Adventure</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body { background: #f7f8fa; font-family: "Nunito", system-ui, sans-serif; }
+    .admin-wrap { max-width: 500px; margin: 60px auto; padding: 0 20px; }
+    .admin-card {
+      background: #fff; border: 1px solid #e4e7ee; border-radius: 16px;
+      padding: 28px; box-shadow: 0 8px 32px rgba(20,22,26,.08);
+    }
+    .admin-card h1 {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
+      font-size: 24px; color: #14161a; margin: 0 0 6px;
+    }
+    .admin-card .subtitle { font-size: 14px; color: #8a92a0; margin: 0 0 24px; }
+    .admin-section { margin-bottom: 28px; }
+    .admin-section h2 {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
+      font-size: 14px; color: #5a6070; text-transform: uppercase;
+      letter-spacing: .08em; margin: 0 0 12px;
+    }
+    .admin-form { display: flex; flex-direction: column; gap: 10px; }
+    .admin-form input {
+      font-family: "Fredoka", system-ui, sans-serif; font-size: 15px;
+      padding: 10px 14px; border: 1px solid #cdd3de; border-radius: 10px;
+      outline: none; transition: border-color .15s;
+    }
+    .admin-form input:focus { border-color: #ff9d4d; }
+    .admin-form button {
+      font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 15px;
+      color: #fff; background: #ff9d4d; border: none; border-radius: 10px;
+      padding: 10px 20px; cursor: pointer; transition: background .15s;
+    }
+    .admin-form button:hover { background: #f0772b; }
+    .user-list { list-style: none; padding: 0; margin: 0; }
+    .user-list li {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; border: 1px solid #e4e7ee; border-radius: 10px;
+      margin-bottom: 8px; font-size: 15px; color: #14161a;
+    }
+    .user-list .del-btn {
+      font-family: "Fredoka", system-ui, sans-serif; font-size: 13px;
+      color: #e8554e; background: none; border: 1px solid #e4e7ee;
+      padding: 4px 12px; border-radius: 999px; cursor: pointer;
+    }
+    .user-list .del-btn:hover { border-color: #e8554e; }
+    .msg { font-size: 14px; padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; }
+    .msg-error { background: rgba(232,85,78,.08); color: #c42b1c; }
+    .msg-success { background: rgba(34,197,94,.08); color: #159541; }
+    .back-link { font-size: 14px; color: #8a92a0; text-decoration: none; }
+    .back-link:hover { color: #f0772b; }
+  </style>
+</head>
+<body>
+  <div class="admin-wrap">
+    <div class="admin-card">
+      <h1>User Management</h1>
+      <p class="subtitle">Add or remove users. Each user has their own performance videos.</p>
+
+      {% if error %}<div class="msg msg-error">{{ error }}</div>{% endif %}
+      {% if success %}<div class="msg msg-success">{{ success }}</div>{% endif %}
+
+      <div class="admin-section">
+        <h2>Add User</h2>
+        <form class="admin-form" method="POST">
+          <input type="hidden" name="action" value="add">
+          <input type="text" name="username" placeholder="Username (letters, numbers, dash)" required>
+          <input type="password" name="password" placeholder="Password (min 4 characters)" required>
+          <button type="submit">Add User</button>
+        </form>
+      </div>
+
+      <div class="admin-section">
+        <h2>Existing Users</h2>
+        <ul class="user-list">
+          {% for username, _ in users.items() %}
+          <li>
+            <span>{{ username }}{% if username == "admin" %} <small style="color:#8a92a0">(admin)</small>{% endif %}</span>
+            {% if username != "admin" %}
+            <form method="POST" style="margin:0;" onsubmit="return confirm('Delete user {{ username }}? Their recordings will remain but they won\\'t be able to log in.')">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="username" value="{{ username }}">
+              <button type="submit" class="del-btn">Delete</button>
+            </form>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <a href="/" class="back-link">← Back to Map</a>
+    </div>
+  </div>
+</body>
+</html>

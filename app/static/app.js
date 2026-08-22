@@ -957,7 +957,7 @@ function showOnly(id) {
 async function loadLibrary() {
   showOnly("map-loading");
   try {
-    const response = await fetch("/api/library", { cache: "no-store" });
+    const response = await fetch("/api/library", { cache: "no-store", credentials: "same-origin" });
     if (!response.ok) throw new Error(`library ${response.status}`);
     const library = await response.json();
     renderMap(library);
@@ -971,7 +971,31 @@ document.getElementById("map-retry").addEventListener("click", loadLibrary);
 
 // ===== init =====
 async function init() {
+  // Check login status before loading the app
+  try {
+    const res = await fetch("/api/me", { credentials: "same-origin" });
+    const data = await res.json();
+    if (!data.username) {
+      window.location.href = "/login";
+      return;
+    }
+    // Show username + logout in topbar
+    const userEl = document.getElementById("user-name");
+    if (userEl) userEl.textContent = data.username;
+  } catch (_) {
+    window.location.href = "/login";
+    return;
+  }
+
   document.getElementById("back-btn").addEventListener("click", closeDetail);
+
+  // Wire logout button
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) logoutBtn.addEventListener("click", () => {
+    fetch("/logout", { credentials: "same-origin" }).then(() => {
+      window.location.href = "/login";
+    });
+  });
 
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawMapPath);
   setTimeout(drawMapPath, 700);

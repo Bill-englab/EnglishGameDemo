@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <title>My English Adventure — Sign In</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" type="image/png" sizes="128x128" href="/static/icon.png">
+  <link rel="icon" href="/static/favicon.ico">
+  <style>
+    /* Login page is self-contained: reuse style.css only for the self-hosted
+       @font-face definitions (Fredoka/Nunito), so it stays offline-capable. */
+    .login-wrap {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px;
+      background: linear-gradient(160deg, #fdf2e4 0%, #f7e8d6 100%);
+    }
+    .login-card {
+      background: #fff; border-radius: 22px;
+      box-shadow: 0 12px 34px rgba(60, 40, 20, 0.16);
+      padding: 36px 30px; max-width: 360px; width: 100%; text-align: center;
+    }
+    .login-card h1 {
+      font-family: 'Fredoka', sans-serif; font-size: 30px; margin: 0 0 8px;
+      color: #3a2a1a;
+    }
+    .login-card .subtitle { color: #7a6a5a; margin: 0 0 22px; font-size: 15px; }
+    .login-card label {
+      display: block; text-align: left; font-size: 13px; color: #5a4a3a;
+      margin: 12px 0 4px;
+    }
+    .login-card input {
+      width: 100%; box-sizing: border-box; padding: 12px 14px;
+      border: 2px solid #e8ddcf; border-radius: 12px; font-size: 16px;
+      font-family: inherit; color: #3a2a1a;
+    }
+    .login-card input:focus { outline: none; border-color: #f5a623; }
+    .login-card button {
+      margin-top: 22px; width: 100%; padding: 14px; border: none;
+      border-radius: 12px; background: #f5a623; color: #fff; font-size: 17px;
+      font-weight: 700; font-family: 'Fredoka', sans-serif; cursor: pointer;
+    }
+    .login-card button:hover { background: #e89b15; }
+    .login-error {
+      color: #c0392b; background: #fdecea; border-radius: 10px;
+      padding: 10px; margin-bottom: 12px; font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <form class="login-card" method="post" action="/login">
+      <h1>My English Adventure</h1>
+      <p class="subtitle">Sign in to start your adventure.</p>
+      {% if error %}<div class="login-error">{{ error }}</div>{% endif %}
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit">Let's go!</button>
+    </form>
+  </div>
+</body>
+</html>

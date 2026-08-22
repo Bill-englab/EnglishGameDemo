@@ -13,7 +13,8 @@ def _has_video(root: Path, chapter: str, level: str, name: str) -> bool:
     return any((d / f"{name}{ext}").exists() for ext in VIDEO_EXTENSIONS)
 
 
-def scan_library(content_root: Path, demo_root: Path, recordings_root: Path) -> list[dict]:
+def scan_library(content_root: Path, demo_root: Path, recordings_root: Path,
+                 username: str | None = None) -> list[dict]:
     """Walk the content root, return chapters (each with levels) in order.
 
     Curriculum text (meta.json) lives under content_root/<chapter>/<level>/.
@@ -21,12 +22,24 @@ def scan_library(content_root: Path, demo_root: Path, recordings_root: Path) -> 
     recordings_root/<chapter>/<level>/performance.<ext> (ext = mp4 or webm).
     Directories must be zero-prefixed so string sort matches intended order.
 
+    When ``username`` is given, performance videos are looked up under
+    recordings_root/<username>/<chapter>/<level>/ so each user's recordings
+    stay isolated. demo videos remain shared under demo_root/<chapter>/<level>/.
+    With ``username=None`` the layout is unchanged (single-user / tests /
+    Electron mode).
+
     Each level: { chapter, level, title, scene, patterns, dialogue, variations,
                   has_demo, has_performance }.
     """
     chapters: list[dict] = []
     if not content_root.exists():
         return chapters
+    # Performance videos are per-user when a username is supplied: they live
+    # under recordings_root/<username>/<chapter>/<level>/. Without a username
+    # the legacy layout recordings_root/<chapter>/<level>/ is used. The caller
+    # (app layer) is responsible for validating the username; here we only
+    # build the path.
+    recordings_base = recordings_root / username if username else recordings_root
     for chapter_dir in sorted(p for p in content_root.iterdir() if p.is_dir()):
         levels = []
         for level_dir in sorted(p for p in chapter_dir.iterdir() if p.is_dir()):
@@ -41,7 +54,7 @@ def scan_library(content_root: Path, demo_root: Path, recordings_root: Path) -> 
                 "dialogue": meta.get("dialogue", []),
                 "variations": meta.get("variations", ""),
                 "has_demo": _has_video(demo_root, chapter, level, "demo"),
-                "has_performance": _has_video(recordings_root, chapter, level, "performance"),
+                "has_performance": _has_video(recordings_base, chapter, level, "performance"),
             })
         if levels:
             chapters.append({"name": chapter_dir.name, "levels": levels})

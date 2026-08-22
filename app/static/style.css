@@ -116,6 +116,24 @@ body {
 }
 .topbar .progress #star-count { color: var(--accent-deep); font-weight: 700; }
 
+/* User area — username + logout button */
+.user-area {
+  display: flex; align-items: center; gap: 8px; flex: none;
+  -webkit-app-region: no-drag;
+}
+#user-name {
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 14px;
+  color: var(--ink-soft);
+}
+.logout-btn {
+  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
+  color: var(--ink-2); background: rgba(255,255,255,.7);
+  border: 1px solid var(--line-strong);
+  padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  transition: all .15s ease;
+}
+.logout-btn:hover { color: #e8554e; border-color: #e8554e; }
+
 /* ---------- loading / error status cards ---------- */
 .status-card {
   max-width: 460px; margin: 64px auto 0;

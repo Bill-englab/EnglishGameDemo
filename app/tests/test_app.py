@@ -3,8 +3,13 @@ import io
 import json
 import pytest
 import werkzeug.exceptions
+from werkzeug.security import generate_password_hash
 import app as app_module
 from scanner import scan_library, annotate_states
+
+# A single test user used by the logged-in fixtures below.
+TEST_USERNAME = "tester"
+TEST_PASSWORD = "test-pass"
 
 
 def _build_lib(content: Path, demo: Path, recordings: Path, prompts: Path):
@@ -18,19 +23,45 @@ def _build_lib(content: Path, demo: Path, recordings: Path, prompts: Path):
     (prompts / "01-c" / "D1b.txt").write_text("prompt B text", encoding="utf-8")
 
 
+def _write_users(users_file: Path, users: dict):
+    """Write {username: password_hash} to the users file."""
+    users_file.write_text(
+        json.dumps({u: generate_password_hash(p) for u, p in users.items()}),
+        encoding="utf-8")
+
+
+def _login(client, username=TEST_USERNAME, password=TEST_PASSWORD):
+    return client.post("/login", data={"username": username, "password": password})
+
+
 @pytest.fixture
-def client(tmp_path, monkeypatch):
+def app_env(tmp_path, monkeypatch):
+    """Temp roots + a test user, returns a test client that is NOT logged in.
+
+    All routes whose auth is conditional can be tested both logged-in and
+    logged-out by reusing this fixture.
+    """
     content = tmp_path / "content"
     demo = tmp_path / "demo"
     recordings = tmp_path / "recordings"
     prompts = tmp_path / "prompts"
+    users_file = tmp_path / "users.json"
     _build_lib(content, demo, recordings, prompts)
+    _write_users(users_file, {TEST_USERNAME: TEST_PASSWORD})
     monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
     monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
     monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
     monkeypatch.setattr(app_module, "PROMPTS_ROOT", prompts)
+    monkeypatch.setattr(app_module, "USERS_FILE", users_file)
     app_module.app.config["TESTING"] = True
     return app_module.app.test_client()
+
+
+@pytest.fixture
+def client(app_env):
+    """A test client logged in as the test user."""
+    _login(app_env)
+    return app_env
 
 
 def test_index_returns_html(client):
@@ -85,7 +116,7 @@ def test_map_shell_has_module_entry_and_resilient_states(client):
 
 def test_app_registers_retryable_library_loading(client):
     javascript = client.get("/static/app.js").get_data(as_text=True)
-    assert 'fetch("/api/library", { cache: "no-store" })' in javascript
+    assert 'fetch("/api/library"' in javascript and 'credentials: "same-origin"' in javascript
     assert 'getElementById("map-retry").addEventListener("click", loadLibrary)' in javascript
     assert 'showOnly("map-error")' in javascript
 
@@ -109,19 +140,15 @@ def test_fonts_are_self_hosted_not_cdn(client):
 # ===== upload route tests =====
 
 @pytest.fixture
-def upload_client(tmp_path, monkeypatch):
-    """A client whose three roots point at temp dirs; returns (client, roots)."""
-    content = tmp_path / "content"
-    demo = tmp_path / "demo"
-    recordings = tmp_path / "recordings"
-    prompts = tmp_path / "prompts"
-    _build_lib(content, demo, recordings, prompts)
-    monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
-    monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
-    monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
-    monkeypatch.setattr(app_module, "PROMPTS_ROOT", prompts)
-    app_module.app.config["TESTING"] = True
-    return app_module.app.test_client(), {"content": content, "demo": demo, "recordings": recordings}
+def upload_client(app_env):
+    """A logged-in client whose roots point at temp dirs; returns (client, roots)."""
+    _login(app_env)
+    roots = {
+        "content": app_module.CONTENT_ROOT,
+        "demo": app_module.DEMO_ROOT,
+        "recordings": app_module.RECORDINGS_ROOT,
+    }
+    return app_env, roots
 
 
 def test_upload_writes_performance_to_recordings(upload_client):
@@ -131,7 +158,8 @@ def test_upload_writes_performance_to_recordings(upload_client):
     }, content_type="multipart/form-data")
     assert res.status_code == 200
     assert res.get_json()["ok"] is True
-    written = roots["recordings"] / "01-c" / "01-s" / "performance.mp4"
+    # Performance uploads land in the logged-in user's own folder.
+    written = roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.mp4"
     assert written.read_bytes() == b"fake-perf"
     # The uploaded video is now servable via the /video route.
     assert client.get("/video/01-c/01-s/performance").status_code == 200
@@ -153,7 +181,7 @@ def test_upload_creates_missing_parent_dirs(upload_client):
         "file": (io.BytesIO(b"x"), "performance.mp4"),
     }, content_type="multipart/form-data")
     assert res.status_code == 200
-    assert (roots["recordings"] / "02-new" / "01-s" / "performance.mp4").exists()
+    assert (roots["recordings"] / TEST_USERNAME / "02-new" / "01-s" / "performance.mp4").exists()
 
 
 def test_upload_webm_stores_correct_extension(upload_client):
@@ -165,10 +193,10 @@ def test_upload_webm_stores_correct_extension(upload_client):
     }, content_type="multipart/form-data")
     assert res.status_code == 200
     assert res.get_json()["ext"] == ".webm"
-    written = roots["recordings"] / "01-c" / "01-s" / "performance.webm"
+    written = roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.webm"
     assert written.read_bytes() == b"fake-webm"
     # No .mp4 should be created.
-    assert not (roots["recordings"] / "01-c" / "01-s" / "performance.mp4").exists()
+    assert not (roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.mp4").exists()
 
 
 def test_upload_webm_served_with_correct_mimetype(upload_client):
@@ -189,14 +217,14 @@ def test_upload_webm_replaces_existing_mp4(upload_client):
     client.post("/upload/01-c/01-s/performance", data={
         "file": (io.BytesIO(b"old-mp4"), "performance.mp4"),
     }, content_type="multipart/form-data")
-    assert (roots["recordings"] / "01-c" / "01-s" / "performance.mp4").exists()
+    assert (roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.mp4").exists()
     # Re-record as webm.
     client.post("/upload/01-c/01-s/performance", data={
         "file": (io.BytesIO(b"new-webm"), "performance.webm"),
         "mimeType": "video/webm",
     }, content_type="multipart/form-data")
-    assert (roots["recordings"] / "01-c" / "01-s" / "performance.webm").exists()
-    assert not (roots["recordings"] / "01-c" / "01-s" / "performance.mp4").exists()
+    assert (roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.webm").exists()
+    assert not (roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.mp4").exists()
 
 
 def test_upload_404_for_unknown_kind(upload_client):
@@ -215,8 +243,14 @@ def test_upload_400_without_file(upload_client):
 
 
 def test_upload_rejects_path_traversal(upload_client):
-    with pytest.raises(werkzeug.exceptions.NotFound):
-        app_module.upload("..", "01-s", "performance")
+    # upload is @login_required, so call it inside a request context that
+    # carries a logged-in session; a ".." chapter must still be refused and
+    # must not escape the user's recordings folder.
+    with app_module.app.test_request_context(method="POST"):
+        from flask import session
+        session["username"] = TEST_USERNAME
+        with pytest.raises(werkzeug.exceptions.NotFound):
+            app_module.upload("..", "01-s", "performance")
 
 
 # ===== prompts API tests =====
@@ -247,3 +281,107 @@ def test_prompts_rejects_path_traversal(client):
 def test_map_shell_has_detail_prompts_element(client):
     html = client.get("/").get_data(as_text=True)
     assert 'id="detail-prompts"' in html
+
+
+# ===== auth + multi-user isolation tests =====
+
+def test_index_requires_login(app_env):
+    """Without a session, the map redirects to /login."""
+    res = app_env.get("/")
+    assert res.status_code == 302
+    assert res.headers["Location"].endswith("/login")
+
+
+def test_api_library_requires_login(app_env):
+    """Without a session, /api/library redirects to /login."""
+    res = app_env.get("/api/library")
+    assert res.status_code == 302
+    assert res.headers["Location"].endswith("/login")
+
+
+def test_login_with_valid_credentials(app_env):
+    res = app_env.post("/login", data={
+        "username": TEST_USERNAME, "password": TEST_PASSWORD})
+    assert res.status_code == 302
+    assert res.headers["Location"].endswith("/")
+    # The session now carries the username.
+    assert app_env.get("/api/me").get_json()["username"] == TEST_USERNAME
+
+
+def test_login_rejects_wrong_password(app_env):
+    res = app_env.post("/login", data={
+        "username": TEST_USERNAME, "password": "nope"})
+    # Re-renders the form (200) with an error; no session is set.
+    assert res.status_code == 200
+    assert app_env.get("/api/me").get_json()["username"] is None
+
+
+def test_api_me_reports_null_when_logged_out(app_env):
+    assert app_env.get("/api/me").get_json() == {"username": None}
+
+
+def test_logout_clears_session(client):
+    # client is logged in by the fixture.
+    assert client.get("/api/me").get_json()["username"] == TEST_USERNAME
+    res = client.get("/logout")
+    assert res.status_code == 302
+    assert res.headers["Location"].endswith("/login")
+    assert client.get("/api/me").get_json()["username"] is None
+
+
+def test_performance_video_requires_login(app_env):
+    """A performance video request without a session redirects to /login
+    (demo videos stay public and shared)."""
+    res = app_env.get("/video/01-c/01-s/performance")
+    assert res.status_code == 302
+    assert res.headers["Location"].endswith("/login")
+
+
+def test_demo_video_served_without_login(app_env):
+    """demo videos are shared content and need no authentication."""
+    res = app_env.get("/video/01-c/01-s/demo")
+    assert res.status_code == 200
+    assert res.mimetype == "video/mp4"
+
+
+def test_performance_isolated_between_users(tmp_path, monkeypatch):
+    """User A's performance upload must be invisible to user B."""
+    content = tmp_path / "content"
+    demo = tmp_path / "demo"
+    recordings = tmp_path / "recordings"
+    prompts = tmp_path / "prompts"
+    users_file = tmp_path / "users.json"
+    _build_lib(content, demo, recordings, prompts)
+    _write_users(users_file, {"userA": "pass-a", "userB": "pass-b"})
+    monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
+    monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
+    monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
+    monkeypatch.setattr(app_module, "PROMPTS_ROOT", prompts)
+    monkeypatch.setattr(app_module, "USERS_FILE", users_file)
+    app_module.app.config["TESTING"] = True
+
+    client_a = app_module.app.test_client()
+    client_a.post("/login", data={"username": "userA", "password": "pass-a"})
+    # User A records a performance.
+    res = client_a.post("/upload/01-c/01-s/performance", data={
+        "file": (io.BytesIO(b"A-perf"), "performance.mp4"),
+    }, content_type="multipart/form-data")
+    assert res.status_code == 200
+
+    # User A sees their recording (the level becomes completed).
+    lib_a = client_a.get("/api/library").get_json()
+    assert lib_a[0]["levels"][0]["has_performance"] is True
+    assert lib_a[0]["levels"][0]["state"] == "completed"
+    assert client_a.get("/video/01-c/01-s/performance").status_code == 200
+
+    # User B logs in and must NOT see user A's recording.
+    client_b = app_module.app.test_client()
+    client_b.post("/login", data={"username": "userB", "password": "pass-b"})
+    lib_b = client_b.get("/api/library").get_json()
+    assert lib_b[0]["levels"][0]["has_performance"] is False
+    assert client_b.get("/video/01-c/01-s/performance").status_code == 404
+
+    # The file is physically under userA's folder only — not shared, not in B's.
+    assert (recordings / "userA" / "01-c" / "01-s" / "performance.mp4").exists()
+    assert not (recordings / "userB" / "01-c" / "01-s").exists()
+    assert not (recordings / "01-c" / "01-s" / "performance.mp4").exists()

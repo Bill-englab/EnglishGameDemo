@@ -137,6 +137,8 @@
   setTimeout(injectAll, 3000);
 
   // Re-inject when detail view opens (the header is re-rendered each time)
-  const observer = new MutationObserver(() => injectAll());
-  observer.observe(document.body, { childList: true, subtree: true });
+  try {
+    const observer = new MutationObserver(() => injectAll());
+    observer.observe(document.body, { childList: true, subtree: true });
+  } catch(e) { /* MutationObserver not supported */ }
 })();

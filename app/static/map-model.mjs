@@ -11,7 +11,7 @@ export const CHAPTER_THEMES = Object.freeze({
   10: { world: "planning-camp", accent: "#f1b84b" },
 });
 
-const chapterNumber = chapterName => Number.parseInt(chapterName.match(/^\d+/)?.[0] || "1", 10);
+const chapterNumber = chapterName => { const m = chapterName.match(/^\d+/); return Number.parseInt((m && m[0]) || "1", 10); };
 export const getChapterTheme = chapterName => CHAPTER_THEMES[chapterNumber(chapterName)] || CHAPTER_THEMES[1];
 export const getLevelVisualState = level => level.has_performance ? "completed" : level.current ? "current" : "locked";
 export const getStableRotation = index => ((index * 53) % 7) - 3;

@@ -35,3 +35,4 @@ design/top-*.png
 design/map-loaded.png
 design/yellow-bar.png
 launch-debug.log
+app/flask.log

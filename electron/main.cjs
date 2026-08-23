@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, session } = require("electron");
 const { spawn, execSync } = require("child_process");
 const path = require("path");
 const http = require("http");
@@ -101,6 +101,16 @@ async function createWindow() {
 }
 
 app.whenReady().then(async () => {
+  // Auto-grant camera + microphone permissions for localhost
+  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
+    const url = webContents.getURL();
+    if (url.startsWith("http://localhost") && ["media", "camera", "microphone"].includes(permission)) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  });
+
   if (!startFlask()) return;
   const up = await waitForServer();
   if (!up) {

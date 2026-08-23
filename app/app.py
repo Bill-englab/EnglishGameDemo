@@ -66,16 +66,27 @@ def _generate_thumb(video_path):
         pass
 
 
-def _compress_video(video_path):
-    """Re-encode a video to a web-friendly size using ffmpeg.
+def _needs_compress(video_path, max_size_mb=5):
+    """Return True if the video file is larger than the threshold."""
+    try:
+        return Path(video_path).stat().st_size > max_size_mb * 1024 * 1024
+    except OSError:
+        return False
 
-    Targets 1.5Mbps max bitrate, 960px wide. Overwrites the original.
-    Skips silently if ffmpeg is not installed. The original is kept
-    as <name>_original.ext until compression is confirmed, then replaced.
+
+def _compress_video(video_path):
+    """Re-encode a video to a web-friendly size using ffmpeg if it exceeds the
+    size threshold.
+
+    Targets 1.5Mbps max bitrate, 960px wide. Overwrites the original only
+    if compression succeeds and the result is smaller. Skips files already
+    under the threshold to avoid double-compressing.
     """
     p = Path(video_path)
+    if not _needs_compress(p):
+        return False
+    tmp = p.parent / f"{p.stem}_tmp{p.suffix}"
     try:
-        tmp = p.parent / f"{p.stem}_tmp{p.suffix}"
         subprocess.run(
             ["ffmpeg", "-y", "-i", str(p),
              "-c:v", "libx264", "-preset", "fast", "-crf", "28",
@@ -84,12 +95,14 @@ def _compress_video(video_path):
              "-c:a", "aac", "-b:a", "128k",
              str(tmp)],
             capture_output=True, timeout=120)
-        if tmp.exists() and tmp.stat().st_size > 0:
+        if tmp.exists() and tmp.stat().st_size > 0 and tmp.stat().st_size < p.stat().st_size:
             p.unlink()
             tmp.rename(p)
+            return True
+        tmp.unlink(missing_ok=True)
     except (FileNotFoundError, subprocess.TimeoutExpired):
-        if tmp.exists():
-            tmp.unlink()
+        tmp.unlink(missing_ok=True)
+    return False
 
 # A username becomes a path component under recordings_root/, so it must be
 # path-safe: no separators, no "..", no slashes. Alphanumerics, dash and
@@ -372,8 +385,8 @@ def upload(chapter, level, kind):
             if other.exists():
                 other.unlink()
     f.save(target)
+    _compress_video(target)
     if kind == "demo":
-        _compress_video(target)
         _generate_thumb(target)
     return jsonify({"ok": True, "path": str(target.relative_to(base_resolved)), "ext": ext})
 
@@ -409,7 +422,38 @@ def api_prompts(chapter, level):
     return jsonify({"a": _read("a.txt"), "b": _read("b.txt")})
 
 
+def _scan_and_optimize():
+    """Scan demo and recordings trees on startup.
+
+    For every video found:
+    - Compress if larger than the threshold (skip already-small files).
+    - For demo videos: generate a thumbnail if one is missing.
+    """
+    import sys
+    roots_to_scan = []
+    if DEMO_ROOT.is_dir():
+        roots_to_scan.append(DEMO_ROOT)
+    if RECORDINGS_ROOT.is_dir():
+        roots_to_scan.append(RECORDINGS_ROOT)
+
+    total = 0
+    for root in roots_to_scan:
+        for ext in VIDEO_EXTENSIONS:
+            for video in root.rglob(f"*{ext}"):
+                if video.stem.endswith("_tmp"):
+                    continue
+                total += 1
+                _compress_video(video)
+                if root == DEMO_ROOT:
+                    thumb = video.parent / "thumb.jpg"
+                    if not thumb.exists():
+                        _generate_thumb(video)
+    if total:
+        print(f"[scan] Processed {total} video file(s) in demo/ and recordings/", file=sys.stderr)
+
+
 if __name__ == "__main__":
+    _scan_and_optimize()
     debug = os.environ.get("FLASK_DEBUG", "").lower() in ("1", "true", "yes")
     port = int(os.environ.get("PORT", "5000"))
     app.run(host="0.0.0.0", debug=debug, port=port)

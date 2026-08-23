@@ -2,6 +2,7 @@ import os
 import json
 import functools
 import re
+import subprocess
 from pathlib import Path
 from flask import (Flask, jsonify, render_template, abort, send_file, request,
                    session, redirect, url_for)
@@ -45,6 +46,24 @@ app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 # stores the right extension instead of forcing everything into .mp4.
 _EXT_TO_MIME = {".mp4": "video/mp4", ".webm": "video/webm"}
 _MIME_TO_EXT = {v: k for k, v in _EXT_TO_MIME.items()}
+
+
+def _generate_thumb(video_path):
+    """Generate a thumbnail JPEG at 20% of the video using ffmpeg.
+
+    Writes thumb.jpg next to the video file. Silently skips if ffmpeg
+    is not installed or fails — the /thumb route will 404 and the
+    frontend falls back to the accent color.
+    """
+    try:
+        thumb = Path(video_path).parent / "thumb.jpg"
+        subprocess.run(
+            ["ffmpeg", "-y", "-ss", "2", "-i", str(video_path),
+             "-frames:v", "1", "-update", "1", "-q:v", "3",
+             "-vf", "scale=480:-2", str(thumb)],
+            capture_output=True, timeout=10)
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        pass
 
 # A username becomes a path component under recordings_root/, so it must be
 # path-safe: no separators, no "..", no slashes. Alphanumerics, dash and
@@ -327,6 +346,8 @@ def upload(chapter, level, kind):
             if other.exists():
                 other.unlink()
     f.save(target)
+    if kind == "demo":
+        _generate_thumb(target)
     return jsonify({"ok": True, "path": str(target.relative_to(base_resolved)), "ext": ext})
 
 

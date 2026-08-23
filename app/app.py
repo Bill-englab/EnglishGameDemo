@@ -49,7 +49,7 @@ _MIME_TO_EXT = {v: k for k, v in _EXT_TO_MIME.items()}
 
 
 def _generate_thumb(video_path):
-    """Generate a thumbnail JPEG at 20% of the video using ffmpeg.
+    """Generate a thumbnail JPEG at 2s into the video using ffmpeg.
 
     Writes thumb.jpg next to the video file. Silently skips if ffmpeg
     is not installed or fails — the /thumb route will 404 and the
@@ -64,6 +64,32 @@ def _generate_thumb(video_path):
             capture_output=True, timeout=10)
     except (FileNotFoundError, subprocess.TimeoutExpired):
         pass
+
+
+def _compress_video(video_path):
+    """Re-encode a video to a web-friendly size using ffmpeg.
+
+    Targets 1.5Mbps max bitrate, 960px wide. Overwrites the original.
+    Skips silently if ffmpeg is not installed. The original is kept
+    as <name>_original.ext until compression is confirmed, then replaced.
+    """
+    p = Path(video_path)
+    try:
+        tmp = p.parent / f"{p.stem}_tmp{p.suffix}"
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", str(p),
+             "-c:v", "libx264", "-preset", "fast", "-crf", "28",
+             "-maxrate", "1500k", "-bufsize", "3000k",
+             "-vf", "scale=960:-2",
+             "-c:a", "aac", "-b:a", "128k",
+             str(tmp)],
+            capture_output=True, timeout=120)
+        if tmp.exists() and tmp.stat().st_size > 0:
+            p.unlink()
+            tmp.rename(p)
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        if tmp.exists():
+            tmp.unlink()
 
 # A username becomes a path component under recordings_root/, so it must be
 # path-safe: no separators, no "..", no slashes. Alphanumerics, dash and
@@ -347,6 +373,7 @@ def upload(chapter, level, kind):
                 other.unlink()
     f.save(target)
     if kind == "demo":
+        _compress_video(target)
         _generate_thumb(target)
     return jsonify({"ok": True, "path": str(target.relative_to(base_resolved)), "ext": ext})
 

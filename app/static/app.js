@@ -785,7 +785,7 @@ function openDetail(level) {
     const v = document.createElement("video");
     v.src = videoURL(level.chapter, level.level, "demo");
     v.controls = true; v.preload = "auto"; v.playsInline = true;
-    v.addEventListener("loadedmetadata", () => { v.playbackRate = 0.75; });
+    v.addEventListener("loadedmetadata", () => { v.playbackRate = 1.0; });
     demoWrap.appendChild(v);
     // Subtle replace button below the video for dad.
     demoWrap.appendChild(makeActionButton("Replace", level, "demo",

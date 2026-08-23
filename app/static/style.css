@@ -235,6 +235,10 @@ body {
   pointer-events: none;
   background: linear-gradient(180deg, var(--warm-1) 0%, var(--warm-2) 48%, var(--warm-3) 100%);
 }
+/* Mobile: position fixed can be unreliable on iOS Safari — use absolute */
+@media (max-width: 600px) {
+  #bg-layer { position: absolute; }
+}
 .bg-layer__slide {
   position: absolute; inset: 0;
   background-size: cover;

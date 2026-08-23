@@ -15,6 +15,17 @@ const chapterIndex = (name) => parseInt((name.match(/^(\d+)/) || [0, 1])[1], 10)
 const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}`;
 const uploadURL = (chapter, level, kind) => `/upload/${chapter}/${level}/${kind}`;
 
+function _fallbackCopy(text, onSuccess) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); if (onSuccess) onSuccess(); } catch(_) {}
+  document.body.removeChild(ta);
+}
+
 // ===== upload helpers (File System Access API + IndexedDB folder memory) =====
 // Chrome/Edge support showOpenFilePicker / showDirectoryPicker. The directory
 // handle is persisted in IndexedDB so the picker reopens at the same folder
@@ -903,10 +914,12 @@ function openDetail(level) {
         copyBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          navigator.clipboard.writeText(text).then(() => {
-            copyBtn.textContent = "Copied!";
-            setTimeout(() => { copyBtn.textContent = "Copy"; }, 1500);
-          });
+          const done = () => { copyBtn.textContent = "Copied!"; setTimeout(() => { copyBtn.textContent = "Copy"; }, 1500); };
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(done).catch(() => _fallbackCopy(text, done));
+          } else {
+            _fallbackCopy(text, done);
+          }
         });
         summary.append(labelEl, copyBtn);
         const pre = document.createElement("pre");

@@ -48,6 +48,22 @@ _EXT_TO_MIME = {".mp4": "video/mp4", ".webm": "video/webm"}
 _MIME_TO_EXT = {v: k for k, v in _EXT_TO_MIME.items()}
 
 
+def _ffmpeg_path():
+    """Return the ffmpeg binary path. Tries PATH first, then imageio-ffmpeg."""
+    try:
+        import shutil
+        p = shutil.which("ffmpeg")
+        if p:
+            return p
+    except Exception:
+        pass
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        return "ffmpeg"  # fallback to PATH lookup
+
+
 def _generate_thumb(video_path):
     """Generate a thumbnail JPEG at 2s into the video using ffmpeg.
 
@@ -58,7 +74,7 @@ def _generate_thumb(video_path):
     try:
         thumb = Path(video_path).parent / "thumb.jpg"
         subprocess.run(
-            ["ffmpeg", "-y", "-ss", "2", "-i", str(video_path),
+            [_ffmpeg_path(), "-y", "-ss", "2", "-i", str(video_path),
              "-frames:v", "1", "-update", "1", "-q:v", "3",
              "-vf", "scale=480:-2", str(thumb)],
             capture_output=True, timeout=10)

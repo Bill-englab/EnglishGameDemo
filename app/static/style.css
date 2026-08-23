@@ -767,14 +767,16 @@ body {
 
 /* Camera-permission error message. */
 .record-error {
-  aspect-ratio: 16 / 9;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 6px; padding: 16px; text-align: center;
+  flex: 1; min-height: 160px;
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 8px; padding: 16px; text-align: left;
   border: 2px dashed var(--line-strong); border-radius: 10px;
   background: var(--surface);
   font-family: "Fredoka", system-ui, sans-serif; font-size: 14px; color: var(--ink-2);
 }
+.record-error p { margin: 0; }
 .record-error__hint { font-size: 12px; color: var(--ink-3); margin: 0; }
+.record-error .action-btn { margin-top: 4px; }
 
 .perf-cap {
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;

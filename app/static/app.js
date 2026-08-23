@@ -12,7 +12,7 @@ function prettyChapter(raw) {
     .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 }
 const chapterIndex = (name) => parseInt((name.match(/^(\d+)/) || [0, 1])[1], 10);
-const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}`;
+const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}?t=${Date.now()}`;
 const uploadURL = (chapter, level, kind) => `/upload/${chapter}/${level}/${kind}`;
 
 function _fallbackCopy(text, onSuccess) {

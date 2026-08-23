@@ -411,44 +411,23 @@ const starSVG = (lit) => {
 };
 
 // ===== frame extraction for the level cover =====
-// Seeks to 20% of the demo video, draws to a canvas, inspects pixels,
-// and only returns a JPEG data URL when isFrameDark is false. Resolves null
-// on timeout, media error, zero dimensions, canvas/tainted error, OR a dark frame.
+// Tries to load a pre-generated server-side thumbnail. Falls back to null
+// (which triggers the accent-color fallback) if the thumbnail is missing.
 const frameCache = new Map();
-const frameKey = (ch, lv, kind) => `${ch}/${lv}/${kind}`;
-function extractSafeCover(level, theme, ratio = 0.2) {
-  const key = frameKey(level.chapter, level.level, "demo");
+const frameKey = (ch, lv) => `${ch}/${lv}`;
+function extractSafeCover(level, theme) {
+  const key = frameKey(level.chapter, level.level);
   if (frameCache.has(key)) return Promise.resolve(frameCache.get(key));
   return new Promise(resolve => {
-    const v = document.createElement("video");
-    v.muted = true; v.preload = "auto"; v.playsInline = true;
-    v.src = videoURL(level.chapter, level.level, "demo");
+    const img = new Image();
     let done = false;
     const finish = (val) => {
-      if (done) return; done = true; clearTimeout(to);
-      v.removeAttribute("src"); v.load();
+      if (done) return; done = true;
       frameCache.set(key, val); resolve(val);
     };
-    const to = setTimeout(() => finish(null), 4500);
-    v.addEventListener("loadedmetadata", () => {
-      if (!v.videoWidth || !v.videoHeight) { finish(null); return; }
-      const d = v.duration || 1;
-      v.currentTime = Math.min(Math.max(0.3, d * ratio), d - 0.05);
-    });
-    v.addEventListener("seeked", () => {
-      try {
-        const w = v.videoWidth, h = v.videoHeight;
-        if (!w || !h) { finish(null); return; }
-        const cv = document.createElement("canvas");
-        cv.width = w; cv.height = h;
-        const ctx = cv.getContext("2d");
-        ctx.drawImage(v, 0, 0, cv.width, cv.height);
-        const imageData = ctx.getImageData(0, 0, cv.width, cv.height);
-        if (isFrameDark(imageData.data)) { finish(null); return; }
-        finish(cv.toDataURL("image/jpeg", 0.82));
-      } catch (_) { finish(null); }
-    });
-    v.addEventListener("error", () => finish(null));
+    img.onload = () => finish(`/thumb/${level.chapter}/${level.level}`);
+    img.onerror = () => finish(null);
+    img.src = `/thumb/${level.chapter}/${level.level}`;
   });
 }
 

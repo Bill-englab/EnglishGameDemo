@@ -223,6 +223,23 @@ def api_library():
                      username=session["username"])))
 
 
+@app.route("/thumb/<chapter>/<level>")
+def thumb(chapter, level):
+    """Serve a pre-generated thumbnail JPEG for a level's demo video.
+
+    Thumbnails live at demo_root/<chapter>/<level>/thumb.jpg and are
+    generated server-side via ffmpeg. Falls back to 404 if missing.
+    """
+    base_resolved = DEMO_ROOT.resolve()
+    d = (DEMO_ROOT / chapter / level).resolve()
+    if not d.is_relative_to(base_resolved):
+        abort(404)
+    f = (d / "thumb.jpg").resolve()
+    if f.is_file() and f.is_relative_to(base_resolved):
+        return send_file(f, mimetype="image/jpeg")
+    abort(404)
+
+
 @app.route("/video/<chapter>/<level>/<kind>")
 def video(chapter, level, kind):
     """Serve a demo (shared) or performance (per-user) video file.

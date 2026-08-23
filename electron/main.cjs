@@ -5,7 +5,7 @@ const http = require("http");
 
 const APP_DIR = path.join(__dirname, "..", "app");
 const PYTHON = path.join(APP_DIR, ".venv", "Scripts", "python.exe");
-const URL = "http://127.0.0.1:5000/";
+const URL = "http://localhost:5000/";
 let flaskProcess = null;
 let mainWindow = null;
 

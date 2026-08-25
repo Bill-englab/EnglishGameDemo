@@ -148,6 +148,10 @@ function makeActionButton(label, level, kind, onDone) {
       await uploadVideo(level, kind, (pct) => {
         fill.style.width = pct + "%";
         text.textContent = pct + "%";
+        // Upload done (100%) but server still processing — show spinner
+        if (pct >= 100) {
+          bar.innerHTML = `<span class="upload-processing"><span class="spinner"></span>Processing…</span>`;
+        }
       });
       await loadLibrary();
       onDone();
@@ -397,6 +401,9 @@ function renderRecordError(container, level, err) {
       await uploadVideo(level, "performance", (pct) => {
         fill.style.width = pct + "%";
         text.textContent = pct + "%";
+        if (pct >= 100) {
+          bar.innerHTML = `<span class="upload-processing"><span class="spinner"></span>Processing…</span>`;
+        }
       });
       await loadLibrary();
       reopenDetail(level.chapter, level.level);
@@ -815,6 +822,9 @@ function openDetail(level) {
         await uploadVideo(level, "demo", (pct) => {
           fill.style.width = pct + "%";
           text.textContent = pct + "%";
+          if (pct >= 100) {
+            slot.innerHTML = `<div class="upload-processing"><span class="spinner"></span>Processing…</div>`;
+          }
         });
         await loadLibrary();
         reopenDetail(level.chapter, level.level);

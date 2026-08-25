@@ -104,7 +104,7 @@ def _compress_video(video_path):
     tmp = p.parent / f"{p.stem}_tmp{p.suffix}"
     try:
         subprocess.run(
-            ["ffmpeg", "-y", "-i", str(p),
+            [_ffmpeg_path(), "-y", "-i", str(p),
              "-c:v", "libx264", "-preset", "fast", "-crf", "28",
              "-maxrate", "1500k", "-bufsize", "3000k",
              "-vf", "scale=960:-2",

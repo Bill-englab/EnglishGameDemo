@@ -16,15 +16,15 @@
     },
     {
       "speaker": "Dad",
-      "line": "You brush once in the morning and once at night."
+      "line": "Because little sugar bugs are hiding on your teeth. Brushing chases them away."
     },
     {
       "speaker": "Child",
-      "line": "But nothing bad happened to them today."
+      "line": "But I brushed them last night!"
     },
     {
       "speaker": "Dad",
-      "line": "That's exactly the point — we want to keep them that way."
+      "line": "The bugs come back while you sleep. That's why we brush every morning too."
     },
     {
       "speaker": "Child",
@@ -32,11 +32,11 @@
     },
     {
       "speaker": "Dad",
-      "line": "Because it scrubs your teeth much better than water."
+      "line": "Toothpaste makes your teeth strong and shiny. The bugs can't hold on."
     },
     {
       "speaker": "Child",
-      "line": "Okay, I will do it, but I'm counting fast."
+      "line": "Okay! Bye-bye, sugar bugs!"
     }
   ],
   "variations": "\"brush twice\" 换 \"go to bed now\"；\"toothpaste\" 换 \"the foam one\"。"

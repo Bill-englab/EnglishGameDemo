@@ -10,17 +10,16 @@
 
 **目标句式：** `We're going to ___`（要去）· `after ___`（在…之后）
 
-> **F:** What is the plan for this Saturday?
+> **F:** What's the plan for Saturday, buddy?
 > **C:** **We're going to** the swimming pool, right?
-> **F:** Yes, but only **after** we eat lunch.
+> **F:** Yes! Lunch first, pool second.
 > **C:** The big pool or the small pool?
-> **F:** We are going to the big one.
-> **C:** Are we bringing our floats with us?
-> **F:** Just the small float. And **after** the pool, maybe we can get ice cream.
-> **C:** **We're going to** be really tired **after** all that.
-> **F:** Then ice cream is very likely, I think.
+> **F:** The big pool. And you're bringing your float.
+> **C:** **After** the pool, can we get ice cream?
+> **F:** Swim a lot first — then yes, ice cream!
+> **C:** **We're going to** swim so fast! Deal!
 
-**换样重演：** "the pool" 换 "the park"；"after lunch" 换 "after nap"。
+**换样重演：** "the pool" 换 "the park"；"ice cream" 换 "juice"。
 
 ---
 
@@ -30,16 +29,16 @@
 
 **目标句式：** `It will ___`（将会）· `I think ___`（我觉得）
 
-> **C:** **It will** rain today, you know.
-> **F:** But the sky is completely clear right now.
-> **C:** But **I think** I smelled the rain coming.
-> **F:** You actually smelled the rain?
-> **C:** It smells like wet dirt, and **I think** it's close.
-> **F:** Well, maybe you are right.
-> **C:** **It will** really pour, **I think**.
-> **F:** We will see if you are right about it.
+> **C:** **It will** rain today, you know!
+> **F:** But look — the sky is all blue right now.
+> **C:** **I think** I can smell the rain coming!
+> **F:** You can smell rain? Really?
+> **C:** Yes! It smells like wet dirt. **I think** it's coming soon!
+> **F:** Hmm... those clouds ARE turning gray over there.
+> **C:** See? **It will** rain — I told you!
+> **F:** Then we'd better grab the umbrellas, weather tiger!
 
-**换样重演：** "rain" 换 "get cold"；"smelled it" 换 "felt it"。
+**换样重演：** "rain" 换 "get windy"；"wet dirt" 换 "flowers"。
 
 ---
 
@@ -49,12 +48,13 @@
 
 **目标句式：** `First ___, then ___`（先…再…）· `as soon as ___`（一…就…）
 
-> **F:** What do we need to bring before the park?
-> **C:** **First** we need our shoes, **then** our water bottles.
-> **F:** And what else do we need?
-> **C:** We need our hats, too. **As soon as** we're ready, we can go.
-> **F:** Then you should hurry up and get ready.
-> **C:** I am hurrying, just the slow way.
-> **F:** Okay then, shoes on first.
+> **F:** We're leaving for the park soon. What do we need?
+> **C:** **First** shoes, **then** water bottles!
+> **F:** Good start! What else goes in the bag?
+> **C:** **First** my hat, **then** my toy truck!
+> **F:** A truck at the park? Okay, little planner!
+> **C:** **As soon as** my shoes are on, I'm ready!
+> **F:** Then shoes on! I'll grab the keys.
+> **C:** Ready! Park, here we come!
 
-**换样重演：** "shoes/water bottles" 换 "snacks/hats"；"we go" 换 "we leave"。
+**换样重演：** "shoes and water bottles" 换 "snacks and hats"；"the park" 换 "Grandma's house"。

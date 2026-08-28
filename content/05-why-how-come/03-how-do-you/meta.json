@@ -13,23 +13,23 @@
     },
     {
       "speaker": "Dad",
-      "line": "The sky is getting dark and heavy with clouds."
+      "line": "Look up. The clouds are getting dark and heavy."
     },
     {
       "speaker": "Child",
-      "line": "But why does that mean it will rain?"
+      "line": "Why does the sky look like that?"
     },
     {
       "speaker": "Dad",
-      "line": "Because the clouds hold water, and they look heavy."
+      "line": "The clouds are full of water. When they get too heavy, down comes the rain."
     },
     {
       "speaker": "Child",
-      "line": "How do you know all of this stuff?"
+      "line": "How do you know so many sky things?"
     },
     {
       "speaker": "Dad",
-      "line": "I have watched a lot of skies in my life."
+      "line": "I watch the sky every day on my way to work."
     },
     {
       "speaker": "Child",
@@ -37,8 +37,8 @@
     },
     {
       "speaker": "Dad",
-      "line": "Sort of, yes. That's why you should bring a coat."
+      "line": "Sort of! Grab your coat, just in case."
     }
   ],
-  "variations": "\"rain\" 换 \"get dark\"；\"clouds\" 换 \"sun\"。"
+  "variations": "\"rain\" 换 \"get dark\"；\"clouds\" 换 \"wind\"。"
 }

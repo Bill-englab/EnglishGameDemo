@@ -1,5 +1,5 @@
 {
-  "title": "That's why I brought it — it gets cold at night.",
+  "title": "My extra sweater! That's why my bag is so full.",
   "title_zh": "解释原因",
   "scene": "他多带一件衣服，解释考虑。",
   "patterns": [
@@ -9,32 +9,36 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "Did you bring an extra sweater with you?"
+      "line": "Your bag looks really full today. What's inside?"
     },
     {
       "speaker": "Child",
-      "line": "That's why I brought it — it gets cold at night."
+      "line": "My extra sweater! That's why my bag is so full."
     },
     {
       "speaker": "Dad",
-      "line": "That was very thoughtful of you."
+      "line": "But it's sunny and warm outside!"
     },
     {
       "speaker": "Child",
-      "line": "So you don't have to come all the way back for me."
+      "line": "At night the sun goes to sleep, and it gets cold!"
     },
     {
       "speaker": "Dad",
-      "line": "I really appreciate it, thank you."
+      "line": "That's true. The park gets chilly after dinner."
     },
     {
       "speaker": "Child",
-      "line": "See, I came prepared today."
+      "line": "That's why I brought it — so I can play longer!"
     },
     {
       "speaker": "Dad",
-      "line": "Those sound like famous last words to me."
+      "line": "Good thinking, little tiger. You're ready for the cold."
+    },
+    {
+      "speaker": "Child",
+      "line": "The cold can't stop a tiger!"
     }
   ],
-  "variations": "\"extra sweater\" 换 \"extra water\"；\"cold at night\" 换 \"thirsty on the way\"。"
+  "variations": "\"sweater\" 换 \"rain boots\"；\"cold\" 换 \"rain\"。"
 }

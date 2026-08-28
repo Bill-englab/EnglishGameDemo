@@ -9,7 +9,7 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "What is the plan for this Saturday?"
+      "line": "What's the plan for Saturday, buddy?"
     },
     {
       "speaker": "Child",
@@ -17,7 +17,7 @@
     },
     {
       "speaker": "Dad",
-      "line": "Yes, but only after we eat lunch."
+      "line": "Yes! Lunch first, pool second."
     },
     {
       "speaker": "Child",
@@ -25,24 +25,20 @@
     },
     {
       "speaker": "Dad",
-      "line": "We are going to the big one."
+      "line": "The big pool. And you're bringing your float."
     },
     {
       "speaker": "Child",
-      "line": "Are we bringing our floats with us?"
+      "line": "After the pool, can we get ice cream?"
     },
     {
       "speaker": "Dad",
-      "line": "Just the small float. And after the pool, maybe we can get ice cream."
+      "line": "Swim a lot first — then yes, ice cream!"
     },
     {
       "speaker": "Child",
-      "line": "We're going to be really tired after all that."
-    },
-    {
-      "speaker": "Dad",
-      "line": "Then ice cream is very likely, I think."
+      "line": "We're going to swim so fast! Deal!"
     }
   ],
-  "variations": "\"the pool\" 换 \"the park\"；\"after lunch\" 换 \"after nap\"。"
+  "variations": "\"the pool\" 换 \"the park\"；\"ice cream\" 换 \"juice\"。"
 }

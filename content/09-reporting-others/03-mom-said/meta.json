@@ -1,5 +1,5 @@
 {
-  "title": "Mom said dinner is at seven, but I'm already hungry now.",
+  "title": "Mom said dinner is at seven, but I'm hungry now!",
   "title_zh": "转述家人",
   "scene": "妈妈说七点吃饭，他现在就饿。",
   "patterns": [
@@ -9,36 +9,36 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "Mom said dinner is at seven, but I'm already hungry now."
+      "line": "Mom said dinner is at seven, but I'm hungry now!"
     },
     {
       "speaker": "Dad",
-      "line": "But you just had a snack a little while ago."
+      "line": "You just had a snack, remember?"
     },
     {
       "speaker": "Child",
-      "line": "Mom said I could only have a small snack."
+      "line": "Mom said I could only have a small one!"
     },
     {
       "speaker": "Dad",
-      "line": "Well, was your snack actually small?"
+      "line": "And was it really small?"
     },
     {
       "speaker": "Child",
-      "line": "It was small... at least, small for me."
+      "line": "It was small... for a tiger!"
     },
     {
       "speaker": "Dad",
-      "line": "For you, maybe that is true."
+      "line": "Ha! Dinner is still at seven, little tiger."
     },
     {
       "speaker": "Child",
-      "line": "So can I please have just one more?"
+      "line": "Can I have just one tiny bite?"
     },
     {
       "speaker": "Dad",
-      "line": "You will have to go ask Mom about that."
+      "line": "Go ask Mom — she's the dinner boss!"
     }
   ],
-  "variations": "\"dinner's at seven\" 换 \"no TV till six\"；\"a small snack\" 换 \"one cookie\"。"
+  "variations": "\"dinner\" 换 \"bedtime\"；\"small snack\" 换 \"one cookie\"。"
 }

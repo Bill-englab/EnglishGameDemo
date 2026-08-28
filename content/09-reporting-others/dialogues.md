@@ -10,16 +10,16 @@
 
 **目标句式：** `He said ___`（他说）
 
-> **F:** What did Leo say to you today?
-> **C:** **He said** he is coming over to my house.
-> **F:** Did he ask his mom about it first?
-> **C:** Yes, **he said** that she said yes.
-> **F:** When is he going to come over?
-> **C:** **He said** maybe on Saturday he can come.
-> **F:** Tell him he should bring a toy to share.
-> **C:** **He said** he will bring his big truck.
+> **F:** Did you talk to Leo at school today?
+> **C:** Yes! **He said** he's coming to my house!
+> **F:** Oh nice! Did he say which day?
+> **C:** **He said** maybe Saturday, if his mom says yes.
+> **F:** Then let's hope Mom says yes! What will you play?
+> **C:** **He said** he'll bring his big yellow truck!
+> **F:** Then we should tidy the toy room, just in case.
+> **C:** Yes! Let's tidy it right now!
 
-**换样重演：** "Leo" 换 "Mia"；"coming to my house" 换 "bringing a toy"。
+**换样重演：** "Leo" 换 "Mia"；"big yellow truck" 换 "new doll"。
 
 ---
 
@@ -29,16 +29,16 @@
 
 **目标句式：** `She told me to ___`（她叫我…）
 
-> **F:** What did the teacher say about your drawing today?
-> **C:** **She told me to** add some more color to it.
-> **F:** Did you add more color, then?
-> **C:** I added some blue to the sky part.
-> **F:** Does it look better now?
-> **C:** Yes! And **she told me to** show the whole class tomorrow.
-> **F:** That is a very big deal!
-> **C:** She said that my drawing really pops now.
+> **F:** What did the teacher say about your drawing?
+> **C:** **She told me to** add more colors to the sky!
+> **F:** What colors did you add?
+> **C:** Blue for the sky, and a big orange sun!
+> **F:** Ooh! What did the teacher say then?
+> **C:** **She told me to** show it to the whole class tomorrow!
+> **F:** The whole class? Wow!
+> **C:** I will hold it up high, like this!
 
-**换样重演：** "add more color" 换 "draw it bigger"；"blue to the sky" 换 "a sun in the corner"。
+**换样重演：** "add more colors" 换 "draw it bigger"；"orange sun" 换 "green tree"。
 
 ---
 
@@ -48,13 +48,13 @@
 
 **目标句式：** `Mom said ___`（妈说）+ `but ___`（转折）
 
-> **C:** **Mom said** dinner is at seven, **but** I'm already hungry now.
-> **F:** But you just had a snack a little while ago.
-> **C:** **Mom said** I could only have a small snack.
-> **F:** Well, was your snack actually small?
-> **C:** It was small... at least, small for me.
-> **F:** For you, maybe that is true.
-> **C:** So can I please have just one more?
-> **F:** You will have to go ask Mom about that.
+> **C:** **Mom said** dinner is at seven, **but** I'm hungry now!
+> **F:** You just had a snack, remember?
+> **C:** **Mom said** I could only have a small one!
+> **F:** And was it really small?
+> **C:** It was small... for a tiger!
+> **F:** Ha! Dinner is still at seven, little tiger.
+> **C:** Can I have just one tiny bite?
+> **F:** Go ask Mom — she's the dinner boss!
 
-**换样重演：** "dinner's at seven" 换 "no TV till six"；"a small snack" 换 "one cookie"。
+**换样重演：** "dinner" 换 "bedtime"；"small snack" 换 "one cookie"。

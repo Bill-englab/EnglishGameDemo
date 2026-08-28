@@ -17,23 +17,27 @@
     },
     {
       "speaker": "Dad",
-      "line": "But you already had a banana yesterday."
+      "line": "But you had a banana this morning, remember?"
     },
     {
       "speaker": "Child",
-      "line": "I know, but I like banana better."
+      "line": "I know! I like bananas better than apples."
     },
     {
       "speaker": "Dad",
-      "line": "You will get tired of them if you eat too many."
+      "line": "Why do you like them so much?"
     },
     {
       "speaker": "Child",
-      "line": "I'm not tired of them yet, though."
+      "line": "Bananas are soft and sweet. I'd rather eat them every day!"
     },
     {
       "speaker": "Dad",
-      "line": "Okay then, banana it is for you."
+      "line": "If you eat bananas every day, you might turn into a monkey!"
+    },
+    {
+      "speaker": "Child",
+      "line": "Okay — apple today, banana tomorrow!"
     }
   ],
   "variations": "\"banana\" 换 \"grapes\"；\"apple\" 换 \"pear\"。"

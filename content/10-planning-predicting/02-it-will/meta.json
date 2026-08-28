@@ -1,5 +1,5 @@
 {
-  "title": "It will rain today, you know.",
+  "title": "It will rain today, you know!",
   "title_zh": "预测",
   "scene": "他凭观察预测要下雨。",
   "patterns": [
@@ -9,36 +9,36 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "It will rain today, you know."
+      "line": "It will rain today, you know!"
     },
     {
       "speaker": "Dad",
-      "line": "But the sky is completely clear right now."
+      "line": "But look — the sky is all blue right now."
     },
     {
       "speaker": "Child",
-      "line": "But I think I smelled the rain coming."
+      "line": "I think I can smell the rain coming!"
     },
     {
       "speaker": "Dad",
-      "line": "You actually smelled the rain?"
+      "line": "You can smell rain? Really?"
     },
     {
       "speaker": "Child",
-      "line": "It smells like wet dirt, and I think it's close."
+      "line": "Yes! It smells like wet dirt. I think it's coming soon!"
     },
     {
       "speaker": "Dad",
-      "line": "Well, maybe you are right."
+      "line": "Hmm... those clouds ARE turning gray over there."
     },
     {
       "speaker": "Child",
-      "line": "It will really pour, I think."
+      "line": "See? It will rain — I told you!"
     },
     {
       "speaker": "Dad",
-      "line": "We will see if you are right about it."
+      "line": "Then we'd better grab the umbrellas, weather tiger!"
     }
   ],
-  "variations": "\"rain\" 换 \"get cold\"；\"smelled it\" 换 \"felt it\"。"
+  "variations": "\"rain\" 换 \"get windy\"；\"wet dirt\" 换 \"flowers\"。"
 }

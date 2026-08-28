@@ -1,5 +1,5 @@
 {
-  "title": "She told me to add some more color to it.",
+  "title": "She told me to add more colors to the sky!",
   "title_zh": "转述指令",
   "scene": "老师让他在画上加东西。",
   "patterns": [
@@ -8,36 +8,36 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "What did the teacher say about your drawing today?"
+      "line": "What did the teacher say about your drawing?"
     },
     {
       "speaker": "Child",
-      "line": "She told me to add some more color to it."
+      "line": "She told me to add more colors to the sky!"
     },
     {
       "speaker": "Dad",
-      "line": "Did you add more color, then?"
+      "line": "What colors did you add?"
     },
     {
       "speaker": "Child",
-      "line": "I added some blue to the sky part."
+      "line": "Blue for the sky, and a big orange sun!"
     },
     {
       "speaker": "Dad",
-      "line": "Does it look better now?"
+      "line": "Ooh! What did the teacher say then?"
     },
     {
       "speaker": "Child",
-      "line": "Yes! And she told me to show the whole class tomorrow."
+      "line": "She told me to show it to the whole class tomorrow!"
     },
     {
       "speaker": "Dad",
-      "line": "That is a very big deal!"
+      "line": "The whole class? Wow!"
     },
     {
       "speaker": "Child",
-      "line": "She said that my drawing really pops now."
+      "line": "I will hold it up high, like this!"
     }
   ],
-  "variations": "\"add more color\" 换 \"draw it bigger\"；\"blue to the sky\" 换 \"a sun in the corner\"。"
+  "variations": "\"add more colors\" 换 \"draw it bigger\"；\"orange sun\" 换 \"green tree\"。"
 }

@@ -13,27 +13,31 @@
     },
     {
       "speaker": "Dad",
-      "line": "But you used to like it a lot."
+      "line": "But you loved this soup last week!"
     },
     {
       "speaker": "Child",
-      "line": "Well, it's too salty for me now."
+      "line": "It's too salty now. And I don't like the little green bits."
     },
     {
       "speaker": "Dad",
-      "line": "Try eating it together with some bread."
+      "line": "The green bits are just tiny pieces of spinach."
     },
     {
       "speaker": "Child",
-      "line": "Does bread really make it less salty?"
+      "line": "Spinach tastes like grass!"
     },
     {
       "speaker": "Dad",
-      "line": "I'm not sure, but it's worth a try."
+      "line": "Try it with a piece of bread. Bread makes the salty taste smaller."
     },
     {
       "speaker": "Child",
-      "line": "Okay, it tastes a little better now."
+      "line": "Okay... Mmm! It's not too salty anymore!"
+    },
+    {
+      "speaker": "Dad",
+      "line": "See? Now eat it all up, big tiger."
     }
   ],
   "variations": "\"soup\" 换 \"rice\"；\"salty\" 换 \"dry\"。"

@@ -10,15 +10,16 @@
 
 **目标句式：** `because ___`（因为）· `so ___`（所以）
 
-> **F:** Why did you sit down on the floor?
-> **C:** **Because** the chair wobbles, **so** I moved to the floor.
-> **F:** That was a smart idea.
-> **C:** Can you fix the wobbly chair for me?
-> **F:** I will tighten it up for you tonight.
-> **C:** **So** I can sit in it again tomorrow?
-> **F:** Yes, **so** you can sit in it tomorrow.
+> **F:** Why are you sitting on the floor, little tiger?
+> **C:** **Because** the chair wobbles, Dad!
+> **F:** Let me see... You're right, one leg is loose.
+> **C:** **So** I moved to the floor. The floor never wobbles!
+> **F:** Should we fix the chair together?
+> **C:** Yes! **Because** a strong chair is better than the floor!
+> **F:** Then bring me the big screwdriver from the drawer.
+> **C:** Coming, Dad! Screwdriver is on the way!
 
-**换样重演：** "sit on the floor" 换 "stand by the window"；"wobbles" 换 "creaks"。
+**换样重演：** "chair wobbles" 换 "table creaks"；"screwdriver" 换 "hammer"。
 
 ---
 
@@ -28,15 +29,16 @@
 
 **目标句式：** `That's why ___`（所以才）· `so ___`（所以）
 
-> **F:** Did you bring an extra sweater with you?
-> **C:** **That's why** I brought it — it gets cold at night.
-> **F:** That was very thoughtful of you.
-> **C:** **So** you don't have to come all the way back for me.
-> **F:** I really appreciate it, thank you.
-> **C:** See, I came prepared today.
-> **F:** Those sound like famous last words to me.
+> **F:** Your bag looks really full today. What's inside?
+> **C:** My extra sweater! **That's why** my bag is so full.
+> **F:** But it's sunny and warm outside!
+> **C:** At night the sun goes to sleep, and it gets cold!
+> **F:** That's true. The park gets chilly after dinner.
+> **C:** **That's why** I brought it — **so** I can play longer!
+> **F:** Good thinking, little tiger. You're ready for the cold.
+> **C:** The cold can't stop a tiger!
 
-**换样重演：** "extra sweater" 换 "extra water"；"cold at night" 换 "thirsty on the way"。
+**换样重演：** "sweater" 换 "rain boots"；"cold" 换 "rain"。
 
 ---
 
@@ -46,14 +48,13 @@
 
 **目标句式：** `even though ___, I still ___`（尽管…我仍…）
 
-> **F:** You actually went outside in the rain?
-> **C:** Yeah! **Even though** it was wet outside, **I still** had lots of fun.
-> **F:** Did you get completely soaked out there?
-> **C:** Just my feet got wet. The puddles were totally worth it.
-> **F:** You are going to catch a cold like that.
-> **C:** But I feel totally fine. Can I go out again tomorrow?
-> **F:** Maybe you can, if it's not pouring rain.
-> **C:** Do you promise, Dad?
-> **F:** We will see about it.
+> **F:** You went outside in the rain?!
+> **C:** **Even though** it was raining, **I still** had lots of fun!
+> **F:** But you're all wet, from head to toe!
+> **C:** **Even though** my shoes got wet, **I still** jumped in every puddle!
+> **F:** Didn't the rain feel cold?
+> **C:** A little, but the puddles were so splashy!
+> **F:** You'll catch a cold, silly tiger. Towel time — now.
+> **C:** Okay! Drying fast, so no cold can catch me!
 
-**换样重演：** "rain" 换 "dark"；"wet" 换 "scary"。
+**换样重演：** "rain" 换 "dark outside"；"puddles" 换 "shadows"。

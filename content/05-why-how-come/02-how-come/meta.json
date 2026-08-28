@@ -16,28 +16,28 @@
     },
     {
       "speaker": "Dad",
-      "line": "Because we already had lots of treats at the party."
+      "line": "Your tummy is still full of party cake and candy."
     },
     {
       "speaker": "Child",
-      "line": "But those don't count, I think."
+      "line": "But that was a long time ago!"
     },
     {
       "speaker": "Dad",
-      "line": "Sugar is still sugar, no matter what."
+      "line": "The sugar is still in there, bouncing around. It will keep you awake at bedtime."
     },
     {
       "speaker": "Child",
-      "line": "How come you get to decide for me?"
+      "line": "How come sugar keeps me awake?"
     },
     {
       "speaker": "Dad",
-      "line": "Because I'm the dad, and you have had enough sugar today."
+      "line": "It makes your body want to jump and play, even in bed."
     },
     {
       "speaker": "Child",
-      "line": "Hmph. Can I have some tomorrow, then?"
+      "line": "Okay. Can I have dessert tomorrow, then?"
     }
   ],
-  "variations": "\"dessert\" 换 \"story time\"；\"treats\" 换 \"soda\"。"
+  "variations": "\"dessert\" 换 \"ice cream\"；\"cake and candy\" 换 \"birthday cake\"。"
 }

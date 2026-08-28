@@ -1,5 +1,5 @@
 {
-  "title": "Because the chair wobbles, so I moved to the floor.",
+  "title": "Because the chair wobbles, Dad!",
   "title_zh": "解释选择",
   "scene": "他不坐椅子坐地上，并催爸爸修。",
   "patterns": [
@@ -9,32 +9,36 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "Why did you sit down on the floor?"
+      "line": "Why are you sitting on the floor, little tiger?"
     },
     {
       "speaker": "Child",
-      "line": "Because the chair wobbles, so I moved to the floor."
+      "line": "Because the chair wobbles, Dad!"
     },
     {
       "speaker": "Dad",
-      "line": "That was a smart idea."
+      "line": "Let me see... You're right, one leg is loose."
     },
     {
       "speaker": "Child",
-      "line": "Can you fix the wobbly chair for me?"
+      "line": "So I moved to the floor. The floor never wobbles!"
     },
     {
       "speaker": "Dad",
-      "line": "I will tighten it up for you tonight."
+      "line": "Should we fix the chair together?"
     },
     {
       "speaker": "Child",
-      "line": "So I can sit in it again tomorrow?"
+      "line": "Yes! Because a strong chair is better than the floor!"
     },
     {
       "speaker": "Dad",
-      "line": "Yes, so you can sit in it tomorrow."
+      "line": "Then bring me the big screwdriver from the drawer."
+    },
+    {
+      "speaker": "Child",
+      "line": "Coming, Dad! Screwdriver is on the way!"
     }
   ],
-  "variations": "\"sit on the floor\" 换 \"stand by the window\"；\"wobbles\" 换 \"creaks\"。"
+  "variations": "\"chair wobbles\" 换 \"table creaks\"；\"screwdriver\" 换 \"hammer\"。"
 }

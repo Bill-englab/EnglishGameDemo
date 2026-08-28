@@ -1,5 +1,5 @@
 {
-  "title": "We drew lots of monsters, and then we showed them to the teacher.",
+  "title": "We drew monsters! Big scary ones!",
   "title_zh": "复述做了啥",
   "scene": "问他和朋友今天干了啥。",
   "patterns": [
@@ -9,32 +9,36 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "What did you and Sam do together today?"
+      "line": "What did you and Sam do at school today?"
     },
     {
       "speaker": "Child",
-      "line": "We drew lots of monsters, and then we showed them to the teacher."
+      "line": "We drew monsters! Big scary ones!"
     },
     {
       "speaker": "Dad",
-      "line": "What did she say about your monster?"
+      "line": "Ooh, what did you do after drawing?"
     },
     {
       "speaker": "Child",
-      "line": "She said that mine was the scariest one."
+      "line": "And then we showed them to Ms. Lee!"
     },
     {
       "speaker": "Dad",
-      "line": "Was it really the scariest?"
+      "line": "Which monster did she like best?"
     },
     {
       "speaker": "Child",
-      "line": "Yes, because mine had three eyes on it."
+      "line": "Mine! It had three eyes and ten legs!"
     },
     {
       "speaker": "Dad",
-      "line": "Of course it did, silly."
+      "line": "Ten legs? That's a lot of legs!"
+    },
+    {
+      "speaker": "Child",
+      "line": "And then it stomped all around the classroom!"
     }
   ],
-  "variations": "\"drew monsters\" 换 \"built a fort\"；\"showed the teacher\" 换 \"showed Mom\"。"
+  "variations": "\"drew monsters\" 换 \"built a fort\"；\"Ms. Lee\" 换 \"Mom\"。"
 }

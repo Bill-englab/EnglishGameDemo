@@ -1,5 +1,5 @@
 {
-  "title": "I tripped while running at recess, but then I didn't cry.",
+  "title": "I fell down running! But then I didn't cry.",
   "title_zh": "复述小意外",
   "scene": "课间摔了一跤，讲经过。",
   "patterns": [
@@ -9,28 +9,36 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "You look really happy today."
+      "line": "How was recess today?"
     },
     {
       "speaker": "Child",
-      "line": "I tripped while running at recess, but then I didn't cry."
+      "line": "I fell down running! But then I didn't cry."
     },
     {
       "speaker": "Dad",
-      "line": "Were you okay after you fell?"
+      "line": "Oh no! Did you get hurt?"
     },
     {
       "speaker": "Child",
-      "line": "I was fine, and I didn't even need a bandage."
+      "line": "Just a little scrape on my knee. But then it stopped hurting."
     },
     {
       "speaker": "Dad",
-      "line": "You are one tough kid."
+      "line": "Did the teacher see you fall?"
     },
     {
       "speaker": "Child",
-      "line": "It was just a small scrape on my knee."
+      "line": "Yes, but I didn't even need a bandage!"
+    },
+    {
+      "speaker": "Dad",
+      "line": "You're one tough little tiger."
+    },
+    {
+      "speaker": "Child",
+      "line": "Roar! Tigers don't cry — they roar!"
     }
   ],
-  "variations": "\"tripped\" 换 \"dropped my lunch\"；\"cry\" 换 \"give up\"。"
+  "variations": "\"fell down\" 换 \"dropped my lunch\"；\"cry\" 换 \"give up\"。"
 }

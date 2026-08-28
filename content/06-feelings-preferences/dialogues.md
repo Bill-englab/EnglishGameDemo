@@ -11,15 +11,15 @@
 **目标句式：** `I'm ___`（情绪）· `because ___`（原因）
 
 > **F:** You're dragging your feet today. Are you okay?
-> **C:** **I'm** feeling tired **because** I went to sleep late.
-> **F:** You did stay up late last night.
-> **C:** And **I'm** also bored of walking so much.
-> **F:** Are you bored, or are you tired?
-> **C:** I think I'm both. Can I have a piggyback ride?
-> **F:** You can have one, but only up to the corner.
-> **C:** Okay, that's a deal.
+> **C:** **I'm** tired **because** I went to sleep too late.
+> **F:** You did stay up past your bedtime, didn't you?
+> **C:** And **I'm** bored too. This walk is so long.
+> **F:** Are you more bored, or more tired?
+> **C:** Both! **Because** walking makes my legs sleepy.
+> **F:** Then how about a piggyback ride to the corner?
+> **C:** Yes please! My legs say thank you!
 
-**换样重演：** "tired" 换 "hungry"；"bored of walking" 换 "hot"。
+**换样重演：** "tired" 换 "hungry"；"walk" 换 "car ride"。
 
 ---
 
@@ -30,12 +30,13 @@
 **目标句式：** `I don't like ___`（不喜欢）· `It's too ___`（太…）
 
 > **C:** **I don't like** this soup, Dad.
-> **F:** But you used to like it a lot.
-> **C:** Well, **it's too** salty for me now.
-> **F:** Try eating it together with some bread.
-> **C:** Does bread really make it less salty?
-> **F:** I'm not sure, but it's worth a try.
-> **C:** Okay, it tastes a little better now.
+> **F:** But you loved this soup last week!
+> **C:** **It's too** salty now. And **I don't like** the little green bits.
+> **F:** The green bits are just tiny pieces of spinach.
+> **C:** Spinach tastes like grass!
+> **F:** Try it with a piece of bread. Bread makes the salty taste smaller.
+> **C:** Okay... Mmm! **It's** not **too** salty anymore!
+> **F:** See? Now eat it all up, big tiger.
 
 **换样重演：** "soup" 换 "rice"；"salty" 换 "dry"。
 
@@ -49,10 +50,11 @@
 
 > **F:** Do you want an apple or a banana?
 > **C:** **I'd rather** have the banana, please.
-> **F:** But you already had a banana yesterday.
-> **C:** I know, but **I like** banana **better**.
-> **F:** You will get tired of them if you eat too many.
-> **C:** I'm not tired of them yet, though.
-> **F:** Okay then, banana it is for you.
+> **F:** But you had a banana this morning, remember?
+> **C:** I know! **I like** bananas **better** than apples.
+> **F:** Why do you like them so much?
+> **C:** Bananas are soft and sweet. **I'd rather** eat them every day!
+> **F:** If you eat bananas every day, you might turn into a monkey!
+> **C:** Okay — apple today, banana tomorrow!
 
 **换样重演：** "banana" 换 "grapes"；"apple" 换 "pear"。

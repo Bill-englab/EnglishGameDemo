@@ -10,14 +10,14 @@
 
 **目标句式：** `I went ___`（去了）· `It was ___`（评价·过去）
 
-> **F:** How was your visit to Grandma's house today?
-> **C:** It was good. **I went** out to her garden.
-> **F:** What did you see out there?
-> **C:** **It was** completely full of tomatoes.
-> **F:** Did you pick any of them?
-> **C:** I picked one big red one, and **I went** to show it to Grandma.
-> **F:** She must have really liked that.
-> **C:** She told me it was her favorite kind of tomato.
+> **F:** How was Grandma's house today?
+> **C:** **It was** fun! **I went** out to her garden.
+> **F:** Ooh, what did you see out there?
+> **C:** Tomatoes! The whole garden was red!
+> **F:** Wow. Did you pick one?
+> **C:** I picked the biggest one, and **I went** to show Grandma.
+> **F:** What did Grandma say?
+> **C:** She hugged me and called it a super tomato!
 
 **换样重演：** "Grandma's garden" 换 "the park"；"tomatoes" 换 "ducks"。
 
@@ -29,15 +29,16 @@
 
 **目标句式：** `We ___`（我们·过去）· `and then ___`（然后）
 
-> **F:** What did you and Sam do together today?
-> **C:** **We** drew lots of monsters, **and then** we showed them to the teacher.
-> **F:** What did she say about your monster?
-> **C:** She said that mine was the scariest one.
-> **F:** Was it really the scariest?
-> **C:** Yes, because mine had three eyes on it.
-> **F:** Of course it did, silly.
+> **F:** What did you and Sam do at school today?
+> **C:** **We** drew monsters! Big scary ones!
+> **F:** Ooh, what did you do after drawing?
+> **C:** **And then** **we** showed them to Ms. Lee!
+> **F:** Which monster did she like best?
+> **C:** Mine! It had three eyes and ten legs!
+> **F:** Ten legs? That's a lot of legs!
+> **C:** **And then** it stomped all around the classroom!
 
-**换样重演：** "drew monsters" 换 "built a fort"；"showed the teacher" 换 "showed Mom"。
+**换样重演：** "drew monsters" 换 "built a fort"；"Ms. Lee" 换 "Mom"。
 
 ---
 
@@ -47,11 +48,13 @@
 
 **目标句式：** `but then ___`（但后来）· `I didn't ___`（过去否定）
 
-> **F:** You look really happy today.
-> **C:** I tripped while running at recess, **but then** I didn't cry.
-> **F:** Were you okay after you fell?
-> **C:** I was fine, and **I didn't** even need a bandage.
-> **F:** You are one tough kid.
-> **C:** It was just a small scrape on my knee.
+> **F:** How was recess today?
+> **C:** I fell down running! **But then** I didn't cry.
+> **F:** Oh no! Did you get hurt?
+> **C:** Just a little scrape on my knee. **But then** it stopped hurting.
+> **F:** Did the teacher see you fall?
+> **C:** Yes, but **I didn't** even need a bandage!
+> **F:** You're one tough little tiger.
+> **C:** Roar! Tigers don't cry — they roar!
 
-**换样重演：** "tripped" 换 "dropped my lunch"；"cry" 换 "give up"。
+**换样重演：** "fell down" 换 "dropped my lunch"；"cry" 换 "give up"。

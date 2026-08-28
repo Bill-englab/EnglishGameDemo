@@ -1,5 +1,5 @@
 {
-  "title": "He said he is coming over to my house.",
+  "title": "Yes! He said he's coming to my house!",
   "title_zh": "转述同伴",
   "scene": "朋友说来家里玩，时间没定死。",
   "patterns": [
@@ -8,36 +8,36 @@
   "dialogue": [
     {
       "speaker": "Dad",
-      "line": "What did Leo say to you today?"
+      "line": "Did you talk to Leo at school today?"
     },
     {
       "speaker": "Child",
-      "line": "He said he is coming over to my house."
+      "line": "Yes! He said he's coming to my house!"
     },
     {
       "speaker": "Dad",
-      "line": "Did he ask his mom about it first?"
+      "line": "Oh nice! Did he say which day?"
     },
     {
       "speaker": "Child",
-      "line": "Yes, he said that she said yes."
+      "line": "He said maybe Saturday, if his mom says yes."
     },
     {
       "speaker": "Dad",
-      "line": "When is he going to come over?"
+      "line": "Then let's hope Mom says yes! What will you play?"
     },
     {
       "speaker": "Child",
-      "line": "He said maybe on Saturday he can come."
+      "line": "He said he'll bring his big yellow truck!"
     },
     {
       "speaker": "Dad",
-      "line": "Tell him he should bring a toy to share."
+      "line": "Then we should tidy the toy room, just in case."
     },
     {
       "speaker": "Child",
-      "line": "He said he will bring his big truck."
+      "line": "Yes! Let's tidy it right now!"
     }
   ],
-  "variations": "\"Leo\" 换 \"Mia\"；\"coming to my house\" 换 \"bringing a toy\"。"
+  "variations": "\"Leo\" 换 \"Mia\"；\"big yellow truck\" 换 \"new doll\"。"
 }

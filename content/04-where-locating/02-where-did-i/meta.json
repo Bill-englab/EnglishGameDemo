@@ -1,7 +1,7 @@
 {
   "title": "Where did I put my water bottle? I forgot.",
   "title_zh": "忘了放哪",
-  "scene": "水壶不知放哪了，问爸爸看见没。",
+  "scene": "水壶不知放哪了，问爸爸看见没，两人一起去找。",
   "patterns": [
     "Where did I put ___?",
     "Did you see ___?"
@@ -25,15 +25,15 @@
     },
     {
       "speaker": "Child",
-      "line": "Okay, I will go out and check the car."
+      "line": "Can we go out and check the car together?"
     },
     {
       "speaker": "Dad",
-      "line": "While you're there, can you bring mine too?"
+      "line": "Good idea, let's both go look for it."
     },
     {
       "speaker": "Child",
-      "line": "Maybe I will, if I can find mine first."
+      "line": "Maybe I can help you find yours too."
     }
   ],
   "variations": "\"water bottle\" 换 \"jacket\"；\"in the car\" 换 \"by the door\"。"

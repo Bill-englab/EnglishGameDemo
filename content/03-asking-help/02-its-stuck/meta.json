@@ -1,7 +1,7 @@
 {
-  "title": "It's stuck, Dad — the zipper won't move.",
+  "title": "It's stuck, Dad — my jacket won't come off the hook.",
   "title_zh": "卡住了",
-  "scene": "拉链卡住，够不着也看不清。",
+  "scene": "出门前，孩子的夹克挂在门边高挂钩上拿不下来，拉链挂住了，孩子够不着挂钩看不清。",
   "patterns": [
     "It's stuck",
     "I can't reach ___"
@@ -9,27 +9,27 @@
   "dialogue": [
     {
       "speaker": "Child",
-      "line": "It's stuck, Dad — the zipper won't move."
+      "line": "It's stuck, Dad — my jacket won't come off the hook."
     },
     {
       "speaker": "Dad",
-      "line": "Try pulling it down from the bottom part."
+      "line": "What's caught up there?"
     },
     {
       "speaker": "Child",
-      "line": "But I can't reach the bottom part of it."
+      "line": "I can't reach it — the hook is too high for me to see."
     },
     {
       "speaker": "Dad",
-      "line": "You can stand on the little step stool."
+      "line": "Here, let me lift you up so you can look."
     },
     {
       "speaker": "Child",
-      "line": "Oh no, the fabric is caught in it now."
+      "line": "Oh! The zipper is caught on the hook."
     },
     {
       "speaker": "Dad",
-      "line": "Hold the fabric flat, and then pull it. There, it's free!"
+      "line": "Lift the jacket up a little, and pull it off. There, it's free!"
     },
     {
       "speaker": "Child",

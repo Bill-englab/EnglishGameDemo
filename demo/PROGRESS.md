@@ -63,7 +63,7 @@
 - [x] 段 1 — `prompts/03-asking-help/D1a.txt`
 - [x] 段 2 — `prompts/03-asking-help/D1b.txt`
 
-### 02-its-stuck — It's stuck, Dad — the zipper won't move. · 卡住了
+### 02-its-stuck — It's stuck, Dad — my jacket won't come off the hook. · 卡住了
 → `demo/03-asking-help/02-its-stuck/demo.mp4`
 - [x] 段 1 — `prompts/03-asking-help/D2a.txt`
 - [x] 段 2 — `prompts/03-asking-help/D2b.txt`

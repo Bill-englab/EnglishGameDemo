@@ -23,7 +23,7 @@
 | 关卡 | 路径 | 标题 |
 | --- | --- | --- |
 | 3-1 | `03-asking-help/01-can-you-help/demo.mp4` | Can you help me open this jar? |
-| 3-2 | `03-asking-help/02-its-stuck/demo.mp4` | It's stuck, Dad — the zipper won't move. |
+| 3-2 | `03-asking-help/02-its-stuck/demo.mp4` | It's stuck, Dad — my jacket won't come off the hook. |
 | 3-3 | `03-asking-help/03-let-me-try/demo.mp4` | No, let me try it first by myself. |
 
 ## 04-where-locating（位置 / 找东西）

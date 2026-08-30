@@ -1,6 +1,6 @@
 # 视频素材进度表 · Video Asset Progress
 
-快照（snapshot）：2026-08-14 ｜ demo 完成 **7 / 30** ｜ 段落 **14 / 60**
+快照（snapshot）：2026-08-30 ｜ demo 完成 **14 / 30** ｜ 段落 **28 / 60**
 
 ## 结构说明 · How it works
 
@@ -65,15 +65,15 @@
 
 ### 02-its-stuck — It's stuck, Dad — the zipper won't move. · 卡住了
 → `demo/03-asking-help/02-its-stuck/demo.mp4`
-- [ ] 段 1 — `prompts/03-asking-help/D2a.txt`
-- [ ] 段 2 — `prompts/03-asking-help/D2b.txt`
+- [x] 段 1 — `prompts/03-asking-help/D2a.txt`
+- [x] 段 2 — `prompts/03-asking-help/D2b.txt`
 
 ### 03-let-me-try — No, let me try it first by myself. · 自己来
 → `demo/03-asking-help/03-let-me-try/demo.mp4`
-- [ ] 段 1 — `prompts/03-asking-help/D3a.txt`
-- [ ] 段 2 — `prompts/03-asking-help/D3b.txt`
+- [x] 段 1 — `prompts/03-asking-help/D3a.txt`
+- [x] 段 2 — `prompts/03-asking-help/D3b.txt`
 
-**03 小计：1 / 3 demo（2 / 6 段）**
+**03 小计：3 / 3 demo（6 / 6 段）**
 
 ---
 
@@ -81,20 +81,20 @@
 
 ### 01-wheres — Where's my blue sock, Dad? I can't see it. · 找东西
 → `demo/04-where-locating/01-wheres/demo.mp4`
-- [ ] 段 1 — `prompts/04-where-locating/D1a.txt`
-- [ ] 段 2 — `prompts/04-where-locating/D1b.txt`
+- [x] 段 1 — `prompts/04-where-locating/D1a.txt`
+- [x] 段 2 — `prompts/04-where-locating/D1b.txt`
 
 ### 02-where-did-i — Where did I put my water bottle? I forgot. · 忘了放哪
 → `demo/04-where-locating/02-where-did-i/demo.mp4`
-- [ ] 段 1 — `prompts/04-where-locating/D2a.txt`
-- [ ] 段 2 — `prompts/04-where-locating/D2b.txt`
+- [x] 段 1 — `prompts/04-where-locating/D2a.txt`
+- [x] 段 2 — `prompts/04-where-locating/D2b.txt`
 
 ### 03-is-inon — Is my hat in this bag? · 位置确认
 → `demo/04-where-locating/03-is-inon/demo.mp4`
-- [ ] 段 1 — `prompts/04-where-locating/D3a.txt`
-- [ ] 段 2 — `prompts/04-where-locating/D3b.txt`
+- [x] 段 1 — `prompts/04-where-locating/D3a.txt`
+- [x] 段 2 — `prompts/04-where-locating/D3b.txt`
 
-**04 小计：0 / 3 demo（0 / 6 段）**
+**04 小计：3 / 3 demo（6 / 6 段）**
 
 ---
 
@@ -102,20 +102,20 @@
 
 ### 01-why-do-i — Why do I have to brush them two times? · 问规则原因
 → `demo/05-why-how-come/01-why-do-i/demo.mp4`
-- [ ] 段 1 — `prompts/05-why-how-come/D1a.txt`
-- [ ] 段 2 — `prompts/05-why-how-come/D1b.txt`
+- [x] 段 1 — `prompts/05-why-how-come/D1a.txt`
+- [x] 段 2 — `prompts/05-why-how-come/D1b.txt`
 
 ### 02-how-come — How come we can't have dessert? · 问原因
 → `demo/05-why-how-come/02-how-come/demo.mp4`
-- [ ] 段 1 — `prompts/05-why-how-come/D2a.txt`
-- [ ] 段 2 — `prompts/05-why-how-come/D2b.txt`
+- [x] 段 1 — `prompts/05-why-how-come/D2a.txt`
+- [x] 段 2 — `prompts/05-why-how-come/D2b.txt`
 
 ### 03-how-do-you — How do you know that it's going to rain? · 问方法
 → `demo/05-why-how-come/03-how-do-you/demo.mp4`
 - [ ] 段 1 — `prompts/05-why-how-come/D3a.txt`
 - [ ] 段 2 — `prompts/05-why-how-come/D3b.txt`
 
-**05 小计：0 / 3 demo（0 / 6 段）**
+**05 小计：2 / 3 demo（4 / 6 段）**
 
 ---
 

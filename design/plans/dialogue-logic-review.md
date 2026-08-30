@@ -124,5 +124,5 @@
   - 10-D2 天空矛盾：问题在重写版里**复现**（Setting "the sky turning gray" vs 台词 "the sky is all blue right now"），已按同一思路重修（a 段 Setting 改晴空；b 段改 "mostly clear with a faint gray smudge low on the horizon"）。
   - 06-D3b "hugs the banana"：措辞在重写版里**保留**，已改 "clutches the banana close"。
   - 09-D2a "points at the sky"：重写版已写成 "points at his picture"，问题**不存在**，无需处理。
-- **视频现状**：03-02 的 demo 是 8-16 在修正合入 master 之后生成的，画面即修正版（夹克挂高挂钩 + 爸爸托起）——本次文字落地后视频与台词**恢复同步**。04-02 的 demo 生成于 8-26（main 时期），按时间线疑似旧版画面（孩子独自去车里），需人工核验；若为旧版，用 `tools/test_pipeline.py` 重做即可。
+- **视频现状**：03-02 的 demo 是 8-16 在修正合入 master 之后生成的，画面即修正版（夹克挂高挂钩 + 爸爸托起）——本次文字落地后视频与台词**恢复同步**。04-02 的 demo 经人工核验亦为正确版本。（注：当时用于核验/重做的 CogVideoX 试验脚本 `tools/test_pipeline.py` 已于 8-30 移除，demo 生产回归纯手动 Sora 流程。）
 - **master 分支处置**：其上的修正已全部落地 main，master 自 8-21 起本就停更，可不再维护（留着亦无害）。

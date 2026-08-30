@@ -86,8 +86,7 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │
 ├── tools/                             # 脚本
 │   ├── README.md
-│   ├── scaffold_levels.py             # 从 dialogues.md 生成 meta.json
-│   └── test_pipeline.py               # 端到端：调智谱 CogVideoX-Flash 生成两段 → ffmpeg 拼接 → 验证 scanner
+│   └── scaffold_levels.py             # 从 dialogues.md 生成 meta.json
 │
 ├── design/                            # 设计工作区
 │   ├── memo.md + plans/               # 详情页重设计的需求备忘与实施计划（已落地）
@@ -323,9 +322,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 1. **写对话源**：编辑 `content/<章>/dialogues.md`（D1/D2/D3，格式见 `content/01-wants-requests/dialogues.md`）。
 2. **生成 meta**：`python tools/scaffold_levels.py` → 写出各关 `meta.json`（`demo/` 里已有 `demo.mp4` 的关不动）。
-3. **做 demo 视频**，两条路：
-   - **手动（Sora）**：拿 `prompts/<章>/D{N}a.txt` + `D{N}b.txt` 各粘进 Sora 生成两段 → ffmpeg 流拷贝拼成 `demo.mp4` 放进 `demo/<章>/<关>/`。
-   - **自动（智谱 CogVideoX-Flash）**：`python tools/test_pipeline.py` 端到端跑完（读提示词 → 调 API 生成两段 5s → ffmpeg 拼接 → 落盘 → 验证 scanner 能检测到）。API key 从根目录 `.env` 读（gitignored）。第 3–5 章的 demo 就是这条流水线产的。脚本里的 `CHAPTER`/`LEVEL` 是硬编码的，跑别的关要改。
+3. **做 demo 视频（手动 Sora 流程）**：拿 `prompts/<章>/D{N}a.txt` + `D{N}b.txt` 各粘进 Sora 生成两段 → ffmpeg 流拷贝拼成 `demo.mp4` 放进 `demo/<章>/<关>/`。也可以在详情页直接上传 demo 文件（后端自动压缩+生成缩略图）。
 4. **更新进度表**：改 `demo/PROGRESS.md` 的勾选状态 + 小计。
 5. demo 落盘后**无需手动做缩略图**：启动服务或上传时会自动生成 `thumb.jpg`（也可手动跑 `ffmpeg` 抽帧，见 §6）。
 
@@ -417,7 +414,7 @@ refactor: split content, demo, and recordings into separate trees
 - 孩子表演 `performance.mp4`/`.webm`：admin 用户 2 / 30。
 - 背景插画：8 / 10 章（缺第 9、10 章，靠循环兜底）。
 
-**瓶颈**：demo 视频备课跟不上闯关节奏——正在用 `tools/test_pipeline.py`（CogVideoX-Flash）自动化缓解。
+**瓶颈**：demo 视频备课跟不上闯关节奏。demo 由人工用 Sora 制作（详情页可上传，后端自动压缩+缩略图）。
 
 ### 代码状态
 

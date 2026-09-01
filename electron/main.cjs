@@ -101,10 +101,10 @@ async function createWindow() {
 }
 
 app.whenReady().then(async () => {
-  // Auto-grant camera + microphone permissions for localhost
+  // Auto-grant permissions for localhost (camera/mic for recording, fullscreen for video playback)
   session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
     const url = webContents.getURL();
-    if (url.startsWith("http://localhost") && ["media", "camera", "microphone"].includes(permission)) {
+    if (url.startsWith("http://localhost")) {
       callback(true);
     } else {
       callback(false);

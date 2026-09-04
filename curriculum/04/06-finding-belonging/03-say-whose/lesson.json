@@ -1,0 +1,18 @@
+{
+  "title":"The Bottle with My Name","title_zh":"写着我名字的水瓶","can_do":"说明物品属于谁，并补充一个能辨认它的特征。",
+  "conversation_move":{"id":"identify-belonging","label":"identify whose item it is"},
+  "trigger":"Rabbit Teacher finds a bottle, but another bottle has the same yellow-star design.",
+  "core_response":"It's mine. It has a yellow star.","stretch_response":"Mine has my name under the yellow star.","repair_response":"That one is not mine. Mine has my name.",
+  "recycle":["specify-choice","check-location"],"roles":["child","teacher"],"setting":"A light classroom setting after art time.","essential_props":["two similar water bottles"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"teacher","line":"This water bottle was left by the art table. Whose is it?","kind":"input"},{"speaker":"child","line":"It's mine. It has a yellow star.","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"teacher","line":"I see two bottles with yellow stars.","kind":"input"},{"speaker":"child","line":"Mine has my name under the star.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"teacher","line":"Here is the one with your name.","kind":"input"},{"speaker":"child","line":"Yes, that is mine. I will put it in my bag.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Whose coat?","setting":"At the classroom coat hooks","change":"Two coats are the same color","challenge":"Say the coat is yours, name the animal patch, confirm it, and put it on"},
+    {"title":"Whose drawing?","setting":"At the family table","change":"Two drawings are face down","challenge":"Say which is yours using the name or subject on it, turn it over, and take it"}
+  ],
+  "parent_support":["Use a feature that really distinguishes the item; a name label is especially useful.","Do not treat possession as proven until the identifying detail matches."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

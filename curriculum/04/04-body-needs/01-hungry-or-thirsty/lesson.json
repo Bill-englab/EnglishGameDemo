@@ -1,0 +1,18 @@
+{
+  "title":"Cold Water, Please","title_zh":"我渴了，想喝凉水","can_do":"说出饿或渴，并提出一个能满足需要的请求。",
+  "conversation_move":{"id":"state-body-need","label":"state a body need"},
+  "trigger":"After coming in from active play, the child notices thirst while Mom asks whether to continue.",
+  "core_response":"I'm thirsty.","stretch_response":"I'm thirsty. Can I have some water, please?","repair_response":"Water, please, not a snack.",
+  "recycle":["request-item","specify-choice"],"roles":["child","mom"],"setting":"Coming inside after active play.","essential_props":["water and two cups"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"You came in from outside. Do you want to keep playing?","kind":"input"},{"speaker":"child","line":"I'm thirsty. Can I have some water, please?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"Yes. Cold water or warm water?","kind":"input"},{"speaker":"child","line":"Cold water, please. I want the blue cup.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Here is cold water in the blue cup.","kind":"input"},{"speaker":"child","line":"Thank you. I feel better after a drink.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"A small snack","setting":"Before going outside","change":"The child notices hunger","challenge":"Say the need, choose between two available snacks, eat, and then get ready"},
+    {"title":"Water in the car","setting":"Before a short car ride","change":"The child notices thirst before buckling in","challenge":"Ask for the water bottle, take a drink while parked, then buckle in"}
+  ],
+  "parent_support":["Respond first to the body need, then offer one or two realistic options.","Do not require a polished sentence before meeting an urgent need."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

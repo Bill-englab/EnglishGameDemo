@@ -1,0 +1,18 @@
+{
+  "title":"One Book Before Bed","title_zh":"睡前读一本","can_do":"在明确的睡前边界内，请求一件可以完成的小事。",
+  "conversation_move":{"id":"request-before-boundary","label":"request one thing before a boundary"},
+  "trigger":"Mom says there is time for one short activity before lights out.",
+  "core_response":"Can we read a book before bed?","stretch_response":"Can we read the blue bear book before bed?","repair_response":"Just one short book, please.",
+  "recycle":["request-item","specify-choice"],"roles":["child","mom"],"setting":"The regular bedtime routine.","essential_props":["two short picture books"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"We have time for one thing before lights out.","kind":"input"},{"speaker":"child","line":"Can we read the bear book before bed?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"Yes, one short book. Which bear book?","kind":"input"},{"speaker":"child","line":"The blue one, please. It has the sleepy bear.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Here it is. We will read it, then lights out.","kind":"input"},{"speaker":"child","line":"Okay. I am ready for our story.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"One goodnight song","setting":"After the book is finished","change":"There is time for one short song","challenge":"Request one named song, sing it together, then turn out the light"},
+    {"title":"Choose tomorrow's shirt","setting":"Before getting into bed","change":"Two shirts are already on the chair","challenge":"Ask to choose one now, identify it, set it aside, and continue bedtime"}
+  ],
+  "parent_support":["State the real limit before inviting the request.","Honor the agreed short activity, then keep the bedtime boundary calmly."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

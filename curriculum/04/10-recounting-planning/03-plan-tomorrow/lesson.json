@@ -1,0 +1,18 @@
+{
+  "title":"Scooter at the Park","title_zh":"明天去公园骑滑板车","can_do":"听懂一个明天的家庭安排，并贡献一个可执行的选择和准备步骤。",
+  "conversation_move":{"id":"contribute-to-plan","label":"contribute one idea to a plan"},
+  "trigger":"Mom shares tomorrow's park plan, and the child wants to bring a scooter that requires a helmet.",
+  "core_response":"I want to ride my scooter there.","stretch_response":"First my helmet, then my scooter. Can we pack them tonight?","repair_response":"I mean the scooter, with my helmet.",
+  "recycle":["sequence-actions","report-readiness"],"roles":["child","mom"],"setting":"Making a simple family plan at home.","essential_props":["a helmet and scooter"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"Tomorrow we are going to the park after breakfast.","kind":"input"},{"speaker":"child","line":"I want to ride my scooter there.","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"We can take it if we remember your helmet.","kind":"input"},{"speaker":"child","line":"First my helmet, then my scooter. Can we pack them tonight?","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Yes. Put them by the door, and we will be ready.","kind":"input"},{"speaker":"child","line":"Okay. I will get my helmet first.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Library tomorrow","setting":"Planning at the dinner table","change":"The child wants to return one book and choose another","challenge":"Add that idea to Mom's plan, name the book to pack, and place it by the bag"},
+    {"title":"Picnic tomorrow","setting":"Planning at home","change":"Dad offers fruit or crackers to bring","challenge":"Choose one, suggest packing it after breakfast, and add it to the family list"}
+  ],
+  "parent_support":["Begin with one real family plan and invite one manageable contribution.","Connect the child's idea to a necessary preparation without turning planning into a lecture."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

@@ -1,0 +1,18 @@
+{
+  "title":"Pirates in Space","title_zh":"太空里的海盗","can_do":"同伴想法不同时提出新玩法，并把两个想法合成一个共同方案。",
+  "conversation_move":{"id":"suggest-shared-play","label":"suggest a shared play idea"},
+  "trigger":"The child and peer want the same blanket to become two different pretend-play settings.",
+  "core_response":"How about we make it a space ship?","stretch_response":"What if our space ship carries pirate treasure?","repair_response":"We can keep your pirates and add my space ship.",
+  "recycle":["propose-order","change-choice"],"roles":["child","peer"],"setting":"Pretend play with one blanket.","essential_props":["a blanket and a paper treasure map"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"Let's make the blanket a pirate ship.","kind":"input"},{"speaker":"child","line":"How about we make it a space ship?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"peer","line":"I want pirates. I already made a treasure map.","kind":"input"},{"speaker":"child","line":"What if our space ship carries pirate treasure?","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Yes! We can fly to Treasure Planet.","kind":"input"},{"speaker":"child","line":"Great. I will be the treasure captain.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Castle train","setting":"Block and train play","change":"One child wants a castle and one wants a railway","challenge":"Suggest a train that delivers people to the castle, agree on roles, and start building"},
+    {"title":"Animal restaurant","setting":"Pretend kitchen play","change":"One child wants animals and one wants cooking","challenge":"Suggest a restaurant for toy animals, choose jobs, and serve the first guest"}
+  ],
+  "parent_support":["Let the peer prefer their own idea instead of agreeing immediately.","A successful plan preserves something important from both children's ideas."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

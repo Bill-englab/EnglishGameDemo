@@ -1,0 +1,18 @@
+{
+  "title":"Shoes, Then Coat","title_zh":"先鞋子，再外套","can_do":"用 first/then 提出并完成两个熟悉的准备步骤。",
+  "conversation_move":{"id":"sequence-actions","label":"sequence two actions"},
+  "trigger":"Shoes and a coat are both needed before leaving, and the child chooses the order.",
+  "core_response":"First my shoes, then my coat.","stretch_response":"First I will put on my shoes, then my coat.","repair_response":"Shoes first, not the coat yet.",
+  "recycle":["propose-order","request-help"],"roles":["child","dad"],"setting":"Getting ready at the front door.","essential_props":["shoes and a coat"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"We need your shoes and coat before we leave.","kind":"input"},{"speaker":"child","line":"First I put on my shoes, then my coat.","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"One shoe is hiding behind the bag.","kind":"input"},{"speaker":"child","line":"I found it. Shoes first, then I can get my coat.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"Both shoes are on. Your coat is by the door.","kind":"input"},{"speaker":"child","line":"Now my coat is on. I am ready.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Wash and eat","setting":"Before a snack","change":"Hands need washing and the snack needs carrying","challenge":"Choose wash first, then carry the plate; complete both steps"},
+    {"title":"Pajamas and teeth","setting":"Getting ready for bed","change":"Two routine steps remain","challenge":"Propose pajamas first and teeth second; complete the sequence with Mom"}
+  ],
+  "parent_support":["Offer two necessary steps and accept either safe order.","Use first and then while acting, not as a memory quiz afterward."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

@@ -1,0 +1,18 @@
+{
+  "title":"The Road We Made","title_zh":"我们今天搭的路","can_do":"回答今天做了什么，并补充人物、物品或喜欢的部分。",
+  "conversation_move":{"id":"recount-one-event","label":"recount one event from today"},
+  "trigger":"Rabbit Teacher asks about an outdoor-play event the child just experienced.",
+  "core_response":"Today I made a long road.","stretch_response":"Today I made a long road with Maya.","repair_response":"Not yesterday. We made it today.",
+  "recycle":["join-play","identify-belonging"],"roles":["child","teacher"],"setting":"A short end-of-day classroom conversation.","essential_props":[],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"teacher","line":"What did you do during outdoor play today?","kind":"input"},{"speaker":"child","line":"Today I made a long road with Maya.","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"teacher","line":"What went on the road?","kind":"input"},{"speaker":"child","line":"We put three cars and a bus on it.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"teacher","line":"Which part did you like best?","kind":"input"},{"speaker":"child","line":"I liked driving the bus under our bridge.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Today I painted","setting":"Talking with Mom after an art activity","change":"Mom asks what was in the picture","challenge":"Name the event, add one object or color, and say the favorite part"},
+    {"title":"Today I played outside","setting":"Talking at dinner","change":"Dad asks who joined the game","challenge":"Name the event, the person, and one concrete thing they did together"}
+  ],
+  "parent_support":["Ask about one recent, shared, concrete event rather than the whole day.","Follow the child's answer with one genuine detail question, not a quiz sequence."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

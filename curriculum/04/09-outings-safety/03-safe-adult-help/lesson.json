@@ -1,0 +1,19 @@
+{
+  "title":"Ask the Shop Worker","title_zh":"向商店工作人员求助","can_do":"在走失演练中向可识别的工作人员说明找不到家长、说出名字并留在安全地点。",
+  "conversation_move":{"id":"seek-safe-adult-help","label":"ask an identifiable safe adult for help"},
+  "trigger":"Mom starts a calm home rehearsal and plays a shop worker wearing a visible name badge.",
+  "core_response":"I can't find my mom.","stretch_response":"My name is Leo. Can you help me, please?","repair_response":"I need help finding my mom. I will stay here.",
+  "recycle":["request-help","identify-belonging"],"roles":["child","mom"],"setting":"A calm pretend shop-worker rehearsal at home.","essential_props":["a pretend shop-worker name badge"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"Let's practice. Pretend I am a shop worker with a name badge.","kind":"input"},{"speaker":"child","line":"Excuse me. I can't find my mom.","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"You came to a worker. What is your name?","kind":"input"},{"speaker":"child","line":"My name is Leo. Can you help me, please?","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Yes. Stay with me while I call for your mom.","kind":"input"},{"speaker":"child","line":"Okay. I will stay here with you.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Ask a security officer","setting":"A calm home role-play","change":"Dad wears a pretend security badge","challenge":"Say the parent is missing, give the child's first name, and stay while the officer gets help"},
+    {"title":"Ask a parent with children","setting":"A pretend park rehearsal","change":"No worker is visible, but Mom plays a parent caring for children","challenge":"Ask that adult for help, do not leave the public area, and wait while the adult contacts staff"}
+  ],
+  "parent_support":["Practice calmly; never hide from the child or stage a frightening real separation.","Teach identifiable helpers such as a store employee, security officer, police officer, or parent with children; the child must not leave for a parking lot."],
+  "safety_source":{"title":"NCMEC KidSmartz Going Out Checklist","url":"https://www.missingkids.org/content/dam/kidsmartz/pdfs/KidSmartz_Going_Out_Checklist.pdf"},
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

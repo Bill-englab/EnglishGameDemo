@@ -1,0 +1,18 @@
+{
+  "title":"After the Big Bridge","title_zh":"过了大桥还要多久","can_do":"在车里询问还要多久，并用一个可观察路标理解回答。",
+  "conversation_move":{"id":"ask-duration","label":"ask how much longer"},
+  "trigger":"The child wants to know when the car ride to Grandma's house will end.",
+  "core_response":"How much longer?","stretch_response":"How much longer until we get there?","repair_response":"I mean, how long until Grandma's house?",
+  "recycle":["ask-location","report-readiness"],"roles":["child","dad"],"setting":"Buckled into the car on a familiar trip.","essential_props":[],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"We are on the way to Grandma's house.","kind":"input"},{"speaker":"child","line":"How much longer until we get there?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"About ten minutes, after we cross the big bridge.","kind":"input"},{"speaker":"child","line":"Can you tell me when we reach the bridge?","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"There it is. Now we have about five minutes.","kind":"input"},{"speaker":"child","line":"Okay. I can look for Grandma's street now.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Two songs to home","setting":"In the car after an outing","change":"Dad answers with two familiar songs rather than minutes","challenge":"Ask how much longer, listen for the song count, and notice when the second song ends"},
+    {"title":"After the next stop","setting":"Waiting on a pretend bus","change":"Mom explains they leave after the next stop","challenge":"Ask about the wait, repeat the landmark, and get ready when it appears"}
+  ],
+  "parent_support":["Give a short truthful estimate plus a landmark the child can notice.","The driver keeps attention on driving; the scene needs no turning or prop handling."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

@@ -1,0 +1,18 @@
+{
+  "title":"Find the Oatmeal","title_zh":"找到燕麦片","can_do":"在商店设定中询问商品位置，并用包装特征确认选择。",
+  "conversation_move":{"id":"ask-shop-location","label":"ask where to find an item in a shop"},
+  "trigger":"Mom needs oatmeal, but it is not on the shelf they are currently checking.",
+  "core_response":"Where can we find the oatmeal?","stretch_response":"Can we look for the blue box in the next aisle?","repair_response":"Not that blue box. The one with the oat picture.",
+  "recycle":["ask-location","specify-choice"],"roles":["child","mom"],"setting":"A lightly staged grocery aisle.","essential_props":["two grocery boxes and a simple aisle sign"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"We need oatmeal, but I do not see it here.","kind":"input"},{"speaker":"child","line":"Where can we find the oatmeal?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"The sign says cereal is in the next aisle.","kind":"input"},{"speaker":"child","line":"Can we look for the blue box there?","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Here are two blue boxes. Which one?","kind":"input"},{"speaker":"child","line":"The one with the big oat picture, please.","kind":"repair"},{"speaker":"mom","line":"That is oatmeal. We will put it in the basket.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Find the soap","setting":"A pretend shop shelf at home","change":"Soap is not with the snacks","challenge":"Ask where it is, follow a simple sign clue, identify the pump bottle, and place it in the basket"},
+    {"title":"Find the apples","setting":"A real or pretend produce area","change":"Two red fruits are nearby","challenge":"Ask for the produce area, describe apples rather than tomatoes, choose one, and continue shopping"}
+  ],
+  "parent_support":["A printed word is only an adult clue; the child succeeds through asking and visual matching.","Keep the shop as a setting, not a prop-heavy reconstruction."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

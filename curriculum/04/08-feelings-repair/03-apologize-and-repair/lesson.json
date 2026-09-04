@@ -1,0 +1,18 @@
+{
+  "title":"Rebuild the Bridge","title_zh":"一起把桥搭回来","can_do":"注意到自己的动作影响同伴后道歉，并提出能修复游戏的行动。",
+  "conversation_move":{"id":"repair-relationship","label":"apologize and repair the shared activity"},
+  "trigger":"The child's truck accidentally bumps down a bridge the peer wanted to keep.",
+  "core_response":"I'm sorry. Are you okay?","stretch_response":"Can I help rebuild it with you?","repair_response":"I did not mean to bump it. I can help fix it.",
+  "recycle":["request-help","join-play"],"roles":["child","peer"],"setting":"Two children playing with a block bridge.","essential_props":["a block bridge and toy truck"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"My bridge fell when your truck bumped it.","kind":"input"},{"speaker":"child","line":"I'm sorry. Are you okay?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"peer","line":"I'm okay, but I wanted the bridge to stay up.","kind":"input"},{"speaker":"child","line":"Can I help rebuild it with you?","kind":"repair"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Yes. Please hold this side while I add the top.","kind":"input"},{"speaker":"child","line":"I will hold it. Let's try again together.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Fix the drawing","setting":"Two children sharing a large paper","change":"One child draws across the peer's road by mistake","challenge":"Notice the effect, apologize, ask how to repair it, and add a useful bridge together"},
+    {"title":"Return the moved piece","setting":"A shared puzzle","change":"The child takes the piece the peer was about to place","challenge":"Apologize, return the piece, and offer to find a different one"}
+  ],
+  "parent_support":["Do not force an empty apology; make the impact visible and allow a repair action.","The peer can name what mattered, then accept a reasonable repair without instant praise."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

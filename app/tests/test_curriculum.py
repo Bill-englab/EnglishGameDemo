@@ -339,3 +339,63 @@ def test_chapter_3_makes_help_and_repairs_change_the_outcome():
         for lesson in lessons
     )
     assert validate_stage(load_stage(CURRICULUM_ROOT, "04")) == []
+
+
+def test_chapters_4_to_10_follow_the_approved_stage_outline():
+    stage = load_stage(CURRICULUM_ROOT, "04")
+    expected = {
+        "04-body-needs": (
+            ["01-hungry-or-thirsty", "02-request-a-pause", "03-say-what-hurts"],
+            ["state-body-need", "request-a-pause", "describe-discomfort"],
+            ["mom", "dad", "mom"],
+        ),
+        "05-routines-transitions": (
+            ["01-first-then", "02-before-bed", "03-check-readiness"],
+            ["sequence-actions", "request-before-boundary", "report-readiness"],
+            ["dad", "mom", "dad"],
+        ),
+        "06-finding-belonging": (
+            ["01-ask-where", "02-check-a-place", "03-say-whose"],
+            ["ask-location", "check-location", "identify-belonging"],
+            ["dad", "mom", "teacher"],
+        ),
+        "07-joining-cooperation": (
+            ["01-join-play", "02-ask-for-a-turn", "03-plan-the-game"],
+            ["join-play", "request-turn", "suggest-shared-play"],
+            ["peer", "peer", "peer"],
+        ),
+        "08-feelings-repair": (
+            ["01-feeling-and-reason", "02-ask-to-stop", "03-apologize-and-repair"],
+            ["explain-feeling", "set-stop-boundary", "repair-relationship"],
+            ["mom", "dad", "peer"],
+        ),
+        "09-outings-safety": (
+            ["01-how-much-longer", "02-find-it-in-a-shop", "03-safe-adult-help"],
+            ["ask-duration", "ask-shop-location", "seek-safe-adult-help"],
+            ["dad", "mom", "mom"],
+        ),
+        "10-recounting-planning": (
+            ["01-one-event-today", "02-first-and-then", "03-plan-tomorrow"],
+            ["recount-one-event", "recount-two-events", "contribute-to-plan"],
+            ["teacher", "dad", "mom"],
+        ),
+    }
+
+    actual = {}
+    for chapter in stage["chapters"][3:]:
+        lessons = chapter["lessons"]
+        actual[chapter["id"]] = (
+            [lesson["id"] for lesson in lessons],
+            [lesson["conversation_move"]["id"] for lesson in lessons],
+            [lesson["roles"][1] for lesson in lessons],
+        )
+
+    assert actual == expected
+
+
+def test_shop_search_ends_with_the_identified_item_taken_for_purchase():
+    stage = load_stage(CURRICULUM_ROOT, "04")
+    lesson = stage["chapters"][8]["lessons"][1]
+
+    resolution = lesson["parts"][2]
+    assert any(turn["kind"] == "action" for turn in resolution["turns"])

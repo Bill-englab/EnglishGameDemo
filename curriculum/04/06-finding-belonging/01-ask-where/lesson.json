@@ -1,0 +1,18 @@
+{
+  "title":"Where Is My Puzzle Piece?","title_zh":"我的拼图在哪里","can_do":"找不到熟悉物品时主动询问位置，并请求一起寻找。",
+  "conversation_move":{"id":"ask-location","label":"ask where something is"},
+  "trigger":"The final red puzzle piece is not beside the puzzle where the child expects it.",
+  "core_response":"Where's my red puzzle piece?","stretch_response":"Where's my red puzzle piece? Can you help me look?","repair_response":"Not that piece. Mine is red.",
+  "recycle":["request-help","specify-choice"],"roles":["child","dad"],"setting":"Finishing a puzzle at home.","essential_props":["a puzzle with one loose piece"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"Your puzzle is waiting. Do you have the last piece?","kind":"input"},{"speaker":"child","line":"No. Where's my red puzzle piece?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"I saw a red piece near the sofa.","kind":"input"},{"speaker":"child","line":"Can you help me look under the sofa?","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"Here it is, beside the front leg.","kind":"input"},{"speaker":"child","line":"I found it. Now I can finish my puzzle.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Find the hairbrush","setting":"Getting ready in the bedroom","change":"The brush is not on the dresser","challenge":"Ask where it is, follow Mom's clue, find it by the mirror, and finish brushing"},
+    {"title":"Find the blue car","setting":"Playing on the floor","change":"One named car is missing","challenge":"Ask Dad for help, check near the toy box, find the car, and resume the game"}
+  ],
+  "parent_support":["Let the missing object matter to an activity already in progress.","Give one truthful location clue rather than turning the search into repeated guessing."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

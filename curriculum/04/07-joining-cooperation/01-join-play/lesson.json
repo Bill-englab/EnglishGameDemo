@@ -1,0 +1,18 @@
+{
+  "title":"Can I Build the Bridge?","title_zh":"我能一起搭桥吗","can_do":"礼貌请求加入正在进行的游戏，并尊重同伴已经搭好的部分。",
+  "conversation_move":{"id":"join-play","label":"ask to join play"},
+  "trigger":"A peer is building a car road alone, and the child wants to contribute without taking it over.",
+  "core_response":"Can I play with you?","stretch_response":"Can I build a bridge beside your road?","repair_response":"Okay, I won't move your road. Can I build here?",
+  "recycle":["request-item","check-location"],"roles":["child","peer"],"setting":"Free play with blocks and cars.","essential_props":["blocks and toy cars"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"I'm making a road for these cars.","kind":"input"},{"speaker":"child","line":"That looks fun. Can I play with you?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"peer","line":"Okay, but don't move my road.","kind":"input"},{"speaker":"child","line":"Okay. Can I build a bridge beside your road?","kind":"repair"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Yes, then our cars can cross together.","kind":"input"},{"speaker":"child","line":"Great. I will start the bridge here.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Join the animal home","setting":"Pretend play on the floor","change":"A peer has already made one animal house","challenge":"Ask to join, accept that the first house stays, add a second house, and connect the play"},
+    {"title":"Join the chalk road","setting":"Outdoor drawing","change":"A peer owns the current chalk line","challenge":"Ask to join, learn where not to draw, add a parking place, and use both parts"}
+  ],
+  "parent_support":["Play the peer as someone with a real idea and a reasonable boundary.","Joining succeeds through a useful contribution, not automatic access to every object."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

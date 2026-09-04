@@ -1,0 +1,18 @@
+{
+  "title":"The Boat Tipped Over","title_zh":"小船翻了以后","can_do":"用 first/then 讲两个连续事件，并说出自己接下来做了什么。",
+  "conversation_move":{"id":"recount-two-events","label":"recount two linked events"},
+  "trigger":"Dad sees the child's paper boat and asks about a specific event from the day.",
+  "core_response":"First I put it in the water, and then it tipped over.","stretch_response":"Then I asked my teacher for help, and we fixed it.","repair_response":"No, it tipped over first. Then we fixed it.",
+  "recycle":["recount-one-event","request-help"],"roles":["child","dad"],"setting":"Talking at home about a paper boat.","essential_props":["a paper boat"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"What happened to your paper boat today?","kind":"input"},{"speaker":"child","line":"First I put it in the water, and then it tipped over.","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"Oh no. What did you do next?","kind":"input"},{"speaker":"child","line":"I asked my teacher for help.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"Did you try the boat again?","kind":"input"},{"speaker":"child","line":"Yes. We fixed it, and then it floated.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"The block tower","setting":"Talking with Mom after play","change":"A tower fell and was rebuilt","challenge":"Tell the fall first, the request for help next, and the successful rebuild last"},
+    {"title":"The missing mitten","setting":"Talking after returning home","change":"A mitten was missing and then found","challenge":"Say where the search began, who helped, and where the mitten was found"}
+  ],
+  "parent_support":["Use a prop or shared memory to anchor the event without demanding perfect recall.","Ask what happened next only after accepting the first event."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

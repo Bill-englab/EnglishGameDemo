@@ -1,0 +1,18 @@
+{
+  "title":"No More Tickling","title_zh":"不要再挠痒了","can_do":"用清楚、直接的语言要求停止不喜欢的身体互动。",
+  "conversation_move":{"id":"set-stop-boundary","label":"ask someone to stop"},
+  "trigger":"Dad starts playful tickling, but the child no longer enjoys it.",
+  "core_response":"Please stop. I don't like that.","stretch_response":"Please stop. I need some space.","repair_response":"No tickling. A funny face is okay.",
+  "recycle":["delay-boundary","state-body-need"],"roles":["child","dad"],"setting":"A playful moment at home.","essential_props":[],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"Here comes the silly tickle monster!","kind":"input"},{"speaker":"child","line":"Please stop. I don't like that.","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"I stopped. Do you need some space?","kind":"input"},{"speaker":"child","line":"Yes, please. I need space beside me.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"I will sit over here. Would a funny face be okay?","kind":"input"},{"speaker":"child","line":"A funny face is okay. No tickling.","kind":"repair"}]}
+  ],
+  "replay_cards":[
+    {"title":"Stop the loud sound","setting":"Silly music play at home","change":"Dad repeats a sound close to the child","challenge":"Ask him to stop, request quiet space, then choose a softer game if wanted"},
+    {"title":"Do not move my hair","setting":"Getting ready in front of a mirror","change":"Mom playfully changes the child's hairstyle after the child objects","challenge":"Say stop clearly, Mom stops immediately, then the child chooses whether to brush independently"}
+  ],
+  "parent_support":["Stop the action immediately at the first clear request; discussion comes afterward.","Do not require please, eye contact, or an explanation before respecting a body boundary."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

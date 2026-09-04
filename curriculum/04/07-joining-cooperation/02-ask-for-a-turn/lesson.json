@@ -1,0 +1,18 @@
+{
+  "title":"After Your Two Blocks","title_zh":"你搬完两块后轮到我","can_do":"请求下一轮，并用明确事件确认什么时候轮到自己。",
+  "conversation_move":{"id":"request-turn","label":"request the next turn"},
+  "trigger":"A peer is actively using the shared truck, and the child wants a turn without interrupting it.",
+  "core_response":"Can I have a turn after you?","stretch_response":"You carry two blocks, then it is my turn.","repair_response":"Not now. I mean after your two blocks.",
+  "recycle":["request-item","sequence-actions"],"roles":["child","peer"],"setting":"Sharing one toy truck during block play.","essential_props":["one toy truck and blocks"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"I'm using the red truck to fill this box.","kind":"input"},{"speaker":"child","line":"Can I have a turn after you?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"peer","line":"Yes, after I carry these two blocks.","kind":"input"},{"speaker":"child","line":"Okay. You carry two blocks, then it is my turn.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Both blocks are in. Here is the truck.","kind":"input"},{"speaker":"child","line":"Thanks. Now I will carry the blue blocks.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Turn with the marker","setting":"Drawing one shared poster","change":"The peer is finishing one sun","challenge":"Ask for the marker after the sun, watch it finish, receive it, and draw the next item"},
+    {"title":"Turn on the swing","setting":"A pretend playground scene","change":"The peer asks for three more pushes","challenge":"Agree on the clear endpoint, count it together, switch places, and begin the child's turn"}
+  ],
+  "parent_support":["Let the current player finish a small visible unit.","Make the handoff happen exactly when agreed so the sequence language has meaning."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

@@ -1,0 +1,18 @@
+{
+  "title":"I Worked Hard on It","title_zh":"我很努力地搭了它","can_do":"说出自己的感受，并补充一个与刚才事件直接相关的原因。",
+  "conversation_move":{"id":"explain-feeling","label":"name a feeling and its reason"},
+  "trigger":"The child's block tower falls after a long build, and Mom notices the child stop.",
+  "core_response":"I'm upset because my tower fell.","stretch_response":"I'm upset because I worked hard on it.","repair_response":"I need a short break before I rebuild.",
+  "recycle":["request-a-pause","sequence-actions"],"roles":["child","mom"],"setting":"Building a block tower at home.","essential_props":["a fallen block tower"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"Your tower fell down. How are you feeling?","kind":"input"},{"speaker":"child","line":"I'm upset because I worked hard on it.","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"Do you want help, or do you need a break?","kind":"input"},{"speaker":"child","line":"I need a short break, then I want to rebuild.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"I will keep the blocks here until you are ready.","kind":"input"},{"speaker":"child","line":"Thanks. I feel calmer sitting with you.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"The torn picture","setting":"Drawing at home","change":"The paper tears near a finished part","challenge":"Name sadness and the reason, choose help or a break, then decide how to repair the picture"},
+    {"title":"The missed turn","setting":"A family game","change":"The child realizes a turn was skipped","challenge":"Name frustration and why, tell Dad, restore the missed turn, and continue"}
+  ],
+  "parent_support":["Accept the feeling without correcting it or rushing to cheer the child up.","Offer two useful next steps and let the child choose one."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

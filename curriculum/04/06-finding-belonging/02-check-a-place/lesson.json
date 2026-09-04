@@ -1,0 +1,18 @@
+{
+  "title":"Behind the Curtain?","title_zh":"在窗帘后面吗","can_do":"用位置词提出一个可检查的猜测，并根据新线索继续寻找。",
+  "conversation_move":{"id":"check-location","label":"check a possible location"},
+  "trigger":"One toy car is missing during cleanup, and Mom can see a clue near the curtain.",
+  "core_response":"Is it under the bed?","stretch_response":"Is it behind the curtain?","repair_response":"No, not under it. Maybe behind it.",
+  "recycle":["ask-location","repair-meaning"],"roles":["child","mom"],"setting":"Putting toy cars into a basket.","essential_props":["toy cars, a basket, and a curtain"],
+  "parts":[
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"One toy car is still missing from the basket.","kind":"input"},{"speaker":"child","line":"Is it under the bed?","kind":"core"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"I looked there. I can see something by the curtain.","kind":"input"},{"speaker":"child","line":"Is it behind the curtain?","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Yes, the blue car is behind it.","kind":"input"},{"speaker":"child","line":"There it is. I will put it in the basket.","kind":"action"}]}
+  ],
+  "replay_cards":[
+    {"title":"Check the coat pocket","setting":"Looking for a mitten by the door","change":"The mitten is not in the basket","challenge":"Ask whether it is in the coat pocket, check, find it, and complete the pair"},
+    {"title":"Check under the book","setting":"Looking for a drawing crayon","change":"A small red tip is visible near a book","challenge":"Ask whether the crayon is under the book, lift it with Mom, and return the crayon"}
+  ],
+  "parent_support":["Use a visible clue so the second guess follows evidence.","Let the child check the safe location and complete the original cleanup task."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+}

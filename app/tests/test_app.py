@@ -34,6 +34,38 @@ def _login(client, username=TEST_USERNAME, password=TEST_PASSWORD):
     return client.post("/login", data={"username": username, "password": password})
 
 
+def test_missing_config_uses_local_password_and_a_fresh_strong_secret(tmp_path):
+    first = app_module._load_config(tmp_path / "missing.json")
+    second = app_module._load_config(tmp_path / "missing.json")
+
+    assert first["admin_password"] == "admin123"
+    assert len(first["secret_key"]) >= 64
+    assert first["secret_key"] != second["secret_key"]
+
+
+def test_malformed_explicit_config_fails_with_its_path(tmp_path):
+    config_file = tmp_path / "config.json"
+    config_file.write_text("{broken", encoding="utf-8")
+
+    with pytest.raises(RuntimeError, match="config.json"):
+        app_module._load_config(config_file)
+
+
+@pytest.mark.parametrize(
+    "config",
+    [
+        {"admin_password": "CHANGE_ME", "secret_key": "x" * 64},
+        {"admin_password": "a-real-password", "secret_key": "short"},
+    ],
+)
+def test_explicit_config_rejects_placeholder_password_or_weak_secret(tmp_path, config):
+    config_file = tmp_path / "config.json"
+    config_file.write_text(json.dumps(config), encoding="utf-8")
+
+    with pytest.raises(RuntimeError, match="invalid"):
+        app_module._load_config(config_file)
+
+
 @pytest.fixture
 def app_env(tmp_path, monkeypatch):
     """Temp roots + a test user, returns a test client that is NOT logged in.

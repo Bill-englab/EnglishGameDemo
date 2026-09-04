@@ -22,6 +22,8 @@ cd app
 
 或从仓库根双击 `run.bat`（Windows，自动开浏览器）。
 
+本地缺少 `config.json` 时使用开发账号 `admin` / `admin123`，session secret 每次进程启动随机生成。自部署必须从 `config.example.json` 复制并替换两个 `CHANGE_ME` 占位值；固定默认密码、过短 secret 和损坏 JSON 会直接阻止启动。详见 [`DEPLOY.md`](../DEPLOY.md)。
+
 ## 三棵内容树（默认相对仓库根）
 
 | 环境变量 | 默认 | 作用 |

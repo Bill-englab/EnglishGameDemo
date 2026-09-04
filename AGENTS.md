@@ -156,7 +156,7 @@ cd app
 
 ### 登录与配置
 
-- 所有页面/接口要登录（session cookie）。管理员账号 `admin`，密码在 `app/config.json`（从 `config.example.json` 复制；缺失时回退示例值 `admin123`，仅限本地开发）。`secret_key` 同文件配置。
+- 所有页面/接口要登录（session cookie）。管理员账号 `admin`，部署密码在 `app/config.json`（从 `config.example.json` 复制并替换占位值）。缺失配置时仅本地开发回退 `admin123`，同时为当前进程随机生成 session secret；损坏、占位或弱配置会拒绝启动。
 - 登录后右上角用户菜单可切换/登出；admin 有用户管理（`/admin` 页面 + `/api/admin/users`），普通用户密码哈希存 `app/users.json`（gitignored）。
 - 用户名即 `recordings/<用户名>/` 的路径成分：只允许字母数字、`-`、`_`（`_valid_username`），登录和建路径时双重校验。
 
@@ -464,7 +464,7 @@ refactor: split content, demo, and recordings into separate trees
 | 改 `CHAPTER_THEMES` 后 JS 测试红 | 测试钉死了 10 个唯一 world + hex accent；同步改测试或符合约束 |
 | `scaffold_levels.py` 没更新某关 | 那关 `demo/<章>/<关>/demo.mp4` 已存在（被视作已激活，脚本故意跳过保护 meta） |
 | venv 失效 | `app/` 被重命名后 venv 绝对路径失效；删 `app/.venv` 重建（见 `app/README.md`） |
-| 登录进不去 | admin 密码在 `app/config.json`（没这文件就回退示例值 `admin123`）；普通用户由 admin 在用户菜单里增删 |
+| 登录进不去 | admin 密码在 `app/config.json`（没这文件时仅本地开发回退 `admin123`）；若显式配置无效，启动日志会直接指出错误。普通用户由 admin 在用户菜单里增删 |
 | Electron 窗口白屏 | Flask 没起来：看 `launch-debug.log` 和 Electron 控制台的 `[flask]` 输出；确认 `app/.venv` 存在 |
 
 ---

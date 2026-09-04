@@ -1,7 +1,9 @@
 import os
 import json
 import functools
+import logging
 import re
+import secrets
 import subprocess
 from pathlib import Path
 from flask import (Flask, jsonify, render_template, abort, send_file, request,
@@ -21,22 +23,47 @@ USERS_FILE = _PROJECT / "app" / "users.json"
 # Copy config.example.json to config.json and edit before deploying.
 # config.json is gitignored and never committed.
 _CONFIG_FILE = _PROJECT / "app" / "config.json"
-_CONFIG_EXAMPLE = _PROJECT / "app" / "config.example.json"
 
-def _load_config():
-    """Load config.json. If missing, fall back to config.example.json with a warning."""
-    f = _CONFIG_FILE if _CONFIG_FILE.exists() else _CONFIG_EXAMPLE
+
+def _load_config(config_file=_CONFIG_FILE):
+    """Load explicit config, or create safe process-local development defaults."""
+    config_file = Path(config_file)
+    if not config_file.exists():
+        logging.getLogger(__name__).warning(
+            "%s is missing; using local-only admin password and an ephemeral session secret",
+            config_file,
+        )
+        return {"admin_password": "admin123", "secret_key": secrets.token_hex(32)}
     try:
-        return json.loads(f.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return {"admin_password": "admin123", "secret_key": "dev-fallback-change-me"}
+        config = json.loads(config_file.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as exc:
+        raise RuntimeError(f"Cannot read config file {config_file}: {exc}") from exc
+
+    if not isinstance(config, dict):
+        raise RuntimeError(f"Configuration is invalid in {config_file}: expected an object")
+    password = config.get("admin_password")
+    secret_key = config.get("secret_key")
+    weak_passwords = {"admin123", "CHANGE_ME", "change-me-before-deploying"}
+    if (
+        not isinstance(password, str)
+        or len(password) < 8
+        or password in weak_passwords
+        or not isinstance(secret_key, str)
+        or len(secret_key) < 32
+        or secret_key.startswith("CHANGE_ME")
+    ):
+        raise RuntimeError(
+            f"Configuration is invalid in {config_file}: use a non-default password "
+            "and a random secret_key of at least 32 characters"
+        )
+    return config
 
 _cfg = _load_config()
 ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = _cfg.get("admin_password", "admin123")
+ADMIN_PASSWORD = _cfg["admin_password"]
 
 app = Flask(__name__)
-app.secret_key = _cfg.get("secret_key", "dev-fallback-change-me")
+app.secret_key = _cfg["secret_key"]
 app.config["MAX_CONTENT_LENGTH"] = 500 * 1024 * 1024  # 500 MB upload cap
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"

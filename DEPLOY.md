@@ -29,9 +29,17 @@ cp config.example.json config.json
 ```json
 {
   "admin_password": "你的密码",
-  "secret_key": "一串随机字符"
+  "secret_key": "至少32字符的随机值"
 }
 ```
+
+可以用 Python 生成 64 字符随机 secret，再复制到上面：
+
+```bash
+python -c "import secrets; print(secrets.token_hex(32))"
+```
+
+示例文件里的 `CHANGE_ME` 不能直接使用；应用会拒绝默认密码、占位值、过短 secret 或损坏的 JSON，并在启动时明确报错。本机没有 `config.json` 时仍可用 `admin` / `admin123` 开发，但 session secret 每次启动都会重新生成，因此这种模式不能用于部署。
 
 ### 4. 上传视频（用 Xftp / scp / FTP）
 
@@ -63,7 +71,7 @@ cd EnglishGameDemo
 git pull
 ```
 
-**这不影响视频文件**——`demo/`、`recordings/`、`config.json`、`users.json` 都被 gitignore 排除，`git pull` 只更新代码和文案（`app/`、`content/`、`prompts/` 等）。
+**这不影响视频文件**——`demo/`、`recordings/`、`config.json`、`users.json` 都被 gitignore 排除，`git pull` 只更新代码和文案（`app/`、`curriculum/`、迁移期 `content/`/`prompts/` 等）。
 
 ### 2. 如果有新的 demo 视频
 
@@ -80,7 +88,7 @@ git pull
 - `app/config.json` 包含管理员密码——**不要上传到 GitHub**（已被 gitignore）
 - `app/users.json` 包含用户密码哈希——**不要上传到 GitHub**（已被 gitignore）
 - `demo/` 和 `recordings/` 下的所有视频——**不要上传到 GitHub**（已被 gitignore）
-- 部署前一定要改 `config.json` 里的默认密码 `admin123`
+- 部署必须创建有效的 `config.json`；不要使用 `admin123`、`CHANGE_ME` 或固定示例 secret
 - 公网部署建议加 Nginx 反向代理 + HTTPS
 
 ---
@@ -90,6 +98,7 @@ git pull
 | 目录 | git pull 会更新 | Xftp 上传 | 说明 |
 | --- | --- | --- | --- |
 | `app/` | ✅ 代码 | ❌ | Flask 应用代码 |
+| `curriculum/` | ✅ 文案 | ❌ | 新版分年龄课程唯一创作源 |
 | `content/` | ✅ 文案 | ❌ | 课程 meta.json + dialogues.md |
 | `prompts/` | ✅ 提示词 | ❌ | Sora prompt 文本 |
 | `demo/` | 只更新 README | ✅ 视频 | demo 视频（手动传） |

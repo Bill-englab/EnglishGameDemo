@@ -1,0 +1,48 @@
+{
+  "title": "The Apple, Please",
+  "title_zh": "请给我苹果",
+  "can_do": "在两个可见选项中礼貌请求自己想要的物品，并在拿错时修正。",
+  "conversation_move": {"id": "request-item", "label": "request an item"},
+  "trigger": "Mom offers two snack choices, then hands over the wrong one by mistake.",
+  "core_response": "Can I have the apple, please?",
+  "stretch_response": "Can I have the red apple, please?",
+  "repair_response": "No, I mean the apple, please.",
+  "recycle": [],
+  "roles": ["child", "mom"],
+  "setting": "Snack time at home.",
+  "essential_props": ["an apple and a banana"],
+  "parts": [
+    {
+      "id": "A",
+      "beat": "goal",
+      "turns": [
+        {"speaker": "mom", "line": "Would you like the apple or the banana for your snack?", "kind": "input"},
+        {"speaker": "child", "line": "Can I have the apple, please?", "kind": "core"}
+      ]
+    },
+    {
+      "id": "B",
+      "beat": "change",
+      "turns": [
+        {"speaker": "mom", "line": "Here is the banana.", "kind": "input"},
+        {"speaker": "child", "line": "No, I mean the apple, please.", "kind": "repair"}
+      ]
+    },
+    {
+      "id": "C",
+      "beat": "resolve",
+      "turns": [
+        {"speaker": "mom", "line": "Oh, you asked for the apple. Here it is.", "kind": "input"},
+        {"speaker": "child", "line": "Yes, that one. Thank you, Mom!", "kind": "playful"}
+      ]
+    }
+  ],
+  "replay_cards": [
+    {"title": "Choose a drink", "setting": "At breakfast", "change": "Ask for water or milk", "challenge": "Mom reaches for the other drink; clarify and receive the right one"},
+    {"title": "Choose a book", "setting": "Before bedtime", "change": "Ask for the bear or train book", "challenge": "Dad picks up the other book; clarify and begin the chosen story"}
+  ],
+  "parent_support": ["Offer two choices the child can see.", "If you hand over the wrong one, make it a believable mistake and correct it immediately after the child clarifies."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "status": "language_reviewed",
+  "content_revision": 1
+}

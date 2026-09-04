@@ -1,0 +1,48 @@
+{
+  "title": "The Dinosaur Shirt",
+  "title_zh": "恐龙上衣",
+  "can_do": "用颜色或明显特征说清楚自己要哪一个。",
+  "conversation_move": {"id": "specify-choice", "label": "specify a choice"},
+  "trigger": "Dad offers two shirts, but there are two red shirts and he needs one more detail.",
+  "core_response": "I want the red one.",
+  "stretch_response": "I want the red one with the dinosaur.",
+  "repair_response": "No, the one with the dinosaur.",
+  "recycle": ["request-item"],
+  "roles": ["child", "dad"],
+  "setting": "Getting dressed at home.",
+  "essential_props": ["two shirts"],
+  "parts": [
+    {
+      "id": "A",
+      "beat": "goal",
+      "turns": [
+        {"speaker": "dad", "line": "It is time to get dressed. The red shirt or the blue shirt?", "kind": "input"},
+        {"speaker": "child", "line": "Can I have the red one, please?", "kind": "core"}
+      ]
+    },
+    {
+      "id": "B",
+      "beat": "change",
+      "turns": [
+        {"speaker": "dad", "line": "This striped red one?", "kind": "input"},
+        {"speaker": "child", "line": "No, I want the red one with the dinosaur.", "kind": "stretch"}
+      ]
+    },
+    {
+      "id": "C",
+      "beat": "resolve",
+      "turns": [
+        {"speaker": "dad", "line": "The dinosaur shirt. I found it.", "kind": "input"},
+        {"speaker": "child", "line": "Yes, that is the one I want. Thanks, Dad!", "kind": "playful"}
+      ]
+    }
+  ],
+  "replay_cards": [
+    {"title": "Pick a sock pair", "setting": "Getting dressed", "change": "Choose stars or stripes", "challenge": "Dad points to the same color with the wrong pattern; add the pattern detail and get the pair"},
+    {"title": "Find the cup", "setting": "At the kitchen table", "change": "Choose the cup with a handle or a lid", "challenge": "Mom reaches for a similar cup; describe the visible feature and receive the right cup"}
+  ],
+  "parent_support": ["Start with a broad choice, then ask for one useful detail.", "Accept any visible detail that truly identifies the object."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "status": "language_reviewed",
+  "content_revision": 1
+}

@@ -1,0 +1,48 @@
+{
+  "title": "Water Instead",
+  "title_zh": "我改要水",
+  "can_do": "在行动尚未完成前自然地改变选择。",
+  "conversation_move": {"id": "change-choice", "label": "change a choice"},
+  "trigger": "Mom is about to pour the first drink choice, and the child changes their mind in time.",
+  "core_response": "Actually, can I have water instead?",
+  "stretch_response": "I changed my mind. Can I have water instead?",
+  "repair_response": "Water, please, not milk.",
+  "recycle": ["request-item", "specify-choice"],
+  "roles": ["child", "mom"],
+  "setting": "At the kitchen table.",
+  "essential_props": ["two drink choices and an empty cup"],
+  "parts": [
+    {
+      "id": "A",
+      "beat": "goal",
+      "turns": [
+        {"speaker": "mom", "line": "Milk or water in your cup?", "kind": "input"},
+        {"speaker": "child", "line": "Can I have milk, please?", "kind": "core"}
+      ]
+    },
+    {
+      "id": "B",
+      "beat": "change",
+      "turns": [
+        {"speaker": "mom", "line": "Sure. I am about to pour it.", "kind": "input"},
+        {"speaker": "child", "line": "Actually, can I have water instead?", "kind": "stretch"}
+      ]
+    },
+    {
+      "id": "C",
+      "beat": "resolve",
+      "turns": [
+        {"speaker": "mom", "line": "Of course. I have not poured it yet. Here is your water.", "kind": "input"},
+        {"speaker": "child", "line": "Thanks. Water is what I want now.", "kind": "playful"}
+      ]
+    }
+  ],
+  "replay_cards": [
+    {"title": "Switch the fruit", "setting": "Packing a snack", "change": "Change from an orange to an apple before the bag closes", "challenge": "Mom checks the new choice, swaps it, and closes the bag"},
+    {"title": "Switch the bedtime book", "setting": "Before the story begins", "change": "Change from the train book to the bear book", "challenge": "Dad has opened the first cover but has not started; ask to switch and begin the new story"}
+  ],
+  "parent_support": ["Pause before pouring so there is a real chance to change the choice.", "Treat changing one's mind as ordinary when the action is still easy to change."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "status": "language_reviewed",
+  "content_revision": 1
+}

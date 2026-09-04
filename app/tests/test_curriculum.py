@@ -8,6 +8,7 @@ import pytest
 from curriculum import CurriculumLoadError, load_stage, validate_stage
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+CURRICULUM_ROOT = REPO_ROOT / "curriculum"
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
@@ -241,3 +242,26 @@ def test_validation_exit_code_reflects_issues_without_rejecting_draft_counts(tmp
 
     assert run_validation(root, "04", require_complete=False)[0] == 0
     assert run_validation(root, "04", require_complete=True)[0] == 1
+
+
+def test_chapter_1_builds_requests_through_recycled_moves():
+    chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][0]
+    lessons = chapter["lessons"]
+
+    assert chapter["id"] == "01-choosing-requests"
+    assert [lesson["id"] for lesson in lessons] == [
+        "01-request-an-item",
+        "02-specify-a-choice",
+        "03-change-a-choice",
+    ]
+    assert [lesson["conversation_move"]["id"] for lesson in lessons] == [
+        "request-item",
+        "specify-choice",
+        "change-choice",
+    ]
+    assert [lesson["roles"][1] for lesson in lessons] == ["mom", "dad", "mom"]
+    assert lessons[0]["recycle"] == []
+    assert lessons[1]["recycle"] == ["request-item"]
+    assert lessons[2]["recycle"] == ["request-item", "specify-choice"]
+    assert all([part["id"] for part in lesson["parts"]] == ["A", "B", "C"] for lesson in lessons)
+    assert validate_stage(load_stage(CURRICULUM_ROOT, "04")) == []

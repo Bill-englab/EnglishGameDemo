@@ -17,7 +17,7 @@
       "beat": "goal",
       "turns": [
         {"speaker": "mom", "line": "Would you like warm milk or cold water?", "kind": "input"},
-        {"speaker": "child", "line": "Cold water, please.", "kind": "core"}
+        {"speaker": "child", "line": "Can I have cold water, please?", "kind": "core"}
       ]
     },
     {
@@ -33,7 +33,7 @@
       "beat": "resolve",
       "turns": [
         {"speaker": "mom", "line": "Cold water. Thanks for telling me. Here you are.", "kind": "input"},
-        {"speaker": "child", "line": "Yes, cold water. That is right.", "kind": "action"}
+        {"speaker": "child", "line": "Yes, cold water. That is what I asked for.", "kind": "action"}
       ]
     }
   ],

@@ -126,6 +126,18 @@ def _dialogue_word_count(parts: Any) -> int:
     )
 
 
+def _speaker_word_count(parts: Any, speaker: str) -> int:
+    if not isinstance(parts, list):
+        return 0
+    return sum(
+        len(str(turn.get("line", "")).split())
+        for part in parts
+        if isinstance(part, dict)
+        for turn in part.get("turns", [])
+        if isinstance(turn, dict) and turn.get("speaker") == speaker
+    )
+
+
 def validate_stage(
     stage: dict[str, Any], *, require_complete: bool = False
 ) -> list[ValidationIssue]:
@@ -237,6 +249,14 @@ def validate_stage(
                     f"{path}.parts",
                     "word-budget",
                     f"Stage 4 dialogue needs 35-65 words; found {word_count}",
+                )
+            child_word_count = _speaker_word_count(parts, "child")
+            if not 18 <= child_word_count <= 28:
+                _add(
+                    issues,
+                    f"{path}.parts",
+                    "child-word-budget",
+                    f"Stage 4 child dialogue needs 18-28 words; found {child_word_count}",
                 )
 
             for move_id in lesson.get("recycle", []):

@@ -64,7 +64,7 @@ def valid_lesson(move_id="request-item", *, recycle=None):
                 "beat": "resolve",
                 "turns": [
                     {"speaker": "mom", "line": "Oh, the red apple. Here you are!", "kind": "input"},
-                    {"speaker": "child", "line": "Yes, thank you, Mom!", "kind": "playful"},
+                    {"speaker": "child", "line": "Yes, that is the apple I wanted. Thank you, Mom!", "kind": "playful"},
                 ],
             },
         ],
@@ -185,7 +185,7 @@ def test_load_stage_reports_the_relative_path_for_malformed_json(tmp_path):
             "review-gate",
         ),
         (
-            lambda lesson: lesson["parts"][0]["turns"][0].update(line="Go."),
+            lambda lesson: lesson["parts"][0]["turns"][0].update(line="word " * 70),
             "word-budget",
         ),
         (lambda lesson: lesson.update(recycle=["not-introduced"]), "unknown-recycle"),
@@ -202,6 +202,22 @@ def test_validate_stage_reports_contract_breaks(mutate, expected_code):
 
 def test_validate_stage_accepts_a_well_formed_draft():
     assert validate_stage(valid_stage()) == []
+
+
+def test_validate_stage_rejects_dialogue_that_gives_the_child_too_few_words():
+    stage = valid_stage()
+    lesson = stage["chapters"][0]["lessons"][0]
+    for part in lesson["parts"]:
+        for turn in part["turns"]:
+            if turn["speaker"] == "child":
+                turn["line"] = "Yes."
+    lesson["parts"][0]["turns"][0]["line"] += (
+        " Please look carefully because both choices are here on the table."
+    )
+
+    assert "child-word-budget" in {
+        issue.code for issue in validate_stage(stage)
+    }
 
 
 def test_complete_validation_enforces_counts_and_family_partner_ratio():

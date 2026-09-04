@@ -11,4 +11,8 @@
 
 下一轮 UI 改造：[`specs/2026-09-04-immersive-ui-redesign.md`](specs/2026-09-04-immersive-ui-redesign.md)（已确认 B 沉浸冒险方向、无独立标题栏、课程目录与 Stage 展示规则；设计文档待书面复核，正式 UI 尚未实施）。
 
+个人资料增补：[`specs/2026-09-04-personal-profile-design.md`](specs/2026-09-04-personal-profile-design.md)（已确认头像＋昵称范围；图片隐私、用户隔离与交互规范，尚未实施）。
+
+视频检查记录：[`specs/2026-09-04-video-compression-audit.md`](specs/2026-09-04-video-compression-audit.md)（当前环境与格式处理问题，含验证限制；不代表已经修复）。
+
 课程设计主线：[`specs/2026-09-04-curriculum-architecture-design.md`](specs/2026-09-04-curriculum-architecture-design.md)（4–6 岁成长框架、4 岁 30 课大纲、真实性与内容生产标准）。4 岁课程的逐课验收记录见 [`../curriculum/04/FINAL-REVIEW.md`](../curriculum/04/FINAL-REVIEW.md)，应用接入记录见 [`plans/2026-09-04-curriculum-runtime-migration.md`](plans/2026-09-04-curriculum-runtime-migration.md)。后续关卡设计必须遵循课程设计与最终审查文档。

@@ -24,13 +24,15 @@ cd app
 
 本地缺少 `config.json` 时使用开发账号 `admin` / `admin123`，session secret 每次进程启动随机生成。自部署必须从 `config.example.json` 复制并替换两个 `CHANGE_ME` 占位值；固定默认密码、过短 secret 和损坏 JSON 会直接阻止启动。详见 [`DEPLOY.md`](../DEPLOY.md)。
 
-## 三棵内容树（默认相对仓库根）
+## 课程与三棵媒体树（默认相对仓库根）
 
 | 环境变量 | 默认 | 作用 |
 | --- | --- | --- |
-| `CONTENT_ROOT` | `../content` | 课程文案（meta.json） |
+| `CURRICULUM_ROOT` | `../curriculum` | 新版分年龄课程文案 |
+| `CURRICULUM_STAGE` | `04` | 当前网站展示的年龄 Stage |
 | `DEMO_ROOT` | `../demo` | AI 演示视频 |
 | `RECORDINGS_ROOT` | `../recordings` | 孩子表演录像 |
+| `PROMPTS_ROOT` | `../prompts` | 可选的 A/B/C 视频提示词 |
 
 可分别用环境变量覆盖（测试或挂载别的内容库时用）。
 
@@ -42,7 +44,7 @@ cd app
 | GET | `/api/library` | 带状态标注的章/关树（JSON） |
 | GET | `/video/<chapter>/<level>/<kind>` | `demo` 或 `performance` 视频（非法 kind / 路径越界 / 文件不存在均 404） |
 | POST | `/upload/<chapter>/<level>/<kind>` | 上传视频到对应树（流式写盘，500MB 上限，同样有路径越界守卫） |
-| GET | `/api/prompts/<chapter>/<level>` | 返回该关的 Sora prompt 文本（Part A + Part B，JSON） |
+| GET | `/api/prompts/<chapter>/<level>` | 返回当前 Stage 该课的 Sora prompt 文本（Part A + B + C，JSON） |
 
 上传后前端自动刷新 library，关卡状态实时更新。
 

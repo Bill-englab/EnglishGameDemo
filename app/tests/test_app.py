@@ -12,15 +12,41 @@ TEST_USERNAME = "tester"
 TEST_PASSWORD = "test-pass"
 
 
-def _build_lib(content: Path, demo: Path, recordings: Path, prompts: Path):
-    (content / "01-c" / "01-s").mkdir(parents=True)
-    (content / "01-c" / "01-s" / "meta.json").write_text(
-        json.dumps({"title": "S1"}), encoding="utf-8")
-    (demo / "01-c" / "01-s").mkdir(parents=True)
-    (demo / "01-c" / "01-s" / "demo.mp4").write_bytes(b"fake-demo")
-    (prompts / "01-c").mkdir(parents=True)
-    (prompts / "01-c" / "D1a.txt").write_text("prompt A text", encoding="utf-8")
-    (prompts / "01-c" / "D1b.txt").write_text("prompt B text", encoding="utf-8")
+def _build_lib(curriculum: Path, demo: Path, recordings: Path, prompts: Path):
+    lesson_dir = curriculum / "04" / "01-c" / "01-s"
+    lesson_dir.mkdir(parents=True)
+    (curriculum / "04" / "stage.json").write_text(
+        json.dumps({"id": "04", "title": "Stage 4"}), encoding="utf-8")
+    (curriculum / "04" / "01-c" / "chapter.json").write_text(
+        json.dumps({"title": "Chapter One", "background_asset": "01-wants-requests"}),
+        encoding="utf-8",
+    )
+    (lesson_dir / "lesson.json").write_text(json.dumps({
+        "title": "S1",
+        "title_zh": "第一课",
+        "can_do": "Ask for one clear choice.",
+        "trigger": "Dad offers two choices.",
+        "core_response": "Can I have the apple?",
+        "stretch_response": "Can I have the red apple, please?",
+        "repair_response": "No, I mean the apple.",
+        "conversation_move": {"id": "request-item", "label": "request an item"},
+        "parent_support": ["Offer two choices."],
+        "replay_cards": [{"title": "Drink", "setting": "Breakfast", "change": "Choose milk", "challenge": "Repair a mix-up"}],
+        "status": "language_reviewed",
+        "content_revision": 1,
+        "parts": [
+            {"id": "A", "beat": "goal", "turns": [{"speaker": "dad", "line": "Apple or banana?", "kind": "input"}, {"speaker": "child", "line": "The apple, please.", "kind": "core"}]},
+            {"id": "B", "beat": "change", "turns": [{"speaker": "dad", "line": "The banana?", "kind": "input"}, {"speaker": "child", "line": "No, the apple.", "kind": "repair"}]},
+            {"id": "C", "beat": "resolve", "turns": [{"speaker": "dad", "line": "Here it is.", "kind": "action"}, {"speaker": "child", "line": "Thank you!", "kind": "playful"}]},
+        ],
+    }), encoding="utf-8")
+    (demo / "04" / "01-c" / "01-s").mkdir(parents=True)
+    (demo / "04" / "01-c" / "01-s" / "demo.mp4").write_bytes(b"fake-demo")
+    prompt_dir = prompts / "04" / "01-c" / "01-s"
+    prompt_dir.mkdir(parents=True)
+    (prompt_dir / "a.txt").write_text("prompt A text", encoding="utf-8")
+    (prompt_dir / "b.txt").write_text("prompt B text", encoding="utf-8")
+    (prompt_dir / "c.txt").write_text("prompt C text", encoding="utf-8")
 
 
 def _write_users(users_file: Path, users: dict):
@@ -73,14 +99,15 @@ def app_env(tmp_path, monkeypatch):
     All routes whose auth is conditional can be tested both logged-in and
     logged-out by reusing this fixture.
     """
-    content = tmp_path / "content"
+    curriculum = tmp_path / "curriculum"
     demo = tmp_path / "demo"
     recordings = tmp_path / "recordings"
     prompts = tmp_path / "prompts"
     users_file = tmp_path / "users.json"
-    _build_lib(content, demo, recordings, prompts)
+    _build_lib(curriculum, demo, recordings, prompts)
     _write_users(users_file, {TEST_USERNAME: TEST_PASSWORD})
-    monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
+    monkeypatch.setattr(app_module, "CURRICULUM_ROOT", curriculum, raising=False)
+    monkeypatch.setattr(app_module, "CURRICULUM_STAGE", "04", raising=False)
     monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
     monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
     monkeypatch.setattr(app_module, "PROMPTS_ROOT", prompts)
@@ -108,8 +135,10 @@ def test_api_library_returns_annotated_tree(client):
     data = res.get_json()
     assert isinstance(data, list)
     assert data[0]["name"] == "01-c"
+    assert data[0]["title"] == "Chapter One"
     lv = data[0]["levels"][0]
     assert lv["title"] == "S1"
+    assert lv["can_do"] == "Ask for one clear choice."
     assert lv["state"] == "unlocked"
     assert lv["current"] is True
 
@@ -176,7 +205,7 @@ def upload_client(app_env):
     """A logged-in client whose roots point at temp dirs; returns (client, roots)."""
     _login(app_env)
     roots = {
-        "content": app_module.CONTENT_ROOT,
+        "curriculum": app_module.CURRICULUM_ROOT,
         "demo": app_module.DEMO_ROOT,
         "recordings": app_module.RECORDINGS_ROOT,
     }
@@ -191,7 +220,7 @@ def test_upload_writes_performance_to_recordings(upload_client):
     assert res.status_code == 200
     assert res.get_json()["ok"] is True
     # Performance uploads land in the logged-in user's own folder.
-    written = roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.mp4"
+    written = roots["recordings"] / TEST_USERNAME / "04" / "01-c" / "01-s" / "performance.mp4"
     assert written.read_bytes() == b"fake-perf"
     # The uploaded video is now servable via the /video route.
     assert client.get("/video/01-c/01-s/performance").status_code == 200
@@ -203,7 +232,7 @@ def test_upload_writes_demo_to_demo_root(upload_client):
         "file": (io.BytesIO(b"fake-demo-2"), "demo.mp4"),
     }, content_type="multipart/form-data")
     assert res.status_code == 200
-    written = roots["demo"] / "01-c" / "01-s" / "demo.mp4"
+    written = roots["demo"] / "04" / "01-c" / "01-s" / "demo.mp4"
     assert written.read_bytes() == b"fake-demo-2"
 
 
@@ -213,7 +242,7 @@ def test_upload_creates_missing_parent_dirs(upload_client):
         "file": (io.BytesIO(b"x"), "performance.mp4"),
     }, content_type="multipart/form-data")
     assert res.status_code == 200
-    assert (roots["recordings"] / TEST_USERNAME / "02-new" / "01-s" / "performance.mp4").exists()
+    assert (roots["recordings"] / TEST_USERNAME / "04" / "02-new" / "01-s" / "performance.mp4").exists()
 
 
 def test_upload_webm_stores_correct_extension(upload_client):
@@ -225,10 +254,10 @@ def test_upload_webm_stores_correct_extension(upload_client):
     }, content_type="multipart/form-data")
     assert res.status_code == 200
     assert res.get_json()["ext"] == ".webm"
-    written = roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.webm"
+    written = roots["recordings"] / TEST_USERNAME / "04" / "01-c" / "01-s" / "performance.webm"
     assert written.read_bytes() == b"fake-webm"
     # No .mp4 should be created.
-    assert not (roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.mp4").exists()
+    assert not (roots["recordings"] / TEST_USERNAME / "04" / "01-c" / "01-s" / "performance.mp4").exists()
 
 
 def test_upload_webm_served_with_correct_mimetype(upload_client):
@@ -249,14 +278,14 @@ def test_upload_webm_replaces_existing_mp4(upload_client):
     client.post("/upload/01-c/01-s/performance", data={
         "file": (io.BytesIO(b"old-mp4"), "performance.mp4"),
     }, content_type="multipart/form-data")
-    assert (roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.mp4").exists()
+    assert (roots["recordings"] / TEST_USERNAME / "04" / "01-c" / "01-s" / "performance.mp4").exists()
     # Re-record as webm.
     client.post("/upload/01-c/01-s/performance", data={
         "file": (io.BytesIO(b"new-webm"), "performance.webm"),
         "mimeType": "video/webm",
     }, content_type="multipart/form-data")
-    assert (roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.webm").exists()
-    assert not (roots["recordings"] / TEST_USERNAME / "01-c" / "01-s" / "performance.mp4").exists()
+    assert (roots["recordings"] / TEST_USERNAME / "04" / "01-c" / "01-s" / "performance.webm").exists()
+    assert not (roots["recordings"] / TEST_USERNAME / "04" / "01-c" / "01-s" / "performance.mp4").exists()
 
 
 def test_upload_404_for_unknown_kind(upload_client):
@@ -287,12 +316,13 @@ def test_upload_rejects_path_traversal(upload_client):
 
 # ===== prompts API tests =====
 
-def test_prompts_returns_a_and_b_text(client):
+def test_prompts_returns_a_b_and_c_text(client):
     res = client.get("/api/prompts/01-c/01-s")
     assert res.status_code == 200
     data = res.get_json()
     assert data["a"] == "prompt A text"
     assert data["b"] == "prompt B text"
+    assert data["c"] == "prompt C text"
 
 
 def test_prompts_404_for_missing_chapter(client):
@@ -380,14 +410,15 @@ def test_demo_video_served_without_login(app_env):
 
 def test_performance_isolated_between_users(tmp_path, monkeypatch):
     """User A's performance upload must be invisible to user B."""
-    content = tmp_path / "content"
+    curriculum = tmp_path / "curriculum"
     demo = tmp_path / "demo"
     recordings = tmp_path / "recordings"
     prompts = tmp_path / "prompts"
     users_file = tmp_path / "users.json"
-    _build_lib(content, demo, recordings, prompts)
+    _build_lib(curriculum, demo, recordings, prompts)
     _write_users(users_file, {"userA": "pass-a", "userB": "pass-b"})
-    monkeypatch.setattr(app_module, "CONTENT_ROOT", content)
+    monkeypatch.setattr(app_module, "CURRICULUM_ROOT", curriculum, raising=False)
+    monkeypatch.setattr(app_module, "CURRICULUM_STAGE", "04", raising=False)
     monkeypatch.setattr(app_module, "DEMO_ROOT", demo)
     monkeypatch.setattr(app_module, "RECORDINGS_ROOT", recordings)
     monkeypatch.setattr(app_module, "PROMPTS_ROOT", prompts)
@@ -416,9 +447,9 @@ def test_performance_isolated_between_users(tmp_path, monkeypatch):
     assert client_b.get("/video/01-c/01-s/performance").status_code == 404
 
     # The file is physically under userA's folder only — not shared, not in B's.
-    assert (recordings / "userA" / "01-c" / "01-s" / "performance.mp4").exists()
-    assert not (recordings / "userB" / "01-c" / "01-s").exists()
-    assert not (recordings / "01-c" / "01-s" / "performance.mp4").exists()
+    assert (recordings / "userA" / "04" / "01-c" / "01-s" / "performance.mp4").exists()
+    assert not (recordings / "userB" / "04" / "01-c" / "01-s").exists()
+    assert not (recordings / "04" / "01-c" / "01-s" / "performance.mp4").exists()
 
 
 # ===== admin tests =====

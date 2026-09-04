@@ -10,10 +10,11 @@ from flask import (Flask, jsonify, render_template, abort, send_file, request,
                    session, redirect, url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from scanner import scan_library, annotate_states, VIDEO_EXTENSIONS
+from scanner import scan_curriculum_library, annotate_states, VIDEO_EXTENSIONS
 
 _PROJECT = Path(__file__).resolve().parent.parent
-CONTENT_ROOT = Path(os.environ.get("CONTENT_ROOT", _PROJECT / "content"))
+CURRICULUM_ROOT = Path(os.environ.get("CURRICULUM_ROOT", _PROJECT / "curriculum"))
+CURRICULUM_STAGE = os.environ.get("CURRICULUM_STAGE", "04")
 DEMO_ROOT = Path(os.environ.get("DEMO_ROOT", _PROJECT / "demo"))
 RECORDINGS_ROOT = Path(os.environ.get("RECORDINGS_ROOT", _PROJECT / "recordings"))
 PROMPTS_ROOT = Path(os.environ.get("PROMPTS_ROOT", _PROJECT / "prompts"))
@@ -320,19 +321,25 @@ def api_library():
     # Pass the logged-in username so performance videos are read from the
     # user's own folder; demo videos stay shared.
     return jsonify(annotate_states(
-        scan_library(CONTENT_ROOT, DEMO_ROOT, RECORDINGS_ROOT,
-                     username=session["username"])))
+        scan_curriculum_library(
+            CURRICULUM_ROOT,
+            CURRICULUM_STAGE,
+            DEMO_ROOT,
+            RECORDINGS_ROOT,
+            username=session["username"],
+        )))
 
 
 @app.route("/thumb/<chapter>/<level>")
 def thumb(chapter, level):
     """Serve a pre-generated thumbnail JPEG for a level's demo video.
 
-    Thumbnails live at demo_root/<chapter>/<level>/thumb.jpg and are
+    Thumbnails live at demo_root/<stage>/<chapter>/<level>/thumb.jpg and are
     generated server-side via ffmpeg. Falls back to 404 if missing.
     """
-    base_resolved = DEMO_ROOT.resolve()
-    d = (DEMO_ROOT / chapter / level).resolve()
+    base = DEMO_ROOT / CURRICULUM_STAGE
+    base_resolved = base.resolve()
+    d = (base / chapter / level).resolve()
     if not d.is_relative_to(base_resolved):
         abort(404)
     f = (d / "thumb.jpg").resolve()
@@ -346,7 +353,7 @@ def video(chapter, level, kind):
     """Serve a demo (shared) or performance (per-user) video file.
 
     demo videos are shared across users and need no login. performance videos
-    are isolated per user under recordings_root/<username>/<chapter>/<level>/
+    are isolated per user under recordings_root/<username>/<stage>/<chapter>/<level>/
     and require a logged-in user. Path-traversal guard: the resolved file must
     stay under the effective base directory for this kind.
     """
@@ -356,10 +363,10 @@ def video(chapter, level, kind):
         username = session["username"]
         if not _valid_username(username):
             abort(404)
-        base = RECORDINGS_ROOT / username
+        base = RECORDINGS_ROOT / username / CURRICULUM_STAGE
         name = "performance"
     elif kind == "demo":
-        base = DEMO_ROOT
+        base = DEMO_ROOT / CURRICULUM_STAGE
         name = "demo"
     else:
         abort(404)
@@ -386,9 +393,9 @@ def upload(chapter, level, kind):
     Reuses the same path-traversal guard as the /video route. FileStorage.save()
     streams to disk, so large videos don't pile up in memory.
 
-    demo uploads go to the shared demo_root/<chapter>/<level>/ but still require
+    demo uploads go to the shared demo_root/<stage>/<chapter>/<level>/ but still require
     login. performance uploads go to the user's own folder
-    recordings_root/<username>/<chapter>/<level>/ so each child's recordings
+    recordings_root/<username>/<stage>/<chapter>/<level>/ so each child's recordings
     stay isolated from other users.
 
     The in-browser recorder sends the actual MIME type via a ``mimeType`` form
@@ -399,9 +406,9 @@ def upload(chapter, level, kind):
     if kind == "performance":
         if not _valid_username(username):
             abort(404)
-        base = RECORDINGS_ROOT / username
+        base = RECORDINGS_ROOT / username / CURRICULUM_STAGE
     elif kind == "demo":
-        base = DEMO_ROOT
+        base = DEMO_ROOT / CURRICULUM_STAGE
     else:
         abort(404)
     base_resolved = base.resolve()
@@ -436,33 +443,25 @@ def upload(chapter, level, kind):
 
 @app.route("/api/prompts/<chapter>/<level>")
 def api_prompts(chapter, level):
-    """Return the Sora prompt text (a + b) for a given level.
-
-    Derives the dialogue number (D1/D2/D3) from the level's sorted position
-    within its chapter in the content tree.
-    """
-    chapter_dir = (CONTENT_ROOT / chapter).resolve()
-    if not chapter_dir.is_relative_to(CONTENT_ROOT.resolve()):
+    """Return optional A/B/C video prompts for a canonical Lesson."""
+    stage_dir = (CURRICULUM_ROOT / CURRICULUM_STAGE).resolve()
+    lesson_dir = (stage_dir / chapter / level).resolve()
+    if not lesson_dir.is_relative_to(stage_dir):
         abort(404)
-    if not chapter_dir.is_dir():
+    if not (lesson_dir / "lesson.json").is_file():
         abort(404)
-    level_dirs = sorted(p for p in chapter_dir.iterdir() if p.is_dir())
-    try:
-        n = level_dirs.index((chapter_dir / level).resolve()) + 1
-    except (ValueError, FileNotFoundError):
+    prompts_base = (PROMPTS_ROOT / CURRICULUM_STAGE).resolve()
+    prompts_dir = (prompts_base / chapter / level).resolve()
+    if not prompts_dir.is_relative_to(prompts_base):
         abort(404)
 
-    prompts_dir = (PROMPTS_ROOT / chapter).resolve()
-    if not prompts_dir.is_relative_to(PROMPTS_ROOT.resolve()):
-        abort(404)
-
-    def _read(suffix):
-        f = prompts_dir / f"D{n}{suffix}"
+    def _read(part):
+        f = prompts_dir / f"{part}.txt"
         if not f.is_file():
             return ""
         return f.read_text(encoding="utf-8")
 
-    return jsonify({"a": _read("a.txt"), "b": _read("b.txt")})
+    return jsonify({part: _read(part) for part in ("a", "b", "c")})
 
 
 def _scan_and_optimize():

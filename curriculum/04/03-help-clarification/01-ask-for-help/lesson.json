@@ -1,0 +1,48 @@
+{
+  "title": "My Paper Star",
+  "title_zh": "我的纸星星",
+  "can_do": "遇到具体困难时，请求恰好够用的帮助，同时保留自己完成任务的机会。",
+  "conversation_move": {"id": "request-help", "label": "ask for specific help"},
+  "trigger": "The child wants to cut out a paper star but needs child-safe scissors and help turning the paper.",
+  "core_response": "Can you help me get my child-safe scissors?",
+  "stretch_response": "Can you help me turn the paper while I cut?",
+  "repair_response": "No, help me turn it. I want to cut it.",
+  "recycle": ["request-item", "propose-order"],
+  "roles": ["child", "dad"],
+  "setting": "Making a paper star at the table.",
+  "essential_props": ["a paper star outline and child-safe scissors"],
+  "parts": [
+    {
+      "id": "A",
+      "beat": "goal",
+      "turns": [
+        {"speaker": "dad", "line": "You want to cut out this paper star. What do you need?", "kind": "input"},
+        {"speaker": "child", "line": "Can you help me get my child-safe scissors?", "kind": "core"}
+      ]
+    },
+    {
+      "id": "B",
+      "beat": "change",
+      "turns": [
+        {"speaker": "dad", "line": "Here they are. Should I cut the star for you?", "kind": "input"},
+        {"speaker": "child", "line": "No, help me turn the paper while I cut.", "kind": "repair"}
+      ]
+    },
+    {
+      "id": "C",
+      "beat": "resolve",
+      "turns": [
+        {"speaker": "dad", "line": "I will hold the corner. You cut the last side.", "kind": "input"},
+        {"speaker": "child", "line": "It is a little wiggly, but it is still my star!", "kind": "action"}
+      ]
+    }
+  ],
+  "replay_cards": [
+    {"title": "Open the lunch box", "setting": "At the kitchen table", "change": "The lid is too tight", "challenge": "Ask Dad to hold the box while the child lifts the latch; the child opens it"},
+    {"title": "Zip the coat", "setting": "Before going outside", "change": "The zipper will not catch", "challenge": "Ask Mom to hold the bottom while the child pulls the zipper up; the coat closes"}
+  ],
+  "parent_support": ["Name the child-safe scissors because retrieving them is part of the real task.", "Offer the smallest useful help; do not take over the cutting unless safety requires it."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "status": "language_reviewed",
+  "content_revision": 1
+}

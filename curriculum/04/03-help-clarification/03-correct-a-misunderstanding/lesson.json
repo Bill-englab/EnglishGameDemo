@@ -1,0 +1,48 @@
+{
+  "title": "Cold Water",
+  "title_zh": "我说的是凉水",
+  "can_do": "对方听错时，用简短明确的话重述自己的意思。",
+  "conversation_move": {"id": "repair-meaning", "label": "correct a misunderstanding"},
+  "trigger": "Mom repeats the wrong drink after the child makes a choice.",
+  "core_response": "No, I mean cold water.",
+  "stretch_response": "I said cold water, not warm milk.",
+  "repair_response": "Cold water, please.",
+  "recycle": ["request-item", "specify-choice"],
+  "roles": ["child", "mom"],
+  "setting": "Choosing a drink at home.",
+  "essential_props": ["two drink choices"],
+  "parts": [
+    {
+      "id": "A",
+      "beat": "goal",
+      "turns": [
+        {"speaker": "mom", "line": "Would you like warm milk or cold water?", "kind": "input"},
+        {"speaker": "child", "line": "Cold water, please.", "kind": "core"}
+      ]
+    },
+    {
+      "id": "B",
+      "beat": "change",
+      "turns": [
+        {"speaker": "mom", "line": "Warm milk. I will get it.", "kind": "input"},
+        {"speaker": "child", "line": "No, I mean cold water.", "kind": "repair"}
+      ]
+    },
+    {
+      "id": "C",
+      "beat": "resolve",
+      "turns": [
+        {"speaker": "mom", "line": "Cold water. Thanks for telling me. Here you are.", "kind": "input"},
+        {"speaker": "child", "line": "Yes, cold water. That is right.", "kind": "action"}
+      ]
+    }
+  ],
+  "replay_cards": [
+    {"title": "The striped socks", "setting": "Getting dressed", "change": "Mom hears stars instead of stripes", "challenge": "Correct the pattern, confirm it, and receive the striped socks"},
+    {"title": "The bear book", "setting": "Choosing a bedtime story", "change": "Dad picks up the train book", "challenge": "Say the intended title again, confirm it, and start the bear story"}
+  ],
+  "parent_support": ["Make the misunderstanding plausible and brief.", "After the child repairs the meaning, repeat the correct choice and act on it."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "status": "language_reviewed",
+  "content_revision": 1
+}

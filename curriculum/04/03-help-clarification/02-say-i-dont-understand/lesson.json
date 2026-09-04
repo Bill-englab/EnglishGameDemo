@@ -1,0 +1,48 @@
+{
+  "title": "Show Me Under",
+  "title_zh": "给我看看“下面”",
+  "can_do": "听不懂一个指令时直接说明，并请求一次示范。",
+  "conversation_move": {"id": "signal-nonunderstanding", "label": "say I do not understand"},
+  "trigger": "Rabbit Teacher gives a short activity direction containing a location word the child does not yet understand.",
+  "core_response": "I don't understand.",
+  "stretch_response": "I don't understand. Can you show me?",
+  "repair_response": "Can you show me what under means?",
+  "recycle": ["request-help"],
+  "roles": ["child", "teacher"],
+  "setting": "A simple tabletop activity at school.",
+  "essential_props": ["two counters and a cup"],
+  "parts": [
+    {
+      "id": "A",
+      "beat": "goal",
+      "turns": [
+        {"speaker": "teacher", "line": "Put one blue counter under the cup.", "kind": "input"},
+        {"speaker": "child", "line": "I don't understand.", "kind": "core"}
+      ]
+    },
+    {
+      "id": "B",
+      "beat": "change",
+      "turns": [
+        {"speaker": "teacher", "line": "Would you like me to show you once?", "kind": "input"},
+        {"speaker": "child", "line": "Yes, please. Can you show me what under means?", "kind": "repair"}
+      ]
+    },
+    {
+      "id": "C",
+      "beat": "resolve",
+      "turns": [
+        {"speaker": "teacher", "line": "I put mine here, under the cup.", "kind": "input"},
+        {"speaker": "child", "line": "Now I understand. I put mine under the cup.", "kind": "action"}
+      ]
+    }
+  ],
+  "replay_cards": [
+    {"title": "Show me beside", "setting": "A small sorting game", "change": "Teacher says to place a card beside the box", "challenge": "Say it is unclear, watch one example, then place the child's card beside the box"},
+    {"title": "Show me fold", "setting": "Folding a napkin at home", "change": "Dad says to fold it in half", "challenge": "Ask for a demonstration, watch one fold, then fold the second napkin"}
+  ],
+  "parent_support": ["Respond to not understanding as useful information, not misbehavior.", "Demonstrate once with your own object, then let the child complete the parallel action."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "status": "language_reviewed",
+  "content_revision": 1
+}

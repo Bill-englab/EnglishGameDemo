@@ -292,3 +292,34 @@ def test_chapter_2_ends_each_negotiation_with_an_agreed_action():
         for lesson in lessons
     )
     assert validate_stage(load_stage(CURRICULUM_ROOT, "04")) == []
+
+
+def test_chapter_3_makes_help_and_repairs_change_the_outcome():
+    chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][2]
+    lessons = chapter["lessons"]
+
+    assert chapter["id"] == "03-help-clarification"
+    assert [lesson["id"] for lesson in lessons] == [
+        "01-ask-for-help",
+        "02-say-i-dont-understand",
+        "03-correct-a-misunderstanding",
+    ]
+    assert [lesson["conversation_move"]["id"] for lesson in lessons] == [
+        "request-help",
+        "signal-nonunderstanding",
+        "repair-meaning",
+    ]
+    assert [lesson["roles"][1] for lesson in lessons] == ["dad", "teacher", "mom"]
+    assert lessons[0]["recycle"] == ["request-item", "propose-order"]
+    assert lessons[1]["recycle"] == ["request-help"]
+    assert lessons[2]["recycle"] == ["request-item", "specify-choice"]
+    assert all(lesson["repair_response"] for lesson in lessons)
+    assert all(
+        any(
+            turn["kind"] == "repair"
+            for part in lesson["parts"]
+            for turn in part["turns"]
+        )
+        for lesson in lessons
+    )
+    assert validate_stage(load_stage(CURRICULUM_ROOT, "04")) == []

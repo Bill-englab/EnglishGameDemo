@@ -1,10 +1,19 @@
 from pathlib import Path
 import json
 
+from curriculum import load_stage
+
 # Supported video file extensions. The in-browser recorder (MediaRecorder)
 # produces .webm on Chrome/Firefox and .mp4 on Safari; legacy file uploads
 # are .mp4. Both are recognized so a level lights up regardless of format.
 VIDEO_EXTENSIONS = (".mp4", ".webm")
+ROLE_LABELS = {
+    "child": "Child",
+    "dad": "Dad",
+    "mom": "Mom",
+    "teacher": "Teacher",
+    "peer": "Friend",
+}
 
 
 def _has_video(root: Path, chapter: str, level: str, name: str) -> bool:
@@ -58,6 +67,92 @@ def scan_library(content_root: Path, demo_root: Path, recordings_root: Path,
             })
         if levels:
             chapters.append({"name": chapter_dir.name, "levels": levels})
+    return chapters
+
+
+def scan_curriculum_library(
+    curriculum_root: Path,
+    stage_id: str,
+    demo_root: Path,
+    recordings_root: Path,
+    username: str | None = None,
+) -> list[dict]:
+    """Project one canonical Stage into the map library interface.
+
+    Stage-aware media lives below ``<root>/<stage>/<chapter>/<lesson>``;
+    performance media also includes the username before the Stage when one is
+    supplied. The returned shape intentionally keeps the existing map fields
+    while exposing the richer Lesson contract for the detail view.
+    """
+
+    stage = load_stage(Path(curriculum_root), stage_id)
+    demo_base = Path(demo_root) / stage_id
+    recordings_base = Path(recordings_root)
+    if username:
+        recordings_base /= username
+    recordings_base /= stage_id
+    chapters = []
+    for chapter in stage.get("chapters", []):
+        chapter_id = chapter["id"]
+        levels = []
+        for lesson in chapter.get("lessons", []):
+            lesson_id = lesson["id"]
+            dialogue = []
+            for part in lesson.get("parts", []):
+                for turn in part.get("turns", []):
+                    dialogue.append(
+                        {
+                            **turn,
+                            "speaker": ROLE_LABELS.get(
+                                turn.get("speaker"), str(turn.get("speaker", "")).title()
+                            ),
+                            "part": part.get("id"),
+                            "beat": part.get("beat"),
+                        }
+                    )
+            levels.append(
+                {
+                    "chapter": chapter_id,
+                    "level": lesson_id,
+                    "title": lesson.get("title", lesson_id),
+                    "title_zh": lesson.get("title_zh", ""),
+                    "scene": lesson.get("setting", ""),
+                    "can_do": lesson.get("can_do", ""),
+                    "trigger": lesson.get("trigger", ""),
+                    "conversation_move": lesson.get("conversation_move", {}),
+                    "patterns": [
+                        value
+                        for value in (
+                            lesson.get("core_response"),
+                            lesson.get("stretch_response"),
+                            lesson.get("repair_response"),
+                        )
+                        if value
+                    ],
+                    "dialogue": dialogue,
+                    "parts": lesson.get("parts", []),
+                    "replay_cards": lesson.get("replay_cards", []),
+                    "variations": "",
+                    "parent_support": lesson.get("parent_support", []),
+                    "status": lesson.get("status", "draft"),
+                    "content_revision": lesson.get("content_revision", 1),
+                    "has_demo": _has_video(demo_base, chapter_id, lesson_id, "demo"),
+                    "has_performance": _has_video(
+                        recordings_base, chapter_id, lesson_id, "performance"
+                    ),
+                }
+            )
+        if levels:
+            chapters.append(
+                {
+                    "name": chapter_id,
+                    "title": chapter.get("title", chapter_id),
+                    "title_zh": chapter.get("title_zh", ""),
+                    "background_asset": chapter.get("background_asset", chapter_id),
+                    "phase": chapter.get("phase"),
+                    "levels": levels,
+                }
+            )
     return chapters
 
 

@@ -1,7 +1,7 @@
 from collections import namedtuple
 from pathlib import Path
 import json
-from scanner import scan_library, annotate_states
+from scanner import scan_curriculum_library, scan_library, annotate_states
 
 Roots = namedtuple("Roots", ["content", "demo", "recordings"])
 
@@ -34,6 +34,80 @@ def make_level(roots: Roots, chapter: str, level: str, *,
 
 def scan(roots: Roots):
     return scan_library(roots.content, roots.demo, roots.recordings)
+
+
+def test_scan_curriculum_projects_stage_lessons_and_stage_media(tmp_path):
+    curriculum = tmp_path / "curriculum"
+    demo = tmp_path / "demo"
+    recordings = tmp_path / "recordings"
+    stage_dir = curriculum / "04"
+    (stage_dir / "02-second" / "01-lesson").mkdir(parents=True)
+    (stage_dir / "01-first" / "02-lesson").mkdir(parents=True)
+    (stage_dir / "01-first" / "01-lesson").mkdir(parents=True)
+    (stage_dir / "stage.json").write_text(
+        json.dumps({"title": "I Can Take Part"}), encoding="utf-8"
+    )
+    for chapter_id in ("01-first", "02-second"):
+        (stage_dir / chapter_id / "chapter.json").write_text(
+            json.dumps({"title": chapter_id.title(), "background_asset": "01-wants-requests"}),
+            encoding="utf-8",
+        )
+    lesson = {
+        "title": "A Real Choice",
+        "title_zh": "真实选择",
+        "can_do": "清楚选择一个物品",
+        "trigger": "Mom offers two visible choices.",
+        "core_response": "Can I have the apple?",
+        "stretch_response": "Can I have the red apple, please?",
+        "repair_response": "No, I mean the apple.",
+        "conversation_move": {"id": "request-item", "label": "request an item"},
+        "status": "language_reviewed",
+        "content_revision": 2,
+        "parent_support": ["Pause for the child."],
+        "replay_cards": [{"title": "Drink", "setting": "Breakfast", "change": "Choose milk", "challenge": "Repair a mix-up"}],
+        "parts": [
+            {"id": "A", "turns": [{"speaker": "mom", "line": "Apple or banana?", "kind": "input"}, {"speaker": "child", "line": "The apple, please.", "kind": "core"}]},
+            {"id": "B", "turns": [{"speaker": "mom", "line": "The banana?", "kind": "input"}, {"speaker": "child", "line": "No, the apple.", "kind": "repair"}]},
+            {"id": "C", "turns": [{"speaker": "mom", "line": "Here it is.", "kind": "action"}, {"speaker": "child", "line": "Thank you!", "kind": "playful"}]},
+        ],
+    }
+    for lesson_dir in (
+        stage_dir / "01-first" / "01-lesson",
+        stage_dir / "01-first" / "02-lesson",
+        stage_dir / "02-second" / "01-lesson",
+    ):
+        (lesson_dir / "lesson.json").write_text(json.dumps(lesson), encoding="utf-8")
+    demo_dir = demo / "04" / "01-first" / "01-lesson"
+    demo_dir.mkdir(parents=True)
+    (demo_dir / "demo.mp4").write_bytes(b"")
+    performance_dir = recordings / "tiger" / "04" / "01-first" / "01-lesson"
+    performance_dir.mkdir(parents=True)
+    (performance_dir / "performance.webm").write_bytes(b"")
+
+    chapters = scan_curriculum_library(
+        curriculum, "04", demo, recordings, username="tiger"
+    )
+
+    assert [chapter["name"] for chapter in chapters] == ["01-first", "02-second"]
+    assert [level["level"] for level in chapters[0]["levels"]] == ["01-lesson", "02-lesson"]
+    assert chapters[0]["title"] == "01-First"
+    assert chapters[0]["background_asset"] == "01-wants-requests"
+    level = chapters[0]["levels"][0]
+    assert level["can_do"] == "清楚选择一个物品"
+    assert level["trigger"] == "Mom offers two visible choices."
+    assert level["patterns"] == [
+        "Can I have the apple?",
+        "Can I have the red apple, please?",
+        "No, I mean the apple.",
+    ]
+    assert [turn["speaker"] for turn in level["dialogue"]] == [
+        "Mom", "Child", "Mom", "Child", "Mom", "Child"
+    ]
+    assert level["dialogue"][2]["part"] == "B"
+    assert level["replay_cards"][0]["title"] == "Drink"
+    assert level["content_revision"] == 2
+    assert level["has_demo"] is True
+    assert level["has_performance"] is True
 
 
 def test_scan_empty_root_returns_empty_list(tmp_path):

@@ -6,6 +6,43 @@
 import { getChapterTheme, getLevelVisualState, getStableRotation, isFrameDark } from "./map-model.mjs";
 import { buildSmoothPath } from "./map-path.mjs";
 import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
+import { resolveMediaView } from "./detail-media.mjs";
+
+let detailVisit = 0;
+let recordingGeneration = 0;
+let releaseRecording = () => {};
+let cameraActive = false;
+let selectedMedia = "performance";
+const mobileMedia = window.matchMedia("(max-width: 899px)");
+
+function updateMediaView() {
+  const state = resolveMediaView({ mobile: mobileMedia.matches, selected: selectedMedia, cameraActive });
+  selectedMedia = state.selected;
+  for (const [kind, visible] of [["performance", state.showPerformance], ["demo", state.showDemo]]) {
+    const panel = document.getElementById(`media-panel-${kind}`);
+    const tab = document.getElementById(`media-tab-${kind}`);
+    if (!visible) panel.querySelectorAll("video").forEach(video => video.pause());
+    panel.hidden = !visible;
+    panel.setAttribute("role", mobileMedia.matches ? "tabpanel" : "region");
+    tab.setAttribute("aria-selected", String(kind === state.selected));
+    tab.tabIndex = kind === state.selected ? 0 : -1;
+    tab.disabled = kind === "demo" && cameraActive && mobileMedia.matches;
+  }
+}
+
+function disposeDetailMedia() {
+  detailVisit += 1;
+  recordingGeneration += 1;
+  releaseRecording();
+  releaseRecording = () => {};
+  cameraActive = false;
+  document.querySelectorAll("#detail-view video").forEach(video => {
+    video.pause();
+    video.srcObject = null;
+    video.removeAttribute("src");
+    video.load();
+  });
+}
 
 function prettyChapter(raw) {
   const s = raw.replace(/^\d+-/, "");
@@ -98,6 +135,7 @@ async function pickVideoFile() {
     const input = document.createElement("input");
     input.type = "file"; input.accept = ".mp4,.mov,.webm,.avi,video/*";
     input.onchange = () => resolve(input.files[0] || null);
+    input.oncancel = () => resolve(null);
     input.onerror = () => resolve(null);
     input.click();
   });
@@ -105,11 +143,12 @@ async function pickVideoFile() {
 
 // Upload a File to the given chapter/level/kind with progress reporting.
 // Returns true on success. onProgress(percent) is called during upload.
-async function uploadVideo(level, kind, onProgress) {
+async function uploadVideo(level, kind, onProgress, isCurrent = () => true) {
   const file = await pickVideoFile();
-  if (!file) return false;
+  if (!file || !isCurrent()) return false;
   const fd = new FormData();
   fd.append("file", file, file.name || "video.mp4");
+  fd.append("mimeType", file.type || (file.name?.toLowerCase().endsWith(".webm") ? "video/webm" : "video/mp4"));
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", uploadURL(level.chapter, level.level, kind));
@@ -129,6 +168,8 @@ async function uploadVideo(level, kind, onProgress) {
 
 // Build a small "Replace" button for the demo area (dad's tool, not the kid's).
 function makeActionButton(label, level, kind, onDone) {
+  const visit = detailVisit;
+  const isCurrent = () => visit === detailVisit;
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "action-btn";
@@ -146,24 +187,32 @@ function makeActionButton(label, level, kind, onDone) {
     const fill = bar.querySelector(".upload-progress__fill");
     const text = bar.querySelector(".upload-progress__text");
     try {
-      await uploadVideo(level, kind, (pct) => {
+      const uploaded = await uploadVideo(level, kind, (pct) => {
+        if (!isCurrent()) return;
         fill.style.width = pct + "%";
         text.textContent = pct + "%";
         // Upload done (100%) but server still processing — show spinner
         if (pct >= 100) {
           bar.innerHTML = `<span class="upload-processing"><span class="spinner"></span>Processing…</span>`;
         }
-      });
-      await loadLibrary();
+      }, isCurrent);
+      if (!isCurrent()) return;
+      if (!uploaded) {
+        btn.textContent = orig;
+        btn.disabled = false;
+        return;
+      }
+      const refreshed = await loadLibrary({ isCurrent });
+      if (!isCurrent()) return;
+      if (!refreshed) throw new Error("Unable to refresh the saved video");
       onDone();
     } catch (e) {
+      if (!isCurrent()) return;
       console.error("Upload failed", e);
       btn.textContent = "Failed — retry";
-      setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2000);
+      setTimeout(() => { if (isCurrent()) { btn.textContent = orig; btn.disabled = false; } }, 2000);
       return;
     }
-    btn.textContent = "Done!";
-    setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 1500);
   });
   return btn;
 }
@@ -195,7 +244,15 @@ function pickRecorderMime() {
 // Replaces the container's contents with: camera preview → record button →
 // (on stop) playback + Redo/Save.
 async function startRecordingSession(level, container) {
+  releaseRecording();
+  releaseRecording = () => {};
+  const generation = ++recordingGeneration;
+  const visit = detailVisit;
+  const isCurrent = () => visit === detailVisit && generation === recordingGeneration;
+  container.querySelectorAll("video").forEach(video => video.pause());
   container.innerHTML = "";
+  cameraActive = true;
+  updateMediaView();
 
   let stream;
   try {
@@ -204,14 +261,20 @@ async function startRecordingSession(level, container) {
       audio: true,
     });
   } catch (err) {
+    if (!isCurrent()) return;
+    cameraActive = false;
+    updateMediaView();
     renderRecordError(container, level, err);
     return;
   }
-
-  renderRecordingUI(container, stream, level);
+  if (!isCurrent()) {
+    stream.getTracks().forEach(track => track.stop());
+    return;
+  }
+  renderRecordingUI(container, stream, level, isCurrent);
 }
 
-function renderRecordingUI(container, stream, level) {
+function renderRecordingUI(container, stream, level, isCurrent) {
   container.innerHTML = "";
 
   // Live camera preview (muted so there's no echo from the mic).
@@ -246,6 +309,18 @@ function renderRecordingUI(container, stream, level) {
   let autoStopTimer = null;
   let chosenMime = "";
 
+  releaseRecording = () => {
+    clearInterval(timerInterval);
+    clearTimeout(autoStopTimer);
+    if (mediaRecorder) {
+      mediaRecorder.ondataavailable = null;
+      mediaRecorder.onstop = null;
+      if (mediaRecorder.state !== "inactive") mediaRecorder.stop();
+    }
+    stream.getTracks().forEach(track => track.stop());
+    preview.srcObject = null;
+  };
+
   btn.addEventListener("click", () => {
     if (mediaRecorder && mediaRecorder.state === "recording") {
       stopRecording();
@@ -255,26 +330,33 @@ function renderRecordingUI(container, stream, level) {
   });
 
   function startRecording() {
-    chosenMime = pickRecorderMime();
-    console.log("[recorder] MediaRecorder mimeType:", chosenMime);
-
     try {
+      chosenMime = pickRecorderMime();
+      console.log("[recorder] MediaRecorder mimeType:", chosenMime);
       mediaRecorder = new MediaRecorder(stream, chosenMime ? { mimeType: chosenMime } : {});
     } catch (e) {
-      console.error("[recorder] cannot create MediaRecorder:", e);
+      recordingFailed(e);
       return;
     }
 
     chunks = [];
     mediaRecorder.ondataavailable = e => { if (e.data && e.data.size > 0) chunks.push(e.data); };
     mediaRecorder.onstop = () => {
+      clearInterval(timerInterval);
+      clearTimeout(autoStopTimer);
+      if (!isCurrent()) return;
       const blobType = chosenMime || "video/webm";
       const blob = new Blob(chunks, { type: blobType });
       console.log("[recorder] recorded blob:", blob.size, "bytes, type:", blob.type);
-      renderPlayback(container, blob, stream, level, blobType);
+      renderPlayback(container, blob, stream, level, blobType, isCurrent);
     };
 
-    mediaRecorder.start();
+    try {
+      mediaRecorder.start();
+    } catch (e) {
+      recordingFailed(e);
+      return;
+    }
     btn.classList.add("recording");  // circle → square
     btn.setAttribute("aria-label", "Stop recording");
     indicator.classList.remove("hidden");
@@ -290,11 +372,22 @@ function renderRecordingUI(container, stream, level) {
 
   function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
+      // The stop event is asynchronous. Prevent a second click from creating
+      // another recorder and replacing the chunks before playback is ready.
+      btn.disabled = true;
       mediaRecorder.stop();
     }
     clearInterval(timerInterval);
     clearTimeout(autoStopTimer);
     btn.classList.remove("recording");
+  }
+
+  function recordingFailed(error) {
+    console.error("[recorder] cannot start MediaRecorder:", error);
+    releaseRecording();
+    cameraActive = false;
+    updateMediaView();
+    renderRecordError(container, level, error);
   }
 
   function updateTimer() {
@@ -306,9 +399,11 @@ function renderRecordingUI(container, stream, level) {
 }
 
 // After recording stops: play back the recording with Redo / Save.
-function renderPlayback(container, blob, stream, level, mimeType) {
+function renderPlayback(container, blob, stream, level, mimeType, isCurrent) {
   // Release the camera — we're done recording.
   stream.getTracks().forEach(t => t.stop());
+  cameraActive = false;
+  updateMediaView();
 
   container.innerHTML = "";
 
@@ -319,6 +414,11 @@ function renderPlayback(container, blob, stream, level, mimeType) {
   video.playsInline = true;
   video.autoplay = true;
   container.appendChild(video);
+  const blobURL = video.src;
+  releaseRecording = () => {
+    video.pause();
+    URL.revokeObjectURL(blobURL);
+  };
 
   const actions = document.createElement("div");
   actions.className = "record-actions";
@@ -328,7 +428,6 @@ function renderPlayback(container, blob, stream, level, mimeType) {
   redoBtn.className = "record-action record-action--redo";
   redoBtn.textContent = "⟲ Redo";
   redoBtn.addEventListener("click", () => {
-    URL.revokeObjectURL(video.src);
     startRecordingSession(level, container);
   });
 
@@ -342,9 +441,13 @@ function renderPlayback(container, blob, stream, level, mimeType) {
     saveBtn.textContent = "Saving…";
     try {
       await uploadRecording(level, blob, mimeType);
-      await loadLibrary();
+      if (!isCurrent()) return;
+      const refreshed = await loadLibrary({ isCurrent });
+      if (!isCurrent()) return;
+      if (!refreshed) throw new Error("Unable to refresh the saved recording");
       reopenDetail(level.chapter, level.level);
     } catch (e) {
+      if (!isCurrent()) return;
       console.error("Save failed", e);
       saveBtn.textContent = "Failed — retry";
       saveBtn.disabled = false;
@@ -384,36 +487,8 @@ function renderRecordError(container, level, err) {
   } else {
     msg.innerHTML = `<p>Couldn't start the camera.</p><p class="record-error__hint">Upload a video file instead.</p>`;
   }
-  const fallback = document.createElement("button");
-  fallback.type = "button";
-  fallback.className = "action-btn";
-  fallback.textContent = "Choose file";
-  fallback.addEventListener("click", async () => {
-    // Show progress bar inside the button
-    fallback.disabled = true;
-    const bar = document.createElement("div");
-    bar.className = "upload-progress";
-    bar.innerHTML = `<div class="upload-progress__fill" style="width:0%"></div><span class="upload-progress__text">0%</span>`;
-    fallback.textContent = "";
-    fallback.appendChild(bar);
-    const fill = bar.querySelector(".upload-progress__fill");
-    const text = bar.querySelector(".upload-progress__text");
-    try {
-      await uploadVideo(level, "performance", (pct) => {
-        fill.style.width = pct + "%";
-        text.textContent = pct + "%";
-        if (pct >= 100) {
-          bar.innerHTML = `<span class="upload-processing"><span class="spinner"></span>Processing…</span>`;
-        }
-      });
-      await loadLibrary();
-      reopenDetail(level.chapter, level.level);
-    } catch (e) {
-      console.error("File upload fallback failed", e);
-      fallback.textContent = "Choose file";
-      fallback.disabled = false;
-    }
-  });
+  const fallback = makeActionButton("Choose file", level, "performance",
+    () => reopenDetail(level.chapter, level.level));
   msg.appendChild(fallback);
   container.appendChild(msg);
 }
@@ -788,8 +863,12 @@ function drawMapPath() {
 
 // ===== level detail view =====
 function openDetail(level) {
+  disposeDetailMedia();
+  const visit = detailVisit;
+  const isCurrent = () => visit === detailVisit;
+  selectedMedia = "performance";
   const mapView = document.getElementById("map-view");
-  mapScrollY = mapView.scrollTop;
+  if (!mapView.classList.contains("hidden")) mapScrollY = mapView.scrollTop;
   const view = document.getElementById("detail-view");
 
   document.getElementById("detail-chapter").textContent = level.chapterTitle || prettyChapter(level.chapter);
@@ -807,66 +886,37 @@ function openDetail(level) {
   });
   patterns.style.display = (level.patterns && level.patterns.length) ? "" : "none";
 
-  // --- Demo video slot: video if present, else clickable + placeholder ---
+  // --- Demo video slot: playback or an explicit upload action ---
   const demoWrap = document.getElementById("detail-demo");
   demoWrap.innerHTML = "";
   if (level.has_demo) {
     const v = document.createElement("video");
     v.src = videoURL(level.chapter, level.level, "demo");
-    v.controls = true; v.preload = "auto"; v.playsInline = true;
+    v.controls = true; v.preload = "metadata"; v.playsInline = true;
     v.addEventListener("loadedmetadata", () => { v.playbackRate = 1.0; });
     demoWrap.appendChild(v);
     // Subtle replace button below the video for dad.
     demoWrap.appendChild(makeActionButton("Replace", level, "demo",
       () => reopenDetail(level.chapter, level.level)));
   } else {
-    // Empty placeholder: click anywhere to trigger upload.
+    // A named button is reachable by keyboard and survives picker cancellation.
     const slot = document.createElement("div");
-    slot.className = "video-slot--empty";
-    slot.innerHTML = `<span class="plus">+</span>`;
-    slot.addEventListener("click", async () => {
-      // Replace + with progress bar
-      slot.innerHTML = `<div class="upload-progress"><div class="upload-progress__fill" style="width:0%"></div><span class="upload-progress__text">0%</span></div>`;
-      const fill = slot.querySelector(".upload-progress__fill");
-      const text = slot.querySelector(".upload-progress__text");
-      try {
-        await uploadVideo(level, "demo", (pct) => {
-          fill.style.width = pct + "%";
-          text.textContent = pct + "%";
-          if (pct >= 100) {
-            slot.innerHTML = `<div class="upload-processing"><span class="spinner"></span>Processing…</div>`;
-          }
-        });
-        await loadLibrary();
-        reopenDetail(level.chapter, level.level);
-      } catch (e) {
-        console.error("Demo upload failed", e);
-        slot.innerHTML = `<span class="plus">+</span>`;
-        slot.style.opacity = "1";
-      }
-    });
+    slot.className = "video-slot--empty video-slot--demo";
+    slot.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4Z"/></svg><p>No demo yet</p>`;
+    slot.appendChild(makeActionButton("Add demo", level, "demo",
+      () => reopenDetail(level.chapter, level.level)));
     demoWrap.appendChild(slot);
   }
 
-  // --- Star row (no path hint — that moved to the "?" tooltip) ---
+  // Retain the existing status mount without duplicating the map's stars.
   const lit = level.has_performance;
   const starRow = document.getElementById("detail-star");
   starRow.innerHTML = "";
-  const star = document.createElement("span");
-  star.className = "big-star";
-  star.innerHTML = starSVG(lit);
-  const cap = document.createElement("span");
-  cap.className = "star-cap";
-  cap.textContent = lit
-    ? "You did it! Your show is saved."
-    : "Practice together, then upload your show!";
-  starRow.appendChild(star);
-  starRow.appendChild(cap);
-
-  // --- "?" tooltip on "Your Turn" shows where the recording file lives ---
-  const tooltipTrigger = document.querySelector(".rec-tooltip-trigger");
-  if (tooltipTrigger) {
-    tooltipTrigger.title = `recordings/<you>/${level.stage || "04"}/${level.chapter}/${level.level}/performance.mp4`;
+  if (lit) {
+    const cap = document.createElement("span");
+    cap.className = "star-cap";
+    cap.textContent = "Your show is saved.";
+    starRow.appendChild(cap);
   }
 
   // --- Performance video slot: recording if empty, playback if present ---
@@ -875,7 +925,7 @@ function openDetail(level) {
   if (level.has_performance) {
     const v = document.createElement("video");
     v.src = videoURL(level.chapter, level.level, "performance");
-    v.controls = true; v.preload = "auto"; v.playsInline = true;
+    v.controls = true; v.preload = "metadata"; v.playsInline = true;
     v.addEventListener("loadedmetadata", () => { v.playbackRate = 1.0; });
     perfWrap.appendChild(v);
     // "Record again" triggers the in-browser recorder (not file upload).
@@ -886,12 +936,17 @@ function openDetail(level) {
     redoBtn.addEventListener("click", () => startRecordingSession(level, perfWrap));
     perfWrap.appendChild(redoBtn);
   } else {
-    // Empty slot: click + to start the camera and record directly.
+    // The child's recording is the primary action, separate from demo uploads.
     const slot = document.createElement("div");
     slot.className = "video-slot--empty";
-    slot.innerHTML = `<span class="plus">+</span>`;
-    slot.addEventListener("click", () => startRecordingSession(level, perfWrap));
+    slot.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M6 10v2a6 6 0 0 0 12 0v-2M12 18v4m-3 0h6"/></svg><p>Record your roleplay</p>`;
     perfWrap.appendChild(slot);
+    const recordBtn = document.createElement("button");
+    recordBtn.type = "button";
+    recordBtn.className = "action-btn record-start";
+    recordBtn.textContent = "Start recording";
+    recordBtn.addEventListener("click", () => startRecordingSession(level, perfWrap));
+    perfWrap.appendChild(recordBtn);
   }
 
   const dialogueEl = document.getElementById("detail-dialogue");
@@ -952,6 +1007,7 @@ function openDetail(level) {
   fetch(`/api/prompts/${level.chapter}/${level.level}`)
     .then(r => r.ok ? r.json() : null)
     .then(data => {
+      if (!isCurrent()) return;
       promptWrap.innerHTML = "";
       const parts = data ? promptParts(data) : [];
       if (parts.length === 0) {
@@ -993,7 +1049,7 @@ function openDetail(level) {
         if (block) promptWrap.appendChild(block);
       });
     })
-    .catch(() => { promptWrap.innerHTML = `<div class="prompt-empty">No prompts available</div>`; });
+    .catch(() => { if (isCurrent()) promptWrap.innerHTML = `<div class="prompt-empty">No prompts available</div>`; });
 
   // Prev / Next navigation — find this level in the flat list and wire buttons.
   const navWrap = document.getElementById("detail-nav");
@@ -1004,19 +1060,24 @@ function openDetail(level) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = `nav-btn nav-btn--${offset < 0 ? "prev" : "next"}`;
-      btn.textContent = label;
+      const arrow = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${offset < 0 ? 'M19 12H5m7-7-7 7 7 7' : 'M5 12h14m-7-7 7 7-7 7'}"/></svg>`;
+      btn.innerHTML = offset < 0 ? arrow : "";
+      btn.appendChild(document.createTextNode(label));
+      if (offset > 0) btn.insertAdjacentHTML("beforeend", arrow);
       if (disabled) { btn.disabled = true; }
       else { btn.addEventListener("click", () => openDetail(flatLevels[idx + offset])); }
       return btn;
     };
-    navWrap.appendChild(makeBtn("\u2190 Prev", -1, idx <= 0));
-    navWrap.appendChild(makeBtn("Next \u2192", 1, idx >= flatLevels.length - 1));
+    navWrap.appendChild(makeBtn("Previous", -1, idx <= 0));
+    navWrap.appendChild(makeBtn("Next", 1, idx >= flatLevels.length - 1));
   }
 
   mapView.classList.add("hidden");
   document.getElementById("bg-layer").classList.add("hidden");
   view.classList.remove("hidden");
   view.classList.add("open");
+  view.querySelectorAll(".detail-disclosure").forEach(disclosure => { disclosure.open = false; });
+  updateMediaView();
   view.scrollTop = 0;
   // Re-inject window controls into the freshly-rendered detail header
   if (window.__injectTitlebar) window.__injectTitlebar();
@@ -1030,9 +1091,7 @@ function reopenDetail(chapter, level) {
 }
 
 function closeDetail() {
-  document.querySelectorAll("#detail-view video").forEach(v => {
-    v.pause(); v.removeAttribute("src"); v.load();
-  });
+  disposeDetailMedia();
   const view = document.getElementById("detail-view");
   view.classList.remove("open");
   view.classList.add("hidden");
@@ -1055,17 +1114,23 @@ function showOnly(id) {
     document.getElementById(el).classList.toggle("hidden", el !== id);
   }
 }
-async function loadLibrary() {
-  showOnly("map-loading");
+async function loadLibrary({ isCurrent = () => true } = {}) {
+  // A detail upload refreshes in the background. Keep the existing map usable
+  // if the family navigates away before that request finishes.
+  if (!document.getElementById("map-view").classList.contains("hidden")) showOnly("map-loading");
   try {
     const response = await fetch("/api/library", { cache: "no-store", credentials: "same-origin" });
     if (!response.ok) throw new Error(`library ${response.status}`);
     const library = await response.json();
+    if (!isCurrent()) return false;
     renderMap(library);
     showOnly("map-scroll");
+    return true;
   } catch (error) {
+    if (!isCurrent()) return false;
     console.error("Unable to load library", error);
     showOnly("map-error");
+    return false;
   }
 }
 document.getElementById("map-retry").addEventListener("click", loadLibrary);
@@ -1123,6 +1188,22 @@ async function init() {
   }
 
   document.getElementById("back-btn").addEventListener("click", closeDetail);
+  for (const kind of ["performance", "demo"]) {
+    const tab = document.getElementById(`media-tab-${kind}`);
+    tab.addEventListener("click", () => {
+      selectedMedia = kind;
+      updateMediaView();
+    });
+    tab.addEventListener("keydown", event => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const next = event.key === "Home" ? "performance" : event.key === "End" ? "demo" : kind === "performance" ? "demo" : "performance";
+      const target = document.getElementById(`media-tab-${next}`);
+      if (!target.disabled) { target.click(); target.focus(); }
+    });
+  }
+  mobileMedia.addEventListener("change", updateMediaView);
+  window.addEventListener("pagehide", disposeDetailMedia);
 
   // User menu popup — toggle on click, close on outside click
   const menuTrigger = document.getElementById("user-menu-trigger");

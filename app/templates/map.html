@@ -55,64 +55,59 @@
     <!-- LEVEL DETAIL VIEW -->
     <section id="detail-view" class="view hidden">
       <div class="detail-card">
-        <div class="detail-header">
+        <header class="detail-header">
           <div class="detail-header__left">
-            <button id="back-btn" class="back-btn" type="button">&#8592; Map</button>
-            <div class="detail-title-area">
-              <h1 id="detail-title"></h1>
-              <div class="detail-meta">
-                <span id="detail-chapter" class="chip"></span>
-                <div id="detail-patterns" class="patterns-row"></div>
-              </div>
-              <div class="lesson-intent">
-                <p><strong>Can do</strong><span id="detail-can-do"></span></p>
-                <p><strong>Why speak now</strong><span id="detail-trigger"></span></p>
-              </div>
-            </div>
+            <button id="back-btn" class="back-btn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg>Map</button>
+            <h1 id="detail-title"></h1>
+            <span id="detail-chapter"></span>
           </div>
-        </div>
+        </header>
 
         <div class="detail-body">
-          <!-- Top row: two videos side by side, large -->
-          <div class="video-row">
-            <div class="video-col">
-              <div class="section-label">Watch &amp; Learn</div>
-              <div id="detail-demo" class="video-slot-wrap"></div>
+          <aside class="detail-media" aria-label="Lesson videos">
+            <div class="media-tabs" role="tablist" aria-label="Lesson videos">
+              <button id="media-tab-performance" type="button" role="tab" aria-selected="true" aria-controls="media-panel-performance">Your Show</button>
+              <button id="media-tab-demo" type="button" role="tab" aria-selected="false" aria-controls="media-panel-demo" tabindex="-1">Watch &amp; Learn</button>
             </div>
-            <div class="video-col">
-              <div class="section-label">Your Turn<span class="rec-tooltip-trigger" title="">?</span></div>
+            <section id="media-panel-performance" class="media-panel" aria-labelledby="media-tab-performance">
+              <h2 class="section-label">Your Show</h2>
               <div id="detail-perf" class="video-slot-wrap"></div>
-              <div id="detail-star" class="star-row"></div>
-            </div>
-          </div>
+              <div id="detail-star" class="star-row" role="status"></div>
+            </section>
+            <section id="media-panel-demo" class="media-panel" aria-labelledby="media-tab-demo">
+              <h2 class="section-label">Watch &amp; Learn</h2>
+              <div id="detail-demo" class="video-slot-wrap"></div>
+            </section>
+          </aside>
 
-          <!-- Bottom row: authored dialogue | complete replay cards -->
-          <div class="text-row">
-            <div class="text-col-wrap">
-              <div class="section-label">Read Together</div>
-              <div class="text-col text-col--dialogue">
-                <div id="detail-dialogue" class="dialogue"></div>
-              </div>
-            </div>
-            <div class="text-col-wrap">
-              <div class="section-label">Replay Together</div>
-              <div class="text-col text-col--vars">
-                <div id="detail-replay-cards" class="replay-cards"></div>
-              </div>
-              <div class="parent-support">
-                <div class="section-label">For the Grown-up</div>
+          <div class="detail-reading">
+            <section class="reading-section" aria-labelledby="reading-heading">
+              <h2 id="reading-heading" class="section-label">Read Together</h2>
+              <div id="detail-dialogue" class="dialogue"></div>
+            </section>
+            <section class="replay-section" aria-labelledby="replay-heading">
+              <h2 id="replay-heading" class="section-label">Replay Together</h2>
+              <div id="detail-replay-cards" class="replay-cards"></div>
+            </section>
+            <section class="grownup-section" aria-labelledby="grownup-heading">
+              <h2 id="grownup-heading" class="section-label">Grown-up Notes</h2>
+              <details class="parent-support detail-disclosure">
+                <summary>Tips for supporting your child<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+                <div class="lesson-intent">
+                  <p><strong>Can do</strong><span id="detail-can-do"></span></p>
+                  <p><strong>Why speak now</strong><span id="detail-trigger"></span></p>
+                  <div id="detail-patterns" class="patterns-row"></div>
+                </div>
                 <ul id="detail-parent-support"></ul>
-              </div>
-              <details class="videogen-toggle" open>
-                <summary>VideoGen</summary>
+              </details>
+              <details class="videogen-toggle detail-disclosure">
+                <summary>VideoGen · A/B/C prompts<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
                 <div id="detail-prompts" class="prompt-section"></div>
               </details>
-            </div>
+            </section>
           </div>
-
-          <!-- Nav spans full width -->
-          <div id="detail-nav" class="detail-nav"></div>
         </div>
+        <nav id="detail-nav" class="detail-nav" aria-label="Lessons"></nav>
       </div>
     </section>
   </div>

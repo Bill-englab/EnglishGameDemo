@@ -1099,7 +1099,10 @@ async function loadAdminUsers() {
 }
 
 // ===== init =====
+import { initProfile } from './profile.mjs';
+
 async function init() {
+  let profileUI;
   // Check login status before loading the app
   try {
     const res = await fetch("/api/me", { credentials: "same-origin" });
@@ -1109,8 +1112,7 @@ async function init() {
       return;
     }
   // Show username in menu trigger
-  const userEl = document.getElementById("user-name");
-  if (userEl) userEl.textContent = data.username;
+  profileUI = initProfile(data);
   if (data.isAdmin) {
     const adminSection = document.getElementById("admin-section");
     if (adminSection) adminSection.style.display = "";
@@ -1140,6 +1142,7 @@ async function init() {
   // Logout
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) logoutBtn.addEventListener("click", () => {
+    profileUI?.clear();
     fetch("/logout", { credentials: "same-origin" }).then(() => {
       window.location.href = "/login";
     });

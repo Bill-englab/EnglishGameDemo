@@ -11,7 +11,7 @@
 
 下一轮 UI 改造：[`specs/2026-09-04-immersive-ui-redesign.md`](specs/2026-09-04-immersive-ui-redesign.md)（已确认 B 沉浸冒险方向、无独立标题栏、课程目录与 Stage 展示规则；设计文档待书面复核，正式 UI 尚未实施）。
 
-个人资料增补：[`specs/2026-09-04-personal-profile-design.md`](specs/2026-09-04-personal-profile-design.md)（已确认头像＋昵称范围；图片隐私、用户隔离与交互规范，尚未实施）。
+个人资料增补：[`specs/2026-09-04-personal-profile-design.md`](specs/2026-09-04-personal-profile-design.md)（头像＋昵称已实现；图片隐私、用户隔离与交互规范）。实施与验收见 [`plans/2026-09-04-personal-profile-implementation.md`](plans/2026-09-04-personal-profile-implementation.md)。不代表整套 B 界面已经落地。
 
 视频检查记录：[`specs/2026-09-04-video-compression-audit.md`](specs/2026-09-04-video-compression-audit.md)（当前环境与格式处理问题，含验证限制；不代表已经修复）。
 

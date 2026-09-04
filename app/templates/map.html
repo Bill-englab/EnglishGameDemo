@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f8fa">
   <title>My English Adventure</title>
   <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/profile.css">
   <link rel="icon" type="image/png" sizes="128x128" href="/static/icon.png">
   <link rel="icon" href="/static/favicon.ico">
 </head>
@@ -18,10 +19,12 @@
         <div class="progress" aria-label="Completed levels"><span id="star-count">0</span>/<span id="star-total">30</span></div>
         <div class="user-menu" id="user-menu">
           <button class="user-menu__trigger" id="user-menu-trigger" type="button">
+            <img id="user-avatar" class="user-avatar" src="/static/avatar-default.svg" alt="">
             <span id="user-name"></span>
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <div class="user-menu__popup" id="user-menu-popup" style="display:none;">
+            <button id="profile-open" type="button" class="user-menu__item" aria-haspopup="dialog">My Profile</button>
             <div class="user-menu__section" id="admin-section" style="display:none;">
               <button id="admin-btn" type="button" class="user-menu__item">Manage Users</button>
             </div>
@@ -113,6 +116,34 @@
       </div>
     </section>
   </div>
+  <dialog id="profile-dialog" class="profile-dialog" aria-labelledby="profile-heading" aria-describedby="profile-intro">
+    <form id="profile-form">
+      <p class="profile-eyebrow">YOUR ADVENTURE</p>
+      <h2 id="profile-heading">My Profile</h2>
+      <p id="profile-intro" class="profile-intro">A familiar face for your little adventures.</p>
+      <fieldset id="profile-fields">
+        <legend class="hidden">Your photo and nickname</legend>
+        <div class="profile-photo-row">
+          <img id="profile-preview" class="profile-preview" src="/static/avatar-default.svg" alt="Your avatar preview">
+          <div class="profile-photo-actions">
+            <button id="profile-choose" type="button">Choose Photo</button>
+            <button id="profile-default" type="button">Use Default</button>
+          </div>
+          <input id="profile-photo" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        </div>
+        <label for="profile-nickname">Nickname</label>
+        <input id="profile-nickname" type="text" autocomplete="nickname" aria-describedby="profile-nickname-hint">
+        <p id="profile-nickname-hint" class="profile-hint">Up to 24 characters. Leave blank to use your username.</p>
+        <div class="profile-account"><span>Username · stays the same</span><strong id="profile-username"></strong></div>
+        <p class="profile-hint">JPEG, PNG or static WebP · up to 5 MB / 16 MP.<br>Photos stay on this server. Location data is removed.</p>
+      </fieldset>
+      <p id="profile-status" class="profile-status" role="status" aria-live="polite"></p>
+      <div class="profile-actions">
+        <button id="profile-cancel" type="button">Cancel</button>
+        <button id="profile-save" type="submit">Save</button>
+      </div>
+    </form>
+  </dialog>
   <script src="/static/titlebar.js"></script>
   <script type="module" src="/static/app.js"></script>
 </body>

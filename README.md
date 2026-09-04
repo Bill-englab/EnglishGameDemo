@@ -53,6 +53,12 @@ Then open http://127.0.0.1:5000.
 
 The app runs entirely on your machine. No internet required (fonts are bundled), and recorded videos stay on your disk — nothing is sent to any server.
 
+### Personal Profile
+
+Open the account menu → **My Profile** to upload an avatar, preview it, and save a nickname. Cancel keeps the existing profile; Use Default restores the built-in avatar. Login usernames, lesson progress, and recording paths never change.
+
+Photos stay on your server, are resized to 256×256, and have embedded metadata removed. JPEG, PNG and static WebP are supported (up to 5 MiB / 16 megapixels). Update the Python requirements before starting; existing sessions need one fresh login after upgrading. See the [profile design and privacy rules](docs/specs/2026-09-04-personal-profile-design.md).
+
 ### Recording a Performance
 
 1. Open a level's detail page.

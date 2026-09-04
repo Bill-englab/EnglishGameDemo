@@ -4,13 +4,18 @@ import functools
 import logging
 import re
 import secrets
+import io
+import hashlib
+import hmac
 import subprocess
 from pathlib import Path
-from flask import (Flask, jsonify, render_template, abort, send_file, request,
+from flask import (Flask, Request, jsonify, render_template, abort, send_file, request,
                    session, redirect, url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.exceptions import RequestEntityTooLarge
 
 from scanner import scan_curriculum_library, annotate_states, VIDEO_EXTENSIONS
+from profile_store import read_profile, save_profile, read_avatar, delete_profile, profile_lock, IMAGE_LIMIT
 
 _PROJECT = Path(__file__).resolve().parent.parent
 CURRICULUM_ROOT = Path(os.environ.get("CURRICULUM_ROOT", _PROJECT / "curriculum"))
@@ -19,6 +24,7 @@ DEMO_ROOT = Path(os.environ.get("DEMO_ROOT", _PROJECT / "demo"))
 RECORDINGS_ROOT = Path(os.environ.get("RECORDINGS_ROOT", _PROJECT / "recordings"))
 PROMPTS_ROOT = Path(os.environ.get("PROMPTS_ROOT", _PROJECT / "prompts"))
 USERS_FILE = _PROJECT / "app" / "users.json"
+PROFILES_ROOT = Path(os.environ.get("PROFILES_ROOT", _PROJECT / "profiles"))
 
 # Sensitive config (admin password, secret key) read from config.json — NOT in the repo.
 # Copy config.example.json to config.json and edit before deploying.
@@ -63,7 +69,16 @@ _cfg = _load_config()
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = _cfg["admin_password"]
 
+class ProfileLimitedRequest(Request):
+    @property
+    def max_content_length(self):
+        if self.path == '/api/profile':
+            return 6 * 1024 * 1024
+        return super().max_content_length
+
+
 app = Flask(__name__)
+app.request_class = ProfileLimitedRequest
 app.secret_key = _cfg["secret_key"]
 app.config["MAX_CONTENT_LENGTH"] = 500 * 1024 * 1024  # 500 MB upload cap
 app.config["SESSION_COOKIE_HTTPONLY"] = True
@@ -217,7 +232,11 @@ def login():
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
+        account_at_login = load_users().get(username)
         if _valid_username(username) and verify_password(username, password):
+            session.pop('profile_csrf', None)
+            session.pop('profile_identity', None)
+            session['profile_account_stamp'] = _account_stamp(username, account_at_login)
             session["username"] = username
             return redirect(url_for("index"))
         return render_template("login.html", error="Wrong username or password.")
@@ -232,8 +251,121 @@ def logout():
 
 @app.route("/api/me")
 def api_me():
-    username = session.get("username")
-    return jsonify({"username": username, "isAdmin": username == ADMIN_USERNAME})
+    username = _profile_user()
+    profile = {'displayName': username, 'avatarUrl': None}
+    if _valid_username(username):
+        try:
+            with profile_lock(PROFILES_ROOT, username):
+                username = _profile_user()
+                if username:
+                    profile.update(read_profile(PROFILES_ROOT, username))
+                else:
+                    profile = {'displayName': None, 'avatarUrl': None}
+        except (OSError, ValueError):
+            app.logger.warning('Profile unavailable; keeping account display defaults.')
+    return jsonify({"username": username, "isAdmin": username == ADMIN_USERNAME, **profile})
+
+
+@app.after_request
+def private_profile_responses(response):
+    if request.path.startswith('/api/profile') or request.path == '/api/me':
+        response.headers['Cache-Control'] = 'private, no-store'
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        response.vary.add('Cookie')
+    return response
+
+
+def _profile_user():
+    username = session.get('username')
+    if not _valid_username(username):
+        return None
+    users = load_users()
+    if username not in users:
+        return None
+    if session.get('profile_account_stamp') != _account_stamp(username, users[username]):
+        return None
+    return username
+
+
+def _account_stamp(username, account):
+    material = (username + '\0' + json.dumps(account, sort_keys=True)).encode('utf-8')
+    key = app.secret_key.encode('utf-8') if isinstance(app.secret_key, str) else app.secret_key
+    return hmac.new(key, material, hashlib.sha256).hexdigest()
+
+
+def _delete_user_with_profile(username):
+    with profile_lock(PROFILES_ROOT, username):
+        users = load_users()
+        if username not in users:
+            return False
+        delete_profile(PROFILES_ROOT, username)
+        del users[username]
+        save_users(users)
+        return True
+
+
+@app.route('/api/profile', methods=['GET', 'POST'])
+def api_profile():
+    username = _profile_user()
+    if not username:
+        return jsonify(error='Please sign in again.'), 401
+    if request.method == 'GET':
+        try:
+            with profile_lock(PROFILES_ROOT, username):
+                if _profile_user() != username:
+                    return jsonify(error='Please sign in again.'), 401
+                if not session.get('profile_csrf') or session.get('profile_identity') != username:
+                    session['profile_csrf'] = secrets.token_hex(32)
+                    session['profile_identity'] = username
+                return jsonify(username=username, csrfToken=session['profile_csrf'],
+                               **read_profile(PROFILES_ROOT, username))
+        except (OSError, ValueError):
+            return jsonify(error='Your profile is unavailable. Please try again.'), 503
+    token = request.headers.get('X-CSRF-Token', '')
+    if (session.get('profile_identity') != username or not token
+            or not secrets.compare_digest(session.get('profile_csrf', '').encode('utf-8'), token.encode('utf-8'))):
+        return jsonify(error='Please reopen My Profile and try again.'), 403
+    try:
+        if (set(request.form) - {'nickname', 'resetAvatar'} or set(request.files) - {'avatar'}
+                or any(len(request.form.getlist(k)) != 1 for k in request.form)
+                or len(request.files.getlist('avatar')) > 1):
+            return jsonify(error='Invalid profile fields.'), 400
+        reset = request.form.get('resetAvatar', 'false')
+        if reset not in ('true', 'false'):
+            return jsonify(error='Invalid default avatar choice.'), 400
+        photo = request.files.get('avatar')
+        image = photo.read(IMAGE_LIMIT + 1) if photo else None
+        with profile_lock(PROFILES_ROOT, username):
+            # Serialize against deletion and recheck after waiting for the lock.
+            if _profile_user() != username:
+                return jsonify(error='Please sign in again.'), 401
+            result = save_profile(PROFILES_ROOT, username, request.form.get('nickname', ''),
+                                  image, reset == 'true')
+        return jsonify(username=username, **result)
+    except RequestEntityTooLarge:
+        return jsonify(error='This upload is too large. Choose a photo smaller than 5 MB.'), 413
+    except ValueError as exc:
+        return jsonify(error=str(exc)), 400
+    except OSError:
+        app.logger.exception('Could not save profile.')
+        return jsonify(error='Could not save. Your previous profile is still available. Please retry.'), 503
+
+
+@app.route('/api/profile/avatar')
+def profile_avatar():
+    username = _profile_user()
+    if not username:
+        return jsonify(error='Please sign in again.'), 401
+    try:
+        with profile_lock(PROFILES_ROOT, username):
+            if _profile_user() != username:
+                return jsonify(error='Please sign in again.'), 401
+            data = read_avatar(PROFILES_ROOT, username)
+    except (ValueError, OSError):
+        return jsonify(error='Your photo is unavailable.'), 404
+    if data is None:
+        return jsonify(error='No custom photo.'), 404
+    return send_file(io.BytesIO(data), mimetype='image/jpeg', download_name='avatar.jpg')
 
 
 @app.route("/admin", methods=["GET", "POST"])
@@ -259,10 +391,7 @@ def admin():
             username = request.form.get("username", "").strip()
             if username == ADMIN_USERNAME:
                 return render_template("admin.html", users=load_users(), error="Cannot delete admin.")
-            users = load_users()
-            if username in users:
-                del users[username]
-                save_users(users)
+            if _valid_username(username) and _delete_user_with_profile(username):
                 return render_template("admin.html", users=load_users(), success=f"User '{username}' deleted.")
             return render_template("admin.html", users=load_users(), error=f"User '{username}' not found.")
     return render_template("admin.html", users=load_users(), error=None, success=None)
@@ -300,11 +429,8 @@ def api_admin_users_action():
     elif action == "delete":
         if username == ADMIN_USERNAME or not _valid_username(username):
             return jsonify({"error": "Cannot delete this user"}), 400
-        users = load_users()
-        if username in users:
-            del users[username]
-            save_users(users)
-            return jsonify({"ok": True, "users": [u for u in users.keys() if u != ADMIN_USERNAME]})
+        if _delete_user_with_profile(username):
+            return jsonify({"ok": True, "users": [u for u in load_users().keys() if u != ADMIN_USERNAME]})
         return jsonify({"error": "User not found"}), 404
     return jsonify({"error": "Unknown action"}), 400
 

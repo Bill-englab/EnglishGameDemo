@@ -476,6 +476,17 @@ refactor: split content, demo, and recordings into separate trees
 
 ## 13. 给后续 agent 的速记
 
+### 个人资料增补（2026-09-04）
+
+- 头像＋昵称已接入右上角 My Profile，见 `docs/specs/2026-09-04-personal-profile-design.md`；整套 B 地图 UI 和压缩修复尚未交付，勿混淆状态。
+- `app/profile_store.py` 管图片/昵称校验、256px JPEG 转换、剥离元数据、原子写入和跨进程文件锁；新增 Pillow 依赖。`profile.mjs` / `profile-model.mjs` / `profile.css` 独立负责资料 UI，不继续向主文件堆放逻辑。
+- `PROFILES_ROOT` 默认根目录 `profiles/`，整树忽略入库。内部目录为 `u-` 加用户名 ASCII 十六进制，防止 Windows 大小写账号/保留名称冲突；不是裸用户名，且不修改既有录像路径。
+- `/api/profile` GET/POST、`/api/profile/avatar` 只允许当前用户。POST 验 CSRF，整请求 6 MiB、图片 5 MiB/1600 万像素上限；支持静态 JPEG/PNG/WebP。不支持 GIF/HEIC/SVG/动画。
+- `/api/me` 增加 displayName/avatarUrl；会话在登录时绑定账号 HMAC 指纹，账号重建或凭据变化会拒绝旧资料会话。升级前会话需重新登录一次。删除用户只清理资料，不清理表演录像。
+- `app/tests/conftest.py` 自动隔离所有测试的资料根；新增 `test_profiles.py` 与 JS nickname 测试。真机 Electron/iOS 未验证，Edge 桌面与手机视口已验证。
+
+### 通用速记
+
 - **先跑两套测试**（`npm test` + `pytest -q`）确认基线绿，再动手。
 - **纯逻辑放模块、副作用放 app.js**：`map-model`/`map-path` 是纯的、有测试的；新增纯逻辑优先进这些模块并配测试。
 - **改状态机（`annotate_states`）= 改产品规则**，三思，并更新 `test_scanner.py`。

@@ -33,6 +33,7 @@ cd app
 | `DEMO_ROOT` | `../demo` | AI 演示视频 |
 | `RECORDINGS_ROOT` | `../recordings` | 孩子表演录像 |
 | `PROMPTS_ROOT` | `../prompts` | 可选的 A/B/C 视频提示词 |
+| `PROFILES_ROOT` | `../profiles` | 私有头像与昵称（不入 Git） |
 
 可分别用环境变量覆盖（测试或挂载别的内容库时用）。
 
@@ -47,6 +48,18 @@ cd app
 | GET | `/api/prompts/<chapter>/<level>` | 返回当前 Stage 该课的 Sora prompt 文本（Part A + B + C，JSON） |
 
 上传后前端自动刷新 library，关卡状态实时更新。
+
+## 个人资料
+
+右上角账号菜单 → **My Profile**：选择照片、预览并保存，修改昵称，或恢复默认头像。取消不会保存草稿；登录用户名与录像路径不变。首次升级后旧会话需要重新登录一次。
+
+支持 JPEG、PNG、静态 WebP（最多 5 MiB / 1600 万像素），HEIC 请先导出 JPEG。后端使用 Pillow 校正方向、居中裁切为 256×256 JPEG 并移除照片元数据，不保留原图。部署时重新安装 `requirements.txt` 中的依赖。
+
+资料独立存于 `profiles/u-<用户名的 ASCII 十六进制>/`，例如 alice 为 `u-616c696365`；这种编码避免 Windows 大小写账号碰撞。目录包含 `profile.json`、随机命名头像与持久 `.lock`；不要手动删除运行中的锁文件。删除账号会清理资料，不删除表演录像。头像通过登录接口返回，不放进公开静态目录。
+
+`GET/POST /api/profile` 读取/保存当前用户资料；POST 需要 GET 返回的 csrfToken（请求头 X-CSRF-Token）。`GET /api/profile/avatar` 仅返回自己的头像；`/api/me` 增加 displayName/avatarUrl。新接口限制整请求 6 MiB，不改变视频 500 MiB 上限。
+
+设计与边界见[个人资料规范](../docs/specs/2026-09-04-personal-profile-design.md)。
 
 ## 背景插画
 
@@ -69,9 +82,13 @@ npm test                                   # JS：前端纯模块（零依赖，
 app/
   app.py            # Flask 路由：/、/api/library、/video、/upload
   scanner.py        # 纯逻辑：投影 curriculum/ + 算关卡三态（保留 v1 扫描兼容）
+  profile_store.py  # 头像解码与隐私处理、昵称校验、原子存储与文件锁
   templates/map.html
   static/
     app.js          # 主逻辑：渲染地图、A/B/C 详情、录制与上传 UI
+    profile.mjs     # 独立的资料面板、草稿、上传与账号显示
+    profile-model.mjs # 昵称纯校验（与后端语义一致）
+    profile.css     # 资料面板样式，不重排地图
     lesson-view.mjs # 纯：对话分段、Replay Card、章节上下文
     map-model.mjs   # 纯：10 章主题（world + accent）、视觉状态、旋转、帧暗检测
     map-path.mjs    # 纯：Catmull-Rom 平滑路径
@@ -82,4 +99,4 @@ app/
   package.json      # 仅挂 "test" 脚本，零依赖
 ```
 
-纯逻辑在 `map-model.mjs` / `map-path.mjs`（有测试）；副作用集中在 `app.js`。
+纯逻辑在 `map-model.mjs` / `map-path.mjs` 等模块（有测试）；地图编排在 `app.js`，个人资料 DOM 生命周期在 `profile.mjs`。

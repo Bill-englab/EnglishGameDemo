@@ -27,6 +27,7 @@ demo/**/thumb.jpg
 # Sensitive config — never commit. Created locally on each deployment.
 app/config.json
 app/users.json
+profiles/
 
 # Electron binary cache — local only
 app/node_modules/electron/dist/

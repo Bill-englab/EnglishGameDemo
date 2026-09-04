@@ -55,7 +55,7 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │   │   ├── style.css                  # 绘本风样式（卡片布局+背景插画+节点+详情）+ 自托管 @font-face
 │   │   ├── fonts/                     # 自托管 woff2（Fredoka/Nunito，离线可用）
 │   │   └── worlds/                    # 每章背景插画（<章节名>.jpg|.png，竖版 9:16）
-│   ├── tests/                         # pytest：test_scanner.py, test_app.py（登录/上传/缩略图）
+│   ├── tests/                         # pytest：scanner、app、curriculum loader/validator
 │   ├── tests-js/                      # node --test：map-model/path .test.mjs
 │   └── .venv/                         # 本地虚拟环境（gitignored）
 │
@@ -63,7 +63,14 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │   ├── main.cjs                       # 主进程：spawn Flask → 等就绪 → 加载 localhost:5000；自动授权摄像头/麦克风；退出杀 Flask
 │   └── preload.cjs                    # contextBridge 暴露 window.electronAPI（窗口最小化/最大化/关闭）
 │
-├── content/                           # 课程文案 —— 文件系统即数据库，入库
+├── curriculum/                        # 新版课程唯一创作源（分年龄、结构化、可校验）
+│   ├── README.md                      # schema、迁移状态、校验入口
+│   └── 04/                            # 4 岁 Stage：10 章 × 3 课，已通过语言/逻辑审查
+│       ├── stage.json                 # Stage 策略、状态、5 岁桥接 Moves
+│       ├── FINAL-REVIEW.md            # 30 课最终内容审查
+│       └── <章>/<课>/lesson.json      # 对话、Replay Cards、review gates
+│
+├── content/                           # v1 运行时文案（迁移期保留）
 │   ├── README.md                      # 章/关/meta.json 约定
 │   └── 01-wants-requests/             # 章（10 个，零填充前缀）
 │       ├── dialogues.md               # 本章对话源（scaffold_levels.py 的输入）
@@ -86,7 +93,8 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │
 ├── tools/                             # 脚本
 │   ├── README.md
-│   └── scaffold_levels.py             # 从 dialogues.md 生成 meta.json
+│   ├── scaffold_levels.py             # 从 v1 dialogues.md 生成 meta.json
+│   └── validate_curriculum.py         # 校验新版 Stage 结构、输出负担与复现覆盖
 │
 ├── design/                            # 设计工作区
 │   ├── memo.md + plans/               # 详情页重设计的需求备忘与实施计划（已落地）
@@ -101,7 +109,7 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
     └── twodots-reference.jpeg         # Two Dots 风格参考图
 ```
 
-> **视频不入库**：所有 `demo/**/*.mp4`、`recordings/**/*.mp4`（及 webm/mov/avi）被 `.gitignore` 忽略（体积 + 隐私）；服务端生成的 `demo/**/thumb.jpg` 同样忽略（可由后端再生）。仓库只跟踪 `content/` 的 `meta.json`/`dialogues.md`、`prompts/` 的提示词等文案。克隆后本地没有视频，地图上对应关卡显示空状态——这是预期的。
+> **视频不入库**：所有 `demo/**/*.mp4`、`recordings/**/*.mp4`（及 webm/mov/avi）被 `.gitignore` 忽略（体积 + 隐私）；服务端生成的 `demo/**/thumb.jpg` 同样忽略（可由后端再生）。仓库跟踪 `curriculum/` 的新版结构化课程、迁移期 `content/` 文案和 `prompts/` 提示词。克隆后本地没有视频，地图上对应关卡显示空状态——这是预期的。
 
 ---
 
@@ -318,9 +326,16 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ## 8. 内容工作流（备课 vs 使用）
 
-> **课程设计约束（2026-09-04）：** 当前 30 关是 v1 参考内容。后续新增或重写关卡前，必须先读 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md)。新版以 4–6 岁长期成长、真实生活会话动作、螺旋复用、三次 Session 和真实性准入为准；不要继续照旧模板批量增加孤立句式。
+> **课程设计约束（2026-09-04）：** `curriculum/` 是新版唯一创作源，当前 4 岁 30 课已经审查完成；`content/` 只是迁移期 v1 运行时源。新增或重写课程前，必须先读 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md) 和 [`curriculum/04/FINAL-REVIEW.md`](curriculum/04/FINAL-REVIEW.md)。不要继续按旧模板批量增加孤立句式。
 
-### 备课流程（改内容时按这个走）
+### 新版课程创作流程
+
+1. 编辑 `curriculum/<stage>/<章>/<课>/lesson.json`。每课一个主要 Conversation Move、A/B/C 三段对话、两张 Replay Card、八项 reviews。
+2. 增量创作运行 `python tools/validate_curriculum.py --stage 04`。
+3. 整个 Stage 发布前运行 `python tools/validate_curriculum.py --stage 04 --complete`。
+4. 只有 Lesson 达到 `video_ready` 才恢复对应 demo 的提示词与视频制作。内容修改时递增 `content_revision`，已生成视频应标记为过期。
+
+### v1 备课流程（仅迁移期维护）
 
 1. **写对话源**：编辑 `content/<章>/dialogues.md`（D1/D2/D3，格式见 `content/01-wants-requests/dialogues.md`）。
 2. **生成 meta**：`python tools/scaffold_levels.py` → 写出各关 `meta.json`（`demo/` 里已有 `demo.mp4` 的关不动）。
@@ -408,15 +423,16 @@ refactor: split content, demo, and recordings into separate trees
 
 ## 11. 当前状态与进行中的工作
 
-### 内容进度（截至 2026-08-30）
+### 内容进度（截至 2026-09-04）
 
-- 关卡文案 `meta.json`：**30 / 30**。
-- Sora demo 提示词：**60 份**。
+- 新版 4 岁课程 `curriculum/04`：**30 / 30**，10 章全部完成语言与逻辑审查；详见 `FINAL-REVIEW.md`。
+- v1 运行时文案 `content/`：**30 / 30**，等待迁移替换。
+- v1 Sora demo 提示词：**60 份**，不再继续生产。
 - AI 演示 `demo.mp4`：**14 / 30**（第 1–4 章全齐，第 5 章 2/3；见 `demo/PROGRESS.md`）。
 - 孩子表演 `performance.mp4`/`.webm`：admin 用户 2 / 30。
 - 背景插画：8 / 10 章（缺第 9、10 章，靠循环兜底）。
 
-**瓶颈**：demo 视频备课跟不上闯关节奏。demo 由人工用 Sora 制作（详情页可上传，后端自动压缩+缩略图）。
+**当前重点**：把网站运行时从 v1 `content/`/`prompts/` 迁到新版 `curriculum/04`。迁移前保持 demo 制作暂停，避免继续为过期台词生产视频。
 
 ### 代码状态
 

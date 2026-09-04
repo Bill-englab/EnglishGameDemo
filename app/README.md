@@ -2,7 +2,7 @@
 
 本地 Flask 应用：把父子线下英语 role-play 录像排成「章 → 关」向上闯关地图。每章一幅整幅背景插画，路和关卡节点叠在上面。放一个 `performance.mp4` 到 `recordings/<章>/<关>/`（或通过页面内上传）即点亮该关、解锁下一关。
 
-课程内容正在按 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md) 重构。应用层后续需要支持年龄阶段、三段 prompt、完整重演卡和内容版本；当前代码仍读取 v1 的「章 → 关」结构。
+新版 4 岁 30 课已按 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md) 写入 `curriculum/04` 并通过审查。应用层下一步需要支持年龄阶段、三段 prompt、完整 Replay Card 和内容版本；当前代码仍读取 v1 的 `content/`「章 → 关」结构。
 
 ## Setup（一次性）
 

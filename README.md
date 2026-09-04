@@ -4,7 +4,7 @@
   <a href="https://github.com/Bill-englab/EnglishGameDemo/releases/tag/v0.1.0"><img alt="version" src="https://img.shields.io/badge/version-v0.1.0-blue"></a>
   <img alt="license" src="https://img.shields.io/badge/license-MIT-green">
   <img alt="platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey">
-  <img alt="status" src="https://img.shields.io/badge/status-curriculum%20redesign-orange">
+  <img alt="status" src="https://img.shields.io/badge/status-stage%204%20authored-yellow">
 </p>
 
 An interactive adventure map that turns parent-child English role-play into a visual journey. Every completed performance lights up a node on the map — not with a star, but with a frame from the demo animation.
@@ -25,7 +25,7 @@ This project makes role-play feel like a game:
 
 ### Curriculum design guide
 
-The curriculum is being rebuilt as a systematic 4–6-year-old life-English journey. New and revised lessons must follow the approved learner profile, age progression, three-session practice model, authenticity gate, and Stage 4 syllabus in the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md). The current scripts remain a v1 reference until the redesigned Stage 4 content is ready.
+The curriculum is a systematic 4–6-year-old life-English journey. Stage 4 now has 30 reviewed Lessons in [`curriculum/04`](curriculum/04), following the learner profile, age progression, three-session practice model, and authenticity gate in the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md). The website still serves the old `content/` tree until the runtime migration is complete.
 
 ---
 
@@ -98,24 +98,24 @@ Prev / Next navigation spans the full width at the bottom, letting kids move bet
 
 ---
 
-## Current Curriculum (v1 reference)
+## Stage 4 Curriculum
 
-Thirty levels across ten language themes, progressing in difficulty:
+Thirty Lessons across ten daily-communication chapters, progressing from expressing intent to participating, cooperating, and recounting:
 
 | Ch | Theme | Patterns |
 | --- | --- | --- |
-| 1 | wants-requests | Can I have ___? / I want ___ |
-| 2 | refusing-bargaining | I don't want to ___ / What if ___? |
-| 3 | asking-help | Can you help me ___? / It's stuck |
-| 4 | where-locating | Where's ___? / Is ___ in/on ___? |
-| 5 | why-how-come | Why do I ___? / How come ___? |
-| 6 | feelings-preferences | I'm ___ / I don't like ___ |
-| 7 | reasoning | because ___ / That's why ___ |
-| 8 | recounting-day | I went ___ / and then ___ |
-| 9 | reporting-others | He said ___ / She told me ___ |
-| 10 | planning-predicting | We're going to ___ / First ___, then ___ |
+| 1 | choosing and requests | Ask, specify, and change a choice |
+| 2 | refusal and negotiation | State a boundary, ask for time, propose an order |
+| 3 | help and clarification | Ask for help, signal non-understanding, repair meaning |
+| 4 | body and needs | Hunger/thirst, pause needs, mild discomfort |
+| 5 | routines and transitions | Sequence actions, request within a boundary, report readiness |
+| 6 | finding and belonging | Ask/check location and identify belongings |
+| 7 | joining and cooperation | Join peer play, take turns, combine ideas |
+| 8 | feelings and repair | Explain feelings, stop a body interaction, repair a mistake |
+| 9 | outings and safety | Car questions, shop finding, calm lost-child rehearsal |
+| 10 | recounting and planning | One event, two linked events, tomorrow's plan |
 
-Every current level includes a full dialogue, target patterns, and variation prompts for re-enactment. The redesigned curriculum expands the cast to a cartoon dog dad, pig mom, rabbit teacher, tiger child, and one recurring same-age friend; see the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md) for the intended structure.
+Every Lesson includes one primary Conversation Move, a three-part causal dialogue, two complete Replay Cards, parent support, and eight review gates. The cast is a cartoon dog dad, pig mom, rabbit teacher, tiger child, and one recurring same-age friend. See the [full Stage 4 review](curriculum/04/FINAL-REVIEW.md). The existing `content/` and `prompts/` trees remain the v1 runtime reference during migration.
 
 ---
 
@@ -123,8 +123,8 @@ Every current level includes a full dialogue, target patterns, and variation pro
 
 | Component | Status |
 | --- | --- |
-| Curriculum scripts | 30/30 ✅ |
-| Stage 4 curriculum redesign | Design under review |
+| Stage 4 reviewed curriculum | 30/30 ✅ |
+| Runtime migration to new curriculum | Pending |
 | Background illustrations | 8/10 |
 | Legacy demo production record | 14/30 |
 | Sora prompts | 60/60 ✅ |

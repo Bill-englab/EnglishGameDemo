@@ -1,8 +1,8 @@
 # content/ — 课程文案库
 
-这里是「章 → 关」课程的**文案真相源**，入库跟踪。视频不在这里（见 `../demo/` 和 `../recordings/`）。
+这里是网站当前读取的 **v1 运行时文案源**，入库跟踪。视频不在这里（见 `../demo/` 和 `../recordings/`）。新版课程的唯一创作源已经迁到 [`curriculum/`](../curriculum/README.md)；运行时迁移完成前不要在两棵树之间手工同步。
 
-> **课程设计规范：** 新增或重写关卡前，必须先阅读 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md)。当前 30 关是 v1 参考内容；4 岁阶段将按新的生活沟通大纲、三次练习结构和真实性准入标准整体重构。
+> **课程设计规范：** 新增或重写课程请编辑 `curriculum/`，并先阅读 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md)。本目录只在迁移期间维护必要的运行时修复。
 
 ## 结构
 
@@ -34,7 +34,7 @@ content/
 
 字段缺失有默认（空串/空数组）；除 `title` 外都可选。
 
-## 怎么生成 / 更新
+## v1 怎么生成 / 更新
 
 1. 编辑 `<章>/dialogues.md`（D1/D2/D3，格式见 `01-wants-requests/dialogues.md`）。
 2. 在仓库根跑 `python tools/scaffold_levels.py` —— 解析 dialogues.md，写出各关 `meta.json`。

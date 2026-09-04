@@ -3,11 +3,26 @@
   "title": "I Can Take Part",
   "age": 4,
   "version": 1,
-  "status": "draft",
-  "completed_phases": ["A"],
+  "status": "language_reviewed",
+  "completed_phases": ["A", "B", "C", "D"],
   "expected_chapters": 10,
   "expected_lessons": 30,
   "minimum_family_partner_ratio": 0.7,
   "roles": ["child", "dad", "mom", "teacher", "peer"],
-  "dialogue_parts": ["A", "B", "C"]
+  "dialogue_parts": ["A", "B", "C"],
+  "carry_forward_moves": [
+    "signal-nonunderstanding",
+    "describe-discomfort",
+    "request-before-boundary",
+    "request-turn",
+    "suggest-shared-play",
+    "explain-feeling",
+    "set-stop-boundary",
+    "repair-relationship",
+    "ask-duration",
+    "ask-shop-location",
+    "seek-safe-adult-help",
+    "recount-two-events",
+    "contribute-to-plan"
+  ]
 }

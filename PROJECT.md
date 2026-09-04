@@ -1,6 +1,6 @@
 # My English Adventure — 项目说明文档
 
-> **课程设计主线：** 4–6 岁长期课程及当前 4 岁阶段的指导规范见 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md)。当前 30 关是 v1 参考内容，后续新增和重写关卡必须遵循该文档的真实性、螺旋复用和三次练习要求。
+> **课程设计主线：** 4–6 岁长期课程及当前 4 岁阶段的指导规范见 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md)。新版 4 岁 30 课已写入 [`curriculum/04`](curriculum/04) 并通过内容审查；网站暂时仍显示 `content/` 中的 v1 内容，等待运行时迁移。
 
 ## 这是什么
 
@@ -58,22 +58,22 @@ cd app
 
 ### 课程内容
 
-30 关覆盖 10 个英语语言主题，按难度递进：
+新版 30 课覆盖 10 个生活沟通主题，按参与能力递进：
 
 | 章 | 主题 | 学什么 |
 | --- | --- | --- |
-| 1 | wants-requests | Can I have ___? / I want ___ |
-| 2 | refusing-bargaining | I don't want to ___ / What if ___? |
-| 3 | asking-help | Can you help me ___? / It's stuck |
-| 4 | where-locating | Where's ___? / Is ___ in/on ___? |
-| 5 | why-how-come | Why do I ___? / How come ___? |
-| 6 | feelings-preferences | I'm ___ / I don't like ___ |
-| 7 | reasoning | because ___ / That's why ___ |
-| 8 | recounting-day | I went ___ / and then ___ |
-| 9 | reporting-others | He said ___ / She told me ___ |
-| 10 | planning-predicting | We're going to ___ / First ___, then ___ |
+| 1 | 选择与请求 | 请求、说明并改变选择 |
+| 2 | 拒绝与协商 | 说边界、请求时间、提出顺序 |
+| 3 | 求助与澄清 | 具体求助、说没听懂、修正意思 |
+| 4 | 身体与需要 | 饿渴、暂停、说明轻微不适 |
+| 5 | 日常步骤与转换 | 先后顺序、边界内请求、准备状态 |
+| 6 | 寻找、位置与归属 | 询问/检查位置、说明归属 |
+| 7 | 加入游戏与合作 | 加入、轮流、合并玩法 |
+| 8 | 感受、边界与修复 | 感受加原因、要求停止、修复关系 |
+| 9 | 外出、商店与安全 | 车程、找商品、走失求助演练 |
+| 10 | 讲述与计划 | 一件事、两个连续事件、明日计划 |
 
-每关包含完整对话、目标句式、换样重演提示。demo 动画由 AI（Sora）生成，角色固定：爸爸 = 卡通狗，孩子 = 卡通小老虎。
+每课包含一个主要 Conversation Move、三段对话、两张完整 Replay Card 和八项真实性审查。角色包括狗狗爸爸、猪猪妈妈、兔子老师、小老虎孩子和同龄伙伴。完整审查见 [`curriculum/04/FINAL-REVIEW.md`](curriculum/04/FINAL-REVIEW.md)。
 
 ### 视频上传
 
@@ -86,7 +86,8 @@ cd app
 
 | 项 | 进度 |
 | --- | --- |
-| 课程文案 | 30/30 ✅ |
+| 新版 4 岁课程 | 30/30，已完成语言与逻辑审查 ✅ |
+| 应用读取新版课程 | 待迁移 |
 | 背景插画 | 8/10 |
 | demo 动画 | 14/30 |
 | Sora 提示词 | 60/60 ✅ |

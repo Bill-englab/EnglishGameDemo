@@ -5,7 +5,7 @@
 
 import { getChapterTheme, getLevelVisualState, getStableRotation, isFrameDark } from "./map-model.mjs";
 import { buildSmoothPath } from "./map-path.mjs";
-import { groupDialogueByPart, normalizeReplayCards, promptParts } from "./lesson-view.mjs";
+import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
 
 function prettyChapter(raw) {
   const s = raw.replace(/^\d+-/, "");
@@ -659,11 +659,7 @@ function renderMap(library) {
 
   // Keep the library for detail-view navigation (prev/next).
   currentLibrary = library;
-  flatLevels = library.flatMap(ch => ch.levels.map(lv => ({
-    ...lv,
-    chapter: ch.name,
-    chapterTitle: ch.title || prettyChapter(ch.name),
-  })));
+  flatLevels = library.flatMap(ch => ch.levels.map(lv => withChapterContext(lv, ch)));
 
   const total = library.reduce((n, ch) => n + ch.levels.length, 0);
   const done = library.reduce((n, ch) => n + ch.levels.filter(l => l.has_performance).length, 0);
@@ -700,7 +696,8 @@ function renderMap(library) {
     levelsCol.className = "chapter-levels";
 
     let inChapter = 0;
-    for (const level of chapter.levels) {
+    for (const rawLevel of chapter.levels) {
+      const level = withChapterContext(rawLevel, chapter);
       const i = gIdx++;
       const wrap = createLevelNode(level, i, theme);
       wrap.style.setProperty("--d", (inChapter++ * 0.07).toFixed(2) + "s");
@@ -791,7 +788,8 @@ function drawMapPath() {
 
 // ===== level detail view =====
 function openDetail(level) {
-  mapScrollY = window.scrollY;
+  const mapView = document.getElementById("map-view");
+  mapScrollY = mapView.scrollTop;
   const view = document.getElementById("detail-view");
 
   document.getElementById("detail-chapter").textContent = level.chapterTitle || prettyChapter(level.chapter);
@@ -1015,11 +1013,11 @@ function openDetail(level) {
     navWrap.appendChild(makeBtn("Next \u2192", 1, idx >= flatLevels.length - 1));
   }
 
-  document.getElementById("map-view").classList.add("hidden");
+  mapView.classList.add("hidden");
   document.getElementById("bg-layer").classList.add("hidden");
   view.classList.remove("hidden");
   view.classList.add("open");
-  window.scrollTo(0, 0);
+  view.scrollTop = 0;
   // Re-inject window controls into the freshly-rendered detail header
   if (window.__injectTitlebar) window.__injectTitlebar();
 }
@@ -1038,11 +1036,12 @@ function closeDetail() {
   const view = document.getElementById("detail-view");
   view.classList.remove("open");
   view.classList.add("hidden");
-  document.getElementById("map-view").classList.remove("hidden");
+  const mapView = document.getElementById("map-view");
+  mapView.classList.remove("hidden");
   document.getElementById("bg-layer").classList.remove("hidden");
   requestAnimationFrame(() => {
     drawMapPath();
-    window.scrollTo(0, mapScrollY);
+    mapView.scrollTop = mapScrollY;
     activeChapter = null;
     // Delay bg refresh slightly so scroll position is restored first
     setTimeout(() => updateBgOnScroll(bgSlides), 50);

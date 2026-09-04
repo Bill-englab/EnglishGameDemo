@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { groupDialogueByPart, normalizeReplayCards, promptParts } from "../static/lesson-view.mjs";
+import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterContext } from "../static/lesson-view.mjs";
 
 
 test("groups flattened dialogue into authored A B C parts", () => {
@@ -39,4 +39,12 @@ test("returns only available prompt parts in A B C order", () => {
     { label: "Part A", text: "first" },
     { label: "Part C", text: "third" },
   ]);
+});
+
+
+test("adds the authored chapter title to levels opened directly from the map", () => {
+  assert.deepEqual(
+    withChapterContext({ level: "01-request" }, { name: "01-choosing", title: "Choosing and Requests" }),
+    { level: "01-request", chapter: "01-choosing", chapterTitle: "Choosing and Requests" },
+  );
 });

@@ -28,3 +28,11 @@ export function promptParts(data = {}) {
     .filter(part => data[part])
     .map(part => ({ label: `Part ${part.toUpperCase()}`, text: data[part] }));
 }
+
+export function withChapterContext(level, chapter) {
+  return {
+    ...level,
+    chapter: chapter.name,
+    chapterTitle: chapter.title || chapter.name,
+  };
+}

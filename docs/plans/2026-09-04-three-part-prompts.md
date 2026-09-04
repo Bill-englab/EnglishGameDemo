@@ -31,7 +31,7 @@ This implements the already-agreed three-part content workflow, not a new curric
 - TDD: missing renderer first produced 11 expected failures; then 10 focused cases passed before exports, 12 passed after exports + all-course route coverage. Independent review caught bool/float revision equality; two regression cases failed before correction, all 14 then passed.
 - `--check`: 90 prompts / 30 lessons synchronized. Only 9.2 C exceeds the 22-word pacing threshold (25 words); warning retained, not treated as video approval.
 - Curriculum complete validator: 10 chapters, 30 lessons, no issues; canonical JSON/statuses unchanged.
-- Whole-suite checkpoint with concurrent detail changes: 131 pytest / 18 Node tests passed; later final UI handoff reruns the combined suite.
+- Final combined suite with the completed detail changes: 133 pytest / 18 Node tests passed. Independent integration review approved the combined implementation.
 - Real Edge/Playwright browser, isolated users/media: first lesson displays three real prompt blocks; each Copy puts exact complete text on the clipboard without opening the disclosure; no page errors. All 30 API routes separately checked byte-for-byte.
 - Independent content review read all 30 lessons / 90 storyboard parts. Fixed shop camera-vs-character sightline geometry; clarified scripted dressing vs stable garment identity in the global prompt. Scoped rereview found both addressed, no new issue.
 - No image/video generation service was called for lesson media. No family recordings or demo files changed. Actual generated clip duration, lip-sync, visual consistency and quality remain unverified.

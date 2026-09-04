@@ -1,6 +1,6 @@
 # Detail reading redesign
 
-Status: ACTIVE, revised option 2 approved by user on 2026-09-04: left media / right dialogue. Earlier oversized-header concept rejected. No production UI had changed before this selection. Earlier red-phase tests were removed and will be replaced by tests for this selection.
+Status: COMPLETE. Independent task review and final integration review approved on 2026-09-04. Revised option 2 approved by user: left media / right dialogue. Earlier oversized-header concept rejected. No production UI had changed before this selection. Earlier red-phase tests were replaced by tests for this selection.
 
 ## Goal and scope
 
@@ -16,12 +16,12 @@ Intentional reference corrections: Your Show must say Record your roleplay / Sta
 
 ## Task 1: Implement the approved detail reading surface (TDD)
 
-- [ ] Add structural HTML regression tests for order and closed grown-up/tools disclosure, and pure media-state tests; verify red on current implementation.
-- [ ] Change `app/templates/map.html` only within detail; retain all rendering IDs. Replace obsolete detail layout rules in `app/static/style.css`; keep map and recording classes stable.
-- [ ] Add `resolveMediaView({mobile, selected, cameraActive})` in `app/static/detail-media.mjs`; returns selected/showDemo/showPerformance. Wire accessible mobile tabs in `app.js`, pause hidden playback, retain existing DOM through resize, show performance during camera use.
-- [ ] Add descriptive empty-state buttons, metadata-only video preload, guard late prompt/upload/camera results by detail visit, release camera/timers/blob URLs on navigation. Do not introduce an unsaved-change confirmation or recording history.
-- [ ] Verify full dialogue/replay text against `/api/library`, desktop + mobile + 800×600, uploads/cancel/error, media playback/tab pause, recorder stop/redo/save/resize/navigation, previous/next/map and Electron controls. Use an isolated temporary media/user server; never test uploads against family recordings.
-- [ ] Full Python/Node tests, syntax checks, read-only code review, visual comparison and docs update.
+- [x] Add structural HTML regression tests for order and closed grown-up/tools disclosure, and pure media-state tests; verify red on current implementation.
+- [x] Change `app/templates/map.html` only within detail; retain all rendering IDs. Replace obsolete detail layout rules in `app/static/style.css`; keep map and recording classes stable.
+- [x] Add `resolveMediaView({mobile, selected, cameraActive})` in `app/static/detail-media.mjs`; returns selected/showDemo/showPerformance. Wire accessible mobile tabs in `app.js`, pause hidden playback, retain existing DOM through resize, show performance during camera use.
+- [x] Add descriptive empty-state buttons, metadata-only video preload, guard late prompt/upload/camera results by detail visit, release camera/timers/blob URLs on navigation. Do not introduce an unsaved-change confirmation or recording history.
+- [x] Verify full dialogue/replay text against `/api/library`, desktop + mobile + 800×600, uploads/cancel/error, media playback/tab pause, recorder stop/redo/save/resize/navigation, previous/next/map and Electron controls. Use an isolated temporary media/user server; never test uploads against family recordings.
+- [x] Full Python/Node tests, syntax checks, read-only code review, visual comparison and docs update.
 
 ## Deferred
 
@@ -57,3 +57,11 @@ Longer canonical replay text and retained tools intentionally place Previous/Nex
 - Actual Electron executable and repository preload: hidden isolated window, CSS viewports 1280×900 and 800×600, measured header 56px, no horizontal overflow, real minimize/maximize/close IPC. QA used port 65492 and unique temporary userData; process exited 0 with empty stderr. The existing user window/port 28289 was untouched.
 - Limits: physical camera/microphone and iOS/Safari were not tested; browser recording used Edge fake devices. Five-minute recording cap was not timed end-to-end. Missing-thumbnail fallback was tested, not real ffmpeg compression in this environment.
 - The existing Electron backend may cache the old template: do not promise that reloading that window alone updates it. A new/restarted backend is needed; do not close a potentially unsaved user recording without approval.
+
+### Independent review repair
+
+Task review found same-lesson demo upload completion could reconstruct the whole detail and discard a newly started recording or unsaved playback. Fix `99412cf` updates only the demo panel; performance ownership is untouched. Persistent optional regression `app/tests-browser/detail-upload.cjs` starts an ephemeral isolated Flask fixture and intercepts uploads. Both capture and unsaved-playback cases failed before the fix and passed afterward (identical element/source retained, live tracks or Save action preserved). Root independently reran it successfully.
+
+Final combined verification after that fix: `python -m pytest -q` 133 passed; `npm test` 18 passed; both JS syntax checks passed. Prompt export check: 90/30 synchronized, one explicit pacing warning; complete curriculum validation: 0 issues. Real clipboard and same-size desktop/mobile comparison passed. No production data was modified.
+
+Scoped rereview approved the repair with no new blocking issue. Final independent integration review of `bc61bd2..99412cf` approved with no Critical/Important findings. No deferred review findings. Test services on 65492/65493 were stopped; handoff screenshots retained. Existing user Electron was not restarted. Work remains in local main commits; no push or PR was performed.

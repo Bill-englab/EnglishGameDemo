@@ -1,0 +1,12 @@
+{
+  "id": "04",
+  "title": "I Can Take Part",
+  "age": 4,
+  "version": 1,
+  "status": "draft",
+  "expected_chapters": 10,
+  "expected_lessons": 30,
+  "minimum_family_partner_ratio": 0.7,
+  "roles": ["child", "dad", "mom", "teacher", "peer"],
+  "dialogue_parts": ["A", "B", "C"]
+}

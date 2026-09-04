@@ -1,9 +1,17 @@
 import copy
 import json
+from pathlib import Path
+import sys
 
 import pytest
 
 from curriculum import CurriculumLoadError, load_stage, validate_stage
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from tools.validate_curriculum import format_report, run_validation
 
 
 ALL_REVIEWS = {
@@ -216,3 +224,20 @@ def test_recycle_can_reference_only_an_earlier_lesson():
     assert "unknown-recycle" in {
         issue.code for issue in validate_stage(valid_stage([first, second]))
     }
+
+
+def test_format_report_lists_structure_and_move_coverage():
+    report = format_report(valid_stage(), [])
+
+    assert "Stage 04" in report
+    assert "family partner ratio" in report
+    assert "request-item" in report
+    assert "orphan moves" in report
+
+
+def test_validation_exit_code_reflects_issues_without_rejecting_draft_counts(tmp_path):
+    root = tmp_path / "curriculum"
+    write_json(root / "04" / "stage.json", valid_stage() | {"chapters": []})
+
+    assert run_validation(root, "04", require_complete=False)[0] == 0
+    assert run_validation(root, "04", require_complete=True)[0] == 1

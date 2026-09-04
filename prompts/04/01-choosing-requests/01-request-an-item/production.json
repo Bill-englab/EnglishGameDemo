@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "At a quiet home snack table, Mom sits screen-left and Child sits screen-right. A single red apple rests at center-right and one banana at center-left within Mom's reach. Both choices remain visible. Use the same locked 16:9 medium two-shot throughout; only these two characters, their hands and the tabletop matter.",
+  "parts": {
+    "A": {
+      "start": "Mom and Child face each other across the table; the apple rests at center-right and the banana at center-left; both have empty hands.",
+      "action": "On Mom's choice question, she indicates the two fruits with an open hand. On Child's request, Child looks at the apple and then at Mom without taking either fruit.",
+      "end": "Mom and Child face each other; the apple remains at center-right and the banana at center-left; Child is waiting with empty hands."
+    },
+    "B": {
+      "start": "Mom and Child face each other; the apple remains at center-right and the banana at center-left; Child is waiting with empty hands.",
+      "action": "On Mom's turn, she absentmindedly picks up the banana and offers it halfway across the table. Child gently shakes their head and points to the apple during the correction. Mom pauses with the banana still in her hand; she does not correct the offer before Child speaks.",
+      "end": "Mom holds the banana just above the center of the table; the apple remains at center-right; Child's pointing hand has lowered and both look at the apple."
+    },
+    "C": {
+      "start": "Mom holds the banana just above the center of the table; the apple remains at center-right; Child's pointing hand has lowered and both look at the apple.",
+      "action": "On Mom's acknowledgment, she returns the banana to center-left, picks up the apple from center-right, and hands it to Child. Child receives the apple with both hands during the thankful response. No eating while speaking.",
+      "end": "Child holds the single apple with both hands; the banana rests at center-left; Mom has empty hands and smiles at Child."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "Just inside a home after outdoor play, Mom sits screen-left and Child stands screen-right beside a small kitchen table. Two cups are already filled with drinking water at table-center: a blue cup with cool condensation on the right and a cream cup with room-warm water on the left. No hot liquid or steam. The door is only a soft background cue; no outdoor journey is shown. A locked 16:9 medium two-shot keeps both cups, hands and faces visible. Meet the body need promptly, without making Child perform for a drink.",
+  "parts": {
+    "A": {
+      "start": "Mom sits left and Child stands right after coming indoors; the filled blue cup sits at table-center-right and the filled cream cup at table-center-left.",
+      "action": "Mom notices Child's arrival and asks about continuing play. Child pauses to state thirst and request water. Mom's attentive expression immediately acknowledges the need and she turns her open hand toward the already available cups.",
+      "end": "Both filled cups remain at center; Mom's open hand indicates the available water and Child stands calmly beside the table."
+    },
+    "B": {
+      "start": "Both filled cups remain at center; Mom's open hand indicates the available water and Child stands calmly beside the table.",
+      "action": "Mom offers the two comfortable drinking temperatures. Child chooses cold water and indicates the blue cup. Mom reaches toward the blue cup as soon as the choice is clear; do not introduce another question or delay.",
+      "end": "The blue cup of cold water remains at center-right with Mom's hand beside it; the cream cup stays at center-left; Child is ready to receive the blue cup."
+    },
+    "C": {
+      "start": "The blue cup of cold water remains at center-right with Mom's hand beside it; the cream cup stays at center-left; Child is ready to receive the blue cup.",
+      "action": "During Mom's turn she hands the blue cup to Child. Child takes one small sip in the brief pause before the final line, lowers the cup away from the mouth, and then speaks with a relaxed expression. Keep drinking and speaking separate; no exaggerated instant healing.",
+      "end": "Child holds the blue cup below the chin after one sip; the cream cup remains untouched at center-left and Mom has empty hands."
+    }
+  }
+}

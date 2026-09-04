@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A quiet classroom art-table corner, Teacher seated screen left and Child seated screen right. Two otherwise similar light-blue water bottles each have a yellow star. The first bottle has a small physical Leo name label directly below its star; the other has no name label. Both labels face the characters and remain consistent. Child's open bag rests against the near right table leg within reach. Locked 16:9 medium two-shot; no other pupils or art props.",
+  "parts": {
+    "A": {
+      "start": "Teacher holds the first yellow-star bottle above the table; the second stands beside it and Child's open bag rests at the right table leg.",
+      "action": "Teacher presents the found bottle and asks who owns it, without handing it over. Child indicates the yellow star and makes the initial claim. Teacher keeps both bottles in view; do not treat the shared star as enough evidence of ownership.",
+      "end": "Teacher still holds the first bottle above the table; Child has indicated its star and the matching second bottle stands beside it."
+    },
+    "B": {
+      "start": "Teacher still holds the first bottle above the table; Child has indicated its star and the matching second bottle stands beside it.",
+      "action": "Teacher gestures to the second yellow-star bottle while noting the ambiguity. Child points specifically beneath the first bottle's star while giving the distinguishing detail. Teacher turns the first bottle only enough to check the existing physical name label; do not swap labels or add floating text.",
+      "end": "Teacher has checked the name label beneath the first bottle's star and holds it toward Child; the second bottle remains on the table."
+    },
+    "C": {
+      "start": "Teacher has checked the name label beneath the first bottle's star and holds it toward Child; the second bottle remains on the table.",
+      "action": "Teacher offers the verified first bottle during the first turn. Child accepts it after visually confirming the label, then lowers that same bottle into the already-open bag while finishing the final line. Keep the second bottle untouched and visible.",
+      "end": "Child's named bottle is inside the open bag; the unnamed yellow-star bottle remains on the table and both characters are relaxed."
+    }
+  }
+}

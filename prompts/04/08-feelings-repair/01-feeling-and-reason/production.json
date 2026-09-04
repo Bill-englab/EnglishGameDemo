@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A soft home play mat. Mom sits screen left and Child screen right, with four fallen tower blocks resting in a small loose cluster between them. The fall has just happened before the opening frame; the blocks stay still throughout this conversation. Locked 16:9 medium two-shot with comfortable personal space, warm ordinary daylight, and no dramatic visual effects or extra toys.",
+  "parts": {
+    "A": {
+      "start": "Mom and Child sit by four fallen tower blocks; Child's hands have stopped in their lap and their expression is disappointed.",
+      "action": "Mom notices Child's pause and asks about the feeling with an attentive, unhurried expression. Child looks from the fallen blocks to Mom while explaining the reason for being upset. Mom listens without correcting the feeling, touching the blocks, or demanding a smile.",
+      "end": "The fallen blocks remain untouched; Child faces Mom with hands in their lap, still visibly disappointed."
+    },
+    "B": {
+      "start": "The fallen blocks remain untouched; Child faces Mom with hands in their lap, still visibly disappointed.",
+      "action": "Mom offers help or a break with two small open-handed gestures, then waits. Child chooses a short break and future rebuilding, settling their hands and shoulders rather than starting another tower. Mom accepts the choice with a gentle nod; do not rush the emotional change.",
+      "end": "Child sits quietly beside Mom with hands resting in their lap; all four blocks remain fallen and untouched."
+    },
+    "C": {
+      "start": "Child sits quietly beside Mom with hands resting in their lap; all four blocks remain fallen and untouched.",
+      "action": "Mom gestures briefly toward the safe, undisturbed blocks while promising to leave them. Child takes one comfortable breath and softens slightly while acknowledging the comfort of sitting together. Keep this a small move toward calm, not instant delight; no rebuilding or imposed hug occurs.",
+      "end": "Mom and Child remain seated quietly together; Child appears a little calmer and the four blocks are still waiting untouched."
+    }
+  }
+}

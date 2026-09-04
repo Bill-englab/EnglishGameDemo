@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "An uncluttered end-of-day classroom corner. Teacher sits screen left and Child sits screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No toys or essential props are present; the outdoor play is a past event being discussed, never reenacted. Maya, the cars, bus, road, and bridge exist only in the spoken memory and simple hand gestures, not as additional actors, cutaways, thought bubbles, or generated objects.",
+  "parts": {
+    "A": {
+      "start": "Teacher and Child sit facing each other in the quiet classroom with empty hands and attentive expressions.",
+      "action": "Teacher asks about a specific recent play event with genuine interest. Child recalls the road and uses a short horizontal hand gesture for its length while answering, then returns attention to Teacher. Keep the moment conversational, not a test or a performance of the remembered scene.",
+      "end": "Child's hands rest near their lap after describing the road; Teacher remains turned toward Child, listening."
+    },
+    "B": {
+      "start": "Child's hands rest near their lap after describing the road; Teacher remains turned toward Child, listening.",
+      "action": "Teacher asks the follow-up prompted by the road detail. Child makes a small count gesture for three, then a slightly broader hand shape for the bus while answering. No physical vehicles appear and no one looks toward an imaginary offscreen Maya; maintain the real conversation.",
+      "end": "Child has lowered the counting hand and both remain seated together; the classroom is unchanged and no props have appeared."
+    },
+    "C": {
+      "start": "Child has lowered the counting hand and both remain seated together; the classroom is unchanged and no props have appeared.",
+      "action": "Teacher invites the favorite part with a warm curious expression. Child smiles at the memory and briefly moves one empty hand beneath the other curved hand to suggest the bus passing under the bridge. Teacher listens with a small nod, without added praise or dialogue.",
+      "end": "Child lowers both empty hands with a pleased expression; Teacher remains attentive beside Child in the unchanged classroom."
+    }
+  }
+}

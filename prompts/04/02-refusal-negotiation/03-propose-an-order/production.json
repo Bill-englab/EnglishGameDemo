@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Exactly two toy cars lie on the table's right and three large blocks on its left. A single open divided storage box sits at center-back, with room for both groups. Pancakes are a later shared activity mentioned only in dialogue: no food, cooking tools, scene switch, or instant finished pancakes. Locked 16:9 medium two-shot shows both faces and the whole toy arrangement.",
+  "parts": {
+    "A": {
+      "start": "The two cars lie at table-right, the three blocks at table-left, and the open storage box at center-back; Dad and Child have empty hands.",
+      "action": "Dad indicates the toys during the cleanup boundary. Child points gently to the cars while proposing an order. Both leave the toys in place while discussing the plan.",
+      "end": "All toys remain outside the box in their original groups; Dad and Child look toward the cars on the right."
+    },
+    "B": {
+      "start": "All toys remain outside the box in their original groups; Dad and Child look toward the cars on the right.",
+      "action": "Dad acknowledges the idea, then indicates the blocks still needing cleanup. During Child's sequence question, Child gestures from cars to blocks and finally looks up at Dad. Do not show cleanup or cooking completed before agreement.",
+      "end": "The cars and blocks are still in their original groups; both characters' hands rest clear of the toys; the empty box remains at center-back."
+    },
+    "C": {
+      "start": "The cars and blocks are still in their original groups; both characters' hands rest clear of the toys; the empty box remains at center-back.",
+      "action": "Dad agrees, then moves a hand toward the blocks without lifting them yet. Child accepts the car task and puts the two nearby cars into the box one after the other. Only after both cars are stored does Dad begin lifting the nearest block. The remaining blocks stay visible; show the start of teamwork, not instantaneous completion or pancakes.",
+      "end": "Both cars are in the box; Child has empty hands and Dad holds one block above the remaining two blocks; the cars-first sequence has moved on to the blocks."
+    }
+  }
+}

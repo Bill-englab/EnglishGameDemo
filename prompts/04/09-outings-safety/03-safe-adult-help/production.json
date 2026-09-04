@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A familiar, clearly domestic living room during calm pretend practice. Mom sits screen left in her usual coral cardigan with a simple pretend shop-worker name badge pinned to it; Child sits screen right within easy conversational distance. A home sofa remains recognizable behind them. Locked 16:9 medium two-shot. Mom never disappears or changes identity, and no stranger, real shop, parking lot, phone, or extra helper appears. The badge belongs to the rehearsal, not a claim that every badge guarantees safety.",
+  "parts": {
+    "A": {
+      "start": "Mom and Child sit calmly together at home; Mom's pretend worker badge is visible on her cardigan and Child can see her throughout.",
+      "action": "Mom explicitly introduces the pretend practice while indicating her badge with a small gesture. Child then begins the rehearsed request toward Mom, with a calm, purposeful face rather than distress. Keep the domestic background and familiar relationship unmistakable; no hiding or simulated real separation.",
+      "end": "Mom and Child remain calmly face-to-face at home with the pretend badge visible; Child has begun the help-request rehearsal."
+    },
+    "B": {
+      "start": "Mom and Child remain calmly face-to-face at home with the pretend badge visible; Child has begun the help-request rehearsal.",
+      "action": "Mom acknowledges the approach and asks the name as the pretend worker, without leaving her seat. Child answers with the scripted first name and asks for help, remaining beside Mom. The exchange is supportive and low-key; do not add surnames, addresses, phone numbers, quizzes, or another adult.",
+      "end": "Child remains seated beside Mom after giving the scripted first name; Mom's badge is visible and both are calm in the same living room."
+    },
+    "C": {
+      "start": "Child remains seated beside Mom after giving the scripted first name; Mom's badge is visible and both are calm in the same living room.",
+      "action": "Mom accepts the request and indicates the space beside her while describing the next help step. Child agrees and stays in that exact safe spot. End before any actual call, reply, reunion, or further instruction; no added spoken words and no newly appearing communication device or person.",
+      "end": "Mom and Child remain together in the same visible home space, calmly waiting as the pretend practice concludes."
+    }
+  }
+}

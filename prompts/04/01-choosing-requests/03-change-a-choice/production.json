@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "At a home kitchen table, Mom sits screen-left and Child screen-right. One empty transparent cup stands at table-center within both characters' reach. A small open milk pitcher stands to its left and a small open clear-water pitcher farther left, both within Mom's reach. No extra cups. Keep a locked 16:9 medium two-shot with the cup and pitcher spouts visible; liquid continuity is essential.",
+  "parts": {
+    "A": {
+      "start": "The cup at center is empty; the milk and water pitchers stand upright on its left; Mom and Child have empty hands.",
+      "action": "Mom indicates the two pitchers during the choice question. Child looks at Mom and requests milk. Mom reaches toward the milk pitcher only after the choice, without lifting or pouring it yet.",
+      "end": "The cup is still empty; both pitchers remain upright on the left; Mom's hand rests beside the milk pitcher and Child waits."
+    },
+    "B": {
+      "start": "The cup is still empty; both pitchers remain upright on the left; Mom's hand rests beside the milk pitcher and Child waits.",
+      "action": "During Mom's turn she lifts the milk pitcher and positions its spout near the cup but keeps it upright enough that no milk flows. As Child changes the choice, Mom immediately stops the movement and listens. The cup must remain visibly empty for the whole part.",
+      "end": "Mom holds the milk pitcher upright just left of the empty cup; no liquid has been poured; the water pitcher remains farther left and Child watches."
+    },
+    "C": {
+      "start": "Mom holds the milk pitcher upright just left of the empty cup; no liquid has been poured; the water pitcher remains farther left and Child watches.",
+      "action": "During Mom's response she returns the milk pitcher to its original place, takes the water pitcher, and pours a small amount of clear water into the empty cup. She sets the pitcher back and slides the cup a short distance toward Child. Child receives the cup during the final response; no speech with the cup at the mouth.",
+      "end": "Child holds the cup containing clear water; both pitchers stand upright in their original left-side positions; no milk entered the cup."
+    }
+  }
+}

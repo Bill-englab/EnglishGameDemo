@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "At a simple school activity table, Teacher sits screen-left and Child sits screen-right. Exactly two large blue counters lie separately, one near Teacher and one near Child. One broad clear plastic cup stands inverted at table-center; its opening is wide enough to cover both counters side by side. The cup is transparent so the placement underneath remains visible. Keep the same locked 16:9 medium two-shot with a slightly high tabletop view. No extra pupils, duplicate cups, written labels, or arrows.",
+  "parts": {
+    "A": {
+      "start": "Teacher and Child face the table; the inverted clear cup is empty at center; Teacher's blue counter lies to its left and Child's blue counter to its right.",
+      "action": "Teacher gives the direction while looking at Child, without demonstrating the location yet. Child looks uncertainly from the counter to the cup and then back at Teacher during the admission of not understanding. Neither counter moves.",
+      "end": "The empty inverted cup remains centered with one blue counter on each side; Child looks at Teacher for help and Teacher's hands stay clear of the props."
+    },
+    "B": {
+      "start": "The empty inverted cup remains centered with one blue counter on each side; Child looks at Teacher for help and Teacher's hands stay clear of the props.",
+      "action": "Teacher offers one demonstration with a calm open-hand gesture. Child accepts and asks for the meaning while looking toward Teacher's counter. Teacher waits until Child finishes; no demonstration before the request.",
+      "end": "The inverted clear cup is still empty at center; the two blue counters remain on opposite sides; Teacher and Child are ready to watch the example."
+    },
+    "C": {
+      "start": "The inverted clear cup is still empty at center; the two blue counters remain on opposite sides; Teacher and Child are ready to watch the example.",
+      "action": "During Teacher's turn, Teacher lifts the inverted cup with one hand, slides the left counter beneath its rim with the other, and replaces the cup over it. During Child's turn, Child lifts the same cup gently, slides the right counter beside the first, and sets the cup down over both. Keep the two counters separately visible through the cup; no prop duplication.",
+      "end": "Both blue counters lie side by side under the single inverted clear cup at center; both characters' hands have withdrawn and Child looks confident."
+    }
+  }
+}

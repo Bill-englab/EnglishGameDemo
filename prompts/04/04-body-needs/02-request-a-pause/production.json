@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "At a home animal-card table, Dad sits screen-left and Child begins seated screen-right with an unobstructed exit just behind Child. A small animal-card deck lies by Dad and one distinct face-up tiger card lies directly in front of Child. Keep all cards fixed once play pauses. Locked 16:9 medium two-shot stays on the table; no bathroom interior, toileting, distress or extra people. Editorial exception in Part C: after Dad's invitation and Child's exit, use a short gentle same-angle dissolve to a later return; the bathroom visit takes ordinary off-screen time and is never portrayed as instantaneous.",
+  "parts": {
+    "A": {
+      "start": "Dad and Child sit at the table; the deck is beside Dad and Child's tiger card lies face-up in front of Child; Dad is ready to begin a new round.",
+      "action": "Dad gestures toward the deck during the invitation. At Child's first interruption Dad stops the game immediately and withdraws his hand from the cards. Child rises from the chair while stating the bathroom need, with no forced waiting or visible distress.",
+      "end": "Child stands beside the right-hand chair, already turning toward the clear exit; Dad sits left with hands away from the unchanged deck and face-up tiger card."
+    },
+    "B": {
+      "start": "Child stands beside the right-hand chair, already turning toward the clear exit; Dad sits left with hands away from the unchanged deck and face-up tiger card.",
+      "action": "Dad offers to keep the game in place while leaving the exit clear. Child briefly indicates the tiger card during the reply and continues turning toward the exit. Dad does not demand further language before Child can go.",
+      "end": "Child stands at the right edge of the chair facing the clear exit; Dad sits left with hands away from the deck and tiger card, which remain in their original places."
+    },
+    "C": {
+      "start": "Child stands at the right edge of the chair facing the clear exit; Dad sits left with hands away from the deck and tiger card, which remain in their original places.",
+      "action": "During Dad's first turn Child walks the short remaining step out of frame to the right; Dad keeps the card untouched. Then make one gentle same-angle dissolve marking a normal bathroom interval off-screen. Child re-enters from the same right edge at the later time and delivers the return line while approaching the chair. Never compress the actual bathroom visit into a few seconds or show it; preserve every card position through the dissolve.",
+      "end": "At the later time Child is back beside the right-hand chair and looks at Dad; the face-up tiger card and deck remain exactly where they were, ready for resumed play."
+    }
+  }
+}

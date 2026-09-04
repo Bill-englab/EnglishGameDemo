@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "In a quiet home living room, Mom is screen-left beside Child at screen-right. A low stable sofa is immediately behind both, allowing one supported sitting movement without walking. Child has already stopped jumping before the first frame and keeps weight comfortably off the sore heel. Use a locked 16:9 medium two-shot slightly wide enough to include Child's heel, both faces, and the nearby seat. No music device, medical props, swelling, injury close-ups, diagnosis or miraculous recovery. Do not make Child jump again or step to demonstrate pain.",
+  "parts": {
+    "A": {
+      "start": "Child stands still beside the low sofa with weight comfortably shifted off the sore heel; Mom is nearby on the left and no jumping is taking place.",
+      "action": "Mom notices the stopped activity and addresses Child with concern. Child indicates the affected foot during the response without stepping or testing it. Mom remains within easy supporting distance and does not restart the activity.",
+      "end": "Child remains still beside the sofa with the sore heel unweighted; Mom watches attentively from the left, ready to support."
+    },
+    "B": {
+      "start": "Child remains still beside the sofa with the sore heel unweighted; Mom watches attentively from the left, ready to support.",
+      "action": "Mom asks for the location using a small gesture toward the foot, not a touch that suggests a diagnosis. Child points toward the heel and describes the sensation. Do not require another step as evidence; Mom accepts the report.",
+      "end": "Child has indicated the heel without taking another step; both remain immediately in front of the sofa, with Mom's hands available to support."
+    },
+    "C": {
+      "start": "Child has indicated the heel without taking another step; both remain immediately in front of the sofa, with Mom's hands available to support.",
+      "action": "Mom offers rest and an open supporting hand. During Child's request for help sitting, Mom offers her forearm and steadies Child's side with consent; Child lowers onto the immediately adjacent seat without loading the sore heel. Mom settles beside Child. No declaration that the pain has gone.",
+      "end": "Child and Mom sit together on the sofa, Child's affected foot comfortably resting without weight; Mom remains attentive and the jumping activity stays stopped."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "At a home front door, Dad kneels screen-left and Child sits screen-right on a low entry bench. One easy slip-on shoe lies in front of Child; its matching shoe is partly hidden immediately behind a soft bag beside the bench, with its toe visible to the camera. An unfastened lightweight coat hangs open over the bench end nearest the door, within Dad's reach. Child wears the usual yellow T-shirt underneath. Locked 16:9 medium two-shot includes faces, hands, feet, bag and coat; no laces, buttons or zipper tasks. The bag is required by the spoken hiding clue, not an added obstacle.",
+  "parts": {
+    "A": {
+      "start": "Child sits on the entry bench with both shoes off; one shoe is in front of Child and its mate is partly behind the bag; the open coat lies over the bench end by the door; Dad kneels left.",
+      "action": "Dad indicates the shoes and coat during the departure reminder. Child states the chosen sequence, then lifts the visible slip-on shoe and slides the first foot into it. Leave the other shoe behind the bag and the coat untouched.",
+      "end": "Child sits with the first shoe on; the matching shoe is still partly behind the bag; the coat remains over the bench end; Dad kneels left with empty hands."
+    },
+    "B": {
+      "start": "Child sits with the first shoe on; the matching shoe is still partly behind the bag; the coat remains over the bench end; Dad kneels left with empty hands.",
+      "action": "During Dad's clue he points behind the bag. Child leans only a short distance, retrieves the matching shoe from its established position, and reports finding it. While describing shoes first, Child slips it onto the other foot. The coat is not put on yet.",
+      "end": "Child sits with both slip-on shoes on; the bag remains beside the bench and the open coat still rests over the bench end by the door; Dad kneels left."
+    },
+    "C": {
+      "start": "Child sits with both slip-on shoes on; the bag remains beside the bench and the open coat still rests over the bench end by the door; Dad kneels left.",
+      "action": "During Dad's turn Child stands steadily in both shoes while Dad lifts the open coat from the bench and presents its sleeves. Child threads both arms into the already open sleeves with Dad's help. Only once the coat is on does Child say the final readiness line. Leave the coat unfastened; no rushed zipper or button action.",
+      "end": "Child stands screen-right in both shoes and the open coat over the yellow T-shirt; Dad remains left with empty hands; the bag stays beside the bench and they are ready to leave."
+    }
+  }
+}

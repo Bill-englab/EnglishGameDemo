@@ -1,0 +1,36 @@
+My Heel Hurts — Part B (change)
+Production prompt draft | Source: curriculum/04/04-body-needs/03-say-what-hurts/lesson.json | Content revision: 1
+Source SHA256: 571c0c4026f86fa7af6a64fa0eb3d38b56f03f30e2ca862705cc884ba4ea3908
+The source/revision above are production metadata, not spoken words or on-screen text.
+
+VIDEO AND SOUND
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+
+FIXED CAST (only these two)
+Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
+
+SETTING
+At home after jumping to music.
+
+SCENE AND PROP CONTINUITY
+In a quiet home living room, Mom is screen-left beside Child at screen-right. A low stable sofa is immediately behind both, allowing one supported sitting movement without walking. Child has already stopped jumping before the first frame and keeps weight comfortably off the sore heel. Use a locked 16:9 medium two-shot slightly wide enough to include Child's heel, both faces, and the nearby seat. No music device, medical props, swelling, injury close-ups, diagnosis or miraculous recovery. Do not make Child jump again or step to demonstrate pain.
+Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+
+START FRAME
+Child remains still beside the sofa with the sore heel unweighted; Mom watches attentively from the left, ready to support.
+
+ACTION AND REACTIONS
+Mom asks for the location using a small gesture toward the foot, not a touch that suggests a diagnosis. Child points toward the heel and describes the sensation. Do not require another step as evidence; Mom accepts the report.
+
+SPOKEN DIALOGUE (verbatim, in order):
+Mom: "Show me where it hurts. The top or the heel?"
+Child: "The heel. It feels sore when I step."
+
+END FRAME
+Child has indicated the heel without taking another step; both remain immediately in front of the sofa, with Mom's hands available to support.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+
+PACING (18 spoken words)
+Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "Inside the same family car on a familiar daytime route, filmed in a locked 16:9 medium two-shot from the front passenger-side dashboard area looking diagonally toward the driver and rear passenger. Dad is screen left at the wheel, correctly belted, eyes always forward; Child is screen right in the rear seat in a correctly fitted age-appropriate child restraint. The framing keeps both faces visible at three-quarter angles. No other occupants or handheld props. Use restrained exterior motion only. Parts A and B are continuous; Part C uses a deliberate editorial time ellipsis of approximately five minutes, not a five-minute journey compressed into seconds. Interior positions, restraint fit, daylight, and camera remain unchanged across the ellipsis.",
+  "parts": {
+    "A": {
+      "start": "Dad drives looking forward with both hands on the wheel; Child sits securely restrained in the rear seat, looking out the side window.",
+      "action": "Dad states the destination without turning his head or moving a hand from the wheel. Child shifts only their eyes and a small head angle toward Dad while asking about the remaining time; the torso stays properly restrained. No impatience comedy, unbuckling, or reaching between seats.",
+      "end": "Dad remains belted and forward-facing with both hands on the wheel; Child remains correctly restrained in the rear seat, attentive to Dad."
+    },
+    "B": {
+      "start": "Dad remains belted and forward-facing with both hands on the wheel; Child remains correctly restrained in the rear seat, attentive to Dad.",
+      "action": "Dad gives the time estimate and bridge landmark while watching the road. Child makes the request from the back seat, then looks toward the window to anticipate the landmark. Do not show the bridge reached within this ten-second segment. After B, the edit must represent approximately five minutes of uneventful travel before C, with no added dialogue.",
+      "end": "Dad remains forward-facing with both hands on the wheel; Child sits correctly restrained looking toward the side window, and the car interior is unchanged."
+    },
+    "C": {
+      "start": "Dad remains forward-facing with both hands on the wheel; Child sits correctly restrained looking toward the side window, and the car interior is unchanged.",
+      "action": "This matching shot occurs approximately five minutes later than B. A broad bridge railing now becomes visible outside; Dad notes reaching it without pointing or turning. Child follows the exterior view and settles into looking for the familiar street during the final turn. Do not show Grandma, an arrival, or any additional person; the trip continues.",
+      "end": "Dad continues driving attentively with both hands on the wheel; Child remains properly restrained and looks out for the familiar street as the bridge railing passes."
+    }
+  }
+}

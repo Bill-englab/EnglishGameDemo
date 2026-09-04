@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A simple home play mat, Peer kneeling screen left and Child kneeling screen right. A short road made from four flat blocks runs in front of Peer, with two small cars parked on it. Three loose bridge blocks rest in the clear space on Child's side, beside rather than on the road. Locked 16:9 medium two-shot shows both faces and hands; only these two children are present.",
+  "parts": {
+    "A": {
+      "start": "Peer kneels beside the completed short block road and its two parked cars; Child kneels at the clear right side with three loose blocks nearby.",
+      "action": "Peer rolls one car a few centimeters along the existing road while describing the game, then parks it again. Child watches with interest and asks to join, keeping both hands in their own space. No blocks or cars are taken before the invitation.",
+      "end": "Both cars are parked on Peer's unchanged road; Child faces Peer with hands resting beside the three loose bridge blocks."
+    },
+    "B": {
+      "start": "Both cars are parked on Peer's unchanged road; Child faces Peer with hands resting beside the three loose bridge blocks.",
+      "action": "Peer agrees while indicating the road that must stay intact. Child nods, keeps clear of it, and points to the empty right-side patch while proposing a bridge. Child waits for the response before building; Peer remains interested but retains ownership of the existing idea.",
+      "end": "Child points at an empty patch beside the intact road; all three bridge blocks remain loose and both cars remain parked."
+    },
+    "C": {
+      "start": "Child points at an empty patch beside the intact road; all three bridge blocks remain loose and both cars remain parked.",
+      "action": "Peer accepts the bridge idea and gestures toward the adjoining play space. Only then does Child pick up one nearby loose block and set it as the first bridge support in that patch. End with a beginning, not an instantly completed bridge or cars crossing before it exists.",
+      "end": "One bridge support stands beside the unchanged road; two bridge blocks remain loose, both cars stay parked, and the children look pleased to build together."
+    }
+  }
+}

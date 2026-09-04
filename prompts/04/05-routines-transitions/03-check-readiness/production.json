@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "In a compact home kitchen-entry area, Dad stands screen-left and Child screen-right beside the inside of the front door. A backpack rests on a low entry stool beside Child. The near end of a small kitchen table is immediately to Dad's left within one short step; a single capped water bottle rests on its farther edge, visible to the camera but outside Child's initial downward gaze at the backpack. Keep one locked 16:9 medium two-shot slightly wide enough to include the table edge, backpack and both faces. Do not add a search montage, another room, car interior, spare bottles or a new obstacle.",
+  "parts": {
+    "A": {
+      "start": "Dad stands left and Child stands right beside the door; the backpack rests on the stool beside Child; the capped water bottle remains on the nearby kitchen table, not beside the backpack.",
+      "action": "Dad asks the genuine readiness question without moving through the door. Child checks the space beside the backpack, then looks up to report the missing bottle. Neither character points at or retrieves the bottle before Child proposes the search location.",
+      "end": "Dad and Child remain by the door looking at the empty space beside the backpack; the bottle stays on the nearby kitchen table."
+    },
+    "B": {
+      "start": "Dad and Child remain by the door looking at the empty space beside the backpack; the bottle stays on the nearby kitchen table.",
+      "action": "Dad checks beside the backpack and asks where to look. Child turns and gestures toward the nearby kitchen table while asking for help. Only after this request does Dad turn his gaze and body toward that table; keep the bottle stationary until Part C.",
+      "end": "Dad is turned toward the nearby kitchen table while Child watches from the right; the bottle still rests on the table and the backpack remains on the entry stool."
+    },
+    "C": {
+      "start": "Dad is turned toward the nearby kitchen table while Child watches from the right; the bottle still rests on the table and the backpack remains on the entry stool.",
+      "action": "During Dad's discovery line he takes the one short step to the table, picks up the single capped bottle, then turns back and hands it to Child without leaving the frame. Child receives the bottle before reporting readiness. The backpack remains on the stool; do not imply it has teleported onto Child.",
+      "end": "Child holds the capped water bottle beside the backpack on the stool; Dad stands to the left with empty hands, and both are ready for the next departure step."
+    }
+  }
+}

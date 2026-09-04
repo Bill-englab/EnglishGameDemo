@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "At a home entryway play mat, Mom kneels screen-left and Child sits screen-right. Exactly two toy cars are near Child, with a simple empty parking rectangle just beyond them. An analog kitchen timer sits left of the rectangle, facing Mom; its dial is not legible. Child's two easy slip-on shoes lie beside the right knee. Use one locked 16:9 medium two-shot. Editorial exception: Part C occurs after the agreed two minutes have elapsed off-screen between B and C; keep the same room, positions and object arrangement across that time ellipsis. Never make a two-minute timer visibly expire in ten seconds, accelerate a clock, or imply a false countdown.",
+  "parts": {
+    "A": {
+      "start": "Child sits beside two unparked cars with shoes off; the shoes are beside the right knee; Mom kneels left and the timer is idle beside the empty parking rectangle.",
+      "action": "Mom gestures gently toward the shoes during her departure reminder. Child stops moving the cars and looks up to make the time request. Mom listens without moving the cars or forcing the shoes on.",
+      "end": "The two cars remain outside the parking rectangle; Child sits with shoes off; Mom kneels beside the idle timer and listens."
+    },
+    "B": {
+      "start": "The two cars remain outside the parking rectangle; Child sits with shoes off; Mom kneels beside the idle timer and listens.",
+      "action": "On Mom's agreement she sets the real two-minute timer once. During Child's response, Child rolls each car a few inches into the parking rectangle and leaves both stationary side by side. End with everyone calmly holding position. A genuine two-minute off-screen interval separates this endpoint from Part C; it is not a continuous thirty-second event.",
+      "end": "Both cars are parked side by side in the rectangle; Child sits with shoes off beside the two slip-on shoes; Mom kneels left with her hand beside the timer."
+    },
+    "C": {
+      "start": "Both cars are parked side by side in the rectangle; Child sits with shoes off beside the two slip-on shoes; Mom kneels left with her hand beside the timer.",
+      "action": "After the two-minute off-screen interval, a brief timer ring motivates Mom's first turn; Mom switches it off. Child looks at the parked cars, then picks up one slip-on shoe and begins sliding a foot into it during the final response. Do not show two minutes passing inside this clip and do not move the parked cars.",
+      "end": "Both cars remain parked; the timer is silent; Child is putting on the first shoe while the second stays beside the right knee; Mom waits nearby."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A broad home sofa with Dad screen left and Child screen right, both seated upright and with visible room to separate. No props. Dad begins with a light, playful approach of his hands toward Child's side, never pinning, grabbing, chasing, or blocking Child. Locked 16:9 medium two-shot includes both sets of hands and the sofa gap. Respect for the boundary is the visible central action.",
+  "parts": {
+    "A": {
+      "start": "Dad sits near Child on the broad sofa with playful hands approaching Child's side; Child is upright and free to move.",
+      "action": "Dad gives the playful introduction with only a brief light tickling motion. As soon as Child first says stop, Dad immediately ends all contact and withdraws both hands to his own lap, before Child finishes the rest of the sentence. Do not wait for politeness, explanation, a later clip, or laughter before stopping.",
+      "end": "Dad's hands rest in his own lap with no contact; Child sits upright beside him and the tickling has fully stopped."
+    },
+    "B": {
+      "start": "Dad's hands rest in his own lap with no contact; Child sits upright beside him and the tickling has fully stopped.",
+      "action": "Dad calmly acknowledges stopping and asks about space, keeping his hands still. Child indicates the area beside their body when requesting space. Dad promptly slides a short distance left after the request, opening a clear gap; he never restarts tickling or asks Child to justify the boundary.",
+      "end": "Dad sits farther left with hands in his lap and a clear empty cushion-width gap beside Child; there is no physical contact."
+    },
+    "C": {
+      "start": "Dad sits farther left with hands in his lap and a clear empty cushion-width gap beside Child; there is no physical contact.",
+      "action": "Dad settles in his new position while asking whether a funny face is acceptable. He waits for Child's explicit agreement, including the no-tickling condition, then makes one small silly face from his own seat. Child can show a modest smile without being required to laugh; the gap and no-contact boundary remain.",
+      "end": "Dad and Child sit separated by the same empty gap; Dad's hands stay in his lap and the interaction remains entirely non-contact."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "Two children sit on a play mat, Peer screen left and Child screen right. One red open-bed toy truck is at Peer's hands with exactly two tan blocks already loaded. A low open box sits a hand's width ahead of the truck. Two blue blocks wait beside Child for the next turn. Locked 16:9 medium two-shot; all hauling happens within a short reach and no props enter from offscreen.",
+  "parts": {
+    "A": {
+      "start": "Peer holds the red truck with two tan blocks in its bed; the open box is just ahead, and two blue blocks lie beside Child.",
+      "action": "Peer nudges the loaded truck toward the box while explaining the current job, but does not unload it. Child requests the following turn with open hands, leaving the truck under Peer's control. Keep the delivery small enough to complete during the next exchange.",
+      "end": "Peer controls the truck a short distance from the open box with both tan blocks still loaded; Child waits beside the two blue blocks."
+    },
+    "B": {
+      "start": "Peer controls the truck a short distance from the open box with both tan blocks still loaded; Child waits beside the two blue blocks.",
+      "action": "Peer indicates the two loaded tan blocks as the agreed endpoint. During Child's confirmation, Peer rolls the truck the final few centimeters, lifts each tan block once, and places both visibly inside the box. Do not hand over the truck until this two-block job is finished.",
+      "end": "Both tan blocks are inside the box; Peer holds the empty red truck beside it and Child waits with the two blue blocks untouched."
+    },
+    "C": {
+      "start": "Both tan blocks are inside the box; Peer holds the empty red truck beside it and Child waits with the two blue blocks untouched.",
+      "action": "Peer acknowledges the completed delivery and rolls the empty truck directly to Child. Child receives it before thanking Peer, then places the waiting blue blocks into its bed and starts the next small delivery. Keep the transfer visible, with exactly one truck throughout.",
+      "end": "Child controls the red truck loaded with the two blue blocks; the tan blocks remain in the box and Peer watches the new turn."
+    }
+  }
+}

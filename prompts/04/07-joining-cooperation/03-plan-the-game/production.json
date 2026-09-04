@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A quiet home play area with one blanket laid flat as a pretend ship. Peer sits on its left edge and Child on its right edge, facing inward. A single hand-drawn paper treasure map rests by Peer's knee. The real room, blanket, map, and ordinary clothes never transform into a fantasy setting. Locked 16:9 medium two-shot; no costumes, weapons, treasure chest, or extra characters.",
+  "parts": {
+    "A": {
+      "start": "Peer and Child sit at opposite edges of the flat blanket; the paper treasure map lies beside Peer's knee.",
+      "action": "Peer pats the blanket while proposing the pirate setting. Child looks over the same blanket and uses one small upward hand gesture to suggest a space setting. Both remain seated; neither takes over the other's idea or starts a full pretend voyage yet.",
+      "end": "Both sit on the blanket considering their different ideas; the treasure map remains by Peer's knee."
+    },
+    "B": {
+      "start": "Both sit on the blanket considering their different ideas; the treasure map remains by Peer's knee.",
+      "action": "Peer picks up the existing map to show why the pirate idea matters. Child looks at it, then gestures from the map toward the shared blanket while proposing the combined game. Preserve Peer's genuine preference; no agreement or launch happens before the next turn.",
+      "end": "Peer holds the treasure map between them; Child faces Peer expectantly and the blanket remains flat beneath both children."
+    },
+    "C": {
+      "start": "Peer holds the treasure map between them; Child faces Peer expectantly and the blanket remains flat beneath both children.",
+      "action": "Peer accepts the combined premise with an enthusiastic nod and traces a destination on the map. Child makes a brief captain's salute during the final turn, then both look forward as if preparing an imaginary voyage. Keep the map real and the space travel purely pretend.",
+      "end": "Peer holds the map on the blanket while Child lowers the salute; both sit together ready for their shared pretend voyage."
+    }
+  }
+}

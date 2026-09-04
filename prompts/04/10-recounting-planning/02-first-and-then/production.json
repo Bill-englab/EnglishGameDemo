@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A home table conversation with Dad seated screen left and Child seated screen right. One already-repaired, dry paper boat rests upright between them throughout. No bowl, water, repair tools, or additional people are present. Locked 16:9 medium two-shot. All tipping, teacher help, and floating happened earlier; illustrate the telling with empty-hand gestures, never flashbacks or actual present-tense sinking.",
+  "parts": {
+    "A": {
+      "start": "The dry, repaired paper boat rests upright on the table between Dad and Child; both sit facing each other with hands clear of it.",
+      "action": "Dad glances at the boat before asking about its day. Child uses an empty hand first flat and then gently tilted to mark the two remembered events. Keep the actual boat stationary and upright, so the story is not mistaken for an accident happening now.",
+      "end": "The boat remains upright and dry on the table; Child's empty hand is lowered after the tipping gesture and Dad listens."
+    },
+    "B": {
+      "start": "The boat remains upright and dry on the table; Child's empty hand is lowered after the tipping gesture and Dad listens.",
+      "action": "Dad reacts with mild concern and asks about the next event, accepting the first part of the account. Child looks back to Dad and gives the help-seeking detail with one small open-hand gesture. No Teacher appears or speaks and no repairs take place in the present scene.",
+      "end": "Dad and Child remain seated with the repaired boat untouched between them; Child's hands are relaxed near the table edge."
+    },
+    "C": {
+      "start": "Dad and Child remain seated with the repaired boat untouched between them; Child's hands are relaxed near the table edge.",
+      "action": "Dad asks whether there was another attempt. Child gives a small nod and makes a level, gently gliding empty-hand gesture while describing the successful result, then looks proudly at the real dry boat. Do not animate the boat floating on air or summon water to illustrate the past.",
+      "end": "The repaired paper boat remains dry and upright on the table; Dad and Child share a quiet pleased look at it."
+    }
+  }
+}

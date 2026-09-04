@@ -1,0 +1,36 @@
+After the Big Bridge — Part B (change)
+Production prompt draft | Source: curriculum/04/09-outings-safety/01-how-much-longer/lesson.json | Content revision: 1
+Source SHA256: ea60d91c7209839b9268d6bfb976cde502f316fa742b17aaa81399d672853832
+The source/revision above are production metadata, not spoken words or on-screen text.
+
+VIDEO AND SOUND
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+
+FIXED CAST (only these two)
+Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt, gentle natural adult male voice.
+
+SETTING
+Buckled into the car on a familiar trip.
+
+SCENE AND PROP CONTINUITY
+Inside the same family car on a familiar daytime route, filmed in a locked 16:9 medium two-shot from the front passenger-side dashboard area looking diagonally toward the driver and rear passenger. Dad is screen left at the wheel, correctly belted, eyes always forward; Child is screen right in the rear seat in a correctly fitted age-appropriate child restraint. The framing keeps both faces visible at three-quarter angles. No other occupants or handheld props. Use restrained exterior motion only. Parts A and B are continuous; Part C uses a deliberate editorial time ellipsis of approximately five minutes, not a five-minute journey compressed into seconds. Interior positions, restraint fit, daylight, and camera remain unchanged across the ellipsis.
+Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+
+START FRAME
+Dad remains belted and forward-facing with both hands on the wheel; Child remains correctly restrained in the rear seat, attentive to Dad.
+
+ACTION AND REACTIONS
+Dad gives the time estimate and bridge landmark while watching the road. Child makes the request from the back seat, then looks toward the window to anticipate the landmark. Do not show the bridge reached within this ten-second segment. After B, the edit must represent approximately five minutes of uneventful travel before C, with no added dialogue.
+
+SPOKEN DIALOGUE (verbatim, in order):
+Dad: "About ten minutes, after we cross the big bridge."
+Child: "Can you tell me when we reach the bridge?"
+
+END FRAME
+Dad remains forward-facing with both hands on the wheel; Child sits correctly restrained looking toward the side window, and the car interior is unchanged.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+
+PACING (18 spoken words)
+Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

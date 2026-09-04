@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A compact bedroom cleanup area, Mom kneeling screen left and Child kneeling screen right. A small basket containing two toy cars sits between them; a low bed edge is visible at left and a floor-length curtain is immediately behind Child. One blue car is behind the curtain's lower edge, with just a blue wheel visible from Mom's angle. These are the only movable props. Locked 16:9 medium two-shot includes the basket and curtain hem.",
+  "parts": {
+    "A": {
+      "start": "Mom and Child kneel by the basket of two cars; the blue car stays behind the curtain, with a small wheel visible from Mom's angle.",
+      "action": "Mom looks into the basket before noting the missing car. Child points toward the visible bed edge to ask about that possible location. Mom listens without moving the curtain or revealing the blue car; the question remains a plausible first guess.",
+      "end": "Child points toward the bed while Mom stays beside the basket; the blue car remains behind the curtain."
+    },
+    "B": {
+      "start": "Child points toward the bed while Mom stays beside the basket; the blue car remains behind the curtain.",
+      "action": "Mom gently shakes her head about the already-checked bed, then directs her gaze and one finger toward the small blue clue at the curtain. Child follows the clue, lowers the bed-pointing hand, and asks about the curtain. Child may prepare to lift the hem but waits for confirmation.",
+      "end": "Both look at the curtain hem; Child's hand is poised near but not touching it, and the blue car is still behind it."
+    },
+    "C": {
+      "start": "Both look at the curtain hem; Child's hand is poised near but not touching it, and the blue car is still behind it.",
+      "action": "After Mom confirms the location, Child gently moves only the bottom curtain edge, exposing the stationary blue car. Child picks up that car and deposits it in the basket during the final turn. Mom leaves the checking and cleanup to Child; no bed search or extra guessing is added.",
+      "end": "The blue car is in the basket with the other two cars; the curtain has fallen back into place and both remain kneeling nearby."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low play table. A tiny stable block house at center lacks only one roof piece, which lies directly to its right. A single open storage box sits left of the house within both characters' reach. Locked 16:9 medium two-shot shows faces, hands, house and box; no other toys or people.",
+  "parts": {
+    "A": {
+      "start": "Dad and Child kneel beside the table; the unfinished house stands at center, its one roof piece lies to the right, and the open box waits to the left.",
+      "action": "Dad gestures calmly toward the box during the cleanup request, without touching the house. Child pauses the play and states the boundary with a disappointed but ordinary expression. No tantrum, scolding, or immediate forced cleanup.",
+      "end": "The house still lacks its roof; the loose roof remains to its right and the box to its left; Child's hands rest beside the house and Dad listens."
+    },
+    "B": {
+      "start": "The house still lacks its roof; the loose roof remains to its right and the box to its left; Child's hands rest beside the house and Dad listens.",
+      "action": "Dad leans in attentively during his question. Child indicates the single roof piece and the visible gap during the explanation, leaving the piece on the table until the short finish point is agreed.",
+      "end": "Dad and Child look at the visible roof gap; the roof piece remains beside the house and the open box remains left; neither has moved a block."
+    },
+    "C": {
+      "start": "Dad and Child look at the visible roof gap; the roof piece remains beside the house and the open box remains left; neither has moved a block.",
+      "action": "During Dad's agreement, Child lifts the roof piece and places it steadily on the house. Finish this one small placement before Child reports that it is on. During the final cleanup words, Child reaches toward the box to begin tidying; do not demand a full house dismantling within this clip.",
+      "end": "The roof rests securely on the house; Child has turned one open hand toward the storage box to begin cleanup; Dad stays beside Child, ready to help."
+    }
+  }
+}

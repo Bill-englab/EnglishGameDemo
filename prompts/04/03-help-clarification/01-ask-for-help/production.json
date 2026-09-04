@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "At a home craft table, Dad sits screen-left and Child screen-right. One large paper star outline lies at center-right, visibly already cut around almost its whole perimeter except one short final edge; leave a small curved attachment requiring only one or two snips, not a whole star to cut in ten seconds. One pair of blunt child-safe scissors lies closed at table-left within Dad's easy reach but outside Child's comfortable reach. Keep one locked 16:9 medium two-shot showing faces and hands. Dad never takes over the cutting; fingers remain well clear of the blades.",
+  "parts": {
+    "A": {
+      "start": "Dad and Child sit at the table; the partly cut paper star lies at center-right with its final edge attached, and the closed child-safe scissors lie at table-left.",
+      "action": "Dad indicates the unfinished paper outline during the question. Child looks from the outline toward the scissors and asks for help retrieving them. Dad prepares to reach for them only after the request; no cutting yet.",
+      "end": "The final edge of the star remains attached; Dad's hand is beside the closed scissors at table-left; Child's hands rest beside the paper."
+    },
+    "B": {
+      "start": "The final edge of the star remains attached; Dad's hand is beside the closed scissors at table-left; Child's hands rest beside the paper.",
+      "action": "During Dad's turn he lifts the closed scissors by the closed blades, offers the handles safely toward Child, then releases them into Child's hand. Child clarifies the desired help, keeping the scissors low and away from Dad. After the repair, Dad moves his empty hand toward the paper's far corner; no snipping before they coordinate.",
+      "end": "Child holds the child-safe scissors low over the table; the star is still attached along its final short edge; Dad's empty hand waits beside the far paper corner, clear of the cutting line."
+    },
+    "C": {
+      "start": "Child holds the child-safe scissors low over the table; the star is still attached along its final short edge; Dad's empty hand waits beside the far paper corner, clear of the cutting line.",
+      "action": "During Dad's response he steadies the far corner and turns the paper slightly, keeping his fingers away from the blade path. Child makes one or two short snips to free the last edge, then closes and lays the scissors at table-right before speaking proudly. Child lifts the freed slightly wavy star; Dad keeps the surrounding scrap on the table. Do not cut a full star at impossible speed.",
+      "end": "Child holds the freed paper star; the closed scissors rest at table-right; Dad's hand rests beside the surrounding paper scrap, and both look pleased."
+    }
+  }
+}

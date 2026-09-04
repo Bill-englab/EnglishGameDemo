@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A shared play mat with Peer kneeling screen left and Child kneeling screen right. A simple three-piece block bridge has two low supports, left and right, and a long top block. Its right support is tilted and its top has fallen onto the mat beside it after Child's toy truck bumped it. The truck is stopped by Child's knee. Locked 16:9 medium two-shot clearly shows faces, hands, and the damaged bridge.",
+  "parts": {
+    "A": {
+      "start": "Peer looks at the fallen bridge top and tilted right support; Child's truck is stopped beside the damaged bridge, under Child's resting hand.",
+      "action": "Peer names the effect of the accidental bump with disappointment rather than anger. Child immediately stops handling the truck, looks at Peer, and apologizes while checking on them. Do not reconstruct the bridge before asking; keep the impact visible and avoid injury or blame exaggeration.",
+      "end": "The truck is stationary by Child's knee; the bridge top is on the mat, its right support is tilted, and Child faces Peer with empty hands."
+    },
+    "B": {
+      "start": "The truck is stationary by Child's knee; the bridge top is on the mat, its right support is tilted, and Child faces Peer with empty hands.",
+      "action": "Peer indicates the fallen bridge while explaining what mattered. Child looks at the damage, then offers to help rebuild with an open hand, without grabbing Peer's blocks. Peer considers the offer; do not require an instant smile or restore the bridge before permission.",
+      "end": "Both look at the damaged bridge; Child's empty hand is offered near the tilted right support but has not touched it, and the truck remains parked."
+    },
+    "C": {
+      "start": "Both look at the damaged bridge; Child's empty hand is offered near the tilted right support but has not touched it, and the truck remains parked.",
+      "action": "Peer accepts and points to the right support, then reaches for the fallen top. Child rights and steadies that support after the instruction, confirming the cooperation. Once Child is holding it stable, Peer places the top across both supports. Keep the truck still; the repair, not resumed driving, closes the scene.",
+      "end": "The bridge stands with its top across both supports; Child steadies the right support and Peer has just released the top, while the truck stays parked."
+    }
+  }
+}

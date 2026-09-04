@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A lightly staged, empty grocery setting with Mom screen left and Child screen right. Within a single locked 16:9 medium two-shot, a bare shelf end occupies the left background and the entrance of the next aisle is two short steps to the right. A simple physical cereal aisle sign points right. Two blue boxes remain plainly visible to the camera on the next-aisle shelf from the first frame: one has a large oat illustration, the other a large corn illustration. A short shelf side panel blocks only Mom's and Child's initial sightline to those boxes, never the camera's view. Their two-step move around the panel will let them see the already-visible boxes. Mom carries a small open shopping basket on her left forearm. Keep both characters together within frame; no workers, crowds, checkout, or extra stock.",
+  "parts": {
+    "A": {
+      "start": "Mom and Child stand beside the bare shelf end; Mom holds the open basket, and both blue boxes are visible to the camera but hidden from the characters' sightline by the side panel.",
+      "action": "Mom checks the near shelf and notes the missing oatmeal. Child looks at the same shelf, then asks Mom where to find it. Neither can yet see, identify, or reach for a blue box; the camera continuously shows both boxes fixed on the adjacent shelf beyond the panel that blocks only the characters' sightline.",
+      "end": "Both face the near shelf end; Mom holds the basket and Child looks to her for a location clue, while both blue boxes stay visible to the camera but outside the characters' sightline."
+    },
+    "B": {
+      "start": "Both face the near shelf end; Mom holds the basket and Child looks to her for a location clue, while both blue boxes stay visible to the camera but outside the characters' sightline.",
+      "action": "Mom looks up and indicates the physical cereal sign toward the adjacent aisle. Child asks about searching there, and they take two short steps together to the right around the side panel during the remaining beat. Their new position gives both characters a clear sightline to the two stationary boxes, which the camera has shown continuously since the first frame. Keep Mom left of Child and the camera locked; no long aisle walk.",
+      "end": "Mom and Child stand at the adjacent shelf, now able to see both blue boxes that remain visible to the camera; Mom still carries the open basket and neither box has been touched."
+    },
+    "C": {
+      "start": "Mom and Child stand at the adjacent shelf, now able to see both blue boxes that remain visible to the camera; Mom still carries the open basket and neither box has been touched.",
+      "action": "Mom indicates both boxes without picking one while asking which. Child points specifically to the oat illustration during the reply. Only after that identification, Mom confirms and takes the oat box directly into the basket during her final turn. Use tiny concurrent gestures and no extra pause or celebration; this three-turn segment needs a spoken timing check.",
+      "end": "The oat-illustrated blue box is inside Mom's basket; the corn-illustrated blue box stays on the shelf, and Child stands beside Mom."
+    }
+  }
+}

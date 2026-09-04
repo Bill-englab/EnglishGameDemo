@@ -15,3 +15,5 @@ curriculum/<stage>/<chapter>/<lesson>/lesson.json
 网站已直接读取这里的 canonical Lesson。`content/` 和根级旧 prompts 只作 v1 历史参考，不要手工同步。新版媒体使用 Stage 路径：`demo/04/<章>/<课>/`、`recordings/<用户名>/04/<章>/<课>/`、`prompts/04/<章>/<课>/{a,b,c}.txt`。
 
 增量创作允许章节不完整；正式制作视频前必须执行 `python tools/validate_curriculum.py --stage 04 --complete`，并把对应 Lesson 明确推进到 `video_ready`。
+
+新版 [90 份三段提示词草稿](../prompts/04/README.md) 已齐；`production.json` 仅记录视觉分镜，台词由 `tools/build_video_prompts.py` 从这里直接导出。准备提示词不改变课程状态，正式视频仍需逐课验收。

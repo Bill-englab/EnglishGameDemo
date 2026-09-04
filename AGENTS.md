@@ -337,12 +337,12 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 1. 编辑 `curriculum/<stage>/<章>/<课>/lesson.json`。每课一个主要 Conversation Move、A/B/C 三段对话、两张 Replay Card、八项 reviews。
 2. 增量创作运行 `python tools/validate_curriculum.py --stage 04`。
 3. 整个 Stage 发布前运行 `python tools/validate_curriculum.py --stage 04 --complete`。
-4. 只有 Lesson 达到 `video_ready` 才恢复对应 demo 的提示词与视频制作。内容修改时递增 `content_revision`，已生成视频应标记为过期。
+4. 提示词草稿可在 `language_reviewed` 后准备；正式 demo 制作仍需 `video_ready`。内容修改时递增 `content_revision`，审查并同步逐课 `production.json` 的版本，再重新导出提示词；已生成视频应标记为过期。
 
 ### 新版视频流程（按课恢复）
 
-1. Lesson 达到 `video_ready` 后，为 A/B/C 各写一份约 10 秒提示词到 `prompts/04/<章>/<课>/{a,b,c}.txt`。
-2. 分别生成三段并拼接为 `demo.mp4`，放到 `demo/04/<章>/<课>/`；也可从详情页上传。
+1. `prompts/04` 已有 30课 / 90份 A/B/C 制作草稿。台词从 `curriculum` 导出，镜头只写在逐课 `production.json`；运行 `python tools/build_video_prompts.py --stage 04 --check` 检查，`--write` 明确重生成。禁止直接维护导出文件内的第二份台词。
+2. 逐课完成分镜/节奏确认并达到 `video_ready` 后，分别生成三段并拼接为 `demo.mp4`，放到 `demo/04/<章>/<课>/`；也可从详情页上传。每段约10秒，台词拥挤时允许12–15秒，不能删词或加速。提示词齐全不等于视频已生成。
 3. 更新新版进度记录；服务会自动压缩并生成 `thumb.jpg`。
 
 ### demo.mp4 拼接命令
@@ -432,11 +432,12 @@ refactor: split content, demo, and recordings into separate trees
 - 网站运行时：已直接读取 `curriculum/04`，显示 A/B/C、Replay Cards 与 Parent Support。
 - v1 `content/`：30 关归档，只作历史对照和兼容测试。
 - v1 Sora demo 提示词：**60 份**，不再继续生产。
+- 新版 A/B/C 提示词草稿：**90 / 90**，逐课分镜 **30 / 30**；说明与索引见 `prompts/README.md`、`prompts/04/README.md`。课程仍为 `language_reviewed`。
 - AI 演示 `demo.mp4`：**14 / 30**（第 1–4 章全齐，第 5 章 2/3；见 `demo/PROGRESS.md`）。
 - 孩子表演 `performance.mp4`/`.webm`：admin 用户 2 / 30。
 - 背景插画：8 / 10 章（缺第 9、10 章，靠循环兜底）。
 
-**当前重点**：在不急于恢复视频生产的前提下，继续做真实家庭试用记录；确认 Lesson 达到 `video_ready` 后，再逐课制作新版 A/B/C prompts 和 demo。
+**当前重点**：在不急于恢复视频生产的前提下，继续做真实家庭试用记录；使用已补齐的三段提示词，逐课确认时长与镜头，达到 `video_ready` 后再制作正式 demo。
 
 ### 代码状态
 

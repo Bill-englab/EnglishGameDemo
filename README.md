@@ -27,6 +27,8 @@ This project makes role-play feel like a game:
 
 The curriculum is a systematic 4–6-year-old life-English journey. Stage 4 has 30 reviewed Lessons in [`curriculum/04`](curriculum/04), following the learner profile, age progression, three-session practice model, and authenticity gate in the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md). The website now reads this canonical curriculum directly.
 
+All 30 lessons now have **three standalone video prompt drafts each** (A/B/C, nominally ~10 seconds): [browse the 90 prompts](prompts/04/README.md). Speech is exported directly from canonical lessons; per-lesson staging preserves physical continuity. See the [production and maintenance guide](prompts/README.md). Prompt availability is not `video_ready` approval or evidence of a finished video.
+
 ---
 
 ## How It Works
@@ -100,7 +102,7 @@ Each level opens to a three-panel detail view:
 - **Replay Together** — two complete transfer situations showing the setting, what changes, and the speaking challenge.
 - **For the Grown-up** — brief support for prompting without turning the performance into a test.
 
-A **VideoGen** panel in the bottom-right reveals any available Sora prompt text (Part A / B / C), each with a one-click **Copy** button. New prompts are intentionally produced only after a Lesson reaches `video_ready`.
+A **VideoGen** disclosure reveals Sora prompt text (Part A / B / C), each with a one-click **Copy** button. All 30 current lessons have complete draft prompts. Final staging, timing and audiovisual checks are still required before `video_ready` and formal video production.
 
 Prev / Next navigation spans the full width at the bottom, letting kids move between levels without returning to the map.
 

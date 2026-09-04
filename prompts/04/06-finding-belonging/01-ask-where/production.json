@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "A quiet home puzzle corner. Dad kneels screen left and Child kneels screen right at a low table directly beside a sofa. One almost-complete puzzle lies within Child's reach. Its single loose red piece stays partly concealed beside the sofa's nearest front leg, within one arm's reach of the table; it does not move until Child retrieves it. A locked 16:9 medium two-shot includes faces, table, and this low search area.",
+  "parts": {
+    "A": {
+      "start": "Dad and Child kneel beside the low puzzle table; the last puzzle space is empty and the red piece remains partly concealed beside the sofa's front leg.",
+      "action": "On Dad's question, he glances from the empty space to Child's empty hands. Child checks the table edge, opens both hands, then asks Dad about the missing piece. Show mild puzzlement, not a prolonged guessing game; neither character finds or touches the piece yet.",
+      "end": "Child's hands are empty above the table and both look toward the sofa; the red piece remains beside its front leg."
+    },
+    "B": {
+      "start": "Child's hands are empty above the table and both look toward the sofa; the red piece remains beside its front leg.",
+      "action": "Dad gives his truthful clue with a small gesture toward the sofa. Child follows the gesture and indicates the gap below the sofa while requesting help. After the request, both lean slightly toward that same front leg; do not reveal or retrieve the piece before Dad's next turn.",
+      "end": "Both lean toward the sofa's near front leg; Child's empty right hand rests beside the table and the red piece is still on the floor by the leg."
+    },
+    "C": {
+      "start": "Both lean toward the sofa's near front leg; Child's empty right hand rests beside the table and the red piece is still on the floor by the leg.",
+      "action": "As Dad identifies the precise location, he points without picking up the piece. Child spots it, reaches a short distance, visibly lifts it, and returns the hand to the adjacent table during the final line. Child fits that same piece into the single remaining space; keep the action simple and continuous.",
+      "end": "The puzzle is complete on the table; Child's hand rests beside the inserted red piece and Dad smiles beside Child."
+    }
+  }
+}

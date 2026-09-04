@@ -1,74 +1,61 @@
-# Video Prompts — Sora demo-video 生成提示词
+# Video Prompts — 三段式视频生成提示词
 
-> **当前约定：** 根目录下现有章文件夹对应旧版 `content/` 对话，只作 v1 参考。新版课程位于 `curriculum/04`，采用 A/B/C 三段、每段约 10 秒；提示词按课审核后写入 `prompts/04/<章>/<课>/{a,b,c}.txt`。
+新版 Stage 04 已提供 **30 课 × A/B/C 三段 = 90 份**独立提示词。每份都含本段完整台词、固定角色、场景、起始状态、动作与反应、结束状态、语音和时长约束。
 
-以下说明仅用于维护已有 v1 提示词：为 `content/` 里**每个对话**生成两段开箱即用的 Sora 提示词（**两段式**）。新版提示词不要沿用此命名或切分规则。
-每个对话拆成 **两段**:`D{1,2,3}a.txt`(前半台词)+ `D{1,2,3}b.txt`(后半台词),各粘进 Sora 单独生成。两段合起来 = 原来的整段台词,一句不少;拆两段是为了让 Sora 念得更慢、更从容(治"一段式说太快")。
+**[逐课索引 →](04/README.md)**
 
-## 怎么用
+## 直接使用
 
-1. 对每个对话,分别打开 `D{1,2,3}a.txt` 和 `D{1,2,3}b.txt` → 各粘进 Sora → 各生成一段。
-2. 把两段按 **a → b** 顺序拼成 **`demo.mp4`**,放进 `demo/<章>/<关>/`。两段同编码可直接流拷贝拼接:
+1. 在课程详情页展开 **VideoGen**（详情页新版中位于 For the Grown-up），分别复制 Part A、B、C。也可直接打开 `04/<章>/<课>/a.txt`、`b.txt`、`c.txt`。
+2. 各生成一段，默认每段约 10 秒，按 A → B → C 拼成一个 `demo.mp4`。不要把三段提示一次性提交成一个十秒视频。
+3. 人物参考图保持一致；如果所用工具支持，后一段使用前一段的末帧作衔接参考。提示词本身不能保证模型的人物、声音和道具连续性。
+4. 检查台词、口型、动作、节奏、衔接和安全表达。通过人工分镜/试生成确认后，再将对应课程推进到 `video_ready` 并制作正式 demo。
+5. 上传到课程的示范区，或放到 `demo/04/<章>/<课>/demo.mp4`。本次没有生成或修改任何视频。
 
-```bash
-printf "file 'a.mp4'\nfile 'b.mp4'\n" > list.txt
-ffmpeg -f concat -safe 0 -i list.txt -c copy demo.mp4
+当前提示词是完整可复制的**制作草稿**；课程仍为 `language_reviewed`，不因补齐文件就自动获得 `video_ready`。不恢复旧版视频生产。
+
+## 固定角色
+
+每份提示只列当前课出现的两个角色，不把全部家庭成员塞进同一镜头。
+
+| 角色 | 固定视觉设定 |
+| --- | --- |
+| Child | 4 岁小老虎，橙底黑条纹、黄色 T 恤、幼儿身形 |
+| Dad | 温棕色狗狗、大垂耳、橄榄绿 T 恤 |
+| Mom | 粉色猪猪、珊瑚色开衫、奶油色内搭 |
+| Teacher | 奶油色兔子、直立耳朵、淡紫色开衫 |
+| Peer | 同龄棕色小熊、青绿色 T 恤、儿童声音与身形 |
+
+统一暖光、粉彩、精致家庭向 3D 卡通、16:9；以固定机位中景双人为主。车内等场景以安全、物理合理的构图优先。无旁白、字幕、额外台词或多余角色；剧情需要的物品标签可以保留。
+
+## 节奏与真实性
+
+- **10 秒是目标，不是强行挤台词的硬限制。** 各段先自然试读；需要时延至 12–15 秒，仍保持三段。不能删除台词、倍速念白或靠反复写“speak slowly”掩盖过量内容。
+- 当前 `09-outings-safety/02-find-it-in-a-shop/c.txt` 为 25 词，已明确标记节奏复核；其他段也需实际试读。
+- 2.2 两分钟计时、4.2 上厕所后回来、9.1 车程减少五分钟，都写明了时间省略，不能在几秒内伪装真实时间已过。
+- 爸爸听到 stop 立即停止；走失求助是妈妈在家陪同的平静演练；车内爸爸始终注意驾驶。保持身体需要、安全边界和真实因果优先。
+
+## 后续维护：不产生第二份台词源
+
+```text
+curriculum/04/<章>/<课>/lesson.json    唯一台词、角色、设定与版本来源
+prompts/04/<章>/<课>/production.json  只写镜头与动作，不复制台词
+                       ↓
+tools/build_video_prompts.py         生成 / 校验
+                       ↓
+prompts/04/<章>/<课>/{a,b,c}.txt       详情页直接读取的导出文件
 ```
 
-> 文件名对齐 `content/<章>/dialogues.md` 的 D1/D2/D3。例:`prompts/01-wants-requests/D1a.txt` + `D1b.txt` ↔ 关卡 `content/01-wants-requests/01-can-i-have/`(标题 "Can I have the apple one?"),拼成的 `demo.mp4` 放进 `demo/01-wants-requests/01-can-i-have/`。
+修改台词时编辑课程源并递增 `content_revision`；重新审查分镜后，同步 `production.json` 的版本。修改镜头只编辑 `production.json`。不要直接维护三份导出文件中的重复台词。
 
-## 角色设定(每份提示都自带,逐字一致,保证角色稳定)
+```bash
+python tools/build_video_prompts.py --stage 04 --check
+python tools/build_video_prompts.py --stage 04 --write
+python tools/validate_curriculum.py --stage 04 --complete
+```
 
-- **爸爸** = 卡通狗(温棕色、大垂耳、橄榄绿 T 恤)
-- **孩子** = 卡通小老虎(4 岁、橙底黑条纹、黄 T 恤、粗短 toddler 身形)
-- 风格统一:**Pixar 式 3D 卡通 / 暖光 / 粉彩 / 萌系家庭向**;镜头:**锁机中景双人、轻微漂移、16:9**。
+不带 `--write` 时只检查，不写文件。检查涵盖缺段、过期导出、源版本、说话角色和 A/B/C 起止状态；每份提示含源内容摘要，遗漏递增版本的内容修改也会让导出检查失败。检查不等于人工审美、时长或生成质量验收。
 
-## 节奏:两段式 + 慢速(本版核心)
+## 历史资料
 
-为治"一段式说太快",**每个对话默认拆成两段生成**;两段都自带 **慢速、句间带停顿** 的念白指令,并按各自台词句数给时长:
-
-| 单段台词句数 | 目标时长 |
-|---|---|
-| 3 句 | 约 10 秒 |
-| 4 句 | 约 12 秒 |
-| 5 句 | 约 14 秒 |
-
-- 拆法:按台词轮次从中点切,前半进 a、后半进 b(如 7 句 → a 3 句 + b 4 句;8 句 → 4+4;9 句 → 4+5)。
-- 关键指令(**两段都有**):`speak slowly and calmly, with natural little pauses between each line — never rushed` + 结尾 `Slow, unhurried dialogue delivery with small pauses`。
-> Sora 单条生成有时会卡在 10–12s 上限;真正控制语速的是上面那句"慢速 + 停顿"指令。若某段仍嫌快,把**该段**结尾秒数改大即可——两段各自调,互不影响。
-> 若某句 AI 英文发音不地道(娃在学英文),把该段静音、你自己读那两句配上即可。
-
-## 索引
-
-| 章 | 对话 | 标题 | 目标句式 |
-|---|---|---|---|
-| 01 wants-requests | D1 | 想要某样东西 | `Can I have ___?` / `I want ___` |
-| | D2 | 表达需要 | `I need ___` / `Can I ___?` |
-| | D3 | 想做某事 | `Can we ___?` / `I want to ___` |
-| 02 refusing-bargaining | D1 | 不想现在做 | `I don't want to ___` / `not yet` |
-| | D2 | 讲条件 | `What if ___?` / `just one more ___` |
-| | D3 | 婉拒 / 偏好 | `I'd rather ___` / `not now` |
-| 03 asking-help | D1 | 请帮忙 | `Can you help me ___?` / `I can't ___` |
-| | D2 | 卡住了 | `It's stuck` / `I can't reach ___` |
-| | D3 | 自己来 | `Let me try` / `I can do it ___` |
-| 04 where-locating | D1 | 找东西 | `Where's ___?` / `I can't find ___` |
-| | D2 | 忘了放哪 | `Where did I put ___?` / `Did you see ___?` |
-| | D3 | 位置确认 | `Is ___ in/on ___?` / `It's not ___` |
-| 05 why-how-come | D1 | 问规则原因 | `Why do I have to ___?` |
-| | D2 | 问原因 | `How come ___?` |
-| | D3 | 问方法 | `How do you ___?` / `Why does ___?` |
-| 06 feelings-preferences | D1 | 说情绪 | `I'm ___` / `because ___` |
-| | D2 | 表达不喜欢 | `I don't like ___` / `It's too ___` |
-| | D3 | 偏好选择 | `I'd rather ___` / `I like ___ better` |
-| 07 reasoning | D1 | 解释选择 | `because ___` / `so ___` |
-| | D2 | 解释原因 | `That's why ___` / `so ___` |
-| | D3 | 让步 | `even though ___, I still ___` |
-| 08 recounting-day | D1 | 复述去了哪 | `I went ___` / `It was ___` |
-| | D2 | 复述做了啥 | `We ___` / `and then ___` |
-| | D3 | 复述小意外 | `but then ___` / `I didn't ___` |
-| 09 reporting-others | D1 | 转述同伴 | `He said ___` |
-| | D2 | 转述指令 | `She told me to ___` |
-| | D3 | 转述家人 | `Mom said ___` + `but ___` |
-| 10 planning-predicting | D1 | 计划 | `We're going to ___` / `after ___` |
-| | D2 | 预测 | `It will ___` / `I think ___` |
-| | D3 | 安排顺序 | `First ___, then ___` / `as soon as ___` |
+根目录原来的 60 份 `D1a/D1b…` 提示词全部保留，只对应旧版 `content/`。旧说明见 [V1-REFERENCE.md](V1-REFERENCE.md)，不要用于新版关卡。

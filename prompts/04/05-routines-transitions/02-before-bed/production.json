@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "In a softly lit bedroom, Mom sits screen-left and Child sits screen-right against the bed pillows. The yellow T-shirt remains unchanged. Two thin picture books lie face-up on the bed between them: a blue book with a sleeping bear on its cover closest to Child and a cream book with a wide-awake bear closest to Mom. One warm bedside lamp provides steady light, with no switch action. Keep a locked 16:9 medium two-shot showing both faces, book covers and laps. The story begins after agreement; do not perform a whole reading session or lights-out inside the final clip.",
+  "parts": {
+    "A": {
+      "start": "Mom and Child sit on the bed; the blue sleepy-bear book and cream awake-bear book lie face-up between them; the bedside lamp is on.",
+      "action": "Mom states the bedtime limit with a warm expression. Child requests a bear story while looking at Mom. Neither book is selected yet and the lighting remains steady.",
+      "end": "Both bear books still lie face-up between Mom and Child; both characters have empty hands and the lamp remains on."
+    },
+    "B": {
+      "start": "Both bear books still lie face-up between Mom and Child; both characters have empty hands and the lamp remains on.",
+      "action": "Mom agrees to one short book and glances between the two covers. Child identifies the blue book and its visible sleepy-bear picture with one gentle pointing gesture. Mom waits for this identifying detail before picking a book.",
+      "end": "Child's hand has lowered beside the blue sleepy-bear book; both books remain on the bed and Mom looks at the blue cover; the lamp remains on."
+    },
+    "C": {
+      "start": "Child's hand has lowered beside the blue sleepy-bear book; both books remain on the bed and Mom looks at the blue cover; the lamp remains on.",
+      "action": "During Mom's response she lifts only the blue book onto the shared space between their laps and opens its first spread. Child settles closer without switching sides and says the readiness line. End with the story about to begin; keep the cream book on the bed and the lamp on because lights out follows the actual reading.",
+      "end": "Mom holds the blue book open between their laps; Child looks at its first spread; the cream book remains face-up on the bed and the lamp is still on."
+    }
+  }
+}

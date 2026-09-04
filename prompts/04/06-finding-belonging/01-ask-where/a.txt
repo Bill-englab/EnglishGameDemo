@@ -1,0 +1,36 @@
+Where Is My Puzzle Piece? — Part A (goal)
+Production prompt draft | Source: curriculum/04/06-finding-belonging/01-ask-where/lesson.json | Content revision: 1
+Source SHA256: d552c3b35111dc6f06a95dd99a4ee3f5563558b435b94dcae66ccb76a50f14c0
+The source/revision above are production metadata, not spoken words or on-screen text.
+
+VIDEO AND SOUND
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+
+FIXED CAST (only these two)
+Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt, gentle natural adult male voice.
+
+SETTING
+Finishing a puzzle at home.
+
+SCENE AND PROP CONTINUITY
+A quiet home puzzle corner. Dad kneels screen left and Child kneels screen right at a low table directly beside a sofa. One almost-complete puzzle lies within Child's reach. Its single loose red piece stays partly concealed beside the sofa's nearest front leg, within one arm's reach of the table; it does not move until Child retrieves it. A locked 16:9 medium two-shot includes faces, table, and this low search area.
+Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+
+START FRAME
+Dad and Child kneel beside the low puzzle table; the last puzzle space is empty and the red piece remains partly concealed beside the sofa's front leg.
+
+ACTION AND REACTIONS
+On Dad's question, he glances from the empty space to Child's empty hands. Child checks the table edge, opens both hands, then asks Dad about the missing piece. Show mild puzzlement, not a prolonged guessing game; neither character finds or touches the piece yet.
+
+SPOKEN DIALOGUE (verbatim, in order):
+Dad: "Your puzzle is waiting. Do you have the last piece?"
+Child: "No. Where's my red puzzle piece?"
+
+END FRAME
+Child's hands are empty above the table and both look toward the sofa; the red piece remains beside its front leg.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+
+PACING (16 spoken words)
+Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

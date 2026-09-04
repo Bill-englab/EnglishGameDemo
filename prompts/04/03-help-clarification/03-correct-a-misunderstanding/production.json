@@ -1,0 +1,21 @@
+{
+  "content_revision": 1,
+  "scene": "At a quiet kitchen table, Mom sits screen-left and Child screen-right. There are exactly two ready drinks near Mom: a cream-colored handled cup containing warm milk at table-left and a clear tumbler of cold water with slight condensation at table-center. No pouring tools or steam suggesting dangerous heat. Keep a locked 16:9 medium two-shot with both drinks and both faces visible. The mistaken choice is verbal plus a reach; correct it only after Child clarifies.",
+  "parts": {
+    "A": {
+      "start": "Both drinks rest near Mom, with milk at table-left and cold water at table-center; Mom and Child have empty hands.",
+      "action": "Mom indicates both ready drinks during the choice question. Child looks toward the clear water and then at Mom while requesting it. Neither drink moves.",
+      "end": "The milk remains at table-left and the cold water at center; Mom looks back at the drinks and Child waits with empty hands."
+    },
+    "B": {
+      "start": "The milk remains at table-left and the cold water at center; Mom looks back at the drinks and Child waits with empty hands.",
+      "action": "During Mom's mistaken repetition, she reaches toward the milk cup as if to pick it up. Child gives a small head shake and states the intended choice. Mom pauses with fingers beside the milk handle; do not bring milk to Child or correct the reach before the repair.",
+      "end": "Mom's hand rests beside the milk handle at table-left; the water tumbler remains untouched at center; Child watches Mom."
+    },
+    "C": {
+      "start": "Mom's hand rests beside the milk handle at table-left; the water tumbler remains untouched at center; Child watches Mom.",
+      "action": "On Mom's acknowledgment she withdraws from the milk and moves the water tumbler a short distance to Child. Child takes it with both hands and confirms the corrected choice. No drinking over dialogue; the untouched milk stays in view.",
+      "end": "Child holds the water tumbler; the milk cup remains untouched at table-left; Mom has empty hands and attends to Child."
+    }
+  }
+}

@@ -304,7 +304,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 ### 两层视图
 
 1. **地图视图**（`#map-view`）：10 个 `.chapter-world` section 自上而下。关卡节点按 `getLevelVisualState` 分三态：`completed`（demo 截图封面 + 金星，金星慢旋 + 闪烁 + 金色光晕呼吸）、`current`（demo 截图封面 + 双层橙色光晕呼吸 + 封面缩放呼吸 + 播放按钮）、`locked`（暗化 demo 截图 + 锁，有 demo 时带小播放标记）。每个状态都可点，点击打开详情。路径分两段：走过的路金色发光，未走的路白色。
-2. **详情视图**（`#detail-view`）：顶部为课程标题、Can-Do 与 Trigger；两个视频并排；下方依次呈现 A/B/C 对话、两张 Replay Card、Parent Support；底部 Prev/Next。VideoGen 支持 Part A/B/C。performance 未录时点 `+` 进入录制。
+2. **详情视图**（`#detail-view`）：约56px紧凑标题栏；桌面左视频栏（Your Show在上、Watch & Learn在下）、右侧完整A/B/C→完整Replay→折叠家长说明/VideoGen；底部Prev/Next。小于900px使用视频页签＋单列正文，只页面整体滚动。未录时点 **Start recording**，示范为空点 **Add demo**。Can-Do、Trigger和句式放在家长说明内，不挤标题。
 
 ### 关键实现细节（改时注意）
 
@@ -314,7 +314,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 - **录制** `startRecordingSession()`：`getUserMedia` 开摄像头+麦克风 → 镜像预览 → 一钮两态（红圆开始/方块停止）+ 闪红计时 + 5 分钟硬上限自动停 → `MediaRecorder` 产 webm → 现场回放 + Redo/Save。Save 时 `uploadRecording()` 把 blob + mimeType POST 到 `/upload`，后端按 mimeType 存 `.webm`/`.mp4`。`pickRecorderMime()` 探测浏览器支持的最佳格式（Chrome→webm，Safari→mp4），console 打印实际 mimeType。摄像头被拒/缺失时回退到文件上传。
 - **详情导航**：`openDetail` 底部渲染 Prev/Next（跨全宽），从 `flatLevels` 找相邻关卡。上传后 `reopenDetail` 重新打开当前关。
 - **demo 标记**：locked 关如果有 demo，节点加 `.level-node__demo-badge` 小播放标记。
-- **demo 上传**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。demo 视频区域的 `+` 空白封面点击即触发上传。
+- **demo 上传**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。使用 **Add demo / Replace**；取消选择不会触发刷新或显示成功。
 - **背景图刷新**：`closeDetail` 返回地图时强制重置 `activeChapter` 并调 `updateBgOnScroll(bgSlides)`，修了从详情页返回时背景图不显示的 bug（`#map-view` 被 `display:none` 期间 scroll listener 检测不到章节）。
 - **VideoGen**：`GET /api/prompts/<chapter>/<level>` 返回可选的 a/b/c 文本。Part A/B/C 是可折叠 `<details>`，summary 里有 Copy 按钮。
 - **可重试加载**：`loadLibrary()` 三态切换，`fetch("/api/library", { cache: "no-store" })`。
@@ -361,7 +361,7 @@ ffmpeg -f concat -safe 0 -i list.txt -c copy demo.mp4
 
 ### 使用流程（家庭一起，别自动化）
 
-看 demo → 线下练 → 详情页点 `+` 用 PC 摄像头录 → 回放确认 → Save → 关卡点亮 → 孩子点封面回看表演。也可手动放入 `recordings/<用户名>/04/<章>/<课>/` 再刷新。
+看 demo → 线下练 → 详情页点 **Start recording** 用摄像头录 → 回放确认 → Save → 关卡点亮 → 孩子点封面回看表演。也可手动放入 `recordings/<用户名>/04/<章>/<课>/` 再刷新。
 
 > 录像应是游戏自然高潮，不是小考。4 岁孩子一旦感到被测会躲避。
 

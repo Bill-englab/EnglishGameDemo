@@ -64,7 +64,7 @@ Photos stay on your server, are resized to 256×256, and have embedded metadata 
 ### Recording a Performance
 
 1. Open a level's detail page.
-2. In the **Your Turn** panel, click the `+` (or "Record again" if replacing).
+2. In the **Your Show** panel, click **Start recording** (or "Record again" if replacing).
 3. The browser asks for camera + microphone permission (grant once).
 4. A live camera preview appears (mirrored, so the child sees themselves).
 5. Click the red circle to start recording → it becomes a square, a red dot blinks, and a timer runs.
@@ -94,17 +94,19 @@ The winding path changes color as you progress: **traveled segments turn golden*
 
 ## The Detail Page
 
-Each level opens to a three-panel detail view:
+Each level opens with a compact title toolbar. Desktop places videos on the left and the complete reading flow on the right; narrower screens use video tabs above a single reading column. Only the page scrolls—dialogue, replay situations and prompts have no nested scrollbars.
 
-- **Watch & Learn** — the demo animation video (0.75× speed for clarity). Upload or replace directly by clicking the video area.
-- **Your Turn** — the child's performance video. Empty slots show a `+` placeholder; click to start the in-browser recorder. Hover the `?` next to "Your Turn" to see where the file is stored.
-- **Read Together** — the full causal dialogue, divided into Part A / B / C with the actual partner label (Dad, Mom, Teacher, or Friend).
+- **Your Show** — the child's performance video, prioritized above the demo. **Start recording** opens the camera; saved performances offer playback and Record again.
+- **Watch & Learn** — the demo animation with native playback controls at normal speed. Use **Add demo** or **Replace**; an absent demo occupies only a compact strip.
+- **Read Together** — the full causal dialogue, divided into Part A / B / C with the actual partner label (Dad, Mom, Teacher, or Peer).
 - **Replay Together** — two complete transfer situations showing the setting, what changes, and the speaking challenge.
-- **For the Grown-up** — brief support for prompting without turning the performance into a test.
+- **Grown-up Notes** — collapsed lesson intent, response patterns and support; a separate collapsed VideoGen entry keeps the three prompts easy to find.
 
 A **VideoGen** disclosure reveals Sora prompt text (Part A / B / C), each with a one-click **Copy** button. All 30 current lessons have complete draft prompts. Final staging, timing and audiovisual checks are still required before `video_ready` and formal video production.
 
 Prev / Next navigation spans the full width at the bottom, letting kids move between levels without returning to the map.
+
+Hidden mobile videos pause when switching tabs. Camera sessions remain visible across resizing, and leaving a lesson releases tracks, timers and preview URLs. This detail-only refresh does not implement the remaining map/menu redesign, countdown or speed controls; see [scope and verification](docs/plans/2026-09-04-detail-reading-redesign.md).
 
 ---
 

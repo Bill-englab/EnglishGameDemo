@@ -9,7 +9,7 @@
 
 当前主线设计：[`specs/2026-08-12-living-chapter-worlds-design.md`](specs/2026-08-12-living-chapter-worlds-design.md)（动态章节世界）。
 
-下一轮 UI 改造：[`specs/2026-09-04-immersive-ui-redesign.md`](specs/2026-09-04-immersive-ui-redesign.md)（已确认 B 沉浸冒险方向、无独立标题栏、课程目录与 Stage 展示规则；设计文档待书面复核，正式 UI 尚未实施）。
+UI 改造方向：[`specs/2026-09-04-immersive-ui-redesign.md`](specs/2026-09-04-immersive-ui-redesign.md)（B 沉浸冒险方向）。其中详情页已按用户选定的「② 左视频、右对话」实施：56px 紧凑顶部、完整阅读区、手机单列媒体页签；验收记录见 [`plans/2026-09-04-detail-reading-redesign.md`](plans/2026-09-04-detail-reading-redesign.md)。这不代表整套地图、目录与 Stage 改造已经完成。
 
 个人资料增补：[`specs/2026-09-04-personal-profile-design.md`](specs/2026-09-04-personal-profile-design.md)（头像＋昵称已实现；图片隐私、用户隔离与交互规范）。实施与验收见 [`plans/2026-09-04-personal-profile-implementation.md`](plans/2026-09-04-personal-profile-implementation.md)。不代表整套 B 界面已经落地。
 

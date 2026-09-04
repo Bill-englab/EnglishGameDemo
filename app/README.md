@@ -49,6 +49,12 @@ cd app
 
 上传后前端自动刷新 library，关卡状态实时更新。
 
+## 课程详情
+
+桌面采用紧凑单行标题栏、左视频/右对话；小于900px切换为视频页签＋单列阅读。**Your Show → Start recording** 进入摄像头，**Watch & Learn → Add demo** 添加示范。完整A/B/C、完整复练顺序展示，只让页面滚动。家长说明与 **VideoGen · A/B/C prompts** 默认折叠；[30课90份提示词](../prompts/04/README.md)均可复制。
+
+详情重排不改变地图、课程、进度或文件存储。返回地图/换课会释放摄像头和预览资源；没有新增未保存确认或录像历史。设计与验证见[实施记录](../docs/plans/2026-09-04-detail-reading-redesign.md)。
+
 ## 个人资料
 
 右上角账号菜单 → **My Profile**：选择照片、预览并保存，修改昵称，或恢复默认头像。取消不会保存草稿；登录用户名与录像路径不变。首次升级后旧会话需要重新登录一次。
@@ -90,6 +96,7 @@ app/
     profile-model.mjs # 昵称纯校验（与后端语义一致）
     profile.css     # 资料面板样式，不重排地图
     lesson-view.mjs # 纯：对话分段、Replay Card、章节上下文
+    detail-media.mjs # 纯：窄屏页签可见性，录制保持表演面板
     map-model.mjs   # 纯：10 章主题（world + accent）、视觉状态、旋转、帧暗检测
     map-path.mjs    # 纯：Catmull-Rom 平滑路径
     style.css       # 绘本风样式 + 自托管 @font-face

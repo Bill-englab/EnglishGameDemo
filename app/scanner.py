@@ -112,6 +112,7 @@ def scan_curriculum_library(
                     )
             levels.append(
                 {
+                    "stage": stage_id,
                     "chapter": chapter_id,
                     "level": lesson_id,
                     "title": lesson.get("title", lesson_id),

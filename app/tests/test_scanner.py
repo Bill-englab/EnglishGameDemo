@@ -93,6 +93,7 @@ def test_scan_curriculum_projects_stage_lessons_and_stage_media(tmp_path):
     assert chapters[0]["title"] == "01-First"
     assert chapters[0]["background_asset"] == "01-wants-requests"
     level = chapters[0]["levels"][0]
+    assert level["stage"] == "04"
     assert level["can_do"] == "清楚选择一个物品"
     assert level["trigger"] == "Mom offers two visible choices."
     assert level["patterns"] == [

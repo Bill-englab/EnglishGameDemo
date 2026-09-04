@@ -810,7 +810,7 @@ body {
 .dialogue { display: flex; flex-direction: column; gap: 5px; }
 .turn { display: flex; flex-direction: column; max-width: 85%; }
 .turn.child { align-self: flex-end; align-items: flex-end; }
-.turn.dad { align-self: flex-start; align-items: flex-start; }
+.turn.dad, .turn.partner { align-self: flex-start; align-items: flex-start; }
 .turn .who {
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 12px;
   color: var(--ink-3); margin: 0 4px 2px;
@@ -823,10 +823,24 @@ body {
 }
 .turn.child .bubble { background: var(--accent); color: #fff; border-color: transparent; }
 
-.variations {
-  padding: 0; color: var(--ink-2);
-  font-size: 15px; line-height: 1.6;
+.lesson-intent { margin-top: 8px; display: grid; gap: 4px; }
+.lesson-intent p { margin: 0; color: var(--ink-2); font-size: 13px; line-height: 1.35; }
+.lesson-intent strong { color: var(--ink); margin-right: 8px; }
+.lesson-intent span { display: inline; }
+.dialogue-part {
+  align-self: center; margin: 9px 0 3px; padding: 3px 10px;
+  border-radius: 999px; background: var(--surface-2); color: var(--ink-3);
+  font: 700 11px/1.3 "Nunito", sans-serif; letter-spacing: .03em;
+  text-transform: uppercase;
 }
+.replay-cards { display: grid; gap: 9px; }
+.replay-card { padding: 11px 12px; border-radius: 12px; background: var(--surface-2); }
+.replay-card h3 { margin: 0 0 6px; color: var(--ink); font: 700 15px/1.3 "Fredoka", sans-serif; }
+.replay-card p { margin: 3px 0; color: var(--ink-2); font-size: 13px; line-height: 1.4; }
+.replay-card strong { color: var(--ink); }
+.parent-support { margin-top: 12px; }
+.parent-support ul { margin: 0; padding-left: 20px; color: var(--ink-2); font-size: 13px; line-height: 1.45; }
+.parent-support li + li { margin-top: 4px; }
 
 /* Prompt blocks (inside VideoGen popup) — no overflow:hidden so content shows */
 .prompt-section { display: flex; flex-direction: column; gap: 8px; }

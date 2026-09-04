@@ -345,6 +345,18 @@ def test_map_shell_has_detail_prompts_element(client):
     assert 'id="detail-prompts"' in html
 
 
+def test_map_shell_has_stage_4_teaching_and_replay_regions(client):
+    html = client.get("/").get_data(as_text=True)
+
+    for element_id in (
+        "detail-can-do",
+        "detail-trigger",
+        "detail-replay-cards",
+        "detail-parent-support",
+    ):
+        assert f'id="{element_id}"' in html
+
+
 # ===== auth + multi-user isolation tests =====
 
 def test_index_requires_login(app_env):

@@ -5,6 +5,7 @@
 
 import { getChapterTheme, getLevelVisualState, getStableRotation, isFrameDark } from "./map-model.mjs";
 import { buildSmoothPath } from "./map-path.mjs";
+import { groupDialogueByPart, normalizeReplayCards, promptParts } from "./lesson-view.mjs";
 
 function prettyChapter(raw) {
   const s = raw.replace(/^\d+-/, "");
@@ -597,7 +598,7 @@ function buildBgLayer(library) {
 
   // Phase 2: probe each chapter's own image. Chapters that have one get it
   // directly. Chapters that don't will cycle through the ones that do.
-  const probePromises = library.map(ch => asyncProbeChapterImage(ch.name));
+  const probePromises = library.map(ch => asyncProbeChapterImage(ch.background_asset || ch.name));
   Promise.all(probePromises).then(urls => {
     const available = urls.filter(Boolean);  // URLs that loaded successfully
     if (available.length === 0) return;      // no images at all — keep placeholders
@@ -658,7 +659,11 @@ function renderMap(library) {
 
   // Keep the library for detail-view navigation (prev/next).
   currentLibrary = library;
-  flatLevels = library.flatMap(ch => ch.levels.map(lv => ({ ...lv, chapter: ch.name })));
+  flatLevels = library.flatMap(ch => ch.levels.map(lv => ({
+    ...lv,
+    chapter: ch.name,
+    chapterTitle: ch.title || prettyChapter(ch.name),
+  })));
 
   const total = library.reduce((n, ch) => n + ch.levels.length, 0);
   const done = library.reduce((n, ch) => n + ch.levels.filter(l => l.has_performance).length, 0);
@@ -682,7 +687,13 @@ function renderMap(library) {
 
     const heading = document.createElement("header");
     heading.className = "chapter-heading";
-    heading.innerHTML = `<span class="ch-no">Ch ${String(ci).padStart(2, "0")}</span><span class="ch-name">${prettyChapter(chapter.name)}</span>`;
+    const chapterNumberEl = document.createElement("span");
+    chapterNumberEl.className = "ch-no";
+    chapterNumberEl.textContent = `Ch ${String(ci).padStart(2, "0")}`;
+    const chapterNameEl = document.createElement("span");
+    chapterNameEl.className = "ch-name";
+    chapterNameEl.textContent = chapter.title || prettyChapter(chapter.name);
+    heading.append(chapterNumberEl, chapterNameEl);
     main.appendChild(heading);
 
     const levelsCol = document.createElement("div");
@@ -783,8 +794,10 @@ function openDetail(level) {
   mapScrollY = window.scrollY;
   const view = document.getElementById("detail-view");
 
-  document.getElementById("detail-chapter").textContent = prettyChapter(level.chapter);
+  document.getElementById("detail-chapter").textContent = level.chapterTitle || prettyChapter(level.chapter);
   document.getElementById("detail-title").textContent = level.title;
+  document.getElementById("detail-can-do").textContent = level.can_do || "";
+  document.getElementById("detail-trigger").textContent = level.trigger || "";
 
   const patterns = document.getElementById("detail-patterns");
   patterns.innerHTML = "";
@@ -855,7 +868,7 @@ function openDetail(level) {
   // --- "?" tooltip on "Your Turn" shows where the recording file lives ---
   const tooltipTrigger = document.querySelector(".rec-tooltip-trigger");
   if (tooltipTrigger) {
-    tooltipTrigger.title = `recordings/${level.chapter}/${level.level}/performance.mp4`;
+    tooltipTrigger.title = `recordings/<you>/${level.stage || "04"}/${level.chapter}/${level.level}/performance.mp4`;
   }
 
   // --- Performance video slot: recording if empty, playback if present ---
@@ -885,25 +898,65 @@ function openDetail(level) {
 
   const dialogueEl = document.getElementById("detail-dialogue");
   dialogueEl.innerHTML = "";
-  (level.dialogue || []).forEach(turn => {
-    const t = document.createElement("div");
-    t.className = "turn " + (turn.speaker === "Child" ? "child" : "dad");
-    t.innerHTML = `<div class="who">${turn.speaker}</div><div class="bubble"></div>`;
-    t.querySelector(".bubble").textContent = turn.line;
-    dialogueEl.appendChild(t);
+  const beatLabels = { goal: "Goal", change: "Something changes", resolve: "Resolve" };
+  groupDialogueByPart(level.dialogue || []).forEach(group => {
+    if (group.id) {
+      const divider = document.createElement("div");
+      divider.className = "dialogue-part";
+      divider.textContent = `Part ${group.id} · ${beatLabels[group.beat] || group.beat}`;
+      dialogueEl.appendChild(divider);
+    }
+    group.turns.forEach(turn => {
+      const t = document.createElement("div");
+      t.className = "turn " + (turn.speaker === "Child" ? "child" : "partner");
+      const who = document.createElement("div");
+      who.className = "who";
+      who.textContent = turn.speaker;
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.textContent = turn.line;
+      t.append(who, bubble);
+      dialogueEl.appendChild(t);
+    });
   });
   dialogueEl.style.display = (level.dialogue && level.dialogue.length) ? "" : "none";
 
-  document.getElementById("detail-variations").textContent = level.variations || "";
+  const replayWrap = document.getElementById("detail-replay-cards");
+  replayWrap.innerHTML = "";
+  normalizeReplayCards(level.replay_cards || []).forEach(card => {
+    const article = document.createElement("article");
+    article.className = "replay-card";
+    const title = document.createElement("h3");
+    title.textContent = card.title;
+    article.appendChild(title);
+    for (const [label, value] of [["Setting", card.setting], ["Change", card.change], ["Challenge", card.challenge]]) {
+      if (!value) continue;
+      const row = document.createElement("p");
+      const strong = document.createElement("strong");
+      strong.textContent = `${label}: `;
+      row.append(strong, document.createTextNode(value));
+      article.appendChild(row);
+    }
+    replayWrap.appendChild(article);
+  });
 
-  // Fetch and render Sora prompts (a + b) for this level.
+  const supportWrap = document.getElementById("detail-parent-support");
+  supportWrap.innerHTML = "";
+  (level.parent_support || []).forEach(tip => {
+    const item = document.createElement("li");
+    item.textContent = tip;
+    supportWrap.appendChild(item);
+  });
+
+  // Fetch and render optional Sora prompts (A/B/C) for this level.
   const promptWrap = document.getElementById("detail-prompts");
   promptWrap.innerHTML = `<div class="prompt-loading">Loading prompts…</div>`;
   fetch(`/api/prompts/${level.chapter}/${level.level}`)
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       promptWrap.innerHTML = "";
-      if (!data || (!data.a && !data.b)) {
+      const parts = data ? promptParts(data) : [];
+      if (parts.length === 0) {
         promptWrap.innerHTML = `<div class="prompt-empty">No prompts available</div>`;
         return;
       }
@@ -937,10 +990,10 @@ function openDetail(level) {
         wrap.append(summary, pre);
         return wrap;
       };
-      const a = makeBlock("Part A", data.a);
-      const b = makeBlock("Part B", data.b);
-      if (a) promptWrap.appendChild(a);
-      if (b) promptWrap.appendChild(b);
+      parts.forEach(part => {
+        const block = makeBlock(part.label, part.text);
+        if (block) promptWrap.appendChild(block);
+      });
     })
     .catch(() => { promptWrap.innerHTML = `<div class="prompt-empty">No prompts available</div>`; });
 

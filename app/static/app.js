@@ -862,6 +862,34 @@ function drawMapPath() {
 }
 
 // ===== level detail view =====
+// A demo upload owns only this panel. Reopening the whole lesson would discard
+// a camera session or unsaved playback started while that upload was pending.
+function renderDetailDemo(level) {
+  const demoWrap = document.getElementById("detail-demo");
+  demoWrap.querySelectorAll("video").forEach(video => {
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+  });
+  demoWrap.innerHTML = "";
+  const refreshDemo = () => {
+    const fresh = flatLevels.find(item => item.chapter === level.chapter && item.level === level.level);
+    if (fresh) renderDetailDemo(fresh);
+  };
+  if (level.has_demo) {
+    const video = document.createElement("video");
+    video.src = videoURL(level.chapter, level.level, "demo");
+    video.controls = true; video.preload = "metadata"; video.playsInline = true;
+    demoWrap.append(video, makeActionButton("Replace", level, "demo", refreshDemo));
+  } else {
+    const slot = document.createElement("div");
+    slot.className = "video-slot--empty video-slot--demo";
+    slot.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4Z"/></svg><p>No demo yet</p>`;
+    slot.appendChild(makeActionButton("Add demo", level, "demo", refreshDemo));
+    demoWrap.appendChild(slot);
+  }
+}
+
 function openDetail(level) {
   disposeDetailMedia();
   const visit = detailVisit;
@@ -886,27 +914,7 @@ function openDetail(level) {
   });
   patterns.style.display = (level.patterns && level.patterns.length) ? "" : "none";
 
-  // --- Demo video slot: playback or an explicit upload action ---
-  const demoWrap = document.getElementById("detail-demo");
-  demoWrap.innerHTML = "";
-  if (level.has_demo) {
-    const v = document.createElement("video");
-    v.src = videoURL(level.chapter, level.level, "demo");
-    v.controls = true; v.preload = "metadata"; v.playsInline = true;
-    v.addEventListener("loadedmetadata", () => { v.playbackRate = 1.0; });
-    demoWrap.appendChild(v);
-    // Subtle replace button below the video for dad.
-    demoWrap.appendChild(makeActionButton("Replace", level, "demo",
-      () => reopenDetail(level.chapter, level.level)));
-  } else {
-    // A named button is reachable by keyboard and survives picker cancellation.
-    const slot = document.createElement("div");
-    slot.className = "video-slot--empty video-slot--demo";
-    slot.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4Z"/></svg><p>No demo yet</p>`;
-    slot.appendChild(makeActionButton("Add demo", level, "demo",
-      () => reopenDetail(level.chapter, level.level)));
-    demoWrap.appendChild(slot);
-  }
+  renderDetailDemo(level);
 
   // Retain the existing status mount without duplicating the map's stars.
   const lit = level.has_performance;

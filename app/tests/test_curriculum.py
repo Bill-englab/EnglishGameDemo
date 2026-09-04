@@ -265,3 +265,30 @@ def test_chapter_1_builds_requests_through_recycled_moves():
     assert lessons[2]["recycle"] == ["request-item", "specify-choice"]
     assert all([part["id"] for part in lesson["parts"]] == ["A", "B", "C"] for lesson in lessons)
     assert validate_stage(load_stage(CURRICULUM_ROOT, "04")) == []
+
+
+def test_chapter_2_ends_each_negotiation_with_an_agreed_action():
+    chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][1]
+    lessons = chapter["lessons"]
+
+    assert chapter["id"] == "02-refusal-negotiation"
+    assert [lesson["id"] for lesson in lessons] == [
+        "01-not-ready-yet",
+        "02-ask-for-time",
+        "03-propose-an-order",
+    ]
+    assert [lesson["conversation_move"]["id"] for lesson in lessons] == [
+        "delay-boundary",
+        "request-time",
+        "propose-order",
+    ]
+    assert [lesson["roles"][1] for lesson in lessons] == ["dad", "mom", "dad"]
+    assert lessons[0]["recycle"] == ["specify-choice"]
+    assert lessons[1]["recycle"] == ["request-item"]
+    assert lessons[2]["recycle"] == ["change-choice"]
+    assert all(lesson["parts"][-1]["beat"] == "resolve" for lesson in lessons)
+    assert all(
+        any(turn["kind"] == "action" for turn in lesson["parts"][-1]["turns"])
+        for lesson in lessons
+    )
+    assert validate_stage(load_stage(CURRICULUM_ROOT, "04")) == []

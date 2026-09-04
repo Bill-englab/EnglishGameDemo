@@ -1,0 +1,48 @@
+{
+  "title": "One Roof to Finish",
+  "title_zh": "还差一个屋顶",
+  "can_do": "在不想立刻停止时说出感受，并具体说明还需要完成什么。",
+  "conversation_move": {"id": "delay-boundary", "label": "state a not-yet boundary"},
+  "trigger": "Dad announces cleanup while one visible part of the child's block house is unfinished.",
+  "core_response": "I don't want to stop yet.",
+  "stretch_response": "I don't want to stop yet. I need to finish the roof.",
+  "repair_response": "Just the roof, then I can stop.",
+  "recycle": ["specify-choice"],
+  "roles": ["child", "dad"],
+  "setting": "Playing with blocks at home.",
+  "essential_props": ["a nearly finished block house"],
+  "parts": [
+    {
+      "id": "A",
+      "beat": "goal",
+      "turns": [
+        {"speaker": "dad", "line": "Cleanup time. Please put the blocks in the box.", "kind": "input"},
+        {"speaker": "child", "line": "I don't want to stop yet.", "kind": "core"}
+      ]
+    },
+    {
+      "id": "B",
+      "beat": "change",
+      "turns": [
+        {"speaker": "dad", "line": "What do you still need to finish?", "kind": "input"},
+        {"speaker": "child", "line": "I need to add the roof to my house.", "kind": "stretch"}
+      ]
+    },
+    {
+      "id": "C",
+      "beat": "resolve",
+      "turns": [
+        {"speaker": "dad", "line": "Finish the roof, then the blocks go in the box.", "kind": "input"},
+        {"speaker": "child", "line": "Okay. The roof is on. I am ready to clean up.", "kind": "action"}
+      ]
+    }
+  ],
+  "replay_cards": [
+    {"title": "Finish the picture", "setting": "Drawing at the table", "change": "The last wheel still needs color", "challenge": "Mom calls for bath time; name the one visible part to finish, finish it, and go"},
+    {"title": "End the train game", "setting": "Playing on the floor", "change": "The train is one stop from the station", "challenge": "Dad calls for lunch; state the boundary, name the last stop, arrive, and put the train away"}
+  ],
+  "parent_support": ["Ask what remains instead of guessing.", "Agree only to a short, visible finish point and calmly keep the cleanup boundary."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "status": "language_reviewed",
+  "content_revision": 1
+}

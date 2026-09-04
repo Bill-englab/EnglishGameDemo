@@ -1,0 +1,48 @@
+{
+  "title": "Cars First",
+  "title_zh": "先收小汽车",
+  "can_do": "面对两个都要完成的任务时，提出一个可行顺序。",
+  "conversation_move": {"id": "propose-order", "label": "propose an order"},
+  "trigger": "Dad asks for the cars and blocks to be put away before they make pancakes together.",
+  "core_response": "What if we put away the cars first?",
+  "stretch_response": "What if we do the cars first, then the blocks?",
+  "repair_response": "I mean cars first, not pancakes first.",
+  "recycle": ["change-choice"],
+  "roles": ["child", "dad"],
+  "setting": "Cleaning the play area before a shared activity.",
+  "essential_props": ["toy cars and blocks"],
+  "parts": [
+    {
+      "id": "A",
+      "beat": "goal",
+      "turns": [
+        {"speaker": "dad", "line": "Please put the toys away before we make pancakes.", "kind": "input"},
+        {"speaker": "child", "line": "What if we put away the cars first?", "kind": "core"}
+      ]
+    },
+    {
+      "id": "B",
+      "beat": "change",
+      "turns": [
+        {"speaker": "dad", "line": "That can work. Then the blocks need a home too.", "kind": "input"},
+        {"speaker": "child", "line": "Cars first, then blocks, then pancakes?", "kind": "stretch"}
+      ]
+    },
+    {
+      "id": "C",
+      "beat": "resolve",
+      "turns": [
+        {"speaker": "dad", "line": "That order works. I will take the blocks.", "kind": "input"},
+        {"speaker": "child", "line": "I will take the cars. Let us start.", "kind": "action"}
+      ]
+    }
+  ],
+  "replay_cards": [
+    {"title": "Coats and shoes", "setting": "At the front door", "change": "Both coat and shoes are needed", "challenge": "Propose shoes first, then coat; Dad agrees and both steps are completed"},
+    {"title": "Books and animals", "setting": "Tidying the bedroom", "change": "Two groups belong in different places", "challenge": "Propose books first and stuffed animals second; Mom takes one group and the child takes the other"}
+  ],
+  "parent_support": ["Keep the real boundary: both jobs still happen before pancakes.", "Accept any safe order and join the action after agreeing."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "status": "language_reviewed",
+  "content_revision": 1
+}

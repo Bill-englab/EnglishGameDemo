@@ -2,6 +2,8 @@
 
 这里是「章 → 关」课程的**文案真相源**，入库跟踪。视频不在这里（见 `../demo/` 和 `../recordings/`）。
 
+> **课程设计规范：** 新增或重写关卡前，必须先阅读 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md)。当前 30 关是 v1 参考内容；4 岁阶段将按新的生活沟通大纲、三次练习结构和真实性准入标准整体重构。
+
 ## 结构
 
 ```

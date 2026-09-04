@@ -318,6 +318,8 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ## 8. 内容工作流（备课 vs 使用）
 
+> **课程设计约束（2026-09-04）：** 当前 30 关是 v1 参考内容。后续新增或重写关卡前，必须先读 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md)。新版以 4–6 岁长期成长、真实生活会话动作、螺旋复用、三次 Session 和真实性准入为准；不要继续照旧模板批量增加孤立句式。
+
 ### 备课流程（改内容时按这个走）
 
 1. **写对话源**：编辑 `content/<章>/dialogues.md`（D1/D2/D3，格式见 `content/01-wants-requests/dialogues.md`）。
@@ -427,7 +429,7 @@ refactor: split content, demo, and recordings into separate trees
 - **服务端视频处理**（上传/启动时 ffmpeg 压缩 >5MB 视频 + 生成缩略图，`/thumb` 路由替代 canvas 抽帧封面）：完成。
 - **详情页重设计**（卡片布局，design/memo.md + design/plans/ 的产出）：完成。
 - 字体自托管、三棵树分离、视频路由越界守卫：完成。
-- 下一组 demo：`05-why-how-come/03-how-do-you`（见 `demo/PROGRESS.md`）。
+- 旧版下一组 demo 原为 `05-why-how-come/03-how-do-you`；课程重构期间暂停排产，待新版 Lesson 达到 `video_ready` 后再恢复（见 `demo/PROGRESS.md`）。
 
 ---
 

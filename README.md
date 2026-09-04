@@ -4,7 +4,7 @@
   <a href="https://github.com/Bill-englab/EnglishGameDemo/releases/tag/v0.1.0"><img alt="version" src="https://img.shields.io/badge/version-v0.1.0-blue"></a>
   <img alt="license" src="https://img.shields.io/badge/license-MIT-green">
   <img alt="platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey">
-  <img alt="status" src="https://img.shields.io/badge/status-WIP%20(7%2F30%20demo)-orange">
+  <img alt="status" src="https://img.shields.io/badge/status-curriculum%20redesign-orange">
 </p>
 
 An interactive adventure map that turns parent-child English role-play into a visual journey. Every completed performance lights up a node on the map — not with a star, but with a frame from the demo animation.
@@ -22,6 +22,10 @@ This project makes role-play feel like a game:
 - **No teaching engine.** Learning happens offline, face-to-face. The website never grades or corrects.
 - **No star ratings.** A level is either done or not — there's a `performance.mp4`, or there isn't.
 - **The child's own performance is the reward.** A completed level shows a frame from the demo animation as its cover. The performance video is always one click away.
+
+### Curriculum design guide
+
+The curriculum is being rebuilt as a systematic 4–6-year-old life-English journey. New and revised lessons must follow the approved learner profile, age progression, three-session practice model, authenticity gate, and Stage 4 syllabus in the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md). The current scripts remain a v1 reference until the redesigned Stage 4 content is ready.
 
 ---
 
@@ -94,7 +98,7 @@ Prev / Next navigation spans the full width at the bottom, letting kids move bet
 
 ---
 
-## Curriculum
+## Current Curriculum (v1 reference)
 
 Thirty levels across ten language themes, progressing in difficulty:
 
@@ -111,7 +115,7 @@ Thirty levels across ten language themes, progressing in difficulty:
 | 9 | reporting-others | He said ___ / She told me ___ |
 | 10 | planning-predicting | We're going to ___ / First ___, then ___ |
 
-Every level includes a full dialogue (Dad + Child alternating), target patterns, and variation prompts for re-enactment. Demo animations are AI-generated (Sora) with fixed characters: Dad = cartoon dog, Child = cartoon tiger cub.
+Every current level includes a full dialogue, target patterns, and variation prompts for re-enactment. The redesigned curriculum expands the cast to a cartoon dog dad, pig mom, rabbit teacher, tiger child, and one recurring same-age friend; see the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md) for the intended structure.
 
 ---
 
@@ -120,8 +124,9 @@ Every level includes a full dialogue (Dad + Child alternating), target patterns,
 | Component | Status |
 | --- | --- |
 | Curriculum scripts | 30/30 ✅ |
+| Stage 4 curriculum redesign | Design under review |
 | Background illustrations | 8/10 |
-| Demo animations | 7/30 |
+| Legacy demo production record | 14/30 |
 | Sora prompts | 60/60 ✅ |
 | In-browser webcam recording | ✅ |
 

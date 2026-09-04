@@ -1,5 +1,7 @@
 # My English Adventure — 项目说明文档
 
+> **课程设计主线：** 4–6 岁长期课程及当前 4 岁阶段的指导规范见 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md)。当前 30 关是 v1 参考内容，后续新增和重写关卡必须遵循该文档的真实性、螺旋复用和三次练习要求。
+
 ## 这是什么
 
 一个给 4 岁孩子用的英语闯关地图网站。孩子和爸爸一起做英语 role-play，练熟一段对话后录下表演。把录像放进网站，地图上对应的关卡就亮起来。孩子可以反复点开回看自己的表演。

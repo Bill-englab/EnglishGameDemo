@@ -2,6 +2,8 @@
 
 快照（snapshot）：2026-08-30 ｜ demo 完成 **14 / 30** ｜ 段落 **28 / 60**
 
+> **课程重构提示（2026-09-04）：** 现有进度是 v1 内容的历史素材记录。新版 4 岁课程正在按 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md) 设计；对应 Lesson 达到 `video_ready` 前，建议暂停继续制作 demo，避免因台词和剧情重构而返工。
+
 ## 结构说明 · How it works
 
 - 每个对话需要生成一个 **demo 视频**，由 **两段**（对话前半 + 后半）拼成：
@@ -226,6 +228,6 @@
 
 ## 总计 · Total
 
-**demo 7 / 30**（段落 14 / 60，约 23%）
+**demo 14 / 30**（段落 28 / 60，约 47%）
 
-下一组（按顺序）：`03-asking-help/02-its-stuck` 的 demo —— 段 1 `D2a.txt` + 段 2 `D2b.txt`，生成后拼成 `02-its-stuck/demo.mp4`。
+旧版计划中的下一组是 `05-why-how-come/03-how-do-you`。课程重构期间暂不继续排产；新版 Lesson 通过内容审核并达到 `video_ready` 后再恢复。

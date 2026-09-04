@@ -9,8 +9,8 @@ The complete 4–6-year-old English role-play learning journey.
 _Avoid_: Course, syllabus, program when referring to the whole journey
 
 **Stage**:
-One age-oriented part of the Curriculum, currently planned for ages 4, 5, and 6.
-_Avoid_: Level, grade
+One developmental part of the Curriculum, presented as Stage 1, 2, or 3 with a communication focus; approximate ages 4, 5, and 6 guide content design rather than admission or automatic promotion.
+_Avoid_: Level, grade, proficiency score
 
 **Phase**:
 A developmental segment within one Stage that groups Chapters with a shared growth focus.

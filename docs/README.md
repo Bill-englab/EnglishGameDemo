@@ -9,4 +9,6 @@
 
 当前主线设计：[`specs/2026-08-12-living-chapter-worlds-design.md`](specs/2026-08-12-living-chapter-worlds-design.md)（动态章节世界）。
 
+下一轮 UI 改造：[`specs/2026-09-04-immersive-ui-redesign.md`](specs/2026-09-04-immersive-ui-redesign.md)（已确认 B 沉浸冒险方向、无独立标题栏、课程目录与 Stage 展示规则；设计文档待书面复核，正式 UI 尚未实施）。
+
 课程设计主线：[`specs/2026-09-04-curriculum-architecture-design.md`](specs/2026-09-04-curriculum-architecture-design.md)（4–6 岁成长框架、4 岁 30 课大纲、真实性与内容生产标准）。4 岁课程的逐课验收记录见 [`../curriculum/04/FINAL-REVIEW.md`](../curriculum/04/FINAL-REVIEW.md)，应用接入记录见 [`plans/2026-09-04-curriculum-runtime-migration.md`](plans/2026-09-04-curriculum-runtime-migration.md)。后续关卡设计必须遵循课程设计与最终审查文档。

@@ -1,6 +1,6 @@
 # My English Adventure — 项目说明文档
 
-> **课程设计主线：** 4–6 岁长期课程及当前 4 岁阶段的指导规范见 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md)。新版 4 岁 30 课已写入 [`curriculum/04`](curriculum/04) 并通过内容审查；网站暂时仍显示 `content/` 中的 v1 内容，等待运行时迁移。
+> **课程设计主线：** 4–6 岁长期课程及当前 4 岁阶段的指导规范见 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md)。新版 4 岁 30 课已写入 [`curriculum/04`](curriculum/04)、完成内容审查，并已由网站直接读取。
 
 ## 这是什么
 
@@ -52,9 +52,9 @@ cd app
 ### 详情页
 
 - 两个视频并排占顶部，等大显示。
-- 下方是完整对话（Dad + Child 聊天气泡）和变体提示。
+- 下方是按 A/B/C 展开的真实情境对话、两张 Replay Card，以及给家长的支持提示。
 - 底部有 Prev / Next 按钮，不用回地图就能切换关卡。
-- 右下角 VideoGen 面板显示生成 demo 用的 Sora 提示词（Part A / Part B），各带一个 Copy 按钮。
+- 右下角 VideoGen 面板显示可用的 Sora 提示词（Part A / B / C），各带一个 Copy 按钮；未制作时明确显示空状态。
 
 ### 课程内容
 
@@ -87,10 +87,10 @@ cd app
 | 项 | 进度 |
 | --- | --- |
 | 新版 4 岁课程 | 30/30，已完成语言与逻辑审查 ✅ |
-| 应用读取新版课程 | 待迁移 |
+| 应用读取新版课程 | 已完成 ✅ |
 | 背景插画 | 8/10 |
-| demo 动画 | 14/30 |
-| Sora 提示词 | 60/60 ✅ |
+| v1 demo 动画 | 14/30，已暂停 |
+| 新版 A/B/C 提示词 | 视频制作恢复时按课生成 |
 
 ## License
 

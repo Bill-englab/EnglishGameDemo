@@ -45,7 +45,7 @@ python -c "import secrets; print(secrets.token_hex(32))"
 
 把本地的视频文件传到对应目录：
 
-- `demo/01-wants-requests/01-can-i-have/demo.mp4` → 传到服务器的 `demo/01-wants-requests/01-can-i-have/demo.mp4`
+- `demo/04/01-choosing-requests/01-request-an-item/demo.mp4` → 传到服务器的相同路径
 - `recordings/` 下已有用户上传的，不用管
 
 **目录结构对照**：本地和服务器完全一致，直接拖文件夹就行。
@@ -71,7 +71,7 @@ cd EnglishGameDemo
 git pull
 ```
 
-**这不影响视频文件**——`demo/`、`recordings/`、`config.json`、`users.json` 都被 gitignore 排除，`git pull` 只更新代码和文案（`app/`、`curriculum/`、迁移期 `content/`/`prompts/` 等）。
+**这不影响视频文件**——`demo/`、`recordings/`、`config.json`、`users.json` 都被 gitignore 排除，`git pull` 只更新代码和文案（`app/`、`curriculum/`、归档 `content/`、`prompts/` 等）。
 
 ### 2. 如果有新的 demo 视频
 
@@ -99,8 +99,8 @@ git pull
 | --- | --- | --- | --- |
 | `app/` | ✅ 代码 | ❌ | Flask 应用代码 |
 | `curriculum/` | ✅ 文案 | ❌ | 新版分年龄课程唯一创作源 |
-| `content/` | ✅ 文案 | ❌ | 课程 meta.json + dialogues.md |
-| `prompts/` | ✅ 提示词 | ❌ | Sora prompt 文本 |
+| `content/` | ✅ 归档 | ❌ | v1 meta.json + dialogues.md，仅兼容参考 |
+| `prompts/` | ✅ 提示词 | ❌ | 新版 `04/.../{a,b,c}.txt` 与 v1 历史文本 |
 | `demo/` | 只更新 README | ✅ 视频 | demo 视频（手动传） |
 | `recordings/` | 只更新 README | ❌ | 用户自己上传，不用管 |
 | `app/config.json` | ❌ 不更新 | 手动创建 | 服务器专用配置 |

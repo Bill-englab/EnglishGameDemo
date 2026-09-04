@@ -41,8 +41,8 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 ├── app/                               # Flask 网站（后端 + 前端 + 测试）—— 代码核心
 │   ├── README.md                      # 如何运行/测试
 │   ├── package.json                   # "test" 脚本 + electron devDependency（桌面壳）
-│   ├── app.py                         # Flask 路由 + 三棵内容根 + 登录/用户管理 + 上传 + 服务端视频处理
-│   ├── scanner.py                     # 纯逻辑：扫 content/ + 算关卡三态（支持按用户隔离 performance）
+│   ├── app.py                         # Flask 路由 + Stage 课程/媒体根 + 登录/用户管理 + 上传 + 视频处理
+│   ├── scanner.py                     # 纯逻辑：投影 curriculum/ + 算三态；保留 v1 扫描兼容
 │   ├── requirements.txt               # flask>=3.0, pytest, imageio-ffmpeg
 │   ├── config.example.json            # 配置模板；config.json（真实密码/secret）本地生成不入库
 │   ├── users.json                     # 用户密码哈希（gitignored，运行时生成）
@@ -52,6 +52,7 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │   │   ├── titlebar.js                # Electron 环境注入自定义标题栏；浏览器里 no-op
 │   │   ├── map-model.mjs              # 纯：10 章主题(world+accent)、视觉状态、旋转、帧暗检测
 │   │   ├── map-path.mjs               # 纯：Catmull-Rom 平滑路径
+│   │   ├── lesson-view.mjs            # 纯：A/B/C 分段、Replay Cards、章节上下文
 │   │   ├── style.css                  # 绘本风样式（卡片布局+背景插画+节点+详情）+ 自托管 @font-face
 │   │   ├── fonts/                     # 自托管 woff2（Fredoka/Nunito，离线可用）
 │   │   └── worlds/                    # 每章背景插画（<章节名>.jpg|.png，竖版 9:16）
@@ -70,7 +71,7 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │       ├── FINAL-REVIEW.md            # 30 课最终内容审查
 │       └── <章>/<课>/lesson.json      # 对话、Replay Cards、review gates
 │
-├── content/                           # v1 运行时文案（迁移期保留）
+├── content/                           # v1 文案归档（仅历史对照和兼容测试）
 │   ├── README.md                      # 章/关/meta.json 约定
 │   └── 01-wants-requests/             # 章（10 个，零填充前缀）
 │       ├── dialogues.md               # 本章对话源（scaffold_levels.py 的输入）
@@ -81,15 +82,17 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 ├── demo/                              # AI 演示视频 —— gitignored，可再生
 │   ├── README.md                      # demo 生产流程
 │   ├── PROGRESS.md                    # demo 生产进度表（14/30，手维护）
-│   └── 01-wants-requests/01-can-i-have/demo.mp4 + thumb.jpg …
+│   ├── 04/<章>/<课>/demo.mp4 + thumb.jpg …  # 新版 Stage 媒体
+│   └── 01-wants-requests/…            # v1 历史视频，原样保留
 │
 ├── recordings/                        # 孩子表演录像 —— gitignored，珍贵不可再生
 │   ├── README.md                      # 「放文件即点亮」工作流 + 备份提醒
-│   └── <用户名>/<章>/<关>/performance.mp4 …   # 多用户模式按用户隔离；单用户模式无 <用户名> 层
+│   └── <用户名>/04/<章>/<课>/performance.mp4 …
 │
-├── prompts/                           # 每关的 Sora demo 提示词（两段式 a/b），入库
+├── prompts/                           # Sora demo 提示词，入库
 │   ├── README.md                      # 角色设定 + 节奏说明 + 索引
-│   └── 01-wants-requests/D1a.txt, D1b.txt …
+│   ├── 04/<章>/<课>/{a,b,c}.txt       # 新版约定（按需制作）
+│   └── 01-wants-requests/D1a.txt …    # v1 历史提示词
 │
 ├── tools/                             # 脚本
 │   ├── README.md
@@ -109,7 +112,7 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
     └── twodots-reference.jpeg         # Two Dots 风格参考图
 ```
 
-> **视频不入库**：所有 `demo/**/*.mp4`、`recordings/**/*.mp4`（及 webm/mov/avi）被 `.gitignore` 忽略（体积 + 隐私）；服务端生成的 `demo/**/thumb.jpg` 同样忽略（可由后端再生）。仓库跟踪 `curriculum/` 的新版结构化课程、迁移期 `content/` 文案和 `prompts/` 提示词。克隆后本地没有视频，地图上对应关卡显示空状态——这是预期的。
+> **视频不入库**：所有 `demo/**/*.mp4`、`recordings/**/*.mp4`（及 webm/mov/avi）被 `.gitignore` 忽略（体积 + 隐私）；服务端生成的 `demo/**/thumb.jpg` 同样忽略（可由后端再生）。仓库跟踪 `curriculum/` 的结构化课程；`content/` 和根级旧 prompts 仅作 v1 参考。克隆后本地没有新版视频，地图显示空状态——这是预期的。
 
 ---
 
@@ -152,7 +155,7 @@ cd app
 .venv/Scripts/python app.py          # 然后开 http://127.0.0.1:5000
 ```
 
-`app.run(debug=True, port=5000)`——改 Python 文件会自动重载。注意 Electron 用 `localhost` 而不是 `127.0.0.1`（secure context，摄像头需要），两者都指向同一服务。
+默认不开 debug；开发时可设置 `FLASK_DEBUG=1` 开启自动重载。Electron 用 `localhost` 而不是 `127.0.0.1`（secure context，摄像头需要），两者都指向同一服务。
 
 ### 登录与配置
 
@@ -160,11 +163,12 @@ cd app
 - 登录后右上角用户菜单可切换/登出；admin 有用户管理（`/admin` 页面 + `/api/admin/users`），普通用户密码哈希存 `app/users.json`（gitignored）。
 - 用户名即 `recordings/<用户名>/` 的路径成分：只允许字母数字、`-`、`_`（`_valid_username`），登录和建路径时双重校验。
 
-### 三棵内容根（环境变量，默认相对仓库根）
+### 课程与媒体根（环境变量，默认相对仓库根）
 
 | 变量 | 默认 | 作用 |
 | --- | --- | --- |
-| `CONTENT_ROOT` | `<repo>/content` | 课程文案（meta.json、dialogues.md） |
+| `CURRICULUM_ROOT` | `<repo>/curriculum` | 分年龄结构化课程 |
+| `CURRICULUM_STAGE` | `04` | 当前展示的 Stage |
 | `DEMO_ROOT` | `<repo>/demo` | AI 演示视频 |
 | `RECORDINGS_ROOT` | `<repo>/recordings` | 孩子表演录像 |
 | `PROMPTS_ROOT` | `<repo>/prompts` | Sora 提示词（VideoGen 面板用） |
@@ -193,7 +197,7 @@ cd app
 .venv/Scripts/python -m pytest tests/test_scanner.py -v   # 单文件
 ```
 
-测试用 `tmp_path` 临时目录构造假内容库（content + demo + recordings 三棵），`monkeypatch` 替换 `CONTENT_ROOT/DEMO_ROOT/RECORDINGS_ROOT`，不碰真实内容。
+测试用 `tmp_path` 临时目录构造 canonical curriculum、demo、recordings 和 prompts，`monkeypatch` 替换各根路径与 Stage，不碰真实内容。`scan_library` 的单测继续覆盖 v1 兼容层。
 
 ### JS 测试（前端纯模块逻辑）
 
@@ -223,11 +227,12 @@ node --test tests-js/map-path.test.mjs # 单文件
 
 ## 6. 后端架构
 
-### `app/app.py`（路由 + 三棵根 + 认证 + 视频处理）
+### `app/app.py`（路由 + Stage 课程/媒体根 + 认证 + 视频处理）
 
 ```python
 _PROJECT = Path(__file__).resolve().parent.parent
-CONTENT_ROOT    = Path(os.environ.get("CONTENT_ROOT",    _PROJECT / "content"))
+CURRICULUM_ROOT = Path(os.environ.get("CURRICULUM_ROOT", _PROJECT / "curriculum"))
+CURRICULUM_STAGE = os.environ.get("CURRICULUM_STAGE", "04")
 DEMO_ROOT       = Path(os.environ.get("DEMO_ROOT",       _PROJECT / "demo"))
 RECORDINGS_ROOT = Path(os.environ.get("RECORDINGS_ROOT", _PROJECT / "recordings"))
 PROMPTS_ROOT    = Path(os.environ.get("PROMPTS_ROOT",    _PROJECT / "prompts"))
@@ -241,11 +246,11 @@ PROMPTS_ROOT    = Path(os.environ.get("PROMPTS_ROOT",    _PROJECT / "prompts"))
 | `GET /api/me` | 当前用户名 + 是否 admin（前端用户菜单用） |
 | `GET/POST /admin`、`GET/POST /api/admin/users` | admin 用户管理（HTML 页 + JSON API，加/删用户） |
 | `GET /` | 渲染 `map.html`（需登录） |
-| `GET /api/library` | `annotate_states(scan_library(CONTENT_ROOT, DEMO_ROOT, RECORDINGS_ROOT, username=session["username"]))` → JSON。performance 按登录用户隔离 |
-| `GET /thumb/<chapter>/<level>` | 返回 `DEMO_ROOT/<ch>/<lv>/thumb.jpg`（服务端预生成），缺失 404 → 前端回退主题色。同一路径越界守卫 |
-| `GET /video/<chapter>/<level>/<kind>` | `kind=="demo"` 查 `DEMO_ROOT/<ch>/<lv>/demo.{mp4\|webm}`（共享，无需登录）；`kind=="performance"` 查 `RECORDINGS_ROOT/<用户名>/<ch>/<lv>/performance.{mp4\|webm}`（需登录）。按实际文件扩展名返回对应 mimetype（`video/mp4` 或 `video/webm`）。**路径越界守卫**：resolve 后 `is_relative_to(对应根)`，否则 404。非法 kind / 文件不存在也 404 |
-| `POST /upload/<chapter>/<level>/<kind>` | 接收视频文件，流式写盘到对应树（demo 共享 / performance 进用户自己的目录，同路径守卫）。`mimeType` form 字段决定存 `.mp4` 还是 `.webm`（浏览器录制传 `video/webm`，旧文件传 `video/mp4`）。重录换格式时自动删旧文件。存盘后：`_compress_video` 压缩（>5MB 时），demo 再 `_generate_thumb`。`MAX_CONTENT_LENGTH=500MB`。无文件→400，非法 kind/越界→404 |
-| `GET /api/prompts/<chapter>/<level>` | 返回该关的 Sora prompt a/b 文本（按关在章内的排序位置推导 D1/D2/D3，读 `PROMPTS_ROOT/<章>/D{N}a.txt` + `D{N}b.txt`） |
+| `GET /api/library` | `annotate_states(scan_curriculum_library(CURRICULUM_ROOT, CURRICULUM_STAGE, ...))` → JSON。performance 按登录用户隔离 |
+| `GET /thumb/<chapter>/<level>` | 返回 `DEMO_ROOT/<stage>/<ch>/<lv>/thumb.jpg`，缺失 404 → 前端回退主题色。同一路径越界守卫 |
+| `GET /video/<chapter>/<level>/<kind>` | demo 查 `DEMO_ROOT/<stage>/<ch>/<lv>/demo.{mp4\|webm}`；performance 查 `RECORDINGS_ROOT/<用户名>/<stage>/<ch>/<lv>/performance.{mp4\|webm}`。按实际扩展名返回 mimetype，并执行路径越界守卫 |
+| `POST /upload/<chapter>/<level>/<kind>` | 流式上传到上述 Stage 路径。`mimeType` 决定 `.mp4`/`.webm`；换格式重录会删旧文件；>5MB 自动压缩，demo 自动生成缩略图 |
+| `GET /api/prompts/<chapter>/<level>` | 校验 canonical Lesson 后读取 `PROMPTS_ROOT/<stage>/<章>/<课>/{a,b,c}.txt`；缺少某一段允许为空，未知 Lesson 返回 404 |
 
 URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落点）。
 
@@ -263,9 +268,10 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ### `app/scanner.py`（纯逻辑，无 Flask 依赖）
 
-两个函数，**纯逻辑、可单测**（`annotate_states` 就地修改并返回输入）：
+主要函数均为**纯逻辑、可单测**（`annotate_states` 就地修改并返回输入）：
 
-- **`scan_library(content_root, demo_root, recordings_root, username=None)`**：遍历 `content_root` 的章/关读 `meta.json`；`has_demo` 查 `demo_root/<ch>/<lv>/demo.{mp4|webm}`（`_has_video` helper 检查两种扩展名）；`has_performance` 查 `recordings_root/[<用户名>/]<ch>/<lv>/performance.{mp4|webm}`——**传 `username` 时 performance 走用户子目录（多用户隔离），不传时是旧的单用户布局**（测试/Electron 直跑场景）。`meta.json` 缺失/损坏 → 空 dict，title 回退为目录名。
+- **`scan_curriculum_library(...)`**：读取 `curriculum/<stage>/stage.json → chapter.json → lesson.json`，把 canonical Lesson 投影为地图需要的章/关 JSON，并检测 Stage 前缀下的 demo/performance。
+- **`scan_library(...)`**：只为 v1 兼容与回归测试保留，不再被 Flask 运行时调用。
 - **`annotate_states(chapters) -> list[dict]`**：扁平化后按全局顺序算状态：
 
   > **三态规则（三句话）**：关卡顺序 = 文件夹名前缀排序；关卡解锁 = 上一关存在 `performance` 视频；关卡点亮 = 当前关存在 `performance` 视频。
@@ -274,19 +280,16 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
   这是整个产品的核心规则，改它前想清楚含义。
 
-### `tools/scaffold_levels.py`（内容脚手架）
+### 内容校验与 v1 脚手架
 
-从 `content/<章>/dialogues.md`（课程唯一真相源）解析 D1/D2/D3，写 `meta.json` 到 `content/<章>/<关>/`。
-
-- **不会覆盖已激活的关**：检查 `demo/<章>/<关>/demo.mp4` 是否存在（视频已搬到 `demo/` 树），存在则跳过。
-- 在仓库根跑 `python tools/scaffold_levels.py`。
-- 可随时重跑；只给未激活的关（重新）写 `meta.json`。
+- `python tools/validate_curriculum.py --stage 04 --complete`：校验新版完整 Stage 的结构、字数、角色、复现与审查门。
+- `tools/scaffold_levels.py`：仅用于重建 v1 `content/` 归档；不是新版课程工作流的一部分。
 
 ---
 
 ## 7. 前端架构
 
-**无框架、无构建。** `map.html` 用 `<script type="module" src="/static/app.js">` 加载，app.js 再 import 三个 `.mjs` 模块。
+**无框架、无构建。** `map.html` 用 `<script type="module" src="/static/app.js">` 加载，app.js 再 import 纯 `.mjs` 模块。
 
 ### 模块职责
 
@@ -294,13 +297,14 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 | --- | --- | --- |
 | `map-model.mjs` | **纯数据/纯函数**：`CHAPTER_THEMES`（10 章：world + accent）、`getChapterTheme`、`getLevelVisualState`、`getStableRotation`、`isFrameDark` | 无 |
 | `map-path.mjs` | **纯函数**：`buildSmoothPath(points)`，绝不修改输入数组 | 无 |
-| `app.js` | **编排层**（唯一有 DOM 副作用的）：拉 `/api/library`、渲染背景插画地图、加载封面、画路径、开关详情+导航、**PC 摄像头录制**（`getUserMedia` + `MediaRecorder`）、demo/表演上传（File System Access API + IndexedDB 文件夹记忆） | 上面两个全依赖 |
+| `lesson-view.mjs` | **纯函数**：A/B/C 对话分组、Replay Card、prompt 分段、章节上下文 | 无 |
+| `app.js` | **编排层**（唯一有 DOM 副作用的）：拉 `/api/library`、渲染地图和课程详情、导航、摄像头录制、demo/表演上传 | 上面三个全依赖 |
 | `titlebar.js`（普通 script，非 module） | Electron 环境检测 + 注入自定义标题栏/窗口控制按钮（`window.electronAPI`）；浏览器里是 no-op | 无 |
 
 ### 两层视图
 
 1. **地图视图**（`#map-view`）：10 个 `.chapter-world` section 自上而下。关卡节点按 `getLevelVisualState` 分三态：`completed`（demo 截图封面 + 金星，金星慢旋 + 闪烁 + 金色光晕呼吸）、`current`（demo 截图封面 + 双层橙色光晕呼吸 + 封面缩放呼吸 + 播放按钮）、`locked`（暗化 demo 截图 + 锁，有 demo 时带小播放标记）。每个状态都可点，点击打开详情。路径分两段：走过的路金色发光，未走的路白色。
-2. **详情视图**（`#detail-view`）：三区域布局——顶部两个视频并排（Watch & Learn demo + Your Turn performance，16:9 等大），下方对话 + 变体并排，底部 Prev/Next 跨全宽。VideoGen 面板在右下角默认展开，内含 Part A/B 可折叠的 prompt 文本（带 Copy 按钮）。performance 未录时显示 `+` 空白封面，点击触发 PC 摄像头录制；"Your Turn"标签旁有 `?` 图标，悬停显示文件路径。
+2. **详情视图**（`#detail-view`）：顶部为课程标题、Can-Do 与 Trigger；两个视频并排；下方依次呈现 A/B/C 对话、两张 Replay Card、Parent Support；底部 Prev/Next。VideoGen 支持 Part A/B/C。performance 未录时点 `+` 进入录制。
 
 ### 关键实现细节（改时注意）
 
@@ -312,7 +316,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 - **demo 标记**：locked 关如果有 demo，节点加 `.level-node__demo-badge` 小播放标记。
 - **demo 上传**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。demo 视频区域的 `+` 空白封面点击即触发上传。
 - **背景图刷新**：`closeDetail` 返回地图时强制重置 `activeChapter` 并调 `updateBgOnScroll(bgSlides)`，修了从详情页返回时背景图不显示的 bug（`#map-view` 被 `display:none` 期间 scroll listener 检测不到章节）。
-- **VideoGen**：`GET /api/prompts/<chapter>/<level>` 返回 Sora prompt a/b 文本。Part A/B 是可折叠 `<details>`，summary 里有 Copy 按钮（`stopPropagation` 防止点 copy 触发折叠）。
+- **VideoGen**：`GET /api/prompts/<chapter>/<level>` 返回可选的 a/b/c 文本。Part A/B/C 是可折叠 `<details>`，summary 里有 Copy 按钮。
 - **可重试加载**：`loadLibrary()` 三态切换，`fetch("/api/library", { cache: "no-store" })`。
 - **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`。
 - **动效约束**：current 关发光呼吸；`prefers-reduced-motion: reduce` 关闭。
@@ -326,7 +330,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ## 8. 内容工作流（备课 vs 使用）
 
-> **课程设计约束（2026-09-04）：** `curriculum/` 是新版唯一创作源，当前 4 岁 30 课已经审查完成；`content/` 只是迁移期 v1 运行时源。新增或重写课程前，必须先读 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md) 和 [`curriculum/04/FINAL-REVIEW.md`](curriculum/04/FINAL-REVIEW.md)。不要继续按旧模板批量增加孤立句式。
+> **课程设计约束（2026-09-04）：** `curriculum/` 是唯一创作源和运行时来源；`content/` 是 v1 归档。新增或重写课程前，必须先读 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md) 和 [`curriculum/04/FINAL-REVIEW.md`](curriculum/04/FINAL-REVIEW.md)。不要继续按旧模板批量增加孤立句式。
 
 ### 新版课程创作流程
 
@@ -335,55 +339,54 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 3. 整个 Stage 发布前运行 `python tools/validate_curriculum.py --stage 04 --complete`。
 4. 只有 Lesson 达到 `video_ready` 才恢复对应 demo 的提示词与视频制作。内容修改时递增 `content_revision`，已生成视频应标记为过期。
 
-### v1 备课流程（仅迁移期维护）
+### 新版视频流程（按课恢复）
 
-1. **写对话源**：编辑 `content/<章>/dialogues.md`（D1/D2/D3，格式见 `content/01-wants-requests/dialogues.md`）。
-2. **生成 meta**：`python tools/scaffold_levels.py` → 写出各关 `meta.json`（`demo/` 里已有 `demo.mp4` 的关不动）。
-3. **做 demo 视频（手动 Sora 流程）**：拿 `prompts/<章>/D{N}a.txt` + `D{N}b.txt` 各粘进 Sora 生成两段 → ffmpeg 流拷贝拼成 `demo.mp4` 放进 `demo/<章>/<关>/`。也可以在详情页直接上传 demo 文件（后端自动压缩+生成缩略图）。
-4. **更新进度表**：改 `demo/PROGRESS.md` 的勾选状态 + 小计。
-5. demo 落盘后**无需手动做缩略图**：启动服务或上传时会自动生成 `thumb.jpg`（也可手动跑 `ffmpeg` 抽帧，见 §6）。
+1. Lesson 达到 `video_ready` 后，为 A/B/C 各写一份约 10 秒提示词到 `prompts/04/<章>/<课>/{a,b,c}.txt`。
+2. 分别生成三段并拼接为 `demo.mp4`，放到 `demo/04/<章>/<课>/`；也可从详情页上传。
+3. 更新新版进度记录；服务会自动压缩并生成 `thumb.jpg`。
 
 ### demo.mp4 拼接命令
 
 ```bash
-printf "file 'a.mp4'\nfile 'b.mp4'\n" > list.txt
+printf "file 'a.mp4'\nfile 'b.mp4'\nfile 'c.mp4'\n" > list.txt
 ffmpeg -f concat -safe 0 -i list.txt -c copy demo.mp4
 ```
 
 ### 角色设定（每份视频提示逐字一致）
 
 - 爸爸 = 卡通狗（温棕色、大垂耳、橄榄绿 T 恤）
+- 妈妈 = 卡通猪；老师 = 卡通兔子；同龄伙伴 = 固定儿童角色
 - 孩子 = 卡通小老虎（4 岁、橙底黑条纹、黄 T 恤）
 - 风格：Pixar 式 3D 卡通 / 暖光 / 粉彩 / 萌系家庭向；锁机中景双人、16:9。
 
-### 使用流程（父子一起，别自动化）
+### 使用流程（家庭一起，别自动化）
 
-看 demo → 线下练 → 详情页点 `+` 用 PC 摄像头录 → 回放确认 → Save → 关卡点亮 → 孩子点封面回看表演。也可手动拖文件进 `recordings/<章>/<关>/` 再刷新。
+看 demo → 线下练 → 详情页点 `+` 用 PC 摄像头录 → 回放确认 → Save → 关卡点亮 → 孩子点封面回看表演。也可手动放入 `recordings/<用户名>/04/<章>/<课>/` 再刷新。
 
 > 录像应是游戏自然高潮，不是小考。4 岁孩子一旦感到被测会躲避。
 
-### `meta.json` 结构
+### `lesson.json` 结构
 
-见 [`content/README.md`](content/README.md)。`speaker` 只认 `Dad`/`Child`。`title_zh` 仅备课参考，前端不显示（有意保留）。
+见 [`curriculum/README.md`](curriculum/README.md)。运行时角色支持 `Dad`、`Mom`、`Teacher`、`Peer` 与 `Child`；前端显示对应真实对话对象。
 
 ---
 
-## 9. 十个章节主题（别改顺序/别撞名）
+## 9. Stage 4 十个章节主题（别改顺序）
 
 | # | 文件夹 | world 名 | 主题 |
 | --- | --- | --- | --- |
-| 1 | `01-wants-requests` | morning-picnic | 想要 / 请求 |
-| 2 | `02-refusing-bargaining` | color-market | 拒绝 / 讲条件 |
-| 3 | `03-asking-help` | block-workshop | 请求帮忙 |
-| 4 | `04-where-locating` | finding-forest | 位置 / 找东西 |
-| 5 | `05-why-how-come` | question-observatory | 问原因 / 问方法 |
-| 6 | `06-feelings-preferences` | feeling-garden | 情绪 / 偏好 |
-| 7 | `07-reasoning` | reasoning-valley | 推理 / 解释 |
-| 8 | `08-recounting-day` | memory-town | 复述一天 |
-| 9 | `09-reporting-others` | messenger-post | 转述他人 |
-| 10 | `10-planning-predicting` | planning-camp | 计划 / 预测 |
+| 1 | `01-choosing-requests` | morning-picnic | 选择与请求 |
+| 2 | `02-refusal-negotiation` | color-market | 拒绝与协商 |
+| 3 | `03-help-clarification` | block-workshop | 求助与澄清 |
+| 4 | `04-body-needs` | finding-forest | 身体与需要 |
+| 5 | `05-routines-transitions` | question-observatory | 日常步骤与转换 |
+| 6 | `06-finding-belonging` | feeling-garden | 寻找与归属 |
+| 7 | `07-joining-cooperation` | reasoning-valley | 加入与合作 |
+| 8 | `08-feelings-repair` | memory-town | 感受、边界与修复 |
+| 9 | `09-outings-safety` | messenger-post | 外出、商店与安全 |
+| 10 | `10-recounting-planning` | planning-camp | 讲述与计划 |
 
-主题视觉定义在 `app/static/map-model.mjs` 的 `CHAPTER_THEMES`（每章只有 `world` 和 `accent`）。测试要求：10 个 world 名互不相同、每个 accent 是 hex 色。背景图 URL 从章节名派生（`/static/worlds/<章节名>.jpg`），不存进主题。**加新章或改 world 名会破测试。**
+主题视觉定义在 `app/static/map-model.mjs`；每个 `chapter.json` 的 `background_asset` 把 canonical 章映射到现有插画文件。测试要求 10 个 world 名互不相同、每个 accent 是 hex 色。
 
 ---
 
@@ -410,7 +413,7 @@ refactor: split content, demo, and recordings into separate trees
 - `app/config.json`、`app/users.json` —— **密码与密钥，绝不能入库**
 - `.claude/`、`.superpowers/`、`.zcode/`、`.env`、`.electron-tmp/`
 
-> 别 `git add` 任何 `.mp4`（被忽略）；也别把 `.claude/`、`.superpowers/`、`.zcode/`、`config.json`、`users.json` 纳入版本。文案（`meta.json`、`dialogues.md`、提示词、`PROGRESS.md`）才进库。
+> 别 `git add` 任何视频（被忽略）；也别把 `.claude/`、`.superpowers/`、`.zcode/`、`config.json`、`users.json` 纳入版本。新版文案以 `curriculum/**/*.json` 为准。
 
 ### 提交前检查清单
 
@@ -426,13 +429,14 @@ refactor: split content, demo, and recordings into separate trees
 ### 内容进度（截至 2026-09-04）
 
 - 新版 4 岁课程 `curriculum/04`：**30 / 30**，10 章全部完成语言与逻辑审查；详见 `FINAL-REVIEW.md`。
-- v1 运行时文案 `content/`：**30 / 30**，等待迁移替换。
+- 网站运行时：已直接读取 `curriculum/04`，显示 A/B/C、Replay Cards 与 Parent Support。
+- v1 `content/`：30 关归档，只作历史对照和兼容测试。
 - v1 Sora demo 提示词：**60 份**，不再继续生产。
 - AI 演示 `demo.mp4`：**14 / 30**（第 1–4 章全齐，第 5 章 2/3；见 `demo/PROGRESS.md`）。
 - 孩子表演 `performance.mp4`/`.webm`：admin 用户 2 / 30。
 - 背景插画：8 / 10 章（缺第 9、10 章，靠循环兜底）。
 
-**当前重点**：把网站运行时从 v1 `content/`/`prompts/` 迁到新版 `curriculum/04`。迁移前保持 demo 制作暂停，避免继续为过期台词生产视频。
+**当前重点**：在不急于恢复视频生产的前提下，继续做真实家庭试用记录；确认 Lesson 达到 `video_ready` 后，再逐课制作新版 A/B/C prompts 和 demo。
 
 ### 代码状态
 
@@ -445,6 +449,7 @@ refactor: split content, demo, and recordings into separate trees
 - **服务端视频处理**（上传/启动时 ffmpeg 压缩 >5MB 视频 + 生成缩略图，`/thumb` 路由替代 canvas 抽帧封面）：完成。
 - **详情页重设计**（卡片布局，design/memo.md + design/plans/ 的产出）：完成。
 - 字体自托管、三棵树分离、视频路由越界守卫：完成。
+- **Stage 4 运行时迁移**（canonical loader、Stage 媒体路径、A/B/C、Replay Cards、Parent Support）：完成。
 - 旧版下一组 demo 原为 `05-why-how-come/03-how-do-you`；课程重构期间暂停排产，待新版 Lesson 达到 `video_ready` 后再恢复（见 `demo/PROGRESS.md`）。
 
 ---
@@ -456,13 +461,13 @@ refactor: split content, demo, and recordings into separate trees
 | `node --test tests-js/` 失败 | 用 `npm test` 或 glob `node --test tests-js/*.test.mjs` |
 | 克隆后地图很多关卡空着 | 视频被 gitignore，本地没有是正常的；放回 `demo/`、`recordings/` 即恢复 |
 | 关卡顺序乱了 | 文件夹名没零填充前缀（`01-`、`02-`…），排序靠它 |
-| 关卡不解锁 | 上一关没有 `performance` 视频（`.mp4` 或 `.webm`，多用户在 `recordings/<用户名>/<章>/<关>/`）；放进去刷新 |
+| 关卡不解锁 | 上一关没有 `performance` 视频；新版路径是 `recordings/<用户名>/04/<章>/<课>/` |
 | 改了 `app.py` 不生效 | debug 模式应自动重载；没重载就重启 `app.py`（Electron 版要关窗重开，它会自己拉起 Flask） |
 | 封面显示不出来 | `/thumb/<章>/<关>` 404（缺 `thumb.jpg`）会回退主题色；重启服务触发 `_scan_and_optimize` 补生成，或检查 ffmpeg 是否可用 |
 | 从详情页返回背景图消失 | 已修复：`closeDetail` 强制重置 `activeChapter` 并刷新 `updateBgOnScroll` |
 | 录制后关卡没亮 | 检查 console 打印的 mimeType；确认 `/upload` 返回 `ext`；scanner 认 `.mp4`+`.webm` |
 | 改 `CHAPTER_THEMES` 后 JS 测试红 | 测试钉死了 10 个唯一 world + hex accent；同步改测试或符合约束 |
-| `scaffold_levels.py` 没更新某关 | 那关 `demo/<章>/<关>/demo.mp4` 已存在（被视作已激活，脚本故意跳过保护 meta） |
+| `scaffold_levels.py` 没更新新课 | 该脚本只服务 v1 归档；新版直接编辑 `curriculum/<stage>/.../lesson.json` 并运行 validator |
 | venv 失效 | `app/` 被重命名后 venv 绝对路径失效；删 `app/.venv` 重建（见 `app/README.md`） |
 | 登录进不去 | admin 密码在 `app/config.json`（没这文件时仅本地开发回退 `admin123`）；若显式配置无效，启动日志会直接指出错误。普通用户由 admin 在用户菜单里增删 |
 | Electron 窗口白屏 | Flask 没起来：看 `launch-debug.log` 和 Electron 控制台的 `[flask]` 输出；确认 `app/.venv` 存在 |
@@ -474,7 +479,7 @@ refactor: split content, demo, and recordings into separate trees
 - **先跑两套测试**（`npm test` + `pytest -q`）确认基线绿，再动手。
 - **纯逻辑放模块、副作用放 app.js**：`map-model`/`map-path` 是纯的、有测试的；新增纯逻辑优先进这些模块并配测试。
 - **改状态机（`annotate_states`）= 改产品规则**，三思，并更新 `test_scanner.py`。
-- **三棵树同名**：`content/<章>/<关>`、`demo/<章>/<关>`、`recordings/[<用户名>/]<章>/<关>` 的章关目录名必须一致。
+- **Stage 路径同名**：`curriculum/04/<章>/<课>`、`demo/04/<章>/<课>`、`recordings/<用户名>/04/<章>/<课>` 必须一致。
 - **别引入构建工具/打包器/数据库/第三方云服务**——设计上明确排除。（页面内上传是本地功能；自部署见 `DEPLOY.md`。）
 - **视频、密码文件（`config.json`/`users.json`）、`.claude`/`.superpowers`/`.zcode` 不入库**。
 - **产品语言**：文档可中英混排（README 中文为主），代码与 commit 用英文；面向孩子的 UI 文案要简单温暖。

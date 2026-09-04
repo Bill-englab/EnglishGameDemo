@@ -1,8 +1,8 @@
 # app/ — My English Adventure 网站
 
-本地 Flask 应用：把父子线下英语 role-play 录像排成「章 → 关」向上闯关地图。每章一幅整幅背景插画，路和关卡节点叠在上面。放一个 `performance.mp4` 到 `recordings/<章>/<关>/`（或通过页面内上传）即点亮该关、解锁下一关。
+本地 Flask 应用：把家庭与同伴英语 role-play 录像排成「阶段 → 章 → 课」向上闯关地图。每章一幅整幅背景插画，路和关卡节点叠在上面。通过页面录制，或放一个 `performance.mp4` 到 `recordings/<用户名>/<阶段>/<章>/<课>/`，即可点亮该课、解锁下一课。
 
-新版 4 岁 30 课已按 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md) 写入 `curriculum/04` 并通过审查。应用层下一步需要支持年龄阶段、三段 prompt、完整 Replay Card 和内容版本；当前代码仍读取 v1 的 `content/`「章 → 关」结构。
+新版 4 岁 30 课已按 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md) 写入 `curriculum/04` 并通过审查。应用直接读取该结构，支持年龄阶段、A/B/C 对话、完整 Replay Card、家长提示和内容版本；旧 `content/` 仅保留为 v1 参考。
 
 ## Setup（一次性）
 
@@ -68,10 +68,11 @@ npm test                                   # JS：前端纯模块（零依赖，
 ```
 app/
   app.py            # Flask 路由：/、/api/library、/video、/upload
-  scanner.py        # 纯逻辑：扫 content/ + 算关卡三态（locked/unlocked/completed）
+  scanner.py        # 纯逻辑：投影 curriculum/ + 算关卡三态（保留 v1 扫描兼容）
   templates/map.html
   static/
-    app.js          # 主逻辑：渲染地图、详情导航、上传 UI、封面抽取
+    app.js          # 主逻辑：渲染地图、A/B/C 详情、录制与上传 UI
+    lesson-view.mjs # 纯：对话分段、Replay Card、章节上下文
     map-model.mjs   # 纯：10 章主题（world + accent）、视觉状态、旋转、帧暗检测
     map-path.mjs    # 纯：Catmull-Rom 平滑路径
     style.css       # 绘本风样式 + 自托管 @font-face

@@ -2,10 +2,10 @@
 
 | 脚本 | 作用 |
 | --- | --- |
-| `scaffold_levels.py` | 从 `content/<章>/dialogues.md` 解析 D1/D2/D3，写出各关 `meta.json`。不覆盖已激活的关（`demo/` 里已有 `demo.mp4` 的关跳过）。 |
+| `scaffold_levels.py` | 仅用于重建 v1 `content/` 归档；不参与新版课程运行时。 |
 | `validate_curriculum.py` | 校验新版分年龄课程的结构、对话长度、角色比例、审查门槛和 Conversation Move 复现情况。 |
 
-## 用法
+## v1 归档脚手架
 
 ```bash
 python tools/scaffold_levels.py

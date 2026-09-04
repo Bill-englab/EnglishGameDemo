@@ -23,40 +23,40 @@
 
 **Files:** `app/scanner.py`, `app/tests/test_scanner.py`, 10 `curriculum/04/*/chapter.json` files.
 
-- [ ] Write a failing test for `scan_curriculum_library(curriculum_root, stage_id, demo_root, recordings_root, username=None)` using a real temporary Stage.
-- [ ] Assert stable order, chapter title/background asset, Can-Do, Trigger, Core/Stretch/Repair patterns, flattened titled speakers, Replay Cards, review metadata, and Stage-prefixed media detection.
-- [ ] Add `background_asset` to each Chapter (`01-wants-requests` through `10-planning-predicting`) so existing art remains usable after folder renaming.
-- [ ] Implement the adapter while retaining `scan_library` for v1 compatibility and its existing tests.
-- [ ] Run scanner and curriculum tests; commit.
+- [x] Write a failing test for `scan_curriculum_library(curriculum_root, stage_id, demo_root, recordings_root, username=None)` using a real temporary Stage.
+- [x] Assert stable order, chapter title/background asset, Can-Do, Trigger, Core/Stretch/Repair patterns, flattened titled speakers, Replay Cards, review metadata, and Stage-prefixed media detection.
+- [x] Add `background_asset` to each Chapter (`01-wants-requests` through `10-planning-predicting`) so existing art remains usable after folder renaming.
+- [x] Implement the adapter while retaining `scan_library` for v1 compatibility and its existing tests.
+- [x] Run scanner and curriculum tests; commit.
 
 ### Task 2: Switch Flask routes to the configured Stage
 
 **Files:** `app/app.py`, `app/tests/test_app.py`, `app/README.md`.
 
-- [ ] Add failing route tests with a canonical temporary curriculum and `CURRICULUM_STAGE=04`.
-- [ ] Add `CURRICULUM_ROOT` and `CURRICULUM_STAGE`; make `/api/library` call the new adapter.
-- [ ] Resolve demo, thumbnail, upload, and per-user recording paths beneath the implicit Stage directory while preserving traversal guards.
-- [ ] Read prompts from `prompts/<stage>/<chapter>/<lesson>/a.txt`, `b.txt`, and `c.txt`; return all three keys and 404 unknown Lessons.
-- [ ] Update route tests for Stage-prefixed files and run the full Python suite; commit.
+- [x] Add failing route tests with a canonical temporary curriculum and `CURRICULUM_STAGE=04`.
+- [x] Add `CURRICULUM_ROOT` and `CURRICULUM_STAGE`; make `/api/library` call the new adapter.
+- [x] Resolve demo, thumbnail, upload, and per-user recording paths beneath the implicit Stage directory while preserving traversal guards.
+- [x] Read prompts from `prompts/<stage>/<chapter>/<lesson>/a.txt`, `b.txt`, and `c.txt`; return all three keys and 404 unknown Lessons.
+- [x] Update route tests for Stage-prefixed files and run the full Python suite; commit.
 
 ### Task 3: Render the new lesson contract
 
 **Files:** `app/static/app.js`, `app/static/style.css`, `app/templates/map.html`, `app/tests/test_app.py`.
 
-- [ ] Add a failing HTML/static-contract test for Can-Do, Trigger, two Replay Card containers, Parent Support, and Part C prompt rendering.
-- [ ] Show the authored Chapter title rather than deriving it from the directory slug.
-- [ ] Render dialogue with A/B/C dividers and correct Dad/Mom/Teacher/Peer speaker labels.
-- [ ] Replace the v1 variation string with two compact Replay Cards showing setting, change, and challenge.
-- [ ] Show Can-Do, Trigger, and Parent Support as adult-facing detail text without adding scoring or correction.
-- [ ] Render optional prompt A/B/C blocks; when none exist, keep the existing empty state.
-- [ ] Run syntax check, JS tests, and Python HTML tests; commit.
+- [x] Add a failing HTML/static-contract test for Can-Do, Trigger, two Replay Card containers, Parent Support, and Part C prompt rendering.
+- [x] Show the authored Chapter title rather than deriving it from the directory slug.
+- [x] Render dialogue with A/B/C dividers and correct Dad/Mom/Teacher/Peer speaker labels.
+- [x] Replace the v1 variation string with two compact Replay Cards showing setting, change, and challenge.
+- [x] Show Can-Do, Trigger, and Parent Support as adult-facing detail text without adding scoring or correction.
+- [x] Render optional prompt A/B/C blocks; when none exist, keep the existing empty state.
+- [x] Run syntax check, JS tests, and Python HTML tests; commit.
 
 ### Task 4: Verify and document the migration
 
 **Files:** `README.md`, `PROJECT.md`, `AGENTS.md`, `content/README.md`, `demo/README.md`, `prompts/README.md`, this plan.
 
-- [ ] Start the app with isolated temporary media roots and verify login → map → first Lesson detail → next Lesson.
-- [ ] Check page identity, meaningful DOM, console errors/warnings, desktop screenshot, mobile screenshot, and one detail interaction through the Browser plugin.
-- [ ] Run `python tools/validate_curriculum.py --stage 04 --complete`, full pytest, and `npm test`.
-- [ ] Update documentation to say the runtime uses `curriculum/04`; keep v1 directories explicitly archived/reference-only.
-- [ ] Mark this plan complete and commit the verified migration.
+- [x] Start the app and verify login → map → first Lesson detail → next Lesson with empty Stage media roots.
+- [x] Check page identity, meaningful DOM, console errors/warnings, desktop screenshot, mobile screenshot, and detail interactions through the Browser plugin.
+- [x] Run `python tools/validate_curriculum.py --stage 04 --complete`, full pytest, and `npm test`.
+- [x] Update documentation to say the runtime uses `curriculum/04`; keep v1 directories explicitly archived/reference-only.
+- [x] Mark this plan complete and commit the verified migration.

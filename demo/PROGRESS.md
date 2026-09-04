@@ -2,7 +2,7 @@
 
 快照（snapshot）：2026-08-30 ｜ demo 完成 **14 / 30** ｜ 段落 **28 / 60**
 
-> **课程重构提示（2026-09-04）：** 现有进度是 v1 内容的历史素材记录。新版 4 岁课程正在按 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md) 设计；对应 Lesson 达到 `video_ready` 前，建议暂停继续制作 demo，避免因台词和剧情重构而返工。
+> **v1 历史记录（2026-09-04）：** 新版 4 岁课程已经完成并接入网站，现有 14/30 视频不与新版 Lesson 对齐。保留本表用于追溯，不再继续勾选；新版对应 Lesson 达到 `video_ready` 后另建 Stage 4 进度表。
 
 ## 结构说明 · How it works
 

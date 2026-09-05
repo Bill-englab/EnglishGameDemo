@@ -1,39 +1,40 @@
 {
   "title": "Bathroom Break",
   "title_zh": "我要去上厕所",
-  "can_do": "需要上厕所时，立即让成人暂停活动，并在离开时说明会回来或需要陪同。",
+  "can_do": "需要上厕所时，立即让成人暂停活动，并在回来后按自己的准备情况继续。",
   "conversation_move": {"id": "request-a-pause", "label": "request a pause for a body need"},
-  "trigger": "Dad suggests another round of the tabletop game, but Child needs the bathroom now.",
+  "trigger": "While Dad prepares another round of the tabletop game, Child notices he needs the bathroom and interrupts.",
   "core_response": "I need to use the bathroom.",
-  "stretch_response": "I'll come back when I'm done.",
+  "stretch_response": "I'll come back.",
   "repair_response": "Wait, I need to go now.",
   "recycle": ["delay-boundary", "request-time"],
   "roles": ["child", "dad"],
-  "setting": "A tabletop animal-card game at home, with a clear route out of the room.",
+  "setting": "A tabletop animal-card game at home, paused for a bathroom break and resumed only after a later return.",
   "essential_props": ["one animal-card game"],
   "parts": [
     {
       "id": "A", "beat": "goal",
       "turns": [
-        {"speaker": "dad", "line": "Ready for another round?", "kind": "input"},
         {"speaker": "child", "line": "I need to use the bathroom.", "kind": "core"},
-        {"speaker": "dad", "line": "Of course. We're stopping now.", "kind": "action"}
+        {"speaker": "dad", "line": "We're stopping now.", "kind": "action"},
+        {"speaker": "child", "line": "I'll come back.", "kind": "stretch"},
+        {"speaker": "dad", "line": "Okay. I'll keep everything here.", "kind": "action"}
       ]
     },
     {
       "id": "B", "beat": "change",
       "turns": [
-        {"speaker": "child", "line": "I'll come back when I'm done.", "kind": "stretch"},
-        {"speaker": "dad", "line": "Of course. Your turn can wait.", "kind": "input"},
-        {"speaker": "child", "line": "Can you come with me?", "kind": "stretch"}
+        {"speaker": "dad", "line": "Welcome back. Your card's still here.", "kind": "input"},
+        {"speaker": "child", "line": "Thanks for saving my turn.", "kind": "stretch"},
+        {"speaker": "dad", "line": "Ready to play again?", "kind": "input"}
       ]
     },
     {
       "id": "C", "beat": "resolve",
       "turns": [
-        {"speaker": "dad", "line": "I'm coming. The cards stay here.", "kind": "action"},
-        {"speaker": "child", "line": "Thank you for coming, Dad.", "kind": "action"},
-        {"speaker": "dad", "line": "We can finish our game later.", "kind": "input"}
+        {"speaker": "child", "line": "Yes. It's my turn now.", "kind": "stretch"},
+        {"speaker": "dad", "line": "Go ahead. Put your card here.", "kind": "input"},
+        {"speaker": "child", "line": "Here's my tiger card.", "kind": "action"}
       ]
     }
   ],
@@ -53,7 +54,8 @@
   ],
   "parent_support": [
     "Stop the game and make departure possible at the first bathroom signal, in any language or gesture. Never ask whether to pause or require more English before he can go.",
-    "Keep his cards untouched and reassure him while already helping him leave; his promise to return and request for company do not earn permission or care.",
+    "Keep his cards untouched and acknowledge his return promise while he is already leaving; the promise does not earn permission. Accompany him if he needs help without requiring another sentence.",
+    "Allow an ordinary bathroom break and handwashing off-screen. After he returns, ask whether he is ready; resume only if he wants to. Never rush the break to complete the scene.",
     "This is a calm pretend scene. If a real bathroom need arises, stop the role-play immediately and help him; do not finish or repeat the script."
   ],
   "reviews": {

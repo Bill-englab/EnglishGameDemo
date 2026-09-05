@@ -698,6 +698,30 @@ def test_chapter_4_stops_activity_on_the_first_bathroom_or_pain_signal(lesson_id
     assert "stopping now" in response["line"].lower()
 
 
+def test_chapter_4_bathroom_departure_finishes_in_a_before_a_later_return():
+    lesson_id = "02-request-a-pause"
+    lesson = next(item for item in load_stage(CURRICULUM_ROOT, "04")["chapters"][3]["lessons"]
+                  if item["id"] == lesson_id)
+    production_path = REPO_ROOT / "prompts/04/04-body-needs" / lesson_id / "production.json"
+    production = json.loads(production_path.read_text(encoding="utf-8"))
+
+    assert "Child has left the room" in production["parts"]["A"]["end"], (
+        "Finish departure in A; B/C must not stretch the walk across the same room."
+    )
+    opening = lesson["parts"][0]["turns"]
+    assert opening[-2]["speaker"] == "child" and "come back" in opening[-2]["line"]
+    assert opening[-1]["speaker"] == "dad", "Dad agrees while Child is already leaving."
+
+    return_action = production["parts"]["B"]["action"]
+    assert "time ellipsis" in return_action and "after the bathroom break" in return_action
+    assert "both seated" in production["parts"]["B"]["end"]
+    assert "both seated" in production["parts"]["C"]["start"]
+    assert lesson["parts"][2]["turns"][0]["speaker"] == "child"
+    assert lesson["parts"][2]["turns"][0]["line"].startswith("Yes."), (
+        "Only a ready Child resumes the saved game after returning."
+    )
+
+
 def test_chapters_4_to_10_follow_the_approved_stage_outline():
     stage = load_stage(CURRICULUM_ROOT, "04")
     expected = {

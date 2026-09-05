@@ -76,3 +76,12 @@ def test_course_drawer_has_connected_modal_controls_and_stable_window_mounts(cli
     assert any(parent["attrs"].get("id") == "detail-view" for parent in mounts[1]["parents"])
     # The modal must be outside the map that becomes inert while it is open.
     assert not any(parent["attrs"].get("id") == "map-view" for parent in drawer["parents"])
+
+
+def test_account_menu_has_a_name_independent_of_mobile_hidden_username(client):
+    page = Document(client.get("/").get_data(as_text=True))
+    trigger = page.by_id("user-menu-trigger")
+    assert trigger["tag"] == "button"
+    # Mobile hides the username; the decorative avatar cannot name the control.
+    assert page.by_id("user-avatar")["attrs"]["alt"] == ""
+    assert trigger["attrs"].get("aria-label") == "Open account menu"

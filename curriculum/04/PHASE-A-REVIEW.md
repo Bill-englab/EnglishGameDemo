@@ -1,5 +1,7 @@
 # Stage 1（curriculum/04）· Phase A 内容复审
 
+> **已被最终复核取代的阶段快照。** 本文保留 2026-09-05 Phase A 当时的版本、计数与迁移状态，不代表当前 Stage 状态；当前 revision、Q1–Q11、复现 Move 与 production 结果统一见 [Stage 1 完整复核](FINAL-REVIEW.md)。
+
 审查范围：第 1–3 章，共 9 课。复审日期：2026-09-05。本记录替代 2026-09-04 的 Phase A 旧版计数与剧情说明，采用[三段十秒重审设计](../../docs/specs/2026-09-05-stage-1-dialogue-expansion.md)。
 
 ## 总体结论

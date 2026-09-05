@@ -1,6 +1,6 @@
 Not Ready Yet — Part C (resolve)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/01-not-ready-yet/lesson.json | Content revision: 3
-Source SHA256: 9ed9d7ccae71b4b9b8fb4e43e4fbca2573326657fe0547dfb9c21af47c9dd5a7
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/01-not-ready-yet/lesson.json | Content revision: 4
+Source SHA256: 45e6d0181928b7db2df71b8436f75206a76a8067f5ce21877e3e36c60550201c
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
@@ -24,10 +24,10 @@ In a quiet home play area, Dad kneels screen-left and Child kneels screen-right 
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Child holds the single red roof piece beside the unfinished house; its three supporting blocks remain at center, the open empty box remains left, and Dad's hands are clear of the house.
+Child holds the single red roof piece in his right hand beside the unfinished house; its three supporting blocks remain at center, the open empty box remains left, and Dad's hands are clear of the house.
 
 ACTION AND REACTIONS
-During Dad's opening invitation Child places the roof steadily in the visible gap. Complete this placement before Child reports the roof finished. Both briefly look at the complete house while Dad asks about tidying. After Child agrees to help, he calmly lifts the roof into the nearby storage box during his final turn; Dad rests a hand beside a supporting block, ready to continue. This is a brief satisfied finish followed by real cleanup, not a forced demolition. Use only these two small roof movements; no full-house dismantling montage.
+During Dad's opening invitation Child places the roof steadily into the visible gap with his right hand. Complete this placement before Child reports the roof finished. Both briefly look at the complete house while Dad asks about tidying. After Child agrees to help, he calmly lifts the roof into the nearby storage box during his final turn; Dad rests a hand beside a supporting block, ready to continue. This is a brief satisfied finish followed by real cleanup, not a forced demolition. Use only these two small roof movements; no full-house dismantling montage.
 
 SPOKEN DIALOGUE (verbatim, in order):
 Dad: "Put it on here."

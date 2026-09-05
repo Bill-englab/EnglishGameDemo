@@ -1,6 +1,6 @@
 Two More Minutes — Part B (change)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 3
-Source SHA256: 15a0390bc56949be873c01688956945d68a28f0474ceed3184282f52ce471e8e
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 4
+Source SHA256: 032c9cddc14b07b1fa4bf162ec048615920aaa5d0d0ab050725151022c6b8bee
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
@@ -27,7 +27,7 @@ START FRAME
 Mom and Child face each other at the table; the sheet still shows a house with an empty upper-right corner; the yellow crayon remains beside the sheet and the doorway stays at frame-left.
 
 ACTION AND REACTIONS
-Child points to the empty corner while identifying the missing sun. Mom gives a calm two-minute maximum for only that task. After her agreement, Child picks up the yellow crayon and acknowledges the limit. During his final turn he draws one small, nearly closed circle in the empty corner, leaving a short gap. Keep the movement unhurried and the house drawing unchanged.
+Child points to the empty corner while identifying the missing sun. Mom gives a calm two-minute maximum for only that task. After her agreement, Child picks up the yellow crayon in his right hand and acknowledges the limit. During his final turn he draws one small, nearly closed circle in the empty corner, leaving a short gap. Keep the movement unhurried and the house drawing unchanged.
 
 SPOKEN DIALOGUE (verbatim, in order):
 Child: "My picture needs a sun."
@@ -35,7 +35,7 @@ Mom: "Two minutes, just the sun. Then we go."
 Child: "Okay. Just the sun."
 
 END FRAME
-Child holds the yellow crayon beside a nearly closed yellow circle in the sheet's upper-right corner; the circle has one short gap and no rays; the house is unchanged, Mom stands left and the doorway stays at frame-left.
+Child holds the yellow crayon in his right hand beside a nearly closed yellow circle in the sheet's upper-right corner; the circle has one short gap and no rays; the house is unchanged, Mom stands left and the doorway stays at frame-left.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
 PACING (17 spoken words)

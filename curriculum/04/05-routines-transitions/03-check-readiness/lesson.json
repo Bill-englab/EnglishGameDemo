@@ -7,7 +7,7 @@
   "core_response": "I'm ready, but I still need my water bottle.",
   "stretch_response": "Can you help me find my hat before we go?",
   "repair_response": "Wait, not yet. I still need my hat.",
-  "recycle": ["request-help", "state-body-need"],
+  "recycle": ["request-help"],
   "roles": ["child", "dad"],
   "setting": "Inside the front door before a car ride, with the bottle and bag both within easy reach.",
   "essential_props": ["one departure set: a capped water bottle and a small open carry bag"],
@@ -40,5 +40,5 @@
   ],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 3
+  "content_revision": 4
 }

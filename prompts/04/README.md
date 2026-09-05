@@ -2,7 +2,7 @@
 
 30 课、90 份 A/B/C 提示词已与 canonical Lesson 的 revision/SHA256 同步，全部使用 `three-by-ten-v2`。每段必须在约 10 秒内自然完成，不能延长到 12–15 秒；均为制作草稿，30 课状态保持 `language_reviewed`，没有课程因导出提示词而成为 `video_ready`。使用方法与编辑规则见 [上级说明](../README.md)。
 
-当前版本为 revision 2 共 25 课、revision 3 共 5 课（2.1–2.3、5.1、5.3）。历史 14 个 revision 1 / v1 demo 均为 stale，本索引不表示已有匹配视频。
+当前版本为 revision 2 共 23 课、revision 3 共 4 课（2.3、5.1、8.1、9.3）、revision 4 共 3 课（2.1、2.2、5.3）。历史 14 个 revision 1 / v1 demo 均为 stale，本索引不表示已有匹配视频。
 
 | 课 | 课程 | Part A | Part B | Part C | 分镜 |
 | --- | --- | --- | --- | --- | --- |

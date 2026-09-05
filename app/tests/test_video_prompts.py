@@ -123,6 +123,21 @@ def test_v2_renders_restrained_emotion_boy_cast_and_ten_second_limit(v2_source):
         assert dialogue == 'Mom: "Would you like some help?"\nChild: "Yes, please help me, Mom."\nMom: "Let us open it together."'
 
 
+def test_rejects_unknown_nonempty_dialogue_contract_before_rendering(v2_source):
+    lesson, production = v2_source
+    lesson["dialogue_contract"] = "three-by-ten-v3"
+    production["parts"]["A"]["action"] = "Child is raging throughout the scene."
+
+    with pytest.raises(ValueError, match="dialogue-contract"):
+        renderer().render_prompts(lesson, production, "lesson.json")
+
+
+def test_empty_dialogue_contract_keeps_legacy_compatibility(source):
+    source[0]["dialogue_contract"] = ""
+
+    assert renderer().render_prompts(*source, "lesson.json")
+
+
 @pytest.mark.parametrize("positive_direction", [
     "Child screams while reaching for the box.",
     "Child shows extreme excitement and jumps in place.",
@@ -152,6 +167,8 @@ def test_v2_renders_restrained_emotion_boy_cast_and_ten_second_limit(v2_source):
     "Do not stop screaming.",
     "Never avoid screaming.",
     "Child does not stop screaming.",
+    "No screaming is allowed, frantic gestures are encouraged.",
+    "Child is raging throughout the scene.",
     "Extend the clip so every action fits.",
     "Allow 12-15 seconds for the final action.",
 ])
@@ -170,6 +187,9 @@ def test_v2_rejects_unsafe_requested_positive_directions(v2_source, positive_dir
     "No exaggerated surprise, screaming is forbidden.",
     "No exaggerated surprise, screaming is not allowed.",
     "No exaggerated surprise, screaming does not occur.",
+    "No screaming, rage, frantic gestures, or distorted faces.",
+    "No screaming is allowed, frantic gestures are prohibited.",
+    "No screaming is allowed, frantic gestures are not allowed.",
 ])
 def test_v2_allows_negative_safety_prohibitions_and_never_extend(
     v2_source, negative_direction

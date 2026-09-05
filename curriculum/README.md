@@ -18,6 +18,6 @@ curriculum/<stage>/<chapter>/<lesson>/lesson.json
 
 增量创作允许章节不完整；正式制作视频前必须执行 `python tools/validate_curriculum.py --stage 04 --complete`，并把对应 Lesson 明确推进到 `video_ready`。2026-09-05 完整复核结果为 10 章、30 课、家庭角色 23/30（76.7%）、0 validation issue；这只批准 runtime 内容，不批准视频制作。
 
-迁移期间曾使用 `python tools/validate_curriculum.py --stage 04` 逐章检查；现在 30 课已经全部迁移，`--complete` 应当通过。内容修改仍必须同步递增 Lesson 与对应 `production.json` 的 `content_revision`、重新完成十项结构化审查与十一问人工复核，再由工具重建提示词。当前版本分布为 revision 2 共 25 课、revision 3 共 5 课；所有课程仍为 `language_reviewed`。
+迁移期间曾使用 `python tools/validate_curriculum.py --stage 04` 逐章检查；现在 30 课已经全部迁移，`--complete` 应当通过。内容修改仍必须同步递增 Lesson 与对应 `production.json` 的 `content_revision`、重新完成十项结构化审查与十一问人工复核，再由工具重建提示词。当前版本分布为 revision 2 共 23 课、revision 3 共 4 课、revision 4 共 3 课；所有课程仍为 `language_reviewed`。
 
 新版 [90 份三段提示词草稿](../prompts/04/README.md) 已齐并与 canonical revision/hash 同步；`production.json` 仅记录视觉分镜，台词由 `tools/build_video_prompts.py` 从这里直接导出。准备提示词不改变课程状态，正式视频仍需逐课验收。逐课和聚合数据、十一问结果与 production 末态见 [Stage 1 完整复核](04/FINAL-REVIEW.md)。

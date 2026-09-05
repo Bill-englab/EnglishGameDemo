@@ -1,6 +1,6 @@
 Two More Minutes — Part A (goal)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 3
-Source SHA256: 15a0390bc56949be873c01688956945d68a28f0474ceed3184282f52ce471e8e
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 4
+Source SHA256: 032c9cddc14b07b1fa4bf162ec048615920aaa5d0d0ab050725151022c6b8bee
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND

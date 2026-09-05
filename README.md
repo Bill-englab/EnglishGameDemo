@@ -142,7 +142,7 @@ Every Lesson includes one primary Conversation Move, a 9–11-turn causal dialog
 | Stage 1 reviewed curriculum (`curriculum/04`) | 30/30 `three-by-ten-v2` ✅ |
 | Runtime migration to new curriculum | Complete ✅ |
 | Background illustrations | 8/10 |
-| Legacy revision 1 / v1 demo record | 14/30, all stale against revision 2/3 (paused) |
+| Legacy revision 1 / v1 demo record | 14/30, all stale against revision 2–4 (paused) |
 | Stage 1 A/B/C prompt drafts | 90/90 synchronized; 0 lessons `video_ready` |
 | In-browser webcam recording | ✅ |
 

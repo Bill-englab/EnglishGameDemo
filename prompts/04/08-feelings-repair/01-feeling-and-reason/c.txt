@@ -1,6 +1,6 @@
 I Feel Frustrated — Part C (resolve)
-Production prompt draft | Source: curriculum/04/08-feelings-repair/01-feeling-and-reason/lesson.json | Content revision: 2
-Source SHA256: 1408d62344e13b24fd248fd5911016ba564e02e23744e31813b23b9bbf17ea85
+Production prompt draft | Source: curriculum/04/08-feelings-repair/01-feeling-and-reason/lesson.json | Content revision: 3
+Source SHA256: 25d82daab9c0360bc4494255c60c9c4407e16a063c29000e83718d3294f37da9
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND

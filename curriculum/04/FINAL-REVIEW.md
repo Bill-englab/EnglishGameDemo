@@ -1,6 +1,6 @@
 # Stage 1（`curriculum/04`）三段十秒完整内容审查
 
-审查范围：10 章、30 课、90 段 canonical 对话、30 份 `production.json` 与 90 份生成提示词。最终审查日期：2026-09-05。
+审查范围：10 章、30 课、90 段 canonical 对话、30 份 `production.json` 与 90 份生成提示词。最终审查日期：2026-09-06。
 
 ## 发布结论
 
@@ -13,9 +13,9 @@ Stage 1 已完成 `three-by-ten-v2` 迁移和逐课书面复核。`stage.json` �
 - 角色：Dad 11 课、Mom 12 课、Teacher 3 课、Peer 4 课；家庭成员 23/30（76.7%），高于 70% 门槛。
 - 迁移：每课 2 张完整 Replay Card，共 60 个新情境；每课正式新增一个 Move 并只复现此前 Move。
 - 审查：30/30 课的十个结构化 review gate 为 true；下方另逐课回答获批规格的 11 个书面内容问题。
-- 版本：25 课为 revision 2；Chapter 2 三课和 Chapter 5 的 5.1、5.3 为 revision 3。Lesson 与对应 production 版本逐课一致。
+- 版本：revision 2 共 23 课、revision 3 共 4 课（2.3、5.1、8.1、9.3）、revision 4 共 3 课（2.1、2.2、5.3）。Lesson 与对应 production 版本逐课一致。
 - 提示词：90/90 与 canonical 台词、revision 和 SHA256 同步；没有旧 `12-15 seconds`、正向 `extend the clip` 或 pacing advisory。
-- 媒体：历史 14/30 demo 均由 revision 1 / v1 内容制作，相对当前 revision 2/3 **全部 stale**；本轮没有删除、覆盖或重新编码任何 demo/performance。
+- 媒体：历史 14/30 demo 均由 revision 1 / v1 内容制作，相对当前 revision 2–4 **全部 stale**；本轮没有删除、覆盖或重新编码任何 demo/performance。
 
 ## 审查方法与判定口径
 
@@ -44,8 +44,8 @@ Stage 1 已完成 `three-by-ten-v2` 迁移和逐课书面复核。`stage.json` �
 | 1.1 | The Apple, Please | Mom / `request-item` | 14/3 | 18/3 | 16/4 | 48/10 | 22/4 | 2 |
 | 1.2 | The Dinosaur Shirt | Dad / `specify-choice` | 19/3 | 14/4 | 18/4 | 51/11 | 24/5 | 2 |
 | 1.3 | Water Instead | Mom / `change-choice` | 16/3 | 15/4 | 15/3 | 46/10 | 21/4 | 2 |
-| 2.1 | Not Ready Yet | Dad / `delay-boundary` | 17/3 | 16/3 | 17/4 | 50/10 | 24/5 | 3 |
-| 2.2 | Two More Minutes | Mom / `request-time` | 19/3 | 17/3 | 14/4 | 50/10 | 22/5 | 3 |
+| 2.1 | Not Ready Yet | Dad / `delay-boundary` | 17/3 | 16/3 | 17/4 | 50/10 | 24/5 | 4 |
+| 2.2 | Two More Minutes | Mom / `request-time` | 19/3 | 17/3 | 14/4 | 50/10 | 22/5 | 4 |
 | 2.3 | Blocks First | Dad / `propose-order` | 16/3 | 14/3 | 17/4 | 47/10 | 23/5 | 3 |
 | 3.1 | Help With the Track | Dad / `request-help` | 15/3 | 16/3 | 18/4 | 49/10 | 27/5 | 2 |
 | 3.2 | Show Me Again | Teacher / `signal-nonunderstanding` | 16/3 | 16/3 | 18/4 | 50/10 | 19/5 | 2 |
@@ -55,19 +55,19 @@ Stage 1 已完成 `three-by-ten-v2` 迁移和逐课书面复核。`stage.json` �
 | 4.3 | My Knee Hurts | Mom / `describe-discomfort` | 14/3 | 14/3 | 18/3 | 46/9 | 19/4 | 2 |
 | 5.1 | Shoes, Then Jacket | Dad / `sequence-actions` | 15/3 | 14/4 | 17/4 | 46/11 | 22/5 | 3 |
 | 5.2 | One Book Before Bed | Mom / `request-before-boundary` | 16/3 | 16/4 | 16/3 | 48/10 | 24/4 | 2 |
-| 5.3 | I Still Need My Bottle | Dad / `report-readiness` | 18/3 | 14/3 | 16/4 | 48/10 | 24/5 | 3 |
+| 5.3 | I Still Need My Bottle | Dad / `report-readiness` | 18/3 | 14/3 | 16/4 | 48/10 | 24/5 | 4 |
 | 6.1 | Where Is My Car? | Dad / `ask-location` | 15/3 | 17/3 | 19/4 | 51/10 | 24/5 | 2 |
 | 6.2 | Under the Bed? | Mom / `check-location` | 14/3 | 14/3 | 19/4 | 47/10 | 19/4 | 2 |
 | 6.3 | Mine Has a Dinosaur | Teacher / `identify-belonging` | 15/3 | 16/4 | 15/3 | 46/10 | 18/4 | 2 |
 | 7.1 | Can I Build Too? | Peer / `join-play` | 15/3 | 16/4 | 16/3 | 47/10 | 19/4 | 2 |
 | 7.2 | After Your Turn | Peer / `request-turn` | 17/3 | 17/4 | 15/3 | 49/10 | 20/4 | 2 |
 | 7.3 | Space Pirates | Peer / `suggest-shared-play` | 15/3 | 17/3 | 18/4 | 50/10 | 25/5 | 2 |
-| 8.1 | I Feel Frustrated | Mom / `explain-feeling` | 16/3 | 14/3 | 15/4 | 45/10 | 23/5 | 2 |
+| 8.1 | I Feel Frustrated | Mom / `explain-feeling` | 16/3 | 14/3 | 15/4 | 45/10 | 23/5 | 3 |
 | 8.2 | Please Stop | Dad / `set-stop-boundary` | 14/3 | 15/3 | 18/4 | 47/10 | 18/4 | 2 |
 | 8.3 | Let's Build It Again | Peer / `repair-relationship` | 16/3 | 15/3 | 19/4 | 50/10 | 24/5 | 2 |
 | 9.1 | How Much Longer? | Dad / `ask-duration` | 15/3 | 17/3 | 18/4 | 50/10 | 22/5 | 2 |
 | 9.2 | Where Is the Pasta? | Mom / `ask-shop-location` | 17/3 | 16/3 | 18/3 | 51/9 | 22/4 | 2 |
-| 9.3 | I Can't Find My Mom | Mom / `seek-safe-adult-help` | 17/3 | 14/3 | 17/3 | 48/9 | 19/4 | 2 |
+| 9.3 | I Can't Find My Mom | Mom / `seek-safe-adult-help` | 17/3 | 14/3 | 17/3 | 48/9 | 19/4 | 3 |
 | 10.1 | I Built a Tower | Teacher / `recount-one-event` | 18/3 | 13/3 | 17/3 | 48/9 | 20/4 | 2 |
 | 10.2 | First We Painted | Dad / `recount-two-events` | 15/4 | 18/3 | 18/3 | 51/10 | 19/4 | 2 |
 | 10.3 | Tomorrow's Plan | Mom / `contribute-to-plan` | 17/3 | 14/3 | 19/3 | 50/9 | 24/4 | 2 |
@@ -77,16 +77,22 @@ Stage 1 已完成 `three-by-ten-v2` 迁移和逐课书面复核。`stage.json` �
 | 章 | 全部词/turns | Child 词/turns | Partner 分布 | Revision 分布 |
 | --- | ---: | ---: | --- | --- |
 | 1 | 145/31 | 67/13 | Dad×1, Mom×2 | r2×3 |
-| 2 | 147/30 | 69/15 | Dad×2, Mom×1 | r3×3 |
+| 2 | 147/30 | 69/15 | Dad×2, Mom×1 | r3×1, r4×2 |
 | 3 | 148/30 | 70/14 | Dad×1, Mom×1, Teacher×1 | r2×3 |
 | 4 | 139/28 | 62/13 | Dad×1, Mom×2 | r2×3 |
-| 5 | 142/31 | 70/14 | Dad×2, Mom×1 | r2×1, r3×2 |
+| 5 | 142/31 | 70/14 | Dad×2, Mom×1 | r2×1, r3×1, r4×1 |
 | 6 | 144/30 | 61/13 | Dad×1, Mom×1, Teacher×1 | r2×3 |
 | 7 | 146/30 | 64/13 | Peer×3 | r2×3 |
-| 8 | 142/30 | 65/14 | Dad×1, Mom×1, Peer×1 | r2×3 |
-| 9 | 149/28 | 63/13 | Dad×1, Mom×2 | r2×3 |
+| 8 | 142/30 | 65/14 | Dad×1, Mom×1, Peer×1 | r2×2, r3×1 |
+| 9 | 149/28 | 63/13 | Dad×1, Mom×2 | r2×2, r3×1 |
 | 10 | 149/28 | 63/12 | Dad×1, Mom×1, Teacher×1 | r2×3 |
-| **总计** | **1451/296** | **654/134** | **家庭 23、Peer 4、Teacher 3** | **r2×25, r3×5** |
+| **总计** | **1451/296** | **654/134** | **家庭 23、Peer 4、Teacher 3** | **r2×23, r3×4, r4×3** |
+
+### 复现 Move 聚合与承接
+
+validator 重新计算后的非零复现次数为：`ask-location=3`、`change-choice=2`、`check-location=2`、`delay-boundary=2`、`identify-belonging=1`、`join-play=2`、`propose-order=3`、`recount-one-event=1`、`repair-meaning=1`、`report-readiness=2`、`request-a-pause=1`、`request-help=8`、`request-item=9`、`request-time=1`、`sequence-actions=3`、`specify-choice=9`、`state-body-need=1`。
+
+5.3 只保留实际出现的 `request-help`，不再把 readiness/bottle 场景写成 `state-body-need`；该 Move 在合适的 8.2 身体边界场景中承接。9.3 只保留实际出现的 `request-help`，不再把姓名或 worker badge 写成物品归属；`identify-belonging` 在 10.1 的 picture Replay 中由 `It's mine. It has a sun.` 自然承接。没有为覆盖计数把身体需要或归属语言硬塞进不相关的安全/出发场景。
 
 ## 30 课内容合同逐项结果
 
@@ -132,8 +138,8 @@ Stage 1 已完成 `three-by-ten-v2` 迁移和逐课书面复核。`stage.json` �
 | 1.1 | P×6 | 苹果/香蕉身份不变；Mom 右手纠错后交苹果，Child 双手持苹果结束。 |
 | 1.2 | P×6 | 始终只有两件红上衣；黄色 T-shirt 不换装，Child 最终双手持恐龙上衣。 |
 | 1.3 | P×6 | 杯子到 C 前一直空；只倒水，Child 最终持装水杯，牛奶未入杯。 |
-| 2.1 | P×6 | 单个红屋顶由 Child 持有、装上再放入收纳盒；其余三块留桌面。 |
-| 2.2 | P×6 | 黄蜡笔补完太阳后留桌面；二人平静出门，没有伪造两分钟流逝。 |
+| 2.1 | P×6 | 单个红屋顶由 Child 右手持有并装上，再放入收纳盒；其余三块留桌面。 |
+| 2.2 | P×6 | 黄蜡笔在 B-end/C-start 均由 Child 右手持有，补完太阳后留桌面；二人平静出门，没有伪造两分钟流逝。 |
 | 2.3 | P×6 | 两块积木先入左格，再由二人各收一辆车入右格，桌面清空。 |
 | 3.1 | P×6 | Child 右手推轨道、Dad 右手固定；随后同一列车交到 Child 右手并越过接缝。 |
 | 3.2 | P×6 | 无道具；Teacher 与 Child 各自只做一次 clap-then-tap，双手回到自己的膝盖。 |
@@ -163,7 +169,9 @@ Stage 1 已完成 `three-by-ten-v2` 迁移和逐课书面复核。`stage.json` �
 ## 本轮修正与验证边界
 
 - Chapter 2 的六个非逐字 response-tier 示例已对齐：三个 stretch 采用正式剧情中的真实扩展；三个 repair 放入带真实误解的新 Replay exchange。两个只有 `Okay...` 的接受语从 `repair` 改为 `confirmation`。因 canonical 元数据与 Replay 内容改变，三课连同 production、source hash 和提示词一起升至 revision 3；正式 A/B/C 台词未改。
-- 提示词导出器增加了一个窄范围安全门：v2 production 中把尖叫、极端兴奋、扭曲、失控动作、旧时长逃生语或无边界情绪词当作**正向导演要求**时拒绝导出。语义正确且使用明确否定写法的 `emotion.forbidden` 与其他安全禁令仍被允许，因此固定安全句和 `never ... extend the clip` 不会误报；若该字段误写成正向要求，同样拒绝。
+- 最终 Q4 复核把 8.1 的普通求助 `Can you help me find it?` 从 `repair` 改为 `stretch`；board-game Replay 现在先出现 Dad 对诉求的真实误解，再由 Child 说 `No, I mean you skipped my turn.` 明确修复。5.3 与 9.3 删除两项没有实际练习的 recycle 声明。三课随 canonical/production/hash 同步升版，正式 A/B/C 台词未改。
+- 提示词导出器增加了一个窄范围安全门：任何未知非空 `dialogue_contract` 都在 legacy/v2 分支前被拒绝，只有缺失或空值保留 v1 兼容。v2 production 中把尖叫、极端兴奋、扭曲、失控动作、旧时长逃生语或无边界情绪词当作**正向导演要求**时拒绝导出；`No screaming is allowed, frantic gestures are encouraged.` 与 `Child is raging throughout the scene.` 均不能绕过检查。语义正确的逗号并列禁令、明确 `No`/`do not`/`never` 约束与轻微有界情绪仍被允许。
+- Chapter 2 的 roof 与 crayon 在 B-end/C-start 明确保持 Child 右手持有；2.1、2.2 因 production 边界文字改变同步升至 revision 4。所有 90 份导出均已重建并复核 source revision/hash。
 - 9.1 是三段连续的车内谈话：五分钟只是估计，片内没有时间省略、过桥或抵达。2.2 明确“提前完成、无时间跳转”；4.2 与 5.2 才分别用显式省略表示真实如厕返回和完整读完一本书。
 
 ## 剩余制作风险

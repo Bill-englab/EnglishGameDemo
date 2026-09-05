@@ -1,4 +1,5 @@
 import copy
+from collections import Counter
 import json
 from pathlib import Path
 import sys
@@ -325,6 +326,30 @@ def test_stage_04_declares_the_completed_three_by_ten_contract_and_aggregate_bud
         for lesson in lessons
     )
     assert all(lesson["status"] == "language_reviewed" for lesson in lessons)
+    assert Counter(lesson["content_revision"] for lesson in lessons) == {
+        2: 23,
+        3: 4,
+        4: 3,
+    }
+
+
+def test_stage_04_recycle_metadata_claims_only_genuinely_practiced_moves():
+    stage = load_stage(CURRICULUM_ROOT, "04")
+    lessons = {
+        lesson["id"]: lesson
+        for chapter in stage["chapters"]
+        for lesson in chapter["lessons"]
+    }
+    recycled = Counter(
+        move_id
+        for lesson in lessons.values()
+        for move_id in lesson["recycle"]
+    )
+
+    assert lessons["03-check-readiness"]["recycle"] == ["request-help"]
+    assert lessons["03-safe-adult-help"]["recycle"] == ["request-help"]
+    assert recycled["state-body-need"] == 1
+    assert recycled["identify-belonging"] == 1
 
 
 def test_chapter_2_response_tiers_are_practiced_and_acknowledgements_are_not_repairs():
@@ -496,8 +521,8 @@ def test_chapter_2_ends_each_negotiation_with_an_agreed_action():
 
 
 @pytest.mark.parametrize("lesson_id, partner, move, revision", [
-    ("01-not-ready-yet", "dad", "delay-boundary", 3),
-    ("02-ask-for-time", "mom", "request-time", 3),
+    ("01-not-ready-yet", "dad", "delay-boundary", 4),
+    ("02-ask-for-time", "mom", "request-time", 4),
     ("03-propose-an-order", "dad", "propose-order", 3),
 ])
 def test_chapter_2_meets_three_by_ten_negotiation_contract(lesson_id, partner, move, revision):
@@ -558,6 +583,22 @@ def test_chapter_2_meets_three_by_ten_negotiation_contract(lesson_id, partner, m
         )
 
     assert all(checks.values()), [requirement for requirement, passed in checks.items() if not passed]
+
+
+@pytest.mark.parametrize(("lesson_id", "held_item"), [
+    ("01-not-ready-yet", "red roof piece"),
+    ("02-ask-for-time", "yellow crayon"),
+])
+def test_chapter_2_names_the_same_holding_hand_across_b_and_c(lesson_id, held_item):
+    production_path = (
+        REPO_ROOT / "prompts/04/02-refusal-negotiation" / lesson_id / "production.json"
+    )
+    production = json.loads(production_path.read_text(encoding="utf-8"))
+    boundary = production["parts"]["B"]["end"]
+
+    assert boundary == production["parts"]["C"]["start"]
+    assert held_item in boundary.lower()
+    assert "right hand" in boundary.lower()
 
 
 def test_chapter_3_makes_help_and_repairs_change_the_outcome():
@@ -782,7 +823,7 @@ def test_chapter_4_bathroom_departure_finishes_in_a_before_a_later_return():
 @pytest.mark.parametrize("lesson_id, partner, move, title, revision", [
     ("01-first-then", "dad", "sequence-actions", "Shoes, Then Jacket", 3),
     ("02-before-bed", "mom", "request-before-boundary", "One Book Before Bed", 2),
-    ("03-check-readiness", "dad", "report-readiness", "I Still Need My Bottle", 3),
+    ("03-check-readiness", "dad", "report-readiness", "I Still Need My Bottle", 4),
 ])
 def test_chapter_5_meets_three_by_ten_routine_contract(lesson_id, partner, move, title, revision):
     chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][4]
@@ -1181,12 +1222,14 @@ def test_chapter_7_space_pirates_keeps_both_ideas_and_agrees_on_roles():
     assert "map" in resolution[-1]["line"].lower()
 
 
-@pytest.mark.parametrize("lesson_id, partner, move, title", [
-    ("01-feeling-and-reason", "mom", "explain-feeling", "I Feel Frustrated"),
-    ("02-ask-to-stop", "dad", "set-stop-boundary", "Please Stop"),
-    ("03-apologize-and-repair", "peer", "repair-relationship", "Let's Build It Again"),
+@pytest.mark.parametrize("lesson_id, partner, move, title, revision", [
+    ("01-feeling-and-reason", "mom", "explain-feeling", "I Feel Frustrated", 3),
+    ("02-ask-to-stop", "dad", "set-stop-boundary", "Please Stop", 2),
+    ("03-apologize-and-repair", "peer", "repair-relationship", "Let's Build It Again", 2),
 ])
-def test_chapter_8_meets_three_by_ten_regulated_feelings_contract(lesson_id, partner, move, title):
+def test_chapter_8_meets_three_by_ten_regulated_feelings_contract(
+    lesson_id, partner, move, title, revision
+):
     chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][7]
     lesson = next(item for item in chapter["lessons"] if item["id"] == lesson_id)
     production_path = REPO_ROOT / "prompts/04" / chapter["id"] / lesson_id / "production.json"
@@ -1213,7 +1256,9 @@ def test_chapter_8_meets_three_by_ten_regulated_feelings_contract(lesson_id, par
         "two complete Replay Cards remain": len(lesson["replay_cards"]) == 2
         and all(all(card.get(field) for field in ("title", "setting", "change", "challenge"))
                 for card in lesson["replay_cards"]),
-        "lesson and production share revision 2": lesson["content_revision"] == production["content_revision"] == 2,
+        "lesson and production share the reviewed revision": (
+            lesson["content_revision"] == production["content_revision"] == revision
+        ),
         "the lesson remains language_reviewed": lesson["status"] == "language_reviewed",
         "all ten reviews passed": all(lesson["reviews"].get(review) is True for review in (
             "motivation", "causality", "physical", "adult_behavior", "child_language",
@@ -1242,7 +1287,9 @@ def test_chapter_8_meets_three_by_ten_regulated_feelings_contract(lesson_id, par
             turn["speaker"] == "child" for turn in part["turns"]
         )
         exported = production_path.with_name(f"{part['id'].lower()}.txt").read_text(encoding="utf-8")
-        checks[f"Part {part['id']} export matches revision 2"] = "Content revision: 2\n" in exported
+        checks[f"Part {part['id']} export matches the reviewed revision"] = (
+            f"Content revision: {revision}\n" in exported
+        )
         expected_speech = "\n".join(f'{turn["speaker"].title()}: "{turn["line"]}"' for turn in part["turns"])
         checks[f"Part {part['id']} export preserves canonical speech"] = (
             exported.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
@@ -1286,6 +1333,27 @@ def test_chapter_8_frustration_has_a_cause_help_search_and_better_feeling():
     assert any(turn["speaker"] == "child" and "feel better" in turn["line"].lower() for turn in resolution)
     assert resolution[-1]["speaker"] == "child" and "fits" in resolution[-1]["line"].lower()
     assert resolution[-1]["kind"] == "action"
+
+
+def test_chapter_8_help_is_a_stretch_and_replay_repair_corrects_a_misunderstanding():
+    lesson = load_stage(CURRICULUM_ROOT, "04")["chapters"][7]["lessons"][0]
+    card = next(
+        item for item in lesson["replay_cards"] if item["title"] == "The missed turn"
+    )
+    help_turn = next(
+        turn
+        for part in lesson["parts"]
+        for turn in part["turns"]
+        if turn["speaker"] == "child" and turn["line"] == "Can you help me find it?"
+    )
+    repair = "No, I mean you skipped my turn."
+
+    assert help_turn["kind"] == "stretch"
+    assert "mistakes" in card["change"].lower()
+    assert 'Dad asks, "Do you mean you want the next turn?"' in card["challenge"]
+    assert f'"{repair}"' in card["challenge"]
+    assert lesson["repair_response"] == repair
+    assert "moves his piece back" in card["challenge"].lower()
 
 
 def test_chapter_8_stop_is_immediate_before_choice_and_space_is_respected():
@@ -1336,12 +1404,14 @@ def test_chapter_8_apology_checks_on_peer_and_repairs_after_acceptance():
     assert "restored" in production["parts"]["C"]["end"].lower()
 
 
-@pytest.mark.parametrize("lesson_id, partner, move, title", [
-    ("01-how-much-longer", "dad", "ask-duration", "How Much Longer?"),
-    ("02-find-it-in-a-shop", "mom", "ask-shop-location", "Where Is the Pasta?"),
-    ("03-safe-adult-help", "mom", "seek-safe-adult-help", "I Can't Find My Mom"),
+@pytest.mark.parametrize("lesson_id, partner, move, title, revision", [
+    ("01-how-much-longer", "dad", "ask-duration", "How Much Longer?", 2),
+    ("02-find-it-in-a-shop", "mom", "ask-shop-location", "Where Is the Pasta?", 2),
+    ("03-safe-adult-help", "mom", "seek-safe-adult-help", "I Can't Find My Mom", 3),
 ])
-def test_chapter_9_meets_three_by_ten_calm_outings_contract(lesson_id, partner, move, title):
+def test_chapter_9_meets_three_by_ten_calm_outings_contract(
+    lesson_id, partner, move, title, revision
+):
     chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][8]
     lesson = next(item for item in chapter["lessons"] if item["id"] == lesson_id)
     production_path = REPO_ROOT / "prompts/04" / chapter["id"] / lesson_id / "production.json"
@@ -1371,7 +1441,9 @@ def test_chapter_9_meets_three_by_ten_calm_outings_contract(lesson_id, partner, 
         "two complete Replay Cards remain": len(lesson["replay_cards"]) == 2
         and all(all(card.get(field) for field in ("title", "setting", "change", "challenge"))
                 for card in lesson["replay_cards"]),
-        "lesson and production share revision 2": lesson["content_revision"] == production["content_revision"] == 2,
+        "lesson and production share the reviewed revision": (
+            lesson["content_revision"] == production["content_revision"] == revision
+        ),
         "the lesson remains language_reviewed": lesson["status"] == "language_reviewed",
         "all ten reviews passed": all(lesson["reviews"].get(review) is True for review in (
             "motivation", "causality", "physical", "adult_behavior", "child_language",
@@ -1397,7 +1469,9 @@ def test_chapter_9_meets_three_by_ten_calm_outings_contract(lesson_id, partner, 
             turn["speaker"] == "child" for turn in part["turns"]
         )
         exported = production_path.with_name(f"{part['id'].lower()}.txt").read_text(encoding="utf-8")
-        checks[f"Part {part['id']} export matches revision 2"] = "Content revision: 2\n" in exported
+        checks[f"Part {part['id']} export matches the reviewed revision"] = (
+            f"Content revision: {revision}\n" in exported
+        )
         expected_speech = "\n".join(f'{turn["speaker"].title()}: "{turn["line"]}"' for turn in part["turns"])
         checks[f"Part {part['id']} export preserves canonical speech"] = (
             exported.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]

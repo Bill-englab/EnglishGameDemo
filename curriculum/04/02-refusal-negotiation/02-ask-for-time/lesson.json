@@ -49,5 +49,5 @@
   "parent_support": ["Allow up to two minutes only when the schedule permits; agree on one small visible finish point.", "The child can finish early. Once the sun is done, acknowledge it and leave together without another task or a language test."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 3
+  "content_revision": 4
 }

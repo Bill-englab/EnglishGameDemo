@@ -34,8 +34,12 @@ _NEGATIVE_DIRECTION = re.compile(
     r"cannot|can't|rather\s+than|instead\s+of)\b",
     re.IGNORECASE,
 )
+_DIRECTION_TARGET_NOUN = (
+    r"(?:facial\s+or\s+body\s+shapes|faces?|shapes?|expressions?|features?|"
+    r"gestures?|movements?|running|motion|search(?:es)?)"
+)
 _NEGATIVE_DIRECTION_SUFFIX = re.compile(
-    r"^\s+(?:(?:is|are|was|were|stays?|remains?)\s+(?:strictly\s+)?"
+    rf"^\s+(?:{_DIRECTION_TARGET_NOUN}\s+)?(?:(?:is|are|was|were|stays?|remains?)\s+(?:strictly\s+)?"
     r"(?:forbidden|prohibited|not\s+allowed)|"
     r"(?:(?:do|does|did|is|are|was|were|has|have|had|will|would|can|could|"
     r"should|must|may|might)\s+)?(?:not|never)\b)",
@@ -65,10 +69,14 @@ _POSITIVE_CONTINUATION = re.compile(
     r"\b(?:not|never)\s+(?:stop|avoid)\s+$",
     re.IGNORECASE,
 )
+_COMPLETED_NO_PROHIBITION = re.compile(
+    r"\b(?:is|are|was|were)\s+allowed\s*$",
+    re.IGNORECASE,
+)
 _UNSAFE_DIRECTIONS = (
     re.compile(r"\bscream(?:s|ed|ing)?\b", re.IGNORECASE),
     re.compile(r"\bextreme(?:ly)?\s+excit(?:ement|ed)\b", re.IGNORECASE),
-    re.compile(r"\brage(?:s|d|ing)?\b", re.IGNORECASE),
+    re.compile(r"\brag(?:e(?:s|d)?|ing)\b", re.IGNORECASE),
     re.compile(r"\bdistort(?:s|ed|ing|ion|ions)?\b", re.IGNORECASE),
     re.compile(r"\bfrantic(?:ally)?\b", re.IGNORECASE),
     re.compile(r"\buncontrolled(?:\s+\w+){0,2}\s+(?:run|running|movement|motion)\b", re.IGNORECASE),
@@ -223,7 +231,13 @@ def _direction_context(text, match):
                 and not prefix[:negative.start()].strip()
                 and _PROHIBITED_LIST_LEAD.search(governed)
             )
-            if not has_unsafe_target and not is_leading_no_list:
+            completed_no_prohibition = (
+                negative.group(0).lower() == "no"
+                and _COMPLETED_NO_PROHIBITION.search(governed)
+            )
+            if completed_no_prohibition or (
+                not has_unsafe_target and not is_leading_no_list
+            ):
                 before = before[coordinator.end():]
     return before, text[match.end():clause_end]
 
@@ -271,7 +285,10 @@ def _reject_unsafe_positive_direction(text, name):
 
 def render_prompts(lesson, production, source):
     """Return a/b/c text, rejecting stale revisions and discontinuous staging."""
-    is_three_by_ten = lesson.get("dialogue_contract") == THREE_BY_TEN_CONTRACT
+    dialogue_contract = lesson.get("dialogue_contract")
+    if dialogue_contract not in (None, "", THREE_BY_TEN_CONTRACT):
+        raise ValueError(f"dialogue-contract: unsupported {dialogue_contract!r}")
+    is_three_by_ten = dialogue_contract == THREE_BY_TEN_CONTRACT
     revision = lesson.get("content_revision")
     production_revision = production.get("content_revision")
     if type(revision) is not int or revision < 1 or type(production_revision) is not int or production_revision != revision:

@@ -1,6 +1,6 @@
 Two More Minutes — Part C (resolve)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 3
-Source SHA256: 15a0390bc56949be873c01688956945d68a28f0474ceed3184282f52ce471e8e
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 4
+Source SHA256: 032c9cddc14b07b1fa4bf162ec048615920aaa5d0d0ab050725151022c6b8bee
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
@@ -24,10 +24,10 @@ At a low drawing table near the home doorway, Mom stands screen-left and Child s
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Child holds the yellow crayon beside a nearly closed yellow circle in the sheet's upper-right corner; the circle has one short gap and no rays; the house is unchanged, Mom stands left and the doorway stays at frame-left.
+Child holds the yellow crayon in his right hand beside a nearly closed yellow circle in the sheet's upper-right corner; the circle has one short gap and no rays; the house is unchanged, Mom stands left and the doorway stays at frame-left.
 
 ACTION AND REACTIONS
-In the first two seconds Child closes the short circle gap and adds three small rays. Only once the sun is visibly complete does Mom make her opening observation. Child puts the crayon beside the sheet while reporting readiness. Mom turns toward the nearby doorway on her invitation and Child follows on his final response; both take one or two calm steps through the doorway within the locked frame. They finish early, so there is no timer or claim that two minutes passed. Keep the fourteen spoken words fluid to leave room for the drawing finish and departure.
+In the first two seconds Child uses his right hand to close the short circle gap and add three small rays. Only once the sun is visibly complete does Mom make her opening observation. Child puts the crayon beside the sheet while reporting readiness. Mom turns toward the nearby doorway on her invitation and Child follows on his final response; both take one or two calm steps through the doorway within the locked frame. They finish early, so there is no timer or claim that two minutes passed. Keep the fourteen spoken words fluid to leave room for the drawing finish and departure.
 
 SPOKEN DIALOGUE (verbatim, in order):
 Mom: "The sun looks finished."

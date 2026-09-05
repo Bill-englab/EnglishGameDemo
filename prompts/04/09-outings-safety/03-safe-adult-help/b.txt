@@ -1,6 +1,6 @@
 I Can't Find My Mom — Part B (change)
-Production prompt draft | Source: curriculum/04/09-outings-safety/03-safe-adult-help/lesson.json | Content revision: 2
-Source SHA256: 9e65065144d3bc0cf430a99ab4c05513cddf9fcaea516569e9e54cafb0f37373
+Production prompt draft | Source: curriculum/04/09-outings-safety/03-safe-adult-help/lesson.json | Content revision: 3
+Source SHA256: f20f87f7b801c9b2ca34de2a2436ed51bbdb8d266683560b08b63c3f9e695401
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND

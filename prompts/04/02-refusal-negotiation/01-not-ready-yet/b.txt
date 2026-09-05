@@ -1,6 +1,6 @@
 Not Ready Yet — Part B (change)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/01-not-ready-yet/lesson.json | Content revision: 3
-Source SHA256: 9ed9d7ccae71b4b9b8fb4e43e4fbca2573326657fe0547dfb9c21af47c9dd5a7
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/01-not-ready-yet/lesson.json | Content revision: 4
+Source SHA256: 45e6d0181928b7db2df71b8436f75206a76a8067f5ce21877e3e36c60550201c
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
@@ -27,7 +27,7 @@ START FRAME
 The house still lacks its roof; the loose roof remains to its right and the box to its left; Child's hands rest beside the house and Dad listens.
 
 ACTION AND REACTIONS
-Child points once to the loose red roof piece while naming the unfinished roof. Dad indicates that same piece when allowing one final placement and gestures toward the box for the cleanup boundary. Child acknowledges the one-piece agreement and lifts only the red roof piece, holding it low beside the house. Do not place it yet.
+Child points once to the loose red roof piece while naming the unfinished roof. Dad indicates that same piece when allowing one final placement and gestures toward the box for the cleanup boundary. Child acknowledges the one-piece agreement and lifts only the red roof piece with his right hand, holding it low beside the house. Do not place it yet.
 
 SPOKEN DIALOGUE (verbatim, in order):
 Child: "The roof. That red piece."
@@ -35,7 +35,7 @@ Dad: "One last piece, then we clean up."
 Child: "Okay, just that one."
 
 END FRAME
-Child holds the single red roof piece beside the unfinished house; its three supporting blocks remain at center, the open empty box remains left, and Dad's hands are clear of the house.
+Child holds the single red roof piece in his right hand beside the unfinished house; its three supporting blocks remain at center, the open empty box remains left, and Dad's hands are clear of the house.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
 PACING (16 spoken words)

@@ -196,7 +196,7 @@ curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:5000/login
 
 ```bash
 cd app
-.venv/Scripts/python -m pytest        # 全量（2026-09-06：365 个）
+.venv/Scripts/python -m pytest        # 全量（2026-09-06：376 个）
 .venv/Scripts/python -m pytest -v
 .venv/Scripts/python -m pytest tests/test_scanner.py -v   # 单文件
 ```
@@ -216,7 +216,7 @@ node --test tests-js/map-path.test.mjs # 单文件
 
 ### 当前测试覆盖什么
 
-- 2026-09-06 基线：Python 365、Node 44；包含 Stage 1 全量对话/提示词聚合、安全方向与 Child 服装归属检查、20张资产HTTP验证、导航计数/不可变输入、drawer焦点、Electron挂载幂等、current跳转、同章背景回退、上传所有权、路径共享曲线和庆祝队列/取消生命周期。当前验收与命令见 [`docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`](docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
+- 2026-09-06 基线：Python 376、Node 44；包含 Stage 1 全量对话/提示词聚合、未知 contract、正负安全方向与 Child 服装归属检查、20张资产HTTP验证、导航计数/不可变输入、drawer焦点、Electron挂载幂等、current跳转、同章背景回退、上传所有权、路径共享曲线和庆祝队列/取消生命周期。当前验收与命令见 [`docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`](docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
 - 可选 `tests-browser/modern-toy-ui.cjs`：已有 Playwright/Edge/Python 环境下运行；具体环境变量见 `app/README.md`。使用临时课程副本、账号、配置、资料与媒体根，拦截上传且不执行启动扫描。`TOY_QA_ELECTRON=1` 启用真实 Electron/preload、独立 userData、隐藏800×600窗口。不要为测试启动 `electron/main.cjs`（它拉起生产服务并会清理5000端口），不要复用用户窗口。
 
 - `test_scanner.py`：扫描排序、`meta.json` 回退、`has_demo`/`has_performance` 跨树检测、**webm 格式检测**、三态机、跨章状态传递、全完成无 current、**按用户名隔离 performance 路径**。
@@ -441,14 +441,14 @@ refactor: split content, demo, and recordings into separate trees
 
 ## 11. 当前状态与进行中的工作
 
-### 内容进度（截至 2026-09-05）
+### 内容进度（截至 2026-09-06）
 
-- Stage 1（4 岁目录 `curriculum/04`）：**30 / 30** 统一为 `three-by-ten-v2`，共 1451 词 / 296 turns，Child 654 词 / 134 turns；30 课均完成十项结构化 review 和十一问人工复核，详见 `FINAL-REVIEW.md`。版本为 r2×25、r3×5，全部保持 `language_reviewed`。
+- Stage 1（4 岁目录 `curriculum/04`）：**30 / 30** 统一为 `three-by-ten-v2`，共 1451 词 / 296 turns，Child 654 词 / 134 turns；30 课均完成十项结构化 review 和十一问人工复核，详见 `FINAL-REVIEW.md`。版本为 r2×23、r3×4、r4×3，全部保持 `language_reviewed`。
 - 网站运行时：已直接读取 `curriculum/04`，显示 A/B/C、Replay Cards 与 Parent Support。
 - v1 `content/`：30 关归档，只作历史对照和兼容测试。
 - v1 Sora demo 提示词：**60 份**，不再继续生产。
 - 新版 A/B/C 提示词草稿：**90 / 90**，逐课分镜 **30 / 30**，canonical revision/hash 全同步；说明与索引见 `prompts/README.md`、`prompts/04/README.md`。提示词导出会拒绝危险的正向表演要求，但允许明确的负面安全禁令。
-- AI 演示 `demo.mp4` 历史记录：revision 1 / v1 **14 / 30**，相对当前 revision 2/3 全部 stale；未删除或覆盖，正式生产暂停（见 `demo/PROGRESS.md`）。
+- AI 演示 `demo.mp4` 历史记录：revision 1 / v1 **14 / 30**，相对当前 revision 2–4 全部 stale；未删除或覆盖，正式生产暂停（见 `demo/PROGRESS.md`）。
 - 孩子表演 `performance.mp4`/`.webm`：admin 用户 2 / 30。
 - 新版响应式场景：10 / 10章、20 / 20张独立desktop/mobile WebP；旧8张图仅本章回退。
 

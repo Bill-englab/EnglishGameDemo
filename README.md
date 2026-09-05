@@ -80,15 +80,19 @@ Recordings are saved as `.webm` (Chrome/Firefox) or `.mp4` (Safari) — the app 
 
 **10 chapters × 3 levels = 30 levels**, arranged as a winding path climbing upward through ten illustrated worlds.
 
-Each chapter has its own full-bleed background illustration (Pixar-style storybook art). As you scroll, backgrounds cross-fade smoothly while the path and nodes stay in motion — a parallax effect that makes the journey feel continuous.
+Each chapter has its own local **Modern Toy Theatre** scene: soft clay, painted wood and fabric around an open grass corridor. Twenty separate WebP backgrounds provide desktop (1920×1200) and mobile (1080×1920) compositions. Screens below 768px select the mobile asset; missing assets fall back within the same chapter, then to a quiet material surface.
 
 | State | Appearance | Meaning |
 | --- | --- | --- |
-| 🔒 Locked | Gray lock over dimmed demo screenshot | Previous level not yet completed. If a demo exists, a small play badge invites a sneak peek. |
-| ▶️ Current | Demo screenshot with breathing glow + scaling cover + play button | This is the level to practice now. The cover gently pulses to draw attention. |
-| 🌟 Completed | Demo screenshot + gold star (spinning + twinkling) + golden glow | Done. Click to replay the performance anytime. |
+| Locked | Demo cover or numbered material node with a lock | Previous lesson is not complete; click to preview. |
+| Current | Demo cover or numbered node with a teal ring and location marker | The next lesson to practice; it is still incomplete. |
+| Completed | Demo cover or material node with one teal check | A performance exists. Click to replay it. |
 
-The winding path changes color as you progress: **traveled segments turn golden** (completed + current levels), while upcoming segments stay white. The transition happens at the current level — a visual trail of how far you've come.
+The ivory path has a muted teal inner line through completed lessons to the current lesson. Floating controls show the real **completed / 30** count, course menu and account. **Current lesson** scrolls to and focuses that lesson; it does not open or record it. Once every lesson has a performance, the action becomes a completion message.
+
+The course menu contains ten chapter groups with real per-chapter progress and every lesson. Stage 1 is available (the existing `curriculum/04`); Stage 2 and Stage 3 display **Planned** and are disabled. Escape, the close button or the backdrop closes the menu and returns focus. Choosing a lesson opens its complete detail page.
+
+The [implementation and acceptance record](docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md) includes browser sizes, native Electron checks and visual differences from the approved concepts. Run the optional isolated acceptance harness with an existing Playwright runtime; instructions are in [app/README.md](app/README.md).
 
 ---
 

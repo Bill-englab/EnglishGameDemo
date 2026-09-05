@@ -12,13 +12,13 @@
 ### 必须先理解的三个产品认知（违反这些会做错方向）
 
 1. **网站不是教学引擎，是「奖杯陈列柜」。** 真正的英语教学发生在线下父子 role-play。网站只做两件事：把完成的 role-play 可视化成进度；让孩子反复回看自己的表演录像。
-2. **给孩子多巴胺的不是星星，是回头看自己的表演。** 星星只是入口，「我的表演回放」才是主舞台。所以点亮的关卡，圆点变成 demo 动画的画面，点击进入详情页看表演录像。
+2. **给孩子多巴胺的是回头看自己的表演。** 完成勾只是入口，「我的表演回放」才是主舞台。所以点亮的关卡，圆点显示 demo 动画的画面，点击进入详情页看表演录像。
 3. **句式高级度不由网站量化。** 那是线下目标。网站只做二元判定：有没有 `performance` 视频（`.mp4` 或 `.webm`）。
 
 ### 明确排除的事（别去实现）
 
 - ❌ 教学引擎 / AI 对话搭档
-- ❌ 1/2/3 星分级（一颗星，二元）
+- ❌ 1/2/3 星分级（仅一个完成勾，二元）
 - ❌ 用星星追踪「句式高级度」
 - ❌ 构建工具 / 打包器 / 数据库（前端始终原生 ES Modules，无打包）
 - ❌ 第三方云托管 / SaaS。默认本地跑；支持部署到**自己的**服务器（见 `DEPLOY.md`），但不依赖任何外部服务
@@ -53,9 +53,13 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │   │   ├── map-model.mjs              # 纯：10 章主题(world+accent)、视觉状态、旋转、帧暗检测
 │   │   ├── map-path.mjs               # 纯：Catmull-Rom 平滑路径
 │   │   ├── lesson-view.mjs            # 纯：A/B/C 分段、Replay Cards、章节上下文
-│   │   ├── style.css                  # 绘本风样式（卡片布局+背景插画+节点+详情）+ 自托管 @font-face
+│   │   ├── adventure-navigation.mjs   # 纯：Stage 展示、真实计数与 current 目标
+│   │   ├── adventure-shell.mjs        # DOM：浮动外壳、课程目录、焦点与滚动锁
+│   │   ├── world-assets.mjs           # 纯：响应式 v2 图与同章旧图候选
+│   │   ├── style.css                  # 现代玩具剧场共享 token、地图/目录/详情 + 自托管字体
 │   │   ├── fonts/                     # 自托管 woff2（Fredoka/Nunito，离线可用）
-│   │   └── worlds/                    # 每章背景插画（<章节名>.jpg|.png，竖版 9:16）
+│   │   ├── worlds/                    # 同章旧图回退
+│   │   └── worlds-v2/                 # 20 张 <world>-desktop/mobile.webp，8:5 / 9:16
 │   ├── tests/                         # pytest：scanner、app、curriculum loader/validator
 │   ├── tests-js/                      # node --test：map-model/path .test.mjs
 │   └── .venv/                         # 本地虚拟环境（gitignored）
@@ -192,7 +196,7 @@ curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:5000/login
 
 ```bash
 cd app
-.venv/Scripts/python -m pytest        # 全量（约 57 个）
+.venv/Scripts/python -m pytest        # 全量（2026-09-05：159 个）
 .venv/Scripts/python -m pytest -v
 .venv/Scripts/python -m pytest tests/test_scanner.py -v   # 单文件
 ```
@@ -211,6 +215,9 @@ node --test tests-js/map-path.test.mjs # 单文件
 > ⚠️ **坑**：`node --test tests-js/`（传目录）会失败。**必须用 glob `tests-js/*.test.mjs` 或显式列文件**（或直接 `npm test`）。这是 Node test runner 对无 `package.json` 项目的目录发现限制——现已用 `package.json` 的 `test` 脚本封装。
 
 ### 当前测试覆盖什么
+
+- 2026-09-05 基线：Python 159、Node 36；包含20张资产HTTP验证、导航计数/不可变输入、drawer焦点、Electron挂载幂等、current跳转、同章背景回退、上传所有权与详情结构。
+- 可选 `tests-browser/modern-toy-ui.cjs`：已有 Playwright/Edge/Python 环境下运行；具体环境变量见 `app/README.md`。使用临时课程副本、账号、配置、资料与媒体根，拦截上传且不执行启动扫描。`TOY_QA_ELECTRON=1` 启用真实 Electron/preload、独立 userData、隐藏800×600窗口。不要为测试启动 `electron/main.cjs`（它拉起生产服务并会清理5000端口），不要复用用户窗口。
 
 - `test_scanner.py`：扫描排序、`meta.json` 回退、`has_demo`/`has_performance` 跨树检测、**webm 格式检测**、三态机、跨章状态传递、全完成无 current、**按用户名隔离 performance 路径**。
 - `test_app.py`：登录（admin/普通用户/错误密码）、用户管理 API、地图/详情 GET 路由、缩略图路由（`/thumb`）、视频 404 边界（缺文件 / 非法 kind / 路径越界）、上传路由（写盘 / 路径越界 / 非法 kind / 无文件 / 建目录）、**webm 上传存正确扩展名 + serve 正确 mimetype + 重录换格式删旧文件**、HTML 外壳含所有关键 `id`、可重试加载逻辑、静态模块可 serve、字体自托管。
@@ -298,19 +305,24 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 | `map-model.mjs` | **纯数据/纯函数**：`CHAPTER_THEMES`（10 章：world + accent）、`getChapterTheme`、`getLevelVisualState`、`getStableRotation`、`isFrameDark` | 无 |
 | `map-path.mjs` | **纯函数**：`buildSmoothPath(points)`，绝不修改输入数组 | 无 |
 | `lesson-view.mjs` | **纯函数**：A/B/C 对话分组、Replay Card、prompt 分段、章节上下文 | 无 |
-| `app.js` | **编排层**（唯一有 DOM 副作用的）：拉 `/api/library`、渲染地图和课程详情、导航、摄像头录制、demo/表演上传 | 上面三个全依赖 |
+| `world-assets.mjs` | **纯函数**：v2 desktop/mobile 与同章旧图 URL 候选 | 无 |
+| `adventure-navigation.mjs` | **纯函数**：Stage 1/2/3 展示、章/全局真实完成数、current 目标 | 无 |
+| `adventure-shell.mjs` | **DOM 编排**：浮动外壳、课程目录、焦点陷阱、inert 和滚动恢复 | navigation、lesson-view |
+| `app.js` | **编排层**：拉 `/api/library`、连接 shell、渲染地图和课程详情、导航、摄像头录制、demo/表演上传 | map-model/path、lesson-view、detail-media、navigation、shell |
 | `titlebar.js`（普通 script，非 module） | Electron 环境检测 + 注入自定义标题栏/窗口控制按钮（`window.electronAPI`）；浏览器里是 no-op | 无 |
 
 ### 两层视图
 
-1. **地图视图**（`#map-view`）：10 个 `.chapter-world` section 自上而下。关卡节点按 `getLevelVisualState` 分三态：`completed`（demo 截图封面 + 金星，金星慢旋 + 闪烁 + 金色光晕呼吸）、`current`（demo 截图封面 + 双层橙色光晕呼吸 + 封面缩放呼吸 + 播放按钮）、`locked`（暗化 demo 截图 + 锁，有 demo 时带小播放标记）。每个状态都可点，点击打开详情。路径分两段：走过的路金色发光，未走的路白色。
-2. **详情视图**（`#detail-view`）：约56px紧凑标题栏；桌面左视频栏（Your Show在上、Watch & Learn在下）、右侧完整A/B/C→完整Replay→折叠家长说明/VideoGen；底部Prev/Next。小于900px使用视频页签＋单列正文，只页面整体滚动。未录时点 **Start recording**，示范为空点 **Add demo**。Can-Do、Trigger和句式放在家长说明内，不挤标题。
+1. **地图视图**（`#map-view`）：10章×3课，真实编号1–30。completed 为 demo 封面或材质节点＋青绿勾，current 为青绿环＋定位针，locked 为封面或编号＋锁；都可点详情。浮动 shell 显示真实完成数、目录和账号。**Current lesson** 仅用户点击后滚动并聚焦当前节点；不打开详情，不改变进度；全完成时隐藏并显示完成提示。
+2. **详情视图**（`#detail-view`）：56px标题栏；桌面左340px媒体栏（Your Show在上、Watch & Learn在下）、右侧完整A/B/C→完整Replay→默认独立折叠家长说明/VideoGen；底部Prev/Next。小于768px使用媒体页签＋单列正文，只页面整体滚动。未录时点 **Start recording**，示范为空点 **Add demo**。Can-Do、Trigger和句式放在家长说明内，不挤标题。
+
+运行时：`/api/library` → `summarizeAdventure` → 地图与 shell 同一份真实计数；目录选择只打开 Lesson，不写入课程状态。Stage 1 是 `curriculum/04` 的展示名，Stage 2/3 为禁用 Planned。目录打开时背景 inert、地图锁滚动、焦点进入并圈定抽屉；Escape/关闭/遮罩恢复菜单焦点，选课释放锁后打开详情。
 
 ### 关键实现细节（改时注意）
 
-- **背景插画**：固定背景层 `#bg-layer`（parallax，不随滚动移动），每章一个 slide，scroll 时交叉淡入淡出（1.5s）。图从 `/static/worlds/<章节名>.jpg|.png` 探测，缺失时循环用已有图。详情页有自己的灰白背景覆盖地图暖色。
+- **响应式背景**：固定 `#bg-layer`，每章一张 slide，滚动交叉淡入淡出。`/static/worlds-v2/<world>-desktop.webp`（1920×1200）和 `-mobile.webp`（1080×1920）共20张，完整清单见 `app/static/worlds-v2/README.md`。`<768`切手机图；失败按本章旧WebP/PNG/JPG尝试，全部失败保留主题材质，不循环别章。resize仅重选背景，generation token阻止旧响应覆盖新尺寸；详情为暖白阅读面。
 - **封面** `extractSafeCover()`：改为加载服务端缩略图 `/thumb/<ch>/<lv>`（替代原 canvas 抽帧——大视频 seek 慢且暗帧多）。加载失败 → null → 主题色渐变 fallback。有 frameCache，地图/详情共用。缩略图由后端在上传和启动扫描时用 ffmpeg 生成（见 §6）。
-- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，`buildSmoothPath` 画平滑路径。路径在第一个锁定关处断开：走过的段（completed + current）`.trail--done` 金色发光，未走的段 `.trail--todo` 白色暗淡。之字形偏移在 CSS。
+- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，用 `buildSmoothPath` 画阴影/暖灰边/象牙白三层路径，走过段增加低饱和青绿内线。`splitPathPoints` 在当前节点连接两段，不丢点；之字形偏移在 CSS。没有金星旋转或强金光。
 - **录制** `startRecordingSession()`：`getUserMedia` 开摄像头+麦克风 → 镜像预览 → 一钮两态（红圆开始/方块停止）+ 闪红计时 + 5 分钟硬上限自动停 → `MediaRecorder` 产 webm → 现场回放 + Redo/Save。Save 时 `uploadRecording()` 把 blob + mimeType POST 到 `/upload`，后端按 mimeType 存 `.webm`/`.mp4`。`pickRecorderMime()` 探测浏览器支持的最佳格式（Chrome→webm，Safari→mp4），console 打印实际 mimeType。摄像头被拒/缺失时回退到文件上传。
 - **详情导航**：`openDetail` 底部渲染 Prev/Next（跨全宽），从 `flatLevels` 找相邻关卡。上传后 `reopenDetail` 重新打开当前关。
 - **demo 标记**：locked 关如果有 demo，节点加 `.level-node__demo-badge` 小播放标记。
@@ -321,10 +333,11 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 - **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`。
 - **动效约束**：current 关发光呼吸；`prefers-reduced-motion: reduce` 关闭。
 
-### 布局比例（测试钉死，别乱改）
+### 布局尺寸（2026-09-05）
 
-- 桌面（>600px）：左 18 / 主 64 / 右 18；节点 220px，current 244px。
-- 手机（≤600px）：左 12 / 主 76 / 右 12；节点 140px，current 152px。
+- 桌面（≥768px）：中央节点列最大680px，之字形偏移104–150px；节点220px、current244px。
+- 手机（<768px）：节点列最大340px，之字形偏移30–46px；节点140px、current152px。
+- 旧18/64/18、12/76/12三列网格已由此布局替代；背景、详情页签统一用768px断点。800×600允许整体纵向滚动，禁止横向溢出。
 
 ---
 
@@ -435,7 +448,7 @@ refactor: split content, demo, and recordings into separate trees
 - 新版 A/B/C 提示词草稿：**90 / 90**，逐课分镜 **30 / 30**；说明与索引见 `prompts/README.md`、`prompts/04/README.md`。课程仍为 `language_reviewed`。
 - AI 演示 `demo.mp4`：**14 / 30**（第 1–4 章全齐，第 5 章 2/3；见 `demo/PROGRESS.md`）。
 - 孩子表演 `performance.mp4`/`.webm`：admin 用户 2 / 30。
-- 背景插画：8 / 10 章（缺第 9、10 章，靠循环兜底）。
+- 新版响应式场景：10 / 10章、20 / 20张独立desktop/mobile WebP；旧8张图仅本章回退。
 
 **当前重点**：在不急于恢复视频生产的前提下，继续做真实家庭试用记录；使用已补齐的三段提示词，逐课确认时长与镜头，达到 `video_ready` 后再制作正式 demo。
 
@@ -443,7 +456,7 @@ refactor: split content, demo, and recordings into separate trees
 
 - 地图骨架 + 动态章节世界（大型动画主景 + 平滑路线 + 响应式节点）：完成。
 - PC 摄像头实时录制（`getUserMedia` + `MediaRecorder`，一钮两态 + 5 分钟上限 + 回放 + Redo/Save）：完成。
-- 路径进度可视化（走过的路金色，未走白色）、已完成金星旋转闪烁 + 金色光晕、当前关封面缩放呼吸 + 双层光晕：完成。
+- 现代玩具剧场：三层象牙白路径＋青绿进度内线、完成勾/current定位针/锁、浮动外壳、真实计数和课程目录；完整验收记录见 `docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md`。
 - webm/mp4 双格式支持（scanner + 路由 + 上传）：完成。
 - **多用户认证**（登录/session、admin 用户管理、performance 按用户隔离到 `recordings/<用户名>/`）：完成。
 - **Electron 桌面壳**（launch.vbs 一键启动、自定义标题栏、自动授权摄像头/麦克风、退出杀 Flask）：完成。
@@ -468,6 +481,10 @@ refactor: split content, demo, and recordings into separate trees
 | 从详情页返回背景图消失 | 已修复：`closeDetail` 强制重置 `activeChapter` 并刷新 `updateBgOnScroll` |
 | 录制后关卡没亮 | 检查 console 打印的 mimeType；确认 `/upload` 返回 `ext`；scanner 认 `.mp4`+`.webm` |
 | 改 `CHAPTER_THEMES` 后 JS 测试红 | 测试钉死了 10 个唯一 world + hex accent；同步改测试或符合约束 |
+| 手机仍用桌面图 | 切图断点为768px；检查 v2 mobile 请求与同章候选，不改课程 background_asset |
+| 目录关不了或页面不能滚 | 检查 shell.close 的 inert/overflow 恢复、Escape和焦点；不要另建第二个焦点锁 |
+| demo上传完成丢失录像草稿 | 只能调用demo面板刷新，不能重开详情；跑两个delayed-upload场景 |
+| 隔离Electron打不开 | 本机需已有Electron；环境中的 ELECTRON_RUN_AS_NODE 必须删除，不能设为空字符串 |
 | `scaffold_levels.py` 没更新新课 | 该脚本只服务 v1 归档；新版直接编辑 `curriculum/<stage>/.../lesson.json` 并运行 validator |
 | venv 失效 | `app/` 被重命名后 venv 绝对路径失效；删 `app/.venv` 重建（见 `app/README.md`） |
 | 登录进不去 | admin 密码在 `app/config.json`（没这文件时仅本地开发回退 `admin123`）；若显式配置无效，启动日志会直接指出错误。普通用户由 admin 在用户菜单里增删 |
@@ -489,7 +506,7 @@ refactor: split content, demo, and recordings into separate trees
 ### 通用速记
 
 - **先跑两套测试**（`npm test` + `pytest -q`）确认基线绿，再动手。
-- **纯逻辑放模块、副作用放 app.js**：`map-model`/`map-path` 是纯的、有测试的；新增纯逻辑优先进这些模块并配测试。
+- **纯逻辑放模块，按生命周期归属DOM**：`map-model`/`map-path`/`adventure-navigation`/`world-assets` 是纯模块；目录交给 `adventure-shell`，资料交给 `profile`，地图/详情/录制由 `app.js` 编排。
 - **改状态机（`annotate_states`）= 改产品规则**，三思，并更新 `test_scanner.py`。
 - **Stage 路径同名**：`curriculum/04/<章>/<课>`、`demo/04/<章>/<课>`、`recordings/<用户名>/04/<章>/<课>` 必须一致。
 - **别引入构建工具/打包器/数据库/第三方云服务**——设计上明确排除。（页面内上传是本地功能；自部署见 `DEPLOY.md`。）

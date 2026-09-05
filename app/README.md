@@ -51,7 +51,7 @@ cd app
 
 ## 课程详情
 
-桌面采用紧凑单行标题栏、左视频/右对话；小于900px切换为视频页签＋单列阅读。**Your Show → Start recording** 进入摄像头，**Watch & Learn → Add demo** 添加示范。完整A/B/C、完整复练顺序展示，只让页面滚动。家长说明与 **VideoGen · A/B/C prompts** 默认折叠；[30课90份提示词](../prompts/04/README.md)均可复制。
+桌面采用 56px 单行标题栏、左 340px 媒体栏/右对话；小于768px切换为视频页签＋单列阅读。**Your Show → Start recording** 进入摄像头，**Watch & Learn → Add demo** 添加示范。完整A/B/C、完整复练顺序展示，只让页面滚动。家长说明与 **VideoGen · A/B/C prompts** 默认独立折叠；[30课90份提示词](../prompts/04/README.md)均可复制。暖白、可可、青绿与杏色 token 与地图、目录和资料页共用。
 
 详情重排不改变地图、课程、进度或文件存储。返回地图/换课会释放摄像头和预览资源；没有新增未保存确认或录像历史。设计与验证见[实施记录](../docs/plans/2026-09-04-detail-reading-redesign.md)。
 
@@ -69,9 +69,11 @@ cd app
 
 设计与边界见[个人资料规范](../docs/specs/2026-09-04-personal-profile-design.md)。
 
-## 背景插画
+## 地图、目录与响应式背景
 
-每章背景图放 `static/worlds/<章节名>.jpg`（如 `01-wants-requests.jpg`）。图缺失时用 `accent` 色做纯色兜底，不报错。竖版 9:16 构图，元素在两侧、中间留路带。
+`/api/library` 经 `adventure-navigation.mjs` 投影真实完成数、章节计数与 current；`adventure-shell.mjs` 管理浮动外壳和目录焦点。**Current lesson** 只滚动并聚焦当前节点。完成为青绿勾、current 为定位针、locked 为锁；所有节点都可查看。只有当前用户的 performance 文件改变进度。Stage 1 对应 `curriculum/04`，Stage 2/3 为禁用的 Planned 占位。
+
+十章各有独立桌面/手机背景，共20张：`static/worlds-v2/<world>-desktop.webp`（1920×1200）与 `<world>-mobile.webp`（1080×1920），完整文件索引见 [worlds-v2/README.md](static/worlds-v2/README.md)。小于768px选择手机图，resize只换背景，不重建节点或录制DOM。`world-assets.mjs` 提供候选：v2 WebP → 本章旧 WebP/PNG/JPG → 材质底色；不循环其他章的图。代码独立绘制节点与三层象牙白路径、青绿进度内线。
 
 ## 测试
 
@@ -83,6 +85,20 @@ npm test                                   # JS：前端纯模块（零依赖，
 ```
 
 > ⚠️ JS 测试必须用 glob `tests-js/*.test.mjs`，传目录会失败。
+
+可选完整验收（不增加应用依赖；需要已有 Playwright、Edge 和满足 requirements 的 Python）：
+
+```powershell
+$env:NODE_PATH='<existing Playwright node_modules>'
+$env:TOY_QA_PYTHON='<Python executable with app requirements>'
+# 可选：本机已安装 Electron 时验证真实 preload 和原生窗口 IPC
+$env:TOY_QA_ELECTRON='1'
+# 可选：保存截图到你指定的独立 QA 目录
+$env:TOY_QA_OUTPUT='<QA screenshot directory>'
+node tests-browser/modern-toy-ui.cjs
+```
+
+脚本自启临时端口 Flask，复制课程到临时根，隔离账号、配置、资料和媒体，拦截所有上传；不执行 `app.py` 主入口或媒体扫描。最终清理自有浏览器、服务和临时根，不复用用户窗口。默认不启动 Electron；启用后用真实二进制、真实 preload 和独立 userData 的隐藏窗口检查最小化/最大化/关闭、拖动区与800×600布局。浏览器检查1440×960、800×600、390×844、844×390、目录焦点、真实0/30→2/30与延迟demo上传时的录制保留。人工摄像头、Safari/iOS不在自动验收范围。
 
 ## 结构
 
@@ -99,12 +115,16 @@ app/
     profile.css     # 资料面板样式，不重排地图
     lesson-view.mjs # 纯：对话分段、Replay Card、章节上下文
     detail-media.mjs # 纯：窄屏页签可见性，录制保持表演面板
+    adventure-navigation.mjs # 纯：Stage 展示、真实完成计数、current 目标
+    adventure-shell.mjs # DOM：浮动外壳、课程目录、焦点锁与滚动恢复
+    world-assets.mjs # 纯：20 张响应式图与本章旧图候选
     map-model.mjs   # 纯：10 章主题（world + accent）、视觉状态、旋转、帧暗检测
     map-path.mjs    # 纯：Catmull-Rom 平滑路径
-    style.css       # 绘本风样式 + 自托管 @font-face
+    style.css       # 现代玩具剧场共享 token、地图/详情/目录 + 自托管字体
     fonts/          # 自托管 woff2（Fredoka/Nunito，离线可用）
-    worlds/         # 每章背景插画（.jpg）
-  tests/  tests-js/
+    worlds/         # 本章旧图回退
+    worlds-v2/      # 10 世界 × desktop/mobile WebP
+  tests/  tests-js/  tests-browser/
   package.json      # 仅挂 "test" 脚本，零依赖
 ```
 

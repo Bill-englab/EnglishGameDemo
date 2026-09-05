@@ -7,11 +7,11 @@
 | `archive/` | 冻结的历史基线（原始诉求、设计提案、首轮计划） |
 | `twodots-reference.jpeg` | Two Dots 风格参考图 |
 
-当前主线设计：[`specs/2026-08-12-living-chapter-worlds-design.md`](specs/2026-08-12-living-chapter-worlds-design.md)（动态章节世界）。
+历史地图设计：[`specs/2026-08-12-living-chapter-worlds-design.md`](specs/2026-08-12-living-chapter-worlds-design.md)（动态章节世界；视觉已由现代玩具剧场规格接替）。
 
-UI 改造主线：[`specs/2026-09-05-modern-toy-theatre-ui-design.md`](specs/2026-09-05-modern-toy-theatre-ui-design.md)（用户批准的 B「现代玩具剧场」统一视觉：地图、目录、详情、手机与 10 章双比例 3D 场景）。它继承并收敛早期的 [`specs/2026-09-04-immersive-ui-redesign.md`](specs/2026-09-04-immersive-ui-redesign.md)。现有详情页已完成「左视频、右对话」结构；统一美术与地图/目录尚待按新规格实施。
+UI 改造主线：[`specs/2026-09-05-modern-toy-theatre-ui-design.md`](specs/2026-09-05-modern-toy-theatre-ui-design.md)（用户批准的 B「现代玩具剧场」统一视觉：地图、目录、详情、手机与 10 章双比例 3D 场景）。它继承并收敛早期的 [`specs/2026-09-04-immersive-ui-redesign.md`](specs/2026-09-04-immersive-ui-redesign.md)。实施、隔离验收与视觉差异记录见 [`plans/2026-09-05-modern-toy-theatre-ui-implementation.md`](plans/2026-09-05-modern-toy-theatre-ui-implementation.md)。录制倒计时与播放速度仍为后续独立行为任务。
 
-个人资料增补：[`specs/2026-09-04-personal-profile-design.md`](specs/2026-09-04-personal-profile-design.md)（头像＋昵称已实现；图片隐私、用户隔离与交互规范）。实施与验收见 [`plans/2026-09-04-personal-profile-implementation.md`](plans/2026-09-04-personal-profile-implementation.md)。不代表整套 B 界面已经落地。
+个人资料增补：[`specs/2026-09-04-personal-profile-design.md`](specs/2026-09-04-personal-profile-design.md)（头像＋昵称已实现；图片隐私、用户隔离与交互规范）。实施与验收见 [`plans/2026-09-04-personal-profile-implementation.md`](plans/2026-09-04-personal-profile-implementation.md)。本轮仅统一视觉 token。
 
 视频检查记录：[`specs/2026-09-04-video-compression-audit.md`](specs/2026-09-04-video-compression-audit.md)（当前环境与格式处理问题，含验证限制；不代表已经修复）。
 

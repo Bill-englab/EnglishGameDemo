@@ -1,3 +1,5 @@
+import { getWorldAssetUrls } from "./world-assets.mjs";
+
 export const CHAPTER_THEMES = Object.freeze({
   1: { world: "morning-picnic", accent: "#f47b35" },
   2: { world: "color-market", accent: "#e75f79" },
@@ -14,6 +16,12 @@ export const CHAPTER_THEMES = Object.freeze({
 const chapterNumber = chapterName => { const m = chapterName.match(/^\d+/); return Number.parseInt((m && m[0]) || "1", 10); };
 export const getChapterTheme = chapterName => CHAPTER_THEMES[chapterNumber(chapterName)] || CHAPTER_THEMES[1];
 export const getLevelVisualState = level => level.has_performance ? "completed" : level.current ? "current" : "locked";
+export function resolveMapPresentation(level, index) {
+  const state = getLevelVisualState(level);
+  return { state, number: index + 1, showCover: Boolean(level.has_demo),
+    marker: { completed: "check", current: "locator", locked: "lock" }[state] };
+}
+export const resolveMapBackground = (world, width) => getWorldAssetUrls(world, width < 768);
 export const getStableRotation = index => ((index * 53) % 7) - 3;
 export function isFrameDark(data, threshold = 28, ratio = 0.92) {
   let darkPixels = 0;

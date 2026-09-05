@@ -104,8 +104,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     progress.value = summary.completed;
     find("course-drawer-progress").textContent = `${currentStage.label} · ${summary.completed} / ${summary.total} completed`;
     currentButton.hidden = !summary.current;
-    // Task 4 owns enabling this control and connecting the real map jump.
-    currentButton.disabled = true;
+    currentButton.disabled = !summary.current || !onCurrentLesson;
     find("adventure-complete").hidden = !(summary.total > 0 && summary.completed === summary.total);
 
     stages.replaceChildren();
@@ -164,6 +163,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
   }
 
   listen(trigger, "click", open);
+  listen(currentButton, "click", () => onCurrentLesson?.({ behavior: "smooth" }));
   listen(closeButton, "click", close);
   listen(backdrop, "click", close);
   listen(doc, "keydown", trapKeys);

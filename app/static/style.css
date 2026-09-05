@@ -279,344 +279,47 @@ body {
 #map-retry:hover { background: var(--accent-deep); transform: translateY(-1px); }
 #map-retry:active { transform: translateY(0); }
 
-/* ---------- map + solid route path ---------- */
-#map-scroll { position: relative; padding: 0 0 80px; }
-/*
-   Stacking: background image (z0) < route path (z2) < chapter-main nodes (z3).
-   The trail sits ABOVE the background image but BEHIND the level nodes.
-*/
-.path-layer {
-  position: absolute; inset: 0; z-index: 2;
-  width: 100%; height: 100%; pointer-events: none; overflow: visible;
-}
-.path-layer .trail {
-  fill: none; stroke-width: 14;
-  stroke-linecap: round; stroke-dasharray: none;
-}
-/* Traveled path — golden, glowing, like a trail of footprints. */
-.path-layer .trail--done {
-  stroke: #ffc857;
-  opacity: .92;
-  filter: drop-shadow(0 2px 6px rgba(255,180,50,.5));
-}
-/* Upcoming path — white, dimmer, waiting to be walked. */
-.path-layer .trail--todo {
-  stroke: #fff;
-  opacity: .5;
-  filter: drop-shadow(0 3px 5px rgba(90,58,26,.2));
-}
-
-/* ---------- fixed background layer (parallax: bg stays, content scrolls) ---------- */
-#bg-layer {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, var(--warm-1) 0%, var(--warm-2) 48%, var(--warm-3) 100%);
-}
-/* Mobile: position fixed can be unreliable on iOS Safari — use absolute */
-@media (max-width: 600px) {
-  #bg-layer { position: absolute; }
-}
-.bg-layer__slide {
-  position: absolute; inset: 0;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
-}
+/* ---------- toy theatre map: untinted world, ivory path, real video nodes ---------- */
+#map-scroll { position: relative; padding: 0 0 100px; }
+.path-layer { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.path-layer .trail { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.path-layer .trail--shadow { stroke: #796b4e; stroke-width: 40; opacity: .22; transform: translateY(5px); }
+.path-layer .trail--edge { stroke: #d5c5a8; stroke-width: 35; }
+.path-layer .trail--surface { stroke: #f4ebd9; stroke-width: 27; }
+.path-layer .trail--done { stroke: #82a9a0; stroke-width: 7; }
+#bg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: #e9ead6; }
+.bg-layer__slide { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; opacity: 0; transition: opacity .8s ease; }
 .bg-layer__slide.is-active { opacity: 1; }
-/* Placeholder slide for chapters without art — uses accent tint gradient. */
-.bg-layer__slide--placeholder {
-  background:
-    linear-gradient(180deg,
-      color-mix(in srgb, var(--slide-accent, #cc8a4a) 22%, var(--warm-1)) 0%,
-      var(--warm-1) 40%,
-      color-mix(in srgb, var(--slide-accent, #cc8a4a) 18%, var(--warm-2)) 100%);
-}
-
-/* ---------- chapter world (transparent — bg is on the fixed layer) ---------- */
-.chapter-world {
-  position: relative;
-  min-height: 930px;
-  overflow: hidden;
-  opacity: 1;
-}
-/* Fallback class kept for compatibility but bg is now on the fixed layer. */
-.chapter-world--no-bg { /* no-op; placeholder handled by bg-layer slide */ }
-
-.chapter-main {
-  position: relative; z-index: 3;
-  display: flex; flex-direction: column;
-  align-items: center;
-  padding: 34px 16px 24px;
-}
-
-.chapter-heading {
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px; flex: none;
-  width: min(100%, 430px);
-  margin: 0 auto 12px;
-  padding: 9px 15px 9px 10px;
-  font-family: "Fredoka", system-ui, sans-serif;
-  font-weight: 700; font-size: clamp(24px, 2.5vw, 34px); letter-spacing: .2px;
-  color: var(--ink); text-align: center;
-  text-shadow: 0 2px 0 rgba(255,255,255,.65);
-  background: rgba(255,255,255,.68);
-  border: 3px solid rgba(255,255,255,.88);
-  border-radius: 999px;
-  box-shadow: 0 12px 28px rgba(92,58,30,.13), inset 0 -2px 0 rgba(90,58,26,.06);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-}
-.chapter-heading .ch-no {
-  flex: none;
-  font-size: .58em; font-weight: 800; letter-spacing: .8px; text-transform: uppercase;
-  color: #fff;
-  background: var(--chapter-accent, var(--accent-deep));
-  padding: 7px 12px; border-radius: 999px;
-  border: 2px solid rgba(255,255,255,.72);
-  text-shadow: 0 1px 1px rgba(82,50,24,.22);
-  box-shadow: 0 4px 10px rgba(92,58,30,.16);
-}
-.chapter-heading .ch-name {
-  min-width: 0;
-  color: var(--ink);
-  line-height: 1.05;
-}
-
-.chapter-levels {
-  position: relative; z-index: 3;
-  display: flex; flex-direction: column;
-  align-items: center;
-  margin: 12px auto 0;
-  width: 100%; max-width: 680px;
-}
-
-/* ---------- node wrap (reveal + zigzag sweep) ---------- */
-.level-node-wrap {
-  position: relative; z-index: 2;
-  display: flex; flex-direction: column; align-items: center;
-  width: 288px; margin: 38px auto; padding: 0;
-  background: none; border: none; font: inherit; color: inherit; cursor: pointer;
-  opacity: 0; transition: opacity .5s ease; transition-delay: var(--d, 0s);
-}
-/* Zigzag: odd nodes drift left, even nodes drift right — gives the path its sweep. */
+.bg-layer__slide--placeholder { background: radial-gradient(ellipse at 30% 10%, #fffaf2, transparent 70%), linear-gradient(150deg, #eee9dc, color-mix(in srgb, var(--slide-accent) 18%, #e3e7d5)); }
+.chapter-world { position: relative; min-height: 970px; overflow: hidden; }
+.chapter-main { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; padding: 22px 16px 36px; }
+.chapter-heading { display: flex; align-items: center; gap: 12px; width: max-content; max-width: min(100%, 480px); margin: 0 auto 12px; padding: 10px 18px; border: 1px solid #ded2c3; border-radius: 18px; background: #fffaf2f2; color: #402b20; font: 500 clamp(20px,2vw,26px) "Fredoka", sans-serif; text-align: center; box-shadow: 0 4px 12px #402b2010; }
+.chapter-heading .ch-no { flex: none; font: 800 14px "Nunito", sans-serif; color: #267f7b; }
+.chapter-heading .ch-name { min-width: 0; line-height: 1.2; }
+.chapter-levels { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 680px; }
+.level-node-wrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 260px; margin: 30px auto; padding: 0; border: 0; background: none; color: #402b20; font: inherit; cursor: pointer; opacity: 1; scroll-margin-block: 90px; }
 .chapter-world:nth-child(odd) .level-node-wrap:nth-child(odd),
-.chapter-world:nth-child(even) .level-node-wrap:nth-child(even) {
-  transform: translateX(clamp(-150px, -10vw, -104px));
-}
+.chapter-world:nth-child(even) .level-node-wrap:nth-child(even) { transform: translateX(clamp(-150px,-10vw,-104px)); }
 .chapter-world:nth-child(odd) .level-node-wrap:nth-child(even),
-.chapter-world:nth-child(even) .level-node-wrap:nth-child(odd) {
-  transform: translateX(clamp(104px, 10vw, 150px));
-}
-.level-node-wrap.seen { opacity: 1; }
+.chapter-world:nth-child(even) .level-node-wrap:nth-child(odd) { transform: translateX(clamp(104px,10vw,150px)); }
+.level-node { position: relative; display: flex; align-items: center; justify-content: center; width: 220px; height: 220px; flex: none; border: 7px solid #fffaf2; border-radius: 50%; overflow: visible; background: radial-gradient(circle at 35% 20%,#fffaf2,#e4d7b9); box-shadow: 0 7px 0 #c8b790, 0 11px 0 #a99c7e, 0 15px 22px #40321c35, inset 0 0 0 1px #d5c5a8; transition: box-shadow .2s ease; }
+.level-node__cover { position: absolute; inset: 0; border-radius: 50%; background-position: center; background-size: cover; }
+.level-node__number { font: 500 48px "Fredoka",sans-serif; color: #73634b; }
+.level-node:has(.level-node__cover) .level-node__number { position: absolute; z-index: 2; bottom: -10px; left: -8px; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid #fffaf2; background: #efe1c6; font-size: 22px; box-shadow: 0 3px 0 #b6a681; }
+.level-node__marker { position: absolute; z-index: 3; right: -10px; bottom: -12px; display: grid; place-items: center; width: 48px; height: 48px; border: 3px solid #fffaf2; border-radius: 50%; background: #267f7b; color: #fffaf2; box-shadow: 0 4px 0 #206e69,0 6px 8px #402b2020; }
+.level-node__marker svg { width: 26px; height: 26px; }
+.level-node__marker--lock { background: #817e71; box-shadow: 0 4px 0 #696659,0 6px 8px #402b2020; }
+.level-node-wrap--current .level-node { width: 244px; height: 244px; border-color: #267f7b; box-shadow: 0 0 0 3px #fffaf2,0 7px 0 #bfae8a,0 11px 0 #a99c7e,0 15px 22px #40321c35; }
+.level-node--current::before { content: ""; position: absolute; inset: -14px; border-radius: 50%; border: 2px solid #319791; pointer-events: none; animation: currentRing 4s ease-in-out infinite; }
+.level-node__marker--locator { left: calc(50% - 22px); right: auto; top: -43px; bottom: auto; width: 44px; height: 48px; border-radius: 22px 22px 18px 18px; }
 .level-node-wrap:focus-visible { outline: none; }
-.level-node-wrap:focus-visible .level-node {
-  box-shadow: 0 0 0 4px var(--accent), 0 12px 30px rgba(255,150,50,.35);
-}
-
-/* ---------- the level node —28px radius, three states ---------- */
-.level-node {
-  position: relative;
-  width: 280px; height: 280px; border-radius: 42px;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  transition: transform 160ms ease, box-shadow 240ms ease;
-}
-
-/* locked: glassmorphism + minimal gray lock */
-.level-node--locked {
-  background: rgba(255,255,255,.42);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  border: 2px solid rgba(255,255,255,.75);
-  box-shadow: 0 8px 20px rgba(180,120,40,.12);
-  overflow: visible; /* let the demo badge peek outside the node */
-}
-.level-node--locked .lock { width: 44px; height: 44px; opacity: .7; }
-/* Lock + dim overlay sit above the cover. */
-.level-node--locked .lock-wrap {
-  position: relative; z-index: 2;
-  display: flex; align-items: center; justify-content: center;
-}
-/* Dim overlay between cover and lock — mutes the demo screenshot. */
-.level-node__dim {
-  position: absolute; inset: 0; z-index: 1;
-  border-radius: 27px;
-  background: rgba(80, 65, 45, .48);
-}
-
-/* current: white + orange glow + play button on demo cover */
-.level-node-wrap--current {
-  --current-node-size: 308px;
-}
-.level-node-wrap--current .level-node { width: 308px; height: 308px; }
-.level-node--current {
-  background: #fff;
-  box-shadow: 0 0 0 6px rgba(255,255,255,.60),
-              0 14px 36px rgba(255,150,50,.50),
-              0 0 80px rgba(255,170,60,.35);
-  overflow: visible;
-}
-/* Soft breathing halo behind the current node. Lives on the WRAP's ::before
-   (which doesn't clip —unlike the node, whose overflow:hidden would crop a
-   ring) and sits BEHIND the node (z-index:0 under the node's z-index:1) so it
-   reads as a glow around the node, not over it. Only opacity/scale pulse —
-   the node itself never moves. */
-.level-node-wrap--current::before {
-  content: ""; position: absolute;
-  top: calc(var(--current-node-size) / 2);
-  left: 50%;
-  width: calc(var(--current-node-size) * 1.5);
-  height: calc(var(--current-node-size) * 1.5);
-  transform: translate(-50%, -50%);
-  border-radius: 50%; pointer-events: none; z-index: 0;
-  background: radial-gradient(circle,
-    rgba(255,180,70,.55) 0%,
-    rgba(255,160,50,.35) 35%,
-    rgba(255,140,40,0) 70%);
-  animation: glowBreath 2.4s ease-in-out infinite;
-}
-/* Second tighter glow layer for extra punch — a brighter core ring close
-   to the node edge, layered on the WRAP's ::after. */
-.level-node-wrap--current::after {
-  content: ""; position: absolute;
-  top: calc(var(--current-node-size) / 2);
-  left: 50%;
-  width: calc(var(--current-node-size) * 1.15);
-  height: calc(var(--current-node-size) * 1.15);
-  transform: translate(-50%, -50%);
-  border-radius: 50%; pointer-events: none; z-index: 0;
-  background: radial-gradient(circle,
-    rgba(255,200,90,.30) 0%,
-    rgba(255,170,60,0) 65%);
-  animation: glowBreath 2.4s ease-in-out infinite;
-  animation-delay: .3s;
-}
-.level-node-wrap--current .level-node { position: relative; z-index: 1; }
-.level-node--current .play-btn {
-  position: relative; z-index: 2;  /* sit above the cover */
-  width: 72px; height: 72px; border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 6px 14px rgba(240,119,43,.45);
-  display: flex; align-items: center; justify-content: center;
-}
-.level-node--current .play-btn svg { width: 34px; height: 34px; margin-left: 4px; }
-
-/* completed: video cover + polaroid frame + slight tilt */
-.level-node-wrap--completed .level-node {
-  background: #fff;
-  border: 8px solid #fff;
-  box-shadow: 0 14px 28px rgba(120,70,20,.26);
-  transform: rotate(var(--polaroid-rotation, 0deg));
-  overflow: visible; /* the cover clips separately; star sits outside */
-}
-/* Gentle golden glow pulse on completed nodes — subtler than the current
-   node's orange breathing, reads as a warm "trophy" shimmer. Only the
-   box-shadow animates so it never fights the rotation transform. */
-.level-node-wrap--completed.seen .level-node {
-  animation: completedGlow 3s ease-in-out infinite;
-  animation-delay: 600ms;
-}
-@keyframes completedGlow {
-  0%, 100% {
-    box-shadow: 0 14px 28px rgba(120,70,20,.26),
-                0 0 0 rgba(255,200,50,0);
-  }
-  50% {
-    box-shadow: 0 14px 28px rgba(120,70,20,.26),
-                0 0 22px rgba(255,200,50,.35);
-  }
-}
-.level-node__cover {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  border-radius: 27px; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-  background-size: cover; background-position: center;
-  background-color: #fff;
-}
-/* fallback chip when no safe cover could be extracted —colored with theme.accent */
-.level-node__cover.level-node--fallback {
-  background: var(--fallback-accent, var(--accent));
-}
-/* Current level: the demo cover gently breathes (scale up/down) to draw
-   the child's eye — "this one is alive, come play." Subtler than the
-   outer glow, gives the screenshot itself a pulse. Only on current. */
-.level-node-wrap--current.seen .level-node__cover {
-  animation: coverBreath 2.4s ease-in-out infinite;
-  animation-delay: 400ms;
-}
-@keyframes coverBreath {
-  0%, 100% { transform: scale(1);    }
-  50%      { transform: scale(1.06); }
-}
-/* gold star badge —OUTSIDE the cover-clipping layer (lives on overflow:visible node) */
-/* Outer wrapper handles positioning + slow rotation; inner star handles pop + twinkle.
-   Splitting transforms avoids two animations fighting over `transform`. */
-.level-node__star-wrap {
-  position: absolute; top: -10px; right: -10px;
-  width: 40px; height: 40px; z-index: 2;
-  opacity: 0;  /* set visible by the pop animation on the inner star */
-}
-.level-node__star {
-  width: 100%; height: 100%; display: block;
-  filter: drop-shadow(0 3px 4px rgba(120,70,20,.4));
-  transform: scale(0);
-}
-.level-node__star svg { width: 100%; height: 100%; display: block; }
-/* Pop the star in (scale + opacity) the first time its node enters view. */
-.level-node-wrap.seen .level-node__star {
-  animation: starPop 360ms cubic-bezier(.2,1.4,.4,1) forwards;
-  animation-delay: 180ms;
-}
-/* Slow rotation on the wrapper — only kicks in for completed (seen) nodes.
-   Also fades the wrapper in (opacity 0→1) since pop only animates the inner star. */
-.level-node-wrap--completed.seen .level-node__star-wrap {
-  animation: starWrapIn 360ms ease forwards,
-             starSpin 8s linear infinite;
-  animation-delay: 180ms, 600ms;
-}
-@keyframes starWrapIn {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
-/* Star twinkle — after the pop, the gold star periodically catches light. */
-.level-node-wrap--completed.seen .level-node__star {
-  animation: starPop 360ms cubic-bezier(.2,1.4,.4,1) forwards,
-             starTwinkle 2.8s ease-in-out infinite;
-  animation-delay: 180ms, 700ms;
-}
-@keyframes starTwinkle {
-  0%, 100% { filter: drop-shadow(0 3px 4px rgba(120,70,20,.4)); }
-  45%      { filter: drop-shadow(0 2px 6px rgba(255,210,80,.7)); }
-  50%      { filter: drop-shadow(0 2px 10px rgba(255,220,100,.85)); }
-  55%      { filter: drop-shadow(0 2px 6px rgba(255,210,80,.7)); }
-}
-@keyframes starSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* hover / active scale —preserve the completed polaroid tilt */
-.level-node-wrap:hover .level-node { transform: scale(1.05); }
-.level-node-wrap:active .level-node { transform: scale(.96); }
-.level-node-wrap--completed:hover .level-node {
-  transform: rotate(var(--polaroid-rotation, 0deg)) scale(1.05);
-}
-.level-node-wrap--completed:active .level-node {
-  transform: rotate(var(--polaroid-rotation, 0deg)) scale(.96);
-}
-
-/* ---------- title (clean, minimal, two-line clamp, readable over gradients) ---------- */
-.level-title {
-  margin-top: 18px; max-width: 320px;
-  font-family: "Fredoka", system-ui, sans-serif;
-  font-size: 20px; font-weight: 700; line-height: 1.22;
-  text-align: center; color: var(--ink);
-  display: -webkit-box; -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
-  /* keep readable over any chapter gradient */
-  text-shadow: 0 1px 0 rgba(255,255,255,.7), 0 0 6px rgba(255,255,255,.55);
-}
+.level-node-wrap:focus-visible .level-node { outline: 3px solid #267f7b; outline-offset: 15px; }
+.level-node-wrap:hover .level-node { outline: 2px solid #319791; outline-offset: 4px; }
+.level-title { margin-top: 22px; max-width: 260px; padding: 7px 13px; border: 1px solid #ded2c3; border-radius: 12px; background: #fffaf2f2; color: #402b20; font: 500 18px/1.25 "Fredoka",sans-serif; text-align: center; }
+.current-lesson-button { display: inline-flex; align-items: center; gap: 10px; color: #fffaf2; background: #267f7b; border-color: #60a39b; cursor: pointer; }
+.current-lesson-button:hover { background: #319791; }
+@keyframes currentRing { 0%,100% { opacity: .4; } 50% { opacity: .85; } }
+@media (min-width: 1024px) { .current-lesson-button { top: 98px; right: 24px; bottom: auto; left: auto; transform: none; } }
 
 /* ============================================================
    Level detail view — compact media rail and full reading surface
@@ -1011,87 +714,35 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ---------- title readability over dark backgrounds ---------- */
-.chapter-world[data-world="memory-town"] .level-title,
-.chapter-world[data-world="planning-camp"] .level-title {
-  color: #fff8e5;
-  text-shadow: 0 2px 2px rgba(69,45,57,.48), 0 0 10px rgba(69,45,57,.28);
+/* ---------- compact and mobile map ---------- */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .chapter-heading { margin-top: 8px; }
 }
-.chapter-world[data-world="planning-camp"] .chapter-heading {
-  color: #4b3d63;
-  background: rgba(255,248,229,.82);
-}
-
-/* ---------- current-node glow breathing + completed star entrance ---------- */
-/* Pulses only the halo ring's opacity/scale —the node itself never moves. */
-@keyframes glowBreath {
-  0%, 100% { opacity: .40; transform: translate(-50%, -50%) scale(.94); }
-  50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
-}
-/* Star pops in (scale 0→1 with overshoot) on first reveal. Opacity is handled
-   by the wrapper's starWrapIn so the inner star only owns its scale transform. */
-@keyframes starPop {
-  0%   { transform: scale(0);    }
-  70%  { transform: scale(1.2);  }
-  100% { transform: scale(1);    }
-}
-
-/* ---------- responsive ---------- */
-@media (max-width: 600px) {
-  .chapter-world { min-height: 790px; }
-  .chapter-main { padding: 22px 4px 16px; }
-  .chapter-heading {
-    gap: 7px; width: min(100%, 310px); margin-bottom: 5px;
-    padding: 7px 10px 7px 7px;
-    font-size: clamp(16px, 5vw, 21px);
-  }
-  .chapter-heading .ch-no { padding: 6px 8px; letter-spacing: .4px; }
-  .chapter-levels { max-width: 300px; }
-  .level-node { width: 160px; height: 160px; border-radius: 30px; }
-  .level-node-wrap--current { --current-node-size: 176px; }
-  .level-node-wrap--current .level-node { width: 176px; height: 176px; }
-  .level-node-wrap { width: 210px; margin: 30px auto; }
+@media (max-width: 767px) {
+  .chapter-world { min-height: 800px; }
+  .chapter-main { padding: 16px 4px 30px; }
+  .chapter-heading { gap: 8px; padding: 9px 12px; margin-bottom: 16px; font-size: 19px; }
+  .chapter-heading .ch-no { font-size: 14px; }
+  .chapter-levels { max-width: 340px; }
+  .level-node { width: 140px; height: 140px; border-width: 5px; }
+  .level-node-wrap--current .level-node { width: 152px; height: 152px; }
+  .level-node-wrap { width: 190px; margin: 26px auto; }
   .chapter-world:nth-child(odd) .level-node-wrap:nth-child(odd),
-  .chapter-world:nth-child(even) .level-node-wrap:nth-child(even) {
-    transform: translateX(clamp(-46px, -10vw, -34px));
-  }
+  .chapter-world:nth-child(even) .level-node-wrap:nth-child(even) { transform: translateX(clamp(-46px,-10vw,-30px)); }
   .chapter-world:nth-child(odd) .level-node-wrap:nth-child(even),
-  .chapter-world:nth-child(even) .level-node-wrap:nth-child(odd) {
-    transform: translateX(clamp(34px, 10vw, 46px));
-  }
-  .level-title { max-width: 190px; margin-top: 12px; font-size: 14px; }
+  .chapter-world:nth-child(even) .level-node-wrap:nth-child(odd) { transform: translateX(clamp(30px,10vw,46px)); }
+  .level-title { max-width: 190px; margin-top: 20px; font-size: 16px; }
+  .level-node__number { font-size: 36px; }
+  .level-node:has(.level-node__cover) .level-node__number { width: 38px; height: 38px; font-size: 18px; }
+  .level-node__marker { width: 40px; height: 40px; }
+  .level-node__marker svg { width: 23px; height: 23px; }
+  .level-node__marker--locator { top: -34px; left: calc(50% - 20px); }
+  .path-layer .trail--shadow { stroke-width: 31; }
+  .path-layer .trail--edge { stroke-width: 27; }
+  .path-layer .trail--surface { stroke-width: 21; }
+  .path-layer .trail--done { stroke-width: 5; }
 }
-
-@media (max-width: 380px) {
-  .level-node-wrap { width: 180px; margin: 27px auto; }
-  .level-node--current .play-btn { width: 58px; height: 58px; }
-  .level-node--current .play-btn svg { width: 28px; height: 28px; }
-  .level-node--locked .lock { width: 38px; height: 38px; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  /* Kill all motion (ambient loops + translated/opacity reveals), but
-     PRESERVE visibility —force every reveal target to its final state so
-     chapters and nodes stay on screen instead of freezing at opacity:0. */
-  .level-node, .level-node-wrap, .chapter-world, .detail-card, .back-btn { transition: none !important; }
-  .level-node-wrap--current::before,
-  .level-node-wrap--current::after,
-  .level-node-wrap--current.seen .level-node__cover,
-  .level-node-wrap--completed.seen .level-node,
-  .level-node-wrap--completed.seen .level-node__star-wrap,
-  .level-node-wrap.seen .level-node__star { animation: none !important; }
-  /* Force the "revealed" end-state so nothing stays hidden without motion. */
-  .chapter-world, .level-node-wrap, .level-node-wrap .level-node { opacity: 1 !important; }
-  .level-node__star { transform: scale(1) !important; }
-  .level-node__star-wrap { opacity: 1 !important; }
+  .level-node, .level-node-wrap, .chapter-world, .detail-card, .back-btn, .bg-layer__slide { transition: none !important; }
+  .level-node--current::before { animation: none !important; }
 }
-
-/* ---------- demo badge on locked nodes ---------- */
-.level-node__demo-badge {
-  position: absolute;
-  top: -6px; right: -6px;
-  width: 38px; height: 38px;
-  z-index: 2;
-  filter: drop-shadow(0 3px 4px rgba(60,40,15,.35));
-}
-.level-node__demo-badge svg { width: 100%; height: 100%; display: block; }

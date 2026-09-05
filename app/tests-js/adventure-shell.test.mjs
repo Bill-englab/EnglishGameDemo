@@ -46,7 +46,10 @@ test("opening reveals the close control and destroy restores background and remo
   const get = id => elements.get(id);
   const menu = get("adventure-menu-button");
   menu.focus();
-  const shell = createAdventureShell({ root: doc, onOpenLesson() {} });
+  let jumps = 0;
+  const shell = createAdventureShell({ root: doc, onOpenLesson() {}, onCurrentLesson() { jumps++; } });
+  get("current-lesson-button").dispatchEvent(new Event("click"));
+  assert.equal(jumps, 1, "Current lesson control calls the map action");
   menu.dispatchEvent(new Event("click"));
   assert.equal(get("course-drawer").scrollTop, 0);
   assert.equal(doc.activeElement, get("course-drawer-close"));
@@ -54,6 +57,8 @@ test("opening reveals the close control and destroy restores background and remo
   assert.equal(get("map-view").style.overflowY, "hidden");
   assert.equal(menu["aria-expanded"], "true");
   shell.destroy();
+  get("current-lesson-button").dispatchEvent(new Event("click"));
+  assert.equal(jumps, 1, "Destroy removes the current action listener");
   assert.equal(get("course-drawer").hidden, true);
   assert.equal(get("drawer-backdrop").hidden, true);
   assert.equal(get("map-view").inert, false);

@@ -7,6 +7,15 @@
 // in-app smoothPath so the trail keeps its gentle curvature.
 const TENSION = 0.16;
 
+// The shared join is the current node; the connector to locked stays upcoming.
+export function splitPathPoints(points, firstLockedIndex) {
+  if (firstLockedIndex < 0 || firstLockedIndex >= points.length) {
+    return { traveled: points.slice(), upcoming: [] };
+  }
+  return { traveled: points.slice(0, firstLockedIndex),
+    upcoming: points.slice(Math.max(0, firstLockedIndex - 1)) };
+}
+
 // Builds an SVG path string ("M x y C ... C ...") through the given points
 // using a Catmull-Rom spline converted to cubic Bézier segments.
 //

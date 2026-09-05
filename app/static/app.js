@@ -3,8 +3,8 @@
 // Ten chapter worlds, each painted by a full background illustration.
 // ============================================================
 
-import { getChapterTheme, getLevelVisualState, getStableRotation, isFrameDark } from "./map-model.mjs";
-import { buildSmoothPath } from "./map-path.mjs";
+import { getChapterTheme, resolveMapPresentation, resolveMapBackground, isFrameDark } from "./map-model.mjs";
+import { buildSmoothPath, splitPathPoints } from "./map-path.mjs";
 import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
 import { resolveMediaView } from "./detail-media.mjs";
 import { summarizeAdventure } from "./adventure-navigation.mjs";
@@ -13,6 +13,7 @@ import { createAdventureShell } from "./adventure-shell.mjs";
 const adventureShell = createAdventureShell({
   root: document,
   onOpenLesson: openDetail,
+  onCurrentLesson: scrollToCurrentLesson,
   onProfile: () => document.getElementById("profile-open").click(),
 });
 
@@ -501,16 +502,6 @@ function renderRecordError(container, level, err) {
   container.appendChild(msg);
 }
 
-// ===== svg bits =====
-const PLAY_BTN_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>`;
-const LOCK_SVG = `<svg class="lock" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5" y="11" width="14" height="9.5" rx="2.4" fill="#b6a99a"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="#b6a99a" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="15.4" r="1.7" fill="#fff7ec"/></svg>`;
-
-const STAR_PATH = "M12 17.27 L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z";
-const starSVG = (lit) => {
-  const fill = lit ? "#ffd23f" : "#e6ddca";
-  const stroke = lit ? "#f0a500" : "#c2b7a2";
-  return `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="${STAR_PATH}" fill="${fill}" stroke="${stroke}" stroke-width="1" stroke-linejoin="round"/></svg>`;
-};
 
 // ===== frame extraction for the level cover =====
 // Tries to load a pre-generated server-side thumbnail. Falls back to null
@@ -540,30 +531,38 @@ let currentLibrary = [];        // full chapter tree, kept for detail navigation
 let flatLevels = [];            // flattened level list with chapter context for prev/next
 let bgSlides = [];              // background slides, kept so closeDetail can refresh them
 
-// Gold star badge for completed nodes. Placed OUTSIDE the cover-clipping layer
-// on the overflow:visible .level-node so it is never cropped.
-const STAR_BADGE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="${STAR_PATH}" fill="#ffd23f" stroke="#f0a500" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
-
-// Small play badge shown on locked nodes that still have a demo to preview.
-const DEMO_BADGE_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#fff" opacity=".92"/><path d="M9.5 7.5v9l7-4.5z" fill="#ff9d4d"/></svg>`;
+const MAP_MARKERS = {
+  check: '<path d="m5 12 4 4L19 6"/>',
+  locator: '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+  lock: '<rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/>',
+};
 
 // Builds the level node for every state (completed / current / locked).
 // Any state with a demo shows the demo screenshot as its cover; the
-// state-specific overlay (star / play button / lock) sits on top.
+// state-specific marker (check / locator / lock) sits outside the cover.
 function createLevelNode(level, index, theme) {
-  const state = getLevelVisualState(level);
+  const { state, number, showCover, marker } = resolveMapPresentation(level, index);
 
   const wrap = document.createElement("button");
   wrap.type = "button";
   wrap.className = `level-node-wrap level-node-wrap--${state}`;
   wrap.setAttribute("aria-label", level.title);
+  if (state === "current") {
+    wrap.dataset.currentLesson = `${level.chapter}/${level.level}`;
+    wrap.setAttribute("aria-current", "step");
+  }
 
   const node = document.createElement("span");
   node.className = `level-node level-node--${state}`;
+  const numberEl = document.createElement("span");
+  numberEl.className = "level-node__number";
+  numberEl.textContent = number;
+  numberEl.setAttribute("aria-hidden", "true");
+  node.appendChild(numberEl);
 
   // Demo screenshot cover — shown for any state that has a demo so
   // uncompleted levels aren't just blank white.
-  if (level.has_demo) {
+  if (showCover) {
     const cover = document.createElement("span");
     cover.className = "level-node__cover";
     node.appendChild(cover);
@@ -572,48 +571,17 @@ function createLevelNode(level, index, theme) {
       if (url) {
         cover.style.backgroundImage = `url("${url}")`;
       } else {
-        cover.classList.add("level-node--fallback");
-        cover.style.setProperty("--fallback-accent", theme.accent);
+        cover.remove();
       }
       requestAnimationFrame(drawMapPath);
     });
   }
 
-  if (state === "completed") {
-    node.style.setProperty("--polaroid-rotation", getStableRotation(index) + "deg");
-    // Star wrapper (positioning + slow rotation) holds the inner star element
-    // (pop + twinkle). Splitting transforms across two elements lets rotation
-    // and scale coexist without fighting each other.
-    const starWrap = document.createElement("span");
-    starWrap.className = "level-node__star-wrap";
-    const star = document.createElement("span");
-    star.className = "level-node__star";
-    star.innerHTML = STAR_BADGE_SVG;
-    starWrap.appendChild(star);
-    node.appendChild(starWrap);
-  } else if (state === "current") {
-    const playBtn = document.createElement("span");
-    playBtn.className = "play-btn";
-    playBtn.innerHTML = PLAY_BTN_SVG;
-    node.appendChild(playBtn);
-  } else {
-    // locked — dim overlay sits between cover and lock
-    if (level.has_demo) {
-      const dim = document.createElement("span");
-      dim.className = "level-node__dim";
-      node.appendChild(dim);
-    }
-    const lockWrap = document.createElement("span");
-    lockWrap.className = "lock-wrap";
-    lockWrap.innerHTML = LOCK_SVG;
-    node.appendChild(lockWrap);
-    if (level.has_demo) {
-      const badge = document.createElement("span");
-      badge.className = "level-node__demo-badge";
-      badge.innerHTML = DEMO_BADGE_SVG;
-      node.appendChild(badge);
-    }
-  }
+  const markerEl = document.createElement("span");
+  markerEl.className = `level-node__marker level-node__marker--${marker}`;
+  markerEl.setAttribute("aria-hidden", "true");
+  markerEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${MAP_MARKERS[marker]}</svg>`;
+  node.appendChild(markerEl);
 
   const title = document.createElement("span");
   title.className = "level-title";
@@ -626,32 +594,43 @@ function createLevelNode(level, index, theme) {
   return wrap;
 }
 
-// Background images live on a fixed layer (parallax: bg stays put while content scrolls).
-// Images are probed at startup; chapters without their own image cycle through
-// the available ones (index % count) so the map always has a painted background.
-const bgImageCache = new Set();  // URLs known to load successfully
-const EXTENSIONS = ["jpg", "png", "webp"];
-
-// Probe a single chapter image (tries .jpg, .png, .webp). Resolves to URL or null.
-function probeChapterImage(chapterName) {
-  for (const ext of EXTENSIONS) {
-    const url = `/static/worlds/${chapterName}.${ext}`;
-    if (bgImageCache.has(url)) return url;
+let cancelCurrentJump = () => {};
+function scrollToCurrentLesson({ behavior = "smooth" } = {}) {
+  cancelCurrentJump();
+  const map = document.getElementById("map-view");
+  const node = map.querySelector("[data-current-lesson]");
+  if (!node || map.classList.contains("hidden")) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) behavior = "auto";
+  let timer;
+  const cleanup = () => {
+    clearTimeout(timer);
+    map.removeEventListener("scrollend", finish);
+  };
+  const finish = () => {
+    cleanup();
+    if (node.isConnected && !map.classList.contains("hidden")) node.focus({ preventScroll: true });
+  };
+  cancelCurrentJump = cleanup;
+  if (behavior !== "auto") {
+    map.addEventListener("scrollend", finish, { once: true });
+    // Older WebViews lack scrollend; also handles an already-centered node.
+    timer = setTimeout(finish, 1200);
   }
-  return null;  // not yet probed — caller should async-probe
+  node.scrollIntoView({ behavior, block: "center" });
+  if (behavior === "auto") requestAnimationFrame(finish);
 }
 
-// Async-probe one chapter; returns the working URL or null (caches result).
-function asyncProbeChapterImage(chapterName) {
-  const cached = probeChapterImage(chapterName);
-  if (cached) return Promise.resolve(cached);
-  // Try each extension in order; first hit wins.
+// Background images stay untinted on a fixed layer. Each world owns its fallback.
+const bgImageCache = new Set();  // URLs known to load successfully
+const mapMobile = window.matchMedia("(max-width: 767px)");
+let backgroundGeneration = 0;
+function probeBackgroundCandidates(urls) {
   return new Promise(resolve => {
     let i = 0;
     const tryNext = () => {
-      if (i >= EXTENSIONS.length) return resolve(null);
-      const ext = EXTENSIONS[i++];
-      const url = `/static/worlds/${chapterName}.${ext}`;
+      if (i >= urls.length) return resolve(null);
+      const url = urls[i++];
+      if (bgImageCache.has(url)) return resolve(url);
       const img = new Image();
       img.onload = () => { bgImageCache.add(url); resolve(url); };
       img.onerror = tryNext;
@@ -660,6 +639,19 @@ function asyncProbeChapterImage(chapterName) {
     tryNext();
   });
 }
+
+function selectMapBackgrounds(slides) {
+  const generation = ++backgroundGeneration;
+  const width = mapMobile.matches ? 767 : 768;
+  slides.forEach(slide => {
+    probeBackgroundCandidates(resolveMapBackground(slide.dataset.world, width)).then(url => {
+      if (generation !== backgroundGeneration || !slide.isConnected) return;
+      slide.classList.toggle("bg-layer__slide--placeholder", !url);
+      slide.style.backgroundImage = url ? `url("${url}")` : "";
+    });
+  });
+}
+mapMobile.addEventListener("change", () => selectMapBackgrounds(bgSlides));
 
 let bgScrollTicking = false;
 let activeChapter = null;
@@ -674,28 +666,13 @@ function buildBgLayer(library) {
     const slide = document.createElement("div");
     slide.className = "bg-layer__slide bg-layer__slide--placeholder";
     slide.dataset.chapter = chapter.name;
+    slide.dataset.world = theme.world;
     slide.style.setProperty("--slide-accent", theme.accent);
     layer.appendChild(slide);
     slides.push(slide);
   }
 
-  // Phase 2: probe each chapter's own image. Chapters that have one get it
-  // directly. Chapters that don't will cycle through the ones that do.
-  const probePromises = library.map(ch => asyncProbeChapterImage(ch.background_asset || ch.name));
-  Promise.all(probePromises).then(urls => {
-    const available = urls.filter(Boolean);  // URLs that loaded successfully
-    if (available.length === 0) return;      // no images at all — keep placeholders
-
-    library.forEach((chapter, idx) => {
-      const slide = slides[idx];
-      const ownUrl = urls[idx];
-      // Use the chapter's own image if it exists; otherwise cycle through
-      // available images by index (so every chapter gets a painted bg).
-      const url = ownUrl || available[idx % available.length];
-      slide.classList.remove("bg-layer__slide--placeholder");
-      slide.style.backgroundImage = `url("${url}")`;
-    });
-  });
+  selectMapBackgrounds(slides);
 
   return slides;
 }
@@ -720,7 +697,9 @@ function updateBgOnScroll(slides) {
   }
 }
 
+let removeBgScrollListeners = () => {};
 function observeBgSwitch(slides) {
+  removeBgScrollListeners();
   activeChapter = null;
   // Run once immediately to set the initial slide.
   updateBgOnScroll(slides);
@@ -734,6 +713,10 @@ function observeBgSwitch(slides) {
   const mapView = document.getElementById("map-view");
   if (mapView) mapView.addEventListener("scroll", scrollHandler, { passive: true });
   window.addEventListener("scroll", scrollHandler, { passive: true });
+  removeBgScrollListeners = () => {
+    mapView?.removeEventListener("scroll", scrollHandler);
+    window.removeEventListener("scroll", scrollHandler);
+  };
 }
 
 function renderMap(library) {
@@ -813,9 +796,8 @@ function observeReveal() {
 }
 
 // Reads every .level-node center in DOM order and draws the trail. The path
-// splits at the first locked level: the "traveled" segment (completed +
-// current levels) is golden and glowing; the "upcoming" segment (locked
-// levels) stays white and dimmer. Centers are measured from raw layout —
+// has an ivory body with a muted teal traveled inner line.
+// Centers are measured from raw layout —
 // .level-node carries no ambient transform, so hover/scene animations can
 // never shift the measured points.
 function drawMapPath() {
@@ -853,15 +835,15 @@ function drawMapPath() {
   //   level stays white).
   // Upcoming = pts[splitIdx-1 .. end] — starts at the current level so the
   //   two segments visually connect at the current node.
-  const traveledPts = pts.slice(0, splitIdx);
-  const upcomingPts = pts.slice(splitIdx > 0 ? splitIdx - 1 : 0);
-
+  const { traveled: traveledPts, upcoming: upcomingPts } = splitPathPoints(pts, splitIdx);
   let html = "";
+  for (const segment of [traveledPts, upcomingPts]) {
+    if (segment.length < 2) continue;
+    const d = buildSmoothPath(segment);
+    for (const layer of ["shadow", "edge", "surface"]) html += `<path class="trail trail--${layer}" d="${d}"/>`;
+  }
   if (traveledPts.length >= 2) {
     html += `<path class="trail trail--done" d="${buildSmoothPath(traveledPts)}"/>`;
-  }
-  if (upcomingPts.length >= 2) {
-    html += `<path class="trail trail--todo" d="${buildSmoothPath(upcomingPts)}"/>`;
   }
   svg.innerHTML = html;
 }
@@ -1130,7 +1112,7 @@ function showOnly(id) {
 async function loadLibrary({ isCurrent = () => true } = {}) {
   // A detail upload refreshes in the background. Keep the existing map usable
   // if the family navigates away before that request finishes.
-  if (!document.getElementById("map-view").classList.contains("hidden")) showOnly("map-loading");
+  if (!currentLibrary.length && !document.getElementById("map-view").classList.contains("hidden")) showOnly("map-loading");
   try {
     const response = await fetch("/api/library", { cache: "no-store", credentials: "same-origin" });
     if (!response.ok) throw new Error(`library ${response.status}`);
@@ -1142,7 +1124,9 @@ async function loadLibrary({ isCurrent = () => true } = {}) {
   } catch (error) {
     if (!isCurrent()) return false;
     console.error("Unable to load library", error);
+    document.getElementById("current-lesson-button").hidden = true;
     showOnly("map-error");
+    if (currentLibrary.length) document.getElementById("map-scroll").classList.remove("hidden");
     return false;
   }
 }

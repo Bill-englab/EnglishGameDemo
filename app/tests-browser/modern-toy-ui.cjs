@@ -218,9 +218,11 @@ async function shellGeometry(page, viewport) {
       const r = el.querySelector(selector).getBoundingClientRect();
       return { top: r.top, height: r.height, center: r.left + r.width / 2 };
     };
-    return { brand: rect('.adventure-brand'), progress: rect('.progress'), account: rect('.user-menu__trigger') };
+    return { railHeight: el.getBoundingClientRect().height, brand: rect('.adventure-brand'), progress: rect('.progress'), account: rect('.user-menu__trigger') };
   });
   expectClose(shell.brand.top, shell.progress.top, 1);
+  expectClose(shell.brand.top, shell.account.top, 1);
+  expectClose(shell.railHeight, 56, 1);
   expectClose(shell.brand.height, 52, 1);
   expectClose(shell.progress.height, 52, 1);
   expectClose(shell.account.height, 52, 1);

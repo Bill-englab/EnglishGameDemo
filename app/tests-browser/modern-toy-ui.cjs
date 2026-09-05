@@ -177,11 +177,11 @@ async function nativeScreenshot(electron, output, name) {
   fs.writeFileSync(path.join(output, `${name}.png`), Buffer.from(png, 'base64'));
 }
 async function pathAligned(page) {
-  const delta = await page.evaluate(() => {
+  const distances = await page.evaluate(() => {
     const svg = document.querySelector('#path-svg');
     const paths = [...svg.querySelectorAll('path')];
     const origin = document.querySelector('#map-scroll').getBoundingClientRect();
-    return Math.max(...[...document.querySelectorAll('.level-node')].map(node => {
+    return [...document.querySelectorAll('.level-node')].map(node => {
       const r = node.getBoundingClientRect();
       const x = r.left + r.width / 2 - origin.left;
       const y = r.top + r.height / 2 - origin.top;
@@ -199,9 +199,10 @@ async function pathAligned(page) {
         distance = Math.min(distance, Math.hypot(p.x - x, p.y - y));
       }
       return distance;
-    }));
+    });
   });
-  assert.ok(delta < 4, `Path misses a node center by ${delta}px`);
+  const delta = Math.max(...distances);
+  assert.ok(delta < 4, `Path misses a node center by ${delta}px; distances: ${distances.join(', ')}`);
 }
 
 function expectClose(actual, expected, tolerance) {
@@ -457,7 +458,12 @@ async function main() {
       await page.reload();
       await page.waitForFunction(() => document.querySelector('#star-count').textContent === '2');
       assert.equal(await page.locator('.level-node--completed').count(), 2);
+      assert.deepEqual(await page.locator('.level-node--completed').evaluateAll(nodes => nodes.map(node => node.querySelectorAll('.level-node__marker--star').length)), [1, 1]);
+      assert.equal(await page.locator('.level-node--current .level-node__marker--star').count(), 0);
+      assert.equal(await page.locator('.level-node--current .level-node__marker--locator').count(), 1);
+      assert.equal(await page.locator('.level-node--locked').first().locator('.level-node__marker--lock').count(), 1);
       assert.equal(await page.locator('[data-current-lesson]').getAttribute('aria-label'), library[0].levels[2].title);
+      assert.match(await page.locator('.chapter-heading').first().innerText(), /★ 2\/3/);
       await page.locator('#adventure-menu-button').click();
       assert.match(await page.locator('#course-drawer-progress').innerText(), /2 \/ 30 completed/);
       assert.equal(await page.locator('.course-chapter__count').first().innerText(), '2 / 3');

@@ -535,14 +535,14 @@ let flatLevels = [];            // flattened level list with chapter context for
 let bgSlides = [];              // background slides, kept so closeDetail can refresh them
 
 const MAP_MARKERS = {
-  check: '<path d="m5 12 4 4L19 6"/>',
+  star: '<path d="m12 3.1 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.7l6.2-.9Z" fill="currentColor" stroke="none"/>',
   locator: '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
   lock: '<rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/>',
 };
 
 // Builds the level node for every state (completed / current / locked).
 // Any state with a demo shows the demo screenshot as its cover; the
-// state-specific marker (check / locator / lock) sits outside the cover.
+// state-specific marker (star / locator / lock) sits outside the cover.
 function createLevelNode(level, index, theme) {
   const { state, number, showCover, marker } = resolveMapPresentation(level, index);
 
@@ -729,7 +729,11 @@ function renderMap(library) {
     const chapterNameEl = document.createElement("span");
     chapterNameEl.className = "ch-name";
     chapterNameEl.textContent = chapter.title || prettyChapter(chapter.name);
-    heading.append(chapterNumberEl, chapterNameEl);
+    const chapterProgressEl = document.createElement("span");
+    chapterProgressEl.className = "ch-progress";
+    const completed = chapter.levels.filter(level => level.has_performance).length;
+    chapterProgressEl.textContent = `★ ${completed}/${chapter.levels.length}`;
+    heading.append(chapterNumberEl, chapterNameEl, chapterProgressEl);
     main.appendChild(heading);
 
     const levelsCol = document.createElement("div");
@@ -757,6 +761,7 @@ function renderMap(library) {
     observeReveal();
     observeBgSwitch(bgSlides);
   });
+  document.fonts?.ready.then(() => requestAnimationFrame(drawMapPath));
 }
 
 function observeReveal() {
@@ -773,7 +778,7 @@ function observeReveal() {
 }
 
 // Reads every .level-node center in DOM order and draws the trail. The path
-// has an ivory body with a muted teal traveled inner line.
+// has an ivory body with a gold completed inner line and a teal current transition.
 // Centers are measured from raw layout —
 // .level-node carries no ambient transform, so hover/scene animations can
 // never shift the measured points.
@@ -820,7 +825,14 @@ function drawMapPath() {
     for (const layer of ["shadow", "edge", "surface"]) html += `<path class="trail trail--${layer}" d="${d}"/>`;
   }
   if (traveledPts.length >= 2) {
-    html += `<path class="trail trail--done" d="${buildSmoothPath(traveledPts)}"/>`;
+    const hasCurrent = [...nodes].some(node => node.classList.contains("level-node--current"));
+    const completedPts = hasCurrent ? traveledPts.slice(0, -1) : traveledPts;
+    if (completedPts.length >= 2) {
+      html += `<g class="trail--done"><path class="trail trail__progress" d="${buildSmoothPath(completedPts)}"/></g>`;
+    }
+    if (hasCurrent) {
+      html += `<path class="trail trail--current" d="${buildSmoothPath(traveledPts.slice(-2))}"/>`;
+    }
   }
   svg.innerHTML = html;
 }

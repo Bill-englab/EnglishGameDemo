@@ -3,10 +3,10 @@ import assert from "node:assert/strict";
 import * as model from "../static/map-model.mjs";
 import { createCurrentLessonAction, showMapLoadError } from "../static/map-interactions.mjs";
 
-test("only performance earns a completion check; current and preview have distinct markers", () => {
+test("only performance earns a binary star reward; current and preview have distinct markers", () => {
   assert.equal(typeof model.resolveMapPresentation, "function");
   for (const [level, expected] of [
-    [{has_performance:true,current:true,has_demo:true}, {state:"completed",number:1,showCover:true,marker:"check"}],
+    [{has_performance:true,current:true,has_demo:true}, {state:"completed",number:1,showCover:true,marker:"star"}],
     [{has_performance:false,current:true,has_demo:true}, {state:"current",number:1,showCover:true,marker:"locator"}],
     [{has_performance:false,current:false,state:"completed",has_demo:false}, {state:"locked",number:1,showCover:false,marker:"lock"}],
   ]) assert.deepEqual(model.resolveMapPresentation(level, 0), expected);

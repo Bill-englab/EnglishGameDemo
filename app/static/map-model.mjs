@@ -19,7 +19,7 @@ export const getLevelVisualState = level => level.has_performance ? "completed" 
 export function resolveMapPresentation(level, index) {
   const state = getLevelVisualState(level);
   return { state, number: index + 1, showCover: Boolean(level.has_demo),
-    marker: { completed: "check", current: "locator", locked: "lock" }[state] };
+    marker: { completed: "star", current: "locator", locked: "lock" }[state] };
 }
 export const resolveMapBackground = (world, width) => getWorldAssetUrls(world, width < 768);
 export const getStableRotation = index => ((index * 53) % 7) - 3;

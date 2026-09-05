@@ -77,6 +77,8 @@ cd app
 
 ## 测试
 
+2026-09-05 当前基线：Python **160**、Node **44**。本轮修正与可重复命令见[当前 UI 验收记录](../docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
+
 ```bash
 cd app
 .venv/Scripts/python -m pytest            # Python：后端逻辑 + 路由 + 上传
@@ -96,13 +98,20 @@ $env:TOY_QA_ELECTRON='1'
 # 可选：保存截图到你指定的独立 QA 目录
 $env:TOY_QA_OUTPUT='<QA screenshot directory>'
 node tests-browser/modern-toy-ui.cjs
+# 本轮聚焦回归（每条独立构造临时数据）
+node tests-browser/modern-toy-ui.cjs --focus=route
+node tests-browser/modern-toy-ui.cjs --focus=navigation-celebration
+node tests-browser/modern-toy-ui.cjs --focus=cancel-celebration
+node tests-browser/modern-toy-ui.cjs --focus=accessible-state
+node tests-browser/modern-toy-ui.cjs --focus=account
+node tests-browser/modern-toy-ui.cjs --focus=evidence
 # 可选聚焦回归：selection / account / refresh / electron（electron 同时需要 TOY_QA_ELECTRON=1）
 $env:TOY_QA_FINAL_FIX='selection'
 node tests-browser/modern-toy-ui.cjs
 Remove-Item Env:TOY_QA_FINAL_FIX
 ```
 
-脚本自启临时端口 Flask，复制课程到临时根，隔离账号、配置、资料和媒体，拦截所有上传；不执行 `app.py` 主入口或媒体扫描。最终清理自有浏览器、服务和临时根，不复用用户窗口。默认不启动 Electron；启用后用真实二进制、真实 preload 和独立 userData 的隐藏窗口检查最小化/最大化/关闭、拖动区与800×600布局。浏览器检查1440×960、800×600、390×844、844×390、目录焦点、真实0/30→2/30与延迟demo上传时的录制保留。人工摄像头、Safari/iOS不在自动验收范围。
+脚本自启临时端口 Flask，复制课程到临时根，隔离账号、配置、资料和媒体。演示及故障上传场景会拦截请求，成功表演回归只把生成的测试视频写入临时媒体根；不执行 `app.py` 主入口或媒体扫描。最终清理自有浏览器、服务和临时根，不复用用户窗口。默认不启动 Electron；启用后用真实二进制、真实 preload 和独立 userData 的隐藏窗口检查最小化/最大化/关闭、拖动区与800×600布局。浏览器检查1440×960、800×600、390×844、844×390、目录焦点、真实0/30→2/30与延迟demo上传时的录制保留。人工摄像头、Safari/iOS不在自动验收范围。
 
 ## 结构
 
@@ -123,8 +132,8 @@ app/
     adventure-shell.mjs # DOM：浮动外壳、课程目录、焦点锁与滚动恢复
     world-assets.mjs # 纯：20 张响应式图与本章旧图候选
     map-model.mjs   # 纯：10 章主题（world + accent）、视觉状态、旋转、帧暗检测
-    map-path.mjs    # 纯：Catmull-Rom 平滑路径
-    map-interactions.mjs # DOM：current 滚动/焦点与加载错误时保留地图
+    map-path.mjs    # 纯：保留完整邻点的 Catmull-Rom 路径，支持按端点区间绘制内线
+    map-interactions.mjs # DOM：current 焦点、待庆祝队列、动效取消/视图清理与加载错误
     style.css       # 现代玩具剧场共享 token、地图/详情/目录 + 自托管字体
     fonts/          # 自托管 woff2（Fredoka/Nunito，离线可用）
     worlds/         # 本章旧图回退

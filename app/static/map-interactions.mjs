@@ -4,7 +4,31 @@ export function createCelebrationQueue() {
   return {
     queue(levelKey) { pending.add(levelKey); },
     consume(levelKey) { return pending.delete(levelKey); },
+    drain(eligibleKeys) { return [...eligibleKeys].filter(key => pending.delete(key)); },
     clear() { pending.clear(); },
+  };
+}
+
+// Own both CSS-animation listeners and the view's one-shot classes. Removing a
+// view may cancel an animation before it ever emits animationend.
+export function createCelebrationEffects({ view }) {
+  const active = new Set();
+  return {
+    play(element, className, target = element) {
+      if (view.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const clear = () => {
+        element.classList.remove(className);
+        target.removeEventListener("animationend", finish);
+        target.removeEventListener("animationcancel", finish);
+        active.delete(clear);
+      };
+      const finish = event => { if (event.target === target) clear(); };
+      active.add(clear);
+      target.addEventListener("animationend", finish);
+      target.addEventListener("animationcancel", finish);
+      element.classList.add(className);
+    },
+    clear() { for (const clear of active) clear(); },
   };
 }
 

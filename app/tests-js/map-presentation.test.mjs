@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import * as model from "../static/map-model.mjs";
+import * as interactions from "../static/map-interactions.mjs";
 import { createCelebrationQueue, createCurrentLessonAction, resolveCompletionTransition, showMapLoadError } from "../static/map-interactions.mjs";
 
 test("completion celebrations are consumed once and can be cleared", () => {
@@ -11,6 +12,56 @@ test("completion celebrations are consumed once and can be cleared", () => {
   queue.queue("x");
   queue.clear();
   assert.equal(queue.consume("x"), false);
+});
+
+test("map visibility drains every eligible celebration and retains unrendered keys", () => {
+  const queue = createCelebrationQueue();
+  for (const key of ["lesson-a", "lesson-b", "not-rendered", "lesson-a"]) queue.queue(key);
+  assert.equal(typeof queue.drain, "function", "A visible map can consume every eligible pending key");
+  assert.deepEqual(queue.drain(["lesson-b", "lesson-a"]), ["lesson-b", "lesson-a"]);
+  assert.deepEqual(queue.drain(["lesson-a", "lesson-b"]), []);
+  assert.deepEqual(queue.drain(["not-rendered"]), ["not-rendered"]);
+});
+
+function celebrationFixture(reduced = false) {
+  assert.equal(typeof interactions.createCelebrationEffects, "function",
+    "One-shot effects own their animation and view-teardown cleanup");
+  const effects = interactions.createCelebrationEffects({ view: { matchMedia: () => ({ matches: reduced }) } });
+  const elements = ["level-node-wrap--just-completed", "chapter-world--just-completed"].map(className => {
+    const classes = new Set();
+    const element = { classList: { add: key => classes.add(key), remove: key => classes.delete(key) } };
+    const target = new EventTarget();
+    effects.play(element, className, target);
+    return { classes, target, className };
+  });
+  return { effects, elements };
+}
+
+for (const eventName of ["animationend", "animationcancel"]) {
+  test(`${eventName} clears lesson and chapter one-shot classes`, () => {
+    const { elements } = celebrationFixture();
+    for (const { classes, target, className } of elements) {
+      assert.equal(classes.has(className), true);
+      target.dispatchEvent(new Event(eventName));
+      assert.equal(classes.has(className), false);
+    }
+  });
+}
+
+test("view teardown clears active lesson and chapter effects before a later map visit", () => {
+  const { effects, elements } = celebrationFixture();
+  effects.clear();
+  effects.clear();
+  for (const { classes, target } of elements) {
+    assert.equal(classes.size, 0);
+    target.dispatchEvent(new Event("animationcancel"));
+    assert.equal(classes.size, 0);
+  }
+});
+
+test("reduced motion never starts lesson or chapter one-shot effects", () => {
+  const { elements } = celebrationFixture(true);
+  assert.deepEqual(elements.map(({ classes }) => classes.size), [0, 0]);
 });
 
 test("celebrations require a new lesson completion and a new 3/3 chapter", () => {

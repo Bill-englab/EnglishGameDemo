@@ -55,7 +55,7 @@ async function account(page, url, output) {
           return { name: e.id || e.className, width: rect.width, height: rect.height,
             font: parseFloat(style.fontSize), family: style.fontFamily, right: rect.right, left: rect.left };
         }));
-      assert.ok(controls.length >= 7, 'Actual admin account controls are rendered');
+      assert.ok(controls.length >= 7, `Actual admin account controls are rendered at ${viewport.width}px: ${JSON.stringify(controls)}`);
       assert.deepEqual(controls.filter(c => c.width < 44 || c.height < 44 || c.font < 14 || !c.family.includes('Nunito') || c.left < 0 || c.right > viewport.width), [],
         'Account controls must use Nunito >=14px and reachable 44px targets');
       assert.ok(await admin.evaluate(() => parseFloat(getComputedStyle(document.querySelector('.admin-user-list li')).fontSize) >= 14));

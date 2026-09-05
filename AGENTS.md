@@ -196,7 +196,7 @@ curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:5000/login
 
 ```bash
 cd app
-.venv/Scripts/python -m pytest        # 全量（2026-09-05：159 个）
+.venv/Scripts/python -m pytest        # 全量（2026-09-05：160 个）
 .venv/Scripts/python -m pytest -v
 .venv/Scripts/python -m pytest tests/test_scanner.py -v   # 单文件
 ```
@@ -216,7 +216,7 @@ node --test tests-js/map-path.test.mjs # 单文件
 
 ### 当前测试覆盖什么
 
-- 2026-09-05 基线：Python 159、Node 36；包含20张资产HTTP验证、导航计数/不可变输入、drawer焦点、Electron挂载幂等、current跳转、同章背景回退、上传所有权与详情结构。
+- 2026-09-05 基线：Python 160、Node 44；包含20张资产HTTP验证、导航计数/不可变输入、drawer焦点、Electron挂载幂等、current跳转、同章背景回退、上传所有权、路径共享曲线和庆祝队列/取消生命周期。当前验收与命令见 [`docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`](docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
 - 可选 `tests-browser/modern-toy-ui.cjs`：已有 Playwright/Edge/Python 环境下运行；具体环境变量见 `app/README.md`。使用临时课程副本、账号、配置、资料与媒体根，拦截上传且不执行启动扫描。`TOY_QA_ELECTRON=1` 启用真实 Electron/preload、独立 userData、隐藏800×600窗口。不要为测试启动 `electron/main.cjs`（它拉起生产服务并会清理5000端口），不要复用用户窗口。
 
 - `test_scanner.py`：扫描排序、`meta.json` 回退、`has_demo`/`has_performance` 跨树检测、**webm 格式检测**、三态机、跨章状态传递、全完成无 current、**按用户名隔离 performance 路径**。
@@ -303,7 +303,8 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 | 文件 | 角色 | 依赖 |
 | --- | --- | --- |
 | `map-model.mjs` | **纯数据/纯函数**：`CHAPTER_THEMES`（10 章：world + accent）、`getChapterTheme`、`getLevelVisualState`、`getStableRotation`、`isFrameDark` | 无 |
-| `map-path.mjs` | **纯函数**：`buildSmoothPath(points)`，绝不修改输入数组 | 无 |
+| `map-path.mjs` | **纯函数**：`buildSmoothPath(points, { startIndex, endIndex })`，区间端点包含在内，控制点始终使用完整邻点；不修改输入 | 无 |
+| `map-interactions.mjs` | **DOM 边界/纯队列**：current 焦点、待庆祝队列、动效结束/取消/视图清理和加载错误 | 无 |
 | `lesson-view.mjs` | **纯函数**：A/B/C 对话分组、Replay Card、prompt 分段、章节上下文 | 无 |
 | `world-assets.mjs` | **纯函数**：v2 desktop/mobile 与同章旧图 URL 候选 | 无 |
 | `adventure-navigation.mjs` | **纯函数**：Stage 1/2/3 展示、章/全局真实完成数、current 目标 | 无 |
@@ -322,7 +323,8 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 - **响应式背景**：固定 `#bg-layer`，每章一张 slide，滚动交叉淡入淡出。`/static/worlds-v2/<world>-desktop.webp`（1920×1200）和 `-mobile.webp`（1080×1920）共20张，完整清单见 `app/static/worlds-v2/README.md`。`<768`切手机图；失败按本章旧WebP/PNG/JPG尝试，全部失败保留主题材质，不循环别章。resize仅重选背景，generation token阻止旧响应覆盖新尺寸；详情为暖白阅读面。
 - **封面** `extractSafeCover()`：改为加载服务端缩略图 `/thumb/<ch>/<lv>`（替代原 canvas 抽帧——大视频 seek 慢且暗帧多）。加载失败 → null → 主题色渐变 fallback。有 frameCache，地图/详情共用。缩略图由后端在上传和启动扫描时用 ffmpeg 生成（见 §6）。
-- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，用 `buildSmoothPath` 画阴影/暖灰边/象牙白三层路径；已完成段为低饱和金色内线，通往 current 的段为青绿内线。`splitPathPoints` 在当前节点连接两段，不丢点；之字形偏移在 CSS。没有金星旋转或强金光。
+- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，三层底路共用完整 `buildSmoothPath`；金色已完成内线与青绿 current 内线只限制输出区间，不能先截短点数组，否则 Catmull–Rom 控制点会改变。`splitPathPoints` 仅保留兼容接口，不参与运行时曲线绘制；之字形偏移在 CSS。
+- **完成反馈**：地图可见时，按已渲染的 completed 节点与完整章节一次取出所有待庆祝 key，不依赖最后浏览的 Lesson。`createCelebrationEffects` 在 `animationend`、`animationcancel`、打开详情和重建地图时清理类及监听；已消耗的庆祝不重播，reduced motion 不启动动效。关卡按钮无障碍名称包含 Completed / Current lesson / Locked，current 标题附近另有可见标签。
 - **录制** `startRecordingSession()`：`getUserMedia` 开摄像头+麦克风 → 镜像预览 → 一钮两态（红圆开始/方块停止）+ 闪红计时 + 5 分钟硬上限自动停 → `MediaRecorder` 产 webm → 现场回放 + Redo/Save。Save 时 `uploadRecording()` 把 blob + mimeType POST 到 `/upload`，后端按 mimeType 存 `.webm`/`.mp4`。`pickRecorderMime()` 探测浏览器支持的最佳格式（Chrome→webm，Safari→mp4），console 打印实际 mimeType。摄像头被拒/缺失时回退到文件上传。
 - **详情导航**：`openDetail` 底部渲染 Prev/Next（跨全宽），从 `flatLevels` 找相邻关卡。上传后 `reopenDetail` 重新打开当前关。
 - **demo 封面**：有 demo 时节点尝试显示缩略图，缺图使用材质与编号回退；locked 关仍显示锁，可点击预习，不再单独叠加播放徽标。
@@ -456,7 +458,7 @@ refactor: split content, demo, and recordings into separate trees
 
 - 地图骨架 + 动态章节世界（大型动画主景 + 平滑路线 + 响应式节点）：完成。
 - PC 摄像头实时录制（`getUserMedia` + `MediaRecorder`，一钮两态 + 5 分钟上限 + 回放 + Redo/Save）：完成。
-- 现代玩具剧场：三层象牙白路径＋金色已走内线/青绿 current 内线、单一完成星章/current定位针/锁、56px对齐外壳、真实计数和课程目录；完整验收记录见 `docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md`。
+- 现代玩具剧场：三层象牙白路径＋金色已走内线/青绿 current 内线、单一完成星章/current定位针/锁、56px外壳（52px胶囊、统一16px圆角）、真实计数和课程目录；当前验收记录见 `docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`。
 - webm/mp4 双格式支持（scanner + 路由 + 上传）：完成。
 - **多用户认证**（登录/session、admin 用户管理、performance 按用户隔离到 `recordings/<用户名>/`）：完成。
 - **Electron 桌面壳**（launch.vbs 一键启动、自定义标题栏、自动授权摄像头/麦克风、退出杀 Flask）：完成。
@@ -496,7 +498,7 @@ refactor: split content, demo, and recordings into separate trees
 
 ### 个人资料增补（2026-09-04）
 
-- 头像＋昵称已接入右上角 My Profile，见 `docs/specs/2026-09-04-personal-profile-design.md`。B「现代玩具剧场」地图、目录、详情与响应式UI已交付，验收见 `docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md`；压缩审计所列修复仍未交付，勿混淆状态。
+- 头像＋昵称已接入右上角 My Profile，见 `docs/specs/2026-09-04-personal-profile-design.md`。B「现代玩具剧场」地图、目录、详情与响应式UI已交付，当前验收见 `docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`；压缩审计所列修复仍未交付，勿混淆状态。
 - `app/profile_store.py` 管图片/昵称校验、256px JPEG 转换、剥离元数据、原子写入和跨进程文件锁；新增 Pillow 依赖。`profile.mjs` / `profile-model.mjs` / `profile.css` 独立负责资料 UI，不继续向主文件堆放逻辑。
 - `PROFILES_ROOT` 默认根目录 `profiles/`，整树忽略入库。内部目录为 `u-` 加用户名 ASCII 十六进制，防止 Windows 大小写账号/保留名称冲突；不是裸用户名，且不修改既有录像路径。
 - `/api/profile` GET/POST、`/api/profile/avatar` 只允许当前用户。POST 验 CSRF，整请求 6 MiB、图片 5 MiB/1600 万像素上限；支持静态 JPEG/PNG/WebP。不支持 GIF/HEIC/SVG/动画。

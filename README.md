@@ -92,7 +92,7 @@ The ivory path has a muted gold inner line through completed lessons and a teal 
 
 The course menu contains ten chapter groups with real per-chapter progress and every lesson. Stage 1 is available (the existing `curriculum/04`); Stage 2 and Stage 3 display **Planned** and are disabled. Escape, the close button or the backdrop closes the menu and returns focus. Choosing a lesson opens its complete detail page.
 
-The [implementation and acceptance record](docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md) includes browser sizes, native Electron checks and visual differences from the approved concepts. Run the optional isolated acceptance harness with an existing Playwright runtime; instructions are in [app/README.md](app/README.md).
+The [current UI acceptance record](docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md) covers shared route geometry, accessible states, one-shot celebrations across navigation and cancellation, 16px shell capsules, and mobile/Electron checks. The [original visual implementation record](docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md) preserves the earlier concept comparison. Run the isolated acceptance harness using [app/README.md](app/README.md).
 
 ---
 

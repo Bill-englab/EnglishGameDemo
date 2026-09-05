@@ -4,16 +4,17 @@
 // ============================================================
 
 import { getChapterTheme, resolveMapPresentation, resolveMapBackground, isFrameDark } from "./map-model.mjs";
-import { buildSmoothPath, splitPathPoints } from "./map-path.mjs";
+import { buildSmoothPath } from "./map-path.mjs";
 import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
 import { resolveMediaView } from "./detail-media.mjs";
 import { summarizeAdventure } from "./adventure-navigation.mjs";
 import { createAdventureShell } from "./adventure-shell.mjs";
-import { createCelebrationQueue, createCurrentLessonAction, resolveCompletionTransition, showMapLoadState, showMapLoadError } from "./map-interactions.mjs";
+import { createCelebrationQueue, createCelebrationEffects, createCurrentLessonAction, resolveCompletionTransition, showMapLoadState, showMapLoadError } from "./map-interactions.mjs";
 
 const scrollToCurrentLesson = createCurrentLessonAction({ root: document, view: window });
 const celebrationQueue = createCelebrationQueue();
 const chapterCelebrationQueue = createCelebrationQueue();
+const celebrationEffects = createCelebrationEffects({ view: window });
 
 const adventureShell = createAdventureShell({
   root: document,
@@ -539,7 +540,6 @@ let mapScrollY = 0;
 let currentLibrary = [];        // full chapter tree, kept for detail navigation
 let flatLevels = [];            // flattened level list with chapter context for prev/next
 let bgSlides = [];              // background slides, kept so closeDetail can refresh them
-let detailLevelKey = null;
 
 function getCompletionSnapshot(level) {
   const chapter = currentLibrary.find(item => item.name === level.chapter);
@@ -562,7 +562,7 @@ async function refreshPerformanceSave(level, before) {
   celebrationQueue.queue(levelKey(level));
   if (transition.chapter) chapterCelebrationQueue.queue(level.chapter);
   if (!document.getElementById("map-view").classList.contains("hidden")) {
-    celebratePendingCompletion(levelKey(level));
+    celebratePendingCompletion();
   }
   return true;
 }
@@ -583,7 +583,8 @@ function createLevelNode(level, index, theme) {
   wrap.type = "button";
   wrap.className = `level-node-wrap level-node-wrap--${state}`;
   wrap.dataset.levelKey = levelKey(level);
-  wrap.setAttribute("aria-label", level.title);
+  const stateLabel = { completed: "Completed", current: "Current lesson", locked: "Locked" }[state];
+  wrap.setAttribute("aria-label", `${level.title} — ${stateLabel}`);
   if (state === "current") {
     wrap.dataset.currentLesson = `${level.chapter}/${level.level}`;
     wrap.setAttribute("aria-current", "step");
@@ -623,6 +624,12 @@ function createLevelNode(level, index, theme) {
   const title = document.createElement("span");
   title.className = "level-title";
   title.textContent = level.title;
+  if (state === "current") {
+    const label = document.createElement("span");
+    label.className = "level-title__status";
+    label.textContent = "Current lesson";
+    title.prepend(label);
+  }
 
   wrap.appendChild(node);
   wrap.appendChild(title);
@@ -731,6 +738,7 @@ function observeBgSwitch(slides) {
 }
 
 function renderMap(library) {
+  celebrationEffects.clear();
   const map = document.getElementById("map");
   map.innerHTML = "";
 
@@ -846,27 +854,18 @@ function drawMapPath() {
 
   if (pts.length < 2) { svg.innerHTML = ""; return; }
 
-  // Traveled = pts[0 .. splitIdx-1] — stops at the current level, does NOT
-  //   include the first locked level (so the connector to the next locked
-  //   level stays white).
-  // Upcoming = pts[splitIdx-1 .. end] — starts at the current level so the
-  //   two segments visually connect at the current node.
-  const { traveled: traveledPts, upcoming: upcomingPts } = splitPathPoints(pts, splitIdx);
+  // All layers retain the full route's control points. Only the emitted
+  // segment range changes; the connector after current remains ivory.
+  const d = buildSmoothPath(pts);
   let html = "";
-  for (const segment of [traveledPts, upcomingPts]) {
-    if (segment.length < 2) continue;
-    const d = buildSmoothPath(segment);
-    for (const layer of ["shadow", "edge", "surface"]) html += `<path class="trail trail--${layer}" d="${d}"/>`;
+  for (const layer of ["shadow", "edge", "surface"]) html += `<path class="trail trail--${layer}" d="${d}"/>`;
+  const hasCurrent = [...nodes].some(node => node.classList.contains("level-node--current"));
+  const completedEnd = splitIdx - (hasCurrent ? 2 : 1);
+  if (completedEnd >= 1) {
+    html += `<g class="trail--done"><path class="trail trail__progress" d="${buildSmoothPath(pts, { endIndex: completedEnd })}"/></g>`;
   }
-  if (traveledPts.length >= 2) {
-    const hasCurrent = [...nodes].some(node => node.classList.contains("level-node--current"));
-    const completedPts = hasCurrent ? traveledPts.slice(0, -1) : traveledPts;
-    if (completedPts.length >= 2) {
-      html += `<g class="trail--done"><path class="trail trail__progress" d="${buildSmoothPath(completedPts)}"/></g>`;
-    }
-    if (hasCurrent) {
-      html += `<path class="trail trail--current" d="${buildSmoothPath(traveledPts.slice(-2))}"/>`;
-    }
+  if (hasCurrent && completedEnd >= 0) {
+    html += `<path class="trail trail--current" d="${buildSmoothPath(pts, { startIndex: completedEnd, endIndex: completedEnd + 1 })}"/>`;
   }
   svg.innerHTML = html;
 }
@@ -901,12 +900,12 @@ function renderDetailDemo(level) {
 }
 
 function openDetail(level) {
+  celebrationEffects.clear();
   adventureShell.close();
   adventureShell.selectLesson(level);
   disposeDetailMedia();
   const visit = detailVisit;
   const isCurrent = () => visit === detailVisit;
-  detailLevelKey = levelKey(level);
   selectedMedia = "performance";
   const mapView = document.getElementById("map-view");
   if (!mapView.classList.contains("hidden")) mapScrollY = mapView.scrollTop;
@@ -1118,8 +1117,7 @@ function closeDetail() {
   const mapView = document.getElementById("map-view");
   mapView.classList.remove("hidden");
   document.getElementById("bg-layer").classList.remove("hidden");
-  celebratePendingCompletion(detailLevelKey);
-  detailLevelKey = null;
+  celebratePendingCompletion();
   requestAnimationFrame(() => {
     drawMapPath();
     mapView.scrollTop = mapScrollY;
@@ -1129,32 +1127,26 @@ function closeDetail() {
   });
 }
 
-function celebratePendingCompletion(key) {
-  if (document.getElementById("map-view").classList.contains("hidden")) return;
-  if (!key || !celebrationQueue.consume(key)) return;
-  const wrap = [...document.querySelectorAll(".level-node-wrap")]
-    .find(node => node.dataset.levelKey === key);
-  const star = wrap?.querySelector(".level-node__marker--star");
-  if (!wrap || !star) return;
+function celebratePendingCompletion() {
+  const map = document.getElementById("map-view");
+  if (map.classList.contains("hidden")) return;
 
-  const removeAfterAnimation = (element, className, target = element) => {
-    const clear = () => element.classList.remove(className);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      clear();
-      return;
-    }
-    target.addEventListener("animationend", clear, { once: true });
-  };
+  const lessons = new Map([...map.querySelectorAll(".level-node-wrap--completed")]
+    .filter(wrap => wrap.querySelector(".level-node__marker--star"))
+    .map(wrap => [wrap.dataset.levelKey, wrap]));
+  for (const key of celebrationQueue.drain(lessons.keys())) {
+    const wrap = lessons.get(key);
+    celebrationEffects.play(wrap, "level-node-wrap--just-completed", wrap.querySelector(".level-node__marker--star"));
+  }
 
-  wrap.classList.add("level-node-wrap--just-completed");
-  removeAfterAnimation(wrap, "level-node-wrap--just-completed", star);
-
-  const chapter = wrap.closest(".chapter-world");
-  if (!chapter || !chapterCelebrationQueue.consume(chapter.dataset.chapter)) return;
-  const heading = chapter.querySelector(".chapter-heading");
-  if (!heading) return;
-  chapter.classList.add("chapter-world--just-completed");
-  removeAfterAnimation(chapter, "chapter-world--just-completed", heading);
+  const chapters = new Map([...map.querySelectorAll(".chapter-world")]
+    .filter(chapter => chapter.querySelector(".chapter-heading")
+      && !chapter.querySelector(".level-node-wrap:not(.level-node-wrap--completed)"))
+    .map(chapter => [chapter.dataset.chapter, chapter]));
+  for (const key of chapterCelebrationQueue.drain(chapters.keys())) {
+    const chapter = chapters.get(key);
+    celebrationEffects.play(chapter, "chapter-world--just-completed", chapter.querySelector(".chapter-heading"));
+  }
 }
 
 // ===== resilient library loading (loading / error / retry) =====

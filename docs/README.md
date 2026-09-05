@@ -13,6 +13,7 @@ UI 改造主线：[`specs/2026-09-05-modern-toy-theatre-ui-design.md`](specs/202
 
 本轮界面修正：[`specs/2026-09-05-adventure-feedback-ui-correction.md`](specs/2026-09-05-adventure-feedback-ui-correction.md)（顶部统一轨道、二元金星成就反馈与响应式验收标准）。
 对应实施计划：[`plans/2026-09-05-adventure-feedback-ui-correction.md`](plans/2026-09-05-adventure-feedback-ui-correction.md)。
+当前验收结果、回归命令与验证限制：[`plans/2026-09-05-adventure-feedback-ui-acceptance.md`](plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
 
 个人资料增补：[`specs/2026-09-04-personal-profile-design.md`](specs/2026-09-04-personal-profile-design.md)（头像＋昵称已实现；图片隐私、用户隔离与交互规范）。实施与验收见 [`plans/2026-09-04-personal-profile-implementation.md`](plans/2026-09-04-personal-profile-implementation.md)。本轮仅统一视觉 token。
 

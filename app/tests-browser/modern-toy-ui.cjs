@@ -10,6 +10,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const finalFixes = require('./final-fixes.cjs');
+const feedbackRegressions = require('./feedback-regressions.cjs');
 const focus = (process.argv.find(argument => argument.startsWith('--focus=')) || '').slice('--focus='.length);
 
 // Harness resilience helpers also have zero-browser fault-injection checks:
@@ -217,7 +218,8 @@ async function shellGeometry(page, viewport) {
   const shell = await page.locator('.topbar').evaluate(el => {
     const rect = selector => {
       const r = el.querySelector(selector).getBoundingClientRect();
-      return { top: r.top, height: r.height, center: r.left + r.width / 2 };
+      return { top: r.top, height: r.height, left: r.left, right: r.right, center: r.left + r.width / 2,
+        radius: getComputedStyle(el.querySelector(selector)).borderRadius };
     };
     return { railHeight: el.getBoundingClientRect().height, brand: rect('.adventure-brand'), progress: rect('.progress'), account: rect('.user-menu__trigger') };
   });
@@ -228,7 +230,11 @@ async function shellGeometry(page, viewport) {
   expectClose(shell.progress.height, 52, 1);
   expectClose(shell.account.height, 52, 1);
   expectClose(shell.progress.center, viewport.width / 2, 1);
+  assert.deepEqual([shell.brand.radius, shell.progress.radius, shell.account.radius], ['16px', '16px', '16px'],
+    'Brand, progress and account use the shared 16px capsule radius');
   if (viewport.width < 768) {
+    assert.ok(shell.brand.right <= shell.progress.left && shell.progress.right <= shell.account.left,
+      `Compact capsules stay in separate columns: ${JSON.stringify(shell)}`);
     const title = await page.locator('.adventure-brand .title').evaluate(el => {
       const style = getComputedStyle(el);
       return { overflow: style.overflow, textOverflow: style.textOverflow, whiteSpace: style.whiteSpace };
@@ -403,7 +409,8 @@ async function main() {
     const page = await context.newPage();
     page.setDefaultTimeout(15000);
     watchDiagnostics(page);
-    // Every upload is intercepted, including accidental performance uploads.
+    // Initial checks intercept all uploads. Performance-save scenarios later
+    // write only generated recordings inside this fixture's temporary media root.
     await page.route('**/upload/**', route => route.fulfill({ status: 409, json: { error: 'QA upload interception' } }));
     await login(page, url);
     assert.equal(await page.title(), 'My English Adventure');
@@ -414,6 +421,42 @@ async function main() {
     assert.equal(library.length, 10);
     assert.equal(library.flatMap(c => c.levels).length, 30);
     assert.equal(library.flatMap(c => c.levels).filter(l => l.has_performance).length, 0);
+
+    if (focus === 'route') {
+      feedbackRegressions.completeLessons(fixtureRoot, library[0].levels.slice(0, 2));
+      await page.reload();
+      await page.waitForFunction(() => document.querySelector('#star-count').textContent === '2');
+      await feedbackRegressions.route(page, output);
+      assert.deepEqual(errors, []);
+      console.log('PASS focused regression: route');
+      return;
+    }
+
+    if (focus === 'navigation-celebration') {
+      await page.unroute('**/upload/**');
+      await feedbackRegressions.navigationCelebration(page, fixtureRoot, library, 0, output);
+      assert.deepEqual(errors, []);
+      console.log('PASS focused regression: navigation-celebration');
+      return;
+    }
+
+    if (focus === 'cancel-celebration') {
+      await page.unroute('**/upload/**');
+      await feedbackRegressions.cancelCelebration(page, fixtureRoot, library[0], output);
+      assert.deepEqual(errors, []);
+      console.log('PASS focused regression: cancel-celebration');
+      return;
+    }
+
+    if (focus === 'accessible-state') {
+      feedbackRegressions.completeLessons(fixtureRoot, library[0].levels.slice(0, 2));
+      await page.reload();
+      await page.waitForFunction(() => document.querySelector('#star-count').textContent === '2');
+      await feedbackRegressions.accessibleStates(page, library);
+      assert.deepEqual(errors, []);
+      console.log('PASS focused regression: accessible-state');
+      return;
+    }
 
     if (focus === 'evidence') {
       await assertFailedSaveDoesNotCelebrate(page, consoleErrors, output);
@@ -445,9 +488,7 @@ async function main() {
       results.push({ drawerSelection: 'drawer, next, previous, direct map', account: '800x600 and 390x844 controls >=44px, Nunito >=14px' });
 
       for (const [width, height] of [[1440, 960], [800, 600], [390, 844], [844, 390]]) {
-        await page.setViewportSize({ width, height });
-        await page.reload();
-        await page.locator('.level-node').first().waitFor();
+        await shellGeometry(page, { width, height });
         await page.evaluate(() => document.fonts.ready);
         await page.waitForFunction(mobile => [...document.querySelectorAll('.bg-layer__slide')]
           .every(e => e.style.backgroundImage.includes(mobile ? '-mobile.webp' : '-desktop.webp')), width < 768);
@@ -565,7 +606,8 @@ async function main() {
       assert.equal(await page.locator('.level-node--current .level-node__marker--star').count(), 0);
       assert.equal(await page.locator('.level-node--current .level-node__marker--locator').count(), 1);
       assert.equal(await page.locator('.level-node--locked').first().locator('.level-node__marker--lock').count(), 1);
-      assert.equal(await page.locator('[data-current-lesson]').getAttribute('aria-label'), library[0].levels[2].title);
+      await feedbackRegressions.route(page, output);
+      await feedbackRegressions.accessibleStates(page, library);
       assert.match(await page.locator('.chapter-heading').first().innerText(), /★ 2\/3/);
       await page.locator('#adventure-menu-button').click();
       assert.match(await page.locator('#course-drawer-progress').innerText(), /2 \/ 30 completed/);
@@ -601,7 +643,7 @@ async function main() {
       await page.locator('.level-node-wrap--just-completed').waitFor();
       await page.locator('.chapter-world--just-completed').waitFor();
       assert.equal(await page.locator('.level-node-wrap--just-completed .level-node__marker--star').count(), 1);
-      await page.evaluate(() => window.qaCelebrationEnds);
+      await withTimeout(page.evaluate(() => window.qaCelebrationEnds), 'lesson and chapter animation completion');
       assert.equal(await page.locator('.level-node-wrap--just-completed').count(), 0);
       assert.equal(await page.locator('.chapter-world--just-completed').count(), 0);
       assert.equal(await page.locator('.level-node--completed .level-node__marker--star').count(), 3);
@@ -673,7 +715,7 @@ async function main() {
         heldPerformanceUpload.resolve();
       });
       await page.getByRole('button', { name: 'Save', exact: false }).click();
-      await performanceUploadStarted;
+      await withTimeout(performanceUploadStarted, 'performance upload request');
       await page.locator('#back-btn').click();
       inFlightSaved = true;
       await heldPerformanceUpload.route.fulfill({ json: { ok: true } });
@@ -691,6 +733,11 @@ async function main() {
         console.log('PASS focused regression: celebration');
         return;
       }
+
+      await feedbackRegressions.navigationCelebration(page, fixtureRoot, library, 2, output);
+      await feedbackRegressions.cancelCelebration(page, fixtureRoot, library[3], output);
+      results.push({ navigationCelebration: 'Save A -> Next B -> Back celebrates A and its chapter once' });
+      results.push({ cancellation: 'lesson and chapter classes clear on view teardown without replay' });
 
       await page.setViewportSize({ width: 1440, height: 960 });
       // This one lesson's mock demo intentionally has no generated thumbnail.

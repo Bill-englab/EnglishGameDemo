@@ -16,6 +16,16 @@ test("creates one continuous cubic path through top-to-bottom points", () => {
   assert.ok(path.endsWith("160 340"));
 });
 
+test("partial strokes retain the full route's neighboring control points", () => {
+  const points = Object.freeze([
+    { x: 0, y: 0 }, { x: 100, y: 100 }, { x: 0, y: 200 }, { x: 100, y: 300 },
+  ].map(Object.freeze));
+  assert.equal(buildSmoothPath(points, { startIndex: 1, endIndex: 2 }),
+    "M 100 100 C 100 132, 0 168, 0 200");
+  assert.equal(buildSmoothPath(points, { endIndex: 1 }), "M 0 0 C 16 16, 100 68, 100 100");
+  assert.equal(buildSmoothPath(points, { startIndex: 2, endIndex: 2 }), "");
+});
+
 test("path segments join at current node without losing or mutating points", () => {
   assert.equal(typeof pathModel.splitPathPoints, "function");
   const points = Object.freeze([{x:1,y:2},{x:3,y:4},{x:5,y:6},{x:7,y:8}].map(Object.freeze));

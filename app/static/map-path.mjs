@@ -25,10 +25,12 @@ export function splitPathPoints(points, firstLockedIndex) {
 //   separated from the next by " C " (note the surrounding spaces) so callers
 //   can split/count segments reliably.
 // - NEVER mutates the input array.
+// - Optional inclusive endpoint indices emit a partial stroke while retaining
+//   the full route's neighbors, so overlays share the underlying curve exactly.
 //
 // points: Array<{x:number, y:number}>
-export function buildSmoothPath(points) {
-  if (!Array.isArray(points) || points.length < 2) return "";
+export function buildSmoothPath(points, { startIndex = 0, endIndex = points?.length - 1 } = {}) {
+  if (!Array.isArray(points) || points.length < 2 || endIndex <= startIndex) return "";
 
   // Work on a defensive copy so neighbor lookups never touch the caller's array.
   const pts = points.map(p => ({ x: p.x, y: p.y }));
@@ -38,8 +40,8 @@ export function buildSmoothPath(points) {
     return `M ${pts[0].x} ${pts[0].y} L ${pts[1].x} ${pts[1].y}`;
   }
 
-  let d = `M ${pts[0].x} ${pts[0].y}`;
-  for (let i = 0; i < pts.length - 1; i++) {
+  let d = `M ${pts[startIndex].x} ${pts[startIndex].y}`;
+  for (let i = startIndex; i < endIndex; i++) {
     const p0 = pts[i - 1] || pts[i];
     const p1 = pts[i];
     const p2 = pts[i + 1];

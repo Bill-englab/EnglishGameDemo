@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "A shared play mat with Peer kneeling screen left and Child kneeling screen right. A simple three-piece block bridge has two low supports, left and right, and a long top block. Its right support is tilted and its top has fallen onto the mat beside it after Child's toy truck bumped it. The truck is stopped by Child's knee. Locked 16:9 medium two-shot clearly shows faces, hands, and the damaged bridge.",
+  "content_revision": 2,
+  "scene": "A shared home play mat with Peer kneeling screen left and Child kneeling screen right. Peer is the same small brown bear, age four, in his teal T-shirt from every Chapter 7 peer lesson; Child is the four-year-old tiger boy in his yellow T-shirt. Exactly three wide, easy-to-stack blocks form one small tower between them: tan base, blue middle, red top. The tower is within both children's reach. When Child accidentally brushes the two upper blocks, the tan base stays put and the blue and red blocks fall a short distance onto the soft mat toward Child, without hitting anyone. No truck, bridge, additional blocks or props. Locked 16:9 medium two-shot shows faces, hands and all three blocks throughout.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both children are interested in the shared building activity and use ordinary play volume.",
+    "allowed_shift": "Child makes one small surprised pause at his accidental bump, then speaks with sincere calm concern and apology. Peer shows mild disappointment about the fallen tower and may keep that expression while accepting help. The completed repair earns a quiet look of acknowledgment; neither child must smile.",
+    "forbidden": "No crying spectacle, rage, shame posture, forced hug or automatic smile. No blame performance, collapsed shoulders, bowed head, exaggerated gasp, frantic grabbing, celebratory bouncing or distorted face or body. An apology does not require instant forgiveness or physical affection; keep voices normal and actions small."
+  },
   "parts": {
     "A": {
-      "start": "Peer looks at the fallen bridge top and tilted right support; Child's truck is stopped beside the damaged bridge, under Child's resting hand.",
-      "action": "Peer names the effect of the accidental bump with disappointment rather than anger. Child immediately stops handling the truck, looks at Peer, and apologizes while checking on them. Do not reconstruct the bridge before asking; keep the impact visible and avoid injury or blame exaggeration.",
-      "end": "The truck is stationary by Child's knee; the bridge top is on the mat, its right support is tilted, and Child faces Peer with empty hands."
+      "start": "Peer kneels left with his hands just released from the red top of the intact three-block tower. Child kneels right with his left hand beside the tower at the height of the blue middle block, about to return it to his lap; the tan base is flat on the mat.",
+      "action": "Peer describes the tower he is building. As Child draws his left hand back toward his lap, it accidentally brushes the blue middle block once; the blue and red upper blocks fall onto the mat toward him while the tan base stays upright. No block touches either child. Child stops his hand, notices the fallen blocks, looks at Peer and checks that Peer is okay while apologizing sincerely and calmly. Peer answers the concern, then names what happened with mild disappointment. Neither touches the damaged build or assumes the apology has already repaired it.",
+      "end": "The tan base remains upright between the children. The fallen blue block rests beside the base toward Child, with the fallen red block just beyond it; Child's empty hands are in his lap and Peer's empty hands rest by his knees as they face each other."
     },
     "B": {
-      "start": "The truck is stationary by Child's knee; the bridge top is on the mat, its right support is tilted, and Child faces Peer with empty hands.",
-      "action": "Peer indicates the fallen bridge while explaining what mattered. Child looks at the damage, then offers to help rebuild with an open hand, without grabbing Peer's blocks. Peer considers the offer; do not require an instant smile or restore the bridge before permission.",
-      "end": "Both look at the damaged bridge; Child's empty hand is offered near the tilted right support but has not touched it, and the truck remains parked."
+      "start": "The tan base remains upright between the children. The fallen blue block rests beside the base toward Child, with the fallen red block just beyond it; Child's empty hands are in his lap and Peer's empty hands rest by his knees as they face each other.",
+      "action": "Child looks at the fallen blocks and offers to help rebuild without reaching for them. Peer considers the useful offer, accepts and briefly indicates the tan base as their starting point. Child offers to hold that base still, using a small open-hand gesture but not moving any block yet. Peer can remain mildly disappointed while choosing to work together; no hug, praise, forced forgiveness or automatic smile occurs.",
+      "end": "The tan base is still upright, and the blue and red blocks remain fallen in their same positions toward Child. Child's left hand is open beside the tan base without touching it; Peer looks toward the base with both hands beside his knees after accepting help."
     },
     "C": {
-      "start": "Both look at the damaged bridge; Child's empty hand is offered near the tilted right support but has not touched it, and the truck remains parked.",
-      "action": "Peer accepts and points to the right support, then reaches for the fallen top. Child rights and steadies that support after the instruction, confirming the cooperation. Once Child is holding it stable, Peer places the top across both supports. Keep the truck still; the repair, not resumed driving, closes the scene.",
-      "end": "The bridge stands with its top across both supports; Child steadies the right support and Peer has just released the top, while the truck stays parked."
+      "start": "The tan base is still upright, and the blue and red blocks remain fallen in their same positions toward Child. Child's left hand is open beside the tan base without touching it; Peer looks toward the base with both hands beside his knees after accepting help.",
+      "action": "During Peer's first request Child steadies the tan base with his left hand, keeping his right hand on his knee. While Child confirms rebuilding together, Peer lifts the fallen blue block once and places it on the tan base. During Peer's next line he lifts the fallen red block once and places it on the blue block, then releases it. Both pieces are within easy reach, so the two short placements happen during speech without a montage or rushed movement. Child's final observation follows the restored stack. Keep the same three blocks, their color order and a calm, sincere expression; the joint repair closes the scene without requiring smiles or affection.",
+      "end": "The three-block tower is restored in the same place and order: tan base, blue middle and red top. Child gently steadies the tan base with his left hand and rests his right hand on his knee; Peer has released the red top, and both calmly look at the standing tower."
     }
   }
 }

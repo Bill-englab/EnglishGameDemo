@@ -1,18 +1,18 @@
 {
-  "title":"I Worked Hard on It","title_zh":"我很努力地搭了它","can_do":"说出自己的感受，并补充一个与刚才事件直接相关的原因。",
+  "title":"I Feel Frustrated","title_zh":"我有点沮丧","can_do":"说出找不到拼图块带来的沮丧，请求帮助，并在一起找到后报告感受的变化。",
   "conversation_move":{"id":"explain-feeling","label":"name a feeling and its reason"},
-  "trigger":"The child's block tower falls after a long build, and Mom notices the child stop.",
-  "core_response":"I'm upset because my tower fell.","stretch_response":"I'm upset because I worked hard on it.","repair_response":"I need a short break before I rebuild.",
-  "recycle":["request-a-pause","sequence-actions"],"roles":["child","mom"],"setting":"Building a block tower at home.","essential_props":["a fallen block tower"],
+  "trigger":"The last puzzle piece is missing. Child pauses with a small frown because he cannot find it, and Mom notices the gap.",
+  "core_response":"I'm frustrated because I can't find it.","stretch_response":"I'm frustrated because I worked hard on it.","repair_response":"Can you help me find it?",
+  "recycle":["request-a-pause","sequence-actions"],"roles":["child","mom"],"setting":"Finishing a simple puzzle together at a low table at home.","essential_props":["one four-piece puzzle with its final blue piece under the low table"],
   "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"Your tower fell down. How are you feeling?","kind":"input"},{"speaker":"child","line":"I'm upset because I worked hard on it.","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"Do you want help, or do you need a break?","kind":"input"},{"speaker":"child","line":"I need a short break, then I want to rebuild.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"I will keep the blocks here until you are ready.","kind":"input"},{"speaker":"child","line":"Thanks. I feel calmer sitting with you.","kind":"action"}]}
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"One last puzzle piece is missing.","kind":"input"},{"speaker":"child","line":"I'm frustrated because I can't find it.","kind":"core"},{"speaker":"mom","line":"That is frustrating.","kind":"input"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"Can you help me find it?","kind":"repair"},{"speaker":"mom","line":"Let's look under the table.","kind":"action"},{"speaker":"child","line":"There it is!","kind":"confirmation"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Here's the missing piece.","kind":"action"},{"speaker":"child","line":"Thanks. I feel better now.","kind":"confirmation"},{"speaker":"mom","line":"Let's put it in.","kind":"input"},{"speaker":"child","line":"It fits!","kind":"action"}]}
   ],
   "replay_cards":[
-    {"title":"The torn picture","setting":"Drawing at home","change":"The paper tears near a finished part","challenge":"Name sadness and the reason, choose help or a break, then decide how to repair the picture"},
-    {"title":"The missed turn","setting":"A family game","change":"The child realizes a turn was skipped","challenge":"Name frustration and why, tell Dad, restore the missed turn, and continue"}
+    {"title":"The torn picture","setting":"Drawing at home with Mom","change":"The edge of Child's nearly finished picture tears as he moves it","challenge":"Child explains, \"I'm frustrated because I worked hard on it.\" Mom acknowledges the effort and asks whether help or a pause would be useful. Child requests \"Can we stop? I need a break.\" Mom leaves the picture safe; after a real pause, Child chooses to tape the edge with her and continue drawing. He can remain disappointed while accepting help."},
+    {"title":"The missed turn","setting":"A family board game with Dad","change":"Dad moves again and Child notices that his turn was skipped","challenge":"Child names the frustration and explains that he missed his turn. Dad acknowledges the mistake and moves his piece back. Child proposes \"First my turn, then your turn.\" Dad agrees; Child takes the restored turn, then Dad takes his, and they continue without requiring Child to cheer up first."}
   ],
-  "parent_support":["Accept the feeling without correcting it or rushing to cheer the child up.","Offer two useful next steps and let the child choose one."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support":["Accept the small frown and pause as meaningful frustration. Acknowledge the missing piece before suggesting a search; do not turn the feeling into a quiz.","Help after Child asks, check just one reachable place together, and let finding the piece explain the slight relief. A smile is optional, and another situation may need a real break."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2,"dialogue_contract":"three-by-ten-v2"
 }

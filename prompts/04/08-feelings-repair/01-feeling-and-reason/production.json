@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "A soft home play mat. Mom sits screen left and Child screen right, with four fallen tower blocks resting in a small loose cluster between them. The fall has just happened before the opening frame; the blocks stay still throughout this conversation. Locked 16:9 medium two-shot with comfortable personal space, warm ordinary daylight, and no dramatic visual effects or extra toys.",
+  "content_revision": 2,
+  "scene": "Mom sits screen left and Child screen right on a home play mat beside a low table. Child is the four-year-old tiger boy in his yellow T-shirt; Mom is the same pink pig in a coral cardigan over a cream top. Exactly one large four-piece puzzle is on the tabletop: three joined pieces and one obvious gap along the edge nearest Child. The final blue piece lies flat on the floor just under the front table edge, within Mom's easy reach; it is not hidden by another prop and neither character has looked there yet. No extra puzzle pieces, blocks or toys. Locked 16:9 medium two-shot shows faces, hands, the tabletop and the floor under its front edge without needing a camera cut.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Mom is attentive and Child speaks at normal home conversation volume.",
+    "allowed_shift": "Child shows a small frown and a brief pause because he cannot find the last puzzle piece. Mom acknowledges that specific frustration. Finding the piece allows a small easing of his brow and shoulders; he need not smile to report feeling better.",
+    "forbidden": "No crying spectacle, rage, shame posture, forced hug or automatic smile. No dismissing the frustration, demands to cheer up, triumphant bouncing, frantic search, exaggerated gasp or distorted face or body. Keep gestures small and voices at normal volume."
+  },
   "parts": {
     "A": {
-      "start": "Mom and Child sit by four fallen tower blocks; Child's hands have stopped in their lap and their expression is disappointed.",
-      "action": "Mom notices Child's pause and asks about the feeling with an attentive, unhurried expression. Child looks from the fallen blocks to Mom while explaining the reason for being upset. Mom listens without correcting the feeling, touching the blocks, or demanding a smile.",
-      "end": "The fallen blocks remain untouched; Child faces Mom with hands in their lap, still visibly disappointed."
+      "start": "Mom sits left and Child right beside the low table. Three joined puzzle pieces and one gap face Child; the single blue piece lies under the front edge. Child's empty hands have paused beside the puzzle with a small frown; Mom's hands rest in her lap.",
+      "action": "Mom notices the empty gap and Child's pause while naming the missing piece. Child looks from the gap to Mom and explains the cause of his frustration with a small frown, normal volume and one short pause. Mom acknowledges the difficulty without turning it into a question, touching the puzzle or making Child smile. Their gaze stays above the table; the blue piece remains under the front edge.",
+      "end": "Mom faces Child with both hands in her lap. Child's empty hands rest beside the unchanged three joined puzzle pieces and single gap; the blue piece still lies under the front table edge and his small frown remains."
     },
     "B": {
-      "start": "The fallen blocks remain untouched; Child faces Mom with hands in their lap, still visibly disappointed.",
-      "action": "Mom offers help or a break with two small open-handed gestures, then waits. Child chooses a short break and future rebuilding, settling their hands and shoulders rather than starting another tower. Mom accepts the choice with a gentle nod; do not rush the emotional change.",
-      "end": "Child sits quietly beside Mom with hands resting in their lap; all four blocks remain fallen and untouched."
+      "start": "Mom faces Child with both hands in her lap. Child's empty hands rest beside the unchanged three joined puzzle pieces and single gap; the blue piece still lies under the front table edge and his small frown remains.",
+      "action": "Child asks for help. Mom suggests the one place to check; both lean slightly to look under the front table edge, remaining seated without crawling or walking. Child notices the existing blue piece and identifies it with a small glance and quiet discovery. Only after he spots it, Mom reaches down with her right hand, lifts that single piece and brings it just above the table. Her left hand stays in her lap; the joined puzzle does not move and no second search location is introduced.",
+      "end": "Mom holds the single blue puzzle piece in her right hand just above the table, with her left hand in her lap. Child's empty hands rest beside the unchanged three joined pieces and single gap; he looks at the found piece with a slightly softer brow."
     },
     "C": {
-      "start": "Child sits quietly beside Mom with hands resting in their lap; all four blocks remain fallen and untouched.",
-      "action": "Mom gestures briefly toward the safe, undisturbed blocks while promising to leave them. Child takes one comfortable breath and softens slightly while acknowledging the comfort of sitting together. Keep this a small move toward calm, not instant delight; no rebuilding or imposed hug occurs.",
-      "end": "Mom and Child remain seated quietly together; Child appears a little calmer and the four blocks are still waiting untouched."
+      "start": "Mom holds the single blue puzzle piece in her right hand just above the table, with her left hand in her lap. Child's empty hands rest beside the unchanged three joined pieces and single gap; he looks at the found piece with a slightly softer brow.",
+      "action": "During her first turn Mom passes the blue piece from her right hand into Child's open left hand, then lowers her right hand to her lap. Child acknowledges the help and reports a small improvement in his feeling while looking at the piece. At Mom's suggestion he places it into the near-edge gap with his left hand during his last turn, then releases it. Use one easy placement with no fiddly rotation. His expression can remain quiet and neutral as the puzzle fits; no hug, cheering or imposed smile follows.",
+      "end": "All four puzzle pieces are joined flat on the tabletop, with the blue piece filling the former gap. Child has released it and rests his empty hands beside the finished puzzle; Mom's hands are in her lap and both remain seated with calm faces."
     }
   }
 }

@@ -1,18 +1,18 @@
 {
-  "title":"No More Tickling","title_zh":"不要再挠痒了","can_do":"用清楚、直接的语言要求停止不喜欢的身体互动。",
+  "title":"Please Stop","title_zh":"请停下来","can_do":"清楚地要求停止身体互动，并在对方立即停止后选择自己需要的空间。",
   "conversation_move":{"id":"set-stop-boundary","label":"ask someone to stop"},
-  "trigger":"Dad starts playful tickling, but the child no longer enjoys it.",
-  "core_response":"Please stop. I don't like that.","stretch_response":"Please stop. I need some space.","repair_response":"No tickling. A funny face is okay.",
-  "recycle":["delay-boundary","state-body-need"],"roles":["child","dad"],"setting":"A playful moment at home.","essential_props":[],
+  "trigger":"Dad gives one light playful tickle. Child does not like it and asks him to stop; Dad ends contact immediately at the first stop.",
+  "core_response":"Please stop. I don't like that.","stretch_response":"I need this much space.","repair_response":"No, I need some quiet.",
+  "recycle":["delay-boundary","state-body-need"],"roles":["child","dad"],"setting":"A brief playful moment while Dad and Child sit on a broad sofa at home.","essential_props":[],
   "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"Here comes the silly tickle monster!","kind":"input"},{"speaker":"child","line":"Please stop. I don't like that.","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"I stopped. Do you need some space?","kind":"input"},{"speaker":"child","line":"Yes, please. I need space beside me.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"I will sit over here. Would a funny face be okay?","kind":"input"},{"speaker":"child","line":"A funny face is okay. No tickling.","kind":"repair"}]}
+    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"Here comes one little tickle.","kind":"input"},{"speaker":"child","line":"Please stop. I don't like that.","kind":"core"},{"speaker":"dad","line":"Okay. I've stopped.","kind":"action"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"Would you like space or a high five?","kind":"input"},{"speaker":"child","line":"Some space, please.","kind":"confirmation"},{"speaker":"dad","line":"I'll move over here.","kind":"action"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"child","line":"I need this much space.","kind":"stretch"},{"speaker":"dad","line":"I'll stay over here.","kind":"action"},{"speaker":"child","line":"Thanks. I'm comfortable now.","kind":"confirmation"},{"speaker":"dad","line":"You can tell me anytime.","kind":"input"}]}
   ],
   "replay_cards":[
-    {"title":"Stop the loud sound","setting":"Silly music play at home","change":"Dad repeats a sound close to the child","challenge":"Ask him to stop, request quiet space, then choose a softer game if wanted"},
-    {"title":"Do not move my hair","setting":"Getting ready in front of a mirror","change":"Mom playfully changes the child's hairstyle after the child objects","challenge":"Say stop clearly, Mom stops immediately, then the child chooses whether to brush independently"}
+    {"title":"Stop the loud sound","setting":"Silly music play at home with Dad","change":"A playful sound near Child becomes uncomfortable","challenge":"Child asks Dad to stop and Dad ends the sound immediately. Once it is quiet, Dad asks whether Child wants a softer game. Child clarifies, \"No, I need some quiet.\" Dad accepts. If Child says \"I'm not ready yet,\" Dad gives him quiet time; no new game starts until Child chooses it."},
+    {"title":"Do not move my hair","setting":"Getting ready by a mirror with Mom","change":"Mom lightly rearranges Child's hair, and Child decides he wants to do it himself","challenge":"Child says \"Please stop. I don't like that.\" Mom immediately takes her hands away and rests them down before discussing what happens next. Child asks to brush his own hair; Mom passes the brush and waits beside him without touching his hair again. The first boundary is enough, even without please or an explanation."}
   ],
-  "parent_support":["Stop the action immediately at the first clear request; discussion comes afterward.","Do not require please, eye contact, or an explanation before respecting a body boundary."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support":["Stop contact immediately at the first clear stop, put both hands down and only then discuss space or another interaction. Do not require please, eye contact, laughter to end, or an explanation.","Use firm normal-volume speech for the boundary. Follow the choice of space immediately; a high five is only an offered option and never a required gesture of reconciliation."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2,"dialogue_contract":"three-by-ten-v2"
 }

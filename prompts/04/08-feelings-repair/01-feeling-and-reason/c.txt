@@ -1,36 +1,45 @@
-I Worked Hard on It — Part C (resolve)
-Production prompt draft | Source: curriculum/04/08-feelings-repair/01-feeling-and-reason/lesson.json | Content revision: 1
-Source SHA256: d1c349ce0f74727b9b5663fbece25ae16319e574b4bee9875a03367d5d006154
+I Feel Frustrated — Part C (resolve)
+Production prompt draft | Source: curriculum/04/08-feelings-repair/01-feeling-and-reason/lesson.json | Content revision: 2
+Source SHA256: 1408d62344e13b24fd248fd5911016ba564e02e23744e31813b23b9bbf17ea85
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Mom is attentive and Child speaks at normal home conversation volume.
+Child shows a small frown and a brief pause because he cannot find the last puzzle piece. Mom acknowledges that specific frustration. Finding the piece allows a small easing of his brow and shoulders; he need not smile to report feeling better.
+No crying spectacle, rage, shame posture, forced hug or automatic smile. No dismissing the frustration, demands to cheer up, triumphant bouncing, frantic search, exaggerated gasp or distorted face or body. Keep gestures small and voices at normal volume.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-Building a block tower at home.
+Finishing a simple puzzle together at a low table at home.
 
 SCENE AND PROP CONTINUITY
-A soft home play mat. Mom sits screen left and Child screen right, with four fallen tower blocks resting in a small loose cluster between them. The fall has just happened before the opening frame; the blocks stay still throughout this conversation. Locked 16:9 medium two-shot with comfortable personal space, warm ordinary daylight, and no dramatic visual effects or extra toys.
+Mom sits screen left and Child screen right on a home play mat beside a low table. Child is the four-year-old tiger boy in his yellow T-shirt; Mom is the same pink pig in a coral cardigan over a cream top. Exactly one large four-piece puzzle is on the tabletop: three joined pieces and one obvious gap along the edge nearest Child. The final blue piece lies flat on the floor just under the front table edge, within Mom's easy reach; it is not hidden by another prop and neither character has looked there yet. No extra puzzle pieces, blocks or toys. Locked 16:9 medium two-shot shows faces, hands, the tabletop and the floor under its front edge without needing a camera cut.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Child sits quietly beside Mom with hands resting in their lap; all four blocks remain fallen and untouched.
+Mom holds the single blue puzzle piece in her right hand just above the table, with her left hand in her lap. Child's empty hands rest beside the unchanged three joined pieces and single gap; he looks at the found piece with a slightly softer brow.
 
 ACTION AND REACTIONS
-Mom gestures briefly toward the safe, undisturbed blocks while promising to leave them. Child takes one comfortable breath and softens slightly while acknowledging the comfort of sitting together. Keep this a small move toward calm, not instant delight; no rebuilding or imposed hug occurs.
+During her first turn Mom passes the blue piece from her right hand into Child's open left hand, then lowers her right hand to her lap. Child acknowledges the help and reports a small improvement in his feeling while looking at the piece. At Mom's suggestion he places it into the near-edge gap with his left hand during his last turn, then releases it. Use one easy placement with no fiddly rotation. His expression can remain quiet and neutral as the puzzle fits; no hug, cheering or imposed smile follows.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "I will keep the blocks here until you are ready."
-Child: "Thanks. I feel calmer sitting with you."
+Mom: "Here's the missing piece."
+Child: "Thanks. I feel better now."
+Mom: "Let's put it in."
+Child: "It fits!"
 
 END FRAME
-Mom and Child remain seated quietly together; Child appears a little calmer and the four blocks are still waiting untouched.
+All four puzzle pieces are joined flat on the tabletop, with the blue piece filling the former gap. Child has released it and rests his empty hands beside the finished puzzle; Mom's hands are in her lap and both remain seated with calm faces.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (17 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (15 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

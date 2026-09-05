@@ -1,36 +1,44 @@
-Rebuild the Bridge — Part A (goal)
-Production prompt draft | Source: curriculum/04/08-feelings-repair/03-apologize-and-repair/lesson.json | Content revision: 1
-Source SHA256: b8b0977fad003ab500a8e5eeee17e5bc03734a91820c55a28b19861b7b1448c6
+Let's Build It Again — Part A (goal)
+Production prompt draft | Source: curriculum/04/08-feelings-repair/03-apologize-and-repair/lesson.json | Content revision: 2
+Source SHA256: a67bb963575b8a131d5c80a295dcdb8aa5244d1daa63ce1da2762819565f891d
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Bear Peer — the same small brown bear in a teal T-shirt in every peer lesson; age four, child-sized proportions and a distinct natural child voice, never an adult.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Both children are interested in the shared building activity and use ordinary play volume.
+Child makes one small surprised pause at his accidental bump, then speaks with sincere calm concern and apology. Peer shows mild disappointment about the fallen tower and may keep that expression while accepting help. The completed repair earns a quiet look of acknowledgment; neither child must smile.
+No crying spectacle, rage, shame posture, forced hug or automatic smile. No blame performance, collapsed shoulders, bowed head, exaggerated gasp, frantic grabbing, celebratory bouncing or distorted face or body. An apology does not require instant forgiveness or physical affection; keep voices normal and actions small.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-Two children playing with a block bridge.
+Child and the same Bear Peer from the cooperation chapter kneel beside a small block tower on a home play mat.
 
 SCENE AND PROP CONTINUITY
-A shared play mat with Peer kneeling screen left and Child kneeling screen right. A simple three-piece block bridge has two low supports, left and right, and a long top block. Its right support is tilted and its top has fallen onto the mat beside it after Child's toy truck bumped it. The truck is stopped by Child's knee. Locked 16:9 medium two-shot clearly shows faces, hands, and the damaged bridge.
+A shared home play mat with Peer kneeling screen left and Child kneeling screen right. Peer is the same small brown bear, age four, in his teal T-shirt from every Chapter 7 peer lesson; Child is the four-year-old tiger boy in his yellow T-shirt. Exactly three wide, easy-to-stack blocks form one small tower between them: tan base, blue middle, red top. The tower is within both children's reach. When Child accidentally brushes the two upper blocks, the tan base stays put and the blue and red blocks fall a short distance onto the soft mat toward Child, without hitting anyone. No truck, bridge, additional blocks or props. Locked 16:9 medium two-shot shows faces, hands and all three blocks throughout.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Peer looks at the fallen bridge top and tilted right support; Child's truck is stopped beside the damaged bridge, under Child's resting hand.
+Peer kneels left with his hands just released from the red top of the intact three-block tower. Child kneels right with his left hand beside the tower at the height of the blue middle block, about to return it to his lap; the tan base is flat on the mat.
 
 ACTION AND REACTIONS
-Peer names the effect of the accidental bump with disappointment rather than anger. Child immediately stops handling the truck, looks at Peer, and apologizes while checking on them. Do not reconstruct the bridge before asking; keep the impact visible and avoid injury or blame exaggeration.
+Peer describes the tower he is building. As Child draws his left hand back toward his lap, it accidentally brushes the blue middle block once; the blue and red upper blocks fall onto the mat toward him while the tan base stays upright. No block touches either child. Child stops his hand, notices the fallen blocks, looks at Peer and checks that Peer is okay while apologizing sincerely and calmly. Peer answers the concern, then names what happened with mild disappointment. Neither touches the damaged build or assumes the apology has already repaired it.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Peer: "My bridge fell when your truck bumped it."
-Child: "I'm sorry. Are you okay?"
+Peer: "I'm building a tall tower."
+Child: "Oops. Are you okay? I'm sorry."
+Peer: "I'm okay. My tower fell."
 
 END FRAME
-The truck is stationary by Child's knee; the bridge top is on the mat, its right support is tilted, and Child faces Peer with empty hands.
+The tan base remains upright between the children. The fallen blue block rests beside the base toward Child, with the fallen red block just beyond it; Child's empty hands are in his lap and Peer's empty hands rest by his knees as they face each other.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (13 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (16 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

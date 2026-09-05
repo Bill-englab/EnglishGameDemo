@@ -1,18 +1,18 @@
 {
-  "title":"Rebuild the Bridge","title_zh":"一起把桥搭回来","can_do":"注意到自己的动作影响同伴后道歉，并提出能修复游戏的行动。",
+  "title":"Let's Build It Again","title_zh":"我们一起重新搭好","can_do":"不小心碰倒同伴的积木后，先关心同伴并道歉，再征得同意一起重新搭好。",
   "conversation_move":{"id":"repair-relationship","label":"apologize and repair the shared activity"},
-  "trigger":"The child's truck accidentally bumps down a bridge the peer wanted to keep.",
-  "core_response":"I'm sorry. Are you okay?","stretch_response":"Can I help rebuild it with you?","repair_response":"I did not mean to bump it. I can help fix it.",
-  "recycle":["request-help","join-play"],"roles":["child","peer"],"setting":"Two children playing with a block bridge.","essential_props":["a block bridge and toy truck"],
+  "trigger":"Child accidentally brushes the upper two blocks from Peer's small tower while settling his hands. He notices the fallen blocks and checks on Peer before offering to help.",
+  "core_response":"I'm sorry. Are you okay?","stretch_response":"Can I help rebuild it?","repair_response":"I can put it back.",
+  "recycle":["request-help","join-play"],"roles":["child","peer"],"setting":"Child and the same Bear Peer from the cooperation chapter kneel beside a small block tower on a home play mat.","essential_props":["one three-block tower: a tan base, a blue middle block and a red top block"],
   "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"My bridge fell when your truck bumped it.","kind":"input"},{"speaker":"child","line":"I'm sorry. Are you okay?","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"peer","line":"I'm okay, but I wanted the bridge to stay up.","kind":"input"},{"speaker":"child","line":"Can I help rebuild it with you?","kind":"repair"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Yes. Please hold this side while I add the top.","kind":"input"},{"speaker":"child","line":"I will hold it. Let's try again together.","kind":"action"}]}
+    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"I'm building a tall tower.","kind":"input"},{"speaker":"child","line":"Oops. Are you okay? I'm sorry.","kind":"core"},{"speaker":"peer","line":"I'm okay. My tower fell.","kind":"input"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"Can I help rebuild it?","kind":"stretch"},{"speaker":"peer","line":"Yes. Let's start with the bottom.","kind":"input"},{"speaker":"child","line":"I'll hold it still.","kind":"confirmation"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Hold this block, please.","kind":"input"},{"speaker":"child","line":"Let's build it again together.","kind":"action"},{"speaker":"peer","line":"I'll put this one on top.","kind":"action"},{"speaker":"child","line":"There. It's standing again.","kind":"confirmation"}]}
   ],
   "replay_cards":[
-    {"title":"Fix the drawing","setting":"Two children sharing a large paper","change":"One child draws across the peer's road by mistake","challenge":"Notice the effect, apologize, ask how to repair it, and add a useful bridge together"},
-    {"title":"Return the moved piece","setting":"A shared puzzle","change":"The child takes the piece the peer was about to place","challenge":"Apologize, return the piece, and offer to find a different one"}
+    {"title":"Fix the drawing","setting":"Child and Bear Peer draw on a shared sheet","change":"Child's crayon accidentally crosses the road Peer was drawing","challenge":"Child stops drawing, notices the crossed road and says \"I'm sorry. Are you okay?\" Peer says he is okay but wanted a clear road. Child asks how to help; Peer suggests making the accidental line a bridge. Child asks before adding the two bridge edges, Peer agrees, and they connect the repaired road together. Peer may still look disappointed."},
+    {"title":"Return the moved piece","setting":"A shared puzzle with Bear Peer","change":"Child takes a piece Peer had set beside an empty space, thinking it was unused","challenge":"Peer explains that he was about to place that piece. Child apologizes and offers \"I can put it back.\" Peer agrees and Child returns it to the same spot, leaving Peer to fit it himself. Child then asks \"Can I play with you?\" Peer asks him to find a corner piece, and they resume with separate useful jobs."}
   ],
-  "parent_support":["Do not force an empty apology; make the impact visible and allow a repair action.","The peer can name what mattered, then accept a reasonable repair without instant praise."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support":["Keep the accidental damage visible so concern and the apology have a real cause. Child speaks sincerely and calmly; do not demand a bowed head, shame, physical affection or an empty apology.","Let Peer name the loss and accept a useful repair before Child touches the blocks. Rebuilding is the resolution; Peer need not praise, smile or instantly stop feeling disappointed."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2,"dialogue_contract":"three-by-ten-v2"
 }

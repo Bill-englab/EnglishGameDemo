@@ -9,10 +9,11 @@ import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterCont
 import { resolveMediaView } from "./detail-media.mjs";
 import { summarizeAdventure } from "./adventure-navigation.mjs";
 import { createAdventureShell } from "./adventure-shell.mjs";
-import { createCelebrationQueue, createCurrentLessonAction, showMapLoadState, showMapLoadError } from "./map-interactions.mjs";
+import { createCelebrationQueue, createCurrentLessonAction, resolveCompletionTransition, showMapLoadState, showMapLoadError } from "./map-interactions.mjs";
 
 const scrollToCurrentLesson = createCurrentLessonAction({ root: document, view: window });
 const celebrationQueue = createCelebrationQueue();
+const chapterCelebrationQueue = createCelebrationQueue();
 
 const adventureShell = createAdventureShell({
   root: document,
@@ -200,6 +201,7 @@ function makeActionButton(label, level, kind, onDone) {
     btn.appendChild(bar);
     const fill = bar.querySelector(".upload-progress__fill");
     const text = bar.querySelector(".upload-progress__text");
+    const performanceBefore = kind === "performance" ? getCompletionSnapshot(level) : null;
     try {
       const uploaded = await uploadVideo(level, kind, (pct) => {
         if (!isCurrent()) return;
@@ -210,13 +212,15 @@ function makeActionButton(label, level, kind, onDone) {
           bar.innerHTML = `<span class="upload-processing"><span class="spinner"></span>Processing…</span>`;
         }
       }, isCurrent);
-      if (!isCurrent()) return;
       if (!uploaded) {
+        if (!isCurrent()) return;
         btn.textContent = orig;
         btn.disabled = false;
         return;
       }
-      const refreshed = await loadLibrary({ isCurrent });
+      const refreshed = kind === "performance"
+        ? await refreshPerformanceSave(level, performanceBefore)
+        : await loadLibrary({ isCurrent });
       if (!isCurrent()) return;
       if (!refreshed) throw new Error("Unable to refresh the saved video");
       onDone();
@@ -454,9 +458,9 @@ function renderPlayback(container, blob, stream, level, mimeType, isCurrent) {
     redoBtn.disabled = true;
     saveBtn.textContent = "Saving…";
     try {
+      const performanceBefore = getCompletionSnapshot(level);
       await uploadRecording(level, blob, mimeType);
-      if (!isCurrent()) return;
-      const refreshed = await loadLibrary({ isCurrent });
+      const refreshed = await refreshPerformanceSave(level, performanceBefore);
       if (!isCurrent()) return;
       if (!refreshed) throw new Error("Unable to refresh the saved recording");
       reopenDetail(level.chapter, level.level);
@@ -485,7 +489,6 @@ async function uploadRecording(level, blob, mimeType, kind = "performance") {
     body: fd,
   });
   if (!res.ok) throw new Error(`upload ${res.status}`);
-  if (kind === "performance") celebrationQueue.queue(levelKey(level));
   return true;
 }
 
@@ -537,6 +540,32 @@ let currentLibrary = [];        // full chapter tree, kept for detail navigation
 let flatLevels = [];            // flattened level list with chapter context for prev/next
 let bgSlides = [];              // background slides, kept so closeDetail can refresh them
 let detailLevelKey = null;
+
+function getCompletionSnapshot(level) {
+  const chapter = currentLibrary.find(item => item.name === level.chapter);
+  const levels = chapter?.levels || [];
+  const current = levels.find(item => item.level === level.level);
+  return {
+    hasPerformance: Boolean(current?.has_performance ?? level.has_performance),
+    chapterCompleted: levels.filter(item => item.has_performance).length,
+    chapterTotal: levels.length,
+  };
+}
+
+async function refreshPerformanceSave(level, before) {
+  const refreshed = await loadLibrary();
+  if (!refreshed) return false;
+  const after = getCompletionSnapshot(level);
+  const transition = resolveCompletionTransition(before, after);
+  if (!transition.lesson) return true;
+
+  celebrationQueue.queue(levelKey(level));
+  if (transition.chapter) chapterCelebrationQueue.queue(level.chapter);
+  if (!document.getElementById("map-view").classList.contains("hidden")) {
+    celebratePendingCompletion(levelKey(level));
+  }
+  return true;
+}
 
 const MAP_MARKERS = {
   star: '<path d="m12 3.1 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.7l6.2-.9Z" fill="currentColor" stroke="none"/>',
@@ -1101,6 +1130,7 @@ function closeDetail() {
 }
 
 function celebratePendingCompletion(key) {
+  if (document.getElementById("map-view").classList.contains("hidden")) return;
   if (!key || !celebrationQueue.consume(key)) return;
   const wrap = [...document.querySelectorAll(".level-node-wrap")]
     .find(node => node.dataset.levelKey === key);
@@ -1120,7 +1150,7 @@ function celebratePendingCompletion(key) {
   removeAfterAnimation(wrap, "level-node-wrap--just-completed", star);
 
   const chapter = wrap.closest(".chapter-world");
-  if (!chapter || chapter.querySelectorAll(".level-node-wrap--completed").length !== chapter.querySelectorAll(".level-node-wrap").length) return;
+  if (!chapter || !chapterCelebrationQueue.consume(chapter.dataset.chapter)) return;
   const heading = chapter.querySelector(".chapter-heading");
   if (!heading) return;
   chapter.classList.add("chapter-world--just-completed");

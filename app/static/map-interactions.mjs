@@ -8,6 +8,14 @@ export function createCelebrationQueue() {
   };
 }
 
+export function resolveCompletionTransition(before, after) {
+  return {
+    lesson: !before.hasPerformance && after.hasPerformance,
+    chapter: before.chapterCompleted < before.chapterTotal
+      && after.chapterCompleted === after.chapterTotal,
+  };
+}
+
 export function createCurrentLessonAction({ root, view }) {
   let cancel = () => {};
   return function scrollToCurrentLesson({ behavior = "smooth" } = {}) {

@@ -473,6 +473,7 @@ async function main() {
       // A saved performance celebrates once after the detail closes. The
       // fixture already has the first two lessons complete, so this save also
       // completes the first chapter.
+      if (focus === 'celebration') page.setDefaultTimeout(5000);
       await page.emulateMedia({ reducedMotion: 'no-preference' });
       await page.unroute('**/upload/**');
       await page.locator('[data-current-lesson]').click();
@@ -505,7 +506,88 @@ async function main() {
       await page.locator('.level-node').first().waitFor();
       assert.equal(await page.locator('.level-node-wrap--just-completed').count(), 0);
       assert.equal(await page.locator('.chapter-world--just-completed').count(), 0);
+      // A re-record saves successfully but does not create a false-to-true
+      // completion transition, so neither celebration replays.
+      await page.locator('.level-node--completed').nth(2).click();
+      await page.getByRole('button', { name: 'Record again', exact: true }).click();
+      await page.locator('.record-preview').waitFor();
+      await page.locator('.record-btn').click();
+      await page.waitForTimeout(300);
+      await page.getByRole('button', { name: 'Stop recording', exact: true }).click();
+      await page.locator('.record-playback').waitFor();
+      await page.getByRole('button', { name: 'Save', exact: false }).click();
+      await page.getByRole('button', { name: 'Record again', exact: true }).waitFor();
+      await page.locator('#back-btn').click();
+      await page.waitForTimeout(50);
+      assert.equal(await page.locator('.level-node-wrap--just-completed').count(), 0);
+      assert.equal(await page.locator('.chapter-world--just-completed').count(), 0);
+
+      // A camera error falls back to a file upload, which is still a
+      // performance save and earns the same one-shot celebration.
+      await page.locator('[data-current-lesson]').click();
+      await page.evaluate(() => {
+        window.qaGetUserMedia = navigator.mediaDevices.getUserMedia;
+        navigator.mediaDevices.getUserMedia = async () => { throw new DOMException('camera unavailable', 'NotFoundError'); };
+        window.showOpenFilePicker = async () => [{ getFile: async () => new File(['QA'], 'performance.webm', { type: 'video/webm' }) }];
+      });
+      await page.getByRole('button', { name: 'Start recording', exact: true }).click();
+      await page.getByRole('button', { name: 'Choose file', exact: true }).waitFor();
+      await page.getByRole('button', { name: 'Choose file', exact: true }).click();
+      await page.getByRole('button', { name: 'Record again', exact: true }).waitFor();
+      await page.evaluate(() => { navigator.mediaDevices.getUserMedia = window.qaGetUserMedia; });
+      await page.locator('#back-btn').click();
+      await page.locator('.level-node-wrap--just-completed').waitFor();
+      await page.locator('.level-node-wrap--just-completed .level-node__marker--star').waitFor();
+      await page.waitForTimeout(700);
+
+      // The user can return to the map while a save is in flight. Once it
+      // resolves, the refreshed visible map must still celebrate once.
+      await page.locator('[data-current-lesson]').click();
+      await page.getByRole('button', { name: 'Start recording', exact: true }).click();
+      await page.locator('.record-preview').waitFor();
+      await page.locator('.record-btn').click();
+      await page.waitForTimeout(300);
+      await page.getByRole('button', { name: 'Stop recording', exact: true }).click();
+      await page.locator('.record-playback').waitFor();
+      const inFlightKey = await page.locator('[data-current-lesson]').getAttribute('data-current-lesson');
+      let inFlightSaved = false;
+      await page.route('**/api/library', async route => {
+        const response = await route.fetch();
+        const data = await response.json();
+        if (inFlightSaved) {
+          const [chapterName, levelName] = inFlightKey.split('/');
+          const level = data.find(chapter => chapter.name === chapterName).levels.find(item => item.level === levelName);
+          level.has_performance = true;
+        }
+        await route.fulfill({ json: data });
+      });
+      let heldPerformanceUpload;
+      const performanceUploadStarted = new Promise(resolve => {
+        heldPerformanceUpload = { resolve, route: null };
+      });
+      await page.route('**/upload/**/performance', route => {
+        heldPerformanceUpload.route = route;
+        heldPerformanceUpload.resolve();
+      });
+      await page.getByRole('button', { name: 'Save', exact: false }).click();
+      await performanceUploadStarted;
+      await page.locator('#back-btn').click();
+      inFlightSaved = true;
+      await heldPerformanceUpload.route.fulfill({ json: { ok: true } });
+      await page.locator('.level-node-wrap--just-completed').waitFor();
+      assert.equal(await page.locator('.level-node-wrap--just-completed .level-node__marker--star').count(), 1);
+      await page.unroute('**/upload/**/performance');
+      await page.unroute('**/api/library');
       results.push({ performanceSave: 'one-shot lesson and chapter celebration', refresh: 'no replay' });
+
+      if (focus === 'celebration') {
+        assert.deepEqual(errors, []);
+        const unexpected = unexpectedFailures(failedResponses, consoleErrors);
+        assert.deepEqual(unexpected.responses, [], 'Unexpected failed HTTP responses');
+        assert.deepEqual(unexpected.consoleErrors, [], 'Unexpected browser console errors');
+        console.log('PASS focused regression: celebration');
+        return;
+      }
 
       await page.setViewportSize({ width: 1440, height: 960 });
       // This one lesson's mock demo intentionally has no generated thumbnail.

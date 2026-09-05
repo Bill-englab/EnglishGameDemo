@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import * as model from "../static/map-model.mjs";
-import { createCelebrationQueue, createCurrentLessonAction, showMapLoadError } from "../static/map-interactions.mjs";
+import { createCelebrationQueue, createCurrentLessonAction, resolveCompletionTransition, showMapLoadError } from "../static/map-interactions.mjs";
 
 test("completion celebrations are consumed once and can be cleared", () => {
   const queue = createCelebrationQueue();
@@ -11,6 +11,17 @@ test("completion celebrations are consumed once and can be cleared", () => {
   queue.queue("x");
   queue.clear();
   assert.equal(queue.consume("x"), false);
+});
+
+test("celebrations require a new lesson completion and a new 3/3 chapter", () => {
+  assert.deepEqual(resolveCompletionTransition(
+    { hasPerformance: false, chapterCompleted: 2, chapterTotal: 3 },
+    { hasPerformance: true, chapterCompleted: 3, chapterTotal: 3 },
+  ), { lesson: true, chapter: true });
+  assert.deepEqual(resolveCompletionTransition(
+    { hasPerformance: true, chapterCompleted: 3, chapterTotal: 3 },
+    { hasPerformance: true, chapterCompleted: 3, chapterTotal: 3 },
+  ), { lesson: false, chapter: false });
 });
 
 test("only performance earns a binary star reward; current and preview have distinct markers", () => {

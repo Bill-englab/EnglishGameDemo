@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "A quiet home puzzle corner. Dad kneels screen left and Child kneels screen right at a low table directly beside a sofa. One almost-complete puzzle lies within Child's reach. Its single loose red piece stays partly concealed beside the sofa's nearest front leg, within one arm's reach of the table; it does not move until Child retrieves it. A locked 16:9 medium two-shot includes faces, table, and this low search area.",
+  "content_revision": 2,
+  "scene": "A quiet home play corner. Dad kneels screen-left and Child kneels screen-right on a rug, directly in front of a low shelf that both can reach without climbing. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts and cream socks throughout. One small red toy car with black wheels rests at the back-right of the shelf behind a small opaque blue storage box. The box blocks Child's initial view of the car; the car is already there and stays there until retrieved in C. The shelf has clear space immediately to the box's left so Dad can slide it sideways without pushing the car. The car and its single box obstacle are the only movable props. Lock a 16:9 medium two-shot including both faces, hands, the rug and the whole low shelf. No second car, other room or search montage.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Dad notices an ordinary search and listens with relaxed posture.",
+    "allowed_shift": "Child may look mildly puzzled while searching, then show a small smile of recognition. Dad responds with one gentle point and a small acknowledging smile.",
+    "forbidden": "No frantic searching, alarm, theatrical guessing, exaggerated discovery, shouting, jumping, grabbing or distorted expressions."
+  },
   "parts": {
     "A": {
-      "start": "Dad and Child kneel beside the low puzzle table; the last puzzle space is empty and the red piece remains partly concealed beside the sofa's front leg.",
-      "action": "On Dad's question, he glances from the empty space to Child's empty hands. Child checks the table edge, opens both hands, then asks Dad about the missing piece. Show mild puzzlement, not a prolonged guessing game; neither character finds or touches the piece yet.",
-      "end": "Child's hands are empty above the table and both look toward the sofa; the red piece remains beside its front leg."
+      "start": "Dad kneels screen-left and Child screen-right beside the low shelf; both have empty hands. Child looks over the empty rug. The blue box stands at the shelf's front-right, hiding the stationary red car with black wheels at the back-right. Child wears his yellow T-shirt, navy shorts and cream socks.",
+      "action": "Dad notices Child searching the rug and asks what he needs. Child looks up and names his missing car. Dad gives the low-shelf clue with one small point. Child follows that clue by turning his gaze from the rug to the shelf and checking its visible front edge. Neither character touches the box or car.",
+      "end": "Dad kneels screen-left and Child screen-right, both looking at the front of the low shelf with empty hands. The blue box is still at the front-right, hiding the red car with black wheels at the back-right; the clear shelf space to the box's left is empty. Child's outfit is unchanged."
     },
     "B": {
-      "start": "Child's hands are empty above the table and both look toward the sofa; the red piece remains beside its front leg.",
-      "action": "Dad gives his truthful clue with a small gesture toward the sofa. Child follows the gesture and indicates the gap below the sofa while requesting help. After the request, both lean slightly toward that same front leg; do not reveal or retrieve the piece before Dad's next turn.",
-      "end": "Both lean toward the sofa's near front leg; Child's empty right hand rests beside the table and the red piece is still on the floor by the leg."
+      "start": "Dad kneels screen-left and Child screen-right, both looking at the front of the low shelf with empty hands. The blue box is still at the front-right, hiding the red car with black wheels at the back-right; the clear shelf space to the box's left is empty. Child's outfit is unchanged.",
+      "action": "Having checked the visible shelf edge, Child reports that he cannot see the car and asks for help. Dad narrows the search with a short point toward the blue box, then lowers his hand. Child studies the gap behind the box and asks about that specific hidden place. Keep the car concealed and stationary; no successful search or prop movement happens before C.",
+      "end": "Dad and Child remain kneeling screen-left and screen-right, now looking toward the space behind the blue box with empty hands. The blue box remains at the shelf's front-right, the red car with black wheels is hidden at the back-right, and the space to the box's left is clear. Child's outfit is unchanged."
     },
     "C": {
-      "start": "Both lean toward the sofa's near front leg; Child's empty right hand rests beside the table and the red piece is still on the floor by the leg.",
-      "action": "As Dad identifies the precise location, he points without picking up the piece. Child spots it, reaches a short distance, visibly lifts it, and returns the hand to the adjacent table during the final line. Child fits that same piece into the single remaining space; keep the action simple and continuous.",
-      "end": "The puzzle is complete on the table; Child's hand rests beside the inserted red piece and Dad smiles beside Child."
+      "start": "Dad and Child remain kneeling screen-left and screen-right, now looking toward the space behind the blue box with empty hands. The blue box remains at the shelf's front-right, the red car with black wheels is hidden at the back-right, and the space to the box's left is clear. Child's outfit is unchanged.",
+      "action": "During his opening turn Dad uses his right hand to slide the blue box a short distance left into the already clear shelf space, visibly revealing the red car without touching it. Child recognizes the car during his next turn, reaches with his right hand and lifts that same car from the back-right of the shelf. Dad acknowledges the find while Child brings it close. Child's final confirmation happens with the car already secure in his right hand. Dad releases the box and returns his right hand to his lap. These small actions overlap the speech; neither character stands or starts another game.",
+      "end": "Child kneels screen-right holding the single red car with black wheels in his right hand, with his left hand free. Dad kneels screen-left with empty hands. The blue box now stands farther left on the low shelf and the car's former back-right spot is empty. Child's yellow T-shirt, navy shorts and cream socks are unchanged."
     }
   }
 }

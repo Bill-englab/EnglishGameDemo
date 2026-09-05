@@ -1,18 +1,54 @@
 {
-  "title":"The Bottle with My Name","title_zh":"写着我名字的水瓶","can_do":"说明物品属于谁，并补充一个能辨认它的特征。",
-  "conversation_move":{"id":"identify-belonging","label":"identify whose item it is"},
-  "trigger":"Rabbit Teacher finds a bottle, but another bottle has the same yellow-star design.",
-  "core_response":"It's mine. It has a yellow star.","stretch_response":"Mine has my name under the yellow star.","repair_response":"That one is not mine. Mine has my name.",
-  "recycle":["specify-choice","check-location"],"roles":["child","teacher"],"setting":"A light classroom setting after art time.","essential_props":["two similar water bottles"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"teacher","line":"This water bottle was left by the art table. Whose is it?","kind":"input"},{"speaker":"child","line":"It's mine. It has a yellow star.","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"teacher","line":"I see two bottles with yellow stars.","kind":"input"},{"speaker":"child","line":"Mine has my name under the star.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"teacher","line":"Here is the one with your name.","kind":"input"},{"speaker":"child","line":"Yes, that is mine. I will put it in my bag.","kind":"action"}]}
+  "title": "Mine Has a Dinosaur",
+  "title_zh": "我的有恐龙贴纸",
+  "can_do": "用可见的特征辨认自己的物品，排除相似物品，并在核对后确认拿回。",
+  "conversation_move": {"id": "identify-belonging", "label": "identify whose item it is"},
+  "trigger": "At the end of the school day, Rabbit Teacher holds two similar blue bottles and asks whose one is.",
+  "core_response": "Mine has a dinosaur sticker.",
+  "stretch_response": "Mine is red with a bear patch.",
+  "repair_response": "No, mine has a bear patch.",
+  "recycle": ["specify-choice", "check-location"],
+  "roles": ["child", "teacher"],
+  "setting": "Collecting a water bottle at a quiet classroom table before going home.",
+  "essential_props": ["two light-blue bottles with cream caps: one green-dinosaur sticker and one yellow-star sticker"],
+  "dialogue_contract": "three-by-ten-v2",
+  "parts": [
+    {"id": "A", "beat": "goal", "turns": [
+      {"speaker": "teacher", "line": "Whose blue bottle is this?", "kind": "input"},
+      {"speaker": "child", "line": "Mine has a dinosaur sticker.", "kind": "core"},
+      {"speaker": "teacher", "line": "Let's check these two bottles.", "kind": "input"}
+    ]},
+    {"id": "B", "beat": "change", "turns": [
+      {"speaker": "teacher", "line": "This one has a star.", "kind": "input"},
+      {"speaker": "child", "line": "That one's not mine.", "kind": "core"},
+      {"speaker": "teacher", "line": "And this one?", "kind": "input"},
+      {"speaker": "child", "line": "That's my dinosaur sticker.", "kind": "stretch"}
+    ]},
+    {"id": "C", "beat": "resolve", "turns": [
+      {"speaker": "teacher", "line": "Here's your blue bottle.", "kind": "action"},
+      {"speaker": "child", "line": "Yes, that's mine. Thank you.", "kind": "action"},
+      {"speaker": "teacher", "line": "You're welcome. Have a good day.", "kind": "input"}
+    ]}
   ],
-  "replay_cards":[
-    {"title":"Whose coat?","setting":"At the classroom coat hooks","change":"Two coats are the same color","challenge":"Say the coat is yours, name the animal patch, confirm it, and put it on"},
-    {"title":"Whose drawing?","setting":"At the family table","change":"Two drawings are face down","challenge":"Say which is yours using the name or subject on it, turn it over, and take it"}
+  "replay_cards": [
+    {
+      "title": "Whose jacket?",
+      "setting": "At the classroom coat hooks before outdoor play",
+      "change": "Two jackets are red; Child's has a bear patch and the other is plain. Teacher hears the color but misses the feature and mistakenly reaches for the plain jacket.",
+      "challenge": "When Teacher asks which jacket is his, Child explains: \"Mine is red with a bear patch.\" As Teacher reaches for the plain jacket, Child corrects the choice: \"No, mine has a bear patch.\" Teacher accepts the correction, checks the visible bear patch and returns that jacket. Child confirms it is his and puts it on."
+    },
+    {
+      "title": "Whose drawing?",
+      "setting": "Clearing drawings from the family table",
+      "change": "Child wants to keep his blue-boat picture. A red-sun drawing lies on top of it, leaving one blue corner visible.",
+      "challenge": "Child tells Dad that his drawing has a blue boat and asks, \"Is it under that picture?\" Dad lifts the red-sun drawing to check. Child identifies the now-visible boat, confirms the lower drawing is his and takes it. Dad leaves the red-sun drawing on the table."
+    }
   ],
-  "parent_support":["Use a feature that really distinguishes the item; a name label is especially useful.","Do not treat possession as proven until the identifying detail matches."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support": [
+    "Choose a feature that actually distinguishes the objects and show both objects while checking it.",
+    "Treat ownership as a calm joint check. Wait for the matching feature before handing the object over, and accept a correction without blame or grabbing."
+  ],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
+  "status": "language_reviewed",
+  "content_revision": 2
 }

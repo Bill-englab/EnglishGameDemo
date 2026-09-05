@@ -1,36 +1,44 @@
-The Bottle with My Name — Part C (resolve)
-Production prompt draft | Source: curriculum/04/06-finding-belonging/03-say-whose/lesson.json | Content revision: 1
-Source SHA256: 6b93ce4930c1895ab994021570d7edb3660e42af6a270e2dd8b4007d577d8477
+Mine Has a Dinosaur — Part C (resolve)
+Production prompt draft | Source: curriculum/04/06-finding-belonging/03-say-whose/lesson.json | Content revision: 2
+Source SHA256: 61a29186fd2907bb07fc5d17c9812b9e28ce363fa333e127d479d7220695c500
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Rabbit Teacher — a cream rabbit with upright ears and a lavender cardigan, calm natural adult voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Teacher and Child cooperatively check the bottles' visible features at normal conversation volume.
+Child can give a small head shake when excluding the star bottle and a quiet smile when recognizing the dinosaur. Teacher listens and checks with small deliberate wrist movements.
+No accusation, ownership dispute, testing tone, suspicious stare, grabbing, tugging, theatrical surprise, large gestures or distorted expressions.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-A light classroom setting after art time.
+Collecting a water bottle at a quiet classroom table before going home.
 
 SCENE AND PROP CONTINUITY
-A quiet classroom art-table corner, Teacher seated screen left and Child seated screen right. Two otherwise similar light-blue water bottles each have a yellow star. The first bottle has a small physical Leo name label directly below its star; the other has no name label. Both labels face the characters and remain consistent. Child's open bag rests against the near right table leg within reach. Locked 16:9 medium two-shot; no other pupils or art props.
+A quiet classroom collection table at the end of the school day. Rabbit Teacher sits screen-left and Child sits screen-right facing partly toward each other. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts and cream socks throughout; Teacher keeps the same lavender cardigan. There are exactly two small light-blue water bottles with cream screw caps. One has a single green dinosaur sticker and belongs to Child; the other has a single yellow star sticker and is not his. The stickers are physical, distinct and fixed to their original bottles; no names or text labels are needed. Teacher initially holds the star bottle in the right hand and the dinosaur bottle in the left hand nearer Child, just above the table. The stickered sides face diagonally toward the camera, so checking each only needs a small wrist turn. Lock a 16:9 medium two-shot showing both faces, all hands and both whole bottles. No bag, drinking, other pupils or third object is added.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Teacher has checked the name label beneath the first bottle's star and holds it toward Child; the second bottle remains on the table.
+Teacher sits screen-left holding the capped light-blue dinosaur bottle in the left hand nearer Child, its green dinosaur sticker visible to both; the right hand is empty beside the capped light-blue star bottle now standing upright on the table. Child sits screen-right with empty hands looking at the dinosaur sticker. Both outfits and both sticker identities are unchanged.
 
 ACTION AND REACTIONS
-Teacher offers the verified first bottle during the first turn. Child accepts it after visually confirming the label, then lowers that same bottle into the already-open bag while finishing the final line. Keep the second bottle untouched and visible.
+Teacher offers the already verified dinosaur bottle with the left hand. Child looks at its sticker once more, confirms ownership and takes the bottle securely in his right hand during his thank-you. Teacher releases only after his grip is secure, then returns the left hand to the table while giving a quiet farewell. Child keeps his left hand free and remains seated holding his bottle; no exit or extra packing action is needed. The star bottle stays upright in its established table position throughout.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Teacher: "Here is the one with your name."
-Child: "Yes, that is mine. I will put it in my bag."
+Teacher: "Here's your blue bottle."
+Child: "Yes, that's mine. Thank you."
+Teacher: "You're welcome. Have a good day."
 
 END FRAME
-Child's named bottle is inside the open bag; the unnamed yellow-star bottle remains on the table and both characters are relaxed.
+Child sits screen-right holding his capped light-blue bottle with its green dinosaur sticker in his right hand, left hand free. Teacher sits screen-left with both hands empty on the table. The capped light-blue bottle with the yellow star sticker remains upright beside Teacher's right hand. Their seating and clothing are unchanged.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (18 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (15 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

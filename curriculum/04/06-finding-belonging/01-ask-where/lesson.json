@@ -1,18 +1,54 @@
 {
-  "title":"Where Is My Puzzle Piece?","title_zh":"我的拼图在哪里","can_do":"找不到熟悉物品时主动询问位置，并请求一起寻找。",
-  "conversation_move":{"id":"ask-location","label":"ask where something is"},
-  "trigger":"The final red puzzle piece is not beside the puzzle where the child expects it.",
-  "core_response":"Where's my red puzzle piece?","stretch_response":"Where's my red puzzle piece? Can you help me look?","repair_response":"Not that piece. Mine is red.",
-  "recycle":["request-help","specify-choice"],"roles":["child","dad"],"setting":"Finishing a puzzle at home.","essential_props":["a puzzle with one loose piece"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"Your puzzle is waiting. Do you have the last piece?","kind":"input"},{"speaker":"child","line":"No. Where's my red puzzle piece?","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"I saw a red piece near the sofa.","kind":"input"},{"speaker":"child","line":"Can you help me look under the sofa?","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"Here it is, beside the front leg.","kind":"input"},{"speaker":"child","line":"I found it. Now I can finish my puzzle.","kind":"action"}]}
+  "title": "Where Is My Car?",
+  "title_zh": "我的小车在哪里",
+  "can_do": "找不到熟悉物品时主动询问位置，依据线索缩小寻找范围，并确认找到。",
+  "conversation_move": {"id": "ask-location", "label": "ask where something is"},
+  "trigger": "Child is looking for his red toy car on the rug, and Dad notices his empty hands and searching gaze.",
+  "core_response": "Where's my red car?",
+  "stretch_response": "I can't see it. Can you help?",
+  "repair_response": "Not that one. Mine is red.",
+  "recycle": ["request-help", "specify-choice"],
+  "roles": ["child", "dad"],
+  "setting": "Looking for a toy car beside a low shelf at home.",
+  "essential_props": ["one red toy car and a blue storage box hiding it on a low shelf"],
+  "dialogue_contract": "three-by-ten-v2",
+  "parts": [
+    {"id": "A", "beat": "goal", "turns": [
+      {"speaker": "dad", "line": "What are you looking for?", "kind": "input"},
+      {"speaker": "child", "line": "Where's my red car?", "kind": "core"},
+      {"speaker": "dad", "line": "Try the low shelf beside you.", "kind": "input"}
+    ]},
+    {"id": "B", "beat": "change", "turns": [
+      {"speaker": "child", "line": "I can't see it. Can you help?", "kind": "stretch"},
+      {"speaker": "dad", "line": "Check near the blue box.", "kind": "input"},
+      {"speaker": "child", "line": "Is it behind the box?", "kind": "stretch"}
+    ]},
+    {"id": "C", "beat": "resolve", "turns": [
+      {"speaker": "dad", "line": "Let's move the box and see.", "kind": "action"},
+      {"speaker": "child", "line": "There it is!", "kind": "core"},
+      {"speaker": "dad", "line": "You've found your red car.", "kind": "input"},
+      {"speaker": "child", "line": "Thanks, Dad. I've got it.", "kind": "action"}
+    ]}
   ],
-  "replay_cards":[
-    {"title":"Find the hairbrush","setting":"Getting ready in the bedroom","change":"The brush is not on the dresser","challenge":"Ask where it is, follow Mom's clue, find it by the mirror, and finish brushing"},
-    {"title":"Find the blue car","setting":"Playing on the floor","change":"One named car is missing","challenge":"Ask Dad for help, check near the toy box, find the car, and resume the game"}
+  "replay_cards": [
+    {
+      "title": "Find the hairbrush",
+      "setting": "Getting ready in the bedroom",
+      "change": "The hairbrush is missing from the dresser; Mom remembers leaving it in the bedside basket behind a folded towel.",
+      "challenge": "Child asks where his hairbrush is and asks Mom to help him look. Mom gives the basket clue. He checks behind the towel, finds the same brush, confirms he has it, and starts brushing his hair."
+    },
+    {
+      "title": "Find the red glove",
+      "setting": "Getting ready by the front door",
+      "change": "Child needs his red glove. Dad mistakenly points to a blue glove on the bench; the red glove is partly hidden beside a shoe on that same bench.",
+      "challenge": "Child asks where his red glove is. When Dad points to the blue glove, Child corrects him: \"Not that one. Mine is red.\" Dad accepts the correction, looks along the bench and points beside the shoe. Child follows the location clue, picks up his red glove and puts it on."
+    }
   ],
-  "parent_support":["Let the missing object matter to an activity already in progress.","Give one truthful location clue rather than turning the search into repeated guessing."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support": [
+    "Let him look for something he wants to use, then give one truthful clue to a reachable location.",
+    "Wait for his follow-up before moving the obstacle. Ordinary help is a stretch; a repair corrects an actual wrong object, as in the glove card."
+  ],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
+  "status": "language_reviewed",
+  "content_revision": 2
 }

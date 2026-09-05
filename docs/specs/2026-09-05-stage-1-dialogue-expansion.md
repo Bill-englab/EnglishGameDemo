@@ -1,0 +1,157 @@
+# Stage 1 三段十秒生活对话重审设计
+
+> 日期：2026-09-05  
+> 状态：等待书面复核
+
+## 1. 修正目标
+
+重新审查 Stage 1 全部 10 章、30 课。纠正把“三段视频”误写成“三组一问一答”的问题：一个 Lesson 仍由 A/B/C 三段独立生成的视频构成，但三段共同组成一段有目标、变化和解决的真实生活对话。
+
+本文是原课程架构的内容预算修正：若与旧文档中的“六至八轮”发生冲突，以本文的 9–11 轮和严格十秒分段为准。
+
+本轮只改 Stage 1。Stage 2/3 仍为 Planned；现有 demo 和孩子 performance 不删除、不覆盖。
+
+## 2. 学习者与角色约束
+
+- 学习者是四岁、有较好英文理解能力、但回应句式和会话策略不足的非母语男孩。
+- 主角是四岁卡通小老虎男孩；课程元数据和制作提示统一使用 he/him 或 Child，不使用含糊的性别替代。
+- 不给主角安排连衣裙等不存在的个人衣物。正式台词和制作描述避免使用容易产生歧义的 `dress` / `get dressed`，改用 `put on a shirt`、`put on your clothes` 等具体动作；服装课程使用 T-shirt、shirt、jacket、shoes 等家庭真实物品。
+- 不用性别刻板印象限制游戏、颜色或情绪表达；“男孩设定”用于人物连续性与真实物品匹配。
+- 正式对话仍以 Dog Dad、Pig Mom、Rabbit Teacher、Peer 与 Child 为角色，每段最多两个说话角色。
+
+## 3. 三段十秒硬约束
+
+每段视频只能约 10 秒，不能依靠延长到 12–15 秒补救。因此采用以下创作预算：
+
+| 项目 | 标准 |
+| --- | --- |
+| 每段轮次 | 3–4 个简短 turn |
+| 全课轮次 | 9–11 个 turn |
+| 每段英文词数 | 通常 14–19 词 |
+| 全课英文词数 | 通常 45–58 词 |
+| 孩子开口 | 4–5 次，共 18–28 词 |
+| 单句长度 | 孩子通常 3–9 词；成人通常不超过 11 词 |
+
+动作与表情应尽量与台词同时发生。每段保留极短的自然接话间隔，不写旁白、字幕、额外声音或与目标无关的俏皮话。若一句话无法在自然语速下完成，应缩短句子，而不是要求加速。
+
+## 4. 三幕教学结构
+
+### Part A — Goal
+
+- 用真实成人输入建立孩子此刻想完成的事情。
+- 孩子第一次使用核心回应或一个合理但尚不充分的回应。
+- 不能用 `How do you ask?` 等考试式提示强行引出台词。
+
+### Part B — Change
+
+- 出现真实的小变化：听错、条件不够明确、暂时边界、物品不在预期位置或同伴持有不同意见。
+- 孩子必须再说一步：补充特征、说明原因、请求帮助、协商或修复。
+- 成人要立即回应孩子已经表达的安全、身体或情绪信号。
+
+### Part C — Resolve
+
+- 通过动作和语言解决 Part A 的目标。
+- 至少包含一次自然确认、接受结果或下一步行动。
+- 结尾不能突然转成与目标无关的笑话，也不能留下物理状态矛盾。
+
+## 5. 每课内容合同
+
+每课继续只新增一个 Conversation Move。重写时必须同时检查：
+
+1. `can_do` 是否对应真实生活结果；
+2. A/B/C 是否形成连续因果链；
+3. 孩子是否有 4–5 次有功能的输出，而非重复背诵；
+4. core、stretch、repair 是否至少各在正式剧情或 Replay Card 中自然出现；
+5. 复用表达是否来自此前课程；
+6. 道具数量、颜色、位置和人物手部动作是否前后一致；
+7. 两张 Replay Card 是否是完整新情境；
+8. 成人行为、情绪回应、身体与安全逻辑是否合理；
+9. 男孩人物、服装和代词是否一致；
+10. 三段提示词是否逐字导出 canonical 台词，并能各自在 10 秒内自然表演。
+
+## 6. 前两课样板
+
+### 1.1 The Apple, Please
+
+**Part A — Goal**
+
+- Mom: “You look hungry. Apple or banana?”
+- Child: “Can I have the apple, please?”
+- Mom: “Of course.”
+
+**Part B — Change**
+
+- Mom: “Here’s your banana.”
+- Child: “No, I mean the apple—the red one, please.”
+- Mom: “Oh! I picked up the wrong one.”
+
+**Part C — Resolve**
+
+- Mom: “Here’s the apple you asked for.”
+- Child: “Yes, that’s the one.”
+- Mom: “Anything else?”
+- Child: “No, thank you, Mom.”
+
+教学链：礼貌请求 → 被误解 → 补充说明 → 确认并结束。全课约 49 词，孩子开口 4 次。
+
+### 1.2 The Dinosaur Shirt
+
+必要物品是两件红色上衣：一件有条纹，一件有恐龙图案。制作提示不得增加第三件衣服。
+
+**Part A — Goal**
+
+- Dad: “Time to choose a shirt. Which one do you want?”
+- Child: “I want the red one.”
+- Dad: “Both shirts are red.”
+
+**Part B — Change**
+
+- Dad: “Stripes or dinosaurs?”
+- Child: “The one with the dinosaur, please.”
+- Dad: “This one?”
+- Child: “Yes, that one!”
+
+**Part C — Resolve**
+
+- Dad: “Here you go.”
+- Child: “Thanks, Dad. That’s the one I wanted.”
+- Dad: “Ready to put it on?”
+- Child: “Yes, I’m ready.”
+
+教学链：选择不够明确 → 使用可见特征补充 → 确认 → 推动穿衣继续。全课约 51 词，孩子开口 5 次。
+
+## 7. 全 30 课重审顺序
+
+保持章节顺序和每章 Conversation Move 不变，逐章重写台词与制作描述：
+
+1. 选择与请求：明确对象、补充特征、改变选择；
+2. 拒绝与协商：表达暂缓、请求有限时间、提出顺序；
+3. 求助与澄清：具体求助、说明没听懂、修正误解；
+4. 身体与需要：饿渴、厕所或休息、说明不适；
+5. 日常步骤与转换：先后顺序、睡前边界、准备状态；
+6. 寻找与归属：询问位置、检查位置、说明归属；
+7. 加入与合作：加入游戏、请求轮流、协商玩法；
+8. 感受与修复：说明感受、设置边界、道歉修复；
+9. 外出与安全：车里询问、商店寻找、可信成人求助；
+10. 讲述与计划：讲一件事、讲两个连续事件、参与计划。
+
+前一章完成后再进入下一章。每章运行结构、词数、角色、复用和真实性校验；全部完成后再运行 Stage 完整校验，避免一个错误模板扩散到 30 课。
+
+## 8. canonical 内容与视频提示词
+
+- `curriculum/04/**/lesson.json` 是唯一台词源；每个被重写的 Lesson 增加 `content_revision`。
+- `prompts/04/**/production.json` 只维护人物、场景、动作、START FRAME 和 END FRAME，不复制维护另一份台词。
+- 运行导出工具生成 30 课 × A/B/C 共 90 份提示词；每份只包含对应段落的逐字台词。
+- 每份提示记录 source revision/hash、该段词数和严格约 10 秒的节奏要求。
+- 课程状态在重新通过逻辑和语言检查后保持 `language_reviewed`；不得因提示词已生成自动升级到 `video_ready`。
+- 现有 demo 标记为旧内容版本或 stale，但本轮不删除视频，也不恢复批量视频生产。
+
+## 9. 验收标准
+
+- 30/30 Lesson 均为 9–11 turns，孩子开口 4–5 次；偏离必须有逐课书面理由。
+- 90/90 导出提示词均只有一个 A/B/C 段落，且对应段落符合十秒预算。
+- 角色、代词、衣物、道具、空间与动作连续性逐课通过。
+- 所有正式台词逐句回答“为什么现在说这句话”，并解决开头目标。
+- Replay Cards、螺旋复用和 70% 以上家庭角色比例继续满足原课程架构。
+- `validate_curriculum.py --stage 04 --complete`、提示词 `--check`、Python 与前端测试全部通过。
+- README、课程审查记录和 demo 进度记录准确说明新版内容版本与视频是否过时。

@@ -1,18 +1,67 @@
 {
-  "title":"Pause the Game","title_zh":"游戏先暂停","can_do":"需要上厕所或休息时，让对方知道活动必须暂停。",
-  "conversation_move":{"id":"request-a-pause","label":"request a pause for a body need"},
-  "trigger":"Dad proposes another round, but the child needs the bathroom before play can continue.",
-  "core_response":"I need to use the bathroom.","stretch_response":"I need to use the bathroom. Please pause the game.","repair_response":"Wait, I need to go now.",
-  "recycle":["delay-boundary","request-time"],"roles":["child","dad"],"setting":"Playing a simple card game at home.","essential_props":["an animal card game"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"Let us start another round of the animal game.","kind":"input"},{"speaker":"child","line":"Wait. I need to use the bathroom.","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"Okay. Shall I pause the game here?","kind":"input"},{"speaker":"child","line":"Yes, please. Keep my card right there.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"The game is paused. Come back when you are ready.","kind":"input"},{"speaker":"child","line":"I am back now. We can keep playing.","kind":"action"}]}
+  "title": "Bathroom Break",
+  "title_zh": "我要去上厕所",
+  "can_do": "需要上厕所时，立即让成人暂停活动，并在离开时说明会回来或需要陪同。",
+  "conversation_move": {"id": "request-a-pause", "label": "request a pause for a body need"},
+  "trigger": "Dad suggests another round of the tabletop game, but Child needs the bathroom now.",
+  "core_response": "I need to use the bathroom.",
+  "stretch_response": "I'll come back when I'm done.",
+  "repair_response": "Wait, I need to go now.",
+  "recycle": ["delay-boundary", "request-time"],
+  "roles": ["child", "dad"],
+  "setting": "A tabletop animal-card game at home, with a clear route out of the room.",
+  "essential_props": ["one animal-card game"],
+  "parts": [
+    {
+      "id": "A", "beat": "goal",
+      "turns": [
+        {"speaker": "dad", "line": "Ready for another round?", "kind": "input"},
+        {"speaker": "child", "line": "I need to use the bathroom.", "kind": "core"},
+        {"speaker": "dad", "line": "Of course. We're stopping now.", "kind": "action"}
+      ]
+    },
+    {
+      "id": "B", "beat": "change",
+      "turns": [
+        {"speaker": "child", "line": "I'll come back when I'm done.", "kind": "stretch"},
+        {"speaker": "dad", "line": "Of course. Your turn can wait.", "kind": "input"},
+        {"speaker": "child", "line": "Can you come with me?", "kind": "stretch"}
+      ]
+    },
+    {
+      "id": "C", "beat": "resolve",
+      "turns": [
+        {"speaker": "dad", "line": "I'm coming. The cards stay here.", "kind": "action"},
+        {"speaker": "child", "line": "Thank you for coming, Dad.", "kind": "action"},
+        {"speaker": "dad", "line": "We can finish our game later.", "kind": "input"}
+      ]
+    }
   ],
-  "replay_cards":[
-    {"title":"Rest during dancing","setting":"Dancing in the living room","change":"The child feels tired","challenge":"Ask to stop the music, rest, then say whether to restart or finish"},
-    {"title":"Bathroom before leaving","setting":"At the front door","change":"The child needs the bathroom after shoes are on","challenge":"Tell Dad now, leave the shoes by the door, return, and continue leaving"}
+  "replay_cards": [
+    {
+      "title": "A rest during dancing",
+      "setting": "Dancing together in the living room",
+      "change": "He feels tired and wants a rest while Dad is about to start another song",
+      "challenge": "Tell Dad he needs to rest. Dad stops the music immediately and helps him settle. Only after resting, if Dad offers to restart, he may say 'I'm not ready yet. Can I have two more minutes?' Dad accepts the need for more rest; he can later choose to continue or finish. Extra speech is optional and no restart is required."
+    },
+    {
+      "title": "Bathroom before leaving",
+      "setting": "At the front door before going out",
+      "change": "He notices a bathroom need after putting his shoes on",
+      "challenge": "Tell Dad now. If Dad did not hear the first signal, clarify 'Wait, I need to go now.' Dad stops departure as soon as he hears, accompanies him as needed, and leaves the outing preparations in place. No shoe task or extra English line comes before care."
+    }
   ],
-  "parent_support":["Pause promptly for a bathroom need; language practice must never delay it.","Show what will stay in place so the child knows the activity can resume."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support": [
+    "Stop the game and make departure possible at the first bathroom signal, in any language or gesture. Never ask whether to pause or require more English before he can go.",
+    "Keep his cards untouched and reassure him while already helping him leave; his promise to return and request for company do not earn permission or care.",
+    "This is a calm pretend scene. If a real bathroom need arises, stop the role-play immediately and help him; do not finish or repeat the script."
+  ],
+  "reviews": {
+    "motivation": true, "causality": true, "physical": true, "adult_behavior": true,
+    "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true,
+    "character_continuity": true, "emotion_stability": true
+  },
+  "status": "language_reviewed",
+  "content_revision": 2,
+  "dialogue_contract": "three-by-ten-v2"
 }

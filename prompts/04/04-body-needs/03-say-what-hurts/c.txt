@@ -1,36 +1,44 @@
-My Heel Hurts — Part C (resolve)
-Production prompt draft | Source: curriculum/04/04-body-needs/03-say-what-hurts/lesson.json | Content revision: 1
-Source SHA256: 571c0c4026f86fa7af6a64fa0eb3d38b56f03f30e2ca862705cc884ba4ea3908
+My Knee Hurts — Part C (resolve)
+Production prompt draft | Source: curriculum/04/04-body-needs/03-say-what-hurts/lesson.json | Content revision: 2
+Source SHA256: 4d43dc757bfb6eaa06160c31d5fc385a2c56bc923dfd77edad4a3274d5fedd95
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline at ordinary family conversation volume. Mom is attentive and reassuring; Child can state discomfort plainly and is allowed to look uncomfortable.
+The mild bump produces one small wince and a slightly quieter voice. Child points to the knee and describes a stinging feeling; receiving care brings a little relaxation without forcing a smile or implying the pain is gone.
+No screaming, sobbing spectacle, graphic injury, severe-pain acting, distorted face, dramatic collapse or frantic movement. Mom does not dismiss the pain, diagnose it, ask Child to repeat a painful movement or withhold comfort until he supplies more English.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-At home after jumping to music.
+At home just after a small knee bump during quiet play beside the sofa.
 
 SCENE AND PROP CONTINUITY
-In a quiet home living room, Mom is screen-left beside Child at screen-right. A low stable sofa is immediately behind both, allowing one supported sitting movement without walking. Child has already stopped jumping before the first frame and keeps weight comfortably off the sore heel. Use a locked 16:9 medium two-shot slightly wide enough to include Child's heel, both faces, and the nearby seat. No music device, medical props, swelling, injury close-ups, diagnosis or miraculous recovery. Do not make Child jump again or step to demonstrate pain.
+In the home living room, Child sits screen-right on the low sofa and Mom is beside him screen-left. Child is the four-year-old tiger boy in his unchanged yellow T-shirt and blue shorts; his right knee is the affected knee in every segment. Immediately before the first frame he lightly bumped that knee on the nearby low table during ordinary quiet play. Do not replay the bump or show an impact. His feet have comfortable support, and no further weight-bearing or movement test is needed. One clean soft cold cloth lies folded on the sofa arm within Mom's reach; it is the only handled care item. Use a locked 16:9 medium two-shot showing faces, hands and the right knee without a close-up. Fur and skin remain intact, with no blood, swelling, wound, ice cube, diagnosis or promised cure.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Child has indicated the heel without taking another step; both remain immediately in front of the sofa, with Mom's hands available to support.
+Child has indicated the front of his right knee and lowers his hand to his lap. He remains seated with feet supported. Mom stays close with empty hands, and the single folded cold cloth remains on the sofa arm.
 
 ACTION AND REACTIONS
-Mom offers rest and an open supporting hand. During Child's request for help sitting, Mom offers her forearm and steadies Child's side with consent; Child lowers onto the immediately adjacent seat without loading the sore heel. Mom settles beside Child. No declaration that the pain has gone.
+Mom picks up the clean cold cloth with her right hand and shows it low beside the knee while offering it. Child accepts with a small nod and a quiet voice. With his agreement, Mom gently lays the soft cloth against the front of the same right knee and holds it lightly during her final line. Do not press, rub or use ice directly. Child stays comfortably seated and may relax slightly; the activity remains stopped and the scene makes no claim that the pain is cured.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "Let us stop jumping and rest your foot with me."
-Child: "Okay. Can you help me sit down?"
+Mom: "Would you like a cold cloth?"
+Child: "Yes, please. That would help."
+Mom: "I'll hold it gently on your knee."
 
 END FRAME
-Child and Mom sit together on the sofa, Child's affected foot comfortably resting without weight; Mom remains attentive and the jumping activity stays stopped.
+Child remains seated beside Mom with both feet supported and his right knee still. Mom's right hand gently holds the single soft cold cloth against the front of that knee, with her left hand relaxed beside him. Quiet care and rest continue; play has not resumed.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (17 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (18 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

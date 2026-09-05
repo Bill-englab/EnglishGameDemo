@@ -1,18 +1,67 @@
 {
-  "title":"My Heel Hurts","title_zh":"我的脚后跟疼","can_do":"指出轻微不适的位置和感觉，让成人采取合适的下一步。",
-  "conversation_move":{"id":"describe-discomfort","label":"describe where it hurts"},
-  "trigger":"The child stops jumping because stepping on one heel feels sore.",
-  "core_response":"My foot hurts.","stretch_response":"My heel hurts when I step.","repair_response":"Not my toes. My heel hurts.",
-  "recycle":["specify-choice","request-help"],"roles":["child","mom"],"setting":"At home after jumping to music.","essential_props":[],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"You stopped jumping. What is bothering you?","kind":"input"},{"speaker":"child","line":"My foot hurts a little.","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"Show me where it hurts. The top or the heel?","kind":"input"},{"speaker":"child","line":"The heel. It feels sore when I step.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Let us stop jumping and rest your foot with me.","kind":"input"},{"speaker":"child","line":"Okay. Can you help me sit down?","kind":"action"}]}
+  "title": "My Knee Hurts",
+  "title_zh": "我的膝盖疼",
+  "can_do": "说出轻微不适的位置和感觉，让成人立即停止活动并提供照护。",
+  "conversation_move": {"id": "describe-discomfort", "label": "describe where it hurts"},
+  "trigger": "During ordinary quiet play, he lightly bumps his right knee on the low table and tells Mom it hurts.",
+  "core_response": "My knee hurts, Mom.",
+  "stretch_response": "It stings right here, Mom.",
+  "repair_response": "Not my thumb. This finger hurts.",
+  "recycle": ["specify-choice", "request-help"],
+  "roles": ["child", "mom"],
+  "setting": "At home just after a small knee bump during quiet play beside the sofa.",
+  "essential_props": ["one clean soft cold cloth"],
+  "parts": [
+    {
+      "id": "A", "beat": "goal",
+      "turns": [
+        {"speaker": "mom", "line": "You bumped your knee.", "kind": "input"},
+        {"speaker": "child", "line": "My knee hurts, Mom.", "kind": "core"},
+        {"speaker": "mom", "line": "We're stopping now. Let me look.", "kind": "action"}
+      ]
+    },
+    {
+      "id": "B", "beat": "change",
+      "turns": [
+        {"speaker": "child", "line": "It stings right here, Mom.", "kind": "stretch"},
+        {"speaker": "mom", "line": "Here on your knee?", "kind": "input"},
+        {"speaker": "child", "line": "Yes. Can you help me?", "kind": "stretch"}
+      ]
+    },
+    {
+      "id": "C", "beat": "resolve",
+      "turns": [
+        {"speaker": "mom", "line": "Would you like a cold cloth?", "kind": "input"},
+        {"speaker": "child", "line": "Yes, please. That would help.", "kind": "action"},
+        {"speaker": "mom", "line": "I'll hold it gently on your knee.", "kind": "action"}
+      ]
+    }
   ],
-  "replay_cards":[
-    {"title":"A sore finger","setting":"Building at the table","change":"A finger hurts after being bumped","challenge":"Stop, show the exact finger, describe the feeling, and let Mom check it"},
-    {"title":"An itchy sleeve","setting":"Getting dressed","change":"The sleeve feels itchy rather than painful","challenge":"Name the arm and feeling, pause dressing, and choose another shirt with Dad"}
+  "replay_cards": [
+    {
+      "title": "A sore finger",
+      "setting": "Building together at the table",
+      "change": "He gently bumps one finger and stops building",
+      "challenge": "Tell Mom it hurts; Mom immediately stops and checks. If she looks toward the thumb, clarify 'Not my thumb. This finger hurts.' Point to the affected finger and accept appropriate help without demonstrating the bump again."
+    },
+    {
+      "title": "An itchy sleeve",
+      "setting": "Getting dressed at home",
+      "change": "His shirt sleeve feels itchy against his arm",
+      "challenge": "Name the arm and the itchy feeling. Dad pauses dressing immediately, checks the sleeve, and helps him choose another comfortable shirt. He reports whether the change helps; he is not told the cause or required to tolerate it."
+    }
   ],
-  "parent_support":["Ask for location and sensation without suggesting a diagnosis.","Stop the activity and use normal caregiver judgment about whether more help is needed."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support": [
+    "Stop and attend to the first pain signal before asking for location or feeling details. Accept a point, a few words, or his home language; care is never conditional on further speech.",
+    "Keep the pretend bump mild and non-graphic: a small wince and a slightly quieter voice. Do not create a real bump or ask him to repeat a painful movement.",
+    "Acknowledge the report calmly, check without diagnosing, and offer a clean cold cloth with his agreement. Use normal caregiver judgment about any further help; the scene ends with supported rest, not a claim that the pain has disappeared."
+  ],
+  "reviews": {
+    "motivation": true, "causality": true, "physical": true, "adult_behavior": true,
+    "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true,
+    "character_continuity": true, "emotion_stability": true
+  },
+  "status": "language_reviewed",
+  "content_revision": 2,
+  "dialogue_contract": "three-by-ten-v2"
 }

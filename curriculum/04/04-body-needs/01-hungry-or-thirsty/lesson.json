@@ -1,18 +1,67 @@
 {
-  "title":"Cold Water, Please","title_zh":"我渴了，想喝凉水","can_do":"说出饿或渴，并提出一个能满足需要的请求。",
-  "conversation_move":{"id":"state-body-need","label":"state a body need"},
-  "trigger":"After coming in from active play, the child notices thirst while Mom asks whether to continue.",
-  "core_response":"I'm thirsty.","stretch_response":"I'm thirsty. Can I have some water, please?","repair_response":"Water, please, not a snack.",
-  "recycle":["request-item","specify-choice"],"roles":["child","mom"],"setting":"Coming inside after active play.","essential_props":["water and two cups"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"You came in from outside. Do you want to keep playing?","kind":"input"},{"speaker":"child","line":"I'm thirsty. Can I have some water, please?","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"Yes. Cold water or warm water?","kind":"input"},{"speaker":"child","line":"Cold water, please. I want the blue cup.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Here is cold water in the blue cup.","kind":"input"},{"speaker":"child","line":"Thank you. I feel better after a drink.","kind":"action"}]}
+  "title": "Water First",
+  "title_zh": "我想先喝水",
+  "can_do": "说出身体需要，并说明先要什么，让成人及时提供帮助。",
+  "conversation_move": {"id": "state-body-need", "label": "state a body need"},
+  "trigger": "After quiet play, Mom suggests a break and he notices that he is thirsty.",
+  "core_response": "I'm thirsty, Mom.",
+  "stretch_response": "Can I have water first, please?",
+  "repair_response": "Water first, please, not a snack.",
+  "recycle": ["request-item", "specify-choice"],
+  "roles": ["child", "mom"],
+  "setting": "A quiet break at the home table after play.",
+  "essential_props": ["one tray with a blue cup of water and a small snack"],
+  "parts": [
+    {
+      "id": "A", "beat": "goal",
+      "turns": [
+        {"speaker": "mom", "line": "Shall we take a break?", "kind": "input"},
+        {"speaker": "child", "line": "I'm thirsty, Mom.", "kind": "core"},
+        {"speaker": "mom", "line": "I have water and a snack.", "kind": "input"}
+      ]
+    },
+    {
+      "id": "B", "beat": "change",
+      "turns": [
+        {"speaker": "child", "line": "Can I have water first, please?", "kind": "stretch"},
+        {"speaker": "mom", "line": "Of course. Here's your water.", "kind": "action"},
+        {"speaker": "child", "line": "Thanks. I'll have a drink.", "kind": "action"}
+      ]
+    },
+    {
+      "id": "C", "beat": "resolve",
+      "turns": [
+        {"speaker": "mom", "line": "There's a snack here, too.", "kind": "input"},
+        {"speaker": "child", "line": "That's better. I'm not thirsty now.", "kind": "action"},
+        {"speaker": "mom", "line": "Okay. I'll leave it here.", "kind": "action"}
+      ]
+    }
   ],
-  "replay_cards":[
-    {"title":"A small snack","setting":"Before going outside","change":"The child notices hunger","challenge":"Say the need, choose between two available snacks, eat, and then get ready"},
-    {"title":"Water in the car","setting":"Before a short car ride","change":"The child notices thirst before buckling in","challenge":"Ask for the water bottle, take a drink while parked, then buckle in"}
+  "replay_cards": [
+    {
+      "title": "A snack after drawing",
+      "setting": "At home after quiet drawing",
+      "change": "He feels hungry while Mom has a drink and a small snack available",
+      "challenge": "Say the hunger need and ask for the snack first. Mom hands it over promptly; he eats a little, then says whether he wants the drink. No food is withheld for a sentence."
+    },
+    {
+      "title": "Water before the car ride",
+      "setting": "Beside the parked car before a short trip",
+      "change": "He feels thirsty and Dad also has a snack ready",
+      "challenge": "Tell Dad the need. If Dad initially offers the snack, clarify 'Water first, please, not a snack.' Dad promptly provides the bottle; he drinks while stationary, then gets ready to buckle in."
+    }
   ],
-  "parent_support":["Respond first to the body need, then offer one or two realistic options.","Do not require a polished sentence before meeting an urgent need."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support": [
+    "Acknowledge thirst immediately and make water available; do not require a complete sentence, please, or a second choice before he can drink.",
+    "Offer only the water and snack that are already available. Accept water first and let him decide whether he wants the snack afterward.",
+    "Let him take a comfortable sip before he reports how he feels; do not make him speak with water in his mouth."
+  ],
+  "reviews": {
+    "motivation": true, "causality": true, "physical": true, "adult_behavior": true,
+    "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true,
+    "character_continuity": true, "emotion_stability": true
+  },
+  "status": "language_reviewed",
+  "content_revision": 2,
+  "dialogue_contract": "three-by-ten-v2"
 }

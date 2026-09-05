@@ -1,48 +1,53 @@
 {
-  "title": "My Paper Star",
-  "title_zh": "我的纸星星",
+  "title": "Help With the Track",
+  "title_zh": "帮我接好轨道",
   "can_do": "遇到具体困难时，请求恰好够用的帮助，同时保留自己完成任务的机会。",
   "conversation_move": {"id": "request-help", "label": "ask for specific help"},
-  "trigger": "The child wants to cut out a paper star but needs child-safe scissors and help turning the paper.",
-  "core_response": "Can you help me get my child-safe scissors?",
-  "stretch_response": "Can you help me turn the paper while I cut?",
-  "repair_response": "No, help me turn it. I want to cut it.",
+  "trigger": "A loose track piece will not connect, so the train cannot continue. Child asks Dad for help and must specify which side Dad should hold.",
+  "core_response": "This won't fit. Can you help me?",
+  "stretch_response": "Can you help me hold the box?",
+  "repair_response": "This side. Hold it here, please.",
   "recycle": ["request-item", "propose-order"],
   "roles": ["child", "dad"],
-  "setting": "Making a paper star at the table.",
-  "essential_props": ["a paper star outline and child-safe scissors"],
+  "setting": "Connecting a short toy train track at a low table.",
+  "essential_props": ["a short toy train track with one loose connecting piece and one train"],
+  "dialogue_contract": "three-by-ten-v2",
   "parts": [
     {
       "id": "A",
       "beat": "goal",
       "turns": [
-        {"speaker": "dad", "line": "You want to cut out this paper star. What do you need?", "kind": "input"},
-        {"speaker": "child", "line": "Can you help me get my child-safe scissors?", "kind": "core"}
+        {"speaker": "dad", "line": "Your train stops here.", "kind": "input"},
+        {"speaker": "child", "line": "This won't fit. Can you help me?", "kind": "core"},
+        {"speaker": "dad", "line": "Which side needs help?", "kind": "input"}
       ]
     },
     {
       "id": "B",
       "beat": "change",
       "turns": [
-        {"speaker": "dad", "line": "Here they are. Should I cut the star for you?", "kind": "input"},
-        {"speaker": "child", "line": "No, help me turn the paper while I cut.", "kind": "repair"}
+        {"speaker": "child", "line": "This side. Hold it here, please.", "kind": "repair"},
+        {"speaker": "dad", "line": "I'll hold this end still.", "kind": "input"},
+        {"speaker": "child", "line": "Then I'll push these together.", "kind": "action"}
       ]
     },
     {
       "id": "C",
       "beat": "resolve",
       "turns": [
-        {"speaker": "dad", "line": "I will hold the corner. You cut the last side.", "kind": "input"},
-        {"speaker": "child", "line": "It is a little wiggly, but it is still my star!", "kind": "action"}
+        {"speaker": "dad", "line": "That fits. Try your train now.", "kind": "input"},
+        {"speaker": "child", "line": "Can I have it, please?", "kind": "input"},
+        {"speaker": "dad", "line": "Here you go.", "kind": "action"},
+        {"speaker": "child", "line": "It works. Thanks, Dad!", "kind": "action"}
       ]
     }
   ],
   "replay_cards": [
-    {"title": "Open the lunch box", "setting": "At the kitchen table", "change": "The lid is too tight", "challenge": "Ask Dad to hold the box while the child lifts the latch; the child opens it"},
-    {"title": "Zip the coat", "setting": "Before going outside", "change": "The zipper will not catch", "challenge": "Ask Mom to hold the bottom while the child pulls the zipper up; the coat closes"}
+    {"title": "Open the lunch box", "setting": "At the kitchen table", "change": "The box slides when Child tries to lift its latch", "challenge": "Child says, 'Can you help me hold the box?' Dad asks where to hold it. Child points to the side away from the latch. Dad steadies that side, Child lifts the latch and opens the lid, then confirms it is open."},
+    {"title": "Zip the coat", "setting": "Before going outside", "change": "The zipper has been started but its bottom lifts when Child pulls", "challenge": "Child asks Mom for help and points to the bottom of the zipper. Mom holds the joined base steady while Child pulls the zipper up. Child checks that the coat is closed, and they go outside together."}
   ],
-  "parent_support": ["Name the child-safe scissors because retrieving them is part of the real task.", "Offer the smallest useful help; do not take over the cutting unless safety requires it."],
-  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "parent_support": ["Let him show the join that will not connect; ask which side needs support if his first request is unclear.", "Hold only the side he identifies and let him connect the piece. The useful sequence is adult support first, then his own action.", "Keep the train near Dad until he requests it, then let him test the repaired track. A brief puzzled look is enough; help is ordinary and does not require visible distress."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 1
+  "content_revision": 2
 }

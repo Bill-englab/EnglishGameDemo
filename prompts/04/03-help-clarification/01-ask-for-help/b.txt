@@ -1,36 +1,44 @@
-My Paper Star — Part B (change)
-Production prompt draft | Source: curriculum/04/03-help-clarification/01-ask-for-help/lesson.json | Content revision: 1
-Source SHA256: ea1d8066299bd23a1f0ba813d785ba8549e9fd75a48427bc814a7db4ed8a72a3
+Help With the Track — Part B (change)
+Production prompt draft | Source: curriculum/04/03-help-clarification/01-ask-for-help/lesson.json | Content revision: 2
+Source SHA256: 0bcdf7b74cfde34f1506e21d0a20b8b724d7dec9223aeeb104fa70a68df7e9b7
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt, gentle natural adult male voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline at ordinary family conversation volume. Dad is available and matter-of-fact; Child is focused on making his train continue.
+The failed join brings only a brief puzzled look. Child asks and specifies the useful help with one small pointing gesture, then shows quiet satisfaction when his own connection works.
+No frustrated shouting, whining spectacle, angry faces, arm flinging, pounding the track or exaggerated victory gestures. Dad does not scold, take over, withhold help or turn the repair into a test. Keep face and body proportions stable.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-Making a paper star at the table.
+Connecting a short toy train track at a low table.
 
 SCENE AND PROP CONTINUITY
-At a home craft table, Dad sits screen-left and Child screen-right. One large paper star outline lies at center-right, visibly already cut around almost its whole perimeter except one short final edge; leave a small curved attachment requiring only one or two snips, not a whole star to cut in ten seconds. One pair of blunt child-safe scissors lies closed at table-left within Dad's easy reach but outside Child's comfortable reach. Keep one locked 16:9 medium two-shot showing faces and hands. Dad never takes over the cutting; fingers remain well clear of the blades.
+At a low home play table, Dad sits screen-left and Child screen-right. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. Exactly two broad blue plastic track sections run left to right: the existing section rests at table-left with one toy train parked near its left end; Child holds the loose continuation section at table-right. Their simple horizontal push-fit connectors meet at table-center. The existing section skids away under an unsupported push, so Dad needs to steady it while Child connects the loose section. Only one joint must be made. Keep a locked 16:9 medium two-shot showing faces, hands, the joint and the train. No extra track, train, tool or scenery prop. Dad does not connect the track for Child.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-The final edge of the star remains attached; Dad's hand is beside the closed scissors at table-left; Child's hands rest beside the paper.
+The existing section remains on the left with the train parked near its left end; Child's right hand holds the loose section on the right with a small gap between the aligned connectors. Child's left hand and both of Dad's hands are empty.
 
 ACTION AND REACTIONS
-During Dad's turn he lifts the closed scissors by the closed blades, offers the handles safely toward Child, then releases them into Child's hand. Child clarifies the desired help, keeping the scissors low and away from Dad. After the repair, Dad moves his empty hand toward the paper's far corner; no snipping before they coordinate.
+Child uses his empty left index finger to indicate the broad side of the existing section beside the join, then lowers that hand. Dad places his right hand on that indicated section and holds it steady during his response. Only after that support is in place, Child pushes the loose section horizontally with his right hand during his last turn. The broad connectors fit with one short movement. Do not make Dad push the loose piece or move the train.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Dad: "Here they are. Should I cut the star for you?"
-Child: "No, help me turn the paper while I cut."
+Child: "This side. Hold it here, please."
+Dad: "I'll hold this end still."
+Child: "Then I'll push these together."
 
 END FRAME
-Child holds the child-safe scissors low over the table; the star is still attached along its final short edge; Dad's empty hand waits beside the far paper corner, clear of the cutting line.
+The two blue sections are joined at center. Dad's right hand still steadies the left section; Child's right hand rests on the newly connected right section and his left hand is empty beside it. The train remains parked near the left end.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (19 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (16 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

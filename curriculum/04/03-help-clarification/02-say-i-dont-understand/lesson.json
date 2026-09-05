@@ -1,48 +1,53 @@
 {
-  "title": "Show Me Under",
-  "title_zh": "给我看看“下面”",
+  "title": "Show Me Again",
+  "title_zh": "再给我示范一次",
   "can_do": "听不懂一个指令时直接说明，并请求一次示范。",
   "conversation_move": {"id": "signal-nonunderstanding", "label": "say I do not understand"},
-  "trigger": "Rabbit Teacher gives a short activity direction containing a location word the child does not yet understand.",
+  "trigger": "Rabbit Teacher gives a clap-then-tap movement pattern. Child is unsure of the order and asks to see a demonstration before trying it.",
   "core_response": "I don't understand.",
   "stretch_response": "I don't understand. Can you show me?",
-  "repair_response": "Can you show me what under means?",
+  "repair_response": "First clap, then tap my knees?",
   "recycle": ["request-help"],
   "roles": ["child", "teacher"],
-  "setting": "A simple tabletop activity at school.",
-  "essential_props": ["two counters and a cup"],
+  "setting": "A short hands-and-knees movement game in a quiet school corner.",
+  "essential_props": [],
+  "dialogue_contract": "three-by-ten-v2",
   "parts": [
     {
       "id": "A",
       "beat": "goal",
       "turns": [
-        {"speaker": "teacher", "line": "Put one blue counter under the cup.", "kind": "input"},
-        {"speaker": "child", "line": "I don't understand.", "kind": "core"}
+        {"speaker": "teacher", "line": "Clap your hands, then tap your knees.", "kind": "input"},
+        {"speaker": "child", "line": "I don't understand.", "kind": "core"},
+        {"speaker": "teacher", "line": "That's okay. We can try together.", "kind": "input"}
       ]
     },
     {
       "id": "B",
       "beat": "change",
       "turns": [
-        {"speaker": "teacher", "line": "Would you like me to show you once?", "kind": "input"},
-        {"speaker": "child", "line": "Yes, please. Can you show me what under means?", "kind": "repair"}
+        {"speaker": "child", "line": "Can you show me?", "kind": "repair"},
+        {"speaker": "teacher", "line": "Watch me. First clap, then tap.", "kind": "action"},
+        {"speaker": "child", "line": "First clap, then tap my knees?", "kind": "repair"}
       ]
     },
     {
       "id": "C",
       "beat": "resolve",
       "turns": [
-        {"speaker": "teacher", "line": "I put mine here, under the cup.", "kind": "input"},
-        {"speaker": "child", "line": "Now I understand. I put mine under the cup.", "kind": "action"}
+        {"speaker": "teacher", "line": "Yes. Now you try the pattern.", "kind": "input"},
+        {"speaker": "child", "line": "Clap, then tap.", "kind": "action"},
+        {"speaker": "teacher", "line": "That's it. You've got the order.", "kind": "input"},
+        {"speaker": "child", "line": "I understand now.", "kind": "input"}
       ]
     }
   ],
   "replay_cards": [
-    {"title": "Show me beside", "setting": "A small sorting game", "change": "Teacher says to place a card beside the box", "challenge": "Say it is unclear, watch one example, then place the child's card beside the box"},
-    {"title": "Show me fold", "setting": "Folding a napkin at home", "change": "Dad says to fold it in half", "challenge": "Ask for a demonstration, watch one fold, then fold the second napkin"}
+    {"title": "Show me beside", "setting": "A small sorting game", "change": "Teacher asks Child to place a card beside the box, but Child is unsure of the location", "challenge": "Child says it is unclear and asks to see an example. Teacher places a separate card beside the box. Child checks the location by pointing, then puts his own card beside the box and confirms that he understands."},
+    {"title": "Show me fold", "setting": "Folding napkins at home", "change": "Dad asks for a napkin folded in half, but Child does not know which edges to bring together", "challenge": "Child says, 'I don't understand. Can you show me?' Dad slowly folds his own napkin once. Child points to the matching edges of his second napkin to check, folds it himself, and places it beside Dad's."}
   ],
-  "parent_support": ["Respond to not understanding as useful information, not misbehavior.", "Demonstrate once with your own object, then let the child complete the parallel action."],
-  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "parent_support": ["Treat not understanding as useful information. A brief puzzled look and an ordinary request are enough; do not demand guessing or an apology.", "After he asks, show one slow, visible clap followed by one gentle tap on your own knees. Keep your voice normal and your hands in view.", "Answer his order check, then let him perform the pattern. Do not move his hands, clap over him, add props, or turn success into theatrical praise."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 1
+  "content_revision": 2
 }

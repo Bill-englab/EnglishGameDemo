@@ -1,36 +1,44 @@
-Show Me Under — Part B (change)
-Production prompt draft | Source: curriculum/04/03-help-clarification/02-say-i-dont-understand/lesson.json | Content revision: 1
-Source SHA256: 99d31d6bb4fe39fd4103b03b59def9b00c27feb1fa2264bd5d7a3c41b26a4322
+Show Me Again — Part B (change)
+Production prompt draft | Source: curriculum/04/03-help-clarification/02-say-i-dont-understand/lesson.json | Content revision: 2
+Source SHA256: 80d61d2bda0f671f5ad124726bba370fe4d6c9dd89170ec819485ea91af79882
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Rabbit Teacher — a cream rabbit with upright ears and a lavender cardigan, calm natural adult voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Rabbit Teacher is patient and ordinary, speaking at normal conversation volume with relaxed posture. Child can ask for help without shame.
+Child shows only a brief puzzled look when the spoken order is unclear, then watches the visible demonstration with interest. Teacher accepts the admission without fuss. Understanding brings a small assured nod or quiet smile.
+No theatrical teaching voice, oversized praise, chanting, exaggerated clapping, forced smiles, embarrassment, scolding, guessing test or physical guidance of Child's hands. No dramatic surprise, frightened eyes, frantic movement or facial distortion.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-A simple tabletop activity at school.
+A short hands-and-knees movement game in a quiet school corner.
 
 SCENE AND PROP CONTINUITY
-At a simple school activity table, Teacher sits screen-left and Child sits screen-right. Exactly two large blue counters lie separately, one near Teacher and one near Child. One broad clear plastic cup stands inverted at table-center; its opening is wide enough to cover both counters side by side. The cup is transparent so the placement underneath remains visible. Keep the same locked 16:9 medium two-shot with a slightly high tabletop view. No extra pupils, duplicate cups, written labels, or arrows.
+In a quiet uncluttered school corner, Rabbit Teacher sits cross-legged on the floor screen-left and Child sits cross-legged screen-right, angled slightly toward each other. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. Use a locked 16:9 medium two-shot wide enough to show both faces, both pairs of hands and both pairs of knees throughout. The pattern is one gentle hand clap followed by one simultaneous light tap of both palms on their own knees. Teacher demonstrates once in B; Child performs once in C. There are no props, furniture, cards, cups, instruments, written cues or extra pupils. Keep the same floor positions and clothes across all parts.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-The empty inverted cup remains centered with one blue counter on each side; Child looks at Teacher for help and Teacher's hands stay clear of the props.
+Teacher and Child remain seated in the same positions with empty hands on their own knees. Child looks at Teacher for help; the pattern has not yet been demonstrated.
 
 ACTION AND REACTIONS
-Teacher offers one demonstration with a calm open-hand gesture. Child accepts and asks for the meaning while looking toward Teacher's counter. Teacher waits until Child finishes; no demonstration before the request.
+Child asks for a demonstration. During Teacher's response, Teacher raises both hands only to chest height, makes one gentle clap, then lowers both palms to tap both knees once. Show the two movements slowly and distinctly within the short spoken explanation. Child watches without copying yet, then checks the order aloud while looking from Teacher's hands back to Teacher's face. Teacher listens without adding a second demonstration or extra speech.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Teacher: "Would you like me to show you once?"
-Child: "Yes, please. Can you show me what under means?"
+Child: "Can you show me?"
+Teacher: "Watch me. First clap, then tap."
+Child: "First clap, then tap my knees?"
 
 END FRAME
-The inverted clear cup is still empty at center; the two blue counters remain on opposite sides; Teacher and Child are ready to watch the example.
+Teacher's single clap-then-tap demonstration is complete and both of Teacher's hands rest on Teacher's knees. Child has just asked to confirm the order, still with his hands on his own knees; he has not performed the pattern yet.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (17 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (16 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

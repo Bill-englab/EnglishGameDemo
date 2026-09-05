@@ -534,6 +534,81 @@ def test_chapter_3_makes_help_and_repairs_change_the_outcome():
     assert validate_stage(load_stage(CURRICULUM_ROOT, "04")) == []
 
 
+@pytest.mark.parametrize("lesson_id, partner, move, repair_cue", [
+    ("01-ask-for-help", "dad", "request-help", "Hold it here"),
+    ("02-say-i-dont-understand", "teacher", "signal-nonunderstanding", "First clap, then tap"),
+    ("03-correct-a-misunderstanding", "mom", "repair-meaning", "No, I mean the blue cup"),
+])
+def test_chapter_3_meets_three_by_ten_repair_contract(lesson_id, partner, move, repair_cue):
+    chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][2]
+    lesson = next(item for item in chapter["lessons"] if item["id"] == lesson_id)
+    production_path = REPO_ROOT / "prompts/04" / chapter["id"] / lesson_id / "production.json"
+    production = json.loads(production_path.read_text(encoding="utf-8"))
+    turns = [turn for part in lesson["parts"] for turn in part["turns"]]
+    child_turns = [turn for turn in turns if turn["speaker"] == "child"]
+
+    checks = {
+        "the lesson has 9-11 turns": 9 <= len(turns) <= 11,
+        "three-by-ten-v2 is required": lesson.get("dialogue_contract") == "three-by-ten-v2",
+        "the chapter identity stays stable": chapter["id"] == "03-help-clarification",
+        "only Child and the assigned partner speak": lesson["roles"] == ["child", partner]
+        and {turn["speaker"] for turn in turns} == {"child", partner},
+        "the assigned move stays stable": lesson["conversation_move"]["id"] == move,
+        "A/B/C preserve goal/change/resolve order": [
+            (part["id"], part["beat"]) for part in lesson["parts"]
+        ] == [("A", "goal"), ("B", "change"), ("C", "resolve")],
+        "Child has 4-5 turns": 4 <= len(child_turns) <= 5,
+        "the lesson has 45-58 spoken words": 45 <= sum(len(turn["line"].split()) for turn in turns) <= 58,
+        "Child has 18-28 spoken words": 18 <= sum(len(turn["line"].split()) for turn in child_turns) <= 28,
+        "no more than one essential prop group": len(lesson["essential_props"]) <= 1,
+        "two complete Replay Cards remain": len(lesson["replay_cards"]) == 2
+        and all(all(card.get(field) for field in ("title", "setting", "change", "challenge"))
+                for card in lesson["replay_cards"]),
+        "lesson and production are revision 2": lesson["content_revision"] == production["content_revision"] == 2,
+        "the lesson remains language_reviewed": lesson["status"] == "language_reviewed",
+        "all ten content reviews passed": all(lesson["reviews"].get(review) is True for review in (
+            "motivation", "causality", "physical", "adult_behavior", "child_language",
+            "knowledge_safety", "resolution", "replay_logic", "character_continuity", "emotion_stability",
+        )),
+        "production bounds emotional performance": all(
+            isinstance(production.get("emotion", {}).get(field), str)
+            and production["emotion"][field].strip()
+            for field in ("baseline", "allowed_shift", "forbidden")
+        ),
+        "Child supplies the missing help or meaning before the adult responds": any(
+            turn["speaker"] == "child" and turn["kind"] == "repair"
+            and repair_cue in turn["line"] and turns[index + 1]["speaker"] == partner
+            for index, turn in enumerate(turns[:-1])
+        ),
+        "Part C includes the physical outcome": any(
+            turn["kind"] == "action" for turn in lesson["parts"][-1]["turns"]
+        ),
+        "the clap-tap lesson needs no prop": partner != "teacher" or lesson["essential_props"] == [],
+        "production has exactly A/B/C": list(production["parts"]) == ["A", "B", "C"],
+    }
+    for part in lesson["parts"]:
+        checks[f"Part {part['id']} has 3-4 turns"] = 3 <= len(part["turns"]) <= 4
+        checks[f"Part {part['id']} has 12-20 spoken words"] = (
+            12 <= sum(len(turn["line"].split()) for turn in part["turns"]) <= 20
+        )
+        checks[f"Part {part['id']} includes Child"] = any(
+            turn["speaker"] == "child" for turn in part["turns"]
+        )
+        exported = production_path.with_name(f"{part['id'].lower()}.txt").read_text(encoding="utf-8")
+        checks[f"Part {part['id']} export is revision 2"] = "Content revision: 2\n" in exported
+        expected_speech = "\n".join(f'{turn["speaker"].title()}: "{turn["line"]}"' for turn in part["turns"])
+        checks[f"Part {part['id']} export preserves canonical speech"] = (
+            exported.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
+            == expected_speech
+        )
+    for before, after in (("A", "B"), ("B", "C")):
+        checks[f"production preserves {before}/{after} continuity"] = (
+            production["parts"][before]["end"] == production["parts"][after]["start"]
+        )
+
+    assert all(checks.values()), [requirement for requirement, passed in checks.items() if not passed]
+
+
 def test_chapters_4_to_10_follow_the_approved_stage_outline():
     stage = load_stage(CURRICULUM_ROOT, "04")
     expected = {

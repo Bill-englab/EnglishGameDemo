@@ -1,36 +1,44 @@
 Two More Minutes — Part A (goal)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 1
-Source SHA256: 1718fa011999c407262880a2954efc2a093a140f322549760107007d596d616c
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 2
+Source SHA256: 0edc192e7c5d58b038c04d6ff2b10b9b20ea58f4c8f219b172aca3e67b3ff051
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Mom and Child speak at normal family conversation volume with relaxed bodies and small facial movements.
+Child makes an earnest, mild request to finish a concrete task. Mom listens and grants a specific short boundary. Child accepts the limit, concentrates quietly and reports readiness with a small satisfied smile.
+No whining spectacle, shouting, stomping, arm flinging, angry distortion, frantic drawing, nagging or exaggerated excitement. No unexplained adult capitulation or extra drawing tasks; no rushing or running to the doorway.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-Getting ready to leave home.
+Finishing a drawing at home before leaving for the park.
 
 SCENE AND PROP CONTINUITY
-At a home entryway play mat, Mom kneels screen-left and Child sits screen-right. Exactly two toy cars are near Child, with a simple empty parking rectangle just beyond them. An analog kitchen timer sits left of the rectangle, facing Mom; its dial is not legible. Child's two easy slip-on shoes lie beside the right knee. Use one locked 16:9 medium two-shot. Editorial exception: Part C occurs after the agreed two minutes have elapsed off-screen between B and C; keep the same room, positions and object arrangement across that time ellipsis. Never make a two-minute timer visibly expire in ten seconds, accelerate a clock, or imply a false countdown.
+At a low drawing table near the home doorway, Mom stands screen-left and Child stands screen-right. Child is the four-year-old tiger boy, in his same yellow T-shirt and already wearing shoes suitable for leaving. One sheet shows a simple house with an empty upper-right corner where a sun is still missing; one yellow crayon rests beside the sheet. This drawing and crayon are the only essential prop group. Use one locked 16:9 medium two-shot showing faces, hands, the drawing surface and the nearby doorway at frame-left. Mom allows up to two minutes for just the sun; Child finishes early and they leave immediately. The three clips are continuous: no elapsed-two-minutes claim, timer, countdown, accelerated clock or time jump.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Child sits beside two unparked cars with shoes off; the shoes are beside the right knee; Mom kneels left and the timer is idle beside the empty parking rectangle.
+Mom stands left and Child stands right at the low table; the sheet shows a house but no sun, and the yellow crayon lies beside it; the doorway is nearby at frame-left.
 
 ACTION AND REACTIONS
-Mom gestures gently toward the shoes during her departure reminder. Child stops moving the cars and looks up to make the time request. Mom listens without moving the cars or forcing the shoes on.
+Mom gives a small gesture toward the doorway during her departure reminder. Child looks up to request extra time. Mom asks what remains while looking at Child and the unfinished drawing. Leave the paper and crayon still during these three short turns.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "Shoes on. It is time to leave for the park."
-Child: "Can I have two more minutes, please?"
+Mom: "It's time to leave for the park."
+Child: "Can I have two more minutes?"
+Mom: "What do you need to finish?"
 
 END FRAME
-The two cars remain outside the parking rectangle; Child sits with shoes off; Mom kneels beside the idle timer and listens.
+Mom and Child face each other at the table; the sheet still shows a house with an empty upper-right corner; the yellow crayon remains beside the sheet and the doorway stays at frame-left.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (17 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (19 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

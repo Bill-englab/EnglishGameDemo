@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Exactly two toy cars lie on the table's right and three large blocks on its left. A single open divided storage box sits at center-back, with room for both groups. Pancakes are a later shared activity mentioned only in dialogue: no food, cooking tools, scene switch, or instant finished pancakes. Locked 16:9 medium two-shot shows both faces and the whole toy arrangement.",
+  "content_revision": 2,
+  "scene": "In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. Exactly two large blocks lie at table-left and two toy cars at table-right; one item in each group is within easy reach of each person. A single open divided storage box sits at center-back within both characters' reach, with an empty left compartment for blocks and an empty right compartment for cars. This is one small toy-cleanup arrangement. Locked 16:9 medium two-shot shows both faces, hands and all four toys. Keep counts and compartments stable; no extra toys, cooking scene or wardrobe change.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Dad and Child cooperate at normal family conversation volume with relaxed bodies and small gestures.",
+    "allowed_shift": "Child thoughtfully proposes a different order. Dad checks and accepts it because both groups will still be put away. Child takes quiet initiative for the second group after the first is finished.",
+    "forbidden": "No whining spectacle, shouting, stomping, arm flinging, angry distortion, victory posing or exaggerated excitement. No scolding, nagging or unexplained adult capitulation; neither cleanup job is dropped."
+  },
   "parts": {
     "A": {
-      "start": "The two cars lie at table-right, the three blocks at table-left, and the open storage box at center-back; Dad and Child have empty hands.",
-      "action": "Dad indicates the toys during the cleanup boundary. Child points gently to the cars while proposing an order. Both leave the toys in place while discussing the plan.",
-      "end": "All toys remain outside the box in their original groups; Dad and Child look toward the cars on the right."
+      "start": "Two blocks lie at table-left, two cars at table-right, and the empty divided box at center-back; Dad and Child have empty hands.",
+      "action": "Dad indicates cars and then blocks with one small sequential gesture during his cleanup suggestion. Child proposes reversing the order while pointing gently to the blocks. Dad checks the proposed first group. Leave all four toys on the table until the full order is agreed.",
+      "end": "Both blocks and both cars remain outside the empty divided box in their original groups; Dad and Child look toward the blocks at table-left with empty hands."
     },
     "B": {
-      "start": "All toys remain outside the box in their original groups; Dad and Child look toward the cars on the right.",
-      "action": "Dad acknowledges the idea, then indicates the blocks still needing cleanup. During Child's sequence question, Child gestures from cars to blocks and finally looks up at Dad. Do not show cleanup or cooking completed before agreement.",
-      "end": "The cars and blocks are still in their original groups; both characters' hands rest clear of the toys; the empty box remains at center-back."
+      "start": "Both blocks and both cars remain outside the empty divided box in their original groups; Dad and Child look toward the blocks at table-left with empty hands.",
+      "action": "Child confirms that the cars will follow. Dad accepts, then lifts his nearest block toward the left compartment. Child takes the other block during his final turn and places it into the same compartment; Dad lowers his block just after Child's, finishing the group. Each moves only one block. Both cars remain untouched on the right, preserving the agreed order.",
+      "end": "Both blocks rest in the box's left compartment; both cars remain at table-right and the right compartment is empty; Dad has just released the last block, and Child has empty hands."
     },
     "C": {
-      "start": "The cars and blocks are still in their original groups; both characters' hands rest clear of the toys; the empty box remains at center-back.",
-      "action": "Dad agrees, then moves a hand toward the blocks without lifting them yet. Child accepts the car task and puts the two nearby cars into the box one after the other. Only after both cars are stored does Dad begin lifting the nearest block. The remaining blocks stay visible; show the start of teamwork, not instantaneous completion or pancakes.",
-      "end": "Both cars are in the box; Child has empty hands and Dad holds one block above the remaining two blocks; the cars-first sequence has moved on to the blocks."
+      "start": "Both blocks rest in the box's left compartment; both cars remain at table-right and the right compartment is empty; Dad has just released the last block, and Child has empty hands.",
+      "action": "Dad withdraws his empty hand during his observation that the blocks are finished. Child independently initiates the car group and gestures toward it. Dad takes the car nearest him and places it into the right compartment during his turn. Child takes the remaining car and places it beside Dad's during his final turn. Keep the two small transfers continuous with speech and show both groups physically stored by the end.",
+      "end": "Both blocks are stored in the left compartment and both cars in the right; the table is clear of loose toys and Dad and Child have empty hands."
     }
   }
 }

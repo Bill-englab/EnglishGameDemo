@@ -1,36 +1,44 @@
-Cars First — Part A (goal)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/03-propose-an-order/lesson.json | Content revision: 1
-Source SHA256: 3531f2a1887b64a89cf84780e46f67c2c81781fa3daeb6fc80409cdae69b274b
+Blocks First — Part A (goal)
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/03-propose-an-order/lesson.json | Content revision: 2
+Source SHA256: bade99c4b3e92c8d7bf5aba5757a8d776827a0513c3dc421ac33ecc1a1da9f20
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt, gentle natural adult male voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Dad and Child cooperate at normal family conversation volume with relaxed bodies and small gestures.
+Child thoughtfully proposes a different order. Dad checks and accepts it because both groups will still be put away. Child takes quiet initiative for the second group after the first is finished.
+No whining spectacle, shouting, stomping, arm flinging, angry distortion, victory posing or exaggerated excitement. No scolding, nagging or unexplained adult capitulation; neither cleanup job is dropped.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-Cleaning the play area before a shared activity.
+Tidying two small toy groups together at home.
 
 SCENE AND PROP CONTINUITY
-In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Exactly two toy cars lie on the table's right and three large blocks on its left. A single open divided storage box sits at center-back, with room for both groups. Pancakes are a later shared activity mentioned only in dialogue: no food, cooking tools, scene switch, or instant finished pancakes. Locked 16:9 medium two-shot shows both faces and the whole toy arrangement.
+In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. Exactly two large blocks lie at table-left and two toy cars at table-right; one item in each group is within easy reach of each person. A single open divided storage box sits at center-back within both characters' reach, with an empty left compartment for blocks and an empty right compartment for cars. This is one small toy-cleanup arrangement. Locked 16:9 medium two-shot shows both faces, hands and all four toys. Keep counts and compartments stable; no extra toys, cooking scene or wardrobe change.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-The two cars lie at table-right, the three blocks at table-left, and the open storage box at center-back; Dad and Child have empty hands.
+Two blocks lie at table-left, two cars at table-right, and the empty divided box at center-back; Dad and Child have empty hands.
 
 ACTION AND REACTIONS
-Dad indicates the toys during the cleanup boundary. Child points gently to the cars while proposing an order. Both leave the toys in place while discussing the plan.
+Dad indicates cars and then blocks with one small sequential gesture during his cleanup suggestion. Child proposes reversing the order while pointing gently to the blocks. Dad checks the proposed first group. Leave all four toys on the table until the full order is agreed.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Dad: "Please put the toys away before we make pancakes."
-Child: "What if we put away the cars first?"
+Dad: "Let's put the cars away, then the blocks."
+Child: "What if we do blocks first?"
+Dad: "Blocks first?"
 
 END FRAME
-All toys remain outside the box in their original groups; Dad and Child look toward the cars on the right.
+Both blocks and both cars remain outside the empty divided box in their original groups; Dad and Child look toward the blocks at table-left with empty hands.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (17 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (16 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

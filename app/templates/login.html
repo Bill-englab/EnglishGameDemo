@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#f7e8d6">
+  <meta name="theme-color" content="#fffaf2">
   <title>My English Adventure — Sign In</title>
   <link rel="stylesheet" href="/static/style.css">
   <link rel="icon" type="image/png" sizes="256x256" href="/static/icon.png">
@@ -13,13 +13,13 @@
     body {
       font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
-      overflow: hidden;
+      overflow-y: auto;
     }
     .login-page { display: flex; min-height: 100vh; }
     /* Left panel: brand + illustration */
     .login-brand {
       flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: linear-gradient(160deg, #fdf2e4 0%, #f7e0c8 40%, #f0d4a8 100%);
+      background: linear-gradient(160deg, var(--toy-ivory), #e4ede3);
       padding: 48px; position: relative;
     }
     .login-brand__logo {
@@ -28,44 +28,45 @@
     }
     .login-brand__title {
       font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
-      font-size: 36px; color: #3a2a1a; text-align: center; line-height: 1.2;
+      font-size: 36px; color: var(--toy-cocoa); text-align: center; line-height: 1.2;
     }
     .login-brand__subtitle {
       font-family: "Fredoka", system-ui, sans-serif; font-weight: 500;
-      font-size: 16px; color: #8a6a4a; margin-top: 12px; text-align: center; max-width: 320px;
+      font-size: 16px; color: var(--toy-muted); margin-top: 12px; text-align: center; max-width: 320px;
     }
     .login-brand__deco { margin-top: 40px; display: flex; gap: 16px; }
     .login-brand__deco span { width: 10px; height: 10px; border-radius: 50%; }
-    .login-brand__deco span:nth-child(1) { background: #f5a623; }
-    .login-brand__deco span:nth-child(2) { background: #4caf50; }
-    .login-brand__deco span:nth-child(3) { background: #2d5bff; }
+    .login-brand__deco span:nth-child(1) { background: var(--toy-apricot); }
+    .login-brand__deco span:nth-child(2) { background: var(--toy-teal); }
+    .login-brand__deco span:nth-child(3) { background: var(--toy-cocoa); }
     /* Right panel: form */
     .login-form-panel {
       width: 420px; display: flex; align-items: center; justify-content: center;
-      background: #fff; padding: 48px 40px;
+      background: var(--toy-ivory); padding: 48px 40px;
     }
     .login-form { width: 100%; max-width: 300px; }
     .login-form h2 {
       font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
-      font-size: 22px; color: #14161a; margin-bottom: 6px;
+      font-size: 22px; color: var(--toy-cocoa); margin-bottom: 6px;
     }
-    .login-form__hint { font-size: 14px; color: #8a92a0; margin-bottom: 28px; }
+    .login-form__hint { font-size: 14px; color: var(--toy-muted); margin-bottom: 28px; }
     .login-field { margin-bottom: 18px; }
     .login-field label {
-      display: block; font-family: "Fredoka", system-ui, sans-serif;
-      font-weight: 600; font-size: 13px; color: #5a6070; margin-bottom: 6px;
+      display: block; font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 700; font-size: 14px; color: var(--toy-muted); margin-bottom: 6px;
     }
     .login-field input {
       width: 100%; padding: 12px 14px; font-size: 15px; font-family: inherit;
-      border: 1.5px solid #e4e7ee; border-radius: 10px; color: #14161a;
+      border: 1px solid var(--toy-line); border-radius: 12px; color: var(--toy-cocoa);
       transition: border-color .15s; outline: none;
     }
-    .login-field input:focus { border-color: #f5a623; }
+    .login-field input:focus { border-color: var(--toy-teal); }
+    .login-form :focus-visible { outline: 3px solid var(--toy-teal); outline-offset: 3px; }
     .login-form button {
       width: 100%; padding: 13px; border: none; border-radius: 10px;
-      background: linear-gradient(135deg, #f5a623, #e89b15);
+      background: var(--toy-teal);
       color: #fff; font-size: 16px; font-weight: 700;
-      font-family: "Fredoka", system-ui, sans-serif; cursor: pointer;
+      font-family: "Nunito", system-ui, sans-serif; cursor: pointer;
       transition: transform .12s; margin-top: 8px;
     }
     .login-form button:hover { transform: translateY(-1px); }

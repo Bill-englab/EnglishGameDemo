@@ -1,5 +1,6 @@
 """The served reading surface keeps essential content out of nested disclosures."""
 from html.parser import HTMLParser
+import re
 
 from tests.test_app import app_env, client  # noqa: F401 -- reuse isolated route fixtures
 
@@ -85,3 +86,46 @@ def test_account_menu_has_a_name_independent_of_mobile_hidden_username(client):
     # Mobile hides the username; the decorative avatar cannot name the control.
     assert page.by_id("user-avatar")["attrs"]["alt"] == ""
     assert trigger["attrs"].get("aria-label") == "Open account menu"
+
+
+def test_detail_keeps_two_independent_closed_disclosures_after_complete_reading(client):
+    page = Document(client.get("/").get_data(as_text=True))
+    disclosures = [node for node in page.nodes if "detail-disclosure" in node["attrs"].get("class", "").split()]
+    assert len(disclosures) == 2
+    for node in disclosures:
+        assert node["tag"] == "details" and "open" not in node["attrs"]
+        assert not any(parent["tag"] == "details" for parent in node["parents"])
+        assert page.nodes.index(page.by_id("detail-replay-cards")) < page.nodes.index(node)
+
+
+def test_toy_tokens_are_shared_by_detail_shell_and_profile(client):
+    css = client.get("/static/style.css").get_data(as_text=True)
+    for token, value in {
+        "ivory": "#fffaf2", "cocoa": "#402b20", "teal": "#267f7b",
+        "apricot": "#ffddb0", "line": "#ded2c3",
+    }.items():
+        assert f"--toy-{token}: {value}" in css
+    for alias, token in {"shell-surface": "ivory", "shell-ink": "cocoa", "shell-accent": "teal", "shell-line": "line"}.items():
+        assert f"--{alias}: var(--toy-{token})" in css
+    profile = client.get("/static/profile.css").get_data(as_text=True)
+    assert "var(--toy-teal)" in profile and "var(--toy-ivory)" in profile
+
+
+def test_detail_toolbar_and_mobile_media_use_accepted_breakpoint(client):
+    css = client.get("/static/style.css").get_data(as_text=True)
+    assert re.search(r"\.detail-header\s*\{[^}]*min-height:\s*56px", css)
+    assert "grid-template-columns: 340px minmax(0, 1fr)" in css
+    js = client.get("/static/app.js").get_data(as_text=True)
+    assert 'mobileMedia = window.matchMedia("(max-width: 767px)")' in js
+    assert "@media (max-width: 899px)" not in css
+
+
+def test_account_pages_share_tokens_and_keep_electron_controls(client):
+    for path in ["/login", "/admin"]:
+        if path == "/admin":
+            with client.session_transaction() as session:
+                session["username"] = "admin"
+        html = client.get(path).get_data(as_text=True)
+        assert "var(--toy-teal)" in html
+        assert '<script src="/static/titlebar.js"></script>' in html
+        assert "overflow-y: auto" in html

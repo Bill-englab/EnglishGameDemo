@@ -22,7 +22,7 @@ let recordingGeneration = 0;
 let releaseRecording = () => {};
 let cameraActive = false;
 let selectedMedia = "performance";
-const mobileMedia = window.matchMedia("(max-width: 899px)");
+const mobileMedia = window.matchMedia("(max-width: 767px)");
 
 function updateMediaView() {
   const state = resolveMediaView({ mobile: mobileMedia.matches, selected: selectedMedia, cameraActive });

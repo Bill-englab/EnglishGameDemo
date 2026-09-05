@@ -6,53 +6,54 @@
   <title>Admin — My English Adventure</title>
   <link rel="stylesheet" href="/static/style.css">
   <style>
-    body { background: #f7f8fa; font-family: "Nunito", system-ui, sans-serif; }
+    body { background: var(--toy-ivory); font-family: "Nunito", system-ui, sans-serif; overflow-y: auto; }
     .admin-wrap { max-width: 500px; margin: 60px auto; padding: 0 20px; }
     .admin-card {
-      background: #fff; border: 1px solid #e4e7ee; border-radius: 16px;
-      padding: 28px; box-shadow: 0 8px 32px rgba(20,22,26,.08);
+      background: #fffefd; border: 1px solid var(--toy-line); border-radius: 20px;
+      padding: 28px; box-shadow: 0 6px 20px rgba(64,43,32,.08);
     }
     .admin-card h1 {
       font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
-      font-size: 24px; color: #14161a; margin: 0 0 6px;
+      font-size: 24px; color: var(--toy-cocoa); margin: 0 0 6px;
     }
-    .admin-card .subtitle { font-size: 14px; color: #8a92a0; margin: 0 0 24px; }
+    .admin-card .subtitle { font-size: 14px; color: var(--toy-muted); margin: 0 0 24px; }
     .admin-section { margin-bottom: 28px; }
     .admin-section h2 {
       font-family: "Fredoka", system-ui, sans-serif; font-weight: 700;
-      font-size: 14px; color: #5a6070; text-transform: uppercase;
+      font-size: 14px; color: var(--toy-muted); text-transform: uppercase;
       letter-spacing: .08em; margin: 0 0 12px;
     }
     .admin-form { display: flex; flex-direction: column; gap: 10px; }
     .admin-form input {
-      font-family: "Fredoka", system-ui, sans-serif; font-size: 15px;
-      padding: 10px 14px; border: 1px solid #cdd3de; border-radius: 10px;
+      font-family: "Nunito", system-ui, sans-serif; font-size: 15px;
+      padding: 10px 14px; min-height: 44px; border: 1px solid var(--toy-line); border-radius: 12px;
       outline: none; transition: border-color .15s;
     }
-    .admin-form input:focus { border-color: #ff9d4d; }
+    .admin-form input:focus { border-color: var(--toy-teal); }
+    .admin-card :focus-visible { outline: 3px solid var(--toy-teal); outline-offset: 3px; }
     .admin-form button {
-      font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 15px;
-      color: #fff; background: #ff9d4d; border: none; border-radius: 10px;
+      font-family: "Nunito", system-ui, sans-serif; font-weight: 700; font-size: 15px;
+      color: #fff; background: var(--toy-teal); border: none; border-radius: 12px; min-height: 44px;
       padding: 10px 20px; cursor: pointer; transition: background .15s;
     }
-    .admin-form button:hover { background: #f0772b; }
+    .admin-form button:hover { background: var(--toy-hover); }
     .user-list { list-style: none; padding: 0; margin: 0; }
     .user-list li {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 14px; border: 1px solid #e4e7ee; border-radius: 10px;
-      margin-bottom: 8px; font-size: 15px; color: #14161a;
+      padding: 10px 14px; border: 1px solid var(--toy-line); border-radius: 12px;
+      margin-bottom: 8px; font-size: 15px; color: var(--toy-cocoa);
     }
     .user-list .del-btn {
-      font-family: "Fredoka", system-ui, sans-serif; font-size: 13px;
-      color: #e8554e; background: none; border: 1px solid #e4e7ee;
-      padding: 4px 12px; border-radius: 999px; cursor: pointer;
+      font-family: "Nunito", system-ui, sans-serif; font-size: 14px;
+      color: var(--toy-red); background: none; border: 1px solid var(--toy-line);
+      padding: 4px 12px; min-height: 44px; border-radius: 12px; cursor: pointer;
     }
     .user-list .del-btn:hover { border-color: #e8554e; }
     .msg { font-size: 14px; padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; }
     .msg-error { background: rgba(232,85,78,.08); color: #c42b1c; }
     .msg-success { background: rgba(34,197,94,.08); color: #159541; }
-    .back-link { font-size: 14px; color: #8a92a0; text-decoration: none; }
-    .back-link:hover { color: #f0772b; }
+    .back-link { font-size: 14px; color: var(--toy-teal); text-decoration: none; }
+    .back-link:hover { color: var(--toy-hover); }
   </style>
 </head>
 <body>
@@ -95,5 +96,6 @@
       <a href="/" class="back-link">← Back to Map</a>
     </div>
   </div>
+  <script src="/static/titlebar.js"></script>
 </body>
 </html>

@@ -1,18 +1,44 @@
 {
-  "title":"One Book Before Bed","title_zh":"睡前读一本","can_do":"在明确的睡前边界内，请求一件可以完成的小事。",
-  "conversation_move":{"id":"request-before-boundary","label":"request one thing before a boundary"},
-  "trigger":"Mom says there is time for one short activity before lights out.",
-  "core_response":"Can we read a book before bed?","stretch_response":"Can we read the blue bear book before bed?","repair_response":"Just one short book, please.",
-  "recycle":["request-item","specify-choice"],"roles":["child","mom"],"setting":"The regular bedtime routine.","essential_props":["two short picture books"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"We have time for one thing before lights out.","kind":"input"},{"speaker":"child","line":"Can we read the bear book before bed?","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"Yes, one short book. Which bear book?","kind":"input"},{"speaker":"child","line":"The blue one, please. It has the sleepy bear.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Here it is. We will read it, then lights out.","kind":"input"},{"speaker":"child","line":"Okay. I am ready for our story.","kind":"action"}]}
+  "title": "One Book Before Bed",
+  "title_zh": "睡前读一本",
+  "can_do": "在一本故事后关灯的约定内提出请求、选定书，并在读完后接受睡觉。",
+  "conversation_move": {"id": "request-before-boundary", "label": "request one thing before a boundary"},
+  "trigger": "Mom offers one story before lights out, and Child chooses the bear book for that agreed time.",
+  "core_response": "Can we read a book before bed?",
+  "stretch_response": "Can we read the bear book before bed?",
+  "repair_response": "The blue one, please.",
+  "recycle": ["request-item", "specify-choice"],
+  "roles": ["child", "mom"],
+  "setting": "A quiet bedtime story together; a brief time transition leads from opening the book to finishing it later.",
+  "essential_props": ["one bedtime book choice: a blue sleepy-bear book and a cream wide-awake-bear book"],
+  "dialogue_contract": "three-by-ten-v2",
+  "parts": [
+    {"id": "A", "beat": "goal", "turns": [
+      {"speaker": "mom", "line": "One story, then lights out.", "kind": "input"},
+      {"speaker": "child", "line": "Can we read the bear book before bed?", "kind": "core"},
+      {"speaker": "mom", "line": "Yes, just one.", "kind": "input"}
+    ]},
+    {"id": "B", "beat": "change", "turns": [
+      {"speaker": "child", "line": "The blue one, please.", "kind": "stretch"},
+      {"speaker": "mom", "line": "This sleepy bear?", "kind": "input"},
+      {"speaker": "child", "line": "Yes. Can you read it?", "kind": "core"},
+      {"speaker": "mom", "line": "Of course. Get comfy.", "kind": "action"}
+    ]},
+    {"id": "C", "beat": "resolve", "turns": [
+      {"speaker": "mom", "line": "That's the end. Ready for lights out?", "kind": "input"},
+      {"speaker": "child", "line": "Yes. I liked that story. Goodnight, Mom.", "kind": "action"},
+      {"speaker": "mom", "line": "Goodnight, sweetheart.", "kind": "action"}
+    ]}
   ],
-  "replay_cards":[
-    {"title":"One goodnight song","setting":"After the book is finished","change":"There is time for one short song","challenge":"Request one named song, sing it together, then turn out the light"},
-    {"title":"Choose tomorrow's shirt","setting":"Before getting into bed","change":"Two shirts are already on the chair","challenge":"Ask to choose one now, identify it, set it aside, and continue bedtime"}
+  "replay_cards": [
+    {"title": "One goodnight song", "setting": "Choosing tonight's activity before lights out", "change": "Mom offers one short song as tonight's bedtime activity", "challenge": "Request a named song, sing it together, and accept lights out when the song finishes"},
+    {"title": "Choose tomorrow's shirt", "setting": "Before getting into bed", "change": "Mom agrees there is time to choose between two shirts already on the chair", "challenge": "Ask to choose tomorrow's shirt, identify one, set it aside, then get into bed as agreed"}
   ],
-  "parent_support":["State the real limit before inviting the request.","Honor the agreed short activity, then keep the bedtime boundary calmly."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support": [
+    "Offer a real, manageable story with the lights-out boundary, and honor the chosen book.",
+    "Read the whole book at a comfortable pace in real practice. The demo's brief time transition represents that reading time; ask about lights out only when the story is finished."
+  ],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
+  "status": "language_reviewed",
+  "content_revision": 2
 }

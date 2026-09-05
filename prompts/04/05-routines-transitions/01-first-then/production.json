@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "At a home front door, Dad kneels screen-left and Child sits screen-right on a low entry bench. One easy slip-on shoe lies in front of Child; its matching shoe is partly hidden immediately behind a soft bag beside the bench, with its toe visible to the camera. An unfastened lightweight coat hangs open over the bench end nearest the door, within Dad's reach. Child wears the usual yellow T-shirt underneath. Locked 16:9 medium two-shot includes faces, hands, feet, bag and coat; no laces, buttons or zipper tasks. The bag is required by the spoken hiding clue, not an added obstacle.",
+  "content_revision": 2,
+  "scene": "Inside the home front door, Dad kneels screen-left and Child sits screen-right on a low entry bench with both feet reaching the floor. Child is the same four-year-old tiger boy in his yellow T-shirt, navy shorts and cream ankle socks throughout. A matching pair of navy easy slip-on shoes sits side by side directly in front of his feet, toes facing forward; a pale-blue lightweight jacket lies open on the bench immediately to Child's left between him and Dad. These clothes are the one essential prop group. The jacket needs no button or zipper work. Keep a locked 16:9 medium two-shot wide enough for faces, hands, feet and the jacket. All dressing stays seated; the front door stays closed. Give the simple movements real time without a dressing montage or wardrobe jump.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Dad and Child attend to an ordinary park routine at an easy pace.",
+    "allowed_shift": "A small searching glance, a straightforward request for help and a modest satisfied smile when dressed.",
+    "forbidden": "No nagging, impatient adult lecture, whining, exaggerated triumph, rushed dressing, bouncing, frantic gestures or distorted body shapes."
+  },
   "parts": {
     "A": {
-      "start": "Child sits on the entry bench with both shoes off; one shoe is in front of Child and its mate is partly behind the bag; the open coat lies over the bench end by the door; Dad kneels left.",
-      "action": "Dad indicates the shoes and coat during the departure reminder. Child states the chosen sequence, then lifts the visible slip-on shoe and slides the first foot into it. Leave the other shoe behind the bag and the coat untouched.",
-      "end": "Child sits with the first shoe on; the matching shoe is still partly behind the bag; the coat remains over the bench end; Dad kneels left with empty hands."
+      "start": "Child sits screen-right in the yellow T-shirt, navy shorts and cream socks with both shoes off, looking at Dad. Dad kneels screen-left with empty hands. Both navy slip-on shoes sit in front of Child's feet; the open pale-blue jacket lies on the bench immediately to his left; the front door is closed.",
+      "action": "Dad asks about the remaining park preparation. Child names shoes before jacket while staying seated. Dad indicates the shoes with one small right-hand point; Child follows the clue and looks down at both shoes. Dad lowers his hand. Keep both shoes and the jacket in place for the next part.",
+      "end": "Child sits screen-right looking down at both navy shoes in front of his socked feet; neither shoe is on. Dad kneels screen-left with empty hands. The open pale-blue jacket remains on the bench immediately to Child's left; the front door is closed."
     },
     "B": {
-      "start": "Child sits with the first shoe on; the matching shoe is still partly behind the bag; the coat remains over the bench end; Dad kneels left with empty hands.",
-      "action": "During Dad's clue he points behind the bag. Child leans only a short distance, retrieves the matching shoe from its established position, and reports finding it. While describing shoes first, Child slips it onto the other foot. The coat is not put on yet.",
-      "end": "Child sits with both slip-on shoes on; the bag remains beside the bench and the open coat still rests over the bench end by the door; Dad kneels left."
+      "start": "Child sits screen-right looking down at both navy shoes in front of his socked feet; neither shoe is on. Dad kneels screen-left with empty hands. The open pale-blue jacket remains on the bench immediately to Child's left; the front door is closed.",
+      "action": "Child identifies the visible shoes. As Dad offers to steady them, his right hand steadies the back of one shoe while Child slides the correct foot into it, then steadies the other shoe for the other foot. Each is a short, easy slip-on movement; no laces or fasteners. With both shoes on, Child thanks Dad and asks about the jacket. Dad withdraws his hand from the shoes and indicates the jacket beside Child. Child turns his gaze to that visible jacket. Leave it on the bench.",
+      "end": "Child sits screen-right with both navy shoes fully on and looks at the open pale-blue jacket immediately to his left on the bench. Dad kneels screen-left with empty hands lowered after pointing; the yellow T-shirt, navy shorts and cream socks are unchanged, and the front door is closed."
     },
     "C": {
-      "start": "Child sits with both slip-on shoes on; the bag remains beside the bench and the open coat still rests over the bench end by the door; Dad kneels left.",
-      "action": "During Dad's turn Child stands steadily in both shoes while Dad lifts the open coat from the bench and presents its sleeves. Child threads both arms into the already open sleeves with Dad's help. Only once the coat is on does Child say the final readiness line. Leave the coat unfastened; no rushed zipper or button action.",
-      "end": "Child stands screen-right in both shoes and the open coat over the yellow T-shirt; Dad remains left with empty hands; the bag stays beside the bench and they are ready to leave."
+      "start": "Child sits screen-right with both navy shoes fully on and looks at the open pale-blue jacket immediately to his left on the bench. Dad kneels screen-left with empty hands lowered after pointing; the yellow T-shirt, navy shorts and cream socks are unchanged, and the front door is closed.",
+      "action": "Dad notes the completed shoes and lifts the open jacket from its established spot with both hands, holding it beside Child. Child asks for help. Still kneeling, Dad supports the jacket behind Child's shoulders as the seated boy slips one arm and then the other into its open sleeves. Dad settles the shoulders before his brief reassurance and releases the jacket. Only after both arms are through does Child report readiness. Keep the jacket open over the yellow T-shirt; no standing, fastening or departure action is added.",
+      "end": "Child remains seated screen-right wearing both navy shoes and the open pale-blue jacket over his yellow T-shirt, with navy shorts and cream socks unchanged. Both arms are inside the sleeves. Dad kneels screen-left with empty hands. The jacket's former place on the bench is empty and the front door is still closed."
     }
   }
 }

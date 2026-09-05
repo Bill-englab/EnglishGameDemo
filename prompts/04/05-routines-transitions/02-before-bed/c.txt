@@ -1,36 +1,44 @@
 One Book Before Bed — Part C (resolve)
-Production prompt draft | Source: curriculum/04/05-routines-transitions/02-before-bed/lesson.json | Content revision: 1
-Source SHA256: 98c82361747d5310c5ce9b52889a4241a1c54f00634dbbe6a819e5e4887eaf89
+Production prompt draft | Source: curriculum/04/05-routines-transitions/02-before-bed/lesson.json | Content revision: 2
+Source SHA256: 8e203c805ac30825d8c5189f7ceb82256b05d2e3331246456e1ee230ea2909fb
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Mom is reassuring and Child is quietly attentive at bedtime.
+A small pleased response to the chosen bear book, gentle settling against the pillows and relaxed acceptance of lights out.
+No nagging, whining, bedtime struggle, exaggerated sleepiness, extreme delight, fear of darkness, sudden emotional reset or distorted faces and bodies.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-The regular bedtime routine.
+A quiet bedtime story together; a brief time transition leads from opening the book to finishing it later.
 
 SCENE AND PROP CONTINUITY
-In a softly lit bedroom, Mom sits screen-left and Child sits screen-right against the bed pillows. The yellow T-shirt remains unchanged. Two thin picture books lie face-up on the bed between them: a blue book with a sleeping bear on its cover closest to Child and a cream book with a wide-awake bear closest to Mom. One warm bedside lamp provides steady light, with no switch action. Keep a locked 16:9 medium two-shot showing both faces, book covers and laps. The story begins after agreement; do not perform a whole reading session or lights-out inside the final clip.
+In a quiet bedroom, Mom sits screen-left and Child sits screen-right against bed pillows with a blanket already over his legs. The four-year-old tiger boy keeps his yellow T-shirt and navy pajama pants throughout. Two thin picture books lie face-up on the bed between them in front of their knees: the blue sleeping-bear book nearest Child and the cream wide-awake-bear book nearest Mom. They are the one essential prop group. A warm bedside lamp is within Mom's left-hand reach; soft ambient hallway light is present from the start so faces remain readable after the lamp is switched off. Lock a 16:9 medium two-shot on both faces, laps, books and lamp. Part C uses a brief, clear passage-of-time dissolve to show the story has been read at a normal pace; no sped-up reading, page-flipping montage, added story speech or sudden room reset.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Child's hand has lowered beside the blue sleepy-bear book; both books remain on the bed and Mom looks at the blue cover; the lamp remains on.
+Mom sits screen-left holding the blue book open to its first spread on her lap, left hand supporting the left edge and right hand the right edge. Child sits screen-right against the pillows looking at it, hands on the blanket over his legs. The cream book remains face-up in front of their knees; the bedside lamp is on with steady ambient hallway light, and both outfits are unchanged.
 
 ACTION AND REACTIONS
-During Mom's response she lifts only the blue book onto the shared space between their laps and opens its first spread. Child settles closer without switching sides and says the readiness line. End with the story about to begin; keep the cream book on the bed and the lamp on because lights out follows the actual reading.
+Begin with a brief passage-of-time dissolve, a clear time ellipsis representing the full story read together at a comfortable pace. Match the same camera, seating, clothes, blanket and book-hand positions; after the dissolve the blue book is open to its final illustrated spread. No rapid page flipping or extra speech occurs. Only now Mom says the ending and asks about lights out. During Child's accepting reply Mom closes the blue book onto her lap with her right hand. The closed book rests securely there under her right hand, freeing her left hand. After Child's goodnight, Mom says her final goodnight and uses her left hand to switch off the nearby lamp, then lowers that hand. Child relaxes against the same pillows. Keep the soft ambient light and the cream book in place.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "Here it is. We will read it, then lights out."
-Child: "Okay. I am ready for our story."
+Mom: "That's the end. Ready for lights out?"
+Child: "Yes. I liked that story. Goodnight, Mom."
+Mom: "Goodnight, sweetheart."
 
 END FRAME
-Mom holds the blue book open between their laps; Child looks at its first spread; the cream book remains face-up on the bed and the lamp is still on.
+Mom remains screen-left with the closed blue book on her lap under her right hand and her left hand lowered beside her. Child remains screen-right relaxed against the same pillows, hands on the blanket, with yellow T-shirt and navy pajama pants unchanged. The cream book is still face-up in front of their knees. The bedside lamp is off; steady soft ambient hallway light keeps both faces readable.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (17 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (16 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

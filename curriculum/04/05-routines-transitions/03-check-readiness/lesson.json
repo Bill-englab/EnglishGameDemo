@@ -1,18 +1,44 @@
 {
-  "title":"I Still Need My Bottle","title_zh":"我还需要水瓶","can_do":"说明自己基本准备好了，同时指出还缺的一件东西。",
-  "conversation_move":{"id":"report-readiness","label":"report readiness and one missing item"},
-  "trigger":"Dad is ready to leave, but the child's water bottle is not with the backpack.",
-  "core_response":"I'm ready, but I still need my water bottle.","stretch_response":"I'm ready, but can you help me find my water bottle?","repair_response":"Wait, not yet. I still need my bottle.",
-  "recycle":["request-help","state-body-need"],"roles":["child","dad"],"setting":"At the door before a car ride.","essential_props":["a backpack and water bottle"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"We are leaving. Are you ready to get in the car?","kind":"input"},{"speaker":"child","line":"I'm ready, but I still need my water bottle.","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"It is not by your backpack. Where should we look?","kind":"input"},{"speaker":"child","line":"Can you help me look on the kitchen table?","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"Here it is. Now we have everything.","kind":"input"},{"speaker":"child","line":"I have my bottle. I am ready now.","kind":"action"}]}
+  "title": "I Still Need My Bottle",
+  "title_zh": "我还需要水瓶",
+  "can_do": "说明自己基本准备好了但还缺水瓶，请求帮助、按位置线索找到并装好，再确认可以出发。",
+  "conversation_move": {"id": "report-readiness", "label": "report readiness and one missing item"},
+  "trigger": "Dad asks about leaving while Child's open carry bag is ready but his water bottle is still on the nearby table.",
+  "core_response": "I'm ready, but I still need my water bottle.",
+  "stretch_response": "I'm ready, but can you help me find my water bottle?",
+  "repair_response": "Wait, not yet. I still need my bottle.",
+  "recycle": ["request-help", "state-body-need"],
+  "roles": ["child", "dad"],
+  "setting": "Inside the front door before a car ride, with the bottle and bag both within easy reach.",
+  "essential_props": ["one departure set: a capped water bottle and a small open carry bag"],
+  "dialogue_contract": "three-by-ten-v2",
+  "parts": [
+    {"id": "A", "beat": "goal", "turns": [
+      {"speaker": "dad", "line": "Ready for our car ride?", "kind": "input"},
+      {"speaker": "child", "line": "I'm ready, but I still need my water bottle.", "kind": "core"},
+      {"speaker": "dad", "line": "Okay, we can wait.", "kind": "input"}
+    ]},
+    {"id": "B", "beat": "change", "turns": [
+      {"speaker": "child", "line": "Can you help me?", "kind": "repair"},
+      {"speaker": "dad", "line": "It's on the little table beside you.", "kind": "input"},
+      {"speaker": "child", "line": "There it is.", "kind": "action"}
+    ]},
+    {"id": "C", "beat": "resolve", "turns": [
+      {"speaker": "dad", "line": "Your bag is still open.", "kind": "input"},
+      {"speaker": "child", "line": "I'll put it in.", "kind": "action"},
+      {"speaker": "dad", "line": "Got everything now?", "kind": "input"},
+      {"speaker": "child", "line": "Yes. I'm ready now.", "kind": "action"}
+    ]}
   ],
-  "replay_cards":[
-    {"title":"Missing sun hat","setting":"Ready to go to the playground","change":"Shoes are on but the sun hat is missing","challenge":"Report readiness plus the missing hat, find it with Mom, and leave"},
-    {"title":"Missing library book","setting":"Packing a bag at home","change":"The bag is zipped before the book goes in","challenge":"Say what is still needed, reopen the bag, add the book, and confirm readiness"}
+  "replay_cards": [
+    {"title": "Missing sun hat", "setting": "Ready to go to the playground", "change": "Shoes are on but the sun hat is still on the bench", "challenge": "Say you are ready but still need the hat, ask Mom where it is, put it on, and confirm readiness"},
+    {"title": "Missing library book", "setting": "Packing a bag at home", "change": "The bag is zipped before the library book goes in", "challenge": "Say what is still needed, reopen the bag, add the book, close it, and confirm readiness"}
   ],
-  "parent_support":["Ask a genuine readiness question before moving toward the door.","Help search for the named item and let finding it close the scene."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support": [
+    "Ask a genuine readiness question and wait when the child names a missing item.",
+    "Give one useful location clue when asked. Let the child retrieve and pack the bottle before the final readiness check."
+  ],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
+  "status": "language_reviewed",
+  "content_revision": 2
 }

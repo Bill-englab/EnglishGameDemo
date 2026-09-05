@@ -470,6 +470,43 @@ async function main() {
       await page.keyboard.press('Escape');
       results.push({ realProgress: '0/30 -> 2/30', current: 'lesson 3' });
 
+      // A saved performance celebrates once after the detail closes. The
+      // fixture already has the first two lessons complete, so this save also
+      // completes the first chapter.
+      await page.emulateMedia({ reducedMotion: 'no-preference' });
+      await page.unroute('**/upload/**');
+      await page.locator('[data-current-lesson]').click();
+      await page.getByRole('button', { name: 'Start recording', exact: true }).click();
+      await page.locator('.record-preview').waitFor();
+      await page.locator('.record-btn').click();
+      await page.waitForTimeout(300);
+      await page.getByRole('button', { name: 'Stop recording', exact: true }).click();
+      await page.locator('.record-playback').waitFor();
+      await page.getByRole('button', { name: 'Save', exact: false }).click();
+      await page.getByRole('button', { name: 'Record again', exact: true }).waitFor();
+      await page.evaluate(() => {
+        window.qaCelebrationEnds = new Promise(resolve => {
+          const ended = new Set();
+          document.addEventListener('animationend', event => {
+            if (event.target.matches('.level-node__marker--star, .chapter-heading')) ended.add(event.target);
+            if (ended.size === 2) resolve();
+          }, { capture: true });
+        });
+      });
+      await page.locator('#back-btn').click();
+      await page.locator('.level-node-wrap--just-completed').waitFor();
+      await page.locator('.chapter-world--just-completed').waitFor();
+      assert.equal(await page.locator('.level-node-wrap--just-completed .level-node__marker--star').count(), 1);
+      await page.evaluate(() => window.qaCelebrationEnds);
+      assert.equal(await page.locator('.level-node-wrap--just-completed').count(), 0);
+      assert.equal(await page.locator('.chapter-world--just-completed').count(), 0);
+      assert.equal(await page.locator('.level-node--completed .level-node__marker--star').count(), 3);
+      await page.reload();
+      await page.locator('.level-node').first().waitFor();
+      assert.equal(await page.locator('.level-node-wrap--just-completed').count(), 0);
+      assert.equal(await page.locator('.chapter-world--just-completed').count(), 0);
+      results.push({ performanceSave: 'one-shot lesson and chapter celebration', refresh: 'no replay' });
+
       await page.setViewportSize({ width: 1440, height: 960 });
       // This one lesson's mock demo intentionally has no generated thumbnail.
       // Missing assets outside this explicit phase/URL are acceptance failures.

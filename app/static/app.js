@@ -9,9 +9,10 @@ import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterCont
 import { resolveMediaView } from "./detail-media.mjs";
 import { summarizeAdventure } from "./adventure-navigation.mjs";
 import { createAdventureShell } from "./adventure-shell.mjs";
-import { createCurrentLessonAction, showMapLoadState, showMapLoadError } from "./map-interactions.mjs";
+import { createCelebrationQueue, createCurrentLessonAction, showMapLoadState, showMapLoadError } from "./map-interactions.mjs";
 
 const scrollToCurrentLesson = createCurrentLessonAction({ root: document, view: window });
+const celebrationQueue = createCelebrationQueue();
 
 const adventureShell = createAdventureShell({
   root: document,
@@ -64,6 +65,7 @@ function prettyChapter(raw) {
 const chapterIndex = (name) => parseInt((name.match(/^(\d+)/) || [0, 1])[1], 10);
 const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}?t=${Date.now()}`;
 const uploadURL = (chapter, level, kind) => `/upload/${chapter}/${level}/${kind}`;
+const levelKey = ({ chapter, level }) => `${chapter}/${level}`;
 
 function _fallbackCopy(text, onSuccess) {
   const ta = document.createElement("textarea");
@@ -473,16 +475,17 @@ function renderPlayback(container, blob, stream, level, mimeType, isCurrent) {
 
 // Upload a recorded blob to the server. Sends the actual MIME type so the
 // backend stores the correct extension (.webm / .mp4).
-async function uploadRecording(level, blob, mimeType) {
+async function uploadRecording(level, blob, mimeType, kind = "performance") {
   const fd = new FormData();
   const ext = mimeType.includes("mp4") ? "mp4" : "webm";
   fd.append("file", blob, `performance.${ext}`);
   fd.append("mimeType", mimeType);
-  const res = await fetch(uploadURL(level.chapter, level.level, "performance"), {
+  const res = await fetch(uploadURL(level.chapter, level.level, kind), {
     method: "POST",
     body: fd,
   });
   if (!res.ok) throw new Error(`upload ${res.status}`);
+  if (kind === "performance") celebrationQueue.queue(levelKey(level));
   return true;
 }
 
@@ -533,6 +536,7 @@ let mapScrollY = 0;
 let currentLibrary = [];        // full chapter tree, kept for detail navigation
 let flatLevels = [];            // flattened level list with chapter context for prev/next
 let bgSlides = [];              // background slides, kept so closeDetail can refresh them
+let detailLevelKey = null;
 
 const MAP_MARKERS = {
   star: '<path d="m12 3.1 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.7l6.2-.9Z" fill="currentColor" stroke="none"/>',
@@ -549,6 +553,7 @@ function createLevelNode(level, index, theme) {
   const wrap = document.createElement("button");
   wrap.type = "button";
   wrap.className = `level-node-wrap level-node-wrap--${state}`;
+  wrap.dataset.levelKey = levelKey(level);
   wrap.setAttribute("aria-label", level.title);
   if (state === "current") {
     wrap.dataset.currentLesson = `${level.chapter}/${level.level}`;
@@ -872,6 +877,7 @@ function openDetail(level) {
   disposeDetailMedia();
   const visit = detailVisit;
   const isCurrent = () => visit === detailVisit;
+  detailLevelKey = levelKey(level);
   selectedMedia = "performance";
   const mapView = document.getElementById("map-view");
   if (!mapView.classList.contains("hidden")) mapScrollY = mapView.scrollTop;
@@ -1083,6 +1089,8 @@ function closeDetail() {
   const mapView = document.getElementById("map-view");
   mapView.classList.remove("hidden");
   document.getElementById("bg-layer").classList.remove("hidden");
+  celebratePendingCompletion(detailLevelKey);
+  detailLevelKey = null;
   requestAnimationFrame(() => {
     drawMapPath();
     mapView.scrollTop = mapScrollY;
@@ -1090,6 +1098,33 @@ function closeDetail() {
     // Delay bg refresh slightly so scroll position is restored first
     setTimeout(() => updateBgOnScroll(bgSlides), 50);
   });
+}
+
+function celebratePendingCompletion(key) {
+  if (!key || !celebrationQueue.consume(key)) return;
+  const wrap = [...document.querySelectorAll(".level-node-wrap")]
+    .find(node => node.dataset.levelKey === key);
+  const star = wrap?.querySelector(".level-node__marker--star");
+  if (!wrap || !star) return;
+
+  const removeAfterAnimation = (element, className, target = element) => {
+    const clear = () => element.classList.remove(className);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      clear();
+      return;
+    }
+    target.addEventListener("animationend", clear, { once: true });
+  };
+
+  wrap.classList.add("level-node-wrap--just-completed");
+  removeAfterAnimation(wrap, "level-node-wrap--just-completed", star);
+
+  const chapter = wrap.closest(".chapter-world");
+  if (!chapter || chapter.querySelectorAll(".level-node-wrap--completed").length !== chapter.querySelectorAll(".level-node-wrap").length) return;
+  const heading = chapter.querySelector(".chapter-heading");
+  if (!heading) return;
+  chapter.classList.add("chapter-world--just-completed");
+  removeAfterAnimation(chapter, "chapter-world--just-completed", heading);
 }
 
 // ===== resilient library loading (loading / error / retry) =====

@@ -1,4 +1,13 @@
 // Small DOM boundaries shared by the map controller and its regression tests.
+export function createCelebrationQueue() {
+  const pending = new Set();
+  return {
+    queue(levelKey) { pending.add(levelKey); },
+    consume(levelKey) { return pending.delete(levelKey); },
+    clear() { pending.clear(); },
+  };
+}
+
 export function createCurrentLessonAction({ root, view }) {
   let cancel = () => {};
   return function scrollToCurrentLesson({ behavior = "smooth" } = {}) {

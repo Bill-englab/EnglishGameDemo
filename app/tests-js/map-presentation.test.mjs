@@ -1,7 +1,17 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import * as model from "../static/map-model.mjs";
-import { createCurrentLessonAction, showMapLoadError } from "../static/map-interactions.mjs";
+import { createCelebrationQueue, createCurrentLessonAction, showMapLoadError } from "../static/map-interactions.mjs";
+
+test("completion celebrations are consumed once and can be cleared", () => {
+  const queue = createCelebrationQueue();
+  queue.queue("01-choosing-requests/01-request-an-item");
+  assert.equal(queue.consume("01-choosing-requests/01-request-an-item"), true);
+  assert.equal(queue.consume("01-choosing-requests/01-request-an-item"), false);
+  queue.queue("x");
+  queue.clear();
+  assert.equal(queue.consume("x"), false);
+});
 
 test("only performance earns a binary star reward; current and preview have distinct markers", () => {
   assert.equal(typeof model.resolveMapPresentation, "function");

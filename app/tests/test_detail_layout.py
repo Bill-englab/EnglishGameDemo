@@ -88,6 +88,25 @@ def test_account_menu_has_a_name_independent_of_mobile_hidden_username(client):
     assert trigger["attrs"].get("aria-label") == "Open account menu"
 
 
+def test_map_shell_groups_persistent_controls_into_three_alignment_cells(client):
+    """The center progress capsule stays viewport-centered as side controls vary."""
+    page = Document(client.get("/").get_data(as_text=True))
+    topbar = next(node for node in page.nodes if "topbar" in node["attrs"].get("class", "").split())
+    direct_children = [node for node in page.nodes if node["parents"] and node["parents"][-1] is topbar]
+    assert [node["attrs"].get("class") for node in direct_children] == [
+        "shell-left", "shell-progress", "shell-actions",
+    ]
+    cells = {node["attrs"]["class"]: node for node in direct_children}
+    brand = next(node for node in page.nodes if "adventure-brand" in node["attrs"].get("class", "").split())
+    progress = next(node for node in page.nodes if "progress" in node["attrs"].get("class", "").split())
+    account = page.by_id("user-menu")
+    mounts = [node for node in page.nodes if "data-window-controls" in node["attrs"]]
+    assert brand["parents"][-1] is cells["shell-left"]
+    assert progress["parents"][-1] is cells["shell-progress"]
+    assert account["parents"][-1] is cells["shell-actions"]
+    assert mounts[0]["parents"][-1] is cells["shell-actions"]
+
+
 def test_detail_keeps_two_independent_closed_disclosures_after_complete_reading(client):
     page = Document(client.get("/").get_data(as_text=True))
     disclosures = [node for node in page.nodes if "detail-disclosure" in node["attrs"].get("class", "").split()]

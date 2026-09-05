@@ -110,14 +110,17 @@ body {
 /* ---------- top bar ---------- */
 .topbar {
   position: sticky; top: 0; z-index: 8;
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: start;
   gap: 12px; padding: max(12px, env(safe-area-inset-top)) 16px 12px;
   background: transparent;
   pointer-events: none;
 }
 .topbar > * { pointer-events: auto; }
+.shell-left { grid-column: 1; justify-self: start; min-width: 0; }
+.shell-progress { grid-column: 2; justify-self: center; }
+.shell-actions { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: 8px; min-width: 0; }
 .shell-group { background: var(--shell-surface); border: 1px solid var(--shell-line); border-radius: var(--shell-radius); box-shadow: var(--shell-shadow); }
-.adventure-brand { display: flex; align-items: center; gap: 8px; padding: 4px 16px 4px 4px; min-width: 0; }
+.adventure-brand { display: flex; align-items: center; gap: 8px; height: 52px; min-height: 52px; padding: 3px 16px 3px 3px; min-width: 0; }
 .adventure-brand > div { min-width: 0; }
 .topbar .title {
   font-family: "Fredoka", system-ui, sans-serif;
@@ -127,7 +130,7 @@ body {
 }
 .topbar .progress {
   font-family: "Fredoka", system-ui, sans-serif;
-  display: grid; gap: 5px; min-width: 145px;
+  display: grid; align-content: center; gap: 5px; height: 52px; min-height: 52px; min-width: 145px;
   font-weight: 600; font-size: 14px; color: var(--shell-muted);
   padding: 10px 16px;
   white-space: nowrap;
@@ -143,7 +146,7 @@ body {
 .shell-icon-button:hover { background: #ede7dd; }
 .topbar button:focus-visible, .course-drawer :focus-visible, .current-lesson-button:focus-visible { outline: 3px solid var(--shell-accent); outline-offset: 3px; }
 [data-window-controls]:empty { display: none; }
-[data-window-controls] { flex: none; margin-left: auto; }
+[data-window-controls] { flex: none; }
 .topbar [data-window-controls]:not(:empty) { border: 1px solid var(--shell-line); border-radius: 12px; background: var(--shell-surface); box-shadow: var(--shell-shadow); }
 .current-lesson-button, .adventure-complete { position: fixed; bottom: max(24px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); z-index: 7; margin: 0; min-height: 44px; padding: 12px 20px; border: 1px solid var(--shell-line); border-radius: 14px; background: var(--shell-surface); color: var(--shell-accent); font: 800 15px "Nunito", sans-serif; box-shadow: var(--shell-shadow); }
 .current-lesson-button:disabled { color: var(--shell-muted); cursor: default; }
@@ -189,9 +192,9 @@ body {
   .shell-progress-label { display: none; }
 }
 @media (max-width: 767px) {
-  .topbar { flex-wrap: wrap; padding-inline: 8px; }
-  .adventure-brand { padding-right: 8px; gap: 4px; flex: 1; }
-  .topbar .title { font-size: 15px; }
+  .topbar { gap: 4px; padding-inline: 8px; }
+  .adventure-brand { padding-right: 8px; gap: 4px; }
+  .topbar .title { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .shell-stage-label { font-size: 14px; max-width: 155px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .topbar .progress { min-width: 58px; padding: 10px; }
   .topbar #user-name, .topbar .user-menu__trigger > svg { display: none; }
@@ -204,7 +207,7 @@ body {
 .user-menu__trigger {
   display: flex; align-items: center; gap: 6px;
   font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 14px;
-  min-height: 44px; min-width: 44px;
+  height: 52px; min-height: 52px; min-width: 44px;
   color: var(--shell-ink); background: var(--shell-surface);
   border: 1px solid var(--shell-line); border-radius: 999px;
   box-shadow: var(--shell-shadow);
@@ -217,6 +220,7 @@ body {
 
 .user-menu__popup {
   position: absolute; top: calc(100% + 8px); right: 0;
+  max-height: calc(100vh - 84px); overflow-y: auto; overscroll-behavior: contain;
   min-width: 220px; background: #fff;
   border: 1px solid var(--line-strong); border-radius: 14px;
   box-shadow: 0 12px 32px rgba(20,22,26,.14);

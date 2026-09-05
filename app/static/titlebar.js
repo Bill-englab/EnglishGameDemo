@@ -50,8 +50,8 @@
       pointer-events: none;
     }
 
-    /* On map topbar, place controls at the right edge */
-    .topbar .window-controls { margin-left: auto; order: 99; }
+    /* The map shell's right alignment cell owns control placement. */
+    .topbar .shell-actions .window-controls { margin-left: 0; }
     /* On detail header, also at right */
     .detail-header .window-controls { margin-left: auto; order: 99; }
   `;

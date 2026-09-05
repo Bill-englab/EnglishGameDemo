@@ -10,6 +10,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const finalFixes = require('./final-fixes.cjs');
+const focus = (process.argv.find(argument => argument.startsWith('--focus=')) || '').slice('--focus='.length);
 
 // Harness resilience helpers also have zero-browser fault-injection checks:
 // node tests-browser/modern-toy-ui.cjs --self-test
@@ -203,6 +204,72 @@ async function pathAligned(page) {
   assert.ok(delta < 4, `Path misses a node center by ${delta}px`);
 }
 
+function expectClose(actual, expected, tolerance) {
+  assert.ok(Math.abs(actual - expected) <= tolerance,
+    `Expected ${actual} to be within ${tolerance}px of ${expected}`);
+}
+
+async function shellGeometry(page, viewport) {
+  await page.setViewportSize(viewport);
+  await page.reload();
+  await page.locator('.level-node').first().waitFor();
+  const shell = await page.locator('.topbar').evaluate(el => {
+    const rect = selector => {
+      const r = el.querySelector(selector).getBoundingClientRect();
+      return { top: r.top, height: r.height, center: r.left + r.width / 2 };
+    };
+    return { brand: rect('.adventure-brand'), progress: rect('.progress'), account: rect('.user-menu__trigger') };
+  });
+  expectClose(shell.brand.top, shell.progress.top, 1);
+  expectClose(shell.brand.height, 52, 1);
+  expectClose(shell.progress.height, 52, 1);
+  expectClose(shell.account.height, 52, 1);
+  expectClose(shell.progress.center, viewport.width / 2, 1);
+  if (viewport.width < 768) {
+    const title = await page.locator('.adventure-brand .title').evaluate(el => {
+      const style = getComputedStyle(el);
+      return { overflow: style.overflow, textOverflow: style.textOverflow, whiteSpace: style.whiteSpace };
+    });
+    assert.deepEqual(title, { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+      'Narrow shells ellipsize the brand title instead of wrapping the grid cell');
+  }
+}
+
+async function accountPopupStaysScrollable(page, url) {
+  const admin = await page.context().newPage();
+  try {
+    await admin.setViewportSize({ width: 800, height: 600 });
+    await admin.goto(`${url}/login`);
+    await admin.locator('[name=username]').fill('admin');
+    await admin.locator('[name=password]').fill('admin123');
+    await admin.locator('button[type=submit]').click();
+    await admin.locator('.level-node').first().waitFor();
+    await admin.locator('#user-menu-trigger').click();
+    await admin.locator('#admin-btn').click();
+    await admin.locator('.del-user').waitFor();
+    for (const username of ['qa-user-1', 'qa-user-2', 'qa-user-3', 'qa-user-4', 'qa-user-5']) {
+      await admin.locator('#admin-username').fill(username);
+      await admin.locator('#admin-password').fill('qa-only-password');
+      await admin.locator('#admin-add-btn').click();
+      await admin.locator('.admin-user-list').getByText(username, { exact: true }).waitFor();
+    }
+    const popup = await admin.locator('#user-menu-popup').evaluate(el => {
+      const style = getComputedStyle(el);
+      return { scrollHeight: el.scrollHeight, clientHeight: el.clientHeight, overflowY: style.overflowY };
+    });
+    assert.ok(popup.scrollHeight > popup.clientHeight, 'Five-user account popup scrolls internally');
+    assert.equal(popup.overflowY, 'auto');
+    await admin.locator('#user-menu-popup').evaluate(el => { el.scrollTop = el.scrollHeight; });
+    const logout = await admin.locator('#logout-btn').evaluate(el => {
+      const r = el.getBoundingClientRect();
+      return { top: r.top, bottom: r.bottom, viewportHeight: window.innerHeight };
+    });
+    assert.ok(logout.top >= 0 && logout.bottom <= logout.viewportHeight, 'Logout remains fully visible after popup scroll');
+  } finally {
+    await admin.close();
+  }
+}
+
 async function main() {
   const { chromium, _electron } = require('playwright');
   const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'english-modern-toy-'));
@@ -257,12 +324,21 @@ async function main() {
     assert.equal(library.flatMap(c => c.levels).length, 30);
     assert.equal(library.flatMap(c => c.levels).filter(l => l.has_performance).length, 0);
 
+    if (focus === 'account') {
+      for (const viewport of [{ width: 1440, height: 960 }, { width: 800, height: 600 }, { width: 390, height: 844 }]) {
+        await shellGeometry(page, viewport);
+      }
+      await accountPopupStaysScrollable(page, url);
+      console.log('PASS focused regression: account');
+      return;
+    }
+
     if (process.env.TOY_QA_FINAL_FIX && process.env.TOY_QA_FINAL_FIX !== 'electron') {
       await finalFixes[process.env.TOY_QA_FINAL_FIX](page, url, output);
       console.log(`PASS focused regression: ${process.env.TOY_QA_FINAL_FIX}`);
       return;
     }
-    if (process.env.TOY_QA_FINAL_FIX !== 'electron') {
+    if (focus !== 'electron' && process.env.TOY_QA_FINAL_FIX !== 'electron') {
       await finalFixes.selection(page);
       await finalFixes.account(page, url, output);
       await finalFixes.refresh(page, url);
@@ -492,6 +568,10 @@ async function main() {
       assert.equal(await electron.evaluate(() => global.qaWindow.isVisible()), false);
       assert.equal(await native.locator('.topbar').evaluate(e => getComputedStyle(e).webkitAppRegion), 'drag');
       assert.equal(await native.locator('.topbar button').evaluateAll(buttons => buttons.every(e => getComputedStyle(e).webkitAppRegion === 'no-drag')), true);
+      await native.locator('#user-menu-trigger').click();
+      assert.equal(await native.locator('#user-menu-popup').isVisible(), true);
+      await native.locator('#user-menu-trigger').click();
+      assert.equal(await native.locator('#user-menu-popup').isVisible(), false);
       await finalFixes.electronDrawer(native, electron);
       await nativeScreenshot(electron, output, 'electron-map-800x600');
       await native.locator('.level-node').nth(2).click();

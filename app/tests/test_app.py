@@ -12,6 +12,20 @@ TEST_USERNAME = "tester"
 TEST_PASSWORD = "test-pass"
 
 
+@pytest.mark.parametrize("world", [
+    "morning-picnic", "color-market", "block-workshop", "finding-forest",
+    "question-observatory", "feeling-garden", "reasoning-valley",
+    "memory-town", "messenger-post", "planning-camp",
+])
+@pytest.mark.parametrize("layout", ["desktop", "mobile"])
+def test_responsive_chapter_world_assets_are_served_as_webp(client, world, layout):
+    response = client.get(f"/static/worlds-v2/{world}-{layout}.webp")
+    assert response.status_code == 200
+    assert response.mimetype == "image/webp"
+    assert response.data[:4] == b"RIFF"
+    assert response.data[8:12] == b"WEBP"
+
+
 def _build_lib(curriculum: Path, demo: Path, recordings: Path, prompts: Path):
     lesson_dir = curriculum / "04" / "01-c" / "01-s"
     lesson_dir.mkdir(parents=True)

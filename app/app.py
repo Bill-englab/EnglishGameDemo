@@ -2,6 +2,7 @@ import os
 import json
 import functools
 import logging
+import mimetypes
 import re
 import secrets
 import io
@@ -76,6 +77,9 @@ class ProfileLimitedRequest(Request):
             return 6 * 1024 * 1024
         return super().max_content_length
 
+
+# Python/Windows MIME tables can omit WebP or inherit a generic registry type.
+mimetypes.add_type("image/webp", ".webp")
 
 app = Flask(__name__)
 app.request_class = ProfileLimitedRequest

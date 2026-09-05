@@ -238,6 +238,94 @@ async function shellGeometry(page, viewport) {
   }
 }
 
+async function assertMinimumTargetSize(page, selector, label) {
+  const undersized = await page.locator(selector).evaluateAll(elements => elements
+    .filter(element => element.getClientRects().length)
+    .map(element => {
+      const rect = element.getBoundingClientRect();
+      return { label: element.getAttribute('aria-label') || element.textContent.trim() || element.className,
+        width: rect.width, height: rect.height };
+    })
+    .filter(target => target.width < 44 || target.height < 44));
+  assert.deepEqual(undersized, [], `${label} targets must each be at least 44×44px`);
+}
+
+async function assertBrowserTargetDimensions(page, viewport) {
+  await page.setViewportSize(viewport);
+  await page.reload();
+  await page.locator('.level-node').first().waitFor();
+  await assertMinimumTargetSize(page,
+    '.topbar button, .current-lesson-button, .level-node-wrap', `Map shell at ${viewport.width}×${viewport.height}`);
+  await page.locator('#adventure-menu-button').click();
+  await assertMinimumTargetSize(page, '#course-drawer button, #course-drawer summary',
+    `Course drawer at ${viewport.width}×${viewport.height}`);
+  await page.locator('.course-lesson').first().click();
+  await page.locator('#detail-view').waitFor({ state: 'visible' });
+  await assertMinimumTargetSize(page, '#detail-view button, #detail-view summary',
+    `Lesson detail at ${viewport.width}×${viewport.height}`);
+  await page.locator('#back-btn').click();
+}
+
+function addCompletedCoverFixture(fixtureRoot, level) {
+  const recordingDir = path.join(fixtureRoot, 'recordings', 'alice', '04', level.chapter, level.level);
+  const demoDir = path.join(fixtureRoot, 'demo', '04', level.chapter, level.level);
+  fs.mkdirSync(recordingDir, { recursive: true });
+  fs.mkdirSync(demoDir, { recursive: true });
+  fs.writeFileSync(path.join(recordingDir, 'performance.webm'), 'temporary scanner presence marker');
+  fs.writeFileSync(path.join(demoDir, 'demo.mp4'), 'temporary demo presence marker');
+  fs.copyFileSync(path.resolve(__dirname, '../static/worlds/01-wants-requests.jpg'), path.join(demoDir, 'thumb.jpg'));
+}
+
+async function assertCompletedCoverAndStar(page, fixtureRoot, level, output) {
+  addCompletedCoverFixture(fixtureRoot, level);
+  await page.reload();
+  const completed = page.locator('.level-node--completed').first();
+  await completed.locator('.level-node__cover').waitFor();
+  await page.waitForFunction(key => {
+    const cover = document.querySelector(`.level-node-wrap[data-level-key="${key}"] .level-node__cover`);
+    return Boolean(cover?.style.backgroundImage.includes('/thumb/'));
+  }, `${level.chapter}/${level.level}`);
+  assert.equal(await completed.locator('.level-node__cover').count(), 1,
+    'A completed demo lesson retains one rendered cover');
+  assert.equal(await completed.locator('.level-node__marker--star').count(), 1,
+    'A completed demo lesson has exactly one completion star');
+  const composition = await completed.evaluate(node => {
+    const cover = node.querySelector('.level-node__cover').getBoundingClientRect();
+    const star = node.querySelector('.level-node__marker--star').getBoundingClientRect();
+    return { backgroundImage: node.querySelector('.level-node__cover').style.backgroundImage,
+      corner: star.left + star.width / 2 > cover.left + cover.width / 2 && star.top + star.height / 2 > cover.top + cover.height / 2 };
+  });
+  assert.match(composition.backgroundImage, /\/thumb\//, 'Cover is served from the thumbnail route');
+  assert.equal(composition.corner, true, 'The single completion star sits at the cover corner');
+  await screenshot(page, output, 'completed-cover-star-1440x960');
+}
+
+async function assertFailedSaveDoesNotCelebrate(page, consoleErrors, output) {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.unroute('**/upload/**');
+  await page.route('**/upload/**/performance', route => route.fulfill({ status: 500, json: { error: 'QA failed performance save' } }));
+  await page.locator('[data-current-lesson]').click();
+  await page.getByRole('button', { name: 'Start recording', exact: true }).click();
+  await page.locator('.record-preview').waitFor();
+  await page.locator('.record-btn').click();
+  await page.waitForTimeout(300);
+  await page.getByRole('button', { name: 'Stop recording', exact: true }).click();
+  await page.locator('.record-playback').waitFor();
+  await page.getByRole('button', { name: 'Save', exact: false }).click();
+  await page.getByRole('button', { name: 'Failed — retry', exact: true }).waitFor();
+  assert.equal(await page.locator('.level-node-wrap--just-completed, .chapter-world--just-completed').count(), 0,
+    'A failed save must not render a completion celebration before leaving detail');
+  await page.locator('#back-btn').click();
+  await page.waitForTimeout(50);
+  assert.equal(await page.locator('.level-node-wrap--just-completed, .chapter-world--just-completed').count(), 0,
+    'A failed save must not queue a celebration for the return to the map');
+  assert.equal(await page.locator('#star-count').innerText(), '0', 'A failed save must not advance real progress');
+  assert.equal(consoleErrors.filter(message => /^Save failed /.test(message.text)).length, 1,
+    'The expected failed-save diagnostic is recorded exactly once');
+  await screenshot(page, output, 'failed-save-no-celebration-1440x960');
+  await page.unroute('**/upload/**/performance');
+}
+
 async function accountPopupStaysScrollable(page, url) {
   const admin = await page.context().newPage();
   try {
@@ -327,9 +415,18 @@ async function main() {
     assert.equal(library.flatMap(c => c.levels).length, 30);
     assert.equal(library.flatMap(c => c.levels).filter(l => l.has_performance).length, 0);
 
+    if (focus === 'evidence') {
+      await assertFailedSaveDoesNotCelebrate(page, consoleErrors, output);
+      await assertCompletedCoverAndStar(page, fixtureRoot, library[0].levels[0], output);
+      assert.deepEqual(errors, []);
+      console.log('PASS focused regression: evidence');
+      return;
+    }
+
     if (focus === 'account') {
       for (const viewport of [{ width: 1440, height: 960 }, { width: 800, height: 600 }, { width: 390, height: 844 }]) {
         await shellGeometry(page, viewport);
+        await assertBrowserTargetDimensions(page, viewport);
       }
       await accountPopupStaysScrollable(page, url);
       console.log('PASS focused regression: account');
@@ -357,6 +454,8 @@ async function main() {
         assert.equal(await page.locator('.chapter-world').count(), 10);
         assert.equal(await page.locator('.level-node').count(), 30);
         assert.deepEqual(await page.locator('.chapter-world').evaluateAll(chapters => chapters.map(c => c.querySelectorAll('.level-node').length)), Array(10).fill(3));
+        await assertMinimumTargetSize(page, '.topbar button, .current-lesson-button, .level-node-wrap',
+          `Map shell at ${width}×${height}`);
         await screenshot(page, output, `map-${width}x${height}`);
         await noOverflow(page);
         await pathAligned(page);
@@ -376,6 +475,8 @@ async function main() {
         assert.match(await page.locator('.course-stage').nth(1).innerText(), /Stage 2[\s\S]*Planned/);
         assert.match(await page.locator('.course-stage').nth(2).innerText(), /Stage 3[\s\S]*Planned/);
         assert.equal(await page.locator('.course-chapter').count(), 10);
+        await assertMinimumTargetSize(page, '#course-drawer button, #course-drawer summary',
+          `Course drawer at ${width}×${height}`);
         await screenshot(page, output, `drawer-${width}x${height}`);
         await noOverflow(page);
         await page.keyboard.press('Shift+Tab');
@@ -399,6 +500,8 @@ async function main() {
         assert.deepEqual(await page.locator('.detail-reading > section').evaluateAll(nodes => nodes.map(n => n.className)), ['reading-section', 'replay-section', 'grownup-section']);
         assert.equal(await page.locator('.detail-disclosure[open]').count(), 0);
         assert.equal(await page.locator('.detail-media > section').first().getAttribute('id'), 'media-panel-performance');
+        await assertMinimumTargetSize(page, '#detail-view button, #detail-view summary',
+          `Lesson detail at ${width}×${height}`);
         if (width < 768) {
           assert.equal(await page.locator('#media-panel-demo').isVisible(), false);
           await page.locator('#media-tab-demo').click();
@@ -695,16 +798,22 @@ async function main() {
       assert.equal(await electron.evaluate(() => global.qaWindow.isVisible()), false);
       assert.equal(await native.locator('.topbar').evaluate(e => getComputedStyle(e).webkitAppRegion), 'drag');
       assert.equal(await native.locator('.topbar button').evaluateAll(buttons => buttons.every(e => getComputedStyle(e).webkitAppRegion === 'no-drag')), true);
+      await assertMinimumTargetSize(native, '.topbar button, .level-node-wrap', 'Electron map shell');
       await native.locator('#user-menu-trigger').click();
       assert.equal(await native.locator('#user-menu-popup').isVisible(), true);
+      await assertMinimumTargetSize(native, '#user-menu-popup button', 'Electron account menu');
       await native.locator('#user-menu-trigger').click();
       assert.equal(await native.locator('#user-menu-popup').isVisible(), false);
+      await native.locator('#adventure-menu-button').click();
+      await assertMinimumTargetSize(native, '#course-drawer button, #course-drawer summary', 'Electron course drawer');
+      await native.locator('#course-drawer-close').click();
       await finalFixes.electronDrawer(native, electron);
       await nativeScreenshot(electron, output, 'electron-map-800x600');
       await native.locator('.level-node').nth(2).click();
       await native.locator('#detail-view').waitFor({ state: 'visible' });
       await native.waitForTimeout(300);
       await noOverflow(native);
+      await assertMinimumTargetSize(native, '#detail-view button, #detail-view summary', 'Electron lesson detail');
       assert.equal(await native.locator('.detail-header button').evaluateAll(buttons => buttons.every(e => getComputedStyle(e).webkitAppRegion === 'no-drag')), true);
       await nativeScreenshot(electron, output, 'electron-detail-800x600');
       await native.locator('#back-btn').click();

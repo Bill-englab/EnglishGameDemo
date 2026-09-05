@@ -1,8 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import * as model from "../static/map-model.mjs";
-import { readFile } from "node:fs/promises";
-import vm from "node:vm";
+import { createCurrentLessonAction, showMapLoadError } from "../static/map-interactions.mjs";
 
 test("only performance earns a completion check; current and preview have distinct markers", () => {
   assert.equal(typeof model.resolveMapPresentation, "function");
@@ -14,17 +13,13 @@ test("only performance earns a completion check; current and preview have distin
 });
 
 test("current action centers then focuses the real node and forces auto for reduced motion", async () => {
-  const source = await readFile(new URL("../static/app.js", import.meta.url), "utf8");
-  const start = source.indexOf("function scrollToCurrentLesson(");
-  assert.notEqual(start, -1, "Map exposes its current action");
-  const action = source.slice(start, source.indexOf("// Background images", start));
   for (const reduced of [false,true]) {
     const calls = [];
     let end;
     const node = {isConnected:true, scrollIntoView: options => calls.push(["scroll",options]), focus: options => calls.push(["focus",options])};
     const map = {classList:{contains:()=>false}, querySelector:()=>node, addEventListener:(event,fn)=>{end=fn;},removeEventListener(){}};
-    const context = {document:{getElementById:()=>map}, window:{matchMedia:()=>({matches:reduced})}, setTimeout:()=>1, clearTimeout(){}, requestAnimationFrame:fn=>fn(), cancelCurrentJump:()=>{}};
-    vm.runInNewContext(`${action}\nscrollToCurrentLesson({behavior:"smooth"});`,context);
+    const action = createCurrentLessonAction({ root:{getElementById:()=>map}, view:{matchMedia:()=>({matches:reduced}), setTimeout:()=>1, clearTimeout(){}, requestAnimationFrame:fn=>fn()} });
+    action({behavior:"smooth"});
     assert.equal(calls[0][1].behavior, reduced ? "auto":"smooth");
     assert.equal(calls[0][1].block,"center");
     if (!reduced) {assert.equal(calls.length,1); end();}
@@ -49,16 +44,12 @@ test("background selection switches at 768px and keeps each world's own fallback
 });
 
 test("a failed refresh preserves the existing map and hides the current action", async () => {
-  const source = await readFile(new URL("../static/app.js", import.meta.url), "utf8");
-  const start=source.indexOf("function showOnly(");
-  const code=source.slice(start, source.indexOf('document.getElementById("map-retry")',start));
   const elements=new Map();
   for(const id of ["map-view","map-scroll","map-loading","map-error","current-lesson-button"]){
     const classes=new Set(id==="map-error"||id==="map-loading"?["hidden"]:[]);
     elements.set(id,{hidden:false,classList:{contains:x=>classes.has(x),remove:x=>classes.delete(x),toggle:(x,force)=>force?classes.add(x):classes.delete(x)}});
   }
-  const context={document:{getElementById:id=>elements.get(id)}, currentLibrary:[{name:"one"}],fetch:async()=>{throw new Error("offline");},console:{error(){}}};
-  await vm.runInNewContext(`${code}\nloadLibrary();`,context);
+  showMapLoadError({getElementById:id=>elements.get(id)}, {hasLibrary:true});
   assert.equal(elements.get("map-scroll").classList.contains("hidden"),false);
   assert.equal(elements.get("map-error").classList.contains("hidden"),false);
   assert.equal(elements.get("current-lesson-button").hidden,true);

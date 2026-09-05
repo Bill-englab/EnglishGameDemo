@@ -148,6 +148,7 @@ body {
 .current-lesson-button, .adventure-complete { position: fixed; bottom: max(24px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); z-index: 7; margin: 0; min-height: 44px; padding: 12px 20px; border: 1px solid var(--shell-line); border-radius: 14px; background: var(--shell-surface); color: var(--shell-accent); font: 800 15px "Nunito", sans-serif; box-shadow: var(--shell-shadow); }
 .current-lesson-button:disabled { color: var(--shell-muted); cursor: default; }
 .adventure-complete { max-width: calc(100% - 32px); width: max-content; text-align: center; }
+.drawer-backdrop, .course-drawer { -webkit-app-region: no-drag; }
 .drawer-backdrop { position: fixed; inset: 0; z-index: 30; background: rgba(34,42,34,.4); }
 .course-drawer { position: fixed; z-index: 31; inset: max(12px, env(safe-area-inset-top)) auto max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); width: 340px; max-width: calc(100vw - 32px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding: 20px; border: 1px solid var(--shell-line); border-radius: var(--shell-radius); background: var(--shell-surface); color: var(--shell-ink); box-shadow: 0 16px 48px rgba(33,29,23,.22); }
 .course-drawer__header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
@@ -223,7 +224,8 @@ body {
 }
 .user-menu__item {
   display: block; width: 100%; text-align: left;
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 14px;
+  min-width: 44px; min-height: 44px;
+  font-family: "Nunito", system-ui, sans-serif; font-weight: 600; font-size: 14px;
   color: var(--ink); background: none; border: none;
   padding: 10px 14px; border-radius: 8px; cursor: pointer;
   transition: background .12s;
@@ -237,12 +239,14 @@ body {
 .user-menu__admin-panel { padding: 8px 4px 4px; }
 .admin-add { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
 .admin-add input {
-  font-family: "Fredoka", system-ui, sans-serif; font-size: 13px;
+  min-width: 44px; min-height: 44px;
+  font-family: "Nunito", system-ui, sans-serif; font-size: 14px;
   padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; outline: none;
 }
 .admin-add input:focus { border-color: var(--accent); }
 .admin-add button {
-  font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; font-size: 13px;
+  min-width: 44px; min-height: 44px;
+  font-family: "Nunito", system-ui, sans-serif; font-weight: 600; font-size: 14px;
   color: #fff; background: var(--accent); border: none; border-radius: 8px;
   padding: 8px; cursor: pointer;
 }
@@ -250,12 +254,14 @@ body {
 .admin-user-list { list-style: none; padding: 0; margin: 0; }
 .admin-user-list li {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 6px 10px; font-size: 13px; color: var(--ink);
+  padding: 6px 10px; font-size: 14px; color: var(--ink);
   border-radius: 6px; margin-bottom: 2px;
 }
 .admin-user-list li:hover { background: var(--surface-2); }
 .admin-user-list .del-user {
-  font-size: 11px; color: #e8554e; background: none; border: 1px solid var(--line);
+  min-width: 44px; min-height: 44px;
+  font: 600 14px "Nunito", system-ui, sans-serif;
+  color: #e8554e; background: none; border: 1px solid var(--line);
   border-radius: 999px; padding: 2px 8px; cursor: pointer;
 }
 .admin-user-list .del-user:hover { border-color: #e8554e; }

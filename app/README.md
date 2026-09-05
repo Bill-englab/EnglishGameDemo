@@ -96,6 +96,10 @@ $env:TOY_QA_ELECTRON='1'
 # 可选：保存截图到你指定的独立 QA 目录
 $env:TOY_QA_OUTPUT='<QA screenshot directory>'
 node tests-browser/modern-toy-ui.cjs
+# 可选聚焦回归：selection / account / refresh / electron（electron 同时需要 TOY_QA_ELECTRON=1）
+$env:TOY_QA_FINAL_FIX='selection'
+node tests-browser/modern-toy-ui.cjs
+Remove-Item Env:TOY_QA_FINAL_FIX
 ```
 
 脚本自启临时端口 Flask，复制课程到临时根，隔离账号、配置、资料和媒体，拦截所有上传；不执行 `app.py` 主入口或媒体扫描。最终清理自有浏览器、服务和临时根，不复用用户窗口。默认不启动 Electron；启用后用真实二进制、真实 preload 和独立 userData 的隐藏窗口检查最小化/最大化/关闭、拖动区与800×600布局。浏览器检查1440×960、800×600、390×844、844×390、目录焦点、真实0/30→2/30与延迟demo上传时的录制保留。人工摄像头、Safari/iOS不在自动验收范围。
@@ -120,6 +124,7 @@ app/
     world-assets.mjs # 纯：20 张响应式图与本章旧图候选
     map-model.mjs   # 纯：10 章主题（world + accent）、视觉状态、旋转、帧暗检测
     map-path.mjs    # 纯：Catmull-Rom 平滑路径
+    map-interactions.mjs # DOM：current 滚动/焦点与加载错误时保留地图
     style.css       # 现代玩具剧场共享 token、地图/详情/目录 + 自托管字体
     fonts/          # 自托管 woff2（Fredoka/Nunito，离线可用）
     worlds/         # 本章旧图回退

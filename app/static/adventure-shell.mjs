@@ -162,6 +162,13 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     }
   }
 
+  function selectLesson(lesson) {
+    selectedLesson = `${lesson.chapter}/${lesson.level}`;
+    chapters.querySelectorAll("[data-lesson-key]").forEach(item => {
+      item.dataset.selected = String(item.dataset.lessonKey === selectedLesson);
+    });
+  }
+
   listen(trigger, "click", open);
   listen(currentButton, "click", () => onCurrentLesson?.({ behavior: "smooth" }));
   listen(closeButton, "click", close);
@@ -174,8 +181,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     const button = event.target.closest("[data-lesson-key]");
     const lesson = lessons.get(button?.dataset.lessonKey);
     if (!lesson) return;
-    selectedLesson = button.dataset.lessonKey;
-    chapters.querySelectorAll("[data-lesson-key]").forEach(item => { item.dataset.selected = String(item === button); });
+    selectLesson(lesson);
     close();
     onOpenLesson(lesson);
   });
@@ -192,5 +198,5 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     destroyed = true;
   }
 
-  return { render, open, close, destroy };
+  return { render, open, close, selectLesson, destroy };
 }

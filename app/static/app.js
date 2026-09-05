@@ -9,6 +9,9 @@ import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterCont
 import { resolveMediaView } from "./detail-media.mjs";
 import { summarizeAdventure } from "./adventure-navigation.mjs";
 import { createAdventureShell } from "./adventure-shell.mjs";
+import { createCurrentLessonAction, showMapLoadState, showMapLoadError } from "./map-interactions.mjs";
+
+const scrollToCurrentLesson = createCurrentLessonAction({ root: document, view: window });
 
 const adventureShell = createAdventureShell({
   root: document,
@@ -594,32 +597,6 @@ function createLevelNode(level, index, theme) {
   return wrap;
 }
 
-let cancelCurrentJump = () => {};
-function scrollToCurrentLesson({ behavior = "smooth" } = {}) {
-  cancelCurrentJump();
-  const map = document.getElementById("map-view");
-  const node = map.querySelector("[data-current-lesson]");
-  if (!node || map.classList.contains("hidden")) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) behavior = "auto";
-  let timer;
-  const cleanup = () => {
-    clearTimeout(timer);
-    map.removeEventListener("scrollend", finish);
-  };
-  const finish = () => {
-    cleanup();
-    if (node.isConnected && !map.classList.contains("hidden")) node.focus({ preventScroll: true });
-  };
-  cancelCurrentJump = cleanup;
-  if (behavior !== "auto") {
-    map.addEventListener("scrollend", finish, { once: true });
-    // Older WebViews lack scrollend; also handles an already-centered node.
-    timer = setTimeout(finish, 1200);
-  }
-  node.scrollIntoView({ behavior, block: "center" });
-  if (behavior === "auto") requestAnimationFrame(finish);
-}
-
 // Background images stay untinted on a fixed layer. Each world owns its fallback.
 const bgImageCache = new Set();  // URLs known to load successfully
 const mapMobile = window.matchMedia("(max-width: 767px)");
@@ -879,6 +856,7 @@ function renderDetailDemo(level) {
 
 function openDetail(level) {
   adventureShell.close();
+  adventureShell.selectLesson(level);
   disposeDetailMedia();
   const visit = detailVisit;
   const isCurrent = () => visit === detailVisit;
@@ -1105,9 +1083,7 @@ function closeDetail() {
 // ===== resilient library loading (loading / error / retry) =====
 // toggles ONLY these three; never hides the detail view
 function showOnly(id) {
-  for (const el of ["map-loading", "map-error", "map-scroll"]) {
-    document.getElementById(el).classList.toggle("hidden", el !== id);
-  }
+  showMapLoadState(document, id);
 }
 async function loadLibrary({ isCurrent = () => true } = {}) {
   // A detail upload refreshes in the background. Keep the existing map usable
@@ -1124,9 +1100,7 @@ async function loadLibrary({ isCurrent = () => true } = {}) {
   } catch (error) {
     if (!isCurrent()) return false;
     console.error("Unable to load library", error);
-    document.getElementById("current-lesson-button").hidden = true;
-    showOnly("map-error");
-    if (currentLibrary.length) document.getElementById("map-scroll").classList.remove("hidden");
+    showMapLoadError(document, { hasLibrary: currentLibrary.length > 0 });
     return false;
   }
 }

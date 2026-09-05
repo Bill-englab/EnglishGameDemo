@@ -325,7 +325,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 - **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，用 `buildSmoothPath` 画阴影/暖灰边/象牙白三层路径，走过段增加低饱和青绿内线。`splitPathPoints` 在当前节点连接两段，不丢点；之字形偏移在 CSS。没有金星旋转或强金光。
 - **录制** `startRecordingSession()`：`getUserMedia` 开摄像头+麦克风 → 镜像预览 → 一钮两态（红圆开始/方块停止）+ 闪红计时 + 5 分钟硬上限自动停 → `MediaRecorder` 产 webm → 现场回放 + Redo/Save。Save 时 `uploadRecording()` 把 blob + mimeType POST 到 `/upload`，后端按 mimeType 存 `.webm`/`.mp4`。`pickRecorderMime()` 探测浏览器支持的最佳格式（Chrome→webm，Safari→mp4），console 打印实际 mimeType。摄像头被拒/缺失时回退到文件上传。
 - **详情导航**：`openDetail` 底部渲染 Prev/Next（跨全宽），从 `flatLevels` 找相邻关卡。上传后 `reopenDetail` 重新打开当前关。
-- **demo 标记**：locked 关如果有 demo，节点加 `.level-node__demo-badge` 小播放标记。
+- **demo 封面**：有 demo 时节点尝试显示缩略图，缺图使用材质与编号回退；locked 关仍显示锁，可点击预习，不再单独叠加播放徽标。
 - **demo 上传**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。使用 **Add demo / Replace**；取消选择不会触发刷新或显示成功。
 - **背景图刷新**：`closeDetail` 返回地图时强制重置 `activeChapter` 并调 `updateBgOnScroll(bgSlides)`，修了从详情页返回时背景图不显示的 bug（`#map-view` 被 `display:none` 期间 scroll listener 检测不到章节）。
 - **VideoGen**：`GET /api/prompts/<chapter>/<level>` 返回可选的 a/b/c 文本。Part A/B/C 是可折叠 `<details>`，summary 里有 Copy 按钮。

@@ -27,7 +27,7 @@
     .window-controls {
       -webkit-app-region: no-drag;
       display: flex; gap: 0; align-items: center;
-      flex: none; height: 36px;
+      flex: none; height: 44px;
     }
     /* Fixed overlay for login/standalone pages — sits at window top-right */
     .window-controls--overlay {
@@ -35,7 +35,7 @@
       -webkit-app-region: no-drag;
     }
     .window-controls button {
-      width: 40px; height: 36px;
+      width: 44px; height: 44px;
       border: none; cursor: default; padding: 0;
       display: flex; align-items: center; justify-content: center;
       background: transparent;
@@ -77,18 +77,24 @@
 
     const min = document.createElement("button");
     min.className = "wc-minimize";
+    min.type = "button";
+    min.setAttribute("aria-label", "Minimize window");
     min.title = "Minimize";
     min.innerHTML = ICON_MIN;
     min.addEventListener("click", () => winAction("minimize"));
 
     const max = document.createElement("button");
     max.className = "wc-maximize";
+    max.type = "button";
+    max.setAttribute("aria-label", "Maximize window");
     max.title = "Maximize";
     max.innerHTML = ICON_MAX;
     max.addEventListener("click", () => winAction("maximize"));
 
     const close = document.createElement("button");
     close.className = "wc-close";
+    close.type = "button";
+    close.setAttribute("aria-label", "Close window");
     close.title = "Close";
     close.innerHTML = ICON_CLOSE;
     close.addEventListener("click", () => winAction("close"));
@@ -97,8 +103,7 @@
     return controls;
   }
 
-  function injectInto(selector) {
-    const el = document.querySelector(selector);
+  function injectInto(el) {
     if (!el || el.querySelector(".window-controls")) return false;
     el.appendChild(makeControls());
     return true;
@@ -114,30 +119,21 @@
   }
 
   function injectAll() {
-    // Detail view open? inject into detail-header (topbar is hidden but still in DOM)
-    const detailVisible = document.querySelector("#detail-view:not(.hidden)");
-    if (detailVisible) {
-      injectInto(".detail-header");
-    } else if (document.querySelector(".topbar")) {
-      injectInto(".topbar");
+    const mounts = document.querySelectorAll("[data-window-controls]");
+    if (mounts.length) {
+      mounts.forEach(injectInto);
     } else {
       // Login page or other standalone page — use fixed overlay
       injectLoginOverlay();
     }
   }
 
-  // Expose for app.js to call after openDetail renders
+  // Compatibility entry point: persistent mounts make every call idempotent.
   window.__injectTitlebar = injectAll;
 
-  // Try immediately, on DOMContentLoaded, and after delays (dynamic rendering)
-  injectAll();
-  document.addEventListener("DOMContentLoaded", injectAll);
-  setTimeout(injectAll, 1000);
-  setTimeout(injectAll, 3000);
-
-  // Re-inject when detail view opens (the header is re-rendered each time)
-  try {
-    const observer = new MutationObserver(() => injectAll());
-    observer.observe(document.body, { childList: true, subtree: true });
-  } catch(e) { /* MutationObserver not supported */ }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", injectAll, { once: true });
+  } else {
+    injectAll();
+  }
 })();

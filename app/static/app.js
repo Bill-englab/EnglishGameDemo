@@ -7,6 +7,14 @@ import { getChapterTheme, getLevelVisualState, getStableRotation, isFrameDark } 
 import { buildSmoothPath } from "./map-path.mjs";
 import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
 import { resolveMediaView } from "./detail-media.mjs";
+import { summarizeAdventure } from "./adventure-navigation.mjs";
+import { createAdventureShell } from "./adventure-shell.mjs";
+
+const adventureShell = createAdventureShell({
+  root: document,
+  onOpenLesson: openDetail,
+  onProfile: () => document.getElementById("profile-open").click(),
+});
 
 let detailVisit = 0;
 let recordingGeneration = 0;
@@ -736,10 +744,7 @@ function renderMap(library) {
   currentLibrary = library;
   flatLevels = library.flatMap(ch => ch.levels.map(lv => withChapterContext(lv, ch)));
 
-  const total = library.reduce((n, ch) => n + ch.levels.length, 0);
-  const done = library.reduce((n, ch) => n + ch.levels.filter(l => l.has_performance).length, 0);
-  document.getElementById("star-total").textContent = total;
-  document.getElementById("star-count").textContent = done;
+  adventureShell.render(summarizeAdventure(library));
 
   // ---- chapters top-to-bottom, level 1 at the top ----
   let gIdx = 0;
@@ -891,6 +896,7 @@ function renderDetailDemo(level) {
 }
 
 function openDetail(level) {
+  adventureShell.close();
   disposeDetailMedia();
   const visit = detailVisit;
   const isCurrent = () => visit === detailVisit;
@@ -1087,8 +1093,7 @@ function openDetail(level) {
   view.querySelectorAll(".detail-disclosure").forEach(disclosure => { disclosure.open = false; });
   updateMediaView();
   view.scrollTop = 0;
-  // Re-inject window controls into the freshly-rendered detail header
-  if (window.__injectTitlebar) window.__injectTitlebar();
+  document.getElementById("back-btn").focus({ preventScroll: true });
 }
 
 // Re-open detail for the same level after an upload refreshes the library.

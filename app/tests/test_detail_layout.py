@@ -53,3 +53,26 @@ def test_mobile_tabs_are_named_and_connected_to_panels(client):
     for tab in tabs:
         panel = page.by_id(tab["attrs"]["aria-controls"])
         assert panel["attrs"]["aria-labelledby"] == tab["attrs"]["id"]
+
+
+def test_course_drawer_has_connected_modal_controls_and_stable_window_mounts(client):
+    page = Document(client.get("/").get_data(as_text=True))
+    trigger = page.by_id("adventure-menu-button")
+    assert trigger["tag"] == "button"
+    assert trigger["attrs"]["aria-controls"] == "course-drawer"
+    assert trigger["attrs"]["aria-expanded"] == "false"
+    drawer = page.by_id("course-drawer")
+    assert drawer["attrs"]["role"] == "dialog"
+    assert drawer["attrs"]["aria-modal"] == "true"
+    assert page.by_id(drawer["attrs"]["aria-labelledby"])
+    assert "hidden" in drawer["attrs"]
+    assert "hidden" in page.by_id("drawer-backdrop")["attrs"]
+    assert page.by_id("course-drawer-close")["tag"] == "button"
+    current = page.by_id("current-lesson-button")
+    assert "hidden" in current["attrs"] and "disabled" in current["attrs"]
+    mounts = [node for node in page.nodes if "data-window-controls" in node["attrs"]]
+    assert len(mounts) == 2
+    assert any(parent["attrs"].get("id") == "map-view" for parent in mounts[0]["parents"])
+    assert any(parent["attrs"].get("id") == "detail-view" for parent in mounts[1]["parents"])
+    # The modal must be outside the map that becomes inert while it is open.
+    assert not any(parent["attrs"].get("id") == "map-view" for parent in drawer["parents"])

@@ -5,8 +5,8 @@
   "conversation_move": {"id": "report-readiness", "label": "report readiness and one missing item"},
   "trigger": "Dad asks about leaving while Child's open carry bag is ready but his water bottle is still on the nearby table.",
   "core_response": "I'm ready, but I still need my water bottle.",
-  "stretch_response": "I'm ready, but can you help me find my water bottle?",
-  "repair_response": "Wait, not yet. I still need my bottle.",
+  "stretch_response": "Can you help me find my hat before we go?",
+  "repair_response": "Wait, not yet. I still need my hat.",
   "recycle": ["request-help", "state-body-need"],
   "roles": ["child", "dad"],
   "setting": "Inside the front door before a car ride, with the bottle and bag both within easy reach.",
@@ -19,7 +19,7 @@
       {"speaker": "dad", "line": "Okay, we can wait.", "kind": "input"}
     ]},
     {"id": "B", "beat": "change", "turns": [
-      {"speaker": "child", "line": "Can you help me?", "kind": "repair"},
+      {"speaker": "child", "line": "Can you help me?", "kind": "stretch"},
       {"speaker": "dad", "line": "It's on the little table beside you.", "kind": "input"},
       {"speaker": "child", "line": "There it is.", "kind": "action"}
     ]},
@@ -31,7 +31,7 @@
     ]}
   ],
   "replay_cards": [
-    {"title": "Missing sun hat", "setting": "Ready to go to the playground", "change": "Shoes are on but the sun hat is still on the bench", "challenge": "Say you are ready but still need the hat, ask Mom where it is, put it on, and confirm readiness"},
+    {"title": "Missing sun hat", "setting": "Ready to go to the playground", "change": "Shoes are on and the sun hat is on the bench behind Child. Mom sees him pick up his bag and mistakenly assumes he is fully ready to leave", "challenge": "When Mom says, \"All ready. Let's go!\", correct her: \"Wait, not yet. I still need my hat.\" Mom pauses inside the closed door. Ask, \"Can you help me find my hat before we go?\" Mom points to the bench; put on the hat and confirm readiness before leaving together"},
     {"title": "Missing library book", "setting": "Packing a bag at home", "change": "The bag is zipped before the library book goes in", "challenge": "Say what is still needed, reopen the bag, add the book, close it, and confirm readiness"}
   ],
   "parent_support": [
@@ -40,5 +40,5 @@
   ],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

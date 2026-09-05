@@ -1,6 +1,6 @@
 Shoes, Then Jacket — Part A (goal)
-Production prompt draft | Source: curriculum/04/05-routines-transitions/01-first-then/lesson.json | Content revision: 2
-Source SHA256: abe0be98491e27836ef2dad84a6a8beb122b6f1109ef82dc7c81be1e229c1ff0
+Production prompt draft | Source: curriculum/04/05-routines-transitions/01-first-then/lesson.json | Content revision: 3
+Source SHA256: 1f7d8c54fb23997254718c54cf9933459d26f7a995f139c5254ffecdc2dd0cb0
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND

@@ -1,6 +1,6 @@
 I Still Need My Bottle — Part B (change)
-Production prompt draft | Source: curriculum/04/05-routines-transitions/03-check-readiness/lesson.json | Content revision: 2
-Source SHA256: 51e9f6afb56666c55cda2ad7fb2099d8b7139c20e613c69e55ae2d92d13e7777
+Production prompt draft | Source: curriculum/04/05-routines-transitions/03-check-readiness/lesson.json | Content revision: 3
+Source SHA256: 12fc49a8ba888966dbb29bc573df513fb8f37ae7ebe9ac3809c44903027d0c53
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND

@@ -722,12 +722,12 @@ def test_chapter_4_bathroom_departure_finishes_in_a_before_a_later_return():
     )
 
 
-@pytest.mark.parametrize("lesson_id, partner, move, title", [
-    ("01-first-then", "dad", "sequence-actions", "Shoes, Then Jacket"),
-    ("02-before-bed", "mom", "request-before-boundary", "One Book Before Bed"),
-    ("03-check-readiness", "dad", "report-readiness", "I Still Need My Bottle"),
+@pytest.mark.parametrize("lesson_id, partner, move, title, revision", [
+    ("01-first-then", "dad", "sequence-actions", "Shoes, Then Jacket", 3),
+    ("02-before-bed", "mom", "request-before-boundary", "One Book Before Bed", 2),
+    ("03-check-readiness", "dad", "report-readiness", "I Still Need My Bottle", 3),
 ])
-def test_chapter_5_meets_three_by_ten_routine_contract(lesson_id, partner, move, title):
+def test_chapter_5_meets_three_by_ten_routine_contract(lesson_id, partner, move, title, revision):
     chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][4]
     lesson = next(item for item in chapter["lessons"] if item["id"] == lesson_id)
     production_path = REPO_ROOT / "prompts/04" / chapter["id"] / lesson_id / "production.json"
@@ -753,7 +753,9 @@ def test_chapter_5_meets_three_by_ten_routine_contract(lesson_id, partner, move,
         "two complete Replay Cards remain": len(lesson["replay_cards"]) == 2
         and all(all(card.get(field) for field in ("title", "setting", "change", "challenge"))
                 for card in lesson["replay_cards"]),
-        "lesson and production are revision 2": lesson["content_revision"] == production["content_revision"] == 2,
+        "lesson and production share the reviewed revision": (
+            lesson["content_revision"] == production["content_revision"] == revision
+        ),
         "the lesson remains language_reviewed": lesson["status"] == "language_reviewed",
         "all ten content reviews passed": all(lesson["reviews"].get(review) is True for review in (
             "motivation", "causality", "physical", "adult_behavior", "child_language",
@@ -778,7 +780,9 @@ def test_chapter_5_meets_three_by_ten_routine_contract(lesson_id, partner, move,
             turn["speaker"] == "child" for turn in part["turns"]
         )
         exported = production_path.with_name(f"{part['id'].lower()}.txt").read_text(encoding="utf-8")
-        checks[f"Part {part['id']} export is revision 2"] = "Content revision: 2\n" in exported
+        checks[f"Part {part['id']} export matches the reviewed revision"] = (
+            f"Content revision: {revision}\n" in exported
+        )
         expected_speech = "\n".join(f'{turn["speaker"].title()}: "{turn["line"]}"' for turn in part["turns"])
         checks[f"Part {part['id']} export preserves canonical speech"] = (
             exported.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
@@ -836,6 +840,40 @@ def test_chapter_5_packs_the_missing_bottle_before_confirming_readiness():
     assert any(turn["speaker"] == "child" and turn["kind"] == "action" and "put it in" in turn["line"].lower()
                for turn in resolution[:-1])
     assert resolution[-1]["speaker"] == "child" and "ready now" in resolution[-1]["line"].lower()
+
+
+@pytest.mark.parametrize("lesson_id, card_title, mistake, repair, outcome", [
+    (
+        "01-first-then", "Pajamas and teeth", "mishears the order",
+        "No, pajamas first. Teeth come next.", "then helps with brushing",
+    ),
+    (
+        "03-check-readiness", "Missing sun hat", "mistakenly assumes",
+        "Wait, not yet. I still need my hat.", "put on the hat",
+    ),
+])
+def test_chapter_5_replay_repairs_correct_an_adult_misunderstanding(lesson_id, card_title, mistake, repair, outcome):
+    lessons = load_stage(CURRICULUM_ROOT, "04")["chapters"][4]["lessons"]
+    lesson = next(item for item in lessons if item["id"] == lesson_id)
+    card = next(item for item in lesson["replay_cards"] if item["title"] == card_title)
+    help_turns = [turn for part in lesson["parts"] for turn in part["turns"]
+                  if turn["speaker"] == "child" and turn["line"] == "Can you help me?"]
+
+    checks = {
+        "ordinary help extends the routine rather than claiming a repair": bool(help_turns)
+        and all(turn["kind"] == "stretch" for turn in help_turns),
+        "the Replay Card establishes an adult misunderstanding": mistake in card["change"].lower(),
+        "the child explicitly corrects that misunderstanding": f'"{repair}"' in card["challenge"],
+        "the repair example is the actual corrective reply": lesson["repair_response"] == repair,
+        "the stretch example is practiced in the same complete card": (
+            f'"{lesson["stretch_response"]}"' in card["challenge"]
+        ),
+        "the corrected plan leads to a physical outcome": outcome in card["challenge"].lower(),
+        "the card retains all required context": all(card.get(field) for field in (
+            "title", "setting", "change", "challenge",
+        )),
+    }
+    assert all(checks.values()), [requirement for requirement, passed in checks.items() if not passed]
 
 
 def test_chapters_4_to_10_follow_the_approved_stage_outline():

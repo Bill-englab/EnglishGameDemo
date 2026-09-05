@@ -23,14 +23,17 @@ const fixture = [
 ];
 
 test("summarizes completion and preserves a distinct current lesson", () => {
+  const before = structuredClone(fixture);
+  assert.deepEqual(fixture, before);
   const result = summarizeAdventure(fixture);
+  assert.equal(globalLessonNumber(fixture, "02-help", "01-next"), 3);
   assert.deepEqual({ completed: result.completed, total: result.total }, { completed: 1, total: 3 });
   assert.equal(result.current.level, "02-current");
   assert.equal(result.current.chapter, "01-requests");
   assert.equal(result.current.chapterTitle, "Requests");
   assert.equal(result.chapters[0].completed, 1);
   assert.equal(result.chapters[0].total, 2);
-  assert.equal(fixture[0].levels[1].chapter, undefined);
+  assert.deepEqual(fixture, before);
 });
 
 test("summarizes an empty library", () => {

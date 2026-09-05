@@ -71,9 +71,9 @@ cd app
 
 ## 地图、目录与响应式背景
 
-`/api/library` 经 `adventure-navigation.mjs` 投影真实完成数、章节计数与 current；`adventure-shell.mjs` 管理浮动外壳和目录焦点。**Current lesson** 只滚动并聚焦当前节点。完成为青绿勾、current 为定位针、locked 为锁；所有节点都可查看。只有当前用户的 performance 文件改变进度。Stage 1 对应 `curriculum/04`，Stage 2/3 为禁用的 Planned 占位。
+`/api/library` 经 `adventure-navigation.mjs` 投影真实完成数、章节计数与 current；`adventure-shell.mjs` 管理浮动外壳和目录焦点。顶部是固定 56px 三列轨道：品牌居左、真实进度严格居中、账户（及 Electron 窗口控制）居右；手机保持单行，品牌可紧凑截断而进度与头像不压缩。账户弹层在可用高度内独立纵向滚动。**Current lesson** 只滚动并聚焦当前节点。完成为一颗金色星章（只表示已有 performance，不是评分）、current 为定位针、locked 为锁；所有节点都可查看。新完成的 performance 在本次页面会话仅触发一次非阻断星章/章节庆祝，刷新或重录不重复。只有当前用户的 performance 文件改变进度。Stage 1 对应 `curriculum/04`，Stage 2/3 为禁用的 Planned 占位。
 
-十章各有独立桌面/手机背景，共20张：`static/worlds-v2/<world>-desktop.webp`（1920×1200）与 `<world>-mobile.webp`（1080×1920），完整文件索引见 [worlds-v2/README.md](static/worlds-v2/README.md)。小于768px选择手机图，resize只换背景，不重建节点或录制DOM。`world-assets.mjs` 提供候选：v2 WebP → 本章旧 WebP/PNG/JPG → 材质底色；不循环其他章的图。代码独立绘制节点与三层象牙白路径、青绿进度内线。
+十章各有独立桌面/手机背景，共20张：`static/worlds-v2/<world>-desktop.webp`（1920×1200）与 `<world>-mobile.webp`（1080×1920），完整文件索引见 [worlds-v2/README.md](static/worlds-v2/README.md)。小于768px选择手机图，resize只换背景，不重建节点或录制DOM。`world-assets.mjs` 提供候选：v2 WebP → 本章旧 WebP/PNG/JPG → 材质底色；不循环其他章的图。代码独立绘制节点与三层象牙白路径、已走低饱和金色内线和通往 current 的青绿内线。
 
 ## 测试
 

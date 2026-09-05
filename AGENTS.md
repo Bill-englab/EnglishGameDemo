@@ -12,13 +12,13 @@
 ### 必须先理解的三个产品认知（违反这些会做错方向）
 
 1. **网站不是教学引擎，是「奖杯陈列柜」。** 真正的英语教学发生在线下父子 role-play。网站只做两件事：把完成的 role-play 可视化成进度；让孩子反复回看自己的表演录像。
-2. **给孩子多巴胺的是回头看自己的表演。** 完成勾只是入口，「我的表演回放」才是主舞台。所以点亮的关卡，圆点显示 demo 动画的画面，点击进入详情页看表演录像。
+2. **给孩子多巴胺的是回头看自己的表演。** 完成星章只是入口，「我的表演回放」才是主舞台。所以点亮的关卡，圆点显示 demo 动画的画面，点击进入详情页看表演录像。
 3. **句式高级度不由网站量化。** 那是线下目标。网站只做二元判定：有没有 `performance` 视频（`.mp4` 或 `.webm`）。
 
 ### 明确排除的事（别去实现）
 
 - ❌ 教学引擎 / AI 对话搭档
-- ❌ 1/2/3 星分级（仅一个完成勾，二元）
+- ❌ 1/2/3 星分级（仅一个完成星章，二元）
 - ❌ 用星星追踪「句式高级度」
 - ❌ 构建工具 / 打包器 / 数据库（前端始终原生 ES Modules，无打包）
 - ❌ 第三方云托管 / SaaS。默认本地跑；支持部署到**自己的**服务器（见 `DEPLOY.md`），但不依赖任何外部服务
@@ -313,7 +313,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ### 两层视图
 
-1. **地图视图**（`#map-view`）：10章×3课，真实编号1–30。completed 为 demo 封面或材质节点＋青绿勾，current 为青绿环＋定位针，locked 为封面或编号＋锁；都可点详情。浮动 shell 显示真实完成数、目录和账号。**Current lesson** 仅用户点击后滚动并聚焦当前节点；不打开详情，不改变进度；全完成时隐藏并显示完成提示。
+1. **地图视图**（`#map-view`）：10章×3课，真实编号1–30。completed 为 demo 封面或材质节点＋一颗金色星章（只表示完成，绝非评分），current 为青绿环＋定位针，locked 为封面或编号＋锁；都可点详情。浮动 shell 是56px三列轨道：品牌居左、真实进度居中、账号和 Electron 窗口控制居右；账号弹层在可用高度内独立滚动。手机保持单行，品牌可紧凑截断而进度和头像不压缩。保存新 performance 后本次会话仅短促庆祝一次；刷新或重录不重复。**Current lesson** 仅用户点击后滚动并聚焦当前节点；不打开详情，不改变进度；全完成时隐藏并显示完成提示。
 2. **详情视图**（`#detail-view`）：56px标题栏；桌面左340px媒体栏（Your Show在上、Watch & Learn在下）、右侧完整A/B/C→完整Replay→默认独立折叠家长说明/VideoGen；底部Prev/Next。小于768px使用媒体页签＋单列正文，只页面整体滚动。未录时点 **Start recording**，示范为空点 **Add demo**。Can-Do、Trigger和句式放在家长说明内，不挤标题。
 
 运行时：`/api/library` → `summarizeAdventure` → 地图与 shell 同一份真实计数；目录选择只打开 Lesson，不写入课程状态。Stage 1 是 `curriculum/04` 的展示名，Stage 2/3 为禁用 Planned。目录打开时背景 inert、地图锁滚动、焦点进入并圈定抽屉；Escape/关闭/遮罩恢复菜单焦点，选课释放锁后打开详情。
@@ -322,7 +322,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 - **响应式背景**：固定 `#bg-layer`，每章一张 slide，滚动交叉淡入淡出。`/static/worlds-v2/<world>-desktop.webp`（1920×1200）和 `-mobile.webp`（1080×1920）共20张，完整清单见 `app/static/worlds-v2/README.md`。`<768`切手机图；失败按本章旧WebP/PNG/JPG尝试，全部失败保留主题材质，不循环别章。resize仅重选背景，generation token阻止旧响应覆盖新尺寸；详情为暖白阅读面。
 - **封面** `extractSafeCover()`：改为加载服务端缩略图 `/thumb/<ch>/<lv>`（替代原 canvas 抽帧——大视频 seek 慢且暗帧多）。加载失败 → null → 主题色渐变 fallback。有 frameCache，地图/详情共用。缩略图由后端在上传和启动扫描时用 ffmpeg 生成（见 §6）。
-- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，用 `buildSmoothPath` 画阴影/暖灰边/象牙白三层路径，走过段增加低饱和青绿内线。`splitPathPoints` 在当前节点连接两段，不丢点；之字形偏移在 CSS。没有金星旋转或强金光。
+- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，用 `buildSmoothPath` 画阴影/暖灰边/象牙白三层路径；已完成段为低饱和金色内线，通往 current 的段为青绿内线。`splitPathPoints` 在当前节点连接两段，不丢点；之字形偏移在 CSS。没有金星旋转或强金光。
 - **录制** `startRecordingSession()`：`getUserMedia` 开摄像头+麦克风 → 镜像预览 → 一钮两态（红圆开始/方块停止）+ 闪红计时 + 5 分钟硬上限自动停 → `MediaRecorder` 产 webm → 现场回放 + Redo/Save。Save 时 `uploadRecording()` 把 blob + mimeType POST 到 `/upload`，后端按 mimeType 存 `.webm`/`.mp4`。`pickRecorderMime()` 探测浏览器支持的最佳格式（Chrome→webm，Safari→mp4），console 打印实际 mimeType。摄像头被拒/缺失时回退到文件上传。
 - **详情导航**：`openDetail` 底部渲染 Prev/Next（跨全宽），从 `flatLevels` 找相邻关卡。上传后 `reopenDetail` 重新打开当前关。
 - **demo 封面**：有 demo 时节点尝试显示缩略图，缺图使用材质与编号回退；locked 关仍显示锁，可点击预习，不再单独叠加播放徽标。
@@ -456,7 +456,7 @@ refactor: split content, demo, and recordings into separate trees
 
 - 地图骨架 + 动态章节世界（大型动画主景 + 平滑路线 + 响应式节点）：完成。
 - PC 摄像头实时录制（`getUserMedia` + `MediaRecorder`，一钮两态 + 5 分钟上限 + 回放 + Redo/Save）：完成。
-- 现代玩具剧场：三层象牙白路径＋青绿进度内线、完成勾/current定位针/锁、浮动外壳、真实计数和课程目录；完整验收记录见 `docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md`。
+- 现代玩具剧场：三层象牙白路径＋金色已走内线/青绿 current 内线、单一完成星章/current定位针/锁、56px对齐外壳、真实计数和课程目录；完整验收记录见 `docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md`。
 - webm/mp4 双格式支持（scanner + 路由 + 上传）：完成。
 - **多用户认证**（登录/session、admin 用户管理、performance 按用户隔离到 `recordings/<用户名>/`）：完成。
 - **Electron 桌面壳**（launch.vbs 一键启动、自定义标题栏、自动授权摄像头/麦克风、退出杀 Flask）：完成。

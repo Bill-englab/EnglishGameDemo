@@ -7,7 +7,7 @@
   <img alt="status" src="https://img.shields.io/badge/status-stage%204%20live-brightgreen">
 </p>
 
-An interactive adventure map that turns parent-child English role-play into a visual journey. Every completed performance lights up a node on the map — not with a star, but with a frame from the demo animation.
+An interactive adventure map that turns parent-child English role-play into a visual journey. Every completed performance lights up a node with its demo frame when available and one gold completion star—never a score or star rating.
 
 Built for a 4-year-old, designed around one insight: **the real reward isn't a badge — it's watching yourself perform.**
 
@@ -86,9 +86,9 @@ Each chapter has its own local **Modern Toy Theatre** scene: soft clay, painted 
 | --- | --- | --- |
 | Locked | Demo cover or numbered material node with a lock | Previous lesson is not complete; click to preview. |
 | Current | Demo cover or numbered node with a teal ring and location marker | The next lesson to practice; it is still incomplete. |
-| Completed | Demo cover or material node with one teal check | A performance exists. Click to replay it. |
+| Completed | Demo cover or material node with one gold star | A performance exists. The one star means complete, not a rating; click to replay it. |
 
-The ivory path has a muted teal inner line through completed lessons to the current lesson. Floating controls show the real **completed / 30** count, course menu and account. **Current lesson** scrolls to and focuses that lesson; it does not open or record it. Once every lesson has a performance, the action becomes a completion message.
+The ivory path has a muted gold inner line through completed lessons and a teal inner line to the current lesson. The 56px top rail keeps brand, real **completed / 30** progress and account aligned; on phones it stays one row, with a compact title and avatar. The account menu scrolls internally when its choices exceed the available height. **Current lesson** scrolls to and focuses that lesson; it does not open or record it. Once every lesson has a performance, the action becomes a completion message. Saving a newly completed performance plays one short, non-blocking celebration for that page session; refreshes and re-recording do not replay it.
 
 The course menu contains ten chapter groups with real per-chapter progress and every lesson. Stage 1 is available (the existing `curriculum/04`); Stage 2 and Stage 3 display **Planned** and are disabled. Escape, the close button or the backdrop closes the menu and returns focus. Choosing a lesson opens its complete detail page.
 

@@ -4,12 +4,101 @@
 // TOY_QA_PYTHON selects Python; TOY_QA_OUTPUT optionally retains screenshots outside
 // application data. TOY_QA_ELECTRON=1 also tests the installed native Electron shell.
 // All users, curriculum copies, config and media belong to a temporary fixture.
-const { chromium, _electron } = require('playwright');
 const assert = require('node:assert/strict');
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+
+// Harness resilience helpers also have zero-browser fault-injection checks:
+// node tests-browser/modern-toy-ui.cjs --self-test
+function withTimeout(operation, label, timeoutMs = 15000) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(`Timed out after ${timeoutMs}ms waiting for ${label}`)), timeoutMs);
+    Promise.resolve(operation).then(
+      value => { clearTimeout(timer); resolve(value); },
+      error => { clearTimeout(timer); reject(error); },
+    );
+  });
+}
+function unexpectedFailures(responses, messages) {
+  return {
+    responses: responses.filter(response => !response.expected),
+    consoleErrors: messages.filter(message => !(
+      /^Failed to load resource: the server responded with a status of 404(?: |$)/.test(message.text) &&
+      responses.some(response => response.status === 404 && response.expected && response.url === message.url)
+    )),
+  };
+}
+async function cleanupResources(resources, primaryError) {
+  const failures = [];
+  for (const { name, close } of resources) {
+    try {
+      await withTimeout(Promise.resolve().then(close), `${name} cleanup`, 5000);
+    } catch (error) {
+      failures.push({ resource: name, error });
+    }
+  }
+  if (primaryError) {
+    if (failures.length) primaryError.cleanupFailures = failures;
+    throw primaryError;
+  }
+  if (failures.length) {
+    const error = new AggregateError(failures.map(failure => failure.error), 'Acceptance resource cleanup failed');
+    error.cleanupFailures = failures;
+    throw error;
+  }
+}
+async function selfTest(selected) {
+  const cases = {
+    timeout: async () => {
+      let watchdog;
+      try {
+        await assert.rejects(Promise.race([
+          withTimeout(new Promise(() => {}), 'demo upload request (capture)', 30),
+          new Promise((_, reject) => { watchdog = setTimeout(() => reject(new Error('test watchdog: upload wait remained pending')), 150); }),
+        ]), /Timed out.*demo upload request.*capture/);
+      } finally { clearTimeout(watchdog); }
+      assert.equal(await withTimeout(Promise.resolve('started'), 'upload', 30), 'started');
+      const requestError = new Error('request failed');
+      await assert.rejects(withTimeout(Promise.reject(requestError), 'upload', 30), error => error === requestError);
+    },
+    '404': async () => {
+      const text = 'Failed to load resource: the server responded with a status of 404 (NOT FOUND)';
+      const responses = [
+        { url: 'http://fixture/thumb/ch/lesson', status: 404, expected: true },
+        { url: 'http://fixture/static/missing-module.mjs', status: 404, expected: false },
+      ];
+      const messages = responses.map(({ url }) => ({ url, text }));
+      const unexpected = unexpectedFailures(responses, messages);
+      assert.deepEqual(unexpected.responses, [responses[1]], 'missing required resources must fail');
+      assert.deepEqual(unexpected.consoleErrors, [messages[1]], 'unexpected 404 console errors must remain');
+      assert.deepEqual(unexpectedFailures([responses[0]], [messages[0]]), { responses: [], consoleErrors: [] });
+      assert.equal(unexpectedFailures([], [{ url: '', text }]).consoleErrors.length, 1, 'unattributed 404 errors must remain');
+    },
+    cleanup: async () => {
+      const cleaned = [];
+      const primary = new Error('primary acceptance failure');
+      const shutdown = new Error('Electron shutdown failed');
+      await assert.rejects(cleanupResources([
+        { name: 'Electron', close: async () => { cleaned.push('Electron'); throw shutdown; } },
+        { name: 'browser', close: async () => { cleaned.push('browser'); } },
+        { name: 'server', close: async () => { cleaned.push('server'); } },
+        { name: 'temporary root', close: async () => { cleaned.push('temporary root'); } },
+      ], primary), error => error === primary);
+      assert.deepEqual(cleaned, ['Electron', 'browser', 'server', 'temporary root']);
+      assert.equal(primary.cleanupFailures[0].resource, 'Electron');
+      assert.equal(primary.cleanupFailures[0].error, shutdown);
+      await assert.rejects(cleanupResources([{ name: 'browser', close: async () => { throw shutdown; } }]), AggregateError);
+    },
+  };
+  const names = selected ? [selected] : Object.keys(cases);
+  for (const name of names) {
+    assert.ok(cases[name], `Unknown self-test: ${name}`);
+    await cases[name]();
+    console.log(`PASS harness resilience: ${name}`);
+  }
+}
 
 const fixtureProgram = `
 import json, os, shutil, sys
@@ -113,14 +202,28 @@ async function pathAligned(page) {
   assert.ok(delta < 4, `Path misses a node center by ${delta}px`);
 }
 
-(async () => {
+async function main() {
+  const { chromium, _electron } = require('playwright');
   const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'english-modern-toy-'));
   const output = process.env.TOY_QA_OUTPUT && path.resolve(process.env.TOY_QA_OUTPUT);
   if (output) fs.mkdirSync(output, { recursive: true });
   const server = spawn(process.env.TOY_QA_PYTHON || 'python', ['-u', '-c', fixtureProgram, fixtureRoot],
     { cwd: path.resolve(__dirname, '..'), windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
-  let browser, electron;
-  const results = [], errors = [], consoleErrors = [];
+  let browser, electron, primaryError;
+  const results = [], errors = [], consoleErrors = [], failedResponses = [];
+  const allowed404Urls = new Set();
+  function watchDiagnostics(page) {
+    page.on('pageerror', error => errors.push(error.message));
+    page.on('console', message => {
+      if (message.type() === 'error') consoleErrors.push({ text: message.text(), url: message.location().url });
+    });
+    page.on('response', response => {
+      if (response.status() >= 400) failedResponses.push({
+        url: response.url(), status: response.status(),
+        expected: response.status() === 404 && allowed404Urls.has(response.url()),
+      });
+    });
+  }
   try {
     const url = await new Promise((resolve, reject) => {
       let stdout = '', stderr = '';
@@ -140,8 +243,7 @@ async function pathAligned(page) {
     const context = await browser.newContext({ viewport: { width: 1440, height: 960 }, reducedMotion: 'reduce' });
     const page = await context.newPage();
     page.setDefaultTimeout(15000);
-    page.on('pageerror', error => errors.push(error.message));
-    page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
+    watchDiagnostics(page);
     // Every upload is intercepted, including accidental performance uploads.
     await page.route('**/upload/**', route => route.fulfill({ status: 409, json: { error: 'QA upload interception' } }));
     await login(page, url);
@@ -248,6 +350,7 @@ async function pathAligned(page) {
       await page.locator('.level-node').first().click();
       const detailImage = (await page.screenshot()).toString('base64');
       const comparison = await page.context().newPage();
+      watchDiagnostics(comparison);
       await comparison.setViewportSize({ width: 1683, height: 935 });
       await comparison.setContent(`<style>body{margin:0;background:#f7f4ef}img{position:absolute;top:12px;height:910px;border-radius:24px}#map{left:225px;width:575px}#detail{left:893px;width:562px}</style><img id="map" alt="Actual mobile map" src="data:image/png;base64,${mapImage}"><img id="detail" alt="Actual mobile detail" src="data:image/png;base64,${detailImage}">`);
       await screenshot(comparison, output, 'reference-mobile-1683x935');
@@ -272,6 +375,10 @@ async function pathAligned(page) {
     results.push({ realProgress: '0/30 -> 2/30', current: 'lesson 3' });
 
     await page.setViewportSize({ width: 1440, height: 960 });
+    // This one lesson's mock demo intentionally has no generated thumbnail.
+    // Missing assets outside this explicit phase/URL are acceptance failures.
+    const optionalThumbnailUrl = `${url}/thumb/${library[0].name}/${library[0].levels[0].level}`;
+    allowed404Urls.add(optionalThumbnailUrl);
     let uploaded = false;
     await page.route('**/api/library', async route => {
       const response = await route.fetch();
@@ -295,7 +402,7 @@ async function pathAligned(page) {
         window.showOpenFilePicker = async () => [{ getFile: async () => new File(['QA'], 'demo.webm', { type: 'video/webm' }) }];
       });
       await page.getByRole('button', { name: 'Add demo', exact: true }).click();
-      await started;
+      await withTimeout(started, `demo upload request (${phase})`);
       await page.getByRole('button', { name: 'Start recording', exact: true }).click();
       await page.locator('.record-preview').waitFor();
       await page.locator('.record-btn').click();
@@ -323,6 +430,8 @@ async function pathAligned(page) {
       await page.setViewportSize({ width: 1440, height: 960 });
       results.push({ delayedDemo: phase, performanceRetainedAcrossResize: true });
     }
+    await page.waitForLoadState('networkidle');
+    allowed404Urls.delete(optionalThumbnailUrl);
 
     await page.unroute('**/api/library');
     for (const chapter of library) for (const level of chapter.levels) {
@@ -336,7 +445,12 @@ async function pathAligned(page) {
     assert.equal(await page.locator('#current-lesson-button').isVisible(), false);
     assert.equal(await page.locator('#adventure-complete').isVisible(), true);
     // Block every world candidate to exercise the final local material fallback.
-    await page.route('**/static/worlds*/**', route => route.fulfill({ status: 404 }));
+    const { getWorldAssetUrls } = await import('../static/world-assets.mjs');
+    const worlds = await page.locator('.bg-layer__slide').evaluateAll(slides => slides.map(slide => slide.dataset.world));
+    const missingBackgroundUrls = new Set(worlds.flatMap(world => getWorldAssetUrls(world, false)).map(asset => new URL(asset, url).href));
+    missingBackgroundUrls.forEach(asset => allowed404Urls.add(asset));
+    await page.route('**/static/worlds*/**', route => missingBackgroundUrls.has(route.request().url())
+      ? route.fulfill({ status: 404 }) : route.continue());
     await page.reload();
     await page.waitForLoadState('networkidle');
     await page.waitForFunction(() => document.querySelectorAll('.bg-layer__slide--placeholder').length === 10);
@@ -344,6 +458,7 @@ async function pathAligned(page) {
     await page.locator('.level-node').last().click();
     assert.equal(await page.locator('#detail-title').innerText(), library[9].levels[2].title);
     await page.unroute('**/static/worlds*/**');
+    missingBackgroundUrls.forEach(asset => allowed404Urls.delete(asset));
     results.push({ allComplete: '30/30', currentHidden: true, missingBackgrounds: 'material fallback; lesson usable' });
 
     if (process.env.TOY_QA_ELECTRON === '1') {
@@ -355,7 +470,7 @@ async function pathAligned(page) {
       electron = await _electron.launch({ executablePath: path.resolve(__dirname, '../node_modules/electron/dist/electron.exe'),
         args: [main], env: electronEnv });
       const native = await electron.firstWindow();
-      native.on('pageerror', e => errors.push(`Electron: ${e.message}`));
+      watchDiagnostics(native);
       await login(native, url);
       await native.waitForFunction(() => document.querySelector('.bg-layer__slide')?.style.backgroundImage.includes('-desktop.webp'));
       await native.waitForTimeout(300); // Hidden native compositor needs a frame before capturePage.
@@ -390,16 +505,30 @@ async function pathAligned(page) {
       results.push({ electron: '800x600', realPreload: true, nativeIPC: ['minimize', 'maximize', 'unmaximize', 'close'], overflow: false });
     }
     assert.deepEqual(errors, []);
-    // Missing optional thumbnails / intercepted dummy media may log HTTP errors;
-    // JavaScript runtime failures are never excluded.
-    const relevantConsoleErrors = consoleErrors.filter(text => !/Failed to load resource: the server responded with a status of 404/.test(text));
-    assert.deepEqual(relevantConsoleErrors, []);
-    console.log(JSON.stringify({ results, pageErrors: errors, consoleErrors: relevantConsoleErrors, optional404s: consoleErrors.length, output }, null, 2));
+    // Only console 404s correlated to explicitly expected failed-response URLs
+    // are excused. Required assets, unrelated endpoints and unattributed errors fail.
+    const unexpected = unexpectedFailures(failedResponses, consoleErrors);
+    assert.deepEqual(unexpected.responses, [], 'Unexpected failed HTTP responses');
+    assert.deepEqual(unexpected.consoleErrors, [], 'Unexpected browser console errors');
+    console.log(JSON.stringify({ results, pageErrors: errors, consoleErrors: unexpected.consoleErrors,
+      expected404s: failedResponses.filter(response => response.expected), output }, null, 2));
+  } catch (error) {
+    primaryError = error;
   } finally {
-    if (electron) await electron.close();
-    if (browser) await browser.close();
-    if (server.exitCode === null) await new Promise(resolve => { server.once('exit', resolve); if (!server.kill()) resolve(); });
-    // Only this exact mkdtemp-owned root is removed; no application data roots.
-    fs.rmSync(fixtureRoot, { recursive: true, force: true });
+    await cleanupResources([
+      { name: 'Electron', close: async () => { if (electron) await electron.close(); } },
+      { name: 'browser', close: async () => { if (browser) await browser.close(); } },
+      { name: 'server', close: async () => {
+        if (server.exitCode === null) await new Promise((resolve, reject) => {
+          server.once('exit', resolve);
+          if (!server.kill()) reject(new Error('Could not stop the owned fixture server'));
+        });
+      } },
+      // Only this exact mkdtemp-owned root is removed; no application data roots.
+      { name: 'temporary root', close: () => fs.rmSync(fixtureRoot, { recursive: true, force: true }) },
+    ], primaryError);
   }
-})().catch(error => { console.error(error); process.exitCode = 1; });
+}
+const selfTestArgument = process.argv.find(argument => /^--self-test(?:=|$)/.test(argument));
+(selfTestArgument ? selfTest(selfTestArgument.split('=')[1]) : main())
+  .catch(error => { console.error(error); process.exitCode = 1; });

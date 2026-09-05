@@ -496,7 +496,7 @@ refactor: split content, demo, and recordings into separate trees
 
 ### 个人资料增补（2026-09-04）
 
-- 头像＋昵称已接入右上角 My Profile，见 `docs/specs/2026-09-04-personal-profile-design.md`；整套 B 地图 UI 和压缩修复尚未交付，勿混淆状态。
+- 头像＋昵称已接入右上角 My Profile，见 `docs/specs/2026-09-04-personal-profile-design.md`。B「现代玩具剧场」地图、目录、详情与响应式UI已交付，验收见 `docs/plans/2026-09-05-modern-toy-theatre-ui-implementation.md`；压缩审计所列修复仍未交付，勿混淆状态。
 - `app/profile_store.py` 管图片/昵称校验、256px JPEG 转换、剥离元数据、原子写入和跨进程文件锁；新增 Pillow 依赖。`profile.mjs` / `profile-model.mjs` / `profile.css` 独立负责资料 UI，不继续向主文件堆放逻辑。
 - `PROFILES_ROOT` 默认根目录 `profiles/`，整树忽略入库。内部目录为 `u-` 加用户名 ASCII 十六进制，防止 Windows 大小写账号/保留名称冲突；不是裸用户名，且不修改既有录像路径。
 - `/api/profile` GET/POST、`/api/profile/avatar` 只允许当前用户。POST 验 CSRF，整请求 6 MiB、图片 5 MiB/1600 万像素上限；支持静态 JPEG/PNG/WebP。不支持 GIF/HEIC/SVG/动画。

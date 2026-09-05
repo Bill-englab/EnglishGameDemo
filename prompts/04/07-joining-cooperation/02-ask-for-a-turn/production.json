@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "Two children sit on a play mat, Peer screen left and Child screen right. One red open-bed toy truck is at Peer's hands with exactly two tan blocks already loaded. A low open box sits a hand's width ahead of the truck. Two blue blocks wait beside Child for the next turn. Locked 16:9 medium two-shot; all hauling happens within a short reach and no props enter from offscreen.",
+  "content_revision": 2,
+  "scene": "A clear home play mat with Bear Peer sitting screen left and Child sitting screen right, angled toward each other and close enough for a short hand-to-hand pass. Peer is the same small brown bear, age four, in his teal T-shirt; Child is the four-year-old tiger boy in his yellow T-shirt. Exactly one small red ball is present. Peer can roll it about twenty centimeters between his own hands in front of his knees; a separate clear short path between the friends will allow Child's later roll back. No truck, blocks, targets, extra balls or other props. Locked 16:9 medium two-shot keeps both faces, knees, hands and the full ball path visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both friends speak at ordinary play volume and keep relaxed seated postures.",
+    "allowed_shift": "Peer shows a small earnest look when requesting one final roll. Child considers and confirms the order, waits attentively and shows a small appreciative smile after receiving the ball; neither needs to look delighted about waiting.",
+    "forbidden": "No grabbing, sulking used to force agreement, pressured smiling, shouting, jumping frenzy, competitive cheering, frantic gestures or elastic faces. The ball moves slowly and stays on the mat during each roll."
+  },
   "parts": {
     "A": {
-      "start": "Peer holds the red truck with two tan blocks in its bed; the open box is just ahead, and two blue blocks lie beside Child.",
-      "action": "Peer nudges the loaded truck toward the box while explaining the current job, but does not unload it. Child requests the following turn with open hands, leaving the truck under Peer's control. Keep the delivery small enough to complete during the next exchange.",
-      "end": "Peer controls the truck a short distance from the open box with both tan blocks still loaded; Child waits beside the two blue blocks."
+      "start": "Peer steadies the one red ball under his right palm in front of his knees, with his left hand twenty centimeters away. Child sits close on the right with his hands resting on his own knees.",
+      "action": "Peer gently rolls the ball from his right palm into his waiting left hand during the opening turn, making his current play visible. The ball has stopped before Child requests the next turn. Peer holds it still as he asks for one additional roll; Child leaves control with Peer while considering the request. This opening roll precedes the agreement and is distinct from the single final roll in Part B.",
+      "end": "The red ball is stopped beneath Peer's left palm in front of his knees. His right hand rests twenty centimeters away, and Child watches with his hands on his own knees."
     },
     "B": {
-      "start": "Peer controls the truck a short distance from the open box with both tan blocks still loaded; Child waits beside the two blue blocks.",
-      "action": "Peer indicates the two loaded tan blocks as the agreed endpoint. During Child's confirmation, Peer rolls the truck the final few centimeters, lifts each tan block once, and places both visibly inside the box. Do not hand over the truck until this two-block job is finished.",
-      "end": "Both tan blocks are inside the box; Peer holds the empty red truck beside it and Child waits with the two blue blocks untouched."
+      "start": "The red ball is stopped beneath Peer's left palm in front of his knees. His right hand rests twenty centimeters away, and Child watches with his hands on his own knees.",
+      "action": "Child confirms the order before any new roll. Peer makes the one-roll limit clear. While Child settles into the brief wait, Peer rolls the ball once from his left hand into his waiting right palm. Stop it fully before Peer's final turn reports that his roll is finished. There is exactly one agreed roll, no extra back-and-forth cycle, and no early handoff.",
+      "end": "Peer has stopped the red ball beneath his right palm after the single agreed final roll. Child remains seated nearby with open hands ready to receive it; no handoff has happened yet."
     },
     "C": {
-      "start": "Both tan blocks are inside the box; Peer holds the empty red truck beside it and Child waits with the two blue blocks untouched.",
-      "action": "Peer acknowledges the completed delivery and rolls the empty truck directly to Child. Child receives it before thanking Peer, then places the waiting blue blocks into its bed and starts the next small delivery. Keep the transfer visible, with exactly one truck throughout.",
-      "end": "Child controls the red truck loaded with the two blue blocks; the tan blocks remain in the box and Peer watches the new turn."
+      "start": "Peer has stopped the red ball beneath his right palm after the single agreed final roll. Child remains seated nearby with open hands ready to receive it; no handoff has happened yet.",
+      "action": "Peer lifts the ball a few centimeters and places it directly into Child's open hands during the handoff turn; this transfer is not another solo roll. Child receives it before thanking him. Child then sets the same ball on the clear mat and begins his own short roll toward Peer. Peer offers his open hands during the final line and catches it gently. The visible sequence is finished Peer turn, handoff, thanks, then Child's first roll; both remain seated throughout.",
+      "end": "Peer cups the same red ball on the mat after catching Child's first roll. Child's hands are relaxed in front of him and both friends remain seated, ready to continue the shared rolling game."
     }
   }
 }

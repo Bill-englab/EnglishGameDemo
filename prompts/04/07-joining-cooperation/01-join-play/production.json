@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "A simple home play mat, Peer kneeling screen left and Child kneeling screen right. A short road made from four flat blocks runs in front of Peer, with two small cars parked on it. Three loose bridge blocks rest in the clear space on Child's side, beside rather than on the road. Locked 16:9 medium two-shot shows both faces and hands; only these two children are present.",
+  "content_revision": 2,
+  "scene": "A simple home play mat, Bear Peer kneeling screen left and Child kneeling screen right within easy reach of the same toy road. Peer is the same small brown bear, age four, in his teal T-shirt; Child is the four-year-old tiger boy in his yellow T-shirt. Use exactly one modular road-and-bridge set: four wide tan straight road pieces and one low blue arched bridge piece with built-in ramps. Three tan pieces already form a short straight road pointing toward the clear space between the children; the fourth tan piece lies beside Peer's right knee, and the single blue bridge lies beside Child's right knee. The matching pieces simply meet end to end on the mat, without delicate fasteners or separate supports. No cars, additional blocks or props. Locked 16:9 medium two-shot shows both faces, hands and the entire short road.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both friends are interested in the building task and speak at normal play volume.",
+    "allowed_shift": "Peer considers the offer and checks that the bridge serves his road before agreeing. Child shows a small thoughtful look while indicating a place; their finished connection earns only small smiles and a quiet nod.",
+    "forbidden": "No automatic agreement, pressured smiling, shouting, jumping frenzy, triumphant bouncing, forceful grabbing or elastic facial expressions. Keep faces and bodies in their normal proportions and all gestures small."
+  },
   "parts": {
     "A": {
-      "start": "Peer kneels beside the completed short block road and its two parked cars; Child kneels at the clear right side with three loose blocks nearby.",
-      "action": "Peer rolls one car a few centimeters along the existing road while describing the game, then parks it again. Child watches with interest and asks to join, keeping both hands in their own space. No blocks or cars are taken before the invitation.",
-      "end": "Both cars are parked on Peer's unchanged road; Child faces Peer with hands resting beside the three loose bridge blocks."
+      "start": "Peer kneels left with his fingertips on the third of three connected tan road pieces; the fourth tan piece lies beside his right knee. Child kneels right with the blue bridge untouched beside his right knee.",
+      "action": "Peer straightens the third tan piece by a few centimeters as he describes his road. Child watches, asks to join and keeps his hands in his own space. Peer indicates the unfinished end and the available blue bridge to explain what the road still needs. The final tan piece and bridge remain unplaced; an invitation to discuss the bridge is not yet permission to rearrange the road.",
+      "end": "The three tan road pieces form a straight connected line. Peer rests his hands beside the fourth tan piece, and Child faces him with both hands beside the untouched blue bridge."
     },
     "B": {
-      "start": "Both cars are parked on Peer's unchanged road; Child faces Peer with hands resting beside the three loose bridge blocks.",
-      "action": "Peer agrees while indicating the road that must stay intact. Child nods, keeps clear of it, and points to the empty right-side patch while proposing a bridge. Child waits for the response before building; Peer remains interested but retains ownership of the existing idea.",
-      "end": "Child points at an empty patch beside the intact road; all three bridge blocks remain loose and both cars remain parked."
+      "start": "The three tan road pieces form a straight connected line. Peer rests his hands beside the fourth tan piece, and Child faces him with both hands beside the untouched blue bridge.",
+      "action": "Child offers to make the bridge connection with a small gesture toward his blue piece. Peer checks whether it will connect to the road; he does not agree before Child answers. Child points along the road's continuation, leaving room for the remaining tan piece and then the bridge. Only after that clarification does Peer give a small accepting nod. Both pieces stay on the mat until the shared plan is agreed.",
+      "end": "Child lowers his pointing hand beside the blue bridge after indicating the road's continuation. Peer faces him with a small nod; three tan pieces remain connected and the fourth tan piece still lies beside Peer's right knee."
     },
     "C": {
-      "start": "Child points at an empty patch beside the intact road; all three bridge blocks remain loose and both cars remain parked.",
-      "action": "Peer accepts the bridge idea and gestures toward the adjoining play space. Only then does Child pick up one nearby loose block and set it as the first bridge support in that patch. End with a beginning, not an instantly completed bridge or cars crossing before it exists.",
-      "end": "One bridge support stands beside the unchanged road; two bridge blocks remain loose, both cars stay parked, and the children look pleased to build together."
+      "start": "Child lowers his pointing hand beside the blue bridge after indicating the road's continuation. Peer faces him with a small nod; three tan pieces remain connected and the fourth tan piece still lies beside Peer's right knee.",
+      "action": "During his first turn Peer lifts the fourth tan piece once and places it against the open road end. Child then lifts the one blue bridge and sets its ramp flush against that new tan piece while presenting it. Child's result statement follows the visible connection, and Peer's final response acknowledges their combined road. These are two short placements within easy reach, leaving time for a small shared smile; no rebuilding or separate bridge assembly occurs.",
+      "end": "All four tan road pieces form one connected line ending at the blue arched bridge. Both children have released the pieces and look at the finished connection with small smiles; no loose pieces or cars have appeared."
     }
   }
 }

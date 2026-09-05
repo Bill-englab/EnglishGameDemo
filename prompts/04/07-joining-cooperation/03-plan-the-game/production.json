@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "A quiet home play area with one blanket laid flat as a pretend ship. Peer sits on its left edge and Child on its right edge, facing inward. A single hand-drawn paper treasure map rests by Peer's knee. The real room, blanket, map, and ordinary clothes never transform into a fantasy setting. Locked 16:9 medium two-shot; no costumes, weapons, treasure chest, or extra characters.",
+  "content_revision": 2,
+  "scene": "A quiet home play area with one blanket laid flat as the proposed pretend ship. Bear Peer sits on its left edge and Child on its right edge, facing inward within easy reach. Peer is the same small brown bear, age four, in his teal T-shirt; Child is the four-year-old tiger boy in his yellow T-shirt. Exactly one paper treasure map lies by Peer's right knee at the outset. It has two simple circles joined by a dotted route, with an X inside one circle, and no written words. The map, flat blanket, room and ordinary clothes keep their identities throughout; space travel remains pretend. Locked 16:9 medium two-shot shows both faces, hands and the map. No costumes, weapons, steering wheel, treasure chest, new props or extra characters.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. The two friends discuss play ideas at ordinary indoor volume, each comfortable stating a different preference.",
+    "allowed_shift": "Peer shows mild thoughtful disagreement while keeping his treasure idea, then a small interested smile when he can choose the pilot role. Child considers that condition and chooses the treasure-finder role with a small nod. Shared play uses only a slight seated steering gesture and quiet smiles.",
+    "forbidden": "No instant compliance, pressured agreement, shouting, jumping frenzy, bouncing, dramatic salutes, exaggerated triumph or elastic facial expressions. Do not turn disagreement into anger or perform pretend flight with frantic movement or extra sound effects."
+  },
   "parts": {
     "A": {
-      "start": "Peer and Child sit at opposite edges of the flat blanket; the paper treasure map lies beside Peer's knee.",
-      "action": "Peer pats the blanket while proposing the pirate setting. Child looks over the same blanket and uses one small upward hand gesture to suggest a space setting. Both remain seated; neither takes over the other's idea or starts a full pretend voyage yet.",
-      "end": "Both sit on the blanket considering their different ideas; the treasure map remains by Peer's knee."
+      "start": "Peer sits on the left edge of the flat blanket and Child on the right; the one paper map lies beside Peer's right knee with both circles and the X visible.",
+      "action": "Peer pats the blanket once to suggest pirate play. Child looks toward the open space above them with one small upward gesture while stating his own idea. Peer lifts the existing map low between them and indicates its X to explain why he wants treasure in the game. Both preferences remain unresolved, and neither child begins the voyage or takes over the other's prop.",
+      "end": "Peer holds the map low between the two seated friends, with its marked circle visible to Child. The blanket remains flat and Child rests his hands on his own knees while considering the different ideas."
     },
     "B": {
-      "start": "Both sit on the blanket considering their different ideas; the treasure map remains by Peer's knee.",
-      "action": "Peer picks up the existing map to show why the pirate idea matters. Child looks at it, then gestures from the map toward the shared blanket while proposing the combined game. Preserve Peer's genuine preference; no agreement or launch happens before the next turn.",
-      "end": "Peer holds the treasure map between them; Child faces Peer expectantly and the blanket remains flat beneath both children."
+      "start": "Peer holds the map low between the two seated friends, with its marked circle visible to Child. The blanket remains flat and Child rests his hands on his own knees while considering the different ideas.",
+      "action": "Child glances from the map upward while proposing the combined pirate-and-space game. Peer considers it, then states his condition that he pilots the spaceship; he has not agreed to any role Child assigns him. Child nods and chooses to find the treasure. During the end of Child's response, Peer passes the existing map into Child's waiting hands to support that chosen job. No steering or pretend departure starts until both roles are agreed.",
+      "end": "Child holds the same map low over his knees with its two circles, dotted route and X visible. Peer rests his empty hands on his own knees; both sit on the unchanged flat blanket with their two roles agreed."
     },
     "C": {
-      "start": "Peer holds the treasure map between them; Child faces Peer expectantly and the blanket remains flat beneath both children.",
-      "action": "Peer accepts the combined premise with an enthusiastic nod and traces a destination on the map. Child makes a brief captain's salute during the final turn, then both look forward as if preparing an imaginary voyage. Keep the map real and the space travel purely pretend.",
-      "end": "Peer holds the map on the blanket while Child lowers the salute; both sit together ready for their shared pretend voyage."
+      "start": "Child holds the same map low over his knees with its two circles, dotted route and X visible. Peer rests his empty hands on his own knees; both sit on the unchanged flat blanket with their two roles agreed.",
+      "action": "Peer asks for their first destination. Child points to the existing X-marked circle on the map, treating it as a treasure planet in the agreed pretend game. Peer then makes one slight steering motion with empty hands as he begins piloting; Child follows the short dotted route with one fingertip during his closing turn. These small simultaneous actions visibly begin both chosen roles without a physical takeoff, a new destination prop or any extra speech.",
+      "end": "Peer holds his hands in a small relaxed pretend-steering pose while Child keeps the same map on his knees with a fingertip on its dotted route. Both remain seated on the flat blanket with small smiles, actively sharing the pirate-space game."
     }
   }
 }

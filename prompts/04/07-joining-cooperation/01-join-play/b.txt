@@ -1,36 +1,45 @@
-Can I Build the Bridge? — Part B (change)
-Production prompt draft | Source: curriculum/04/07-joining-cooperation/01-join-play/lesson.json | Content revision: 1
-Source SHA256: 3a8003c0165cc77c3de5fec2ba3d792fbe717078e29e80b5602003b286f4bdef
+Can I Build Too? — Part B (change)
+Production prompt draft | Source: curriculum/04/07-joining-cooperation/01-join-play/lesson.json | Content revision: 2
+Source SHA256: d1b93e7f51a0401ee16829ef64ce554873abae5bcad7748beb8f8613745175c8
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Bear Peer — the same small brown bear in a teal T-shirt in every peer lesson; age four, child-sized proportions and a distinct natural child voice, never an adult.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Both friends are interested in the building task and speak at normal play volume.
+Peer considers the offer and checks that the bridge serves his road before agreeing. Child shows a small thoughtful look while indicating a place; their finished connection earns only small smiles and a quiet nod.
+No automatic agreement, pressured smiling, shouting, jumping frenzy, triumphant bouncing, forceful grabbing or elastic facial expressions. Keep faces and bodies in their normal proportions and all gestures small.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-Free play with blocks and cars.
+Two friends join wide toy road and bridge pieces on a home play mat.
 
 SCENE AND PROP CONTINUITY
-A simple home play mat, Peer kneeling screen left and Child kneeling screen right. A short road made from four flat blocks runs in front of Peer, with two small cars parked on it. Three loose bridge blocks rest in the clear space on Child's side, beside rather than on the road. Locked 16:9 medium two-shot shows both faces and hands; only these two children are present.
+A simple home play mat, Bear Peer kneeling screen left and Child kneeling screen right within easy reach of the same toy road. Peer is the same small brown bear, age four, in his teal T-shirt; Child is the four-year-old tiger boy in his yellow T-shirt. Use exactly one modular road-and-bridge set: four wide tan straight road pieces and one low blue arched bridge piece with built-in ramps. Three tan pieces already form a short straight road pointing toward the clear space between the children; the fourth tan piece lies beside Peer's right knee, and the single blue bridge lies beside Child's right knee. The matching pieces simply meet end to end on the mat, without delicate fasteners or separate supports. No cars, additional blocks or props. Locked 16:9 medium two-shot shows both faces, hands and the entire short road.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Both cars are parked on Peer's unchanged road; Child faces Peer with hands resting beside the three loose bridge blocks.
+The three tan road pieces form a straight connected line. Peer rests his hands beside the fourth tan piece, and Child faces him with both hands beside the untouched blue bridge.
 
 ACTION AND REACTIONS
-Peer agrees while indicating the road that must stay intact. Child nods, keeps clear of it, and points to the empty right-side patch while proposing a bridge. Child waits for the response before building; Peer remains interested but retains ownership of the existing idea.
+Child offers to make the bridge connection with a small gesture toward his blue piece. Peer checks whether it will connect to the road; he does not agree before Child answers. Child points along the road's continuation, leaving room for the remaining tan piece and then the bridge. Only after that clarification does Peer give a small accepting nod. Both pieces stay on the mat until the shared plan is agreed.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Peer: "Okay, but don't move my road."
-Child: "Okay. Can I build a bridge beside your road?"
+Child: "I can build the bridge."
+Peer: "Will it join my road?"
+Child: "Yes, right here."
+Peer: "Okay, let's build."
 
 END FRAME
-Child points at an empty patch beside the intact road; all three bridge blocks remain loose and both cars remain parked.
+Child lowers his pointing hand beside the blue bridge after indicating the road's continuation. Peer faces him with a small nod; three tan pieces remain connected and the fourth tan piece still lies beside Peer's right knee.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (15 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (16 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

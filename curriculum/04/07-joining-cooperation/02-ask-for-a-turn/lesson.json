@@ -1,18 +1,18 @@
 {
-  "title":"After Your Two Blocks","title_zh":"你搬完两块后轮到我","can_do":"请求下一轮，并用明确事件确认什么时候轮到自己。",
+  "title":"After Your Turn","title_zh":"你玩完后轮到我","can_do":"请求同伴之后的一轮，商定最后一次滚球，等约定完成后接过球并开始自己的回合。",
   "conversation_move":{"id":"request-turn","label":"request the next turn"},
-  "trigger":"A peer is actively using the shared truck, and the child wants a turn without interrupting it.",
-  "core_response":"Can I have a turn after you?","stretch_response":"You carry two blocks, then it is my turn.","repair_response":"Not now. I mean after your two blocks.",
-  "recycle":["request-item","sequence-actions"],"roles":["child","peer"],"setting":"Sharing one toy truck during block play.","essential_props":["one toy truck and blocks"],
+  "trigger":"Peer is rolling the only ball. Child asks for the following turn, and Peer requests one last roll first.",
+  "core_response":"Can I have a turn after you?","stretch_response":"You first, then me.","repair_response":"No, I mean after your turn.",
+  "recycle":["request-item","sequence-actions"],"roles":["child","peer"],"setting":"Two friends sit close together on a clear home play mat and share one ball.","essential_props":["one small red rolling ball"],
   "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"I'm using the red truck to fill this box.","kind":"input"},{"speaker":"child","line":"Can I have a turn after you?","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"peer","line":"Yes, after I carry these two blocks.","kind":"input"},{"speaker":"child","line":"Okay. You carry two blocks, then it is my turn.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Both blocks are in. Here is the truck.","kind":"input"},{"speaker":"child","line":"Thanks. Now I will carry the blue blocks.","kind":"action"}]}
+    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"I'm rolling the ball.","kind":"input"},{"speaker":"child","line":"Can I have a turn after you?","kind":"core"},{"speaker":"peer","line":"Can I roll it once more?","kind":"input"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"You first, then me.","kind":"stretch"},{"speaker":"peer","line":"Just one more roll.","kind":"input"},{"speaker":"child","line":"Okay, I'll wait here.","kind":"confirmation"},{"speaker":"peer","line":"That was my last roll.","kind":"action"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Here you go. Your turn.","kind":"action"},{"speaker":"child","line":"Thanks. I'll roll it back.","kind":"action"},{"speaker":"peer","line":"I'll catch it right here.","kind":"input"}]}
   ],
   "replay_cards":[
-    {"title":"Turn with the marker","setting":"Drawing one shared poster","change":"The peer is finishing one sun","challenge":"Ask for the marker after the sun, watch it finish, receive it, and draw the next item"},
-    {"title":"Turn on the swing","setting":"A pretend playground scene","change":"The peer asks for three more pushes","challenge":"Agree on the clear endpoint, count it together, switch places, and begin the child's turn"}
+    {"title":"Turn with the marker","setting":"Drawing one shared poster","change":"Peer is finishing a sun with the only yellow marker and thinks Child is asking to take it immediately","challenge":"Child requests the next turn. When Peer offers the marker before finishing, Child repairs with \"No, I mean after your turn.\" Peer chooses one last ray as the endpoint; Child agrees to wait. Peer draws the ray and hands over the marker, then Child thanks him and begins a yellow flower."},
+    {"title":"Turn with the rolling pin","setting":"Making pretend food from play dough","change":"Peer is flattening one piece of dough with the only rolling pin; Child wants it for a separate piece","challenge":"Ask for the next turn. Peer requests one final pass over his dough, and Child confirms \"You first, then me.\" Peer completes that pass and puts the pin within Child's reach. Child takes it, thanks Peer, and starts rolling his own piece while Peer shapes the flattened dough by hand."}
   ],
-  "parent_support":["Let the current player finish a small visible unit.","Make the handoff happen exactly when agreed so the sequence language has meaning."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support":["Play Peer's request for one final roll as a real, finite preference. Child can agree on the order without grabbing or being pressured to smile.","Complete exactly the agreed roll, then hand over the ball. Keep the short handoff distinct from Child's first roll so both turns are visible."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2,"dialogue_contract":"three-by-ten-v2"
 }

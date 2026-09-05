@@ -1,36 +1,44 @@
-Ask the Shop Worker — Part B (change)
-Production prompt draft | Source: curriculum/04/09-outings-safety/03-safe-adult-help/lesson.json | Content revision: 1
-Source SHA256: da009f8f075119074254b436c8b58c5b1cfd02173c8075caae1d121ff3dadcdd
+I Can't Find My Mom — Part B (change)
+Production prompt draft | Source: curriculum/04/09-outings-safety/03-safe-adult-help/lesson.json | Content revision: 2
+Source SHA256: 9e65065144d3bc0cf430a99ab4c05513cddf9fcaea516569e9e54cafb0f37373
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Both know this is a home rehearsal. Child is attentive and may look mildly serious when practicing the help request; Mom listens supportively at normal volume.
+A small serious look can ease slightly when Mom explains the stay-and-contact plan. Child's agreement is a quiet nod and remaining in place, with no required smile or relief spectacle.
+No real separation, hiding, parking lot movement, stranger touch, panic, crying spectacle, terrified staring, frantic searching, rescue drama, forced hug or cheering reunion. Do not add surnames, addresses, phone numbers, quizzes or personal-information displays.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-A calm pretend shop-worker rehearsal at home.
+A calm store-worker rehearsal at a small home desk, with Mom and Child seated together and the familiar living room visible.
 
 SCENE AND PROP CONTINUITY
-A familiar, clearly domestic living room during calm pretend practice. Mom sits screen left in her usual coral cardigan with a simple pretend shop-worker name badge pinned to it; Child sits screen right within easy conversational distance. A home sofa remains recognizable behind them. Locked 16:9 medium two-shot. Mom never disappears or changes identity, and no stranger, real shop, parking lot, phone, or extra helper appears. The badge belongs to the rehearsal, not a claim that every badge guarantees safety.
+A clearly domestic living room during calm pretend practice. Mom sits screen left and Child screen right at adjacent sides of a small home desk, within easy conversational distance. A recognizable home sofa stays visible behind them in every A/B/C clip. Use a locked 16:9 medium two-shot of their faces, resting hands and desk. Mom remains the same pink pig in her coral cardigan over a cream top, with one pretend store-worker badge pinned to the cardigan. Child is the same four-year-old tiger boy in his yellow T-shirt; he/him if needed. Mom explicitly announces her pretend role in A and is understood as the same Mom playing that worker in B/C. She never disappears, hides or changes identity. Both remain seated together at home throughout; the desk stands in for a customer-service desk without transforming the room into a shop. No stranger, actual separation, extra helper, outdoor location, phone, call audio or reunion appears. The badge signals a pre-agreed pretend role; it is not a claim that any person with a badge is trustworthy. Leo is only a fictional practice first name.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Mom and Child remain calmly face-to-face at home with the pretend badge visible; Child has begun the help-request rehearsal.
+Mom and Child remain seated together at the same desk at home, with the sofa and badge visible; both have their own hands resting on the desk as Child prepares to answer Mom's name question.
 
 ACTION AND REACTIONS
-Mom acknowledges the approach and asks the name as the pretend worker, without leaving her seat. Child answers with the scripted first name and asks for help, remaining beside Mom. The exchange is supportive and low-key; do not add surnames, addresses, phone numbers, quizzes, or another adult.
+Child gives only the scripted first name Leo. Mom, still playing the agreed worker role, acknowledges him warmly; Child then asks for help. Keep the exchange low-key, with ordinary eye contact and hands resting separately on the desk. Mom stays visible at home throughout; no surname, address, number, quiz, information display or additional adult is introduced.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "You came to a worker. What is your name?"
-Child: "My name is Leo. Can you help me, please?"
+Child: "My name is Leo."
+Mom: "Hello, Leo. You're safe here."
+Child: "Can you help me, please?"
 
 END FRAME
-Child remains seated beside Mom after giving the scripted first name; Mom's badge is visible and both are calm in the same living room.
+Mom and Child remain seated together at the same desk at home after the first-name and help request; the sofa and badge are visible and both rest their own hands on the desk.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (18 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (14 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

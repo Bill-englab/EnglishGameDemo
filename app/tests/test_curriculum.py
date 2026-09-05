@@ -1279,6 +1279,167 @@ def test_chapter_8_apology_checks_on_peer_and_repairs_after_acceptance():
     assert "restored" in production["parts"]["C"]["end"].lower()
 
 
+@pytest.mark.parametrize("lesson_id, partner, move, title", [
+    ("01-how-much-longer", "dad", "ask-duration", "How Much Longer?"),
+    ("02-find-it-in-a-shop", "mom", "ask-shop-location", "Where Is the Pasta?"),
+    ("03-safe-adult-help", "mom", "seek-safe-adult-help", "I Can't Find My Mom"),
+])
+def test_chapter_9_meets_three_by_ten_calm_outings_contract(lesson_id, partner, move, title):
+    chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][8]
+    lesson = next(item for item in chapter["lessons"] if item["id"] == lesson_id)
+    production_path = REPO_ROOT / "prompts/04" / chapter["id"] / lesson_id / "production.json"
+    production = json.loads(production_path.read_text(encoding="utf-8"))
+    turns = [turn for part in lesson["parts"] for turn in part["turns"]]
+    child_turns = [turn for turn in turns if turn["speaker"] == "child"]
+
+    checks = {
+        "the chapter identity stays stable": chapter["id"] == "09-outings-safety",
+        "the lesson uses the assigned scene": lesson["title"] == title,
+        "the assigned move stays stable": lesson["conversation_move"]["id"] == move,
+        "only Child and the assigned partner speak": lesson["roles"] == ["child", partner]
+        and {turn["speaker"] for turn in turns} == {"child", partner},
+        "three-by-ten-v2 is required": lesson.get("dialogue_contract") == "three-by-ten-v2",
+        "A/B/C preserve goal/change/resolve order": [
+            (part["id"], part["beat"]) for part in lesson["parts"]
+        ] == [("A", "goal"), ("B", "change"), ("C", "resolve")],
+        "the lesson has 9-11 turns": 9 <= len(turns) <= 11,
+        "Child has 4-5 turns": 4 <= len(child_turns) <= 5,
+        "the lesson has 45-58 spoken words": 45 <= sum(len(turn["line"].split()) for turn in turns) <= 58,
+        "Child has 18-28 spoken words": 18 <= sum(len(turn["line"].split()) for turn in child_turns) <= 28,
+        "Child turns stay within nine words": all(len(turn["line"].split()) <= 9 for turn in child_turns),
+        "adult turns stay within eleven words": all(
+            len(turn["line"].split()) <= 11 for turn in turns if turn["speaker"] != "child"
+        ),
+        "no more than one essential prop group": len(lesson["essential_props"]) <= 1,
+        "two complete Replay Cards remain": len(lesson["replay_cards"]) == 2
+        and all(all(card.get(field) for field in ("title", "setting", "change", "challenge"))
+                for card in lesson["replay_cards"]),
+        "lesson and production share revision 2": lesson["content_revision"] == production["content_revision"] == 2,
+        "the lesson remains language_reviewed": lesson["status"] == "language_reviewed",
+        "all ten reviews passed": all(lesson["reviews"].get(review) is True for review in (
+            "motivation", "causality", "physical", "adult_behavior", "child_language",
+            "knowledge_safety", "resolution", "replay_logic", "character_continuity", "emotion_stability",
+        )),
+        "production bounds emotional performance": all(
+            isinstance(production.get("emotion", {}).get(field), str)
+            and production["emotion"][field].strip()
+            for field in ("baseline", "allowed_shift", "forbidden")
+        ),
+        "production maintains a calm baseline": "calm" in production.get("emotion", {}).get("baseline", "").lower(),
+        "the resolution contains a visible action": any(
+            turn["kind"] == "action" for turn in lesson["parts"][-1]["turns"]
+        ),
+        "production has exactly A/B/C": list(production["parts"]) == ["A", "B", "C"],
+    }
+    for part in lesson["parts"]:
+        checks[f"Part {part['id']} has 3-4 turns"] = 3 <= len(part["turns"]) <= 4
+        checks[f"Part {part['id']} has 12-20 spoken words"] = (
+            12 <= sum(len(turn["line"].split()) for turn in part["turns"]) <= 20
+        )
+        checks[f"Part {part['id']} includes Child"] = any(
+            turn["speaker"] == "child" for turn in part["turns"]
+        )
+        exported = production_path.with_name(f"{part['id'].lower()}.txt").read_text(encoding="utf-8")
+        checks[f"Part {part['id']} export matches revision 2"] = "Content revision: 2\n" in exported
+        expected_speech = "\n".join(f'{turn["speaker"].title()}: "{turn["line"]}"' for turn in part["turns"])
+        checks[f"Part {part['id']} export preserves canonical speech"] = (
+            exported.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
+            == expected_speech
+        )
+        cast = exported.split("FIXED CAST (only these two)\n")[1].split("\n\n")[0]
+        checks[f"Part {part['id']} keeps the same tiger boy"] = "four-year-old cartoon tiger boy" in cast
+    for before, after in (("A", "B"), ("B", "C")):
+        checks[f"production preserves {before}/{after} continuity"] = (
+            production["parts"][before]["end"] == production["parts"][after]["start"]
+        )
+    child_speech = {turn["line"] for turn in child_turns}
+    for field in ("core_response", "stretch_response", "repair_response"):
+        checks[f"{field} is practiced in the story or a Replay Card"] = (
+            lesson[field] in child_speech
+            or any(f'"{lesson[field]}"' in card["challenge"] for card in lesson["replay_cards"])
+        )
+
+    assert all(checks.values()), [requirement for requirement, passed in checks.items() if not passed]
+
+
+def test_chapter_9_car_answers_time_checks_bridge_and_chooses_a_song_safely():
+    lesson = load_stage(CURRICULUM_ROOT, "04")["chapters"][8]["lessons"][0]
+    opening, middle, resolution = [part["turns"] for part in lesson["parts"]]
+    production_path = REPO_ROOT / "prompts/04/09-outings-safety/01-how-much-longer/production.json"
+    production = json.loads(production_path.read_text(encoding="utf-8"))
+
+    assert opening[1]["speaker"] == "child" and "how much longer" in opening[1]["line"].lower()
+    assert opening[-1]["speaker"] == "dad" and all(
+        cue in opening[-1]["line"].lower() for cue in ("five minutes", "two songs")
+    )
+    assert middle[0]["speaker"] == "child" and "after the bridge" in middle[0]["line"].lower()
+    assert middle[1]["speaker"] == "dad" and middle[1]["line"].startswith("Yes")
+    assert middle[-1]["speaker"] == "child" and "okay" in middle[-1]["line"].lower()
+    assert resolution[0]["speaker"] == "dad" and "which song" in resolution[0]["line"].lower()
+    assert resolution[1]["speaker"] == "child" and "song" in resolution[1]["line"].lower()
+    assert resolution[-1]["speaker"] == "child" and resolution[-1]["kind"] == "action"
+    assert "continuous" in production["scene"].lower() and "no time jump" in production["scene"].lower()
+    for part in production["parts"].values():
+        for frame in ("start", "end"):
+            assert all(cue in part[frame].lower() for cue in ("forward", "wheel", "restrained", "rear seat"))
+        assert "no" in part["action"].lower() and "song" in part["action"].lower()
+
+
+def test_chapter_9_shop_uses_a_shelf_clue_and_child_baskets_the_confirmed_pasta():
+    lesson = load_stage(CURRICULUM_ROOT, "04")["chapters"][8]["lessons"][1]
+    opening, middle, resolution = [part["turns"] for part in lesson["parts"]]
+    production_path = REPO_ROOT / "prompts/04/09-outings-safety/02-find-it-in-a-shop/production.json"
+    production = json.loads(production_path.read_text(encoding="utf-8"))
+
+    assert opening[0]["speaker"] == "mom" and "pasta" in opening[0]["line"].lower()
+    assert opening[1]["speaker"] == "child" and "where can we find the pasta" in opening[1]["line"].lower()
+    assert opening[-1]["speaker"] == "mom" and "bottom shelf" in opening[-1]["line"].lower()
+    assert middle[0]["speaker"] == "child" and all(
+        cue in middle[0]["line"].lower() for cue in ("red bag", "window")
+    )
+    assert middle[1]["speaker"] == "mom" and "yes" in middle[1]["line"].lower()
+    assert "pasta" in middle[1]["line"].lower()
+    assert "basket" in resolution[0]["line"].lower()
+    assert resolution[1]["speaker"] == "child" and resolution[1]["kind"] == "action"
+    assert "put" in resolution[1]["line"].lower()
+    assert "one red pasta bag" in production["scene"].lower()
+    assert "on the bottom shelf" in production["parts"]["B"]["end"].lower()
+    assert "inside the basket" in production["parts"]["C"]["end"].lower()
+
+
+def test_chapter_9_safe_help_is_a_home_rehearsal_with_first_name_help_and_staying():
+    lesson = load_stage(CURRICULUM_ROOT, "04")["chapters"][8]["lessons"][2]
+    opening, middle, resolution = [part["turns"] for part in lesson["parts"]]
+    production_path = REPO_ROOT / "prompts/04/09-outings-safety/03-safe-adult-help/production.json"
+    production = json.loads(production_path.read_text(encoding="utf-8"))
+
+    assert "home" in lesson["setting"].lower() and "rehearsal" in lesson["setting"].lower()
+    assert opening[0]["speaker"] == "mom" and all(
+        cue in opening[0]["line"].lower() for cue in ("practice", "pretend", "store worker")
+    )
+    assert opening[1]["speaker"] == "child" and "can't find my mom" in opening[1]["line"].lower()
+    assert opening[-1]["speaker"] == "mom" and "name" in opening[-1]["line"].lower()
+    assert middle[0]["speaker"] == "child" and "my name is leo" in middle[0]["line"].lower()
+    assert middle[-1]["speaker"] == "child" and "can you help me" in middle[-1]["line"].lower()
+    assert resolution[0]["speaker"] == "mom" and all(
+        cue in resolution[0]["line"].lower() for cue in ("stay", "desk", "call your mom")
+    )
+    assert resolution[1]["speaker"] == "child" and all(
+        cue in resolution[1]["line"].lower() for cue in ("stay here", "with you")
+    )
+    child_speech = " ".join(turn["line"] for part in lesson["parts"] for turn in part["turns"]
+                            if turn["speaker"] == "child")
+    assert not any(character.isdigit() for character in child_speech)
+    assert all(cue not in child_speech.lower() for cue in ("surname", "address", "phone number"))
+    assert all(cue in production["emotion"]["forbidden"].lower() for cue in (
+        "real separation", "parking lot", "stranger touch", "panic", "crying spectacle",
+    ))
+    assert "badge" in production["scene"].lower() and "home sofa" in production["scene"].lower()
+    for part in production["parts"].values():
+        assert "home" in part["start"].lower() and "home" in part["end"].lower()
+        assert "seated" in part["start"].lower() and "seated" in part["end"].lower()
+
+
 def test_chapters_4_to_10_follow_the_approved_stage_outline():
     stage = load_stage(CURRICULUM_ROOT, "04")
     expected = {

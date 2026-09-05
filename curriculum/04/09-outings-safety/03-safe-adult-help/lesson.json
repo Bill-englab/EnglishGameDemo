@@ -1,19 +1,20 @@
 {
-  "title":"Ask the Shop Worker","title_zh":"向商店工作人员求助","can_do":"在走失演练中向可识别的工作人员说明找不到家长、说出名字并留在安全地点。",
+  "title":"I Can't Find My Mom","title_zh":"找不到妈妈时怎样求助","can_do":"在家平静演练向可信任的工作人员说明找不到家长、说出名字并求助，留在服务台旁等工作人员联系家长。",
+  "dialogue_contract":"three-by-ten-v2",
   "conversation_move":{"id":"seek-safe-adult-help","label":"ask an identifiable safe adult for help"},
-  "trigger":"Mom starts a calm home rehearsal and plays a shop worker wearing a visible name badge.",
-  "core_response":"I can't find my mom.","stretch_response":"My name is Leo. Can you help me, please?","repair_response":"I need help finding my mom. I will stay here.",
-  "recycle":["request-help","identify-belonging"],"roles":["child","mom"],"setting":"A calm pretend shop-worker rehearsal at home.","essential_props":["a pretend shop-worker name badge"],
+  "trigger":"Mom explicitly announces that she will pretend to be a store worker during a calm home rehearsal; she stays visible beside Child throughout.",
+  "core_response":"I can't find my mom.","stretch_response":"My name is Leo. Can you help me, please?","repair_response":"I need help finding my mom.",
+  "recycle":["request-help","identify-belonging"],"roles":["child","mom"],"setting":"A calm store-worker rehearsal at a small home desk, with Mom and Child seated together and the familiar living room visible.","essential_props":["Mom's pretend store-worker name badge"],
   "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"Let's practice. Pretend I am a shop worker with a name badge.","kind":"input"},{"speaker":"child","line":"Excuse me. I can't find my mom.","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"You came to a worker. What is your name?","kind":"input"},{"speaker":"child","line":"My name is Leo. Can you help me, please?","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Yes. Stay with me while I call for your mom.","kind":"input"},{"speaker":"child","line":"Okay. I will stay here with you.","kind":"action"}]}
+    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"Let's practice. I'll pretend to be a store worker.","kind":"input"},{"speaker":"child","line":"I can't find my mom.","kind":"core"},{"speaker":"mom","line":"What's your name?","kind":"input"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"My name is Leo.","kind":"recycle"},{"speaker":"mom","line":"Hello, Leo. You're safe here.","kind":"input"},{"speaker":"child","line":"Can you help me, please?","kind":"recycle"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"We'll stay at this desk. I'll call your mom.","kind":"input"},{"speaker":"child","line":"I'll stay here with you.","kind":"action"},{"speaker":"mom","line":"We'll wait together.","kind":"input"}]}
   ],
   "replay_cards":[
-    {"title":"Ask a security officer","setting":"A calm home role-play","change":"Dad wears a pretend security badge","challenge":"Say the parent is missing, give the child's first name, and stay while the officer gets help"},
-    {"title":"Ask a parent with children","setting":"A pretend park rehearsal","change":"No worker is visible, but Mom plays a parent caring for children","challenge":"Ask that adult for help, do not leave the public area, and wait while the adult contacts staff"}
+    {"title":"Ask a security officer","setting":"A calm home rehearsal with Dad always visible","change":"Dad announces that he will pretend to be the security officer at the information desk","challenge":"Child tells Dad-as-officer, \"I can't find my mom.\" After Dad asks his name, Child says, \"My name is Leo. Can you help me, please?\" Dad says they will stay at the desk while he contacts Mom. Child agrees, \"I'll stay here with you,\" and remains seated beside Dad; no actual separation or call is staged."},
+    {"title":"Make the help request clearer","setting":"A calm home rehearsal with Mom always visible","change":"Mom announces her pretend park-staff role at the information desk and does not hear the first request clearly","challenge":"Child says he cannot find his mom. Mom-as-staff calmly asks him to repeat, so he says, \"I need help finding my mom.\" Mom asks his name; he gives only the fictional first name Leo and asks for help. Mom says she will contact his mom while they stay at the desk. Child agrees to stay with the staff member, and both remain seated at home."}
   ],
-  "parent_support":["Practice calmly; never hide from the child or stage a frightening real separation.","Teach identifiable helpers such as a store employee, security officer, police officer, or parent with children; the child must not leave for a parking lot."],
+  "parent_support":["Keep this visibly a calm rehearsal at home. Mom announces her pretend worker role and stays present throughout; never hide, create real separation, frighten Child or turn the exchange into a test.","Before an outing, identify the customer-service or information desk and staff who can help, such as store employees, security officers or park staff. A badge alone does not make every person trustworthy. Practice staying with the identified worker while that worker gets help, without going outside or to a parking lot.","Leo is a fictional practice first name. The demo does not ask for or display a surname, address, phone number or other unnecessary personal details. Mom describes a pretend call; no real contact information, device, call or reunion is needed.","A small serious look is enough. Mom responds warmly at normal volume; no panic, stranger touch, dramatic crying, forced hug or celebratory rescue is part of the rehearsal."],
   "safety_source":{"title":"NCMEC KidSmartz Going Out Checklist","url":"https://www.missingkids.org/content/dam/kidsmartz/pdfs/KidSmartz_Going_Out_Checklist.pdf"},
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2
 }

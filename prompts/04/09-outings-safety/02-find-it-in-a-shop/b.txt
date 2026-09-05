@@ -1,36 +1,44 @@
-Find the Oatmeal — Part B (change)
-Production prompt draft | Source: curriculum/04/09-outings-safety/02-find-it-in-a-shop/lesson.json | Content revision: 1
-Source SHA256: 249397541271304392f475cd13bf5040eb54254d87cf2cef05db6144ad8babb7
+Where Is the Pasta? — Part B (change)
+Production prompt draft | Source: curriculum/04/09-outings-safety/02-find-it-in-a-shop/lesson.json | Content revision: 2
+Source SHA256: 6381b74edc1e868a8b3ff0441fd825af290be55af21cb9f9644ceae262ba9656
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
 
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Mom and Child are focused on a small shared shopping task and speak at an ordinary conversational volume.
+Child's eyes follow the shelf clue, then show mild recognition of the red bag and a small sense of competence during the transfer. Mom's acknowledgment is quiet and matter-of-fact.
+No exaggerated discovery, squealing, bouncing, frantic pointing, package grabbing, racing through aisles, climbing or pulling away from Mom. Do not turn successful shopping into a loud celebration.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
 SETTING
-A lightly staged grocery aisle.
+A simple grocery shelf with Mom and Child standing together; the pasta and basket are within Child's easy reach.
 
 SCENE AND PROP CONTINUITY
-A lightly staged, empty grocery setting with Mom screen left and Child screen right. Within a single locked 16:9 medium two-shot, a bare shelf end occupies the left background and the entrance of the next aisle is two short steps to the right. A simple physical cereal aisle sign points right. Two blue boxes remain plainly visible to the camera on the next-aisle shelf from the first frame: one has a large oat illustration, the other a large corn illustration. A short shelf side panel blocks only Mom's and Child's initial sightline to those boxes, never the camera's view. Their two-step move around the panel will let them see the already-visible boxes. Mom carries a small open shopping basket on her left forearm. Keep both characters together within frame; no workers, crowds, checkout, or extra stock.
+A simple, quiet grocery setting with Mom screen left and Child screen right, standing together beside one short shelf unit. Use a locked 16:9 medium-wide two-shot showing both faces, Child's knees, the bottom shelf and basket. There is exactly one red pasta bag: a small upright packet with a clear rectangular window showing short yellow pasta tubes. It begins on the bottom shelf at Child's knee height, immediately to his right and always visible to the camera. There are no other packages, aisle signs, hidden shelves, workers or shoppers. Mom wears her coral cardigan over a cream top; Child is the same four-year-old tiger boy in his yellow T-shirt, he/him if needed. Mom's right hand holds the basket's rigid handle, keeping the open basket level beside her right hip at Child's waist height; it begins empty. Her left hand rests at her side. Child can grasp the bag with a shallow knee bend and place it directly into the nearby basket without a step, climb or stretch. Preserve the same package color, window, pasta shape and basket throughout.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Both face the near shelf end; Mom holds the basket and Child looks to her for a location clue, while both blue boxes stay visible to the camera but outside the characters' sightline.
+Mom and Child look toward the red pasta bag on the bottom shelf; Mom holds the empty basket level in her right hand beside her right hip, and Child's hands remain at his sides.
 
 ACTION AND REACTIONS
-Mom looks up and indicates the physical cereal sign toward the adjacent aisle. Child asks about searching there, and they take two short steps together to the right around the side panel during the remaining beat. Their new position gives both characters a clear sightline to the two stationary boxes, which the camera has shown continuously since the first frame. Keep Mom left of Child and the camera locked; no long aisle walk.
+Child makes one small right-hand indication toward the red bag and its clear window while asking for confirmation. Mom looks at that same packet and confirms it. Child observes that it is within reach, then lets his right hand return to his side. Leave the package on the shelf until the next part; no other item is introduced and Mom does not pick it up.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "The sign says cereal is in the next aisle."
-Child: "Can we look for the blue box there?"
+Child: "The red bag with the window?"
+Mom: "Yes, that's the pasta we need."
+Child: "I can reach it."
 
 END FRAME
-Mom and Child stand at the adjacent shelf, now able to see both blue boxes that remain visible to the camera; Mom still carries the open basket and neither box has been touched.
+The confirmed red pasta bag remains on the bottom shelf; Mom holds the empty basket level in her right hand beside her right hip, and Child stands beside her with both hands at his sides.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (17 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (16 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

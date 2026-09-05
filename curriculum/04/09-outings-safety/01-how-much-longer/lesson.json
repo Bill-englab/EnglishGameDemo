@@ -1,18 +1,19 @@
 {
-  "title":"After the Big Bridge","title_zh":"过了大桥还要多久","can_do":"在车里询问还要多久，并用一个可观察路标理解回答。",
+  "title":"How Much Longer?","title_zh":"还要多久呀","can_do":"在车里询问剩余时间，用熟悉的路标确认回答，并选择接下来唱的歌。",
+  "dialogue_contract":"three-by-ten-v2",
   "conversation_move":{"id":"ask-duration","label":"ask how much longer"},
-  "trigger":"The child wants to know when the car ride to Grandma's house will end.",
-  "core_response":"How much longer?","stretch_response":"How much longer until we get there?","repair_response":"I mean, how long until Grandma's house?",
-  "recycle":["ask-location","report-readiness"],"roles":["child","dad"],"setting":"Buckled into the car on a familiar trip.","essential_props":[],
+  "trigger":"Dad names Grandma's as their destination, and Child wants to understand the remaining wait.",
+  "core_response":"How much longer?","stretch_response":"Will we get there after the bridge?","repair_response":"I mean, how long until Grandma's house?",
+  "recycle":["ask-location","report-readiness"],"roles":["child","dad"],"setting":"A continuous conversation in the family car; Dad is belted and watches the road, and Child stays in his fitted rear-seat child restraint.","essential_props":[],
   "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"We are on the way to Grandma's house.","kind":"input"},{"speaker":"child","line":"How much longer until we get there?","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"About ten minutes, after we cross the big bridge.","kind":"input"},{"speaker":"child","line":"Can you tell me when we reach the bridge?","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"There it is. Now we have about five minutes.","kind":"input"},{"speaker":"child","line":"Okay. I can look for Grandma's street now.","kind":"action"}]}
+    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"We're on our way to Grandma's.","kind":"input"},{"speaker":"child","line":"How much longer?","kind":"core"},{"speaker":"dad","line":"About five minutes. That's two songs.","kind":"input"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"Will we get there after the bridge?","kind":"stretch"},{"speaker":"dad","line":"Yes, just after the bridge.","kind":"input"},{"speaker":"child","line":"Okay. That's not far now.","kind":"recycle"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"Which song would you like next?","kind":"input"},{"speaker":"child","line":"The animal song, please.","kind":"recycle"},{"speaker":"dad","line":"Okay. We'll sing that one.","kind":"input"},{"speaker":"child","line":"I'm ready, Dad.","kind":"action"}]}
   ],
   "replay_cards":[
-    {"title":"Two songs to home","setting":"In the car after an outing","change":"Dad answers with two familiar songs rather than minutes","challenge":"Ask how much longer, listen for the song count, and notice when the second song ends"},
-    {"title":"After the next stop","setting":"Waiting on a pretend bus","change":"Mom explains they leave after the next stop","challenge":"Ask about the wait, repeat the landmark, and get ready when it appears"}
+    {"title":"Time, not distance","setting":"A seated pretend car trip at home","change":"Dad answers with distance when Child wants a time estimate","challenge":"Child asks, \"Where are we going?\" Dad names Grandma's. Child asks, \"How much longer?\" Dad gives the distance, so Child clarifies, \"I mean, how long until Grandma's house?\" Dad gives a short truthful time estimate. Child accepts it and chooses a quiet song while both remain seated."},
+    {"title":"Waiting for the bus","setting":"A calm pretend bus stop at home with Mom","change":"The bus has not arrived, and Child still needs his jacket","challenge":"Child asks, \"How much longer until the bus comes?\" Mom says about five minutes. Child answers, \"I'm ready, but I still need my jacket.\" Mom passes his jacket; he puts it on and waits beside her. They do not step into a road or board a moving vehicle."}
   ],
-  "parent_support":["Give a short truthful estimate plus a landmark the child can notice.","The driver keeps attention on driving; the scene needs no turning or prop handling."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support":["Give a truthful short estimate; two familiar songs are only an approximate way to picture five minutes. Answer the landmark check without promising an exact arrival second.","Dad stays belted with eyes on the road and hands on the wheel. Child stays seated in his correctly fitted restraint. Choosing a song needs no screen, reaching, unbuckling or turn toward the back seat.","Keep the three parts continuous. They agree on the next song before the bridge or arrival; no five-minute time jump or extra sung lyrics belongs inside the demo."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2
 }

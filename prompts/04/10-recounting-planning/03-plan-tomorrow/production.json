@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "A quiet home entry area in evening light. Mom stands screen left and Child screen right beside a low shelf. Child's helmet is on that shelf within reach; an upright scooter is parked securely against the nearby wall, away from the walkway. The closed front door and a clear space beside it are visible within a locked 16:9 medium two-shot. This is planning for tomorrow, not riding now; no outdoor cutaway, packing bag, or extra equipment.",
+  "content_revision": 2,
+  "scene": "One continuous evening planning conversation at home. Mom stays seated screen left and Child stays seated screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No essential props; both have empty hands. Park, swings, library, rain and animal books are future possibilities mentioned in speech, never visible destinations or activities. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles, generated books or weather effects. Small illustrative hand gestures only; stay in this same home setting with unchanged lighting and no time jump.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline; Mom and Child make an ordinary family decision together at natural conversation volume.",
+    "allowed_shift": "A small pleased smile for the park choice, a brief thoughtful pause for rain, and a relaxed nod as they agree. Mom gives Child room to contribute without testing or prompting a memorized answer.",
+    "forbidden": "No cheering, disappointment tantrum, fear of rain, frantic swinging or pretending to travel, dramatic weather change or triumphant agreement pose. Keep faces and bodies proportionate and gestures small."
+  },
   "parts": {
     "A": {
-      "start": "Mom and Child stand by the low shelf; the helmet is on the shelf and the scooter is parked securely against the nearby wall.",
-      "action": "Mom shares tomorrow's park plan while facing Child. Child glances toward the already-visible scooter and expresses the wish to ride it there. No one mounts or moves the scooter; the plan remains a future activity.",
-      "end": "Child looks from the parked scooter back to Mom; the helmet remains on the low shelf and both stand in the same positions."
+      "start": "Mom remains seated screen left and Child seated screen right at home in evening light, facing each other with empty hands resting near their laps.",
+      "action": "Mom offers two destinations with a small open-palm gesture. Child chooses the park and gives his reason with a modest smile, keeping his body still rather than imitating a swing. Mom acknowledges his preference. No destination appears and neither character looks toward an imagined location.",
+      "end": "Mom and Child remain seated in the same home positions with empty hands near their laps after agreeing that the park sounds appealing."
     },
     "B": {
-      "start": "Child looks from the parked scooter back to Mom; the helmet remains on the low shelf and both stand in the same positions.",
-      "action": "Mom points briefly to the helmet as the condition for taking the scooter. Child indicates the helmet first and then the scooter while proposing the preparation order and asking to pack tonight. Both objects stay put until Mom agrees; keep gestures small enough for the full exchange.",
-      "end": "Child's hand has lowered after indicating helmet then scooter; the helmet stays on the shelf and the scooter remains parked while Child awaits Mom's answer."
+      "start": "Mom and Child remain seated in the same home positions with empty hands near their laps after agreeing that the park sounds appealing.",
+      "action": "Mom introduces rain as a possible condition in normal conversation, then listens. After a brief thoughtful pause, Child offers the library with one small open-hand gesture. Mom accepts indoor reading as the alternative. No rain starts, no lighting changes, and no one supplies Child's proposal for him.",
+      "end": "Mom and Child remain seated at home with empty hands lowered near their laps after agreeing on the library as the rainy-day alternative."
     },
     "C": {
-      "start": "Child's hand has lowered after indicating helmet then scooter; the helmet stays on the shelf and the scooter remains parked while Child awaits Mom's answer.",
-      "action": "Mom agrees and indicates the clear space beside the closed door. Child then takes the helmet from the low shelf and places it in that nearby space during the final turn. End with the first preparation step completed; do not squeeze in scooter transport, riding, a helmet-fitting demonstration, or tomorrow's outing.",
-      "end": "The helmet is set safely beside the closed door; the scooter remains parked against the wall and Child has completed the first preparation step."
+      "start": "Mom and Child remain seated at home with empty hands lowered near their laps after agreeing on the library as the rainy-day alternative.",
+      "action": "Child adds his interest in animal books while looking at Mom. Mom agrees and restates the dry-weather park and rainy-weather library options with a small two-option hand gesture. Child gives one relaxed confirming nod during his final turn. End with a shared plan, without books, travel, pretend reading or additional speech.",
+      "end": "Mom and Child remain seated in the unchanged home setting with empty hands relaxed near their laps, sharing a calm look after confirming tomorrow's conditional plan."
     }
   }
 }

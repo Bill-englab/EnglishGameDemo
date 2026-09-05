@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "An uncluttered end-of-day classroom corner. Teacher sits screen left and Child sits screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No toys or essential props are present; the outdoor play is a past event being discussed, never reenacted. Maya, the cars, bus, road, and bridge exist only in the spoken memory and simple hand gestures, not as additional actors, cutaways, thought bubbles, or generated objects.",
+  "content_revision": 2,
+  "scene": "One continuous conversation in an uncluttered end-of-day classroom corner. Rabbit Teacher stays seated screen left and Child stays seated screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No essential props. The tower and Maya belong only to Child's recalled play episode; neither appears. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles, generated blocks or reenacted collapse. Small illustrative hand gestures only; both remain in this classroom for all three parts, with no time jump.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline; Teacher listens with ordinary interest and Child shares a recent memory in a natural child voice.",
+    "allowed_shift": "A slight thoughtful pause for the fall, followed by a small pleased smile about rebuilding. Express the shift through a glance, small nod or brief hand gesture at normal conversation volume.",
+    "forbidden": "No startled gasp, alarm at the remembered fall, triumphant cheering, exaggerated pride, testing expression, repeated praise demand or reenacted distress. Keep eyes, face and body proportions stable."
+  },
   "parts": {
     "A": {
-      "start": "Teacher and Child sit facing each other in the quiet classroom with empty hands and attentive expressions.",
-      "action": "Teacher asks about a specific recent play event with genuine interest. Child recalls the road and uses a short horizontal hand gesture for its length while answering, then returns attention to Teacher. Keep the moment conversational, not a test or a performance of the remembered scene.",
-      "end": "Child's hands rest near their lap after describing the road; Teacher remains turned toward Child, listening."
+      "start": "Teacher remains seated screen left and Child seated screen right in the quiet classroom; both have empty hands resting near their laps and attentive expressions.",
+      "action": "Teacher invites one recent event. Child briefly marks a modest tower height with one empty hand while naming the shared building activity, then lowers it. Teacher asks only whether that tower stayed upright, with quiet interest. Keep both faces visible; no one turns toward an offscreen peer and no tower appears.",
+      "end": "Teacher and Child remain seated in the same classroom positions with empty hands near their laps; Teacher is listening for the tower's outcome."
     },
     "B": {
-      "start": "Child's hands rest near their lap after describing the road; Teacher remains turned toward Child, listening.",
-      "action": "Teacher asks the follow-up prompted by the road detail. Child makes a small count gesture for three, then a slightly broader hand shape for the bus while answering. No physical vehicles appear and no one looks toward an imaginary offscreen Maya; maintain the real conversation.",
-      "end": "Child has lowered the counting hand and both remain seated together; the classroom is unchanged and no props have appeared."
+      "start": "Teacher and Child remain seated in the same classroom positions with empty hands near their laps; Teacher is listening for the tower's outcome.",
+      "action": "Child gives one gentle downward empty-hand motion while recalling the fall. Teacher acknowledges it without surprise or a second question. Child then makes a small upward stacking gesture while explaining that they rebuilt together. These gestures happen during speech; there are no blocks, sound effects, falling bodies or additional characters.",
+      "end": "Teacher and Child remain seated in the same classroom positions with empty hands lowered near their laps after Child's small rebuilding gesture."
     },
     "C": {
-      "start": "Child has lowered the counting hand and both remain seated together; the classroom is unchanged and no props have appeared.",
-      "action": "Teacher invites the favorite part with a warm curious expression. Child smiles at the memory and briefly moves one empty hand beneath the other curved hand to suggest the bus passing under the bridge. Teacher listens with a small nod, without added praise or dialogue.",
-      "end": "Child lowers both empty hands with a pleased expression; Teacher remains attentive beside Child in the unchanged classroom."
+      "start": "Teacher and Child remain seated in the same classroom positions with empty hands lowered near their laps after Child's small rebuilding gesture.",
+      "action": "Teacher acknowledges the shared rebuilding. Child gives one small nod while adding that the tower stayed upright, with a modest pleased expression. Teacher closes by acknowledging the tower story. Both keep their empty hands relaxed; no reenactment, further question or added praise follows.",
+      "end": "Teacher and Child remain seated in the unchanged classroom with empty hands relaxed near their laps, sharing a quiet look after the complete tower account."
     }
   }
 }

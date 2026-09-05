@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "A home table conversation with Dad seated screen left and Child seated screen right. One already-repaired, dry paper boat rests upright between them throughout. No bowl, water, repair tools, or additional people are present. Locked 16:9 medium two-shot. All tipping, teacher help, and floating happened earlier; illustrate the telling with empty-hand gestures, never flashbacks or actual present-tense sinking.",
+  "content_revision": 2,
+  "scene": "One continuous after-school conversation at home. Dad stays seated screen left and Child stays seated screen right, facing each other in a locked 16:9 medium two-shot. No essential props; both have empty hands and the space between them is clear. Painting and washing brushes happened earlier at school. The red bus is a detail in the remembered picture, not a vehicle or prop. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles or generated school materials. Small illustrative hand gestures only; remain in this home conversation without a time jump.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline; Dad is interested in Child's school experience and Child tells it at ordinary family conversation volume.",
+    "allowed_shift": "Child may pause briefly to recall the sequence and show mild pleasure about the picture. Dad responds with a small interested nod. Gestures stay short and relaxed.",
+    "forbidden": "No excited art reveal, dramatic memory struggle, quiz posture, exaggerated applause, sudden bus animation or noisy washing performance. No facial stretching or large arm movements."
+  },
   "parts": {
     "A": {
-      "start": "The dry, repaired paper boat rests upright on the table between Dad and Child; both sit facing each other with hands clear of it.",
-      "action": "Dad glances at the boat before asking about its day. Child uses an empty hand first flat and then gently tilted to mark the two remembered events. Keep the actual boat stationary and upright, so the story is not mistaken for an accident happening now.",
-      "end": "The boat remains upright and dry on the table; Child's empty hand is lowered after the tipping gesture and Dad listens."
+      "start": "Dad remains seated screen left and Child seated screen right at home, facing each other with empty hands near their laps and no objects between them.",
+      "action": "Dad invites the school account. Child makes one small empty-hand mark for the painting event. Dad's short continuation gives him room to name washing the brushes; Child makes a second small mark beside the first. Do not mime a full painting or washing routine, summon art supplies or move into a classroom.",
+      "end": "Dad and Child remain seated in the same home positions with empty hands lowered near their laps after Child's two small sequence gestures."
     },
     "B": {
-      "start": "The boat remains upright and dry on the table; Child's empty hand is lowered after the tipping gesture and Dad listens.",
-      "action": "Dad reacts with mild concern and asks about the next event, accepting the first part of the account. Child looks back to Dad and gives the help-seeking detail with one small open-hand gesture. No Teacher appears or speaks and no repairs take place in the present scene.",
-      "end": "Dad and Child remain seated with the repaired boat untouched between them; Child's hands are relaxed near the table edge."
+      "start": "Dad and Child remain seated in the same home positions with empty hands lowered near their laps after Child's two small sequence gestures.",
+      "action": "Dad asks what Child painted. Child suggests the bus's shape with a short open-hand gesture close to his body while giving the one picture detail. Dad shows interest in seeing the picture later. Neither fetches a picture or points offscreen; no bus, drawing, teacher or brush appears.",
+      "end": "Dad and Child remain seated at home with empty hands relaxed near their laps; Dad's attention stays on Child after the bus detail."
     },
     "C": {
-      "start": "Dad and Child remain seated with the repaired boat untouched between them; Child's hands are relaxed near the table edge.",
-      "action": "Dad asks whether there was another attempt. Child gives a small nod and makes a level, gently gliding empty-hand gesture while describing the successful result, then looks proudly at the real dry boat. Do not animate the boat floating on air or summon water to illustrate the past.",
-      "end": "The repaired paper boat remains dry and upright on the table; Dad and Child share a quiet pleased look at it."
+      "start": "Dad and Child remain seated at home with empty hands relaxed near their laps; Dad's attention stays on Child after the bus detail.",
+      "action": "Dad restates painting followed by washing the brushes, showing that he understood. Child gives one small confirming nod during his reply. Dad acknowledges the account and settles. Child does not repeat the sequence, demonstrate school activities or leave to retrieve the picture.",
+      "end": "Dad and Child remain seated in the unchanged home setting with empty hands near their laps, relaxed after agreeing on the two-event account."
     }
   }
 }

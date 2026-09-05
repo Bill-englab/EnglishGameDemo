@@ -1,18 +1,19 @@
 {
-  "title":"The Road We Made","title_zh":"我们今天搭的路","can_do":"回答今天做了什么，并补充人物、物品或喜欢的部分。",
+  "title":"I Built a Tower","title_zh":"我搭了一座塔","can_do":"讲今天和同伴做的一件事，在一次具体追问后补充小意外与结果。",
+  "dialogue_contract":"three-by-ten-v2",
   "conversation_move":{"id":"recount-one-event","label":"recount one event from today"},
-  "trigger":"Rabbit Teacher asks about an outdoor-play event the child just experienced.",
-  "core_response":"Today I made a long road.","stretch_response":"Today I made a long road with Maya.","repair_response":"Not yesterday. We made it today.",
-  "recycle":["join-play","identify-belonging"],"roles":["child","teacher"],"setting":"A short end-of-day classroom conversation.","essential_props":[],
+  "trigger":"Rabbit Teacher invites Child to share one thing he did today, then asks whether the tower he mentions stayed up.",
+  "core_response":"I built a tower with Maya.","stretch_response":"We built it again together.","repair_response":"No, that was today.",
+  "recycle":["join-play","identify-belonging"],"roles":["child","teacher"],"setting":"A quiet end-of-day classroom conversation with Rabbit Teacher and Child seated facing each other.","essential_props":[],
   "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"teacher","line":"What did you do during outdoor play today?","kind":"input"},{"speaker":"child","line":"Today I made a long road with Maya.","kind":"core"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"teacher","line":"What went on the road?","kind":"input"},{"speaker":"child","line":"We put three cars and a bus on it.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"teacher","line":"Which part did you like best?","kind":"input"},{"speaker":"child","line":"I liked driving the bus under our bridge.","kind":"action"}]}
+    {"id":"A","beat":"goal","turns":[{"speaker":"teacher","line":"Tell me one thing you did today.","kind":"input"},{"speaker":"child","line":"I built a tower with Maya.","kind":"core"},{"speaker":"teacher","line":"Did your tower stay up?","kind":"input"}]},
+    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"No, it fell down.","kind":"input"},{"speaker":"teacher","line":"Oh, your tower fell.","kind":"confirmation"},{"speaker":"child","line":"We built it again together.","kind":"stretch"}]},
+    {"id":"C","beat":"resolve","turns":[{"speaker":"teacher","line":"You both helped rebuild it.","kind":"confirmation"},{"speaker":"child","line":"Yes, and it stayed up.","kind":"action"},{"speaker":"teacher","line":"Thanks for telling me about your tower.","kind":"confirmation"}]}
   ],
   "replay_cards":[
-    {"title":"Today I painted","setting":"Talking with Mom after an art activity","change":"Mom asks what was in the picture","challenge":"Name the event, add one object or color, and say the favorite part"},
-    {"title":"Today I played outside","setting":"Talking at dinner","change":"Dad asks who joined the game","challenge":"Name the event, the person, and one concrete thing they did together"}
+    {"title":"The picture from today","setting":"A quiet chat with Dad after drawing at home","change":"Dad recognizes the picture but thinks Child made it yesterday","challenge":"Child tells Dad he made a picture today. Dad asks whose picture has a sun, and Child answers, \"It's mine. It has a sun.\" Dad recalls it as yesterday's picture. Child clarifies, \"No, that was today.\" Dad accepts the correction and acknowledges what Child made. Stay with this one drawing event; the picture can be remembered rather than fetched."},
+    {"title":"Joining Maya's game","setting":"Talking with Mom after play","change":"Mom is interested in how Child joined the game he mentions","challenge":"Child says, \"Today I played with Maya.\" Mom asks how he joined. Child recalls his request: \"I asked, 'Can I play with you?'\" He adds that Maya said yes and they played together. Mom acknowledges the complete event. Maya stays a person in Child's memory; no one acts or speaks as a third character."}
   ],
-  "parent_support":["Ask about one recent, shared, concrete event rather than the whole day.","Follow the child's answer with one genuine detail question, not a quiz sequence."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true},"status":"language_reviewed","content_revision":1
+  "parent_support":["Invite one recent event he wants to share. Accept a short answer and use the tower's outcome as one concrete follow-up; do not ask him to report the whole day.","After hearing that the tower fell, acknowledge it and wait for his next thought. Building, falling and rebuilding belong to one small play episode; he need not produce a first/then list or retell it perfectly.","Listen with calm interest. A small hand gesture or nod can support the memory without reenacting it. Acknowledge the event he told, not the quality of his English."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2
 }

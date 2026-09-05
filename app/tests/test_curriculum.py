@@ -1440,6 +1440,165 @@ def test_chapter_9_safe_help_is_a_home_rehearsal_with_first_name_help_and_stayin
         assert "seated" in part["start"].lower() and "seated" in part["end"].lower()
 
 
+@pytest.mark.parametrize("lesson_id, partner, move, title", [
+    ("01-one-event-today", "teacher", "recount-one-event", "I Built a Tower"),
+    ("02-first-and-then", "dad", "recount-two-events", "First We Painted"),
+    ("03-plan-tomorrow", "mom", "contribute-to-plan", "Tomorrow's Plan"),
+])
+def test_chapter_10_meets_three_by_ten_conversation_contract(lesson_id, partner, move, title):
+    chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][9]
+    lesson = next(item for item in chapter["lessons"] if item["id"] == lesson_id)
+    production_path = REPO_ROOT / "prompts/04" / chapter["id"] / lesson_id / "production.json"
+    production = json.loads(production_path.read_text(encoding="utf-8"))
+    turns = [turn for part in lesson["parts"] for turn in part["turns"]]
+    child_turns = [turn for turn in turns if turn["speaker"] == "child"]
+
+    checks = {
+        "the chapter identity stays stable": chapter["id"] == "10-recounting-planning",
+        "the lesson uses the assigned scene": lesson["title"] == title,
+        "the assigned move stays stable": lesson["conversation_move"]["id"] == move,
+        "only Child and the assigned partner speak": lesson["roles"] == ["child", partner]
+        and {turn["speaker"] for turn in turns} == {"child", partner},
+        "three-by-ten-v2 is required": lesson.get("dialogue_contract") == "three-by-ten-v2",
+        "A/B/C preserve goal/change/resolve order": [
+            (part["id"], part["beat"]) for part in lesson["parts"]
+        ] == [("A", "goal"), ("B", "change"), ("C", "resolve")],
+        "the lesson has 9-11 turns": 9 <= len(turns) <= 11,
+        "Child has 4-5 turns": 4 <= len(child_turns) <= 5,
+        "the lesson has 45-58 spoken words": 45 <= sum(len(turn["line"].split()) for turn in turns) <= 58,
+        "Child has 18-28 spoken words": 18 <= sum(len(turn["line"].split()) for turn in child_turns) <= 28,
+        "Child turns stay within nine words": all(len(turn["line"].split()) <= 9 for turn in child_turns),
+        "adult turns stay within eleven words": all(
+            len(turn["line"].split()) <= 11 for turn in turns if turn["speaker"] != "child"
+        ),
+        "the conversation requires no reenactment props": lesson["essential_props"] == [],
+        "two complete Replay Cards remain": len(lesson["replay_cards"]) == 2
+        and all(all(card.get(field) for field in ("title", "setting", "change", "challenge"))
+                for card in lesson["replay_cards"]),
+        "lesson and production share revision 2": lesson["content_revision"] == production["content_revision"] == 2,
+        "the lesson remains language_reviewed": lesson["status"] == "language_reviewed",
+        "all ten reviews passed": all(lesson["reviews"].get(review) is True for review in (
+            "motivation", "causality", "physical", "adult_behavior", "child_language",
+            "knowledge_safety", "resolution", "replay_logic", "character_continuity", "emotion_stability",
+        )),
+        "production bounds emotional performance": all(
+            isinstance(production.get("emotion", {}).get(field), str)
+            and production["emotion"][field].strip()
+            for field in ("baseline", "allowed_shift", "forbidden")
+        ),
+        "production maintains a calm baseline": "calm" in production.get("emotion", {}).get("baseline", "").lower(),
+        "the resolution includes a small visible confirmation": any(
+            turn["kind"] == "action" for turn in lesson["parts"][-1]["turns"]
+        ),
+        "production has exactly A/B/C": list(production["parts"]) == ["A", "B", "C"],
+    }
+    for part in lesson["parts"]:
+        checks[f"Part {part['id']} has 3-4 turns"] = 3 <= len(part["turns"]) <= 4
+        checks[f"Part {part['id']} has 12-20 spoken words"] = (
+            12 <= sum(len(turn["line"].split()) for turn in part["turns"]) <= 20
+        )
+        checks[f"Part {part['id']} includes Child"] = any(
+            turn["speaker"] == "child" for turn in part["turns"]
+        )
+        exported = production_path.with_name(f"{part['id'].lower()}.txt").read_text(encoding="utf-8")
+        checks[f"Part {part['id']} export matches revision 2"] = "Content revision: 2\n" in exported
+        expected_speech = "\n".join(f'{turn["speaker"].title()}: "{turn["line"]}"' for turn in part["turns"])
+        checks[f"Part {part['id']} export preserves canonical speech"] = (
+            exported.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
+            == expected_speech
+        )
+        cast = exported.split("FIXED CAST (only these two)\n")[1].split("\n\n")[0]
+        checks[f"Part {part['id']} keeps the same tiger boy"] = "four-year-old cartoon tiger boy" in cast
+        checks[f"Part {part['id']} independently prohibits reenactment"] = all(
+            cue in exported.lower() for cue in (
+                "no flashback montage", "no extra voices", "no imagined-location cutaways",
+                "small illustrative hand gestures only",
+            )
+        )
+        for frame in ("start", "end"):
+            checks[f"Part {part['id']} {frame} stays in the seated conversation"] = all(
+                cue in production["parts"][part["id"]][frame].lower()
+                for cue in ("seated", "empty hands")
+            )
+    for before, after in (("A", "B"), ("B", "C")):
+        checks[f"production preserves {before}/{after} continuity"] = (
+            production["parts"][before]["end"] == production["parts"][after]["start"]
+        )
+    child_speech = {turn["line"] for turn in child_turns}
+    for field in ("core_response", "stretch_response", "repair_response"):
+        checks[f"{field} is practiced in the story or a Replay Card"] = (
+            lesson[field] in child_speech
+            or any(f'"{lesson[field]}"' in card["challenge"] for card in lesson["replay_cards"])
+        )
+
+    assert all(checks.values()), [requirement for requirement, passed in checks.items() if not passed]
+
+
+def test_chapter_10_one_event_has_one_concrete_followup_and_a_complete_outcome():
+    lesson = load_stage(CURRICULUM_ROOT, "04")["chapters"][9]["lessons"][0]
+    opening, middle, resolution = [part["turns"] for part in lesson["parts"]]
+
+    assert opening[0]["speaker"] == "teacher" and all(
+        cue in opening[0]["line"].lower() for cue in ("one thing", "today")
+    )
+    assert opening[1]["speaker"] == "child" and all(
+        cue in opening[1]["line"].lower() for cue in ("built a tower", "with")
+    )
+    assert opening[-1]["speaker"] == "teacher" and "stay up?" in opening[-1]["line"].lower()
+    assert middle[0]["speaker"] == "child" and "fell" in middle[0]["line"].lower()
+    assert middle[-1]["speaker"] == "child" and all(
+        cue in middle[-1]["line"].lower() for cue in ("built it again", "together")
+    )
+    assert any(turn["speaker"] == "teacher" and "rebuild" in turn["line"].lower() for turn in resolution)
+    assert any(turn["speaker"] == "child" and "stayed up" in turn["line"].lower() for turn in resolution)
+    assert resolution[-1]["speaker"] == "teacher" and "tower" in resolution[-1]["line"].lower()
+    assert sum(turn["line"].count("?") for part in lesson["parts"] for turn in part["turns"]
+               if turn["speaker"] == "teacher") == 1
+
+
+def test_chapter_10_two_events_adds_one_detail_before_dad_restates_the_sequence():
+    lesson = load_stage(CURRICULUM_ROOT, "04")["chapters"][9]["lessons"][1]
+    opening, middle, resolution = [part["turns"] for part in lesson["parts"]]
+
+    assert opening[0]["speaker"] == "dad" and "school" in opening[0]["line"].lower()
+    assert opening[1]["speaker"] == "child" and "first we painted" in opening[1]["line"].lower()
+    assert opening[-1]["speaker"] == "child" and all(
+        cue in opening[-1]["line"].lower() for cue in ("then", "washed the brushes")
+    )
+    assert middle[0]["speaker"] == "dad" and "what did you paint" in middle[0]["line"].lower()
+    assert middle[1]["speaker"] == "child" and "red bus" in middle[1]["line"].lower()
+    assert resolution[0]["speaker"] == "dad" and all(
+        cue in resolution[0]["line"].lower() for cue in ("first", "painted", "then", "washed the brushes")
+    )
+    assert resolution[1]["speaker"] == "child" and "yes" in resolution[1]["line"].lower()
+    assert resolution[1]["kind"] == "action"
+
+
+def test_chapter_10_child_chooses_with_a_reason_and_proposes_the_rain_alternative():
+    lesson = load_stage(CURRICULUM_ROOT, "04")["chapters"][9]["lessons"][2]
+    opening, middle, resolution = [part["turns"] for part in lesson["parts"]]
+
+    assert opening[0]["speaker"] == "mom" and all(
+        cue in opening[0]["line"].lower() for cue in ("tomorrow", "park or library")
+    )
+    assert opening[1]["speaker"] == "child" and all(
+        cue in opening[1]["line"].lower() for cue in ("park", "because", "swings")
+    )
+    assert middle[0]["speaker"] == "mom" and "if it rains" in middle[0]["line"].lower()
+    assert middle[1]["speaker"] == "child" and all(
+        cue in middle[1]["line"].lower() for cue in ("then", "let's", "library")
+    )
+    assert middle[-1]["speaker"] == "mom" and "indoors" in middle[-1]["line"].lower()
+    assert resolution[0]["speaker"] == "child" and "animal books" in resolution[0]["line"].lower()
+    assert resolution[1]["speaker"] == "mom" and all(
+        cue in resolution[1]["line"].lower() for cue in ("yes", "park if dry", "library if it rains")
+    )
+    assert resolution[-1]["speaker"] == "child" and all(
+        cue in resolution[-1]["line"].lower() for cue in ("plan", "tomorrow")
+    )
+    assert resolution[-1]["kind"] == "action"
+
+
 def test_chapters_4_to_10_follow_the_approved_stage_outline():
     stage = load_stage(CURRICULUM_ROOT, "04")
     expected = {

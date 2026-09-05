@@ -1,21 +1,26 @@
 {
-  "content_revision": 1,
-  "scene": "In a quiet dressing corner, Dad kneels screen-left and Child stands screen-right beside a low bench. Lay out one striped red shirt on the bench's left, one blue shirt in its center, and one red dinosaur shirt on its right. The dinosaur graphic is visible from frame one. The dialogue requires three garments despite the source's two-shirt prop shorthand: never merge the two red shirts or change their patterns. Child keeps the yellow T-shirt on; the chosen shirt is received, not worn. Locked 16:9 medium two-shot includes both faces and all three garments.",
+  "content_revision": 2,
+  "scene": "In a quiet dressing corner, Dad kneels screen-left and Child stands screen-right beside a low bench. Exactly two choice shirts lie on the bench: one red shirt with white stripes at bench-left and one red shirt with a single dinosaur graphic at bench-right. Both patterns are visible from the first frame and stay on their original red shirts; never add a third choice shirt. Child is the four-year-old tiger boy. His yellow T-shirt stays on throughout; he receives the dinosaur shirt and prepares to get dressed after the clip, with no wardrobe jump. The locked 16:9 medium two-shot includes both faces, hands and both choice shirts.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Dad and Child are attentive and relaxed, with normal family conversation volume and restrained faces and gestures.",
+    "allowed_shift": "Child briefly considers the visible patterns, then shows mild pleasure with a small smile and nod. Dad's clarification stays patient and matter-of-fact.",
+    "forbidden": "No exaggerated surprise, bouncing, cheering, forceful pointing or raised voices. Do not stretch faces or bodies or turn Child's confirmation into a shout."
+  },
   "parts": {
     "A": {
-      "start": "Dad kneels left with empty hands; Child stands right in the yellow T-shirt; striped red, blue, and red dinosaur shirts lie left-to-right on the bench.",
-      "action": "On Dad's broad question, he gestures toward the red garments and then the blue shirt without rearranging them. Child requests the red choice while looking toward the red side of the selection; avoid an unmistakable dinosaur-pointing gesture before the later clarification.",
-      "end": "Dad and Child remain beside the bench; all three shirts stay in their original positions and neither character holds a garment."
+      "start": "Dad kneels screen-left with empty hands; Child stands screen-right wearing his yellow T-shirt; the red striped shirt lies at bench-left and the red dinosaur shirt at bench-right.",
+      "action": "Dad invites a choice with a small open-hand gesture over both red shirts. Child looks at the pair while making his color-only choice; he does not point out the dinosaur yet. Dad notes the shared color while indicating both shirts together. Keep the patterns clearly visible and do not rearrange the clothes.",
+      "end": "Dad and Child remain beside the bench with empty hands; the red striped shirt stays at bench-left and the red dinosaur shirt at bench-right; Child still wears his yellow T-shirt."
     },
     "B": {
-      "start": "Dad and Child remain beside the bench; all three shirts stay in their original positions and neither character holds a garment.",
-      "action": "On Dad's question, he raises the striped red shirt from the left side of the bench, keeping its pattern visible. Child gently shakes their head, then points to the red dinosaur shirt at bench-right during the identifying reply.",
-      "end": "Dad holds the striped red shirt above bench-left; the blue shirt stays at bench-center and the red dinosaur shirt at bench-right; Child looks at the dinosaur shirt."
+      "start": "Dad and Child remain beside the bench with empty hands; the red striped shirt stays at bench-left and the red dinosaur shirt at bench-right; Child still wears his yellow T-shirt.",
+      "action": "Dad briefly indicates the two patterns during his question. Child identifies the dinosaur with his words and a small pointing gesture. Dad lifts the red dinosaur shirt from bench-right with both hands, keeping its graphic visible, and checks the choice. Child confirms with a small nod at normal volume and lowers his hand. The striped shirt never moves.",
+      "end": "Dad holds the red dinosaur shirt with both hands just above bench-right, graphic facing Child; the red striped shirt rests at bench-left; Child has empty hands and still wears his yellow T-shirt."
     },
     "C": {
-      "start": "Dad holds the striped red shirt above bench-left; the blue shirt stays at bench-center and the red dinosaur shirt at bench-right; Child looks at the dinosaur shirt.",
-      "action": "On Dad's recognition, he lays the striped red shirt back at bench-left and lifts the dinosaur shirt from bench-right. He offers it to Child; Child accepts it during the confirming response. No wardrobe change.",
-      "end": "Child holds the red dinosaur shirt in front of the unchanged yellow T-shirt; the striped red shirt rests at bench-left and the blue shirt at bench-center; Dad has empty hands."
+      "start": "Dad holds the red dinosaur shirt with both hands just above bench-right, graphic facing Child; the red striped shirt rests at bench-left; Child has empty hands and still wears his yellow T-shirt.",
+      "action": "Dad offers the dinosaur shirt during his opening turn. Child takes it with both hands below his face and thanks Dad. Dad asks about the next dressing step; Child agrees with a small nod while holding the shirt ready. Keep his yellow T-shirt on and the chosen shirt in his hands; changing clothes happens after this clip.",
+      "end": "Child holds the red dinosaur shirt with both hands below his face, in front of his unchanged yellow T-shirt; the red striped shirt rests at bench-left; Dad has empty hands and both remain beside the bench."
     }
   }
 }

@@ -1,20 +1,25 @@
 {
-  "content_revision": 1,
-  "scene": "At a home kitchen table, Mom sits screen-left and Child screen-right. One empty transparent cup stands at table-center within both characters' reach. A small open milk pitcher stands to its left and a small open clear-water pitcher farther left, both within Mom's reach. No extra cups. Keep a locked 16:9 medium two-shot with the cup and pitcher spouts visible; liquid continuity is essential.",
+  "content_revision": 2,
+  "scene": "At a home kitchen table, Mom sits screen-left and Child screen-right. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. One empty transparent cup stands at table-center within both characters' reach. A small open milk pitcher stands just left of the cup and a small open clear-water pitcher farther left, both within Mom's easy reach. Keep these two drinks distinct and show only one cup. The cup stays visibly empty through Parts A and B; no milk is ever poured, discarded or replaced. Use a locked 16:9 medium two-shot with both faces, hands, the cup and pitcher spouts visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Mom and Child are attentive and relaxed, speaking at normal family conversation volume with small, proportionate facial movements.",
+    "allowed_shift": "Child has a brief thoughtful pause before changing his choice, then quiet contentment. Mom responds with ordinary, patient acceptance and a small confirming nod.",
+    "forbidden": "No exaggerated surprise, bouncing, frustration, scolding, dramatic pleading, raised voices or sudden grabbing. Keep the change of mind small and everyday."
+  },
   "parts": {
     "A": {
       "start": "The cup at center is empty; the milk and water pitchers stand upright on its left; Mom and Child have empty hands.",
-      "action": "Mom indicates the two pitchers during the choice question. Child looks at Mom and requests milk. Mom reaches toward the milk pitcher only after the choice, without lifting or pouring it yet.",
-      "end": "The cup is still empty; both pitchers remain upright on the left; Mom's hand rests beside the milk pitcher and Child waits."
+      "action": "Mom indicates the two pitchers during her question. Child chooses milk while looking at Mom. During her acknowledgment she lifts the milk pitcher with her right hand and brings it beside the cup, keeping the pitcher upright and its spout away from the rim. No liquid flows.",
+      "end": "Mom holds the milk pitcher upright in her right hand just left of the visibly empty cup; the water pitcher stands farther left; Child waits with empty hands."
     },
     "B": {
-      "start": "The cup is still empty; both pitchers remain upright on the left; Mom's hand rests beside the milk pitcher and Child waits.",
-      "action": "During Mom's turn she lifts the milk pitcher and positions its spout near the cup but keeps it upright enough that no milk flows. As Child changes the choice, Mom immediately stops the movement and listens. The cup must remain visibly empty for the whole part.",
-      "end": "Mom holds the milk pitcher upright just left of the empty cup; no liquid has been poured; the water pitcher remains farther left and Child watches."
+      "start": "Mom holds the milk pitcher upright in her right hand just left of the visibly empty cup; the water pitcher stands farther left; Child waits with empty hands.",
+      "action": "Mom checks the amount while holding the milk pitcher upright. Child briefly glances toward the water and then changes his choice aloud. Mom immediately stops, sets the milk pitcher back in its original place, and checks the new drink. Child confirms. Only after his confirmation, Mom lifts the water pitcher with her left hand and brings it upright beside the cup. Keep the cup visibly empty throughout; use short, smooth hand movements with no pouring yet.",
+      "end": "Mom holds the water pitcher upright in her left hand beside the still-empty cup; the milk pitcher stands in its original place just left of the cup; Child has confirmed water and waits with empty hands."
     },
     "C": {
-      "start": "Mom holds the milk pitcher upright just left of the empty cup; no liquid has been poured; the water pitcher remains farther left and Child watches.",
-      "action": "During Mom's response she returns the milk pitcher to its original place, takes the water pitcher, and pours a small amount of clear water into the empty cup. She sets the pitcher back and slides the cup a short distance toward Child. Child receives the cup during the final response; no speech with the cup at the mouth.",
+      "start": "Mom holds the water pitcher upright in her left hand beside the still-empty cup; the milk pitcher stands in its original place just left of the cup; Child has confirmed water and waits with empty hands.",
+      "action": "With the new choice confirmed, Mom pours a small amount of clear water at the opening, sets the water pitcher back farther left, and slides the cup toward Child during her opening turn. She checks the amount as he receives it with both hands and looks at the water level. He accepts the amount and thanks her; she responds warmly. Keep the cup below his face throughout speech, with no drinking until the dialogue is finished.",
       "end": "Child holds the cup containing clear water; both pitchers stand upright in their original left-side positions; no milk entered the cup."
     }
   }

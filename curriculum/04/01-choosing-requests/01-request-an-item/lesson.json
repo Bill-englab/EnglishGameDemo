@@ -10,39 +10,44 @@
   "recycle": [],
   "roles": ["child", "mom"],
   "setting": "Snack time at home.",
-  "essential_props": ["an apple and a banana"],
+  "essential_props": ["one red apple and one banana"],
+  "dialogue_contract": "three-by-ten-v2",
   "parts": [
     {
       "id": "A",
       "beat": "goal",
       "turns": [
-        {"speaker": "mom", "line": "Would you like the apple or the banana for your snack?", "kind": "input"},
-        {"speaker": "child", "line": "Can I have the apple, please?", "kind": "core"}
+        {"speaker": "mom", "line": "You look hungry. Apple or banana?", "kind": "input"},
+        {"speaker": "child", "line": "Can I have the apple, please?", "kind": "core"},
+        {"speaker": "mom", "line": "Of course.", "kind": "input"}
       ]
     },
     {
       "id": "B",
       "beat": "change",
       "turns": [
-        {"speaker": "mom", "line": "Here is the banana.", "kind": "input"},
-        {"speaker": "child", "line": "No, I mean the apple, please.", "kind": "repair"}
+        {"speaker": "mom", "line": "Here's your banana.", "kind": "input"},
+        {"speaker": "child", "line": "No, I mean the apple—the red one, please.", "kind": "repair"},
+        {"speaker": "mom", "line": "Oh! I picked up the wrong one.", "kind": "input"}
       ]
     },
     {
       "id": "C",
       "beat": "resolve",
       "turns": [
-        {"speaker": "mom", "line": "Oh, you asked for the apple. Here it is.", "kind": "input"},
-        {"speaker": "child", "line": "Yes, that one. Thank you, Mom!", "kind": "playful"}
+        {"speaker": "mom", "line": "Here's the apple you asked for.", "kind": "action"},
+        {"speaker": "child", "line": "Yes, that's the one.", "kind": "input"},
+        {"speaker": "mom", "line": "Anything else?", "kind": "input"},
+        {"speaker": "child", "line": "No, thank you, Mom.", "kind": "input"}
       ]
     }
   ],
   "replay_cards": [
-    {"title": "Choose a drink", "setting": "At breakfast", "change": "Ask for water or milk", "challenge": "Mom reaches for the other drink; clarify and receive the right one"},
-    {"title": "Choose a book", "setting": "Before bedtime", "change": "Ask for the bear or train book", "challenge": "Dad picks up the other book; clarify and begin the chosen story"}
+    {"title": "Pack a picnic snack", "setting": "Packing a bag before going out", "change": "Mom offers a red apple or a green pear for the picnic", "challenge": "Child asks, 'Can I have the red apple, please?' If Mom reaches for the pear by mistake, Child says, 'No, I mean the apple, please.' Mom acknowledges the mix-up, puts the apple in his bag, and checks that his snack is ready."},
+    {"title": "Choose a book", "setting": "Before bedtime", "change": "Dad offers the bear book or the train book for tonight's story", "challenge": "Child asks for the bear book. If Dad picks up the train book by mistake, Child names the bear book again. Dad checks the cover with him, and they open the agreed book and begin reading."}
   ],
-  "parent_support": ["Offer two choices the child can see.", "If you hand over the wrong one, make it a believable mistake and correct it immediately after the child clarifies."],
-  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true},
+  "parent_support": ["Offer two choices the child can see, then wait for his request.", "If you pick up the wrong one, acknowledge the ordinary mistake as soon as he clarifies; do not prolong it to test him.", "Accept a short correction or a useful visible detail. Use a normal voice and small gestures, then let him confirm the result and close politely."],
+  "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 1
+  "content_revision": 2
 }

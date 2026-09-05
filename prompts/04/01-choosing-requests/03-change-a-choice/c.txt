@@ -1,36 +1,44 @@
 Water Instead — Part C (resolve)
-Production prompt draft | Source: curriculum/04/01-choosing-requests/03-change-a-choice/lesson.json | Content revision: 1
-Source SHA256: 779967eccc2d827323f94e49c2476d08cf2b058f51f1d6e5cb13fb96b11fbe4f
+Production prompt draft | Source: curriculum/04/01-choosing-requests/03-change-a-choice/lesson.json | Content revision: 2
+Source SHA256: 715bc32e216df92b89eafff323bff0672d664869d16ab23218d60d3542a466eb
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
 Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
+
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Mom and Child are attentive and relaxed, speaking at normal family conversation volume with small, proportionate facial movements.
+Child has a brief thoughtful pause before changing his choice, then quiet contentment. Mom responds with ordinary, patient acceptance and a small confirming nod.
+No exaggerated surprise, bouncing, frustration, scolding, dramatic pleading, raised voices or sudden grabbing. Keep the change of mind small and everyday.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
 SETTING
 At the kitchen table.
 
 SCENE AND PROP CONTINUITY
-At a home kitchen table, Mom sits screen-left and Child screen-right. One empty transparent cup stands at table-center within both characters' reach. A small open milk pitcher stands to its left and a small open clear-water pitcher farther left, both within Mom's reach. No extra cups. Keep a locked 16:9 medium two-shot with the cup and pitcher spouts visible; liquid continuity is essential.
+At a home kitchen table, Mom sits screen-left and Child screen-right. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. One empty transparent cup stands at table-center within both characters' reach. A small open milk pitcher stands just left of the cup and a small open clear-water pitcher farther left, both within Mom's easy reach. Keep these two drinks distinct and show only one cup. The cup stays visibly empty through Parts A and B; no milk is ever poured, discarded or replaced. Use a locked 16:9 medium two-shot with both faces, hands, the cup and pitcher spouts visible.
 Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Mom holds the milk pitcher upright just left of the empty cup; no liquid has been poured; the water pitcher remains farther left and Child watches.
+Mom holds the water pitcher upright in her left hand beside the still-empty cup; the milk pitcher stands in its original place just left of the cup; Child has confirmed water and waits with empty hands.
 
 ACTION AND REACTIONS
-During Mom's response she returns the milk pitcher to its original place, takes the water pitcher, and pours a small amount of clear water into the empty cup. She sets the pitcher back and slides the cup a short distance toward Child. Child receives the cup during the final response; no speech with the cup at the mouth.
+With the new choice confirmed, Mom pours a small amount of clear water at the opening, sets the water pitcher back farther left, and slides the cup toward Child during her opening turn. She checks the amount as he receives it with both hands and looks at the water level. He accepts the amount and thanks her; she responds warmly. Keep the cup below his face throughout speech, with no drinking until the dialogue is finished.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "Of course. I have not poured it yet. Here is your water."
-Child: "Thanks. Water is what I want now."
+Mom: "Here's your water. Is that enough?"
+Child: "Yes, thank you. That's enough for me."
+Mom: "You're welcome."
 
 END FRAME
 Child holds the cup containing clear water; both pitchers stand upright in their original left-side positions; no milk entered the cup.
 Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
 
-PACING (19 spoken words)
-Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. If a natural read does not fit, extend the clip rather than rush or omit words.
+PACING (15 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

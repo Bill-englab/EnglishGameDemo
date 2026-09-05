@@ -1,20 +1,25 @@
 {
-  "content_revision": 1,
-  "scene": "At a quiet home snack table, Mom sits screen-left and Child sits screen-right. A single red apple rests at center-right and one banana at center-left within Mom's reach. Both choices remain visible. Use the same locked 16:9 medium two-shot throughout; only these two characters, their hands and the tabletop matter.",
+  "content_revision": 2,
+  "scene": "At a quiet home snack table, Mom sits screen-left and Child sits screen-right. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. A single red apple rests at center-right and one banana at center-left within Mom's reach. Both fruits remain visible and keep their colors and identities. Use the same locked 16:9 medium two-shot throughout; show both faces, hands and the tabletop. No extra fruit or eating while speaking.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both are attentive and relaxed, using normal family conversation volume and small, proportionate facial movements.",
+    "allowed_shift": "Child makes a mild, matter-of-fact correction. Mom briefly recognizes an ordinary mistake, then responds warmly; the ending allows a small smile of quiet pleasure.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, blaming or teasing. Mom's recognition stays soft, with no large gasp or body jerk."
+  },
   "parts": {
     "A": {
       "start": "Mom and Child face each other across the table; the apple rests at center-right and the banana at center-left; both have empty hands.",
-      "action": "On Mom's choice question, she indicates the two fruits with an open hand. On Child's request, Child looks at the apple and then at Mom without taking either fruit.",
-      "end": "Mom and Child face each other; the apple remains at center-right and the banana at center-left; Child is waiting with empty hands."
+      "action": "Mom indicates the two fruits with one small open-hand gesture during the offer. Child looks at the apple and then at Mom during his request, without taking either fruit. Mom acknowledges him and rests her right hand beside the banana, ready to serve. Keep the exchange fluid, with gestures during speech.",
+      "end": "Mom and Child face each other; the red apple remains at center-right and the banana at center-left; Mom's right hand rests beside the banana and Child waits with empty hands."
     },
     "B": {
-      "start": "Mom and Child face each other; the apple remains at center-right and the banana at center-left; Child is waiting with empty hands.",
-      "action": "On Mom's turn, she absentmindedly picks up the banana and offers it halfway across the table. Child gently shakes their head and points to the apple during the correction. Mom pauses with the banana still in her hand; she does not correct the offer before Child speaks.",
-      "end": "Mom holds the banana just above the center of the table; the apple remains at center-right; Child's pointing hand has lowered and both look at the apple."
+      "start": "Mom and Child face each other; the red apple remains at center-right and the banana at center-left; Mom's right hand rests beside the banana and Child waits with empty hands.",
+      "action": "Mom mistakenly lifts the banana with her right hand and offers it halfway across the table during her opening turn. Child gently shakes his head once and indicates the red apple during his correction; he does not accept the banana. Mom recognizes the mistake at once. During her acknowledgment she returns the banana to center-left and lifts the apple from center-right with the same hand. Keep her recognition quiet and the two short hand movements continuous with speech.",
+      "end": "Mom holds the single red apple in her right hand just above center-right; the banana rests at center-left; Child has lowered his pointing hand and waits with empty hands."
     },
     "C": {
-      "start": "Mom holds the banana just above the center of the table; the apple remains at center-right; Child's pointing hand has lowered and both look at the apple.",
-      "action": "On Mom's acknowledgment, she returns the banana to center-left, picks up the apple from center-right, and hands it to Child. Child receives the apple with both hands during the thankful response. No eating while speaking.",
+      "start": "Mom holds the single red apple in her right hand just above center-right; the banana rests at center-left; Child has lowered his pointing hand and waits with empty hands.",
+      "action": "Mom hands over the apple during her opening turn. Child receives it with both hands and confirms the choice. Mom checks whether he wants anything else, and he closes politely with a small head shake. Keep the apple below his face and hold it steady through the exchange; no eating while speaking.",
       "end": "Child holds the single apple with both hands; the banana rests at center-left; Mom has empty hands and smiles at Child."
     }
   }

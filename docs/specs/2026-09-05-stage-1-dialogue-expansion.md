@@ -1,7 +1,7 @@
 # Stage 1 三段十秒生活对话重审设计
 
 > 日期：2026-09-05  
-> 状态：等待书面复核
+> 状态：已完成书面复核（2026-09-05）；runtime 内容获批，视频制作仍暂停
 
 ## 1. 修正目标
 
@@ -163,3 +163,14 @@
 - Replay Cards、螺旋复用和 70% 以上家庭角色比例继续满足原课程架构。
 - `validate_curriculum.py --stage 04 --complete`、提示词 `--check`、Python 与前端测试全部通过。
 - README、课程审查记录和 demo 进度记录准确说明新版内容版本与视频是否过时。
+
+## 10. 最终实施与复核结果（2026-09-05）
+
+- `curriculum/04/stage.json` 与 30/30 Lesson 均声明 `dialogue_contract: "three-by-ten-v2"`；所有 Lesson 保持 `language_reviewed`，0 课为 `video_ready`。
+- 30 课共 1451 个台词词 / 296 turns；Child 共 654 词 / 134 turns。逐课为 45–51 词、9–11 turns，Child 为 18–27 词、4–5 turns。
+- 90/90 段均为 3–4 turns、12–20 词；89 段在首选 14–19 词区间，10.1 Part B 为唯一 13 词段。家庭角色为 23/30（76.7%）。
+- 每课的 Q1–Q11 均完成书面检查；30 份 production 的道具、手部、服装/男孩身份、情绪上限、A/B/C 衔接和最终物理状态均逐课通过。完整逐项矩阵、精确计数和末态证据见 [`curriculum/04/FINAL-REVIEW.md`](../../curriculum/04/FINAL-REVIEW.md)。
+- Chapter 2 的六个非逐字 response-tier 示例已对齐到正式剧情或含真实误解的 Replay Card；两个只有 `Okay...` 的接受语已从 `repair` 改为 `confirmation`。这三课因此升到 revision 3，并同步 production 与提示词 hash；另有两课因此前修正为 revision 3，所以全 Stage 为 r2×25、r3×5。
+- 90 份提示词与 canonical 台词、revision 和 SHA256 全部同步；不存在旧 `12-15 seconds`、正向 `extend the clip` 或 pacing advisory。9.1 是无时间跳转的连续车内谈话，五分钟只作为估计。
+- 为使安全要求成为真实、可测试的导出行为，本轮对 `tools/build_video_prompts.py` 做了窄范围扩展：扫描 v2 production 的 scene、全部三个 emotion 字段与 start/action/end，并按穿着者/接受者关系检查 Child 服装归属。明确的 `No`、`do not`、`never` 等禁止句和带轻微上限的情绪允许通过；即使写在 `emotion.forbidden`，正向尖叫、极端兴奋、扭曲、失控动作、旧时长逃生语或无边界 `excited`/`shocked`/`angry` 仍会使导出失败。中性 `get dressed`、成人自己的衣物以及 Child 只整理成人衣物不会误报。
+- 历史 14/30 demo 按 revision 1 / v1 内容制作，相对当前 revision 2/3 全部 stale。本轮没有删除、覆盖、移动或重新编码 demo/performance；逐课真实生成、时长、口型、声音、参考帧连续性和孩子舒适度仍是后续生产门槛。

@@ -19,7 +19,7 @@ UI 改造主线：[`specs/2026-09-05-modern-toy-theatre-ui-design.md`](specs/202
 
 视频检查记录：[`specs/2026-09-04-video-compression-audit.md`](specs/2026-09-04-video-compression-audit.md)（当前环境与格式处理问题，含验证限制；不代表已经修复）。
 
-新版三段提示词：[`../prompts/04/README.md`](../prompts/04/README.md)（30课 / 90份完整草稿）；生成、版本与分镜检查规则见 [`../prompts/README.md`](../prompts/README.md)，实施记录见 [`plans/2026-09-04-three-part-prompts.md`](plans/2026-09-04-three-part-prompts.md)。不自动推进 `video_ready` 或生成视频。
+新版三段提示词：[`../prompts/04/README.md`](../prompts/04/README.md)（30课 / 90份完整草稿）；生成、版本与分镜检查规则见 [`../prompts/README.md`](../prompts/README.md)。[`plans/2026-09-04-three-part-prompts.md`](plans/2026-09-04-three-part-prompts.md) 仅保留最初 renderer/路由的历史实施记录，其时长与内容规则已由下方 Stage 1 重审方案取代。不自动推进 `video_ready` 或生成视频。
 
 课程设计主线：[`specs/2026-09-04-curriculum-architecture-design.md`](specs/2026-09-04-curriculum-architecture-design.md)（4–6 岁成长框架、4 岁 30 课大纲、真实性与内容生产标准）。4 岁课程的逐课验收记录见 [`../curriculum/04/FINAL-REVIEW.md`](../curriculum/04/FINAL-REVIEW.md)，应用接入记录见 [`plans/2026-09-04-curriculum-runtime-migration.md`](plans/2026-09-04-curriculum-runtime-migration.md)。后续关卡设计必须遵循课程设计与最终审查文档。
 

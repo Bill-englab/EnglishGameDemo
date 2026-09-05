@@ -1,8 +1,8 @@
 # 视频素材进度表 · Video Asset Progress
 
-快照（snapshot）：2026-08-30 ｜ demo 完成 **14 / 30** ｜ 段落 **28 / 60**
+历史快照（snapshot）：2026-08-30 ｜ revision 1 / v1 demo 完成 **14 / 30** ｜ 段落 **28 / 60**
 
-> **v1 历史记录（2026-09-04）：** 新版 4 岁课程已经完成并接入网站，现有 14/30 视频不与新版 Lesson 对齐。保留本表用于追溯，不再继续勾选；新版对应 Lesson 达到 `video_ready` 后另建 Stage 4 进度表。
+> **STALE（2026-09-05）：** Stage 1（`curriculum/04`）30 课现为 revision 2/3（r2×25、r3×5）。下列 14/30 个视频按 revision 1 / v1 内容制作，**全部过期且不能视为新版验收证据**。本轮没有删除、覆盖、重编码或移动任何视频；本表只保留历史追溯。30 课目前仍为 `language_reviewed`，0 课为 `video_ready`，正式制作继续暂停，直到某一课独立通过分镜、真实时长、口型、连续性和孩子舒适度检查。
 
 ## 结构说明 · How it works
 
@@ -228,6 +228,6 @@
 
 ## 总计 · Total
 
-**demo 14 / 30**（段落 28 / 60，约 47%）
+**历史 revision 1 / v1 demo 14 / 30**（段落 28 / 60，约 47%；相对当前 revision 2/3 全部 stale）
 
-旧版计划中的下一组是 `05-why-how-come/03-how-do-you`。课程重构期间暂不继续排产；新版 Lesson 通过内容审核并达到 `video_ready` 后再恢复。
+旧版计划中的下一组原为 `05-why-how-come/03-how-do-you`，现已取消排产优先级。新版 Lesson 必须逐课明确达到 `video_ready` 后才可制作对应的三段替换 demo；不得沿用本表勾选状态推断新版完成度。

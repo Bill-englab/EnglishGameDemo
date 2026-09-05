@@ -28,11 +28,212 @@ CAST = {
 PARTS = ("A", "B", "C")
 LEGACY_CHILD_CAST = "Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice."
 
+_NEGATIVE_DIRECTION = re.compile(
+    r"\b(?:no|not|never|without|avoid|avoids|avoiding|forbid|forbids|forbidden|"
+    r"prohibit|prohibits|prohibited|must\s+not|do\s+not|does\s+not|don't|doesn't|"
+    r"cannot|can't|rather\s+than|instead\s+of)\b",
+    re.IGNORECASE,
+)
+_NEGATIVE_DIRECTION_SUFFIX = re.compile(
+    r"^\s+(?:(?:is|are|was|were|stays?|remains?)\s+(?:strictly\s+)?"
+    r"(?:forbidden|prohibited|not\s+allowed)|"
+    r"(?:(?:do|does|did|is|are|was|were|has|have|had|will|would|can|could|"
+    r"should|must|may|might)\s+)?(?:not|never)\b)",
+    re.IGNORECASE,
+)
+_BOUNDED_EMOTION = re.compile(
+    r"\b(?:brief|briefly|mild|mildly|small|quiet|quietly|restrained|ordinary|"
+    r"slight|slightly|subtle|subtly|controlled|regulated|momentary|gentle|gently|"
+    r"modest|low-key|normal-volume)\b",
+    re.IGNORECASE,
+)
+_BOUNDED_EMOTION_SUFFIX = re.compile(
+    r"^\s+(?:but\s+)?(?:only\s+)?(?:briefly|mildly|quietly|slightly|subtly|"
+    r"gently|momentarily|brief|mild|quiet|restrained|controlled|regulated|"
+    r"subtle|gentle|modest|low-key|normal-volume)\b",
+    re.IGNORECASE,
+)
+_DIRECTION_SCOPE_BOUNDARY = re.compile(
+    r"\b(?:but|while|although|however|yet|whereas|then|because|since|unless|"
+    r"before|after|once|until|as)\b|"
+    r"\b(?:and|when)\s+(?=(?:Child|Dad|Mom|Teacher|Peer|he|she|they|it)\b)|"
+    r",\s*(?=(?:Child|Dad|Mom|Teacher|Peer|he|she|they|it)\b)",
+    re.IGNORECASE,
+)
+_COORDINATION_BOUNDARY = re.compile(r",|\band\b", re.IGNORECASE)
+_UNSAFE_DIRECTIONS = (
+    re.compile(r"\bscream(?:s|ed|ing)?\b", re.IGNORECASE),
+    re.compile(r"\bextreme(?:ly)?\s+excit(?:ement|ed)\b", re.IGNORECASE),
+    re.compile(r"\brage(?:s|d|ing)?\b", re.IGNORECASE),
+    re.compile(r"\bdistort(?:s|ed|ing|ion|ions)?\b", re.IGNORECASE),
+    re.compile(r"\bfrantic(?:ally)?\b", re.IGNORECASE),
+    re.compile(r"\buncontrolled(?:\s+\w+){0,2}\s+(?:run|running|movement|motion)\b", re.IGNORECASE),
+    re.compile(r"\bextend(?:s|ed|ing)?\s+the\s+clip\b", re.IGNORECASE),
+    re.compile(r"\b12\s*[-–]\s*15\s+seconds\b", re.IGNORECASE),
+)
+_UNBOUNDED_EMOTIONS = re.compile(
+    r"\b(?:excited|excitedly|excitement|shocked|shock|angry|anger)\b",
+    re.IGNORECASE,
+)
+_PROHIBITED_LIST_LEAD = re.compile(
+    r"\b(?:exaggerated|whining|shouting|theatrical|breathless|desperation|"
+    r"screaming|nagging|frantic|impatience|accusation|automatic\s+agreement|"
+    r"grabbing|instant\s+compliance|crying|separation|startled|excited|cheering|"
+    r"dramatic|frightened|terrified|oversized|forced|visible|panic|alarm|loud|"
+    r"dismissing|blame)\b",
+    re.IGNORECASE,
+)
+_POSITIVE_EVENT_SUFFIX = re.compile(
+    r"^\s+(?:(?:[A-Za-z][A-Za-z'’\-]*ly|always|often|sometimes|soon|now)\s+)*"
+    r"(?!(?:facial|body|faces?|shapes?|expressions?|features?|gestures?|"
+    r"movements?|running|motion)\b)"
+    r"(?:(?:will|would|can|could|should|must|may|might)\s+"
+    r"(?:(?:[A-Za-z][A-Za-z'’\-]*ly|always|often|sometimes|soon|now)\s+)*"
+    r"[A-Za-z][A-Za-z'’\-]*|[A-Za-z][A-Za-z'’\-]*(?:s|ed)|is|was|has|does)\b",
+    re.IGNORECASE,
+)
+_GIRL_SPECIFIC_GARMENT = r"(?:dress(?:es)?|skirts?|blouses?|gowns?)"
+_GARMENT_MODIFIER = (
+    r"(?!(?:a|an|the|and|or|on|onto|in|into|beside|near|with|while|under|over|"
+    r"by|for|to|from|of|child|dad|mom|teacher|peer|he|she|they|it)\b)"
+    r"[A-Za-z][A-Za-z'’\-]*"
+)
+_GARMENT_PHRASE = (
+    rf"(?:(?:a|an|the|his|her|their)\s+)?"
+    rf"(?:(?:{_GARMENT_MODIFIER})"
+    rf"(?:\s*,\s*(?:(?:and|or)\s+)?|\s+(?:(?:and|or)\s+)?)){{0,8}}"
+    rf"{_GIRL_SPECIFIC_GARMENT}\b"
+)
+_CHILD_GIRL_GARMENT_PATTERNS = tuple(
+    re.compile(pattern, re.IGNORECASE)
+    for pattern in (
+        rf"\bChild\s+(?:(?:will|would|can|could|should|must)\s+)?"
+        rf"(?:(?:is|was|be)\s+)?(?:wear(?:s|ing)?|wore|don(?:s|ned|ning)?)\s+"
+        rf"{_GARMENT_PHRASE}",
+        rf"\bChild\s+(?:(?:will|would|should|can|could|must)\s+be|is|was|"
+        rf"remains?|stays?)\s+(?:dressed\s+)?in\s+{_GARMENT_PHRASE}",
+        rf"\bChild\s+(?:(?:will|would|should|can|could|must)\s+be|is|are|was|were|"
+        rf"gets?|got|has\s+been|had\s+been)\s+(?:being\s+)?"
+        rf"(?:put|placed|dressed)\s+in\s+{_GARMENT_PHRASE}",
+        rf"\bChild\s+(?:gets?|got|will\s+get)\s+dressed\s+in\s+{_GARMENT_PHRASE}",
+        rf"\bChild\s+(?:changes?|changed|will\s+change)\s+into\s+{_GARMENT_PHRASE}",
+        rf"\bChild\s+(?:puts?|pulls?|slips?)\s+{_GARMENT_PHRASE}\s+"
+        rf"(?:on|onto)(?=\s*(?:himself\b|[.!?;]|$))",
+        rf"\bChild\s+(?:puts?|pulls?|slips?)\s+on\s+{_GARMENT_PHRASE}",
+        rf"\b(?:put|puts|place|places|placed|pull|pulls|slip|slips)\s+"
+        rf"{_GARMENT_PHRASE}\s+(?:on|onto)\s+(?:the\s+)?Child\b",
+        rf"\b{_GARMENT_PHRASE}\s+(?:is|was|gets?|will\s+be)\s+"
+        rf"(?:put|placed|pulled|slipped)\s+(?:on|onto)\s+(?:the\s+)?Child\b",
+        rf"\b{_GARMENT_PHRASE}\s+(?:is|was|will\s+be)\s+worn\s+by\s+"
+        rf"(?:the\s+)?Child\b",
+        rf"\b(?:dress|dresses|dressed|dressing)\s+(?:the\s+)?Child\s+in\s+"
+        rf"{_GARMENT_PHRASE}",
+        rf"\b(?:put(?:s|ting)?|place(?:s|d|ing)?|dress(?:es|ed|ing)?)\s+"
+        rf"(?:the\s+)?Child\s+in\s+{_GARMENT_PHRASE}",
+    )
+)
+_GARMENT_CLAUSE_BOUNDARY = re.compile(
+    r",\s*(?:and\s+)?(?=(?:Child|Dad|Mom|Teacher|Peer|he|she|they|it)\b)",
+    re.IGNORECASE,
+)
+
 
 def _required_text(value, name):
     if not isinstance(value, str) or not value.strip():
         raise ValueError(f"missing or invalid {name}")
     return value
+
+
+def assigns_girl_specific_garment_to_child(text):
+    """Return true only when a girl-specific garment is assigned to Child."""
+    if not isinstance(text, str):
+        return False
+    clauses = _GARMENT_CLAUSE_BOUNDARY.split(text)
+    return any(
+        pattern.search(clause)
+        for clause in clauses
+        for pattern in _CHILD_GIRL_GARMENT_PATTERNS
+    )
+
+
+def _direction_context(text, match):
+    clause_start = max(text.rfind(mark, 0, match.start()) for mark in ".!?\n;") + 1
+    following_stops = [
+        position
+        for mark in ".!?\n;"
+        if (position := text.find(mark, match.end())) != -1
+    ]
+    clause_end = min(following_stops, default=len(text))
+    before = text[clause_start:match.start()]
+    boundaries = list(_DIRECTION_SCOPE_BOUNDARY.finditer(before))
+    if boundaries:
+        boundary = boundaries[-1]
+        is_negative_comparison = (
+            boundary.group(0).lower() == "as"
+            and re.search(r"\bnot\s+as\s*$", before[:boundary.end()], re.IGNORECASE)
+            and _UNBOUNDED_EMOTIONS.fullmatch(match.group(0))
+        )
+        if not is_negative_comparison:
+            before = before[boundary.end():]
+    coordinators = list(_COORDINATION_BOUNDARY.finditer(before))
+    if coordinators:
+        coordinator = coordinators[-1]
+        prefix = before[:coordinator.start()]
+        negatives = list(_NEGATIVE_DIRECTION.finditer(prefix))
+        if not negatives:
+            before = before[coordinator.end():]
+        else:
+            negative = negatives[-1]
+            governed = prefix[negative.end():]
+            has_unsafe_target = any(
+                pattern.search(governed) for pattern in _UNSAFE_DIRECTIONS
+            ) or _UNBOUNDED_EMOTIONS.search(governed)
+            is_leading_no_list = (
+                negative.group(0).lower() == "no"
+                and not prefix[:negative.start()].strip()
+                and _PROHIBITED_LIST_LEAD.search(governed)
+            )
+            if not has_unsafe_target and not is_leading_no_list:
+                before = before[coordinator.end():]
+    return before, text[match.end():clause_end]
+
+
+def _reject_unsafe_positive_direction(text, name):
+    """Reject unsafe performance cues while permitting explicit prohibitions."""
+    for pattern in _UNSAFE_DIRECTIONS:
+        for match in pattern.finditer(text):
+            before, after = _direction_context(text, match)
+            positive_event_after_comma = (
+                "," in before
+                and _POSITIVE_EVENT_SUFFIX.search(after)
+                and not _NEGATIVE_DIRECTION_SUFFIX.search(after)
+            )
+            if positive_event_after_comma or (
+                not _NEGATIVE_DIRECTION.search(before)
+                and not _NEGATIVE_DIRECTION_SUFFIX.search(after)
+            ):
+                raise ValueError(
+                    f"unsafe-positive-direction: {name} requests {match.group(0)!r}"
+                )
+    for match in _UNBOUNDED_EMOTIONS.finditer(text):
+        before, after = _direction_context(text, match)
+        positive_event_after_comma = (
+            "," in before
+            and _POSITIVE_EVENT_SUFFIX.search(after)
+            and not _NEGATIVE_DIRECTION_SUFFIX.search(after)
+        )
+        if (
+            positive_event_after_comma
+            or (
+                not _NEGATIVE_DIRECTION.search(before)
+                and not _NEGATIVE_DIRECTION_SUFFIX.search(after)
+                and not _BOUNDED_EMOTION.search(before)
+                and not _BOUNDED_EMOTION_SUFFIX.search(after)
+            )
+        ):
+            raise ValueError(
+                f"unsafe-positive-direction: {name} uses unbounded emotion {match.group(0)!r}"
+            )
 
 
 def render_prompts(lesson, production, source):
@@ -49,6 +250,10 @@ def render_prompts(lesson, production, source):
     roles = lesson.get("roles", [])
     if len(roles) != 2 or len(set(roles)) != 2 or "child" not in roles or any(r not in CAST for r in roles):
         raise ValueError("exactly child and one known partner role are required")
+    if is_three_by_ten and assigns_girl_specific_garment_to_child(
+        json.dumps((lesson, production), ensure_ascii=False)
+    ):
+        raise ValueError("child-garment-assignment: girl-specific garment assigned to Child")
     scene = _required_text(production.get("scene"), "scene")
     emotion_block = ""
     if is_three_by_ten:
@@ -59,13 +264,18 @@ def render_prompts(lesson, production, source):
             _required_text(emotion.get(field), f"production-emotion.{field}")
             for field in ("baseline", "allowed_shift", "forbidden")
         ]
+        _reject_unsafe_positive_direction(scene, "scene")
+        for field, line in zip(("baseline", "allowed_shift", "forbidden"), emotion_lines):
+            _reject_unsafe_positive_direction(line, f"emotion.{field}")
         emotion_block = "EMOTIONAL PERFORMANCE\n" + "\n".join(emotion_lines) + (
             "\nNo screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.\n\n"
         )
     for i, part in enumerate(parts):
         visual = notes[part["id"]]
         for field in ("start", "action", "end"):
-            _required_text(visual.get(field), f"{part['id']}.{field}")
+            value = _required_text(visual.get(field), f"{part['id']}.{field}")
+            if is_three_by_ten:
+                _reject_unsafe_positive_direction(value, f"{part['id']}.{field}")
         if i and visual["start"] != notes[PARTS[i - 1]]["end"]:
             raise ValueError(f"broken continuity before Part {part['id']}")
         if not part.get("turns"):

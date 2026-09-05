@@ -1,69 +1,173 @@
-# Stage 4 完整内容审查
+# Stage 1（`curriculum/04`）三段十秒完整内容审查
 
-审查范围：10 章、30 课。审查日期：2026-09-04。
+审查范围：10 章、30 课、90 段 canonical 对话、30 份 `production.json` 与 90 份生成提示词。最终审查日期：2026-09-05。
 
 ## 发布结论
 
-Stage 4 已形成从“表达自己的意思”到“参与家庭生活、同伴合作，再迁移到外出与讲述”的完整能力路径。每课的主要产出是一个能改变当下互动结果的 Conversation Move，而不是孤立词汇或背诵句型。
+Stage 1 已完成 `three-by-ten-v2` 迁移和逐课书面复核。`stage.json` 与 30/30 Lesson 均声明该 contract；所有 Lesson 保持 `language_reviewed`，**0 课**被提升为 `video_ready`。
 
-- 结构：10/10 章，30/30 课，每章 3 课。
-- 角色：家庭成员 23/30（76.7%）；同龄伙伴 4/30；Rabbit Teacher 3/30。
-- 对话：每课 35–65 词；孩子每课 18–28 词；每课 A/B/C 三段。
-- 迁移：每课 2 张 Replay Card；共 60 个完整迁移情境。
-- 审查：30 课均通过动机、因果、物理、成人行为、儿童语言、知识安全、收束和迁移逻辑八项检查。
-- 制作状态：课程达到 `language_reviewed`，尚未批量标为 `video_ready`；应先迁移应用，再逐课做最终分镜审查。
+- 结构：10/10 章、30/30 课、90/90 个 A/B/C 段；30 个不同的主要 Conversation Move。
+- 正式台词：共 **1451 词 / 296 turns**；Child 共 **654 词 / 134 turns**。
+- 逐课负担：45–51 词、9–11 turns；Child 18–27 词、4–5 turns。
+- 分段负担：90/90 段均为 3–4 turns、12–20 词；89 段在首选 14–19 词区间，唯一例外是 10.1 Part B 的 13 词，仍在硬范围内且动作很小。
+- 角色：Dad 11 课、Mom 12 课、Teacher 3 课、Peer 4 课；家庭成员 23/30（76.7%），高于 70% 门槛。
+- 迁移：每课 2 张完整 Replay Card，共 60 个新情境；每课正式新增一个 Move 并只复现此前 Move。
+- 审查：30/30 课的十个结构化 review gate 为 true；下方另逐课回答获批规格的 11 个书面内容问题。
+- 版本：25 课为 revision 2；Chapter 2 三课和 Chapter 5 的 5.1、5.3 为 revision 3。Lesson 与对应 production 版本逐课一致。
+- 提示词：90/90 与 canonical 台词、revision 和 SHA256 同步；没有旧 `12-15 seconds`、正向 `extend the clip` 或 pacing advisory。
+- 媒体：历史 14/30 demo 均由 revision 1 / v1 内容制作，相对当前 revision 2/3 **全部 stale**；本轮没有删除、覆盖或重新编码任何 demo/performance。
 
-## 逐课负担与能力链
+## 审查方法与判定口径
 
-| 章-课 | 总词/孩子词 | 新增 Move | 复现 Move |
-| --- | ---: | --- | --- |
-| 1.1 请求物品 | 42/18 | `request-item` | — |
-| 1.2 说明选择 | 48/25 | `specify-choice` | `request-item` |
-| 1.3 改变选择 | 43/18 | `change-choice` | `request-item`, `specify-choice` |
-| 2.1 尚未准备好 | 52/26 | `delay-boundary` | `specify-choice` |
-| 2.2 请求时间 | 54/24 | `request-time` | `request-item` |
-| 2.3 提出顺序 | 49/22 | `propose-order` | `change-choice` |
-| 3.1 请求具体帮助 | 60/28 | `request-help` | `request-item`, `propose-order` |
-| 3.2 说明没听懂 | 43/21 | `signal-nonunderstanding` | `request-help` |
-| 3.3 修正误解 | 43/20 | `repair-meaning` | `request-item`, `specify-choice` |
-| 4.1 说出饿渴 | 49/24 | `state-body-need` | `request-item`, `specify-choice` |
-| 4.2 请求暂停 | 48/22 | `request-a-pause` | `delay-boundary`, `request-time` |
-| 4.3 说明不适 | 47/20 | `describe-discomfort` | `specify-choice`, `request-help` |
-| 5.1 安排先后 | 54/28 | `sequence-actions` | `propose-order`, `request-help` |
-| 5.2 边界前请求 | 50/24 | `request-before-boundary` | `request-item`, `specify-choice` |
-| 5.3 报告准备状态 | 54/26 | `report-readiness` | `request-help`, `state-body-need` |
-| 6.1 询问位置 | 48/23 | `ask-location` | `request-help`, `specify-choice` |
-| 6.2 检查位置 | 46/20 | `check-location` | `ask-location`, `repair-meaning` |
-| 6.3 说明归属 | 51/25 | `identify-belonging` | `specify-choice`, `check-location` |
-| 7.1 加入游戏 | 44/24 | `join-play` | `request-item`, `check-location` |
-| 7.2 请求轮流 | 49/25 | `request-turn` | `request-item`, `sequence-actions` |
-| 7.3 合并玩法 | 46/23 | `suggest-shared-play` | `propose-order`, `change-choice` |
-| 8.1 感受加原因 | 53/25 | `explain-feeling` | `request-a-pause`, `sequence-actions` |
-| 8.2 要求停止 | 44/20 | `set-stop-boundary` | `delay-boundary`, `state-body-need` |
-| 8.3 道歉并修复 | 48/20 | `repair-relationship` | `request-help`, `join-play` |
-| 9.1 询问时长 | 50/24 | `ask-duration` | `ask-location`, `report-readiness` |
-| 9.2 商店寻找 | 57/22 | `ask-shop-location` | `ask-location`, `specify-choice` |
-| 9.3 向安全成人求助 | 54/23 | `seek-safe-adult-help` | `request-help`, `identify-belonging` |
-| 10.1 讲一件事 | 44/25 | `recount-one-event` | `join-play`, `identify-belonging` |
-| 10.2 讲两件连续事件 | 46/26 | `recount-two-events` | `recount-one-event`, `request-help` |
-| 10.3 参与明天计划 | 54/25 | `contribute-to-plan` | `sequence-actions`, `report-readiness` |
+每课按 A→B→C 阅读正式台词，再读两个 Replay Card；随后逐字阅读 production 的 scene、emotion 与三组 start/action/end。Q1–Q11 对应获批规格中的 11 个问题：
 
-## 真实性抽查
+1. `can_do` 是否得到真实生活结果；
+2. A/B/C 是否形成连续因果链；
+3. Child 的 4–5 次输出是否各有功能；
+4. core/stretch/repair 是否在正式剧情或 Replay Card 中自然出现；
+5. `recycle` 是否只来自此前课程；
+6. 道具、颜色、位置和手部动作是否连续；
+7. 两张 Replay Card 是否为完整新情境；
+8. 成人行为、身体、情绪与安全逻辑是否合理；
+9. 男孩身份、服装归属和代词是否一致；
+10. 情绪、脸部、声音和手势是否克制但准确；
+11. A/B/C 提示是否逐字导出台词且各自满足十秒预算。
 
-- 身体需要先得到回应，再继续语言练习；上厕所不会因练句子被延迟。
-- 不适课程只描述位置和感觉，不做诊断；成人停止活动并根据正常照护判断后续。
-- 身体边界课程中，爸爸在孩子第一次说 stop 后立即停止，再询问空间和替代玩法。
-- 同伴并非自动同意：会保留自己的路、完成当前一轮、坚持海盗想法；孩子要回应真实意见。
-- 商店寻找以“询问—依据指示移动—按包装确认—放入篮子”闭环，不依赖复杂道具。
-- 走失内容只在家平静演练，不制造真实分离。可识别求助对象和“不去停车场”的建议依据 NCMEC KidSmartz 外出清单。
-- 讲述从一个具体当天事件开始，再到两个连续事件；没有要求 4 岁孩子完整复述一整天。
+`P` 表示对该问题逐项通过。服装扫描只判断**分配给 Child 的服装**；中性的 `get dressed`、成人自己的衣物以及不带性别刻板印象的颜色/玩具不会被误判。情绪扫描允许 `No ...`、`do not ...`、`never ...` 等负面安全禁令，也允许带明确上限的轻微情绪；它只拒绝正向要求尖叫、极端兴奋、扭曲或无边界的 `excited`/`shocked`/`angry` 等表演。
 
-## 螺旋复现与 5 岁桥接
+## 精确负担与版本
 
-基础高频 Moves 在多个生活域反复出现：`request-item` 复现 9 次，`specify-choice` 9 次，`request-help` 8 次，位置类表达跨家庭、学校和商店复现。后半段首次出现、尚无自然后续位置复现的 Moves 不硬塞进不相关课程，而是登记为 5 岁阶段开篇桥接内容：
+词数按 validator 的空白分词计算；单元格均为“词 / turns”。
 
-`signal-nonunderstanding`, `describe-discomfort`, `request-before-boundary`, `request-turn`, `suggest-shared-play`, `explain-feeling`, `set-stop-boundary`, `repair-relationship`, `ask-duration`, `ask-shop-location`, `seek-safe-adult-help`, `recount-two-events`, `contribute-to-plan`。
+| 课 | 标题 | Partner / Move | A | B | C | 全课 | Child | Rev |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1.1 | The Apple, Please | Mom / `request-item` | 14/3 | 18/3 | 16/4 | 48/10 | 22/4 | 2 |
+| 1.2 | The Dinosaur Shirt | Dad / `specify-choice` | 19/3 | 14/4 | 18/4 | 51/11 | 24/5 | 2 |
+| 1.3 | Water Instead | Mom / `change-choice` | 16/3 | 15/4 | 15/3 | 46/10 | 21/4 | 2 |
+| 2.1 | Not Ready Yet | Dad / `delay-boundary` | 17/3 | 16/3 | 17/4 | 50/10 | 24/5 | 3 |
+| 2.2 | Two More Minutes | Mom / `request-time` | 19/3 | 17/3 | 14/4 | 50/10 | 22/5 | 3 |
+| 2.3 | Blocks First | Dad / `propose-order` | 16/3 | 14/3 | 17/4 | 47/10 | 23/5 | 3 |
+| 3.1 | Help With the Track | Dad / `request-help` | 15/3 | 16/3 | 18/4 | 49/10 | 27/5 | 2 |
+| 3.2 | Show Me Again | Teacher / `signal-nonunderstanding` | 16/3 | 16/3 | 18/4 | 50/10 | 19/5 | 2 |
+| 3.3 | The Blue Cup | Mom / `repair-meaning` | 17/3 | 15/3 | 17/4 | 49/10 | 24/4 | 2 |
+| 4.1 | Water First | Mom / `state-body-need` | 14/3 | 16/3 | 16/3 | 46/9 | 20/4 | 2 |
+| 4.2 | Bathroom Break | Dad / `request-a-pause` | 17/4 | 15/3 | 15/3 | 47/10 | 23/5 | 2 |
+| 4.3 | My Knee Hurts | Mom / `describe-discomfort` | 14/3 | 14/3 | 18/3 | 46/9 | 19/4 | 2 |
+| 5.1 | Shoes, Then Jacket | Dad / `sequence-actions` | 15/3 | 14/4 | 17/4 | 46/11 | 22/5 | 3 |
+| 5.2 | One Book Before Bed | Mom / `request-before-boundary` | 16/3 | 16/4 | 16/3 | 48/10 | 24/4 | 2 |
+| 5.3 | I Still Need My Bottle | Dad / `report-readiness` | 18/3 | 14/3 | 16/4 | 48/10 | 24/5 | 3 |
+| 6.1 | Where Is My Car? | Dad / `ask-location` | 15/3 | 17/3 | 19/4 | 51/10 | 24/5 | 2 |
+| 6.2 | Under the Bed? | Mom / `check-location` | 14/3 | 14/3 | 19/4 | 47/10 | 19/4 | 2 |
+| 6.3 | Mine Has a Dinosaur | Teacher / `identify-belonging` | 15/3 | 16/4 | 15/3 | 46/10 | 18/4 | 2 |
+| 7.1 | Can I Build Too? | Peer / `join-play` | 15/3 | 16/4 | 16/3 | 47/10 | 19/4 | 2 |
+| 7.2 | After Your Turn | Peer / `request-turn` | 17/3 | 17/4 | 15/3 | 49/10 | 20/4 | 2 |
+| 7.3 | Space Pirates | Peer / `suggest-shared-play` | 15/3 | 17/3 | 18/4 | 50/10 | 25/5 | 2 |
+| 8.1 | I Feel Frustrated | Mom / `explain-feeling` | 16/3 | 14/3 | 15/4 | 45/10 | 23/5 | 2 |
+| 8.2 | Please Stop | Dad / `set-stop-boundary` | 14/3 | 15/3 | 18/4 | 47/10 | 18/4 | 2 |
+| 8.3 | Let's Build It Again | Peer / `repair-relationship` | 16/3 | 15/3 | 19/4 | 50/10 | 24/5 | 2 |
+| 9.1 | How Much Longer? | Dad / `ask-duration` | 15/3 | 17/3 | 18/4 | 50/10 | 22/5 | 2 |
+| 9.2 | Where Is the Pasta? | Mom / `ask-shop-location` | 17/3 | 16/3 | 18/3 | 51/9 | 22/4 | 2 |
+| 9.3 | I Can't Find My Mom | Mom / `seek-safe-adult-help` | 17/3 | 14/3 | 17/3 | 48/9 | 19/4 | 2 |
+| 10.1 | I Built a Tower | Teacher / `recount-one-event` | 18/3 | 13/3 | 17/3 | 48/9 | 20/4 | 2 |
+| 10.2 | First We Painted | Dad / `recount-two-events` | 15/4 | 18/3 | 18/3 | 51/10 | 19/4 | 2 |
+| 10.3 | Tomorrow's Plan | Mom / `contribute-to-plan` | 17/3 | 14/3 | 19/3 | 50/9 | 24/4 | 2 |
 
-5 岁课程应先把这些 Moves 放入新的因果场景，再进入追问、解释和三轮以上对话；这保证成长来自扩大交流功能，而不是简单拉长句子。
+### 章节聚合
 
-**APPROVED FOR RUNTIME MIGRATION; VIDEO PRODUCTION REMAINS PAUSED**
+| 章 | 全部词/turns | Child 词/turns | Partner 分布 | Revision 分布 |
+| --- | ---: | ---: | --- | --- |
+| 1 | 145/31 | 67/13 | Dad×1, Mom×2 | r2×3 |
+| 2 | 147/30 | 69/15 | Dad×2, Mom×1 | r3×3 |
+| 3 | 148/30 | 70/14 | Dad×1, Mom×1, Teacher×1 | r2×3 |
+| 4 | 139/28 | 62/13 | Dad×1, Mom×2 | r2×3 |
+| 5 | 142/31 | 70/14 | Dad×2, Mom×1 | r2×1, r3×2 |
+| 6 | 144/30 | 61/13 | Dad×1, Mom×1, Teacher×1 | r2×3 |
+| 7 | 146/30 | 64/13 | Peer×3 | r2×3 |
+| 8 | 142/30 | 65/14 | Dad×1, Mom×1, Peer×1 | r2×3 |
+| 9 | 149/28 | 63/13 | Dad×1, Mom×2 | r2×3 |
+| 10 | 149/28 | 63/12 | Dad×1, Mom×1, Teacher×1 | r2×3 |
+| **总计** | **1451/296** | **654/134** | **家庭 23、Peer 4、Teacher 3** | **r2×25, r3×5** |
+
+## 30 课内容合同逐项结果
+
+| 课 | Q1 | Q2 | Q3 | Q4 | Q5 | Q6 | Q7 | Q8 | Q9 | Q10 | Q11 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 1.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 1.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 2.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 2.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 2.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 3.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 3.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 3.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 4.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 4.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 4.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 5.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 5.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 5.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 6.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 6.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 6.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 7.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 7.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 7.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 8.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 8.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 8.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 9.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 9.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 9.3 | P | P | P | P | P | P | P | P | P | P | P |
+| 10.1 | P | P | P | P | P | P | P | P | P | P | P |
+| 10.2 | P | P | P | P | P | P | P | P | P | P | P |
+| 10.3 | P | P | P | P | P | P | P | P | P | P | P |
+
+## Production 逐课复核
+
+每行均复核：必要道具与数量、手部/位置衔接、Child 服装与男孩身份、情绪上限、A-end=B-start/B-end=C-start、最终物理状态。`P×6` 表示六项分别通过，不代表已实测生成视频。
+
+| 课 | 结果 | 可核对的最终链路 |
+| --- | --- | --- |
+| 1.1 | P×6 | 苹果/香蕉身份不变；Mom 右手纠错后交苹果，Child 双手持苹果结束。 |
+| 1.2 | P×6 | 始终只有两件红上衣；黄色 T-shirt 不换装，Child 最终双手持恐龙上衣。 |
+| 1.3 | P×6 | 杯子到 C 前一直空；只倒水，Child 最终持装水杯，牛奶未入杯。 |
+| 2.1 | P×6 | 单个红屋顶由 Child 持有、装上再放入收纳盒；其余三块留桌面。 |
+| 2.2 | P×6 | 黄蜡笔补完太阳后留桌面；二人平静出门，没有伪造两分钟流逝。 |
+| 2.3 | P×6 | 两块积木先入左格，再由二人各收一辆车入右格，桌面清空。 |
+| 3.1 | P×6 | Child 右手推轨道、Dad 右手固定；随后同一列车交到 Child 右手并越过接缝。 |
+| 3.2 | P×6 | 无道具；Teacher 与 Child 各自只做一次 clap-then-tap，双手回到自己的膝盖。 |
+| 3.3 | P×6 | 绿杯始终未拿起；Mom 核对蓝色带把手杯后交给 Child 双手。 |
+| 4.1 | P×6 | 水在首次口渴信号后立即可取；Child 喝完再说话，零食保持未动。 |
+| 4.2 | P×6 | Child 在 A 内离开；B 用明确省略表示真实如厕与洗手后返回，卡牌位置未变。 |
+| 4.3 | P×6 | 始终是右膝；Mom 右手轻放同一冷布，活动仍暂停且不声称治愈。 |
+| 5.1 | P×6 | 坐姿依次穿两只鞋和开襟夹克；Child 最终仍穿黄 T-shirt、夹克未扣。 |
+| 5.2 | P×6 | 蓝熊书完整阅读用时间省略；奶油色书不动，结尾蓝书在 Mom 腿上、灯关闭。 |
+| 5.3 | P×6 | Child 右手取瓶、左手稳袋；瓶入袋后左手提袋，门仍关闭。 |
+| 6.1 | P×6 | Dad 右手左移蓝盒露出红车；Child 右手取同一辆车，原位置清空。 |
+| 6.2 | P×6 | 同一蓝黄袜从椅面到 Child 右手；左脚袜仍穿着，右脚仍未穿。 |
+| 6.3 | P×6 | 星星瓶落桌，Teacher 左手交恐龙瓶到 Child 右手；贴纸与瓶不交换。 |
+| 7.1 | P×6 | Peer 放第 4 段路，Child 接唯一蓝桥；四段路与桥最终首尾相接。 |
+| 7.2 | P×6 | 唯一红球完成 Peer 最后一滚、手递交接、Child 第一滚并由 Peer 接住。 |
+| 7.3 | P×6 | 唯一地图由 Peer 交给 Child；二人始终坐在平铺毯上，各自开始协商后的角色。 |
+| 8.1 | P×6 | Mom 右手找到蓝拼图并交 Child 左手；Child 填入唯一缺口，拼图四块齐。 |
+| 8.2 | P×6 | Dad 在首次 stop 立即双手放下；一整垫宽距离保持到结尾，无再次接触。 |
+| 8.3 | P×6 | 仅三块 tan/blue/red；Child 稳底座，Peer 依次放回中层与顶层，颜色顺序恢复。 |
+| 9.1 | P×6 | Dad 全程系带、目视道路、双手握方向盘；Child 保持约束，五分钟没有在片内流逝。 |
+| 9.2 | P×6 | 唯一红色透明窗 pasta 袋从底层架进入 Mom 右手所持空篮，包装身份不变。 |
+| 9.3 | P×6 | 始终在家且 Mom 可见；badge 只表示预先约定角色，没有陌生人、真实电话或重聚。 |
+| 10.1 | P×6 | 教室固定双人谈话，无塔、Maya、闪回或第三声音；空手小动作后仍坐原位。 |
+| 10.2 | P×6 | 家中固定双人谈话，无画作、巴士、画笔或学校闪回；最终仍空手坐原位。 |
+| 10.3 | P×6 | 家中固定双人计划，无书、天气特效或目的地切换；条件计划在原位确认。 |
+
+## 本轮修正与验证边界
+
+- Chapter 2 的六个非逐字 response-tier 示例已对齐：三个 stretch 采用正式剧情中的真实扩展；三个 repair 放入带真实误解的新 Replay exchange。两个只有 `Okay...` 的接受语从 `repair` 改为 `confirmation`。因 canonical 元数据与 Replay 内容改变，三课连同 production、source hash 和提示词一起升至 revision 3；正式 A/B/C 台词未改。
+- 提示词导出器增加了一个窄范围安全门：v2 production 中把尖叫、极端兴奋、扭曲、失控动作、旧时长逃生语或无边界情绪词当作**正向导演要求**时拒绝导出。语义正确且使用明确否定写法的 `emotion.forbidden` 与其他安全禁令仍被允许，因此固定安全句和 `never ... extend the clip` 不会误报；若该字段误写成正向要求，同样拒绝。
+- 9.1 是三段连续的车内谈话：五分钟只是估计，片内没有时间省略、过桥或抵达。2.2 明确“提前完成、无时间跳转”；4.2 与 5.2 才分别用显式省略表示真实如厕返回和完整读完一本书。
+
+## 剩余制作风险
+
+书面审查和导出同步不能替代真实生成验收。每课仍需单独试生成并检查约十秒自然语速、口型、声音身份、参考帧衔接、细小手部动作、角色比例和孩子观看舒适度。生成模型也可能忽略文字中的手部或负面约束。历史 demo 不得作为新版验收证据；只有上述项目逐课通过后，才能明确把那一课提升为 `video_ready` 并制作替换视频。
+
+**APPROVED FOR RUNTIME USE; VIDEO PRODUCTION REMAINS PAUSED**

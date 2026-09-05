@@ -25,9 +25,9 @@ This project makes role-play feel like a game:
 
 ### Curriculum design guide
 
-The curriculum is a systematic 4–6-year-old life-English journey. Stage 4 has 30 reviewed Lessons in [`curriculum/04`](curriculum/04), following the learner profile, age progression, three-session practice model, and authenticity gate in the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md). The website now reads this canonical curriculum directly.
+The curriculum is a systematic 4–6-year-old life-English journey. The app displays [`curriculum/04`](curriculum/04) as Stage 1: 30 reviewed Lessons for age four, following the learner profile, age progression, three-session practice model, and authenticity gate in the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md). The website reads this canonical curriculum directly.
 
-All 30 lessons now have **three standalone video prompt drafts each** (A/B/C, nominally ~10 seconds): [browse the 90 prompts](prompts/04/README.md). Speech is exported directly from canonical lessons; per-lesson staging preserves physical continuity. See the [production and maintenance guide](prompts/README.md). Prompt availability is not `video_ready` approval or evidence of a finished video.
+All 30 lessons now use `three-by-ten-v2` and have **three standalone video prompt drafts each** (A/B/C, each constrained to about 10 seconds): [browse the 90 synchronized prompts](prompts/04/README.md). Speech is exported directly from canonical lessons; per-lesson staging preserves physical continuity and bounded emotion. See the [production and maintenance guide](prompts/README.md) and [complete Stage 1 review](curriculum/04/FINAL-REVIEW.md). Prompt availability is not `video_ready` approval or evidence of a finished video.
 
 ---
 
@@ -114,7 +114,7 @@ Hidden mobile videos pause when switching tabs. Camera sessions remain visible a
 
 ---
 
-## Stage 4 Curriculum
+## Stage 1 Curriculum (`curriculum/04`)
 
 Thirty Lessons across ten daily-communication chapters, progressing from expressing intent to participating, cooperating, and recounting:
 
@@ -131,7 +131,7 @@ Thirty Lessons across ten daily-communication chapters, progressing from express
 | 9 | outings and safety | Car questions, shop finding, calm lost-child rehearsal |
 | 10 | recounting and planning | One event, two linked events, tomorrow's plan |
 
-Every Lesson includes one primary Conversation Move, a three-part causal dialogue, two complete Replay Cards, parent support, and eight review gates. The cast is a cartoon dog dad, pig mom, rabbit teacher, tiger child, and one recurring same-age friend. See the [full Stage 4 review](curriculum/04/FINAL-REVIEW.md). The old `content/` tree and root-level prompt files are retained only as v1 reference material.
+Every Lesson includes one primary Conversation Move, a 9–11-turn causal dialogue split into three strict ~10-second parts, two complete Replay Cards, parent support, and ten structured review gates. The complete review also answers eleven human content questions for each of the 30 lessons. The cast is a cartoon dog dad, pig mom, rabbit teacher, four-year-old tiger boy, and one recurring same-age friend. The old `content/` tree and root-level prompt files are retained only as v1 reference material.
 
 ---
 
@@ -139,11 +139,11 @@ Every Lesson includes one primary Conversation Move, a three-part causal dialogu
 
 | Component | Status |
 | --- | --- |
-| Stage 4 reviewed curriculum | 30/30 ✅ |
+| Stage 1 reviewed curriculum (`curriculum/04`) | 30/30 `three-by-ten-v2` ✅ |
 | Runtime migration to new curriculum | Complete ✅ |
 | Background illustrations | 8/10 |
-| Legacy v1 demo production record | 14/30 (paused) |
-| Stage 4 A/B/C prompts | Deferred until video production resumes |
+| Legacy revision 1 / v1 demo record | 14/30, all stale against revision 2/3 (paused) |
+| Stage 1 A/B/C prompt drafts | 90/90 synchronized; 0 lessons `video_ready` |
 | In-browser webcam recording | ✅ |
 
 See [`demo/PROGRESS.md`](demo/PROGRESS.md) for detailed production tracking.

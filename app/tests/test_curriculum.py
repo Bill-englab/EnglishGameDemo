@@ -301,6 +301,61 @@ def test_complete_validation_enforces_counts_and_family_partner_ratio():
     }
 
 
+def test_stage_04_declares_the_completed_three_by_ten_contract_and_aggregate_budgets():
+    stage = load_stage(CURRICULUM_ROOT, "04")
+    lessons = [
+        lesson
+        for chapter in stage["chapters"]
+        for lesson in chapter["lessons"]
+    ]
+
+    assert stage["dialogue_contract"] == "three-by-ten-v2"
+    assert len(lessons) == 30
+    assert all(lesson["dialogue_contract"] == "three-by-ten-v2" for lesson in lessons)
+    assert all(
+        9 <= sum(len(part["turns"]) for part in lesson["parts"]) <= 11
+        for lesson in lessons
+    )
+    assert all(
+        4 <= sum(
+            turn["speaker"] == "child"
+            for part in lesson["parts"]
+            for turn in part["turns"]
+        ) <= 5
+        for lesson in lessons
+    )
+    assert all(lesson["status"] == "language_reviewed" for lesson in lessons)
+
+
+def test_chapter_2_response_tiers_are_practiced_and_acknowledgements_are_not_repairs():
+    chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][1]
+
+    for lesson in chapter["lessons"]:
+        child_lines = {
+            turn["line"]
+            for part in lesson["parts"]
+            for turn in part["turns"]
+            if turn["speaker"] == "child"
+        }
+        replay_text = "\n".join(card["challenge"] for card in lesson["replay_cards"])
+        for field in ("core_response", "stretch_response", "repair_response"):
+            example = lesson[field]
+            assert example in child_lines or f'"{example}"' in replay_text, (
+                lesson["title"],
+                field,
+                example,
+            )
+
+        assert all(
+            not (
+                turn["kind"] == "repair"
+                and turn["line"].lstrip().lower().startswith("okay")
+            )
+            for part in lesson["parts"]
+            for turn in part["turns"]
+        ), lesson["title"]
+
+
 def test_recycle_can_reference_only_an_earlier_lesson():
     first = valid_lesson("request-item")
     first["id"] = "01-request"
@@ -440,12 +495,12 @@ def test_chapter_2_ends_each_negotiation_with_an_agreed_action():
     assert validate_stage(load_stage(CURRICULUM_ROOT, "04")) == []
 
 
-@pytest.mark.parametrize("lesson_id, partner, move", [
-    ("01-not-ready-yet", "dad", "delay-boundary"),
-    ("02-ask-for-time", "mom", "request-time"),
-    ("03-propose-an-order", "dad", "propose-order"),
+@pytest.mark.parametrize("lesson_id, partner, move, revision", [
+    ("01-not-ready-yet", "dad", "delay-boundary", 3),
+    ("02-ask-for-time", "mom", "request-time", 3),
+    ("03-propose-an-order", "dad", "propose-order", 3),
 ])
-def test_chapter_2_meets_three_by_ten_negotiation_contract(lesson_id, partner, move):
+def test_chapter_2_meets_three_by_ten_negotiation_contract(lesson_id, partner, move, revision):
     chapter = load_stage(CURRICULUM_ROOT, "04")["chapters"][1]
     lesson = next(item for item in chapter["lessons"] if item["id"] == lesson_id)
     production_path = REPO_ROOT / "prompts/04" / chapter["id"] / lesson_id / "production.json"
@@ -470,7 +525,9 @@ def test_chapter_2_meets_three_by_ten_negotiation_contract(lesson_id, partner, m
         "two complete Replay Cards remain": len(lesson["replay_cards"]) == 2
         and all(all(card.get(field) for field in ("title", "setting", "change", "challenge"))
                 for card in lesson["replay_cards"]),
-        "lesson and production are revision 2": lesson["content_revision"] == production["content_revision"] == 2,
+        "lesson and production share the reviewed revision": (
+            lesson["content_revision"] == production["content_revision"] == revision
+        ),
         "the lesson remains language_reviewed": lesson["status"] == "language_reviewed",
         "all ten content reviews passed": all(lesson["reviews"].get(review) is True for review in (
             "motivation", "causality", "physical", "adult_behavior", "child_language",

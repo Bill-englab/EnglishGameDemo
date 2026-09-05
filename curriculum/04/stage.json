@@ -4,6 +4,7 @@
   "age": 4,
   "version": 1,
   "status": "language_reviewed",
+  "dialogue_contract": "three-by-ten-v2",
   "completed_phases": ["A", "B", "C", "D"],
   "expected_chapters": 10,
   "expected_lessons": 30,

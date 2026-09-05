@@ -6,8 +6,8 @@
   "conversation_move": {"id": "request-time", "label": "request a little more time"},
   "trigger": "Mom says it is time to leave for the park while the child's drawing still lacks a sun.",
   "core_response": "Can I have two more minutes?",
-  "stretch_response": "Can I have two more minutes to finish the sun?",
-  "repair_response": "Just the sun, then I'll come.",
+  "stretch_response": "My picture needs a sun.",
+  "repair_response": "I mean one final slide, then I'll come.",
   "recycle": ["request-item"],
   "roles": ["child", "mom"],
   "setting": "Finishing a drawing at home before leaving for the park.",
@@ -28,7 +28,7 @@
       "turns": [
         {"speaker": "child", "line": "My picture needs a sun.", "kind": "stretch"},
         {"speaker": "mom", "line": "Two minutes, just the sun. Then we go.", "kind": "input"},
-        {"speaker": "child", "line": "Okay. Just the sun.", "kind": "repair"}
+        {"speaker": "child", "line": "Okay. Just the sun.", "kind": "confirmation"}
       ]
     },
     {
@@ -43,11 +43,11 @@
     }
   ],
   "replay_cards": [
-    {"title": "Leave the playground", "setting": "At the neighborhood playground", "change": "Ask for time for one final slide", "challenge": "Dad agrees to one turn; take the turn and meet him at the gate"},
+    {"title": "Leave the playground", "setting": "At the neighborhood playground", "change": "Ask for one final slide, but Dad initially thinks Child wants more open-ended play", "challenge": "Child requests one final slide. When Dad checks whether he means more playtime, Child repairs, \"I mean one final slide, then I'll come.\" Dad agrees to that one turn; Child takes it and meets him at the gate."},
     {"title": "Pause the puzzle", "setting": "Before dinner", "change": "Ask for two minutes to place the last three pieces", "challenge": "Mom sets the timer; finish or pause when it rings and come to the table"}
   ],
   "parent_support": ["Allow up to two minutes only when the schedule permits; agree on one small visible finish point.", "The child can finish early. Once the sun is done, acknowledge it and leave together without another task or a language test."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

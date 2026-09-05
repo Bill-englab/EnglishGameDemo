@@ -1,6 +1,6 @@
 Two More Minutes — Part C (resolve)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 2
-Source SHA256: 0edc192e7c5d58b038c04d6ff2b10b9b20ea58f4c8f219b172aca3e67b3ff051
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 3
+Source SHA256: 15a0390bc56949be873c01688956945d68a28f0474ceed3184282f52ce471e8e
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND

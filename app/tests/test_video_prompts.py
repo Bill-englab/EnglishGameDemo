@@ -123,6 +123,132 @@ def test_v2_renders_restrained_emotion_boy_cast_and_ten_second_limit(v2_source):
         assert dialogue == 'Mom: "Would you like some help?"\nChild: "Yes, please help me, Mom."\nMom: "Let us open it together."'
 
 
+@pytest.mark.parametrize("positive_direction", [
+    "Child screams while reaching for the box.",
+    "Child shows extreme excitement and jumps in place.",
+    "Mom gives Child a distorted shocked face.",
+    "Child looks excited.",
+    "Mom looks shocked by the request.",
+    "Child looks angry.",
+    "No props move while Child screams.",
+    "Child does not touch the box and screams.",
+    "Child never looks away and extends the clip.",
+    "Child does not touch the box, then screams.",
+    "Child does not touch the box as he screams.",
+    "Child does not touch the box because he screams.",
+    "Child looks excited while Mom briefly smiles.",
+    "Child briefly waves and looks excited.",
+    "Child briefly touches the cup, looking excited.",
+    "Child does not touch the box before screaming.",
+    "Child does not move as screaming begins.",
+    "No props move, screaming begins.",
+    "No props shift, extreme excitement follows.",
+    "No loud noise, screaming begins.",
+    "No exaggerated surprise, screaming suddenly begins.",
+    "No exaggerated surprise, screaming fills the room.",
+    "No shouting, extreme excitement immediately follows.",
+    "No exaggerated surprise, screaming will fill the room.",
+    "No shouting, extreme excitement can follow.",
+    "Extend the clip so every action fits.",
+    "Allow 12-15 seconds for the final action.",
+])
+def test_v2_rejects_unsafe_requested_positive_directions(v2_source, positive_direction):
+    v2_source[1]["parts"]["A"]["action"] = positive_direction
+
+    with pytest.raises(ValueError, match="unsafe-positive-direction"):
+        renderer().render_prompts(*v2_source, "lesson.json")
+
+
+@pytest.mark.parametrize("negative_direction", [
+    "Child stays calm. Never scream or extend the clip.",
+    "Never scream and extend the clip.",
+    "Do not scream and distort the face.",
+    "No exaggerated surprise, wide-eyed shock or screaming.",
+    "No exaggerated surprise, screaming is forbidden.",
+    "No exaggerated surprise, screaming is not allowed.",
+    "No exaggerated surprise, screaming does not occur.",
+])
+def test_v2_allows_negative_safety_prohibitions_and_never_extend(
+    v2_source, negative_direction
+):
+    v2_source[1]["parts"]["A"]["action"] = negative_direction
+    v2_source[1]["emotion"]["allowed_shift"] = (
+        "Brief mild excitement may show as one small smile."
+    )
+    v2_source[1]["emotion"]["forbidden"] = (
+        "No screaming, extreme excitement, rage, distorted faces or frantic gestures."
+    )
+
+    assert renderer().render_prompts(*v2_source, "lesson.json")
+
+
+def test_v2_allows_emotion_bounded_after_the_adjective(v2_source):
+    v2_source[1]["emotion"]["allowed_shift"] = (
+        "Child looks excited only briefly."
+    )
+
+    assert renderer().render_prompts(*v2_source, "lesson.json")
+
+
+def test_v2_rejects_positive_unsafe_direction_mislabeled_as_forbidden(v2_source):
+    v2_source[1]["emotion"]["forbidden"] = (
+        "Child screams with extreme excitement."
+    )
+
+    with pytest.raises(ValueError, match="unsafe-positive-direction"):
+        renderer().render_prompts(*v2_source, "lesson.json")
+
+
+@pytest.mark.parametrize(("description", "expected"), [
+    ("Child gets dressed beside Mom.", False),
+    ("Mom wears a skirt while Child waits.", False),
+    ("Child helps Mom fold her dress.", False),
+    ("Child is next to Mom, who is in a dress.", False),
+    ("Child puts Mom's red dress on the table.", False),
+    ("Child wears a red shirt beside Mom's pretty dress.", False),
+    ("Child places Mom's pretty dress on the chair.", False),
+    ("Child wears red shorts, Mom holds her blue dress.", False),
+    ("Child wears red shorts, and Mom holds her blue dress.", False),
+    ("Child wears red shorts, Mom folds her dress.", False),
+    ("Child wears a dress for the scene.", True),
+    ("Child will wear a dress.", True),
+    ("Child wears a red dress.", True),
+    ("Child will be wearing a blue dress.", True),
+    ("Child wears dresses.", True),
+    ("Child will don a dress.", True),
+    ("Child wears a pretty dress.", True),
+    ("Child wears a sparkly dress.", True),
+    ("Child wears a polka-dot dress.", True),
+    ("Child changes into a new skirt.", True),
+    ("Child wears a red and blue dress.", True),
+    ("Child wears a red or blue dress.", True),
+    ("Child wears a red, white, and blue dress.", True),
+    ("Child is put in a dress.", True),
+    ("Child is being put in a dress.", True),
+    ("Child is placed in a blue gown.", True),
+    ("Child is dressed in a skirt.", True),
+    ("Child was being dressed in a skirt.", True),
+    ("Child got put in a blue gown.", True),
+    ("Child puts the skirt on.", True),
+    ("Child gets dressed in a gown.", True),
+    ("Put the blouse on Child.", True),
+    ("Put the red skirt on Child.", True),
+    ("Put Child in a red dress.", True),
+    ("Mom puts Child in a red dress.", True),
+    ("Mom places Child in the blue gown.", True),
+    ("A blouse is placed on Child.", True),
+])
+def test_child_garment_scan_targets_only_child_assignments(description, expected):
+    assert renderer().assigns_girl_specific_garment_to_child(description) is expected
+
+
+def test_v2_rejects_girl_specific_garment_assigned_to_child(v2_source):
+    v2_source[1]["scene"] += " Child will wear a dress."
+
+    with pytest.raises(ValueError, match="child-garment-assignment"):
+        renderer().render_prompts(*v2_source, "lesson.json")
+
+
 @pytest.mark.parametrize("first_line_words", [2, 10])
 def test_v2_word_boundaries_ignore_visual_prose(v2_source, first_line_words):
     v2_source[0]["parts"][0]["turns"][0]["line"] = " ".join(["word"] * first_line_words)
@@ -163,15 +289,30 @@ def test_cli_check_does_not_write_and_write_regenerates_only_derived_prompts(tmp
 def test_all_canonical_lessons_have_synced_three_part_exports():
     module = renderer()
     lessons = sorted((ROOT / "curriculum/04").glob("*/*/lesson.json"))
+    productions = sorted((ROOT / "prompts/04").glob("*/*/production.json"))
+    exported_prompts = sorted((ROOT / "prompts/04").glob("*/*/[abc].txt"))
     assert len(lessons) == 30
+    assert len(productions) == 30
+    assert len(exported_prompts) == 90
     for path in lessons:
         lesson = json.loads(path.read_text(encoding="utf-8"))
         folder = ROOT / "prompts" / path.parent.relative_to(ROOT / "curriculum")
         production = json.loads((folder / "production.json").read_text(encoding="utf-8"))
+        turns = [turn for part in lesson["parts"] for turn in part["turns"]]
+        child_turns = [turn for turn in turns if turn["speaker"] == "child"]
+        assert lesson["dialogue_contract"] == "three-by-ten-v2"
+        assert 9 <= len(turns) <= 11
+        assert 4 <= len(child_turns) <= 5
+        assert production["content_revision"] == lesson["content_revision"]
+        assert not module.assigns_girl_specific_garment_to_child(
+            json.dumps((lesson, production), ensure_ascii=False)
+        )
         rendered = module.render_prompts(lesson, production, path.relative_to(ROOT).as_posix())
         for part, expected in rendered.items():
             actual = (folder / f"{part}.txt").read_text(encoding="utf-8")
             assert actual == expected
+            assert "12-15 seconds" not in actual
+            assert "extend the clip rather than" not in actual.lower()
             turns = lesson["parts"]["abc".index(part)]["turns"]
             dialogue = actual.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
             assert dialogue.splitlines() == [f'{t["speaker"].title()}: "{t["line"]}"' for t in turns]

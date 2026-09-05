@@ -1,6 +1,6 @@
 Not Ready Yet — Part C (resolve)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/01-not-ready-yet/lesson.json | Content revision: 2
-Source SHA256: db17c8d31949e3451414dacde8c2de321c6eae6a0c7724ca3390b2bc0b85bef2
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/01-not-ready-yet/lesson.json | Content revision: 3
+Source SHA256: 9ed9d7ccae71b4b9b8fb4e43e4fbca2573326657fe0547dfb9c21af47c9dd5a7
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND

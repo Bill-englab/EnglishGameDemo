@@ -6,8 +6,8 @@
   "conversation_move": {"id": "propose-order", "label": "propose an order"},
   "trigger": "Dad suggests putting away the cars and then the blocks; Child proposes the reverse order while keeping both cleanup jobs.",
   "core_response": "What if we do blocks first?",
-  "stretch_response": "What if we do blocks first, then cars?",
-  "repair_response": "I mean blocks first, then cars.",
+  "stretch_response": "Yes, then the cars.",
+  "repair_response": "I mean books first, then animals.",
   "recycle": ["change-choice"],
   "roles": ["child", "dad"],
   "setting": "Tidying two small toy groups together at home.",
@@ -44,10 +44,10 @@
   ],
   "replay_cards": [
     {"title": "Coats and shoes", "setting": "At the front door", "change": "Both coat and shoes are needed", "challenge": "Propose shoes first, then coat; Dad agrees and both steps are completed"},
-    {"title": "Books and animals", "setting": "Tidying the bedroom", "change": "Two groups belong in different places", "challenge": "Mom suggests animals first; propose books first instead, shelve them together, then begin putting the animals away"}
+    {"title": "Books and animals", "setting": "Tidying the bedroom", "change": "Two groups belong in different places, and Mom initially reverses Child's proposed order", "challenge": "Child proposes books before animals. When Mom checks animals first, Child repairs, \"I mean books first, then animals.\" Mom accepts the complete order; they shelve the books together, then begin putting the animals away."}
   ],
   "parent_support": ["Keep the real boundary: both toy groups go away. The child may change the order, not cancel a job.", "Accept a safe order, finish the first group together, and leave space for the child to initiate the second."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

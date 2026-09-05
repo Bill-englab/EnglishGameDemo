@@ -1,6 +1,6 @@
 Blocks First — Part C (resolve)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/03-propose-an-order/lesson.json | Content revision: 2
-Source SHA256: bade99c4b3e92c8d7bf5aba5757a8d776827a0513c3dc421ac33ecc1a1da9f20
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/03-propose-an-order/lesson.json | Content revision: 3
+Source SHA256: 920ea0738350fa1033063bf25a58cff73541ee89ede2be572b32cd9adfcf2f4b
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND

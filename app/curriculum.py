@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 
+THREE_BY_TEN_CONTRACT = "three-by-ten-v2"
 ALLOWED_STATUSES = {
     "draft",
     "logic_reviewed",
@@ -138,6 +139,18 @@ def _speaker_word_count(parts: Any, speaker: str) -> int:
     )
 
 
+def _speaker_turn_count(parts: Any, speaker: str) -> int:
+    if not isinstance(parts, list):
+        return 0
+    return sum(
+        1
+        for part in parts
+        if isinstance(part, dict)
+        for turn in part.get("turns", [])
+        if isinstance(turn, dict) and turn.get("speaker") == speaker
+    )
+
+
 def validate_stage(
     stage: dict[str, Any], *, require_complete: bool = False
 ) -> list[ValidationIssue]:
@@ -156,6 +169,18 @@ def validate_stage(
             lessons_seen += 1
             lesson_id = lesson.get("id", "<lesson>")
             path = f"{chapter_id}/{lesson_id}"
+            contract = lesson.get("dialogue_contract")
+            is_three_by_ten = contract == THREE_BY_TEN_CONTRACT
+            if contract not in (None, "", THREE_BY_TEN_CONTRACT):
+                _add(
+                    issues, f"{path}.dialogue_contract", "dialogue-contract",
+                    f"Unknown dialogue contract: {contract}",
+                )
+            elif require_complete and stage.get("id") == "04" and not is_three_by_ten:
+                _add(
+                    issues, f"{path}.dialogue_contract", "dialogue-contract",
+                    f"Complete Stage 04 requires {THREE_BY_TEN_CONTRACT}",
+                )
             missing = sorted(REQUIRED_LESSON_FIELDS - set(lesson))
             for field in missing:
                 _add(issues, f"{path}.{field}", "required-field", f"Missing {field}")
@@ -200,12 +225,25 @@ def validate_stage(
             for index, part in enumerate(parts):
                 if not isinstance(part, dict):
                     continue
+                part_id = part.get("id", index)
+                if is_three_by_ten:
+                    turn_count = len(part.get("turns", []))
+                    if not 3 <= turn_count <= 4:
+                        _add(
+                            issues, f"{path}.parts.{part_id}", "part-turn-budget",
+                            f"Each part needs 3-4 turns; found {turn_count}",
+                        )
+                    part_words = _dialogue_word_count([part])
+                    if not 12 <= part_words <= 20:
+                        _add(
+                            issues, f"{path}.parts.{part_id}", "part-word-budget",
+                            f"Each part needs 12-20 spoken words; found {part_words}",
+                        )
                 if not any(
                     turn.get("speaker") == "child"
                     for turn in part.get("turns", [])
                     if isinstance(turn, dict)
                 ):
-                    part_id = part.get("id", index)
                     _add(
                         issues,
                         f"{path}.parts.{part_id}",
@@ -232,24 +270,45 @@ def validate_stage(
                 )
 
             reviews = lesson.get("reviews", {})
-            if status in {"video_ready", "video_produced"} and not all(
-                reviews.get(review) is True for review in REQUIRED_REVIEWS
+            required_reviews = REQUIRED_REVIEWS
+            review_statuses = {"video_ready", "video_produced"}
+            if is_three_by_ten:
+                required_reviews = REQUIRED_REVIEWS | {"character_continuity", "emotion_stability"}
+                review_statuses = review_statuses | {"language_reviewed"}
+            if status in review_statuses and not all(
+                reviews.get(review) is True for review in required_reviews
             ):
                 _add(
                     issues,
                     f"{path}.reviews",
                     "review-gate",
-                    "Video-ready content must pass all eight reviews",
+                    f"{status} content must pass all {len(required_reviews)} required reviews",
                 )
 
             word_count = _dialogue_word_count(parts)
-            if not 35 <= word_count <= 65:
+            minimum_words, maximum_words = (45, 58) if is_three_by_ten else (35, 65)
+            if not minimum_words <= word_count <= maximum_words:
                 _add(
                     issues,
                     f"{path}.parts",
                     "word-budget",
-                    f"Stage 4 dialogue needs 35-65 words; found {word_count}",
+                    f"Stage 4 dialogue needs {minimum_words}-{maximum_words} words; found {word_count}",
                 )
+            if is_three_by_ten:
+                turn_count = sum(
+                    len(part.get("turns", [])) for part in parts if isinstance(part, dict)
+                )
+                if not 9 <= turn_count <= 11:
+                    _add(
+                        issues, f"{path}.parts", "lesson-turn-budget",
+                        f"Lesson needs 9-11 turns; found {turn_count}",
+                    )
+                child_turns = _speaker_turn_count(parts, "child")
+                if not 4 <= child_turns <= 5:
+                    _add(
+                        issues, f"{path}.parts", "child-turn-budget",
+                        f"Lesson needs 4-5 child turns; found {child_turns}",
+                    )
             child_word_count = _speaker_word_count(parts, "child")
             if not 18 <= child_word_count <= 28:
                 _add(

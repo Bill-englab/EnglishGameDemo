@@ -27,8 +27,8 @@ ALL_REVIEWS = {
 }
 
 
-def valid_lesson(move_id="request-item", *, recycle=None):
-    return {
+def valid_lesson(move_id="request-item", *, recycle=None, v2=False):
+    lesson = {
         "id": "01-can-i-have",
         "title": "The Apple One",
         "title_zh": "我想要苹果那个",
@@ -90,6 +90,77 @@ def valid_lesson(move_id="request-item", *, recycle=None):
         "status": "language_reviewed",
         "content_revision": 1,
     }
+    if v2:
+        lesson["dialogue_contract"] = "three-by-ten-v2"
+        lesson["reviews"].update(character_continuity=True, emotion_stability=True)
+        # 3/4/3 turns, 15/16/15 words, four child turns and 19 child words.
+        dialogue = [
+            [("mom", "Would you like a snack?"), ("child", "Can I have an apple?"), ("mom", "Yes, here is your apple.")],
+            [("child", "This apple is too big."), ("mom", "Would you like it cut?"), ("child", "Yes, please cut it."), ("mom", "All right.")],
+            [("mom", "Here are two small pieces."), ("child", "Thank you, I like these."), ("mom", "You can eat them now.")],
+        ]
+        for part, turns in zip(lesson["parts"], dialogue):
+            part["turns"] = [{"speaker": speaker, "line": line, "kind": "input"} for speaker, line in turns]
+    return lesson
+
+
+@pytest.mark.parametrize("mutation, expected_code", [
+    (lambda l: l["parts"][0]["turns"].pop(), "part-turn-budget"),
+    (lambda l: l["parts"][1]["turns"].append({"speaker": "mom", "line": "Okay."}), "part-turn-budget"),
+    (lambda l: (l["parts"][0]["turns"].pop(), l["parts"][2]["turns"].pop()), "lesson-turn-budget"),
+    (lambda l: (l["parts"][0]["turns"].append({"speaker": "mom", "line": "Okay."}), l["parts"][2]["turns"].append({"speaker": "mom", "line": "Okay."})), "lesson-turn-budget"),
+    (lambda l: l["parts"][0]["turns"][1].update(speaker="mom"), "child-turn-budget"),
+    (lambda l: (l["parts"][0]["turns"][0].update(speaker="child"), l["parts"][2]["turns"][0].update(speaker="child")), "child-turn-budget"),
+    (lambda l: l["parts"][0]["turns"][0].update(line="word " * 11), "part-word-budget"),
+    (lambda l: l["parts"][0]["turns"][0].update(line="One."), "part-word-budget"),
+    (lambda l: l["parts"][0]["turns"][0].update(line="Take a snack."), "word-budget"),
+    (lambda l: (l["parts"][0]["turns"][0].update(line="word " * 10), l["parts"][1]["turns"][1].update(line="word " * 9), l["parts"][2]["turns"][0].update(line="word " * 9)), "word-budget"),
+])
+def test_v2_rejects_turn_and_word_budget_violations(mutation, expected_code):
+    lesson = valid_lesson(v2=True)
+    mutation(lesson)
+    assert expected_code in {issue.code for issue in validate_stage(valid_stage([lesson]))}
+
+
+@pytest.mark.parametrize("status", ["language_reviewed", "video_ready", "video_produced"])
+@pytest.mark.parametrize("review", sorted(ALL_REVIEWS) + ["character_continuity", "emotion_stability"])
+def test_v2_requires_all_ten_reviews_from_language_reviewed(status, review):
+    lesson = valid_lesson(v2=True)
+    lesson["status"] = status
+    lesson["reviews"].pop(review)
+    assert "review-gate" in {issue.code for issue in validate_stage(valid_stage([lesson]))}
+
+
+def test_v2_accepts_valid_dialogue_and_does_not_count_production_prose():
+    lesson = valid_lesson(v2=True)
+    lesson["setting"] = "scene " * 100
+    assert validate_stage(valid_stage([lesson])) == []
+    lesson["status"] = "logic_reviewed"
+    lesson["reviews"] = {}
+    assert validate_stage(valid_stage([lesson])) == []
+
+
+@pytest.mark.parametrize("contract", ["three-by-ten-v3", "legacy", 123, {"version": 2}])
+def test_unknown_dialogue_contract_is_rejected(contract):
+    lesson = valid_lesson()
+    lesson["dialogue_contract"] = contract
+    assert "dialogue-contract" in {issue.code for issue in validate_stage(valid_stage([lesson]))}
+
+
+def test_complete_stage_requires_every_lesson_to_migrate_but_incremental_accepts_v1():
+    stage = valid_stage([valid_lesson(v2=True), valid_lesson("second-move")])
+    stage.update(expected_chapters=1, expected_lessons=2)
+    assert validate_stage(stage) == []
+    issues = validate_stage(stage, require_complete=True)
+    assert [issue.code for issue in issues] == ["dialogue-contract"]
+    stage["chapters"][0]["lessons"][1] = valid_lesson("second-move", v2=True)
+    assert validate_stage(stage, require_complete=True) == []
+
+
+def test_complete_other_stage_does_not_force_stage_04_migration():
+    stage = valid_stage()
+    stage.update(id="05", expected_chapters=1, expected_lessons=1)
+    assert validate_stage(stage, require_complete=True) == []
 
 
 def valid_stage(lessons=None):
@@ -226,6 +297,7 @@ def test_complete_validation_enforces_counts_and_family_partner_ratio():
     assert {issue.code for issue in issues} == {
         "chapter-count",
         "lesson-count",
+        "dialogue-contract",
     }
 
 

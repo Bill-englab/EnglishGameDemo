@@ -8,16 +8,25 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import sys
+
+
+APP_ROOT = Path(__file__).resolve().parents[1] / "app"
+if str(APP_ROOT) not in sys.path:
+    sys.path.insert(0, str(APP_ROOT))
+
+from curriculum import THREE_BY_TEN_CONTRACT, _dialogue_word_count
 
 
 CAST = {
-    "child": "Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.",
+    "child": "Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.",
     "dad": "Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt, gentle natural adult male voice.",
     "mom": "Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.",
     "teacher": "Rabbit Teacher — a cream rabbit with upright ears and a lavender cardigan, calm natural adult voice.",
     "peer": "Bear Peer — the same small brown bear in a teal T-shirt in every peer lesson; age four, child-sized proportions and a distinct natural child voice, never an adult.",
 }
 PARTS = ("A", "B", "C")
+LEGACY_CHILD_CAST = "Child — a four-year-old cartoon tiger, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice."
 
 
 def _required_text(value, name):
@@ -28,6 +37,7 @@ def _required_text(value, name):
 
 def render_prompts(lesson, production, source):
     """Return a/b/c text, rejecting stale revisions and discontinuous staging."""
+    is_three_by_ten = lesson.get("dialogue_contract") == THREE_BY_TEN_CONTRACT
     revision = lesson.get("content_revision")
     production_revision = production.get("content_revision")
     if type(revision) is not int or revision < 1 or type(production_revision) is not int or production_revision != revision:
@@ -40,6 +50,18 @@ def render_prompts(lesson, production, source):
     if len(roles) != 2 or len(set(roles)) != 2 or "child" not in roles or any(r not in CAST for r in roles):
         raise ValueError("exactly child and one known partner role are required")
     scene = _required_text(production.get("scene"), "scene")
+    emotion_block = ""
+    if is_three_by_ten:
+        emotion = production.get("emotion")
+        if not isinstance(emotion, dict):
+            raise ValueError("production-emotion: emotion must be an object")
+        emotion_lines = [
+            _required_text(emotion.get(field), f"production-emotion.{field}")
+            for field in ("baseline", "allowed_shift", "forbidden")
+        ]
+        emotion_block = "EMOTIONAL PERFORMANCE\n" + "\n".join(emotion_lines) + (
+            "\nNo screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.\n\n"
+        )
     for i, part in enumerate(parts):
         visual = notes[part["id"]]
         for field in ("start", "action", "end"):
@@ -52,14 +74,22 @@ def render_prompts(lesson, production, source):
             if turn.get("speaker") not in roles:
                 raise ValueError("spoken role not in lesson cast")
             _required_text(turn.get("line"), "dialogue line")
+        if is_three_by_ten and not 12 <= _dialogue_word_count([part]) <= 20:
+            raise ValueError(f"part-word-budget: Part {part['id']} needs 12-20 spoken words; shorten or revise source dialogue before export")
 
     digest = hashlib.sha256(json.dumps(lesson, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
-    cast = "\n".join(CAST[role] for role in roles)
+    # Keep v1 exports stable until their lesson opts into the migration contract.
+    cast = "\n".join(
+        LEGACY_CHILD_CAST if role == "child" and not is_three_by_ten else CAST[role]
+        for role in roles
+    )
     result = {}
     for part in parts:
         key = part["id"]
         visual = notes[key]
-        word_count = sum(len(re.findall(r"\b[\w]+(?:['’-][\w]+)*\b", t["line"])) for t in part["turns"])
+        word_count = _dialogue_word_count([part]) if is_three_by_ten else sum(
+            len(re.findall(r"\b[\w]+(?:['’-][\w]+)*\b", t["line"])) for t in part["turns"]
+        )
         pacing = (
             "PACING REVIEW: this part has more than 22 spoken words. Target about 10 seconds, "
             "but allow 12-15 seconds if a natural read needs it; never rush, omit or paraphrase dialogue."
@@ -67,6 +97,12 @@ def render_prompts(lesson, production, source):
             "Target about 10 seconds. Speak clearly at an unhurried conversational pace with short turn-taking pauses. "
             "If a natural read does not fit, extend the clip rather than rush or omit words."
         )
+        if is_three_by_ten:
+            pacing = (
+                "Fit this clip within about 10 seconds at a natural conversational pace. "
+                "Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip."
+                "\nThe clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip."
+            )
         speech = "\n".join(f'{t["speaker"].title()}: "{t["line"]}"' for t in part["turns"])
         result[key.lower()] = f"""{lesson['title']} — Part {key} ({part['beat']})
 Production prompt draft | Source: {source} | Content revision: {revision}
@@ -79,7 +115,7 @@ Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D
 FIXED CAST (only these two)
 {cast}
 
-SETTING
+{emotion_block}SETTING
 {lesson['setting']}
 
 SCENE AND PROP CONTINUITY

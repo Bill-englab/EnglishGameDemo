@@ -39,6 +39,24 @@ def source():
     return lesson, production
 
 
+@pytest.fixture
+def v2_source(source):
+    lesson, production = source
+    lesson["dialogue_contract"] = "three-by-ten-v2"
+    for part in lesson["parts"]:
+        part["turns"] = [
+            {"speaker": "mom", "line": "Would you like some help?"},
+            {"speaker": "child", "line": "Yes, please help me, Mom."},
+            {"speaker": "mom", "line": "Let us open it together."},
+        ]
+    production["emotion"] = {
+        "baseline": "Calm, warm and regulated baseline.",
+        "allowed_shift": "Brief mild puzzlement, then quiet relief.",
+        "forbidden": "No crying or forceful lid pulling.",
+    }
+    return lesson, production
+
+
 def test_exports_exact_lines_in_their_own_parts_with_only_the_used_cast(source):
     result = renderer().render_prompts(*source, "curriculum/04/01-test/01-help/lesson.json")
     assert list(result) == ["a", "b", "c"]
@@ -67,11 +85,50 @@ def test_rejects_incomplete_stale_or_inconsistent_staging(source, mutation, mess
         renderer().render_prompts(*source, "lesson.json")
 
 
-def test_long_part_gets_a_pacing_warning_without_deleting_words(source):
-    source[0]["parts"][0]["turns"][0]["line"] = " ".join(["word"] * 27)
-    text = renderer().render_prompts(*source, "lesson.json")["a"]
-    assert "PACING REVIEW" in text and "12-15 seconds" in text
-    assert 'Child: "' + " ".join(["word"] * 27) + '"' in text
+@pytest.mark.parametrize("first_line_words", [1, 11])
+def test_v2_rejects_parts_outside_twelve_to_twenty_words(v2_source, first_line_words):
+    # Other two lines contribute 10 words: totals are 11 and 21.
+    v2_source[0]["parts"][0]["turns"][0]["line"] = " ".join(["word"] * first_line_words)
+    with pytest.raises(ValueError, match="part-word-budget"):
+        renderer().render_prompts(*v2_source, "lesson.json")
+
+
+@pytest.mark.parametrize("field", ["baseline", "allowed_shift", "forbidden"])
+@pytest.mark.parametrize("value", [None, "", "   ", 1, {}])
+def test_v2_requires_three_nonempty_emotion_strings(v2_source, field, value):
+    v2_source[1]["emotion"][field] = value
+    with pytest.raises(ValueError, match="production-emotion"):
+        renderer().render_prompts(*v2_source, "lesson.json")
+
+
+@pytest.mark.parametrize("emotion", [None, [], "calm"])
+def test_v2_requires_emotion_object(v2_source, emotion):
+    v2_source[1]["emotion"] = emotion
+    with pytest.raises(ValueError, match="production-emotion"):
+        renderer().render_prompts(*v2_source, "lesson.json")
+
+
+def test_v2_renders_restrained_emotion_boy_cast_and_ten_second_limit(v2_source):
+    for text in renderer().render_prompts(*v2_source, "lesson.json").values():
+        assert "EMOTIONAL PERFORMANCE\n" in text
+        for value in v2_source[1]["emotion"].values():
+            assert value in text
+        assert "No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running." in text
+        assert "The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip." in text
+        assert "Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip." in text
+        assert "four-year-old cartoon tiger boy" in text
+        assert not re.search(r"\b(she|her|hers)\b", text, re.IGNORECASE)
+        assert "12-15 seconds" not in text and "PACING REVIEW" not in text
+        dialogue = text.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
+        assert dialogue == 'Mom: "Would you like some help?"\nChild: "Yes, please help me, Mom."\nMom: "Let us open it together."'
+
+
+@pytest.mark.parametrize("first_line_words", [2, 10])
+def test_v2_word_boundaries_ignore_visual_prose(v2_source, first_line_words):
+    v2_source[0]["parts"][0]["turns"][0]["line"] = " ".join(["word"] * first_line_words)
+    v2_source[1]["scene"] = "scene " * 100
+    text = renderer().render_prompts(*v2_source, "lesson.json")["a"]
+    assert f"PACING ({first_line_words + 10} spoken words)" in text
 
 
 def test_source_hash_changes_even_when_revision_was_not_bumped(source):

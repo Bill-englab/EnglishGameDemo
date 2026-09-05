@@ -196,7 +196,7 @@ curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:5000/login
 
 ```bash
 cd app
-.venv/Scripts/python -m pytest        # 全量（2026-09-05：358 个）
+.venv/Scripts/python -m pytest        # 全量（2026-09-06：365 个）
 .venv/Scripts/python -m pytest -v
 .venv/Scripts/python -m pytest tests/test_scanner.py -v   # 单文件
 ```
@@ -216,7 +216,7 @@ node --test tests-js/map-path.test.mjs # 单文件
 
 ### 当前测试覆盖什么
 
-- 2026-09-05 基线：Python 358、Node 44；包含 Stage 1 全量对话/提示词聚合、安全方向与 Child 服装归属检查、20张资产HTTP验证、导航计数/不可变输入、drawer焦点、Electron挂载幂等、current跳转、同章背景回退、上传所有权、路径共享曲线和庆祝队列/取消生命周期。当前验收与命令见 [`docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`](docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
+- 2026-09-06 基线：Python 365、Node 44；包含 Stage 1 全量对话/提示词聚合、安全方向与 Child 服装归属检查、20张资产HTTP验证、导航计数/不可变输入、drawer焦点、Electron挂载幂等、current跳转、同章背景回退、上传所有权、路径共享曲线和庆祝队列/取消生命周期。当前验收与命令见 [`docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`](docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
 - 可选 `tests-browser/modern-toy-ui.cjs`：已有 Playwright/Edge/Python 环境下运行；具体环境变量见 `app/README.md`。使用临时课程副本、账号、配置、资料与媒体根，拦截上传且不执行启动扫描。`TOY_QA_ELECTRON=1` 启用真实 Electron/preload、独立 userData、隐藏800×600窗口。不要为测试启动 `electron/main.cjs`（它拉起生产服务并会清理5000端口），不要复用用户窗口。
 
 - `test_scanner.py`：扫描排序、`meta.json` 回退、`has_demo`/`has_performance` 跨树检测、**webm 格式检测**、三态机、跨章状态传递、全完成无 current、**按用户名隔离 performance 路径**。

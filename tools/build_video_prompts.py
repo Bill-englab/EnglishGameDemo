@@ -61,6 +61,10 @@ _DIRECTION_SCOPE_BOUNDARY = re.compile(
     re.IGNORECASE,
 )
 _COORDINATION_BOUNDARY = re.compile(r",|\band\b", re.IGNORECASE)
+_POSITIVE_CONTINUATION = re.compile(
+    r"\b(?:not|never)\s+(?:stop|avoid)\s+$",
+    re.IGNORECASE,
+)
 _UNSAFE_DIRECTIONS = (
     re.compile(r"\bscream(?:s|ed|ing)?\b", re.IGNORECASE),
     re.compile(r"\bextreme(?:ly)?\s+excit(?:ement|ed)\b", re.IGNORECASE),
@@ -92,7 +96,7 @@ _POSITIVE_EVENT_SUFFIX = re.compile(
     r"[A-Za-z][A-Za-z'’\-]*|[A-Za-z][A-Za-z'’\-]*(?:s|ed)|is|was|has|does)\b",
     re.IGNORECASE,
 )
-_GIRL_SPECIFIC_GARMENT = r"(?:dress(?:es)?|skirts?|blouses?|gowns?)"
+_GIRL_SPECIFIC_GARMENT = r"(?:dress(?:es)?(?!\s+shirts?\b)|skirts?|blouses?|gowns?)"
 _GARMENT_MODIFIER = (
     r"(?!(?:a|an|the|and|or|on|onto|in|into|beside|near|with|while|under|over|"
     r"by|for|to|from|of|child|dad|mom|teacher|peer|he|she|they|it)\b)"
@@ -136,6 +140,13 @@ _GARMENT_CLAUSE_BOUNDARY = re.compile(
     r",\s*(?:and\s+)?(?=(?:Child|Dad|Mom|Teacher|Peer|he|she|they|it)\b)",
     re.IGNORECASE,
 )
+_GARMENT_SENTENCE_BOUNDARY = re.compile(r"(?<=[.!?])\s+")
+_KNOWN_SUBJECT = re.compile(r"^\s*(Child|Dad|Mom|Teacher|Peer)\b", re.IGNORECASE)
+_LEADING_HE = re.compile(r"^(\s*)He\b", re.IGNORECASE)
+_NEGATED_GARMENT_ACTION = re.compile(
+    r"\b(?:never|do\s+not|does\s+not|don't|doesn't)\s+$",
+    re.IGNORECASE,
+)
 
 
 def _required_text(value, name):
@@ -148,12 +159,31 @@ def assigns_girl_specific_garment_to_child(text):
     """Return true only when a girl-specific garment is assigned to Child."""
     if not isinstance(text, str):
         return False
-    clauses = _GARMENT_CLAUSE_BOUNDARY.split(text)
-    return any(
-        pattern.search(clause)
-        for clause in clauses
-        for pattern in _CHILD_GIRL_GARMENT_PATTERNS
-    )
+    antecedent = None
+    for sentence in _GARMENT_SENTENCE_BOUNDARY.split(text):
+        subject = _KNOWN_SUBJECT.match(sentence)
+        if subject:
+            antecedent = subject.group(1).lower()
+        elif antecedent == "child" and _LEADING_HE.match(sentence):
+            sentence = _LEADING_HE.sub(r"\1Child", sentence, count=1)
+        clauses = _GARMENT_CLAUSE_BOUNDARY.split(sentence)
+        for clause in clauses:
+            for pattern in _CHILD_GIRL_GARMENT_PATTERNS:
+                for match in pattern.finditer(clause):
+                    if not _NEGATED_GARMENT_ACTION.search(clause[:match.start()]):
+                        return True
+    return False
+
+
+def _text_values(value):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from _text_values(item)
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            yield from _text_values(item)
 
 
 def _direction_context(text, match):
@@ -203,12 +233,13 @@ def _reject_unsafe_positive_direction(text, name):
     for pattern in _UNSAFE_DIRECTIONS:
         for match in pattern.finditer(text):
             before, after = _direction_context(text, match)
+            requests_positive_continuation = _POSITIVE_CONTINUATION.search(before)
             positive_event_after_comma = (
                 "," in before
                 and _POSITIVE_EVENT_SUFFIX.search(after)
                 and not _NEGATIVE_DIRECTION_SUFFIX.search(after)
             )
-            if positive_event_after_comma or (
+            if requests_positive_continuation or positive_event_after_comma or (
                 not _NEGATIVE_DIRECTION.search(before)
                 and not _NEGATIVE_DIRECTION_SUFFIX.search(after)
             ):
@@ -217,13 +248,15 @@ def _reject_unsafe_positive_direction(text, name):
                 )
     for match in _UNBOUNDED_EMOTIONS.finditer(text):
         before, after = _direction_context(text, match)
+        requests_positive_continuation = _POSITIVE_CONTINUATION.search(before)
         positive_event_after_comma = (
             "," in before
             and _POSITIVE_EVENT_SUFFIX.search(after)
             and not _NEGATIVE_DIRECTION_SUFFIX.search(after)
         )
         if (
-            positive_event_after_comma
+            requests_positive_continuation
+            or positive_event_after_comma
             or (
                 not _NEGATIVE_DIRECTION.search(before)
                 and not _NEGATIVE_DIRECTION_SUFFIX.search(after)
@@ -250,8 +283,10 @@ def render_prompts(lesson, production, source):
     roles = lesson.get("roles", [])
     if len(roles) != 2 or len(set(roles)) != 2 or "child" not in roles or any(r not in CAST for r in roles):
         raise ValueError("exactly child and one known partner role are required")
-    if is_three_by_ten and assigns_girl_specific_garment_to_child(
-        json.dumps((lesson, production), ensure_ascii=False)
+    setting = _required_text(lesson.get("setting"), "setting")
+    if is_three_by_ten and any(
+        assigns_girl_specific_garment_to_child(text)
+        for text in _text_values((lesson, production))
     ):
         raise ValueError("child-garment-assignment: girl-specific garment assigned to Child")
     scene = _required_text(production.get("scene"), "scene")
@@ -264,6 +299,7 @@ def render_prompts(lesson, production, source):
             _required_text(emotion.get(field), f"production-emotion.{field}")
             for field in ("baseline", "allowed_shift", "forbidden")
         ]
+        _reject_unsafe_positive_direction(setting, "setting")
         _reject_unsafe_positive_direction(scene, "scene")
         for field, line in zip(("baseline", "allowed_shift", "forbidden"), emotion_lines):
             _reject_unsafe_positive_direction(line, f"emotion.{field}")
@@ -326,7 +362,7 @@ FIXED CAST (only these two)
 {cast}
 
 {emotion_block}SETTING
-{lesson['setting']}
+{setting}
 
 SCENE AND PROP CONTINUITY
 {scene}

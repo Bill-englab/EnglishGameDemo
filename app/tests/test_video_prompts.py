@@ -149,6 +149,9 @@ def test_v2_renders_restrained_emotion_boy_cast_and_ten_second_limit(v2_source):
     "No shouting, extreme excitement immediately follows.",
     "No exaggerated surprise, screaming will fill the room.",
     "No shouting, extreme excitement can follow.",
+    "Do not stop screaming.",
+    "Never avoid screaming.",
+    "Child does not stop screaming.",
     "Extend the clip so every action fits.",
     "Allow 12-15 seconds for the final action.",
 ])
@@ -199,8 +202,17 @@ def test_v2_rejects_positive_unsafe_direction_mislabeled_as_forbidden(v2_source)
         renderer().render_prompts(*v2_source, "lesson.json")
 
 
+def test_v2_rejects_unsafe_positive_direction_in_lesson_setting(v2_source):
+    v2_source[0]["setting"] = "At home. Child screams."
+
+    with pytest.raises(ValueError, match="unsafe-positive-direction"):
+        renderer().render_prompts(*v2_source, "lesson.json")
+
+
 @pytest.mark.parametrize(("description", "expected"), [
     ("Child gets dressed beside Mom.", False),
+    ("Child wears a dress shirt.", False),
+    ("Never put a dress on Child.", False),
     ("Mom wears a skirt while Child waits.", False),
     ("Child helps Mom fold her dress.", False),
     ("Child is next to Mom, who is in a dress.", False),
@@ -244,6 +256,13 @@ def test_child_garment_scan_targets_only_child_assignments(description, expected
 
 def test_v2_rejects_girl_specific_garment_assigned_to_child(v2_source):
     v2_source[1]["scene"] += " Child will wear a dress."
+
+    with pytest.raises(ValueError, match="child-garment-assignment"):
+        renderer().render_prompts(*v2_source, "lesson.json")
+
+
+def test_v2_tracks_child_he_pronoun_for_garment_assignment(v2_source):
+    v2_source[1]["scene"] = "Child stands here. He wears a skirt."
 
     with pytest.raises(ValueError, match="child-garment-assignment"):
         renderer().render_prompts(*v2_source, "lesson.json")

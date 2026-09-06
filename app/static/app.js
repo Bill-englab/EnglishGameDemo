@@ -832,7 +832,7 @@ function observeReveal() {
 }
 
 // Reads every .level-node center in DOM order and draws the trail. The path
-// has an ivory body with a gold completed inner line and a teal current transition.
+// has a sand slab body with a gold completed inner line and a teal current transition.
 // Centers are measured from raw layout —
 // .level-node carries no ambient transform, so hover/scene animations can
 // never shift the measured points.
@@ -867,7 +867,7 @@ function drawMapPath() {
   if (pts.length < 2) { svg.innerHTML = ""; return; }
 
   // All layers retain the full route's control points. Only the emitted
-  // segment range changes; the connector after current remains ivory.
+  // segment range changes; the connector after current remains sand.
   const d = buildSmoothPath(pts);
   let html = "";
   for (const layer of ["ground-shadow", "contact-shadow", "sidewall", "surface", "highlight", "seams"]) {

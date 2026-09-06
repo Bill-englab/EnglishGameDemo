@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<title>Path variants comparison — morning picnic</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #221a12;
+    font: 14px/1.45 "Segoe UI", "Noto Sans SC", sans-serif;
+    color: #f3e9d8;
+    padding: 28px 24px 40px;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  p.sub { color: #c9b998; margin-bottom: 22px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    max-width: 1560px;
+    margin: 0 auto;
+  }
+  figure { position: relative; }
+  .stage {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: 14px;
+    overflow: hidden;
+    background: url("../app/static/worlds-v2/morning-picnic-desktop.webp") center 30% / cover;
+    box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  }
+  .stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .stage .trail { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  figcaption {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #2e2418;
+  }
+  figcaption b { display: block; font-size: 15px; margin-bottom: 3px; color: #ffe9bd; }
+  figcaption .note { color: #c9b998; }
+  .tag {
+    position: absolute; top: 10px; left: 10px; z-index: 5;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(20,14,8,.72); color: #ffe9bd;
+    font-size: 12px; font-weight: 600; letter-spacing: .04em;
+  }
+  /* nodes (mirror of app .level-node, empty-number variant) */
+  .node {
+    position: absolute; z-index: 4;
+    width: 112px; height: 88px;
+    transform: translate(-50%, -50%);
+    border: 6px solid #fff4df; border-radius: 50%;
+    background: radial-gradient(ellipse at 34% 18%, #fff 0 22%, #f8edd9 48%, #dfc69b 100%);
+    box-shadow: 0 6px 0 #d7bf94, 0 12px 0 #a78960, 4px 19px 23px rgba(45,34,22,.42),
+      inset 0 3px 0 #fff, inset 0 -7px 9px rgba(114,85,49,.2);
+    display: grid; place-items: center;
+  }
+  .node::after {
+    content: ""; position: absolute; inset: 4px; border-radius: 50%;
+    border-top: 2px solid rgba(255,255,255,.9);
+    box-shadow: inset 0 3px 4px rgba(255,255,255,.75), inset 0 -5px 8px rgba(95,71,42,.17);
+  }
+  .node i { font: 600 32px "Segoe UI", sans-serif; font-style: normal; color: #665239; text-shadow: 0 1px 0 #fff; }
+  .node--lock { filter: saturate(.75); }
+  .node--lock .badge {
+    position: absolute; right: -12px; bottom: -10px;
+    width: 44px; height: 44px; border: 3px solid #fff4df; border-radius: 50%;
+    background: linear-gradient(#908f88, #64645f); color: #f1ebe0;
+    display: grid; place-items: center; font-size: 19px;
+    box-shadow: 0 5px 0 #464740, 0 9px 13px rgba(36,36,31,.38), inset 0 2px 0 rgba(255,255,255,.22);
+  }
+</style>
+<style>
+    .stage svg path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .stage svg path[stroke="#2d241b"][stroke-width="74"] { filter: blur(5px); }
+    .stage svg path[stroke="#51402d"][stroke-width="65"] { filter: blur(1px); }
+    .stage svg path[stroke="#2d241b"][stroke-width="122"] { filter: blur(7px); }
+    .stage svg path[stroke="#51402d"][stroke-width="112"] { filter: blur(2px); }
+    .stage svg path[stroke="#2d241b"][stroke-width="104"] { filter: blur(7px); }
+    .stage svg path[stroke="#51402d"][stroke-width="96"] { filter: blur(2px); }
+    .stage svg path[stroke="#2d241b"][stroke-width="52"] { filter: blur(4px); }
+  </style></head>
+<body>
+<h1>关卡连接路 · 四个候选方案</h1>
+<p class="sub">同一片草地、同一条曲线、同一组节点（112×88 空编号盘），只有路的画法不同。左上是当前线上效果。</p>
+<div class="grid">
+
+  <figure>
+    <div class="stage">
+      <span class="tag">A · 现状</span>
+      <svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#2d241b" stroke-width="74" opacity=".25" transform="translate(9,18)" filter="blur(5px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#51402d" stroke-width="65" opacity=".58" transform="translate(3,12)" filter="blur(1px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#a8895f" stroke-width="62" transform="translate(2,9)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#ead4aa" stroke-width="56" transform="translateY(-1px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="rgba(255,248,222,.96)" stroke-width="46" transform="translate(-2px,-6px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="rgba(111,82,48,.42)" stroke-width="50" stroke-dasharray="2 42" stroke-linecap="butt" transform="translateY(-1px)" style="stroke-linecap: butt;"></path>
+      </svg>
+      <div class="node" style="left:50%;top:14.75%"><i>1</i></div>
+      <div class="node" style="left:59.33%;top:33.5%"><i>2</i></div>
+      <div class="node node--lock" style="left:43.67%;top:49.75%"><i>3</i><span class="badge">🔒</span></div>
+      <div class="node node--lock" style="left:56%;top:67.5%"><i>4</i><span class="badge">🔒</span></div>
+    </div>
+    <figcaption><b>A · 现状（线上版本）</b><span class="note">高光盖住 82% 路面 → 白纸带；等距横缝像绷带；侧壁 3px、无厚度；路宽只有节点的 1/2。</span></figcaption>
+  </figure>
+
+  <figure>
+    <div class="stage">
+      <span class="tag">B · 加宽沙路</span>
+      <svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#2d241b" stroke-width="122" opacity=".26" transform="translate(10,22)" filter="blur(7px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#51402d" stroke-width="112" opacity=".5" transform="translate(4,14)" filter="blur(2px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#a8895f" stroke-width="108" transform="translate(3,11)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#e7cf9f" stroke-width="96" transform="translateY(-1px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="rgba(255,246,214,.55)" stroke-width="34" transform="translate(-14,-6)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="rgba(111,82,48,.22)" stroke-width="88" stroke-dasharray="3 74" stroke-linecap="butt" transform="translateY(-1px)" style="stroke-linecap: butt;"></path>
+      </svg>
+      <div class="node" style="left:50%;top:14.75%"><i>1</i></div>
+      <div class="node" style="left:59.33%;top:33.5%"><i>2</i></div>
+      <div class="node node--lock" style="left:43.67%;top:49.75%"><i>3</i><span class="badge">🔒</span></div>
+      <div class="node node--lock" style="left:56%;top:67.5%"><i>4</i><span class="badge">🔒</span></div>
+    </div>
+    <figcaption><b>B · 加宽沙路（贴近设计参考图）</b><span class="note">沙色做主面、高光收窄成左上一条；侧壁 6px/侧 + 软落地影；缝距拉长到 74px 且更淡。节点"坐"在路上。</span></figcaption>
+  </figure>
+
+  <figure>
+    <div class="stage">
+      <span class="tag">C · 石板拼路</span>
+      <svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#2d241b" stroke-width="104" opacity=".26" transform="translate(9,20)" filter="blur(7px)" style=""></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#51402d" stroke-width="96" opacity=".5" transform="translate(4,13)" filter="blur(2px)" style=""></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#a8895f" stroke-width="92" transform="translate(3,10)" style=""></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#e9d2a2" stroke-width="84" transform="translateY(-1px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="rgba(255,248,222,.8)" stroke-width="34" transform="translate(-5px,-7px)"></path>
+      <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="rgba(101,74,42,.4)" stroke-width="78" transform="translateY(-1px)" stroke-dasharray="3 107" style="stroke-linecap: butt;"></path></svg>
+      <div class="node" style="left:50%;top:14.75%"><i>1</i></div>
+      <div class="node" style="left:59.33%;top:33.5%"><i>2</i></div>
+      <div class="node node--lock" style="left:43.67%;top:49.75%"><i>3</i><span class="badge">🔒</span></div>
+      <div class="node node--lock" style="left:56%;top:67.5%"><i>4</i><span class="badge">🔒</span></div>
+    </div>
+    <figcaption><b>C · 石板拼路</b><span class="note">把整条路切成 58px 圆头石板、板间留 5px 缝透出下层暗色，像参考图里的铺石小径；无等距横缝。</span></figcaption>
+  </figure>
+
+  <figure>
+    <div class="stage">
+      <span class="tag">D · 草地踏石</span>
+      <svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#2d241b" stroke-width="52" opacity=".22" transform="translate(6,13)" stroke-dasharray="0.1 40" filter="blur(4px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#8a6f47" stroke-width="46" stroke-dasharray="0.1 40" transform="translate(2,7)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="#ecd7ab" stroke-width="40" stroke-dasharray="0.1 40" transform="translateY(-1px)"></path>
+        <path class="trail" d="M300 118 C326 172 360 214 356 268 C352 322 268 344 262 398 C256 452 330 486 336 540 C342 594 288 636 292 700" stroke="rgba(255,248,222,.85)" stroke-width="24" stroke-dasharray="0.1 40" transform="translate(-3px,-5px)"></path>
+      </svg>
+      <div class="node" style="left:50%;top:14.75%"><i>1</i></div>
+      <div class="node" style="left:59.33%;top:33.5%"><i>2</i></div>
+      <div class="node node--lock" style="left:43.67%;top:49.75%"><i>3</i><span class="badge">🔒</span></div>
+      <div class="node node--lock" style="left:56%;top:67.5%"><i>4</i><span class="badge">🔒</span></div>
+    </div>
+    <figcaption><b>D · 草地踏石</b><span class="note">最轻：不画整条路，只留一串圆头踏石点（间隔 46px），草地透出来；最贴合背景的手绘感，但"路"的连续感最弱。</span></figcaption>
+  </figure>
+
+</div>
+
+
+</body></html>

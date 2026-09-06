@@ -334,18 +334,18 @@ body {
 #map-retry:hover { background: var(--accent-deep); transform: translateY(-1px); }
 #map-retry:active { transform: translateY(0); }
 
-/* ---------- toy theatre map: untinted world, ivory path, real video nodes ---------- */
+/* ---------- toy theatre map: untinted world, sand slab path, real video nodes ---------- */
 #map-scroll { position: relative; padding: 0 0 100px; }
 .path-layer { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
 .path-layer .trail { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.path-layer .trail--ground-shadow { stroke:#2d241b; stroke-width:74; opacity:.25; transform:translate(9px,18px); filter:blur(5px); }
-.path-layer .trail--contact-shadow { stroke:#51402d; stroke-width:65; opacity:.58; transform:translate(3px,12px); filter:blur(1px); }
-.path-layer .trail--sidewall { stroke:#a8895f; stroke-width:62; transform:translate(2px,9px); filter:drop-shadow(0 2px 1px rgba(58,42,25,.24)); }
-.path-layer .trail--surface { stroke:#ead4aa; stroke-width:56; transform:translateY(-1px); }
-.path-layer .trail--highlight { stroke:rgba(255,248,222,.96); stroke-width:46; transform:translate(-2px,-6px); }
-.path-layer .trail--seams { stroke:rgba(111,82,48,.3); stroke-width:52; stroke-dasharray:2 42; stroke-linecap:butt; transform:translateY(-1px); }
-.path-layer .trail--done .trail__progress { stroke:#d6a63a; stroke-width:8; transform:translateY(-2px); filter:drop-shadow(0 2px 2px #5a431b88); }
-.path-layer .trail--current { stroke:#4da198; stroke-width:8; transform:translateY(-2px); filter:drop-shadow(0 2px 2px #1d575388); }
+.path-layer .trail--ground-shadow { stroke:#2d241b; stroke-width:104; opacity:.26; transform:translate(9px,20px); filter:blur(7px); }
+.path-layer .trail--contact-shadow { stroke:#51402d; stroke-width:96; opacity:.5; transform:translate(4px,13px); filter:blur(2px); }
+.path-layer .trail--sidewall { stroke:#a8895f; stroke-width:92; transform:translate(3px,10px); }
+.path-layer .trail--surface { stroke:#e9d2a2; stroke-width:84; transform:translateY(-1px); }
+.path-layer .trail--highlight { stroke:rgba(255,248,222,.8); stroke-width:34; transform:translate(-5px,-7px); }
+.path-layer .trail--seams { stroke:rgba(101,74,42,.4); stroke-width:78; stroke-dasharray:3 107; stroke-linecap:butt; transform:translateY(-1px); }
+.path-layer .trail--done .trail__progress { stroke:#d6a63a; stroke-width:10; transform:translateY(-2px); filter:drop-shadow(0 2px 2px #5a431b88); }
+.path-layer .trail--current { stroke:#4da198; stroke-width:10; transform:translateY(-2px); filter:drop-shadow(0 2px 2px #1d575388); }
 #bg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(165deg, #cfd8bd 0%, #b9c7a4 55%, #a3b58e 100%); }
 .bg-layer__slide { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; opacity: 0; transition: opacity 1.2s ease; }
 .bg-layer__slide.is-active { opacity: 1; }
@@ -821,13 +821,13 @@ body {
   .level-node__marker { width: 40px; height: 40px; }
   .level-node__marker svg { width: 23px; height: 23px; }
   .level-node__marker--locator { top: -43px; left: calc(50% - 20px); }
-  .path-layer .trail--ground-shadow { stroke-width:50; transform:translate(6px,13px); filter:blur(4px); }
-  .path-layer .trail--contact-shadow { stroke-width:44px; transform:translate(2px,9px); }
-  .path-layer .trail--sidewall { stroke-width:41px; transform:translate(1px,7px); }
-  .path-layer .trail--surface { stroke-width:36px; transform:translateY(-1px); }
-  .path-layer .trail--highlight { stroke-width:29px; transform:translate(-1px,-4px); }
-  .path-layer .trail--seams { stroke-width:34px; stroke-dasharray:2 32; transform:translateY(-1px); }
-  .path-layer .trail--done .trail__progress, .path-layer .trail--current { stroke-width: 5; }
+  .path-layer .trail--ground-shadow { stroke-width:70; transform:translate(6px,14px); filter:blur(5px); }
+  .path-layer .trail--contact-shadow { stroke-width:64; transform:translate(3px,9px); filter:blur(2px); }
+  .path-layer .trail--sidewall { stroke-width:61; transform:translate(2px,7px); }
+  .path-layer .trail--surface { stroke-width:56; transform:translateY(-1px); }
+  .path-layer .trail--highlight { stroke-width:23; transform:translate(-3px,-5px); }
+  .path-layer .trail--seams { stroke-width:52; stroke-dasharray:2 71; transform:translateY(-1px); }
+  .path-layer .trail--done .trail__progress, .path-layer .trail--current { stroke-width: 7; }
 }
 @media (prefers-reduced-motion: reduce) {
   .level-node, .level-node-wrap, .chapter-world, .detail-card, .back-btn, .bg-layer__slide { transition: none !important; }

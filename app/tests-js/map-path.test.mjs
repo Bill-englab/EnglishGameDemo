@@ -1,7 +1,7 @@
 // app/tests-js/map-path.test.mjs
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildSmoothPath } from "../static/map-path.mjs";
+import { buildSmoothPath, getScenicRouteOffset } from "../static/map-path.mjs";
 import * as pathModel from "../static/map-path.mjs";
 
 test("returns empty path for fewer than two points", () => {
@@ -34,4 +34,43 @@ test("path segments join at current node without losing or mutating points", () 
   assert.deepEqual(pathModel.splitPathPoints(points,-1), {traveled:points,upcoming:[]});
   assert.deepEqual(pathModel.splitPathPoints(points,4), {traveled:points,upcoming:[]});
   assert.deepEqual(pathModel.splitPathPoints([],0), {traveled:[],upcoming:[]});
+});
+
+test("global scenic offsets form broad varied arcs instead of chapter zigzags", () => {
+  const offsets = Array.from({ length: 30 }, (_, index) => getScenicRouteOffset(index));
+
+  assert.ok(offsets.every(({ desktopPx }) => Math.abs(desktopPx) <= 150));
+  assert.ok(offsets.every(({ mobilePx }) => Math.abs(mobilePx) <= 46));
+  assert.deepEqual(
+    offsets.map(({ desktopPx }) => Math.sign(desktopPx)),
+    offsets.map(({ mobilePx }) => Math.sign(mobilePx)),
+  );
+
+  const directionChanges = [];
+  let lastDirection = 0;
+  for (let index = 1; index < offsets.length; index += 1) {
+    const direction = Math.sign(offsets[index].desktopPx - offsets[index - 1].desktopPx);
+    if (direction && direction !== lastDirection) {
+      directionChanges.push(index - 1);
+      lastDirection = direction;
+    }
+  }
+  assert.deepEqual(directionChanges, [0, 4, 8, 13, 18, 24]);
+
+  const chapterShapes = Array.from({ length: 10 }, (_, chapter) => {
+    const start = chapter * 3;
+    return offsets.slice(start, start + 3)
+      .map(({ desktopPx }) => Math.round(desktopPx / 10))
+      .join(",");
+  });
+  assert.ok(new Set(chapterShapes).size >= 8);
+});
+
+test("scenic offsets return independent values and clamp outside the stage", () => {
+  const first = getScenicRouteOffset(0);
+  first.desktopPx = 999;
+
+  assert.deepEqual(getScenicRouteOffset(0), { desktopPx: -108, mobilePx: -33 });
+  assert.deepEqual(getScenicRouteOffset(-20), getScenicRouteOffset(0));
+  assert.deepEqual(getScenicRouteOffset(99), getScenicRouteOffset(29));
 });

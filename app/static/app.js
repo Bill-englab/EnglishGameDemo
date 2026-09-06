@@ -4,7 +4,7 @@
 // ============================================================
 
 import { getChapterTheme, resolveMapPresentation, resolveMapBackground, isFrameDark } from "./map-model.mjs";
-import { buildSmoothPath } from "./map-path.mjs";
+import { buildSmoothPath, getScenicRouteOffset } from "./map-path.mjs";
 import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
 import { resolveMediaView } from "./detail-media.mjs";
 import { summarizeAdventure } from "./adventure-navigation.mjs";
@@ -786,6 +786,9 @@ function renderMap(library) {
       const level = withChapterContext(rawLevel, chapter);
       const i = gIdx++;
       const wrap = createLevelNode(level, i, theme);
+      const routeOffset = getScenicRouteOffset(i);
+      wrap.style.setProperty("--route-x-desktop", `${routeOffset.desktopPx}px`);
+      wrap.style.setProperty("--route-x-mobile", `${routeOffset.mobilePx}px`);
       wrap.style.setProperty("--d", (inChapter++ * 0.07).toFixed(2) + "s");
       levelsCol.appendChild(wrap);
     }

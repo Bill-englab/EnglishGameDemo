@@ -7,6 +7,54 @@
 // in-app smoothPath so the trail keeps its gentle curvature.
 const TENSION = 0.16;
 
+// One authored rhythm for the whole 30-lesson stage. Uneven turning spans
+// (4, 4, 5, 5, 6, 5) keep the route scenic without restarting a chapter-sized
+// zigzag. Values are normalized so desktop and mobile preserve the same flow.
+const SCENIC_ROUTE_ANCHORS = Object.freeze([
+  Object.freeze({ index: 0, x: -0.72 }),
+  Object.freeze({ index: 4, x: 0.82 }),
+  Object.freeze({ index: 8, x: -0.90 }),
+  Object.freeze({ index: 13, x: 0.78 }),
+  Object.freeze({ index: 18, x: -0.84 }),
+  Object.freeze({ index: 24, x: 0.92 }),
+  Object.freeze({ index: 29, x: -0.66 }),
+]);
+
+const SCENIC_DESKTOP_AMPLITUDE = 150;
+const SCENIC_MOBILE_AMPLITUDE = 46;
+
+function smoothstep(value) {
+  return value * value * (3 - 2 * value);
+}
+
+// Returns fresh responsive offsets for one global lesson index. Clamping keeps
+// the layout deterministic if a caller briefly renders incomplete/stale data.
+export function getScenicRouteOffset(index) {
+  const numericIndex = Number.isFinite(index) ? Math.trunc(index) : 0;
+  const clampedIndex = Math.max(
+    SCENIC_ROUTE_ANCHORS[0].index,
+    Math.min(SCENIC_ROUTE_ANCHORS.at(-1).index, numericIndex),
+  );
+
+  let left = SCENIC_ROUTE_ANCHORS[0];
+  let right = SCENIC_ROUTE_ANCHORS.at(-1);
+  for (let anchorIndex = 1; anchorIndex < SCENIC_ROUTE_ANCHORS.length; anchorIndex += 1) {
+    if (clampedIndex <= SCENIC_ROUTE_ANCHORS[anchorIndex].index) {
+      right = SCENIC_ROUTE_ANCHORS[anchorIndex];
+      left = SCENIC_ROUTE_ANCHORS[anchorIndex - 1];
+      break;
+    }
+  }
+
+  const span = right.index - left.index;
+  const progress = span ? (clampedIndex - left.index) / span : 0;
+  const normalizedX = left.x + (right.x - left.x) * smoothstep(progress);
+  return {
+    desktopPx: Math.round(normalizedX * SCENIC_DESKTOP_AMPLITUDE),
+    mobilePx: Math.round(normalizedX * SCENIC_MOBILE_AMPLITUDE),
+  };
+}
+
 // The shared join is the current node; the connector to locked stays upcoming.
 export function splitPathPoints(points, firstLockedIndex) {
   if (firstLockedIndex < 0 || firstLockedIndex >= points.length) {

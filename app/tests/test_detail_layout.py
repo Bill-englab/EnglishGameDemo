@@ -89,7 +89,7 @@ def test_account_menu_has_a_name_independent_of_mobile_hidden_username(client):
 
 
 def test_map_shell_groups_progress_and_account_as_one_reference_composition(client):
-    """The avatar overlaps the centered progress group while window controls stay right."""
+    """Progress sits inside the brand group (next to the Stage pill); account stays right."""
     page = Document(client.get("/").get_data(as_text=True))
     topbar = next(node for node in page.nodes if "topbar" in node["attrs"].get("class", "").split())
     direct_children = [node for node in page.nodes if node["parents"] and node["parents"][-1] is topbar]
@@ -102,7 +102,8 @@ def test_map_shell_groups_progress_and_account_as_one_reference_composition(clie
     account = page.by_id("user-menu")
     mounts = [node for node in page.nodes if "data-window-controls" in node["attrs"]]
     assert brand["parents"][-1] is cells["shell-left"]
-    assert progress["parents"][-1] is cells["shell-progress"]
+    # Progress now lives inside the brand group (left side, next to Stage label)
+    assert progress["parents"][-1] is brand
     assert account["parents"][-1] is cells["shell-progress"]
     assert mounts[0]["parents"][-1] is cells["shell-actions"]
 

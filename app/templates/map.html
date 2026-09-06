@@ -19,13 +19,13 @@
           <div class="adventure-brand">
             <button id="adventure-menu-button" class="shell-icon-button" type="button" aria-label="Open course menu" aria-expanded="false" aria-controls="course-drawer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
             <div class="adventure-brand__stage"><h1 class="title">My English Adventure</h1><span id="adventure-stage-label" class="shell-stage-label">Stage 1 · I can take part</span></div>
+            <div class="progress shell-group" aria-label="Completed lessons">
+              <span><span id="star-count">0</span> / <span id="star-total">0</span><span class="shell-progress-label"> completed</span></span>
+              <progress id="adventure-progress" value="0" max="1" aria-label="Completed lessons"></progress>
+            </div>
           </div>
         </div>
         <div class="shell-progress">
-          <div class="progress shell-group" aria-label="Completed lessons">
-            <span><span id="star-count">0</span> / <span id="star-total">0</span><span class="shell-progress-label"> completed</span></span>
-            <progress id="adventure-progress" value="0" max="1" aria-label="Completed lessons"></progress>
-          </div>
           <div class="user-menu" id="user-menu">
             <button class="user-menu__trigger" id="user-menu-trigger" type="button" aria-label="Open account menu">
               <img id="user-avatar" class="user-avatar" src="/static/avatar-default.svg" alt="">

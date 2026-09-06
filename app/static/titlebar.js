@@ -28,6 +28,7 @@
       -webkit-app-region: no-drag;
       display: flex; gap: 0; align-items: center;
       flex: none; height: 44px;
+      color: #555;
     }
     /* Fixed overlay for login/standalone pages — sits at window top-right */
     .window-controls--overlay {
@@ -51,7 +52,12 @@
     }
 
     /* The map shell's right alignment cell owns control placement. */
-    .topbar .shell-actions .window-controls { margin-left: 0; }
+    .topbar .shell-actions .window-controls { margin-left: 0; height: 58px; color: #fffaf2; filter: drop-shadow(0 2px 2px rgba(20,35,30,.48)); }
+    .topbar .shell-actions .window-controls button { height: 58px; color: inherit; }
+    @media (max-width: 1023px) {
+      .topbar .shell-actions .window-controls,
+      .topbar .shell-actions .window-controls button { height: 56px; }
+    }
     /* On detail header, also at right */
     .detail-header .window-controls { margin-left: auto; order: 99; }
   `;
@@ -60,9 +66,9 @@
   document.head.appendChild(style);
 
   // SVG icons — clean stroke-based, Windows 11 style
-  const ICON_MIN = `<svg viewBox="0 0 12 12" fill="none" stroke="#555" stroke-width="1.2"><line x1="2" y1="6" x2="10" y2="6" stroke-linecap="round"/></svg>`;
-  const ICON_MAX = `<svg viewBox="0 0 12 12" fill="none" stroke="#555" stroke-width="1.2"><rect x="2.5" y="2.5" width="7" height="7" rx="1"/></svg>`;
-  const ICON_CLOSE = `<svg viewBox="0 0 12 12" fill="none" stroke="#555" stroke-width="1.3"><path d="M3 3L9 9M9 3L3 9" stroke-linecap="round"/></svg>`;
+  const ICON_MIN = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><line x1="2" y1="6" x2="10" y2="6" stroke-linecap="round"/></svg>`;
+  const ICON_MAX = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2.5" y="2.5" width="7" height="7" rx="1"/></svg>`;
+  const ICON_CLOSE = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 3L9 9M9 3L3 9" stroke-linecap="round"/></svg>`;
 
   // Safe wrapper — works even if preload didn't expose electronAPI
   function winAction(method) {

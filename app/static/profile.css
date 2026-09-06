@@ -1,7 +1,10 @@
 /* Profile shares the theatre palette while retaining its existing form layout. */
 #user-menu-trigger { min-height: 44px; max-width: min(240px, 42vw); }
 #user-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.user-avatar { width: 32px; height: 32px; border-radius: 50%; flex: 0 0 32px; object-fit: cover; }
+.user-avatar { width: 40px; height: 40px; border-radius: 50%; flex: 0 0 40px; object-fit: cover; border:2px solid #fff4df; box-shadow:0 3px 0 #b89a68,0 5px 9px rgba(54,39,22,.24); }
+@media (max-width: 767px) {
+  .topbar .user-avatar { width:34px; height:34px; flex-basis:34px; }
+}
 .profile-dialog {
   --profile-ink: var(--toy-cocoa);
   color: var(--profile-ink); background: var(--toy-ivory);

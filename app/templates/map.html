@@ -23,29 +23,27 @@
               <span><span id="star-count">0</span> / <span id="star-total">0</span><span class="shell-progress-label"> completed</span></span>
               <progress id="adventure-progress" value="0" max="1" aria-label="Completed lessons"></progress>
             </div>
-          </div>
-        </div>
-        <div class="shell-progress">
-          <div class="user-menu" id="user-menu">
-            <button class="user-menu__trigger" id="user-menu-trigger" type="button" aria-label="Open account menu">
-              <img id="user-avatar" class="user-avatar" src="/static/avatar-default.svg" alt="">
-              <span id="user-name"></span>
-              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
-            <div class="user-menu__popup" id="user-menu-popup" style="display:none;">
-              <button id="profile-open" type="button" class="user-menu__item" aria-haspopup="dialog">My Profile</button>
-              <div class="user-menu__section" id="admin-section" style="display:none;">
-                <button id="admin-btn" type="button" class="user-menu__item">Manage Users</button>
-              </div>
-              <div class="user-menu__admin-panel" id="admin-panel" style="display:none;">
-                <div class="admin-add">
-                  <input id="admin-username" type="text" placeholder="username">
-                  <input id="admin-password" type="password" placeholder="password">
-                  <button id="admin-add-btn" type="button">Add</button>
+            <div class="user-menu" id="user-menu">
+              <button class="user-menu__trigger" id="user-menu-trigger" type="button" aria-label="Open account menu">
+                <img id="user-avatar" class="user-avatar" src="/static/avatar-default.svg" alt="">
+                <span id="user-name"></span>
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </button>
+              <div class="user-menu__popup" id="user-menu-popup" style="display:none;">
+                <button id="profile-open" type="button" class="user-menu__item" aria-haspopup="dialog">My Profile</button>
+                <div class="user-menu__section" id="admin-section" style="display:none;">
+                  <button id="admin-btn" type="button" class="user-menu__item">Manage Users</button>
                 </div>
-                <ul class="admin-user-list" id="admin-user-list"></ul>
+                <div class="user-menu__admin-panel" id="admin-panel" style="display:none;">
+                  <div class="admin-add">
+                    <input id="admin-username" type="text" placeholder="username">
+                    <input id="admin-password" type="password" placeholder="password">
+                    <button id="admin-add-btn" type="button">Add</button>
+                  </div>
+                  <ul class="admin-user-list" id="admin-user-list"></ul>
+                </div>
+                <button id="logout-btn" type="button" class="user-menu__item user-menu__item--logout">Logout</button>
               </div>
-              <button id="logout-btn" type="button" class="user-menu__item user-menu__item--logout">Logout</button>
             </div>
           </div>
         </div>

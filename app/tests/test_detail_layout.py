@@ -89,12 +89,12 @@ def test_account_menu_has_a_name_independent_of_mobile_hidden_username(client):
 
 
 def test_map_shell_groups_progress_and_account_as_one_reference_composition(client):
-    """Progress sits inside the brand group (next to the Stage pill); account stays right."""
+    """Progress and account both sit inside the brand group; window controls stay right."""
     page = Document(client.get("/").get_data(as_text=True))
     topbar = next(node for node in page.nodes if "topbar" in node["attrs"].get("class", "").split())
     direct_children = [node for node in page.nodes if node["parents"] and node["parents"][-1] is topbar]
     assert [node["attrs"].get("class") for node in direct_children] == [
-        "shell-left", "shell-progress", "shell-actions",
+        "shell-left", "shell-actions",
     ]
     cells = {node["attrs"]["class"]: node for node in direct_children}
     brand = next(node for node in page.nodes if "adventure-brand" in node["attrs"].get("class", "").split())
@@ -102,9 +102,9 @@ def test_map_shell_groups_progress_and_account_as_one_reference_composition(clie
     account = page.by_id("user-menu")
     mounts = [node for node in page.nodes if "data-window-controls" in node["attrs"]]
     assert brand["parents"][-1] is cells["shell-left"]
-    # Progress now lives inside the brand group (left side, next to Stage label)
+    # Progress and account both live inside the brand group (left side)
     assert progress["parents"][-1] is brand
-    assert account["parents"][-1] is cells["shell-progress"]
+    assert account["parents"][-1] is brand
     assert mounts[0]["parents"][-1] is cells["shell-actions"]
 
 

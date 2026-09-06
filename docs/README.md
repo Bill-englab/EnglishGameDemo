@@ -23,5 +23,7 @@ UI 改造主线：[`specs/2026-09-05-modern-toy-theatre-ui-design.md`](specs/202
 
 课程设计主线：[`specs/2026-09-04-curriculum-architecture-design.md`](specs/2026-09-04-curriculum-architecture-design.md)（4–6 岁成长框架、4 岁 30 课大纲、真实性与内容生产标准）。4 岁课程的逐课验收记录见 [`../curriculum/04/FINAL-REVIEW.md`](../curriculum/04/FINAL-REVIEW.md)，应用接入记录见 [`plans/2026-09-04-curriculum-runtime-migration.md`](plans/2026-09-04-curriculum-runtime-migration.md)。后续关卡设计必须遵循课程设计与最终审查文档。
 
-Stage 1 对话重审：[`specs/2026-09-05-stage-1-dialogue-expansion.md`](specs/2026-09-05-stage-1-dialogue-expansion.md)（全 30 课按三段严格 10 秒、9–11 轮真实对话重新审查；固定四岁男孩角色与服装/道具连续性）。
+下一轮内容规范：[`specs/2026-09-06-continuous-dialogue-content-design.md`](specs/2026-09-06-continuous-dialogue-content-design.md)（依据孩子无提示自然对话重新校准难度；canonical 台词是一段完整对话，三个约10秒视频只属于生产切分）。它取代下一轮创作中的固定 A/B/C 话轮、词数和三幕职能，但当前课程文件尚未实施改造。
+
+Stage 1 旧 contract 实施记录：[`specs/2026-09-05-stage-1-dialogue-expansion.md`](specs/2026-09-05-stage-1-dialogue-expansion.md)（当前30课 `three-by-ten-v2` 与90份提示词的历史设计和验收依据；其固定分段内容规则已被上述连续对话规范取代，保留用于理解现状）。
 对应实施计划：[`plans/2026-09-05-stage-1-dialogue-expansion.md`](plans/2026-09-05-stage-1-dialogue-expansion.md)。

@@ -25,9 +25,9 @@ This project makes role-play feel like a game:
 
 ### Curriculum design guide
 
-The curriculum is a systematic 4–6-year-old life-English journey. The app displays [`curriculum/04`](curriculum/04) as Stage 1: 30 reviewed Lessons for age four, following the learner profile, age progression, three-session practice model, and authenticity gate in the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md). The website reads this canonical curriculum directly.
+The curriculum is a systematic 4–6-year-old life-English journey. The app displays [`curriculum/04`](curriculum/04) as Stage 1: 30 reviewed Lessons for age four, following the learner profile, age progression, three-session practice model, and authenticity gate in the [curriculum architecture design](docs/specs/2026-09-04-curriculum-architecture-design.md). The next content revision is governed by the [continuous-dialogue specification](docs/specs/2026-09-06-continuous-dialogue-content-design.md): each Lesson owns one natural conversation, while three ~10-second clips remain a production-only constraint. The website reads the canonical curriculum directly.
 
-All 30 lessons now use `three-by-ten-v2` and have **three standalone video prompt drafts each** (A/B/C, each constrained to about 10 seconds): [browse the 90 synchronized prompts](prompts/04/README.md). Speech is exported directly from canonical lessons; per-lesson staging preserves physical continuity and bounded emotion. See the [production and maintenance guide](prompts/README.md) and [complete Stage 1 review](curriculum/04/FINAL-REVIEW.md). Prompt availability is not `video_ready` approval or evidence of a finished video.
+The current runtime files still use `three-by-ten-v2` and have **three standalone video prompt drafts each** (A/B/C, each constrained to about 10 seconds): [browse the 90 synchronized prompts](prompts/04/README.md). They are the pre-rewrite baseline, not the approved model for future dialogue authoring. Speech is exported directly from canonical lessons; per-lesson staging preserves physical continuity and bounded emotion. See the [production and maintenance guide](prompts/README.md) and [complete Stage 1 review](curriculum/04/FINAL-REVIEW.md). Prompt availability is not `video_ready` approval or evidence of a finished video.
 
 ---
 

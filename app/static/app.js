@@ -767,7 +767,7 @@ function renderMap(library) {
     heading.className = "chapter-heading";
     const chapterNumberEl = document.createElement("span");
     chapterNumberEl.className = "ch-no";
-    chapterNumberEl.textContent = `CHAPTER ${String(ci).padStart(2, "0")}`;
+    chapterNumberEl.textContent = String(ci).padStart(2, "0");
     const chapterNameEl = document.createElement("span");
     chapterNameEl.className = "ch-name";
     chapterNameEl.textContent = chapter.title || prettyChapter(chapter.name);

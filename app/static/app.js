@@ -858,7 +858,7 @@ function drawMapPath() {
   // segment range changes; the connector after current remains ivory.
   const d = buildSmoothPath(pts);
   let html = "";
-  for (const layer of ["shadow", "edge", "surface", "highlight", "seams"]) {
+  for (const layer of ["ground-shadow", "contact-shadow", "sidewall", "surface", "highlight", "seams"]) {
     html += `<path class="trail trail--${layer}" d="${d}"/>`;
   }
   const hasCurrent = [...nodes].some(node => node.classList.contains("level-node--current"));

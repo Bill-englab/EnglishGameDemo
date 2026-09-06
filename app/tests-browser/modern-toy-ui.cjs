@@ -219,31 +219,33 @@ async function shellGeometry(page, viewport) {
     const rect = selector => {
       const r = el.querySelector(selector).getBoundingClientRect();
       return { top: r.top, height: r.height, left: r.left, right: r.right, center: r.left + r.width / 2,
+        centerY: r.top + r.height / 2,
         radius: getComputedStyle(el.querySelector(selector)).borderRadius };
     };
     return { railHeight: el.getBoundingClientRect().height, brand: rect('.adventure-brand__stage'), progress: rect('.progress'), account: rect('.user-menu__trigger') };
   });
   expectClose(shell.brand.top, shell.progress.top, 1);
-  expectClose(shell.brand.top, shell.account.top, 1);
+  expectClose(shell.progress.centerY, shell.account.centerY, 1);
   const expectedHeight = viewport.width < 768 ? 48 : viewport.width < 1024 ? 56 : 58;
+  const expectedAccountHeight = viewport.width < 768 ? 48 : viewport.width < 1024 ? 62 : 66;
   const expectedRail = viewport.width < 768 ? 58 : viewport.width < 1024 ? 64 : 88;
   expectClose(shell.railHeight, expectedRail, 1);
   expectClose(shell.brand.height, expectedHeight, 1);
   expectClose(shell.progress.height, expectedHeight, 1);
-  expectClose(shell.account.height, expectedHeight, 1);
+  expectClose(shell.account.height, expectedAccountHeight, 1);
   expectClose(shell.progress.center, viewport.width / 2, 1);
-  assert.ok([shell.brand.radius, shell.progress.radius, shell.account.radius]
-    .every(radius => parseFloat(radius) >= expectedHeight * .45),
+  assert.ok([shell.brand.radius, shell.progress.radius].every(radius => parseFloat(radius) >= expectedHeight * .45) &&
+    parseFloat(shell.account.radius) >= expectedAccountHeight * .45,
   'Stage, progress and account use the same raised capsule geometry');
   if (viewport.width < 768) {
-    assert.ok(shell.brand.right <= shell.progress.left && shell.progress.right <= shell.account.left,
-      `Compact capsules stay in separate columns: ${JSON.stringify(shell)}`);
+    assert.ok(shell.brand.right <= shell.progress.left + 4 && shell.account.left < shell.progress.right,
+      `Compact Stage stays clear while the avatar overlaps progress: ${JSON.stringify(shell)}`);
     const title = await page.locator('.shell-stage-label').evaluate(el => {
       const style = getComputedStyle(el);
-      return { overflow: style.overflow, textOverflow: style.textOverflow, whiteSpace: style.whiteSpace };
+      return { shortLabel: el.dataset.shortLabel, fontSize: parseFloat(style.fontSize), whiteSpace: style.whiteSpace };
     });
-    assert.deepEqual(title, { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
-      'Narrow shells ellipsize the Stage title instead of wrapping the grid cell');
+    assert.deepEqual(title, { shortLabel: 'Stage 1', fontSize: 0, whiteSpace: 'nowrap' },
+      'Narrow shells show the complete short Stage label instead of a clipped theme');
   }
 }
 
@@ -261,6 +263,7 @@ async function mapDepthAndDensity(page, viewport, output) {
       return {
         top: bounds.top, right: bounds.right, bottom: bounds.bottom,
         width: bounds.width, height: bounds.height,
+        centerY: bounds.top + bounds.height / 2,
         radius: parseFloat(style.borderTopLeftRadius),
         shadow: style.boxShadow,
         background: style.backgroundImage,
@@ -273,7 +276,14 @@ async function mapDepthAndDensity(page, viewport, output) {
       className: path.getAttribute('class'),
       dash: getComputedStyle(path).strokeDasharray,
       width: parseFloat(getComputedStyle(path).strokeWidth),
+      transform: getComputedStyle(path).transform,
     }));
+    const progressBounds = document.querySelector('.topbar .progress').getBoundingClientRect();
+    const accountBounds = document.querySelector('.user-menu__trigger').getBoundingClientRect();
+    const currentNode = document.querySelector('.level-node--current');
+    const lockedNode = document.querySelector('.level-node--locked');
+    const chapterHeading = document.querySelector('.chapter-world:first-child .chapter-heading').getBoundingClientRect();
+    const currentLocator = document.querySelector('.chapter-world:first-child .level-node__marker--locator').getBoundingClientRect();
     return {
       menu: rect('#adventure-menu-button'),
       stage: rect('.adventure-brand > div'),
@@ -282,6 +292,10 @@ async function mapDepthAndDensity(page, viewport, output) {
       current: rect('.level-node--current'),
       locked: rect('.level-node--locked'),
       currentAction: rect('.current-lesson-button'),
+      currentAspect: currentNode.getBoundingClientRect().width / currentNode.getBoundingClientRect().height,
+      lockedAspect: lockedNode.getBoundingClientRect().width / lockedNode.getBoundingClientRect().height,
+      progressAccountOverlap: progressBounds.right - accountBounds.left,
+      headingLocatorGap: currentLocator.top - chapterHeading.bottom,
       firstChapterBottom: Math.max(...firstChapterNodes.map(node => node.bottom)),
       routeLayers,
     };
@@ -293,21 +307,31 @@ async function mapDepthAndDensity(page, viewport, output) {
     `Stage must be its own dimensional teal capsule: ${JSON.stringify(visual.stage)}`);
   assert.ok([visual.stage, visual.progress, visual.account].every(item => item.shadow !== 'none'),
     `Top controls must share visible elevation: ${JSON.stringify(visual)}`);
-  assert.ok(Math.max(visual.stage.top, visual.progress.top, visual.account.top) -
-    Math.min(visual.stage.top, visual.progress.top, visual.account.top) <= 2,
-  `Top controls must align vertically: ${JSON.stringify(visual)}`);
+  assert.ok(Math.abs(visual.stage.top - visual.progress.top) <= 2 &&
+    Math.abs(visual.progress.centerY - visual.account.centerY) <= 2,
+  `Stage/progress tops and the larger avatar's optical center must align: ${JSON.stringify(visual)}`);
   assert.ok(visual.current.width > visual.locked.width && visual.current.width <= (viewport.width < 768 ? 150 : 190),
     `Current disc must be emphasized without swallowing the route: ${JSON.stringify(visual)}`);
   assert.ok(visual.current.shadow.split(',').length >= 4 && visual.locked.shadow.split(',').length >= 3,
     `Lesson discs must have layered toy depth: ${JSON.stringify(visual)}`);
-  assert.ok(visual.routeLayers.length >= 5 && visual.routeLayers.some(layer => layer.className.includes('trail--seams') && layer.dash !== 'none'),
+  assert.ok(visual.currentAspect >= 1.08 && visual.lockedAspect >= 1.08,
+    `Lesson discs must expose an inclined elliptical top above their layered sidewall shadows: ${JSON.stringify(visual)}`);
+  const requiredRouteLayers = ['ground-shadow', 'contact-shadow', 'sidewall', 'surface', 'highlight', 'seams'];
+  assert.ok(requiredRouteLayers.every(name => visual.routeLayers.some(layer => layer.className.includes(`trail--${name}`))) &&
+    visual.routeLayers.some(layer => layer.className.includes('trail--seams') && layer.dash !== 'none'),
     `The route must render a beveled surface with visible stone seams: ${JSON.stringify(visual.routeLayers)}`);
+  if (viewport.width >= 1024) {
+    assert.ok(visual.progressAccountOverlap >= 32,
+      `The account avatar must overlap the progress capsule like the reference composition: ${JSON.stringify(visual)}`);
+  }
   assert.ok(visual.firstChapterBottom <= viewport.height + 1,
     `All three lessons in the first chapter should establish a route within the opening viewport: ${JSON.stringify(visual)}`);
   assert.ok(visual.currentAction.shadow !== 'none' && visual.currentAction.radius >= 18,
     `Current lesson action must match the raised control family: ${JSON.stringify(visual.currentAction)}`);
   assert.ok(visual.currentAction.height <= 60 && visual.currentAction.whiteSpace === 'nowrap',
     `Current lesson action must remain a single compact line: ${JSON.stringify(visual.currentAction)}`);
+  assert.ok(visual.headingLocatorGap >= 4,
+    `The chapter heading and current locator must remain visually separated: ${JSON.stringify(visual)}`);
   await screenshot(page, output, `map-depth-${viewport.width}x${viewport.height}`);
   await noOverflow(page);
 }

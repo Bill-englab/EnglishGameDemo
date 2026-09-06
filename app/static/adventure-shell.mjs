@@ -96,7 +96,9 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     const hadFocus = opened && drawer.contains(doc.activeElement);
     const focusedKey = doc.activeElement?.dataset.lessonKey;
     const currentStage = STAGES.find(stage => stage.available);
-    find("adventure-stage-label").textContent = `${currentStage.label} · ${currentStage.theme}`;
+    const stageLabel = find("adventure-stage-label");
+    stageLabel.textContent = `${currentStage.label} · ${currentStage.theme}`;
+    stageLabel.dataset.shortLabel = currentStage.label;
     find("star-count").textContent = summary.completed;
     find("star-total").textContent = summary.total;
     const progress = find("adventure-progress");

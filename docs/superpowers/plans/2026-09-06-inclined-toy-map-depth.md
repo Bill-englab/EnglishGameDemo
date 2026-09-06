@@ -26,9 +26,9 @@
 - Consumes: existing `.trail--*`, `.level-node*`, `.topbar`, `.progress`, `.user-menu__trigger`, and `.current-lesson-button` DOM.
 - Produces: acceptance assertions for route sidewall separation, elliptical top faces, shared shadow direction, progress/avatar overlap, and reference-like control placement.
 
-- [ ] Extend `mapDepthAndDensity()` to read route transforms, node aspect ratios/pseudo-element sidewall styles, shell group rectangles, and avatar overlap.
-- [ ] Run `node tests-browser/modern-toy-ui.cjs --focus=map-depth` and confirm the new perspective assertions fail against the flat baseline.
-- [ ] Keep existing alignment, first-chapter density, minimum-target, and overflow assertions unchanged.
+- [x] Extend `mapDepthAndDensity()` to read route transforms, node aspect ratios, shell group rectangles, and avatar overlap.
+- [x] Run `node tests-browser/modern-toy-ui.cjs --focus=map-depth` and confirm the new perspective assertions fail against the flat baseline.
+- [x] Keep existing alignment, first-chapter density, minimum-target, and overflow assertions unchanged.
 
 ### Task 2: Rebuild route and lesson discs as inclined physical surfaces
 
@@ -40,11 +40,11 @@
 - Consumes: `drawMapPath()` DOM center points and `createLevelNode()` state/cover markup.
 - Produces: route paths `ground-shadow`, `contact-shadow`, `sidewall`, `surface`, `highlight`, `seams`, plus CSS node top/sidewall/rim layers.
 
-- [ ] Rename and order the generated SVG layers so the material anatomy is explicit while preserving progress calculations.
-- [ ] Add route CSS with a lower/right sidewall and upper top face; tune desktop and mobile widths/offsets separately.
-- [ ] Give ordinary, video-cover, current, and locked nodes a slightly elliptical top plane, separate front sidewall and cast shadow while keeping the glyphs readable.
-- [ ] Preserve hover, active, focus-visible, reduced-motion, thumbnail fallback, and marker placement.
-- [ ] Run syntax, Node, and focused browser checks; correct any path-center or responsive regression.
+- [x] Rename and order the generated SVG layers so the material anatomy is explicit while preserving progress calculations.
+- [x] Add route CSS with a lower/right sidewall and upper top face; tune desktop and mobile widths/offsets separately.
+- [x] Give ordinary, video-cover, current, and locked nodes a slightly elliptical top plane, layered front sidewall and cast shadow while keeping the glyphs readable.
+- [x] Preserve hover, active, focus-visible, reduced-motion, thumbnail fallback, and marker placement.
+- [x] Run syntax, Node, and focused browser checks; correct path-center and responsive regressions.
 
 ### Task 3: Match the reference control composition
 
@@ -59,10 +59,10 @@
 - Consumes: unchanged element IDs and account/window event bindings.
 - Produces: `.shell-progress-account` composition with progress capsule and overlapping avatar/account target; Electron controls remain in `.shell-actions`.
 
-- [ ] Move the account trigger next to/over the progress capsule in markup without changing its IDs, popup, or behavior.
-- [ ] Style menu, Stage, progress/avatar, Current lesson, and Electron controls from shared elevation tokens; add hover/pressed/focus states.
-- [ ] Keep browser and Electron placement correct at all breakpoints; bound the account popup to the viewport.
-- [ ] Update structure and geometry tests and verify drawer/account/window-control interactions.
+- [x] Move the account trigger next to/over the progress capsule in markup without changing its IDs, popup, or behavior.
+- [x] Style menu, Stage, progress/avatar, Current lesson, and Electron controls from shared elevation tokens; add hover/pressed/focus states.
+- [x] Keep browser and Electron placement correct at all breakpoints; bound the account popup to the viewport.
+- [x] Update structure and geometry tests and verify drawer/account/window-control interactions.
 
 ### Task 4: Visual fidelity, regression verification, and documentation
 
@@ -74,9 +74,8 @@
 - Consumes: approved concept `design/reference/modern-toy-theatre-map.png` and fresh browser/Electron screenshots.
 - Produces: final fidelity ledger and reproducible verification record.
 
-- [ ] Run `node --check static/app.js`, `npm test`, and `.venv/Scripts/python -m pytest -q` from `app/`.
-- [ ] Run the complete Playwright acceptance with real Electron enabled and save temporary screenshots outside the repository.
-- [ ] Inspect the accepted concept and final 1536×1024/390×844 renders with `view_image`; compare at least camera, route, node, controls, typography, and responsive density.
-- [ ] Record the fidelity ledger and remaining intentional deviations; remove temporary repository artifacts.
-- [ ] Run `git diff --check` and inspect `git status --short` before committing.
-
+- [x] Run `node --check static/app.js`, `npm test`, and `.venv/Scripts/python -m pytest -q` from `app/`.
+- [x] Run the complete Playwright acceptance with real Electron enabled and save temporary screenshots outside the repository.
+- [x] Inspect the accepted concept and final 1536×1024/390×844 renders with `view_image`; compare camera, route, node, controls, typography, and responsive density.
+- [x] Record the fidelity ledger and remaining intentional deviations; keep temporary screenshots outside the repository.
+- [x] Run `git diff --check` and inspect `git status --short` before committing.

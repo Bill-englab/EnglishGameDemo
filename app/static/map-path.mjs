@@ -7,16 +7,25 @@
 // in-app smoothPath so the trail keeps its gentle curvature.
 const TENSION = 0.16;
 
-// One authored rhythm for the whole 30-lesson stage. Uneven turning spans
-// (4, 4, 5, 5, 6, 5) keep the route scenic without restarting a chapter-sized
-// zigzag. Values are normalized so desktop and mobile preserve the same flow.
+// One authored rhythm for the whole 30-lesson stage. Anchors every ~2 lessons
+// create a staircase feel — each step swings side to side like climbing stairs,
+// while spans of 2 keep long chapters readable.
 const SCENIC_ROUTE_ANCHORS = Object.freeze([
   Object.freeze({ index: 0, x: -0.72 }),
-  Object.freeze({ index: 4, x: 0.82 }),
-  Object.freeze({ index: 8, x: -0.90 }),
-  Object.freeze({ index: 13, x: 0.78 }),
-  Object.freeze({ index: 18, x: -0.84 }),
-  Object.freeze({ index: 24, x: 0.92 }),
+  Object.freeze({ index: 2, x: 0.55 }),
+  Object.freeze({ index: 4, x: -0.60 }),
+  Object.freeze({ index: 6, x: 0.82 }),
+  Object.freeze({ index: 8, x: -0.55 }),
+  Object.freeze({ index: 10, x: 0.60 }),
+  Object.freeze({ index: 12, x: -0.90 }),
+  Object.freeze({ index: 14, x: 0.55 }),
+  Object.freeze({ index: 16, x: -0.62 }),
+  Object.freeze({ index: 18, x: 0.72 }),
+  Object.freeze({ index: 20, x: -0.84 }),
+  Object.freeze({ index: 22, x: 0.62 }),
+  Object.freeze({ index: 24, x: -0.70 }),
+  Object.freeze({ index: 26, x: 0.92 }),
+  Object.freeze({ index: 28, x: -0.75 }),
   Object.freeze({ index: 29, x: -0.66 }),
 ]);
 

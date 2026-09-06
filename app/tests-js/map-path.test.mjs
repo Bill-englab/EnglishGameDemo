@@ -55,7 +55,8 @@ test("global scenic offsets form broad varied arcs instead of chapter zigzags", 
       lastDirection = direction;
     }
   }
-  assert.deepEqual(directionChanges, [0, 4, 8, 13, 18, 24]);
+  // Staircase rhythm: direction flips roughly every 2 lessons.
+  assert.deepEqual(directionChanges, [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28]);
 
   const chapterShapes = Array.from({ length: 10 }, (_, chapter) => {
     const start = chapter * 3;

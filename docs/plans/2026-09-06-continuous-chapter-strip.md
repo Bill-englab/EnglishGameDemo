@@ -10,8 +10,8 @@
 
 ## Global Constraints
 
-- Cross-chapter node-center gaps target 1.2–1.4 times the within-chapter median and must never exceed 1.5 times it.
-- Desktop cross-chapter gaps must stay at or below 300px; mobile gaps must stay at or below 240px.
+- Cross-chapter node-center gaps target 1.55–1.9 times the within-chapter median, creating a distinct chapter arrival zone without returning to full-screen voids.
+- Desktop cross-chapter gaps must stay at or below 330px; mobile gaps must stay at or below 270px.
 - The first chapter's three lessons remain visible in the desktop opening viewport; its current locator must not overlap the first checkpoint.
 - Exactly one chapter background remains active while scrolling through every chapter boundary.
 - Do not change course order, state semantics, horizontal scenic offsets, path materials, media paths, recordings or user data.
@@ -78,7 +78,7 @@ Change `.chapter-world` from `min-height: max(720px,100vh)` to content-sized lay
 
 - [x] **Step 2: Tighten only the cross-chapter checkpoint spacing**
 
-Reduce `.chapter-main` vertical padding and the default `.chapter-heading` bottom margin until the measured boundary gaps satisfy the test. Preserve a larger first-chapter heading margin so the current locator retains at least 4px clearance, using `.chapter-world:first-child .chapter-heading` rather than enlarging every boundary.
+Distribute the checkpoint spacing above and below `.chapter-heading` until the measured boundary gaps satisfy the test. Preserve the first chapter's dedicated locator clearance and render every visible number as `CHAPTER NN`, so the chapter title cannot be mistaken for a lesson label.
 
 - [x] **Step 3: Run focused QA and confirm GREEN**
 
@@ -112,8 +112,8 @@ git commit -m "fix: connect chapters into one flowing route"
 ## Acceptance Record — 2026-09-06
 
 - Root-cause reproduction: the focused rendered test failed on the original viewport-sized chapters with a 169px desktop within-chapter median versus 614–713px chapter boundaries; mobile measured 149px versus 486–557px.
-- Final rhythm: desktop 1536×1024 measures a 169px within-chapter median and 237–238px boundaries. Mobile 390×844 measures a 149px median and 208–220px boundaries. Eight or more boundaries meet the 1.2–1.4 visual target and every boundary remains below the 1.5 hard limit.
-- Checkpoints: all ten chapter plaques remain separated from the following lesson target; the longer Chapter 8 title is allowed to wrap on mobile without exceeding the 240px boundary cap. The first chapter keeps its larger locator clearance.
+- Initial continuous rhythm: desktop 1536×1024 measured a 169px within-chapter median and 237–238px boundaries; mobile measured a 149px median and 208–220px boundaries.
+- Refined chapter arrival rhythm: desktop boundaries now measure 287–288px and mobile boundaries 234–246px. All ten chapter plaques visibly identify `CHAPTER NN`, the chapter title and binary chapter progress while remaining inside the responsive 330px/270px caps.
 - Backgrounds: scrolling every chapter to the viewport center leaves exactly one active background and it matches that chapter; no inactive gap or rapid class flicker was observed.
 - Focused Playwright/Edge QA: `--focus=scenic-route` passed at 1536×1024 and 390×844, including all 30 nodes, global horizontal arcs, responsive containment, Current lesson, detail/back position restoration and screenshot capture.
 - Full isolated QA: 1440×960, 800×600, 390×844 and 844×390 passed with no horizontal overflow, page errors or console errors. Route overlay deviation remained below 0.001px on desktop and mobile.

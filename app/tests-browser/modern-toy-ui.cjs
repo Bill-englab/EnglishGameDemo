@@ -388,14 +388,25 @@ async function scenicRouteRhythm(page, viewport, output) {
   const chapterBoundaryGaps = verticalGaps.filter((_, index) => (index + 1) % 3 === 0);
   const orderedWithin = withinChapterGaps.slice().sort((a, b) => a - b);
   const withinMedian = orderedWithin[Math.floor(orderedWithin.length / 2)];
-  assert.ok(chapterBoundaryGaps.every(gap => gap >= withinMedian * 1.1),
-    `Chapter checkpoints should remain perceptibly wider than ordinary steps: ${JSON.stringify({ withinMedian, chapterBoundaryGaps })}`);
-  assert.ok(chapterBoundaryGaps.every(gap => gap <= withinMedian * 1.5),
+  assert.ok(chapterBoundaryGaps.every(gap => gap >= withinMedian * 1.55),
+    `Chapter checkpoints should create a distinct arrival zone between chapters: ${JSON.stringify({ withinMedian, chapterBoundaryGaps })}`);
+  assert.ok(chapterBoundaryGaps.every(gap => gap <= withinMedian * 1.9),
     `Chapter checkpoints must not break the continuous route rhythm: ${JSON.stringify({ withinMedian, chapterBoundaryGaps })}`);
-  assert.ok(chapterBoundaryGaps.filter(gap => gap <= withinMedian * 1.41).length >= 8,
-    `At least eight chapter checkpoints should meet the 1.2–1.4 visual target: ${JSON.stringify({ withinMedian, chapterBoundaryGaps })}`);
-  assert.ok(Math.max(...chapterBoundaryGaps) <= (viewport.width < 768 ? 240 : 300),
+  assert.ok(Math.max(...chapterBoundaryGaps) <= (viewport.width < 768 ? 270 : 330),
     `Chapter checkpoints exceed the responsive hard limit: ${JSON.stringify({ viewport, chapterBoundaryGaps })}`);
+
+  const checkpointLabels = await page.locator('.chapter-heading').evaluateAll(headings => headings.map(heading => ({
+    number: heading.querySelector('.ch-no')?.textContent.trim(),
+    title: heading.querySelector('.ch-name')?.textContent.trim(),
+    progress: heading.querySelector('.ch-progress')?.textContent.trim(),
+    visible: heading.getBoundingClientRect().width > 0 && heading.getBoundingClientRect().height > 0,
+  })));
+  assert.equal(checkpointLabels.length, 10, 'Every chapter must render one chapter checkpoint title');
+  assert.ok(checkpointLabels.every((label, index) => label.visible
+    && label.number === `CHAPTER ${String(index + 1).padStart(2, '0')}`
+    && label.title
+    && /^★ \d\/3$/.test(label.progress)),
+  `Chapter checkpoints must visibly identify chapter number, title and progress: ${JSON.stringify(checkpointLabels)}`);
 
   const checkpointClearance = await page.locator('.chapter-world').evaluateAll(sections => sections.map(section => {
     const heading = section.querySelector('.chapter-heading').getBoundingClientRect();

@@ -710,7 +710,16 @@ function updateBgOnScroll(slides) {
     if (centerY >= r.top && centerY <= r.bottom) { found = s.dataset.chapter; break; }
   }
   if (found && found !== activeChapter) {
+    // Fade-through: the outgoing slide stays fully opaque (was-active) while
+    // the incoming one fades in on top, then the old one is dropped. This
+    // avoids the white flash of a classic cross-fade where both slides are
+    // semi-transparent at the same moment.
+    const previous = slides.find(s => s.classList.contains("is-active"));
     slides.forEach(s => s.classList.toggle("is-active", s.dataset.chapter === found));
+    if (previous) {
+      previous.classList.add("was-active");
+      setTimeout(() => previous.classList.remove("was-active"), 1300);
+    }
     activeChapter = found;
   }
 }

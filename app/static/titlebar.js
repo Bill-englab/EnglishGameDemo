@@ -51,12 +51,20 @@
       pointer-events: none;
     }
 
-    /* The map shell's right alignment cell owns control placement. */
-    .topbar .shell-actions .window-controls { margin-left: 0; height: 58px; color: #fffaf2; filter: drop-shadow(0 2px 2px rgba(20,35,30,.48)); }
-    .topbar .shell-actions .window-controls button { height: 58px; color: inherit; }
+    /* The map shell's right alignment cell owns control placement.
+       Cream shell pill keeps the glyphs legible over bright scene art. */
+    .topbar .shell-actions .window-controls {
+      margin-left: 0; height: 58px; padding: 0 7px;
+      color: var(--shell-ink, #555);
+      background: linear-gradient(180deg,#fffef9 0%,#f4e9d7 58%,#ead7b9 100%);
+      border: 2px solid rgba(255,250,239,.94);
+      border-radius: var(--shell-radius, 28px);
+      box-shadow: var(--shell-shadow, none);
+    }
+    .topbar .shell-actions .window-controls button { height: 54px; width: 46px; color: inherit; border-radius: 18px; }
     @media (max-width: 1023px) {
-      .topbar .shell-actions .window-controls,
-      .topbar .shell-actions .window-controls button { height: 56px; }
+      .topbar .shell-actions .window-controls { height: 56px; }
+      .topbar .shell-actions .window-controls button { height: 52px; }
     }
     /* On detail header, also at right */
     .detail-header .window-controls { margin-left: auto; order: 99; }

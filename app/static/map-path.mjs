@@ -23,10 +23,6 @@ const SCENIC_ROUTE_ANCHORS = Object.freeze([
 const SCENIC_DESKTOP_AMPLITUDE = 150;
 const SCENIC_MOBILE_AMPLITUDE = 46;
 
-function smoothstep(value) {
-  return value * value * (3 - 2 * value);
-}
-
 // Returns fresh responsive offsets for one global lesson index. Clamping keeps
 // the layout deterministic if a caller briefly renders incomplete/stale data.
 export function getScenicRouteOffset(index) {
@@ -48,7 +44,10 @@ export function getScenicRouteOffset(index) {
 
   const span = right.index - left.index;
   const progress = span ? (clampedIndex - left.index) / span : 0;
-  const normalizedX = left.x + (right.x - left.x) * smoothstep(progress);
+  // Keep the node movement visible near each turning point. The Catmull-Rom
+  // SVG path supplies the visual easing; easing the layout points as well would
+  // bunch adjacent lessons together and make several chapter views look straight.
+  const normalizedX = left.x + (right.x - left.x) * progress;
   return {
     desktopPx: Math.round(normalizedX * SCENIC_DESKTOP_AMPLITUDE),
     mobilePx: Math.round(normalizedX * SCENIC_MOBILE_AMPLITUDE),

@@ -64,6 +64,12 @@ test("global scenic offsets form broad varied arcs instead of chapter zigzags", 
       .join(",");
   });
   assert.ok(new Set(chapterShapes).size >= 8);
+
+  const chaptersWithVisibleSweep = Array.from({ length: 10 }, (_, chapter) => {
+    const xValues = offsets.slice(chapter * 3, chapter * 3 + 3).map(point => point.desktopPx);
+    return Math.max(...xValues) - Math.min(...xValues) >= 70;
+  }).filter(Boolean).length;
+  assert.ok(chaptersWithVisibleSweep >= 8);
 });
 
 test("scenic offsets return independent values and clamp outside the stage", () => {

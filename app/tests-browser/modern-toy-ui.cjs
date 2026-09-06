@@ -336,6 +336,60 @@ async function mapDepthAndDensity(page, viewport, output) {
   await noOverflow(page);
 }
 
+async function scenicRouteRhythm(page, viewport, output) {
+  await page.setViewportSize(viewport);
+  await page.reload();
+  await page.locator('.level-node-wrap').first().waitFor();
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  });
+
+  const geometry = await page.locator('.level-node-wrap').evaluateAll(nodes => nodes.map((node, index) => {
+    const bounds = node.getBoundingClientRect();
+    const style = getComputedStyle(node);
+    return {
+      index,
+      centerX: Math.round((bounds.left + bounds.right) / 2),
+      left: Math.round(bounds.left),
+      right: Math.round(bounds.right),
+      desktopOffset: parseFloat(node.style.getPropertyValue('--route-x-desktop')),
+      mobileOffset: parseFloat(node.style.getPropertyValue('--route-x-mobile')),
+      transform: style.transform,
+    };
+  }));
+
+  assert.equal(geometry.length, 30, 'The scenic route must position all 30 lessons as one sequence');
+  const xValues = geometry.map(point => point.centerX);
+  const directions = xValues.slice(1).map((value, index) => Math.sign(value - xValues[index]));
+  const directionChanges = directions.reduce((changes, direction, index) => {
+    if (index === 0 || (direction && direction !== directions[index - 1])) changes.push(index);
+    return changes;
+  }, []);
+  assert.deepEqual(directionChanges, [0, 4, 8, 13, 18, 24],
+    `Broad turns should span uneven groups of lessons: ${JSON.stringify(xValues)}`);
+
+  const chapterBoundaryReversals = [];
+  for (let boundary = 3; boundary < geometry.length; boundary += 3) {
+    const before = Math.sign(xValues[boundary - 1] - xValues[boundary - 2]);
+    const after = Math.sign(xValues[boundary] - xValues[boundary - 1]);
+    if (before && after && before !== after) chapterBoundaryReversals.push(boundary);
+  }
+  assert.ok(chapterBoundaryReversals.length <= 2,
+    `Chapter boundaries must usually continue the current arc: ${JSON.stringify(chapterBoundaryReversals)}`);
+  assert.ok(geometry.every(point => point.left >= 0 && point.right <= viewport.width),
+    `Every lesson target must stay inside the viewport: ${JSON.stringify(geometry)}`);
+  assert.ok(geometry.every(point => point.transform !== 'none'),
+    'Every lesson wrapper must apply its authored responsive offset');
+  await noOverflow(page);
+
+  for (const index of [5, 14, 24]) {
+    await page.locator('.level-node-wrap').nth(index).evaluate(node => node.scrollIntoView({ block: 'center' }));
+    await page.waitForTimeout(100);
+    await screenshot(page, output, `scenic-route-${viewport.width}x${viewport.height}-lesson-${index + 1}`);
+  }
+}
+
 async function assertMinimumTargetSize(page, selector, label) {
   const undersized = await page.locator(selector).evaluateAll(elements => elements
     .filter(element => element.getClientRects().length)
@@ -574,6 +628,31 @@ async function main() {
       }
       assert.deepEqual(errors, []);
       console.log('PASS focused regression: map-depth');
+      return;
+    }
+
+    if (focus === 'scenic-route') {
+      for (const viewport of [{ width: 1536, height: 1024 }, { width: 390, height: 844 }]) {
+        await scenicRouteRhythm(page, viewport, output);
+      }
+      await page.setViewportSize({ width: 1536, height: 1024 });
+      await page.reload();
+      await page.locator('.current-lesson-button').click();
+      const currentCenter = await page.locator('.level-node-wrap--current').evaluate(node => {
+        const bounds = node.getBoundingClientRect();
+        return bounds.top + bounds.height / 2;
+      });
+      assert.ok(currentCenter >= 160 && currentCenter <= 864,
+        `Current lesson should scroll into the comfortable visible area: ${currentCenter}`);
+      const originalOffset = await page.locator('.level-node-wrap--current').getAttribute('style');
+      await page.locator('.level-node-wrap--current').click();
+      await page.locator('#detail-view.open').waitFor();
+      await page.locator('.back-btn').click();
+      await page.locator('#map-view').waitFor();
+      assert.equal(await page.locator('.level-node-wrap--current').getAttribute('style'), originalOffset,
+        'Returning from lesson detail must restore the same scenic-route position');
+      assert.deepEqual(errors, []);
+      console.log('PASS focused regression: scenic-route');
       return;
     }
 

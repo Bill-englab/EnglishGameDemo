@@ -105,6 +105,7 @@ node tests-browser/modern-toy-ui.cjs --focus=cancel-celebration
 node tests-browser/modern-toy-ui.cjs --focus=accessible-state
 node tests-browser/modern-toy-ui.cjs --focus=account
 node tests-browser/modern-toy-ui.cjs --focus=evidence
+node tests-browser/modern-toy-ui.cjs --focus=scenic-route
 # 可选聚焦回归：selection / account / refresh / electron（electron 同时需要 TOY_QA_ELECTRON=1）
 $env:TOY_QA_FINAL_FIX='selection'
 node tests-browser/modern-toy-ui.cjs

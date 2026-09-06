@@ -27,7 +27,7 @@
 - Consumes: the existing `scenicRouteRhythm(page, viewport, output)` flow and rendered `.level-node-wrap`, `.chapter-world`, `.chapter-heading`, `.bg-layer__slide` elements.
 - Produces: measured `withinChapterGaps`, `chapterBoundaryGaps`, `withinMedian` and background-activation assertions at 1536×1024 and 390×844.
 
-- [ ] **Step 1: Add vertical rhythm measurements**
+- [x] **Step 1: Add vertical rhythm measurements**
 
 Extend each geometry record with `centerY`. Split the 29 adjacent gaps using `(index + 1) % 3`, calculate the literal median from the sorted within-chapter gaps, and assert:
 
@@ -43,11 +43,11 @@ assert.ok(Math.max(...chapterBoundaryGaps) <= (viewport.width < 768 ? 240 : 300)
 
 The lower automated bound allows rendering rounding while the screenshot review keeps the approved 1.2–1.4 visual target.
 
-- [ ] **Step 2: Add checkpoint and background assertions**
+- [x] **Step 2: Add checkpoint and background assertions**
 
 Assert each chapter heading ends before its first lesson wrapper begins. Scroll each chapter to the viewport center, wait two animation frames, and verify exactly one `.bg-layer__slide.is-active` exists and its `data-chapter` matches the centered chapter.
 
-- [ ] **Step 3: Run the focused browser test and confirm RED**
+- [x] **Step 3: Run the focused browser test and confirm RED**
 
 Run:
 
@@ -72,21 +72,21 @@ Expected: FAIL because current desktop boundary gaps are 614–713px and mobile 
 - Consumes: existing `renderMap`, global `getScenicRouteOffset`, `drawMapPath` and `updateBgOnScroll`; none change signature.
 - Produces: content-sized `.chapter-world` sections and compact `.chapter-heading` checkpoint spacing.
 
-- [ ] **Step 1: Remove the viewport-sized chapter floor**
+- [x] **Step 1: Remove the viewport-sized chapter floor**
 
 Change `.chapter-world` from `min-height: max(720px,100vh)` to content-sized layout and allow node/path shadows to remain visible at section edges. Keep `#map-view` as the only map scroll container.
 
-- [ ] **Step 2: Tighten only the cross-chapter checkpoint spacing**
+- [x] **Step 2: Tighten only the cross-chapter checkpoint spacing**
 
 Reduce `.chapter-main` vertical padding and the default `.chapter-heading` bottom margin until the measured boundary gaps satisfy the test. Preserve a larger first-chapter heading margin so the current locator retains at least 4px clearance, using `.chapter-world:first-child .chapter-heading` rather than enlarging every boundary.
 
-- [ ] **Step 3: Run focused QA and confirm GREEN**
+- [x] **Step 3: Run focused QA and confirm GREEN**
 
 Run `node tests-browser/modern-toy-ui.cjs --focus=scenic-route` with the bundled Playwright environment.
 
 Expected: PASS at desktop and mobile; screenshots show a compact chapter plaque between a continuous curved route, no full-screen straight connector, and one correct active background per chapter.
 
-- [ ] **Step 4: Run complete verification**
+- [x] **Step 4: Run complete verification**
 
 Run:
 
@@ -100,7 +100,7 @@ git diff --check
 
 Expected: 46 Node tests, the complete Python suite and all isolated rendered flows pass with no page or console errors.
 
-- [ ] **Step 5: Record acceptance and commit**
+- [x] **Step 5: Record acceptance and commit**
 
 Update the design status from pending to implemented and append actual desktop/mobile gap ranges, viewports, background result, screenshot evidence and remaining device limitation to this plan. Commit only source, tests and documentation:
 
@@ -108,3 +108,15 @@ Update the design status from pending to implemented and append actual desktop/m
 git add app/static/style.css app/tests-browser/modern-toy-ui.cjs docs/specs/2026-09-05-modern-toy-theatre-ui-design.md docs/plans/2026-09-06-continuous-chapter-strip.md
 git commit -m "fix: connect chapters into one flowing route"
 ```
+
+## Acceptance Record — 2026-09-06
+
+- Root-cause reproduction: the focused rendered test failed on the original viewport-sized chapters with a 169px desktop within-chapter median versus 614–713px chapter boundaries; mobile measured 149px versus 486–557px.
+- Final rhythm: desktop 1536×1024 measures a 169px within-chapter median and 237–238px boundaries. Mobile 390×844 measures a 149px median and 208–220px boundaries. Eight or more boundaries meet the 1.2–1.4 visual target and every boundary remains below the 1.5 hard limit.
+- Checkpoints: all ten chapter plaques remain separated from the following lesson target; the longer Chapter 8 title is allowed to wrap on mobile without exceeding the 240px boundary cap. The first chapter keeps its larger locator clearance.
+- Backgrounds: scrolling every chapter to the viewport center leaves exactly one active background and it matches that chapter; no inactive gap or rapid class flicker was observed.
+- Focused Playwright/Edge QA: `--focus=scenic-route` passed at 1536×1024 and 390×844, including all 30 nodes, global horizontal arcs, responsive containment, Current lesson, detail/back position restoration and screenshot capture.
+- Full isolated QA: 1440×960, 800×600, 390×844 and 844×390 passed with no horizontal overflow, page errors or console errors. Route overlay deviation remained below 0.001px on desktop and mobile.
+- Final automated verification: 46 Node tests and 376 Python tests passed; JavaScript syntax and `git diff --check` were clean.
+- Screenshots are outside the repository under `C:/Users/q00679663/AppData/Local/Temp/codex-continuous-strip-final-20260906/`; test data used temporary curriculum, users, profiles and media roots, never family recordings.
+- Remaining limitation: Safari/iOS and a physical touch device were not exercised in this Windows run.

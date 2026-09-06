@@ -351,6 +351,7 @@ async function scenicRouteRhythm(page, viewport, output) {
     return {
       index,
       centerX: Math.round((bounds.left + bounds.right) / 2),
+      centerY: Math.round((bounds.top + bounds.bottom) / 2),
       left: Math.round(bounds.left),
       right: Math.round(bounds.right),
       desktopOffset: parseFloat(node.style.getPropertyValue('--route-x-desktop')),
@@ -381,6 +382,43 @@ async function scenicRouteRhythm(page, viewport, output) {
     `Every lesson target must stay inside the viewport: ${JSON.stringify(geometry)}`);
   assert.ok(geometry.every(point => point.transform !== 'none'),
     'Every lesson wrapper must apply its authored responsive offset');
+
+  const verticalGaps = geometry.slice(1).map((point, index) => point.centerY - geometry[index].centerY);
+  const withinChapterGaps = verticalGaps.filter((_, index) => (index + 1) % 3 !== 0);
+  const chapterBoundaryGaps = verticalGaps.filter((_, index) => (index + 1) % 3 === 0);
+  const orderedWithin = withinChapterGaps.slice().sort((a, b) => a - b);
+  const withinMedian = orderedWithin[Math.floor(orderedWithin.length / 2)];
+  assert.ok(chapterBoundaryGaps.every(gap => gap >= withinMedian * 1.1),
+    `Chapter checkpoints should remain perceptibly wider than ordinary steps: ${JSON.stringify({ withinMedian, chapterBoundaryGaps })}`);
+  assert.ok(chapterBoundaryGaps.every(gap => gap <= withinMedian * 1.5),
+    `Chapter checkpoints must not break the continuous route rhythm: ${JSON.stringify({ withinMedian, chapterBoundaryGaps })}`);
+  assert.ok(chapterBoundaryGaps.filter(gap => gap <= withinMedian * 1.41).length >= 8,
+    `At least eight chapter checkpoints should meet the 1.2–1.4 visual target: ${JSON.stringify({ withinMedian, chapterBoundaryGaps })}`);
+  assert.ok(Math.max(...chapterBoundaryGaps) <= (viewport.width < 768 ? 240 : 300),
+    `Chapter checkpoints exceed the responsive hard limit: ${JSON.stringify({ viewport, chapterBoundaryGaps })}`);
+
+  const checkpointClearance = await page.locator('.chapter-world').evaluateAll(sections => sections.map(section => {
+    const heading = section.querySelector('.chapter-heading').getBoundingClientRect();
+    const firstLesson = section.querySelector('.level-node-wrap').getBoundingClientRect();
+    return Math.round(firstLesson.top - heading.bottom);
+  }));
+  assert.ok(checkpointClearance.every(clearance => clearance >= 4),
+    `Chapter checkpoint plaques must stay clear of the first lesson: ${JSON.stringify(checkpointClearance)}`);
+
+  const backgroundActivations = await page.locator('.chapter-world').evaluateAll(async sections => {
+    const results = [];
+    for (const section of sections) {
+      section.scrollIntoView({ block: 'center' });
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      results.push({
+        expected: section.dataset.chapter,
+        active: [...document.querySelectorAll('.bg-layer__slide.is-active')].map(slide => slide.dataset.chapter),
+      });
+    }
+    return results;
+  });
+  assert.ok(backgroundActivations.every(result => result.active.length === 1 && result.active[0] === result.expected),
+    `Exactly the centered chapter background must stay active: ${JSON.stringify(backgroundActivations)}`);
   await noOverflow(page);
 
   for (const index of [5, 14, 24]) {
@@ -388,6 +426,11 @@ async function scenicRouteRhythm(page, viewport, output) {
     await page.waitForTimeout(100);
     await screenshot(page, output, `scenic-route-${viewport.width}x${viewport.height}-lesson-${index + 1}`);
   }
+  return {
+    viewport: `${viewport.width}x${viewport.height}`,
+    withinMedian,
+    boundaryRange: [Math.min(...chapterBoundaryGaps), Math.max(...chapterBoundaryGaps)],
+  };
 }
 
 async function assertMinimumTargetSize(page, selector, label) {
@@ -632,8 +675,9 @@ async function main() {
     }
 
     if (focus === 'scenic-route') {
+      const rhythmResults = [];
       for (const viewport of [{ width: 1536, height: 1024 }, { width: 390, height: 844 }]) {
-        await scenicRouteRhythm(page, viewport, output);
+        rhythmResults.push(await scenicRouteRhythm(page, viewport, output));
       }
       await page.setViewportSize({ width: 1536, height: 1024 });
       await page.reload();
@@ -652,7 +696,7 @@ async function main() {
       assert.equal(await page.locator('.level-node-wrap--current').getAttribute('style'), originalOffset,
         'Returning from lesson detail must restore the same scenic-route position');
       assert.deepEqual(errors, []);
-      console.log('PASS focused regression: scenic-route');
+      console.log(`PASS focused regression: scenic-route ${JSON.stringify(rhythmResults)}`);
       return;
     }
 

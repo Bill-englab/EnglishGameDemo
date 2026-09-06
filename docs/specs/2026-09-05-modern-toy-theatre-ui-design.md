@@ -2,7 +2,7 @@
 
 > 日期：2026-09-05
 >
-> 状态：Implemented；2026-09-06 根据实机反馈完成地图 3D fidelity 修正，并批准“连续章节带”路线修正（待实施）；实施与隔离验收见 [实施记录](../plans/2026-09-05-modern-toy-theatre-ui-implementation.md#acceptance-record--2026-09-05)
+> 状态：Implemented；2026-09-06 根据实机反馈完成地图 3D fidelity 与“连续章节带”路线修正；实施与隔离验收见 [实施记录](../plans/2026-09-05-modern-toy-theatre-ui-implementation.md#acceptance-record--2026-09-05)
 >
 > 覆盖：地图、应用外壳、Stage/课程目录、课程详情与手机适配
 >

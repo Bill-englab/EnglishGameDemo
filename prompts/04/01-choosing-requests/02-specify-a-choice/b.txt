@@ -1,10 +1,10 @@
-The Dinosaur Shirt — Part B (change)
-Production prompt draft | Source: curriculum/04/01-choosing-requests/02-specify-a-choice/lesson.json | Content revision: 2
-Source SHA256: e83d011807b198fa009bb21cf03fd75b975b995cabd51280d046af6e5be81ba0
+The Dinosaur Shirt — Clip 2
+Production prompt draft | Source: curriculum/04/01-choosing-requests/02-specify-a-choice/lesson.json | Content revision: 3
+Source SHA256: bfc356d516ece920d3b59c5eb4e3f7cdf3f815047453716d4ae5d671c374305c
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -12,7 +12,7 @@ Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt
 
 EMOTIONAL PERFORMANCE
 Calm, warm and regulated baseline. Dad and Child are attentive and relaxed, with normal family conversation volume and restrained faces and gestures.
-Child briefly considers the visible patterns, then shows mild pleasure with a small smile and nod. Dad's clarification stays patient and matter-of-fact.
+Child briefly considers the visible patterns, then shows mild pleasure with a small smile and nod when naming them. Dad's clarification stays patient and matter-of-fact.
 No exaggerated surprise, bouncing, cheering, forceful pointing or raised voices. Do not stretch faces or bodies or turn Child's confirmation into a shout.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
@@ -21,25 +21,22 @@ Getting dressed at home.
 
 SCENE AND PROP CONTINUITY
 In a quiet dressing corner, Dad kneels screen-left and Child stands screen-right beside a low bench. Exactly two choice shirts lie on the bench: one red shirt with white stripes at bench-left and one red shirt with a single dinosaur graphic at bench-right. Both patterns are visible from the first frame and stay on their original red shirts; never add a third choice shirt. Child is the four-year-old tiger boy. His yellow T-shirt stays on throughout; he receives the dinosaur shirt and prepares to get dressed after the clip, with no wardrobe jump. The locked 16:9 medium two-shot includes both faces, hands and both choice shirts.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Dad and Child remain beside the bench with empty hands; the red striped shirt stays at bench-left and the red dinosaur shirt at bench-right; Child still wears his yellow T-shirt.
 
 ACTION AND REACTIONS
-Dad briefly indicates the two patterns during his question. Child identifies the dinosaur with his words and a small pointing gesture. Dad lifts the red dinosaur shirt from bench-right with both hands, keeping its graphic visible, and checks the choice. Child confirms with a small nod at normal volume and lowers his hand. The striped shirt never moves.
+Dad turns both shirts slightly toward Child during his question about the shared color. Child points once, briefly, at the dinosaur shirt and names both patterns — the big dinosaur and the stripes — then rests his hand at his side.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Dad: "Stripes or dinosaurs?"
-Child: "The one with the dinosaur, please."
-Dad: "This one?"
-Child: "Yes, that one!"
+Dad: "Both are red. Which one do you mean?"
+Child: "The one with the big dinosaur. The other one only has stripes."
 
 END FRAME
-Dad holds the red dinosaur shirt with both hands just above bench-right, graphic facing Child; the red striped shirt rests at bench-left; Child has empty hands and still wears his yellow T-shirt.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Dad lifts the red dinosaur shirt from bench-right with both hands, graphic facing Child; the red striped shirt rests untouched at bench-left; Child has empty hands.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (14 spoken words)
+PACING (20 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

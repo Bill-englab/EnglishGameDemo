@@ -1,47 +1,26 @@
 {
   "title": "Not Ready Yet",
   "title_zh": "还没准备好",
-  "dialogue_contract": "three-by-ten-v2",
+  "dialogue_contract": "continuous-dialogue-v1",
   "can_do": "在不想立刻停止时说出感受，并具体说明还需要完成什么。",
   "conversation_move": {"id": "delay-boundary", "label": "state a not-yet boundary"},
-  "trigger": "Dad announces cleanup while one visible part of the child's block house is unfinished.",
-  "core_response": "I don't want to stop yet.",
-  "stretch_response": "The roof. That red piece.",
-  "repair_response": "I mean the station stop, then I'll come.",
+  "trigger": "Dad announces cleanup while the block house is missing only its red roof, so Child states his not-yet boundary and names the piece he still needs.",
   "recycle": ["specify-choice"],
   "roles": ["child", "dad"],
   "setting": "Playing with blocks at home.",
   "essential_props": ["one block-house set with a final red roof piece and its storage box"],
-  "parts": [
-    {
-      "id": "A",
-      "beat": "goal",
-      "turns": [
-        {"speaker": "dad", "line": "Cleanup time. Let's put the blocks away.", "kind": "input"},
-        {"speaker": "child", "line": "I don't want to stop yet.", "kind": "core"},
-        {"speaker": "dad", "line": "What's left to finish?", "kind": "input"}
-      ]
-    },
-    {
-      "id": "B",
-      "beat": "change",
-      "turns": [
-        {"speaker": "child", "line": "The roof. That red piece.", "kind": "stretch"},
-        {"speaker": "dad", "line": "One last piece, then we clean up.", "kind": "input"},
-        {"speaker": "child", "line": "Okay, just that one.", "kind": "confirmation"}
-      ]
-    },
-    {
-      "id": "C",
-      "beat": "resolve",
-      "turns": [
-        {"speaker": "dad", "line": "Put it on here.", "kind": "input"},
-        {"speaker": "child", "line": "Now the roof is finished.", "kind": "action"},
-        {"speaker": "dad", "line": "Ready to tidy up?", "kind": "input"},
-        {"speaker": "child", "line": "Yes. I'll help you.", "kind": "action"}
-      ]
-    }
-  ],
+  "dialogue": {
+    "turns": [
+      {"speaker": "dad", "line": "Cleanup time. Let's put the blocks away."},
+      {"speaker": "child", "line": "I don't want to stop yet."},
+      {"speaker": "dad", "line": "What's left to finish?"},
+      {"speaker": "child", "line": "The roof. The red piece goes on top."},
+      {"speaker": "dad", "line": "One last piece, then we clean up."},
+      {"speaker": "child", "line": "Deal. Roof first, then tidy up."},
+      {"speaker": "dad", "line": "There. A finished house."},
+      {"speaker": "child", "line": "Now I'm ready to clean up."}
+    ]
+  },
   "replay_cards": [
     {"title": "Finish the picture", "setting": "Drawing at the table", "change": "The last wheel still needs color", "challenge": "Mom calls for bath time; name the one visible part to finish, finish it, and go"},
     {"title": "End the train game", "setting": "Playing on the floor", "change": "The train is one stop from the station, but Dad thinks Child means another full trip", "challenge": "Dad calls for lunch. Child names one last stop; when Dad checks whether he means another trip, Child repairs, \"I mean the station stop, then I'll come.\" Dad accepts that visible endpoint. Child arrives at the station, then puts the train away and comes to lunch."}
@@ -49,5 +28,5 @@
   "parent_support": ["Ask what remains instead of guessing.", "Agree only to a short, visible finish point and calmly keep the cleanup boundary."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 4
+  "content_revision": 5
 }

@@ -3,33 +3,23 @@
   "title_zh": "睡前读一本",
   "can_do": "在一本故事后关灯的约定内提出请求、选定书，并在读完后接受睡觉。",
   "conversation_move": {"id": "request-before-boundary", "label": "request one thing before a boundary"},
-  "trigger": "Mom offers one story before lights out, and Child chooses the bear book for that agreed time.",
-  "core_response": "Can we read a book before bed?",
-  "stretch_response": "Can we read the bear book before bed?",
-  "repair_response": "The blue one, please.",
+  "trigger": "Mom offers one story before lights out, and Child chooses the blue sleepy-bear book for that agreed time.",
   "recycle": ["request-item", "specify-choice"],
   "roles": ["child", "mom"],
   "setting": "A quiet bedtime story together; a brief time transition leads from opening the book to finishing it later.",
   "essential_props": ["one bedtime book choice: a blue sleepy-bear book and a cream wide-awake-bear book"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {"id": "A", "beat": "goal", "turns": [
-      {"speaker": "mom", "line": "One story, then lights out.", "kind": "input"},
-      {"speaker": "child", "line": "Can we read the bear book before bed?", "kind": "core"},
-      {"speaker": "mom", "line": "Yes, just one.", "kind": "input"}
-    ]},
-    {"id": "B", "beat": "change", "turns": [
-      {"speaker": "child", "line": "The blue one, please.", "kind": "stretch"},
-      {"speaker": "mom", "line": "This sleepy bear?", "kind": "input"},
-      {"speaker": "child", "line": "Yes. Can you read it?", "kind": "core"},
-      {"speaker": "mom", "line": "Of course. Get comfy.", "kind": "action"}
-    ]},
-    {"id": "C", "beat": "resolve", "turns": [
-      {"speaker": "mom", "line": "That's the end. Ready for lights out?", "kind": "input"},
-      {"speaker": "child", "line": "Yes. I liked that story. Goodnight, Mom.", "kind": "action"},
-      {"speaker": "mom", "line": "Goodnight, sweetheart.", "kind": "action"}
-    ]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "mom", "line": "Bedtime. One story, then lights out."},
+      {"speaker": "child", "line": "Can we read the bear book before bed?"},
+      {"speaker": "mom", "line": "We have two bear books. Which one?"},
+      {"speaker": "child", "line": "The blue one, please. The sleepy bear, not the wide-awake bear."},
+      {"speaker": "mom", "line": "A sleepy story for bedtime. Snuggle in."},
+      {"speaker": "mom", "line": "The end. Lights out now?"},
+      {"speaker": "child", "line": "Yes. Goodnight, sleepy bear. Goodnight, Mom."}
+    ]
+  },
   "replay_cards": [
     {"title": "One goodnight song", "setting": "Choosing tonight's activity before lights out", "change": "Mom offers one short song as tonight's bedtime activity", "challenge": "Request a named song, sing it together, and accept lights out when the song finishes"},
     {"title": "Choose tomorrow's shirt", "setting": "Before getting into bed", "change": "Mom agrees there is time to choose between two shirts already on the chair", "challenge": "Ask to choose tomorrow's shirt, identify one, set it aside, then get into bed as agreed"}
@@ -40,5 +30,5 @@
   ],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "One continuous conversation in an uncluttered end-of-day classroom corner. Rabbit Teacher stays seated screen left and Child stays seated screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No essential props. The tower and Maya belong only to Child's recalled play episode; neither appears. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles, generated blocks or reenacted collapse. Small illustrative hand gestures only; both remain in this classroom for all three parts, with no time jump.",
+  "content_revision": 3,
+  "scene": "One continuous conversation in an uncluttered end-of-day classroom corner. Rabbit Teacher stays seated screen left and Child stays seated screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No essential props. The tower, the red block and Maya belong only to Child's recalled play episode; none of them appears. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles, generated blocks or reenacted collapse. Small illustrative hand gestures only; both remain in this classroom for all three clips, with no time jump.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline; Teacher listens with ordinary interest and Child shares a recent memory in a natural child voice.",
-    "allowed_shift": "A slight thoughtful pause for the fall, followed by a small pleased smile about rebuilding. Express the shift through a glance, small nod or brief hand gesture at normal conversation volume.",
+    "allowed_shift": "A slight thoughtful pause for the fall, followed by a small pleased smile about rebuilding it taller. Express the shift through a glance, small nod or brief hand gesture at normal conversation volume.",
     "forbidden": "No startled gasp, alarm at the remembered fall, triumphant cheering, exaggerated pride, testing expression, repeated praise demand or reenacted distress. Keep eyes, face and body proportions stable."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Teacher remains seated screen left and Child seated screen right in the quiet classroom; both have empty hands resting near their laps and attentive expressions.",
-      "action": "Teacher invites one recent event. Child briefly marks a modest tower height with one empty hand while naming the shared building activity, then lowers it. Teacher asks only whether that tower stayed upright, with quiet interest. Keep both faces visible; no one turns toward an offscreen peer and no tower appears.",
+      "action": "Teacher invites one recent event. Child briefly marks a modest tower height with one empty hand while naming the shared building with Maya, then lowers it. Teacher asks only whether that tower stayed upright, with quiet interest. Keep both faces visible; no one turns toward an offscreen peer and no tower appears.",
       "end": "Teacher and Child remain seated in the same classroom positions with empty hands near their laps; Teacher is listening for the tower's outcome."
     },
-    "B": {
+    {
+      "turns": [3, 4, 5],
       "start": "Teacher and Child remain seated in the same classroom positions with empty hands near their laps; Teacher is listening for the tower's outcome.",
-      "action": "Child gives one gentle downward empty-hand motion while recalling the fall. Teacher acknowledges it without surprise or a second question. Child then makes a small upward stacking gesture while explaining that they rebuilt together. These gestures happen during speech; there are no blocks, sound effects, falling bodies or additional characters.",
-      "end": "Teacher and Child remain seated in the same classroom positions with empty hands lowered near their laps after Child's small rebuilding gesture."
+      "action": "Child gives one gentle downward empty-hand motion while recalling the fall, then makes a small upward stacking gesture while explaining that they rebuilt it together. Teacher leans in with quiet interest and asks whether the new one was taller. Child answers with modest pride and one small stacking gesture for the red block Maya placed on top. These gestures happen during speech; there are no blocks, sound effects, falling bodies or additional characters.",
+      "end": "Teacher and Child remain seated in the same classroom positions with empty hands lowered near their laps after Child's small stacking gesture."
     },
-    "C": {
-      "start": "Teacher and Child remain seated in the same classroom positions with empty hands lowered near their laps after Child's small rebuilding gesture.",
-      "action": "Teacher acknowledges the shared rebuilding. Child gives one small nod while adding that the tower stayed upright, with a modest pleased expression. Teacher closes by acknowledging the tower story. Both keep their empty hands relaxed; no reenactment, further question or added praise follows.",
+    {
+      "turns": [6, 7],
+      "start": "Teacher and Child remain seated in the same classroom positions with empty hands lowered near their laps after Child's small stacking gesture.",
+      "action": "Teacher warmly sums up the day for towers. Child agrees with a small pleased smile and adds his wish to build a castle tomorrow, with one tiny upward gesture. Both keep their empty hands relaxed; no reenactment, further question or added praise follows.",
       "end": "Teacher and Child remain seated in the unchanged classroom with empty hands relaxed near their laps, sharing a quiet look after the complete tower account."
     }
-  }
+  ]
 }

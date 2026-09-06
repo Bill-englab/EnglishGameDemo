@@ -1,10 +1,10 @@
-I Built a Tower — Part B (change)
-Production prompt draft | Source: curriculum/04/10-recounting-planning/01-one-event-today/lesson.json | Content revision: 2
-Source SHA256: c53993e75ef5156925824062180e976f9b3ef403e23640c013ad02de2a94fc6f
+I Built a Tower — Clip 2
+Production prompt draft | Source: curriculum/04/10-recounting-planning/01-one-event-today/lesson.json | Content revision: 3
+Source SHA256: ef35f67e7f8c14c27abf6990fa325ff1e4bd41f93a95683b4bcbe142cbc51be0
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -12,7 +12,7 @@ Rabbit Teacher — a cream rabbit with upright ears and a lavender cardigan, cal
 
 EMOTIONAL PERFORMANCE
 Calm, warm and regulated baseline; Teacher listens with ordinary interest and Child shares a recent memory in a natural child voice.
-A slight thoughtful pause for the fall, followed by a small pleased smile about rebuilding. Express the shift through a glance, small nod or brief hand gesture at normal conversation volume.
+A slight thoughtful pause for the fall, followed by a small pleased smile about rebuilding it taller. Express the shift through a glance, small nod or brief hand gesture at normal conversation volume.
 No startled gasp, alarm at the remembered fall, triumphant cheering, exaggerated pride, testing expression, repeated praise demand or reenacted distress. Keep eyes, face and body proportions stable.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
@@ -20,25 +20,24 @@ SETTING
 A quiet end-of-day classroom conversation with Rabbit Teacher and Child seated facing each other.
 
 SCENE AND PROP CONTINUITY
-One continuous conversation in an uncluttered end-of-day classroom corner. Rabbit Teacher stays seated screen left and Child stays seated screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No essential props. The tower and Maya belong only to Child's recalled play episode; neither appears. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles, generated blocks or reenacted collapse. Small illustrative hand gestures only; both remain in this classroom for all three parts, with no time jump.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+One continuous conversation in an uncluttered end-of-day classroom corner. Rabbit Teacher stays seated screen left and Child stays seated screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No essential props. The tower, the red block and Maya belong only to Child's recalled play episode; none of them appears. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles, generated blocks or reenacted collapse. Small illustrative hand gestures only; both remain in this classroom for all three clips, with no time jump.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Teacher and Child remain seated in the same classroom positions with empty hands near their laps; Teacher is listening for the tower's outcome.
 
 ACTION AND REACTIONS
-Child gives one gentle downward empty-hand motion while recalling the fall. Teacher acknowledges it without surprise or a second question. Child then makes a small upward stacking gesture while explaining that they rebuilt together. These gestures happen during speech; there are no blocks, sound effects, falling bodies or additional characters.
+Child gives one gentle downward empty-hand motion while recalling the fall, then makes a small upward stacking gesture while explaining that they rebuilt it together. Teacher leans in with quiet interest and asks whether the new one was taller. Child answers with modest pride and one small stacking gesture for the red block Maya placed on top. These gestures happen during speech; there are no blocks, sound effects, falling bodies or additional characters.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Child: "No, it fell down."
-Teacher: "Oh, your tower fell."
-Child: "We built it again together."
+Child: "No, it fell down. But we built it again together."
+Teacher: "Taller than the first one?"
+Child: "Much taller. Maya put the red block on top."
 
 END FRAME
-Teacher and Child remain seated in the same classroom positions with empty hands lowered near their laps after Child's small rebuilding gesture.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Teacher and Child remain seated in the same classroom positions with empty hands lowered near their laps after Child's small stacking gesture.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (13 spoken words)
+PACING (24 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

@@ -3,33 +3,24 @@
   "title_zh": "我的有恐龙贴纸",
   "can_do": "用可见的特征辨认自己的物品，排除相似物品，并在核对后确认拿回。",
   "conversation_move": {"id": "identify-belonging", "label": "identify whose item it is"},
-  "trigger": "At the end of the school day, Rabbit Teacher holds two similar blue bottles and asks whose one is.",
-  "core_response": "Mine has a dinosaur sticker.",
-  "stretch_response": "Mine is red with a bear patch.",
-  "repair_response": "No, mine has a bear patch.",
+  "trigger": "At the end of the school day, Rabbit Teacher holds two similar blue bottles and asks whose they are; Child remembers picking his sticker on the first day.",
   "recycle": ["specify-choice", "check-location"],
   "roles": ["child", "teacher"],
   "setting": "Collecting a water bottle at a quiet classroom table before going home.",
   "essential_props": ["two light-blue bottles with cream caps: one green-dinosaur sticker and one yellow-star sticker"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {"id": "A", "beat": "goal", "turns": [
-      {"speaker": "teacher", "line": "Whose blue bottle is this?", "kind": "input"},
-      {"speaker": "child", "line": "Mine has a dinosaur sticker.", "kind": "core"},
-      {"speaker": "teacher", "line": "Let's check these two bottles.", "kind": "input"}
-    ]},
-    {"id": "B", "beat": "change", "turns": [
-      {"speaker": "teacher", "line": "This one has a star.", "kind": "input"},
-      {"speaker": "child", "line": "That one's not mine.", "kind": "core"},
-      {"speaker": "teacher", "line": "And this one?", "kind": "input"},
-      {"speaker": "child", "line": "That's my dinosaur sticker.", "kind": "stretch"}
-    ]},
-    {"id": "C", "beat": "resolve", "turns": [
-      {"speaker": "teacher", "line": "Here's your blue bottle.", "kind": "action"},
-      {"speaker": "child", "line": "Yes, that's mine. Thank you.", "kind": "action"},
-      {"speaker": "teacher", "line": "You're welcome. Have a good day.", "kind": "input"}
-    ]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "teacher", "line": "Two bottles are left. Whose are they?"},
+      {"speaker": "child", "line": "Mine has a green dinosaur sticker."},
+      {"speaker": "teacher", "line": "How do you know it's yours?"},
+      {"speaker": "child", "line": "I picked the green dinosaur on the first day."},
+      {"speaker": "teacher", "line": "And the yellow-star bottle?"},
+      {"speaker": "child", "line": "That one is my friend's. She loves yellow stars."},
+      {"speaker": "teacher", "line": "Then the star bottle goes back to your friend."},
+      {"speaker": "child", "line": "And my dinosaur bottle goes home with me."}
+    ]
+  },
   "replay_cards": [
     {
       "title": "Whose jacket?",
@@ -50,5 +41,5 @@
   ],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

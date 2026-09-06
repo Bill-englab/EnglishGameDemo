@@ -1,10 +1,10 @@
-Blocks First — Part A (goal)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/03-propose-an-order/lesson.json | Content revision: 3
-Source SHA256: 920ea0738350fa1033063bf25a58cff73541ee89ede2be572b32cd9adfcf2f4b
+Blocks First — Clip 1
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/03-propose-an-order/lesson.json | Content revision: 4
+Source SHA256: 98fbf7ed82a743f49e49bec45680408066e11ba4559b546411c187e1e3579546
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -20,25 +20,24 @@ SETTING
 Tidying two small toy groups together at home.
 
 SCENE AND PROP CONTINUITY
-In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. Exactly two large blocks lie at table-left and two toy cars at table-right; one item in each group is within easy reach of each person. A single open divided storage box sits at center-back within both characters' reach, with an empty left compartment for blocks and an empty right compartment for cars. This is one small toy-cleanup arrangement. Locked 16:9 medium two-shot shows both faces, hands and all four toys. Keep counts and compartments stable; no extra toys, cooking scene or wardrobe change.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. Exactly two large blocks lie at table-left, a red toy car and a blue toy car at table-right. One open blue storage box for blocks and one open red storage box for cars sit at center-back within both characters' reach. This is one small toy-cleanup arrangement. Locked 16:9 medium two-shot shows both faces, hands and all four toys. Keep counts, colors and box identities stable; no extra toys, cooking scene or wardrobe change.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Two blocks lie at table-left, two cars at table-right, and the empty divided box at center-back; Dad and Child have empty hands.
+Two blocks lie at table-left, the red and blue cars at table-right, and the empty blue and red boxes at center-back; Dad and Child have empty hands.
 
 ACTION AND REACTIONS
-Dad indicates cars and then blocks with one small sequential gesture during his cleanup suggestion. Child proposes reversing the order while pointing gently to the blocks. Dad checks the proposed first group. Leave all four toys on the table until the full order is agreed.
+Dad indicates the cars and then the blocks with one small sequential gesture during his cleanup suggestion. Child proposes reversing the order while gesturing gently toward the bigger blocks. Dad accepts the new order and asks which box holds the blocks. Leave all four toys on the table until the boxes are identified.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Dad: "Let's put the cars away, then the blocks."
-Child: "What if we do blocks first?"
-Dad: "Blocks first?"
+Dad: "Dinner's nearly ready. Cars away first, then the blocks."
+Child: "What if we do blocks first? The blocks are bigger."
+Dad: "Blocks first, then. Which box holds the blocks?"
 
 END FRAME
-Both blocks and both cars remain outside the empty divided box in their original groups; Dad and Child look toward the blocks at table-left with empty hands.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Both blocks and both cars remain on the table in their original groups; both boxes stand empty at center-back; Dad and Child look toward the blocks at table-left with empty hands.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (16 spoken words)
+PACING (27 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

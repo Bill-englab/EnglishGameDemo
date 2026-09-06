@@ -1,53 +1,34 @@
 {
   "title": "The Apple, Please",
   "title_zh": "请给我苹果",
-  "can_do": "在两个可见选项中礼貌请求自己想要的物品，并在拿错时修正。",
-  "conversation_move": {"id": "request-item", "label": "request an item"},
-  "trigger": "Mom offers two snack choices, then hands over the wrong one by mistake.",
-  "core_response": "Can I have the apple, please?",
-  "stretch_response": "Can I have the red apple, please?",
-  "repair_response": "No, I mean the apple, please.",
+  "can_do": "礼貌请求想要的物品，并在遇到小等待时接受并补充自己的请求。",
+  "conversation_move": {"id": "request-item", "label": "request an item and adjust to a small wait"},
+  "trigger": "Mom says the apple is still wet from washing, so Child must wait a moment and can ask for anything else he needs.",
   "recycle": [],
   "roles": ["child", "mom"],
   "setting": "Snack time at home.",
   "essential_props": ["one red apple and one banana"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {
-      "id": "A",
-      "beat": "goal",
-      "turns": [
-        {"speaker": "mom", "line": "You look hungry. Apple or banana?", "kind": "input"},
-        {"speaker": "child", "line": "Can I have the apple, please?", "kind": "core"},
-        {"speaker": "mom", "line": "Of course.", "kind": "input"}
-      ]
-    },
-    {
-      "id": "B",
-      "beat": "change",
-      "turns": [
-        {"speaker": "mom", "line": "Here's your banana.", "kind": "input"},
-        {"speaker": "child", "line": "No, I mean the apple—the red one, please.", "kind": "repair"},
-        {"speaker": "mom", "line": "Oh! I picked up the wrong one.", "kind": "input"}
-      ]
-    },
-    {
-      "id": "C",
-      "beat": "resolve",
-      "turns": [
-        {"speaker": "mom", "line": "Here's the apple you asked for.", "kind": "action"},
-        {"speaker": "child", "line": "Yes, that's the one.", "kind": "input"},
-        {"speaker": "mom", "line": "Anything else?", "kind": "input"},
-        {"speaker": "child", "line": "No, thank you, Mom.", "kind": "input"}
-      ]
-    }
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "mom", "line": "You look hungry, sweetheart. Dinner isn't ready yet, but there's an apple and a banana on the counter."},
+      {"speaker": "child", "line": "Can I have the apple, please? The red one."},
+      {"speaker": "mom", "line": "Sure. It's still a little wet from washing. Just a second."},
+      {"speaker": "child", "line": "Okay, I'll wait. Can I have a small plate too?"},
+      {"speaker": "mom", "line": "Here you go — a dry apple and a little plate."},
+      {"speaker": "child", "line": "Thanks, Mom. I'll eat it at the table."}
+    ]
+  },
   "replay_cards": [
-    {"title": "Pack a picnic snack", "setting": "Packing a bag before going out", "change": "Mom offers a red apple or a green pear for the picnic", "challenge": "Child asks, 'Can I have the red apple, please?' If Mom reaches for the pear by mistake, Child says, 'No, I mean the apple, please.' Mom acknowledges the mix-up, puts the apple in his bag, and checks that his snack is ready."},
-    {"title": "Choose a book", "setting": "Before bedtime", "change": "Dad offers the bear book or the train book for tonight's story", "challenge": "Child asks for the bear book. If Dad picks up the train book by mistake, Child names the bear book again. Dad checks the cover with him, and they open the agreed book and begin reading."}
+    {"title": "Pick a book before bed", "setting": "Before bedtime, beside the bookshelf", "change": "Dad says the bear book is still in the other room and he needs a moment to fetch it", "challenge": "Child asks for the bear book, then accepts the small wait and asks Dad to bring the train book too if he finds it. Dad comes back with the bear book, and Child settles on the bed to read together."},
+    {"title": "Pack a snack for the park", "setting": "Getting ready to go out to the park", "change": "Mom says the apple still needs a quick rinse before it goes in the bag", "challenge": "Child asks for the red apple and, when Mom says it needs a rinse, says he will wait and asks for a small bag for the apple. Mom rinses the apple and packs it with the bag, and Child confirms it is ready."}
   ],
-  "parent_support": ["Offer two choices the child can see, then wait for his request.", "If you pick up the wrong one, acknowledge the ordinary mistake as soon as he clarifies; do not prolong it to test him.", "Accept a short correction or a useful visible detail. Use a normal voice and small gestures, then let him confirm the result and close politely."],
+  "parent_support": [
+    "Offer two choices the child can see, then wait for his request.",
+    "When a real small wait comes up (the apple needs a rinse), say so plainly and let him practice accepting it and adding what else he needs.",
+    "Accept a narrowed or added request (a plate, a bag) with a normal voice and small gestures, then let him confirm the result and close naturally."
+  ],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

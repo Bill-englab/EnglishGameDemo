@@ -1,10 +1,10 @@
-Let's Build It Again — Part A (goal)
-Production prompt draft | Source: curriculum/04/08-feelings-repair/03-apologize-and-repair/lesson.json | Content revision: 2
-Source SHA256: a67bb963575b8a131d5c80a295dcdb8aa5244d1daa63ce1da2762819565f891d
+Let's Build It Again — Clip 1
+Production prompt draft | Source: curriculum/04/08-feelings-repair/03-apologize-and-repair/lesson.json | Content revision: 3
+Source SHA256: 6f27ee3d1905d94dbdd906cb8c3c078a403d8641bf54dc89250b8bb44f020bb1
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -21,24 +21,22 @@ Child and the same Bear Peer from the cooperation chapter kneel beside a small b
 
 SCENE AND PROP CONTINUITY
 A shared home play mat with Peer kneeling screen left and Child kneeling screen right. Peer is the same small brown bear, age four, in his teal T-shirt from every Chapter 7 peer lesson; Child is the four-year-old tiger boy in his yellow T-shirt. Exactly three wide, easy-to-stack blocks form one small tower between them: tan base, blue middle, red top. The tower is within both children's reach. When Child accidentally brushes the two upper blocks, the tan base stays put and the blue and red blocks fall a short distance onto the soft mat toward Child, without hitting anyone. No truck, bridge, additional blocks or props. Locked 16:9 medium two-shot shows faces, hands and all three blocks throughout.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Peer kneels left with his hands just released from the red top of the intact three-block tower. Child kneels right with his left hand beside the tower at the height of the blue middle block, about to return it to his lap; the tan base is flat on the mat.
 
 ACTION AND REACTIONS
-Peer describes the tower he is building. As Child draws his left hand back toward his lap, it accidentally brushes the blue middle block once; the blue and red upper blocks fall onto the mat toward him while the tan base stays upright. No block touches either child. Child stops his hand, notices the fallen blocks, looks at Peer and checks that Peer is okay while apologizing sincerely and calmly. Peer answers the concern, then names what happened with mild disappointment. Neither touches the damaged build or assumes the apology has already repaired it.
+As Child draws his left hand back toward his lap, it accidentally brushes the blue middle block once; the blue and red upper blocks fall onto the mat toward him while the tan base stays upright. No block touches either child. Child stops his hand, notices the fallen blocks and immediately apologizes to Peer with sincere calm. Peer answers that he is okay, then names the lost tower with mild disappointment. Neither touches the fallen blocks yet.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Peer: "I'm building a tall tower."
-Child: "Oops. Are you okay? I'm sorry."
-Peer: "I'm okay. My tower fell."
+Child: "Oops! Your blocks fell. I'm sorry."
+Peer: "I'm okay. But my tower is gone."
 
 END FRAME
 The tan base remains upright between the children. The fallen blue block rests beside the base toward Child, with the fallen red block just beyond it; Child's empty hands are in his lap and Peer's empty hands rest by his knees as they face each other.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (16 spoken words)
+PACING (13 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

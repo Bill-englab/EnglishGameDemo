@@ -1,18 +1,25 @@
 {
   "title":"I Feel Frustrated","title_zh":"我有点沮丧","can_do":"说出找不到拼图块带来的沮丧，请求帮助，并在一起找到后报告感受的变化。",
   "conversation_move":{"id":"explain-feeling","label":"name a feeling and its reason"},
-  "trigger":"The last puzzle piece is missing. Child pauses with a small frown because he cannot find it, and Mom notices the gap.",
-  "core_response":"I'm frustrated because I can't find it.","stretch_response":"I'm frustrated because I worked hard on it.","repair_response":"No, I mean you skipped my turn.",
+  "trigger":"The last puzzle piece is missing. Child explains his frustration with because, and Mom's clue leads him to the blue piece under the table.",
   "recycle":["request-a-pause","sequence-actions"],"roles":["child","mom"],"setting":"Finishing a simple puzzle together at a low table at home.","essential_props":["one four-piece puzzle with its final blue piece under the low table"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"One last puzzle piece is missing.","kind":"input"},{"speaker":"child","line":"I'm frustrated because I can't find it.","kind":"core"},{"speaker":"mom","line":"That is frustrating.","kind":"input"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"Can you help me find it?","kind":"stretch"},{"speaker":"mom","line":"Let's look under the table.","kind":"action"},{"speaker":"child","line":"There it is!","kind":"confirmation"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Here's the missing piece.","kind":"action"},{"speaker":"child","line":"Thanks. I feel better now.","kind":"confirmation"},{"speaker":"mom","line":"Let's put it in.","kind":"input"},{"speaker":"child","line":"It fits!","kind":"action"}]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker":"mom","line":"One last puzzle piece is missing."},
+      {"speaker":"child","line":"I'm frustrated because I can't find it."},
+      {"speaker":"mom","line":"I understand. You worked hard on this puzzle."},
+      {"speaker":"child","line":"Yes. Three pieces were easy. The last one is hiding."},
+      {"speaker":"mom","line":"Let's look under the low table."},
+      {"speaker":"child","line":"The blue piece! It was under the table."},
+      {"speaker":"mom","line":"Put it in and see."},
+      {"speaker":"child","line":"It fits! I feel better now."}
+    ]
+  },
   "replay_cards":[
     {"title":"The torn picture","setting":"Drawing at home with Mom","change":"The edge of Child's nearly finished picture tears as he moves it","challenge":"Child explains, \"I'm frustrated because I worked hard on it.\" Mom acknowledges the effort and asks whether help or a pause would be useful. Child requests \"Can we stop? I need a break.\" Mom leaves the picture safe; after a real pause, Child chooses to tape the edge with her and continue drawing. He can remain disappointed while accepting help."},
     {"title":"The missed turn","setting":"A family board game with Dad","change":"Dad accidentally takes two turns, then mistakes Child's complaint for a request to go next","challenge":"Child says, \"You skipped my turn.\" Dad asks, \"Do you mean you want the next turn?\" Child corrects, \"No, I mean you skipped my turn.\" Dad acknowledges the mistake and moves his piece back. Child proposes \"First my turn, then your turn.\" Dad agrees; Child takes the restored turn, then Dad takes his, and they continue without requiring Child to cheer up first."}
   ],
   "parent_support":["Accept the small frown and pause as meaningful frustration. Acknowledge the missing piece before suggesting a search; do not turn the feeling into a quiz.","Help after Child asks, check just one reachable place together, and let finding the piece explain the slight relief. A smile is optional, and another situation may need a real break."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":3,"dialogue_contract":"three-by-ten-v2"
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":4
 }

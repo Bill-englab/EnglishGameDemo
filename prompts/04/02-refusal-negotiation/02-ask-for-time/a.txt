@@ -1,10 +1,10 @@
-Two More Minutes — Part A (goal)
-Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 4
-Source SHA256: 032c9cddc14b07b1fa4bf162ec048615920aaa5d0d0ab050725151022c6b8bee
+Two More Minutes — Clip 1
+Production prompt draft | Source: curriculum/04/02-refusal-negotiation/02-ask-for-time/lesson.json | Content revision: 5
+Source SHA256: 19a08a7d6f3036787f1ed94ffcfe0442d48c19ba3926898967cd1279fb021314
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -21,24 +21,23 @@ Finishing a drawing at home before leaving for the park.
 
 SCENE AND PROP CONTINUITY
 At a low drawing table near the home doorway, Mom stands screen-left and Child stands screen-right. Child is the four-year-old tiger boy, in his same yellow T-shirt and already wearing shoes suitable for leaving. One sheet shows a simple house with an empty upper-right corner where a sun is still missing; one yellow crayon rests beside the sheet. This drawing and crayon are the only essential prop group. Use one locked 16:9 medium two-shot showing faces, hands, the drawing surface and the nearby doorway at frame-left. Mom allows up to two minutes for just the sun; Child finishes early and they leave immediately. The three clips are continuous: no elapsed-two-minutes claim, timer, countdown, accelerated clock or time jump.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Mom stands left and Child stands right at the low table; the sheet shows a house but no sun, and the yellow crayon lies beside it; the doorway is nearby at frame-left.
 
 ACTION AND REACTIONS
-Mom gives a small gesture toward the doorway during her departure reminder. Child looks up to request extra time. Mom asks what remains while looking at Child and the unfinished drawing. Leave the paper and crayon still during these three short turns.
+Mom gives a small gesture toward the doorway during her departure reminder. Child looks up and requests two more minutes, glancing at the empty corner of his sheet. Mom asks what the sun still needs while looking at Child and the unfinished drawing. Leave the paper and crayon still during these three short turns.
 
 SPOKEN DIALOGUE (verbatim, in order):
 Mom: "It's time to leave for the park."
-Child: "Can I have two more minutes?"
-Mom: "What do you need to finish?"
+Child: "Can I have two more minutes? My sun is not done yet."
+Mom: "What does the sun still need?"
 
 END FRAME
 Mom and Child face each other at the table; the sheet still shows a house with an empty upper-right corner; the yellow crayon remains beside the sheet and the doorway stays at frame-left.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (19 spoken words)
+PACING (25 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

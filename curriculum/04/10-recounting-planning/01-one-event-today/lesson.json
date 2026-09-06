@@ -1,19 +1,25 @@
 {
   "title":"I Built a Tower","title_zh":"我搭了一座塔","can_do":"讲今天和同伴做的一件事，在一次具体追问后补充小意外与结果。",
-  "dialogue_contract":"three-by-ten-v2",
+  "dialogue_contract": "continuous-dialogue-v1",
   "conversation_move":{"id":"recount-one-event","label":"recount one event from today"},
-  "trigger":"Rabbit Teacher invites Child to share one thing he did today, then asks whether the tower he mentions stayed up.",
-  "core_response":"I built a tower with Maya.","stretch_response":"We built it again together.","repair_response":"No, that was today.",
+  "trigger":"Rabbit Teacher invites Child to share one thing he did today, and the tower story grows through her follow-up questions.",
   "recycle":["join-play","identify-belonging"],"roles":["child","teacher"],"setting":"A quiet end-of-day classroom conversation with Rabbit Teacher and Child seated facing each other.","essential_props":[],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"teacher","line":"Tell me one thing you did today.","kind":"input"},{"speaker":"child","line":"I built a tower with Maya.","kind":"core"},{"speaker":"teacher","line":"Did your tower stay up?","kind":"input"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"No, it fell down.","kind":"input"},{"speaker":"teacher","line":"Oh, your tower fell.","kind":"confirmation"},{"speaker":"child","line":"We built it again together.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"teacher","line":"You both helped rebuild it.","kind":"confirmation"},{"speaker":"child","line":"Yes, and it stayed up.","kind":"action"},{"speaker":"teacher","line":"Thanks for telling me about your tower.","kind":"confirmation"}]}
-  ],
+  "dialogue": {
+    "turns": [
+      {"speaker":"teacher","line":"Tell me one thing you did today."},
+      {"speaker":"child","line":"I built a big tower with Maya."},
+      {"speaker":"teacher","line":"Did your tower stay up?"},
+      {"speaker":"child","line":"No, it fell down. But we built it again together."},
+      {"speaker":"teacher","line":"Taller than the first one?"},
+      {"speaker":"child","line":"Much taller. Maya put the red block on top."},
+      {"speaker":"teacher","line":"What a great day for towers."},
+      {"speaker":"child","line":"Yes! Tomorrow I want to build a castle."}
+    ]
+  },
   "replay_cards":[
     {"title":"The picture from today","setting":"A quiet chat with Dad after drawing at home","change":"Dad recognizes the picture but thinks Child made it yesterday","challenge":"Child tells Dad he made a picture today. Dad asks whose picture has a sun, and Child answers, \"It's mine. It has a sun.\" Dad recalls it as yesterday's picture. Child clarifies, \"No, that was today.\" Dad accepts the correction and acknowledges what Child made. Stay with this one drawing event; the picture can be remembered rather than fetched."},
     {"title":"Joining Maya's game","setting":"Talking with Mom after play","change":"Mom is interested in how Child joined the game he mentions","challenge":"Child says, \"Today I played with Maya.\" Mom asks how he joined. Child recalls his request: \"I asked, 'Can I play with you?'\" He adds that Maya said yes and they played together. Mom acknowledges the complete event. Maya stays a person in Child's memory; no one acts or speaks as a third character."}
   ],
   "parent_support":["Invite one recent event he wants to share. Accept a short answer and use the tower's outcome as one concrete follow-up; do not ask him to report the whole day.","After hearing that the tower fell, acknowledge it and wait for his next thought. Building, falling and rebuilding belong to one small play episode; he need not produce a first/then list or retell it perfectly.","Listen with calm interest. A small hand gesture or nod can support the memory without reenacting it. Acknowledge the event he told, not the quality of his English."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":3
 }

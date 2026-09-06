@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
+  "content_revision": 3,
   "scene": "A compact bedroom with a low bed at screen-left and a low wooden chair immediately to Child's right. Mom kneels screen-left beside the bed, and Child sits on the floor screen-right between the bed and chair. Child is the same four-year-old tiger boy in a yellow T-shirt and navy shorts, with one blue sock with a yellow toe on his left foot and his right foot bare. The matching loose blue sock with a yellow toe lies flat on the near-right of the chair seat, within his easy right-arm reach. It is visible to the camera from the start, but both characters initially attend to the bed and Child's feet. The gap under the bed is empty and visible without crawling underneath. The chair, bed and their distance never change. Lock a 16:9 medium two-shot wide enough for both faces, the bed gap, the chair seat, Child's hands and socked/bare feet. No basket, curtain, extra loose sock or wardrobe change.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Mom and Child treat the missing sock as a small everyday problem.",
-    "allowed_shift": "A brief thoughtful look after the empty-bed check, a small head turn when Child proposes the chair and mild satisfaction when he finds the sock.",
+    "allowed_shift": "A brief thoughtful look after the empty-bed check, a small head turn when Child proposes the chair, mild satisfaction when he finds the sock and where he sat on it.",
     "forbidden": "No impatience, nagging, frantic rummaging, exaggerated confusion or surprise, crawling under furniture, bouncing or distorted faces and bodies."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Mom kneels screen-left and Child sits on the floor screen-right between the bed and low chair, both with empty hands. Child wears a yellow T-shirt and navy shorts, his left foot has a blue sock with a yellow toe and his right foot is bare. The matching loose sock lies on the chair seat's near-right; the gap under the bed is empty.",
-      "action": "Mom notices that Child has only one sock on and names the missing partner. Child suggests checking under the bed and points toward the visible gap. Mom agrees, and both lower their gaze and lean just enough to look through the empty space during the final turn. They stay outside the bed, and nobody touches or moves the chair sock.",
+      "action": "Mom notices that Child has only one sock on and names the missing partner. Child suggests checking under the bed and points toward the visible gap. Mom agrees, and both lower their gaze and lean just enough to look through the empty space during her short line. They stay outside the bed, and nobody touches or moves the chair sock.",
       "end": "Mom kneels screen-left and Child sits screen-right leaning slightly toward the empty bed gap with empty hands. The loose blue sock with a yellow toe remains on the near-right of the chair seat. Child still wears the matching sock on his left foot; his right foot is bare and his yellow T-shirt and navy shorts are unchanged."
     },
-    "B": {
+    {
+      "turns": [3, 4],
       "start": "Mom kneels screen-left and Child sits screen-right leaning slightly toward the empty bed gap with empty hands. The loose blue sock with a yellow toe remains on the near-right of the chair seat. Child still wears the matching sock on his left foot; his right foot is bare and his yellow T-shirt and navy shorts are unchanged.",
-      "action": "After the actual empty-bed check, Mom states the negative result. Child straightens slightly, glances toward the nearby chair and proposes its seat as another place to check. Mom follows his suggestion. Both turn their heads and upper bodies toward the chair during her final turn, ending with an unobstructed view of the stationary sock. Child does not retrieve it yet; the change of search direction follows his words.",
+      "action": "After the actual empty-bed check, Child straightens slightly, rules out under the bed and proposes the chair seat as the next place to check. Mom follows his suggestion with warm approval. Both turn their heads and upper bodies toward the chair during her line, ending with an unobstructed view of the stationary sock. Child does not retrieve it yet; the change of search direction follows his words.",
       "end": "Mom kneels screen-left and Child sits screen-right, both turned toward the low chair with empty hands and a clear view of the loose blue sock with a yellow toe on its near-right seat. The bed gap is empty. Child's matching left sock, bare right foot, yellow T-shirt and navy shorts are unchanged."
     },
-    "C": {
+    {
+      "turns": [5, 6, 7],
       "start": "Mom kneels screen-left and Child sits screen-right, both turned toward the low chair with empty hands and a clear view of the loose blue sock with a yellow toe on its near-right seat. The bed gap is empty. Child's matching left sock, bare right foot, yellow T-shirt and navy shorts are unchanged.",
-      "action": "Child identifies the sock and states its chair location before reaching. As Mom acknowledges the find, he uses his right hand to lift the loose sock from the chair and bring it to his lap. He confirms possession while holding it, and Mom notes that he has both socks. His left hand stays free. Leave putting on the found sock for after this clip; there is no unshown dressing action or change of feet.",
+      "action": "Child identifies the sock, states its chair location and remembers that he sat right on it, with mild satisfaction. As Mom names the blue sock with yellow toes, he uses his right hand to lift the loose sock from the chair and bring it to his lap. He confirms having both socks and being ready for shoes while holding it. His left hand stays free. Leave putting on the found sock for after this clip; there is no unshown dressing action or change of feet.",
       "end": "Child sits screen-right holding the found blue sock with a yellow toe in his right hand over his lap, with his left hand free. The chair seat is empty. Mom kneels screen-left with empty hands. Child still wears the matching sock on his left foot, his right foot is bare, and his yellow T-shirt and navy shorts are unchanged."
     }
-  }
+  ]
 }

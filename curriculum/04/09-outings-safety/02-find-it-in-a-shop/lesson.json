@@ -1,19 +1,25 @@
 {
   "title":"Where Is the Pasta?","title_zh":"意面在哪里","can_do":"询问商品位置，按货架线索找到并确认包装，再把要买的商品放进篮子。",
-  "dialogue_contract":"three-by-ten-v2",
+  "dialogue_contract": "continuous-dialogue-v1",
   "conversation_move":{"id":"ask-shop-location","label":"ask where to find an item in a shop"},
   "trigger":"Mom says they need pasta for dinner, so Child asks where to look before checking the shelf.",
-  "core_response":"Where can we find the pasta?","stretch_response":"The red bag with the window?","repair_response":"I mean the bag with the window.",
   "recycle":["ask-location","specify-choice"],"roles":["child","mom"],"setting":"A simple grocery shelf with Mom and Child standing together; the pasta and basket are within Child's easy reach.","essential_props":["one red pasta bag with a clear window and a shopping basket"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"We need some pasta for dinner.","kind":"input"},{"speaker":"child","line":"Where can we find the pasta?","kind":"core"},{"speaker":"mom","line":"It's on the bottom shelf.","kind":"input"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"The red bag with the window?","kind":"stretch"},{"speaker":"mom","line":"Yes, that's the pasta we need.","kind":"input"},{"speaker":"child","line":"I can reach it.","kind":"recycle"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"mom","line":"Put it in the basket, please.","kind":"input"},{"speaker":"child","line":"Okay. I'll put it in here.","kind":"action"},{"speaker":"mom","line":"Thanks. We have our pasta now.","kind":"input"}]}
-  ],
+  "dialogue": {
+    "turns": [
+      {"speaker":"mom","line":"We need some pasta for dinner tonight."},
+      {"speaker":"child","line":"Where can we find the pasta?"},
+      {"speaker":"mom","line":"It's on the bottom shelf."},
+      {"speaker":"child","line":"The red bag with the little window?"},
+      {"speaker":"mom","line":"That's the one we need."},
+      {"speaker":"child","line":"I can reach the bottom shelf by myself."},
+      {"speaker":"mom","line":"Great. Put it in our basket, please."},
+      {"speaker":"child","line":"In the basket. Pasta for dinner tonight."}
+    ]
+  },
   "replay_cards":[
     {"title":"Find the soap","setting":"A pretend shop shelf at home","change":"The soap is above Child's reach","challenge":"Mom says they need soap. Child asks, \"Where can we find the soap?\" Mom points to the upper shelf. Child identifies the pump bottle and says, \"I can't reach it. Can you help me?\" Mom lowers that bottle; Child confirms it and puts it in the basket without climbing."},
     {"title":"The bag, not the tin","setting":"A pretend grocery shelf at home","change":"Mom looks toward a red tin after Child asks for a red pasta bag","challenge":"Child asks, \"Where can we find the pasta?\" Mom points to the low shelf. Child asks for the red one, and Mom indicates the tin without lifting it. Child repairs, \"I mean the bag with the window.\" Mom confirms the bag of pasta; Child takes that bag and places it in the basket."}
   ],
   "parent_support":["Child can ask before scanning the shelf. Let him follow the location clue, name the visible red bag and clear window, and hear Mom's confirmation before taking it; reading a label is not required.","Use one small pasta bag and one basket. Keep both within an easy reach, stay together, and avoid aisle walks, climbing, extra shoppers or an elaborate shop reconstruction.","The transfer is Child's action: Mom holds the basket steady, Child puts the confirmed bag inside, and Mom acknowledges that the shopping need is met."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":3
 }

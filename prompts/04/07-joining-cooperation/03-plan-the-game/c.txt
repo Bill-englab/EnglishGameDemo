@@ -1,10 +1,10 @@
-Space Pirates — Part C (resolve)
-Production prompt draft | Source: curriculum/04/07-joining-cooperation/03-plan-the-game/lesson.json | Content revision: 2
-Source SHA256: d5eca01b8a9458dcb5155c8f048b760e3162968852195550583b204123359960
+Space Pirates — Clip 3
+Production prompt draft | Source: curriculum/04/07-joining-cooperation/03-plan-the-game/lesson.json | Content revision: 3
+Source SHA256: c7808297575f9cb3629f6aec26cd56228b0aa38bf05fffea2c86a086a527cee8
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -21,25 +21,22 @@ Two friends plan a pretend voyage while seated on one blanket in a home play are
 
 SCENE AND PROP CONTINUITY
 A quiet home play area with one blanket laid flat as the proposed pretend ship. Bear Peer sits on its left edge and Child on its right edge, facing inward within easy reach. Peer is the same small brown bear, age four, in his teal T-shirt; Child is the four-year-old tiger boy in his yellow T-shirt. Exactly one paper treasure map lies by Peer's right knee at the outset. It has two simple circles joined by a dotted route, with an X inside one circle, and no written words. The map, flat blanket, room and ordinary clothes keep their identities throughout; space travel remains pretend. Locked 16:9 medium two-shot shows both faces, hands and the map. No costumes, weapons, steering wheel, treasure chest, new props or extra characters.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Child holds the same map low over his knees with its two circles, dotted route and X visible. Peer rests his empty hands on his own knees; both sit on the unchanged flat blanket with their two roles agreed.
 
 ACTION AND REACTIONS
-Peer asks for their first destination. Child points to the existing X-marked circle on the map, treating it as a treasure planet in the agreed pretend game. Peer then makes one slight steering motion with empty hands as he begins piloting; Child follows the short dotted route with one fingertip during his closing turn. These small simultaneous actions visibly begin both chosen roles without a physical takeoff, a new destination prop or any extra speech.
+Peer asks for their first destination. Child points to the existing X-marked circle on the map, treating it as a treasure planet in the agreed pretend game, and names his map-checking job. Peer then makes one slight steering motion with empty hands as he begins piloting; Child follows the short dotted route with one fingertip during his closing turn. These small simultaneous actions visibly begin both chosen roles without a physical takeoff, a new destination prop or any extra speech.
 
 SPOKEN DIALOGUE (verbatim, in order):
 Peer: "Where should we fly first?"
-Child: "To this treasure planet."
-Peer: "Then I'll steer us there."
-Child: "I'll check the map."
+Child: "To the treasure planet. I'll check the map."
 
 END FRAME
 Peer holds his hands in a small relaxed pretend-steering pose while Child keeps the same map on his knees with a fingertip on its dotted route. Both remain seated on the flat blanket with small smiles, actively sharing the pirate-space game.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (18 spoken words)
+PACING (13 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

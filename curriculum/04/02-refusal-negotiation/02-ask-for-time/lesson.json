@@ -1,47 +1,26 @@
 {
   "title": "Two More Minutes",
   "title_zh": "再给我两分钟",
-  "dialogue_contract": "three-by-ten-v2",
+  "dialogue_contract": "continuous-dialogue-v1",
   "can_do": "需要从喜欢的活动转场时，请求一小段明确的时间并按约定行动。",
   "conversation_move": {"id": "request-time", "label": "request a little more time"},
-  "trigger": "Mom says it is time to leave for the park while the child's drawing still lacks a sun.",
-  "core_response": "Can I have two more minutes?",
-  "stretch_response": "My picture needs a sun.",
-  "repair_response": "I mean one final slide, then I'll come.",
+  "trigger": "Mom says it is time to leave for the park while the child's drawing still lacks its sun, so he asks for two more minutes to finish the rays.",
   "recycle": ["request-item"],
   "roles": ["child", "mom"],
   "setting": "Finishing a drawing at home before leaving for the park.",
   "essential_props": ["one drawing with its yellow crayon"],
-  "parts": [
-    {
-      "id": "A",
-      "beat": "goal",
-      "turns": [
-        {"speaker": "mom", "line": "It's time to leave for the park.", "kind": "input"},
-        {"speaker": "child", "line": "Can I have two more minutes?", "kind": "core"},
-        {"speaker": "mom", "line": "What do you need to finish?", "kind": "input"}
-      ]
-    },
-    {
-      "id": "B",
-      "beat": "change",
-      "turns": [
-        {"speaker": "child", "line": "My picture needs a sun.", "kind": "stretch"},
-        {"speaker": "mom", "line": "Two minutes, just the sun. Then we go.", "kind": "input"},
-        {"speaker": "child", "line": "Okay. Just the sun.", "kind": "confirmation"}
-      ]
-    },
-    {
-      "id": "C",
-      "beat": "resolve",
-      "turns": [
-        {"speaker": "mom", "line": "The sun looks finished.", "kind": "input"},
-        {"speaker": "child", "line": "I'm ready to go.", "kind": "action"},
-        {"speaker": "mom", "line": "Come along, then.", "kind": "input"},
-        {"speaker": "child", "line": "I'm coming, Mom.", "kind": "action"}
-      ]
-    }
-  ],
+  "dialogue": {
+    "turns": [
+      {"speaker": "mom", "line": "It's time to leave for the park."},
+      {"speaker": "child", "line": "Can I have two more minutes? My sun is not done yet."},
+      {"speaker": "mom", "line": "What does the sun still need?"},
+      {"speaker": "child", "line": "Yellow lines all around it."},
+      {"speaker": "mom", "line": "Two minutes for the sun, then we really go."},
+      {"speaker": "child", "line": "Okay. Sun first, then we go."},
+      {"speaker": "mom", "line": "Deal. I'll wait at the door."},
+      {"speaker": "child", "line": "Ready! Look, the sun is smiling."}
+    ]
+  },
   "replay_cards": [
     {"title": "Leave the playground", "setting": "At the neighborhood playground", "change": "Ask for one final slide, but Dad initially thinks Child wants more open-ended play", "challenge": "Child requests one final slide. When Dad checks whether he means more playtime, Child repairs, \"I mean one final slide, then I'll come.\" Dad agrees to that one turn; Child takes it and meets him at the gate."},
     {"title": "Pause the puzzle", "setting": "Before dinner", "change": "Ask for two minutes to place the last three pieces", "challenge": "Mom sets the timer; finish or pause when it rings and come to the table"}
@@ -49,5 +28,5 @@
   "parent_support": ["Allow up to two minutes only when the schedule permits; agree on one small visible finish point.", "The child can finish early. Once the sun is done, acknowledge it and leave together without another task or a language test."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 4
+  "content_revision": 5
 }

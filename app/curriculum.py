@@ -9,6 +9,7 @@ from typing import Any
 
 
 THREE_BY_TEN_CONTRACT = "three-by-ten-v2"
+CONTINUOUS_DIALOGUE_CONTRACT = "continuous-dialogue-v1"
 ALLOWED_STATUSES = {
     "draft",
     "logic_reviewed",
@@ -33,14 +34,10 @@ REQUIRED_LESSON_FIELDS = {
     "can_do",
     "conversation_move",
     "trigger",
-    "core_response",
-    "stretch_response",
-    "repair_response",
     "recycle",
     "roles",
     "setting",
     "essential_props",
-    "parts",
     "replay_cards",
     "parent_support",
     "reviews",
@@ -171,15 +168,16 @@ def validate_stage(
             path = f"{chapter_id}/{lesson_id}"
             contract = lesson.get("dialogue_contract")
             is_three_by_ten = contract == THREE_BY_TEN_CONTRACT
-            if contract not in (None, "", THREE_BY_TEN_CONTRACT):
+            is_continuous = contract == CONTINUOUS_DIALOGUE_CONTRACT
+            if contract not in (None, "", THREE_BY_TEN_CONTRACT, CONTINUOUS_DIALOGUE_CONTRACT):
                 _add(
                     issues, f"{path}.dialogue_contract", "dialogue-contract",
                     f"Unknown dialogue contract: {contract}",
                 )
-            elif require_complete and stage.get("id") == "04" and not is_three_by_ten:
+            elif require_complete and stage.get("id") == "04" and not is_continuous:
                 _add(
                     issues, f"{path}.dialogue_contract", "dialogue-contract",
-                    f"Complete Stage 04 requires {THREE_BY_TEN_CONTRACT}",
+                    f"Complete Stage 04 requires {CONTINUOUS_DIALOGUE_CONTRACT}",
                 )
             missing = sorted(REQUIRED_LESSON_FIELDS - set(lesson))
             for field in missing:
@@ -198,23 +196,33 @@ def validate_stage(
             if status not in ALLOWED_STATUSES:
                 _add(issues, f"{path}.status", "invalid-status", f"Unknown status: {status}")
 
-            parts = lesson.get("parts", [])
-            actual_parts = [part.get("id") for part in parts if isinstance(part, dict)]
-            if actual_parts != expected_parts:
-                _add(
-                    issues,
-                    f"{path}.parts",
-                    "invalid-dialogue-part",
-                    f"Expected parts {expected_parts}, got {actual_parts}",
-                )
+            if is_continuous:
+                turns = lesson.get("dialogue", {}).get("turns", [])
+                if not isinstance(turns, list) or not turns:
+                    _add(
+                        issues, f"{path}.dialogue", "missing-dialogue",
+                        "Continuous dialogue needs at least one turn",
+                    )
+                    turns = []
+            else:
+                parts = lesson.get("parts", [])
+                turns = [
+                    turn
+                    for part in parts
+                    if isinstance(part, dict)
+                    for turn in part.get("turns", [])
+                    if isinstance(turn, dict)
+                ]
+                actual_parts = [part.get("id") for part in parts if isinstance(part, dict)]
+                if actual_parts != expected_parts:
+                    _add(
+                        issues,
+                        f"{path}.parts",
+                        "invalid-dialogue-part",
+                        f"Expected parts {expected_parts}, got {actual_parts}",
+                    )
 
-            speakers = {
-                turn.get("speaker")
-                for part in parts
-                if isinstance(part, dict)
-                for turn in part.get("turns", [])
-                if isinstance(turn, dict)
-            }
+            speakers = {turn.get("speaker") for turn in turns}
             if len(roles) != 2 or len(speakers) != 2 or set(roles) != speakers:
                 _add(
                     issues,
@@ -222,34 +230,43 @@ def validate_stage(
                     "speaker-count",
                     "Lesson must use exactly the two declared speakers",
                 )
-            for index, part in enumerate(parts):
-                if not isinstance(part, dict):
-                    continue
-                part_id = part.get("id", index)
-                if is_three_by_ten:
-                    turn_count = len(part.get("turns", []))
-                    if not 3 <= turn_count <= 4:
+            if not any(turn.get("speaker") == "child" for turn in turns):
+                _add(
+                    issues,
+                    f"{path}.dialogue",
+                    "missing-child-turn",
+                    "Dialogue needs a child turn",
+                )
+
+            if not is_continuous:
+                for index, part in enumerate(parts):
+                    if not isinstance(part, dict):
+                        continue
+                    part_id = part.get("id", index)
+                    if is_three_by_ten:
+                        turn_count = len(part.get("turns", []))
+                        if not 3 <= turn_count <= 4:
+                            _add(
+                                issues, f"{path}.parts.{part_id}", "part-turn-budget",
+                                f"Each part needs 3-4 turns; found {turn_count}",
+                            )
+                        part_words = _dialogue_word_count([part])
+                        if not 12 <= part_words <= 20:
+                            _add(
+                                issues, f"{path}.parts.{part_id}", "part-word-budget",
+                                f"Each part needs 12-20 spoken words; found {part_words}",
+                            )
+                    if not any(
+                        turn.get("speaker") == "child"
+                        for turn in part.get("turns", [])
+                        if isinstance(turn, dict)
+                    ):
                         _add(
-                            issues, f"{path}.parts.{part_id}", "part-turn-budget",
-                            f"Each part needs 3-4 turns; found {turn_count}",
+                            issues,
+                            f"{path}.parts.{part_id}",
+                            "missing-child-turn",
+                            "Every part needs a child turn",
                         )
-                    part_words = _dialogue_word_count([part])
-                    if not 12 <= part_words <= 20:
-                        _add(
-                            issues, f"{path}.parts.{part_id}", "part-word-budget",
-                            f"Each part needs 12-20 spoken words; found {part_words}",
-                        )
-                if not any(
-                    turn.get("speaker") == "child"
-                    for turn in part.get("turns", [])
-                    if isinstance(turn, dict)
-                ):
-                    _add(
-                        issues,
-                        f"{path}.parts.{part_id}",
-                        "missing-child-turn",
-                        "Every part needs a child turn",
-                    )
 
             replay_cards = lesson.get("replay_cards", [])
             if not isinstance(replay_cards, list) or len(replay_cards) != 2:
@@ -272,7 +289,7 @@ def validate_stage(
             reviews = lesson.get("reviews", {})
             required_reviews = REQUIRED_REVIEWS
             review_statuses = {"video_ready", "video_produced"}
-            if is_three_by_ten:
+            if is_three_by_ten or is_continuous:
                 required_reviews = REQUIRED_REVIEWS | {"character_continuity", "emotion_stability"}
                 review_statuses = review_statuses | {"language_reviewed"}
             if status in review_statuses and not all(
@@ -285,38 +302,43 @@ def validate_stage(
                     f"{status} content must pass all {len(required_reviews)} required reviews",
                 )
 
-            word_count = _dialogue_word_count(parts)
-            minimum_words, maximum_words = (45, 58) if is_three_by_ten else (35, 65)
-            if not minimum_words <= word_count <= maximum_words:
-                _add(
-                    issues,
-                    f"{path}.parts",
-                    "word-budget",
-                    f"Stage 4 dialogue needs {minimum_words}-{maximum_words} words; found {word_count}",
-                )
-            if is_three_by_ten:
-                turn_count = sum(
-                    len(part.get("turns", [])) for part in parts if isinstance(part, dict)
-                )
-                if not 9 <= turn_count <= 11:
+            if is_continuous:
+                # Continuous dialogue carries no per-turn/per-word quota; the
+                # production clips own the ~30s ceiling instead.
+                pass
+            else:
+                word_count = _dialogue_word_count(parts)
+                minimum_words, maximum_words = (45, 58) if is_three_by_ten else (35, 65)
+                if not minimum_words <= word_count <= maximum_words:
                     _add(
-                        issues, f"{path}.parts", "lesson-turn-budget",
-                        f"Lesson needs 9-11 turns; found {turn_count}",
+                        issues,
+                        f"{path}.parts",
+                        "word-budget",
+                        f"Stage 4 dialogue needs {minimum_words}-{maximum_words} words; found {word_count}",
                     )
-                child_turns = _speaker_turn_count(parts, "child")
-                if not 4 <= child_turns <= 5:
+                if is_three_by_ten:
+                    turn_count = sum(
+                        len(part.get("turns", [])) for part in parts if isinstance(part, dict)
+                    )
+                    if not 9 <= turn_count <= 11:
+                        _add(
+                            issues, f"{path}.parts", "lesson-turn-budget",
+                            f"Lesson needs 9-11 turns; found {turn_count}",
+                        )
+                    child_turns = _speaker_turn_count(parts, "child")
+                    if not 4 <= child_turns <= 5:
+                        _add(
+                            issues, f"{path}.parts", "child-turn-budget",
+                            f"Lesson needs 4-5 child turns; found {child_turns}",
+                        )
+                child_word_count = _speaker_word_count(parts, "child")
+                if not 18 <= child_word_count <= 28:
                     _add(
-                        issues, f"{path}.parts", "child-turn-budget",
-                        f"Lesson needs 4-5 child turns; found {child_turns}",
+                        issues,
+                        f"{path}.parts",
+                        "child-word-budget",
+                        f"Stage 4 child dialogue needs 18-28 words; found {child_word_count}",
                     )
-            child_word_count = _speaker_word_count(parts, "child")
-            if not 18 <= child_word_count <= 28:
-                _add(
-                    issues,
-                    f"{path}.parts",
-                    "child-word-budget",
-                    f"Stage 4 child dialogue needs 18-28 words; found {child_word_count}",
-                )
 
             for move_id in lesson.get("recycle", []):
                 if move_id not in introduced:

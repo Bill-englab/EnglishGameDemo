@@ -1,10 +1,10 @@
-Can I Build Too? — Part B (change)
-Production prompt draft | Source: curriculum/04/07-joining-cooperation/01-join-play/lesson.json | Content revision: 2
-Source SHA256: d1b93e7f51a0401ee16829ef64ce554873abae5bcad7748beb8f8613745175c8
+Can I Build Too? — Clip 2
+Production prompt draft | Source: curriculum/04/07-joining-cooperation/01-join-play/lesson.json | Content revision: 3
+Source SHA256: 9a240461132b92617d8e9406bbaae94d9f376ad7a2134308182a59b6a7bf438b
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -12,7 +12,7 @@ Bear Peer — the same small brown bear in a teal T-shirt in every peer lesson; 
 
 EMOTIONAL PERFORMANCE
 Calm, warm and regulated baseline. Both friends are interested in the building task and speak at normal play volume.
-Peer considers the offer and checks that the bridge serves his road before agreeing. Child shows a small thoughtful look while indicating a place; their finished connection earns only small smiles and a quiet nod.
+Peer considers the offer and checks that the bridge serves his road before agreeing. Child shows a small thoughtful look while explaining the connection; their finished connection earns only small smiles and a quiet nod.
 No automatic agreement, pressured smiling, shouting, jumping frenzy, triumphant bouncing, forceful grabbing or elastic facial expressions. Keep faces and bodies in their normal proportions and all gestures small.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
@@ -21,25 +21,22 @@ Two friends join wide toy road and bridge pieces on a home play mat.
 
 SCENE AND PROP CONTINUITY
 A simple home play mat, Bear Peer kneeling screen left and Child kneeling screen right within easy reach of the same toy road. Peer is the same small brown bear, age four, in his teal T-shirt; Child is the four-year-old tiger boy in his yellow T-shirt. Use exactly one modular road-and-bridge set: four wide tan straight road pieces and one low blue arched bridge piece with built-in ramps. Three tan pieces already form a short straight road pointing toward the clear space between the children; the fourth tan piece lies beside Peer's right knee, and the single blue bridge lies beside Child's right knee. The matching pieces simply meet end to end on the mat, without delicate fasteners or separate supports. No cars, additional blocks or props. Locked 16:9 medium two-shot shows both faces, hands and the entire short road.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-The three tan road pieces form a straight connected line. Peer rests his hands beside the fourth tan piece, and Child faces him with both hands beside the untouched blue bridge.
+The three tan road pieces form a straight connected line. Peer rests his hands beside the fourth tan piece with a small accepting nod, and Child faces him with both hands beside the untouched blue bridge.
 
 ACTION AND REACTIONS
-Child offers to make the bridge connection with a small gesture toward his blue piece. Peer checks whether it will connect to the road; he does not agree before Child answers. Child points along the road's continuation, leaving room for the remaining tan piece and then the bridge. Only after that clarification does Peer give a small accepting nod. Both pieces stay on the mat until the shared plan is agreed.
+During his turn Peer lifts the fourth tan piece once and places it against the open road end. Child then lifts the one blue bridge and sets its ramp flush against that new tan piece, reporting the fit only after the visible connection. These are two short placements within easy reach; no rebuilding or separate bridge assembly occurs.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Child: "I can build the bridge."
-Peer: "Will it join my road?"
-Child: "Yes, right here."
-Peer: "Okay, let's build."
+Peer: "Okay, let's build. I'll add this road piece."
+Child: "The bridge and road fit together."
 
 END FRAME
-Child lowers his pointing hand beside the blue bridge after indicating the road's continuation. Peer faces him with a small nod; three tan pieces remain connected and the fourth tan piece still lies beside Peer's right knee.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+All four tan road pieces form one connected line ending at the blue arched bridge. Both children have released the pieces and look at the finished connection with small smiles; no loose pieces or cars have appeared.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (16 spoken words)
+PACING (14 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

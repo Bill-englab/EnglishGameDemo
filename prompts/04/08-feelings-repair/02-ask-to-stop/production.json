@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
+  "content_revision": 3,
   "scene": "A broad home sofa with Dog Dad screen left and Child screen right, both seated upright and with a full cushion of available space to Dad's left. Dad is the warm brown dog with floppy ears and an olive-green T-shirt; Child is the four-year-old tiger boy in his yellow T-shirt. No props. Dad gives only one light tickle with his right hand near Child's left side, over the shirt; he never pins, grabs, chases or blocks Child. Locked 16:9 medium two-shot includes both faces, both sets of hands and enough sofa to show a clear gap. Respect for the first boundary is the central visible action.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Dad is gently playful and Child is free to show dislike without making it a performance.",
     "allowed_shift": "Child uses firm normal-volume speech and a small serious look for the boundary. Dad becomes attentive immediately, drops his hands and calmly follows the choice of space. Child can relax slightly when the distance feels comfortable while keeping a neutral face.",
     "forbidden": "No crying spectacle, rage, shame posture, forced hug or automatic smile. No screaming, tickle frenzy, frightened recoil, distorted face or body, bargaining over stopping, repeated contact, or required high five. Neither laughter nor politeness is a condition for stopping; keep gestures small and volume normal."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Dad sits left beside Child with his right hand near Child's left side and his left hand in his own lap. Child sits upright and free to move, with his hands on his own knees; the sofa space to Dad's left is clear.",
-      "action": "During his opening line Dad makes one brief light tickle with his right hand. Child gives the boundary firmly at normal volume with a small serious expression. At the first stop, Dad immediately ends all contact and lowers both hands into his own lap before Child finishes the rest of the sentence. Dad's acknowledgment is spoken only after his hands are down. Do not wait for an explanation, please, the end of laughter or the next clip; there is no second tickle or follow-up question in this part.",
+      "action": "During his opening line Dad makes one brief light tickle with his right hand. Child gives the boundary firmly at normal volume with a small serious expression. At the first stop, Dad immediately ends all contact and lowers both hands into his own lap before Child finishes the rest of the sentence. Dad's acknowledgment is spoken only after his hands are down. Do not wait for an explanation, please, the end of laughter or the next clip; there is no second tickle or follow-up question in this clip.",
       "end": "Dad sits with both hands down in his own lap and no contact with Child; the tickle has fully stopped. Child remains upright with his hands on his own knees and a small serious look, while the sofa space to Dad's left stays clear."
     },
-    "B": {
+    {
+      "turns": [3, 4],
       "start": "Dad sits with both hands down in his own lap and no contact with Child; the tickle has fully stopped. Child remains upright with his hands on his own knees and a small serious look, while the sofa space to Dad's left stays clear.",
-      "action": "With contact already ended and both hands still down, Dad offers space or a high five in an ordinary conversational voice. He does not raise a hand or approach for the high five while asking. Child chooses space. During his final response Dad slides a short distance left into the available sofa space, immediately leaving one empty cushion-width gap between them; his hands remain in his own lap. Child stays in the same seat. No further condition or unwanted touch is added.",
+      "action": "With contact already ended and both hands still down, Child thanks Dad and states his need for some space now. Dad accepts at once in an ordinary conversational voice and slides a short distance left into the available sofa space, immediately leaving one empty cushion-width gap between them; his hands remain in his own lap. Child stays in the same seat. No further condition or unwanted touch is added.",
       "end": "Dad sits farther left with both hands down in his lap and one empty cushion-width gap between him and Child. Child remains in his original right-hand seat with hands on his own knees; there is no contact."
     },
-    "C": {
+    {
+      "turns": [5, 6, 7],
       "start": "Dad sits farther left with both hands down in his lap and one empty cushion-width gap between him and Child. Child remains in his original right-hand seat with hands on his own knees; there is no contact.",
-      "action": "Child briefly indicates the existing empty gap with his left hand while specifying the space he needs, then returns that hand to his knee. Dad gives a small nod and settles back in his own place, visibly keeping the same distance. Child reports being comfortable with a small release of shoulder tension, not a required smile. Dad's closing reassurance stays brief and warm. Keep the gap and Dad's hands down throughout; do not add tickling, a high five, a funny face or a hug.",
+      "action": "Child briefly indicates the existing empty gap with his left hand while confirming that this much space is just right, then returns that hand to his knee. Dad gives a small nod, settles back in his own place, visibly keeping the same distance, and gives his brief warm reassurance that Child can tell him anytime. Child reports being comfortable with a small release of shoulder tension, not a required smile. Keep the gap and Dad's hands down throughout; do not add tickling, a high five, a funny face or a hug.",
       "end": "Dad and Child remain separated by the same empty cushion-width gap, with no contact. Dad's hands stay down in his own lap and Child's hands rest on his own knees; both have calm faces and Child sits comfortably."
     }
-  }
+  ]
 }

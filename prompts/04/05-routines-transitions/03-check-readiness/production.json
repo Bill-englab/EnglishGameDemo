@@ -1,26 +1,29 @@
 {
-  "content_revision": 4,
+  "content_revision": 5,
   "scene": "Inside a compact home entry, Dad stands screen-left and Child stands screen-right beside the closed front door. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts, cream socks and navy shoes throughout. A small open canvas carry bag with short handles rests upright on a low stool just in front of Child's left side. A single capped water bottle stands on a low little table immediately to his right, at a comfortable reach without climbing or crossing Dad. Bottle and bag form the one essential prop group; the bag is meant to stay open and has no fastening task. The bottle is visible to the camera from the start but Child initially looks into his bag. Lock a 16:9 medium two-shot wide enough for both faces, hands, the bag and the whole bottle. Keep both characters in the entry; no search montage, other room, car interior or extra bottles.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Dad makes an ordinary readiness check and gives Child time to finish packing.",
-    "allowed_shift": "A brief thoughtful look at the missing item, mild recognition on finding it and a small confident nod after packing.",
+    "allowed_shift": "A brief thoughtful look into the bag, mild recognition on finding the bottle and a small confident nod after packing.",
     "forbidden": "No nagging, impatient departure, whining, panic about the bottle, exaggerated discovery, running, frantic searching or distorted body shapes."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2, 3],
       "start": "Dad stands screen-left with empty hands. Child stands screen-right in the yellow T-shirt, navy shorts, cream socks and navy shoes, looking into the open carry bag on the stool just in front of his left side. The capped water bottle stands on the little table immediately to his right. His hands are empty and the front door is closed.",
-      "action": "Dad asks about the car ride without opening the door. Child checks the bag, then looks up to name the bottle he still needs. Dad acknowledges and waits with relaxed hands. Neither character touches the bottle or bag; no adult pressure accompanies the pause.",
+      "action": "Dad asks about the car ride without opening the door. Child checks the open bag, looks up and reports being ready except for the still-needed water bottle. Dad acknowledges and asks where it is. Child looks into the bag once more and explains that the bag is open but the bottle is not in it. Neither character touches the bottle or bag; no adult pressure accompanies the pause.",
       "end": "Dad stands screen-left and Child screen-right looking at each other with empty hands. The carry bag remains open and upright on the stool in front of Child's left side, and the capped bottle stays on the little table immediately to his right. The front door is closed and Child's outfit is unchanged."
     },
-    "B": {
+    {
+      "turns": [4, 5],
       "start": "Dad stands screen-left and Child screen-right looking at each other with empty hands. The carry bag remains open and upright on the stool in front of Child's left side, and the capped bottle stays on the little table immediately to his right. The front door is closed and Child's outfit is unchanged.",
-      "action": "Child asks for help. Dad looks toward the little table and gives its useful location clue with one small point, then lowers his hand. Child follows the clue, recognizes the visible bottle and reports finding it. He reaches with his right hand, lifts the capped bottle from the table and brings it beside his body. His left hand stays free and the bag remains on the stool.",
+      "action": "Dad looks toward the little table and gives its useful location clue with one small point, then lowers his hand. Child follows the clue, recognizes the visible bottle with mild recognition and reports finding it. He reaches with his right hand, lifts the capped bottle from the table and brings it beside his body, stating that he will pack it himself. His left hand stays free and the bag remains on the stool.",
       "end": "Child stands screen-right holding the single capped bottle in his right hand beside his body, left hand free; its former place on the little table to his right is empty. Dad stands screen-left with empty hands. The carry bag is still open on the stool in front of Child's left side, the door is closed and both outfits are unchanged."
     },
-    "C": {
+    {
+      "turns": [6, 7],
       "start": "Child stands screen-right holding the single capped bottle in his right hand beside his body, left hand free; its former place on the little table to his right is empty. Dad stands screen-left with empty hands. The carry bag is still open on the stool in front of Child's left side, the door is closed and both outfits are unchanged.",
-      "action": "Dad indicates the already open bag. Child steadies its short handles with his left hand and, while agreeing to pack, lowers the capped bottle through the wide opening with his right hand until it rests inside. He releases the bottle, then lifts the light bag from the stool by its handles with his left hand. Only after the bottle is packed does Dad make the final readiness check. Child answers with a small nod, bag held at his left side and right hand free. No zipping, shoulder-strap change or exit is needed.",
+      "action": "Child steadies the bag's short handles with his left hand and, while confirming his plan, lowers the capped bottle through the wide opening with his right hand until it rests inside. He releases the bottle, then lifts the light bag from the stool by its handles with his left hand. Only after the bottle is packed does Dad make the final readiness check. Child answers with a small confident nod and a smile, bag held at his left side and right hand free. No zipping, shoulder-strap change or exit is needed.",
       "end": "Child stands screen-right holding the open carry bag by its short handles in his left hand, the capped bottle securely inside and his right hand empty. The stool and the bottle's old table spot are empty. Dad stands screen-left with empty hands; the front door is closed and both outfits are unchanged."
     }
-  }
+  ]
 }

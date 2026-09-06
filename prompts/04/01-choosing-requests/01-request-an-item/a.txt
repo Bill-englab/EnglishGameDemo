@@ -1,10 +1,10 @@
-The Apple, Please — Part A (goal)
-Production prompt draft | Source: curriculum/04/01-choosing-requests/01-request-an-item/lesson.json | Content revision: 2
-Source SHA256: 1ee7a1769abbb59b0dcdd97d16ccecc6d3d15a71fc04b117446f41b0d04fb90a
+The Apple, Please — Clip 1
+Production prompt draft | Source: curriculum/04/01-choosing-requests/01-request-an-item/lesson.json | Content revision: 3
+Source SHA256: 7d43b5fbc4ad6a75992eb7ff9f6e845a4856c8368e1eb0cac6f9accf8db65fc6
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -12,33 +12,31 @@ Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural ad
 
 EMOTIONAL PERFORMANCE
 Calm, warm and regulated baseline. Both are attentive and relaxed, using normal family conversation volume and small, proportionate facial movements.
-Child makes a mild, matter-of-fact correction. Mom briefly recognizes an ordinary mistake, then responds warmly; the ending allows a small smile of quiet pleasure.
-No exaggerated surprise, wide-eyed shock, bouncing, raised voices, blaming or teasing. Mom's recognition stays soft, with no large gasp or body jerk.
+Child briefly accepts a small wait and adds a polite extra request. Mom responds warmly and hands over the apple; the ending allows a small smile of quiet pleasure.
+No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. The wait stays ordinary and short, with no tapping foot, sighing or body jerk.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
 SETTING
 Snack time at home.
 
 SCENE AND PROP CONTINUITY
-At a quiet home snack table, Mom sits screen-left and Child sits screen-right. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. A single red apple rests at center-right and one banana at center-left within Mom's reach. Both fruits remain visible and keep their colors and identities. Use the same locked 16:9 medium two-shot throughout; show both faces, hands and the tabletop. No extra fruit or eating while speaking.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+At a quiet home snack counter, Mom stands screen-left and Child stands screen-right. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. A single red apple rests at center-right and one banana at center-left within Mom's reach, plus one small empty plate that appears only after Child asks for it. All items remain visible and keep their colors and identities. Use the same locked 16:9 medium two-shot throughout; show both faces, hands and the countertop. No extra fruit or eating while speaking.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Mom and Child face each other across the table; the apple rests at center-right and the banana at center-left; both have empty hands.
+Mom and Child face each other across the counter; the red apple rests at center-right and the banana at center-left; both have empty hands.
 
 ACTION AND REACTIONS
-Mom indicates the two fruits with one small open-hand gesture during the offer. Child looks at the apple and then at Mom during his request, without taking either fruit. Mom acknowledges him and rests her right hand beside the banana, ready to serve. Keep the exchange fluid, with gestures during speech.
+Mom indicates the two fruits with one small open-hand gesture during her offer. Child looks at the apple and then at Mom during his request, without taking either fruit. Keep the exchange fluid, with gestures during speech.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "You look hungry. Apple or banana?"
-Child: "Can I have the apple, please?"
-Mom: "Of course."
+Mom: "You look hungry, sweetheart. Dinner isn't ready yet, but there's an apple and a banana on the counter."
+Child: "Can I have the apple, please? The red one."
 
 END FRAME
-Mom and Child face each other; the red apple remains at center-right and the banana at center-left; Mom's right hand rests beside the banana and Child waits with empty hands.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Mom and Child face each other; the red apple remains at center-right and the banana at center-left; Child waits with empty hands.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (14 spoken words)
+PACING (27 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

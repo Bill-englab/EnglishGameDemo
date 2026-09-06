@@ -337,24 +337,38 @@ def test_all_canonical_lessons_have_synced_three_part_exports():
         lesson = json.loads(path.read_text(encoding="utf-8"))
         folder = ROOT / "prompts" / path.parent.relative_to(ROOT / "curriculum")
         production = json.loads((folder / "production.json").read_text(encoding="utf-8"))
-        turns = [turn for part in lesson["parts"] for turn in part["turns"]]
-        child_turns = [turn for turn in turns if turn["speaker"] == "child"]
-        assert lesson["dialogue_contract"] == "three-by-ten-v2"
-        assert 9 <= len(turns) <= 11
-        assert 4 <= len(child_turns) <= 5
+        contract = lesson["dialogue_contract"]
+        assert contract in ("three-by-ten-v2", "continuous-dialogue-v1")
         assert production["content_revision"] == lesson["content_revision"]
         assert not module.assigns_girl_specific_garment_to_child(
             json.dumps((lesson, production), ensure_ascii=False)
         )
         rendered = module.render_prompts(lesson, production, path.relative_to(ROOT).as_posix())
-        for part, expected in rendered.items():
-            actual = (folder / f"{part}.txt").read_text(encoding="utf-8")
-            assert actual == expected
-            assert "12-15 seconds" not in actual
-            assert "extend the clip rather than" not in actual.lower()
-            turns = lesson["parts"]["abc".index(part)]["turns"]
-            dialogue = actual.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
-            assert dialogue.splitlines() == [f'{t["speaker"].title()}: "{t["line"]}"' for t in turns]
+        assert list(rendered) == ["a", "b", "c"]
+        if contract == "continuous-dialogue-v1":
+            turns = lesson["dialogue"]["turns"]
+            clips = production["clips"]
+            for index, (part, expected) in enumerate(rendered.items()):
+                actual = (folder / f"{part}.txt").read_text(encoding="utf-8")
+                assert actual == expected
+                assert "12-15 seconds" not in actual
+                assert "extend the clip rather than" not in actual.lower()
+                clip_turns = [turns[i] for i in clips[index]["turns"]]
+                dialogue = actual.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
+                assert dialogue.splitlines() == [f'{t["speaker"].title()}: "{t["line"]}"' for t in clip_turns]
+        else:
+            turns = [turn for part in lesson["parts"] for turn in part["turns"]]
+            child_turns = [turn for turn in turns if turn["speaker"] == "child"]
+            assert 9 <= len(turns) <= 11
+            assert 4 <= len(child_turns) <= 5
+            for part, expected in rendered.items():
+                actual = (folder / f"{part}.txt").read_text(encoding="utf-8")
+                assert actual == expected
+                assert "12-15 seconds" not in actual
+                assert "extend the clip rather than" not in actual.lower()
+                part_turns = lesson["parts"]["abc".index(part)]["turns"]
+                dialogue = actual.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
+                assert dialogue.splitlines() == [f'{t["speaker"].title()}: "{t["line"]}"' for t in part_turns]
 
 
 def test_every_real_lesson_serves_all_three_prompts_to_the_detail_page(tmp_path, monkeypatch):

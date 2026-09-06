@@ -976,26 +976,17 @@ function openDetail(level) {
 
   const dialogueEl = document.getElementById("detail-dialogue");
   dialogueEl.innerHTML = "";
-  const beatLabels = { goal: "Goal", change: "Something changes", resolve: "Resolve" };
-  groupDialogueByPart(level.dialogue || []).forEach(group => {
-    if (group.id) {
-      const divider = document.createElement("div");
-      divider.className = "dialogue-part";
-      divider.textContent = `Part ${group.id} · ${beatLabels[group.beat] || group.beat}`;
-      dialogueEl.appendChild(divider);
-    }
-    group.turns.forEach(turn => {
-      const t = document.createElement("div");
-      t.className = "turn " + (turn.speaker === "Child" ? "child" : "partner");
-      const who = document.createElement("div");
-      who.className = "who";
-      who.textContent = turn.speaker;
-      const bubble = document.createElement("div");
-      bubble.className = "bubble";
-      bubble.textContent = turn.line;
-      t.append(who, bubble);
-      dialogueEl.appendChild(t);
-    });
+  (level.dialogue || []).forEach(turn => {
+    const t = document.createElement("div");
+    t.className = "turn " + (turn.speaker === "Child" ? "child" : "partner");
+    const who = document.createElement("div");
+    who.className = "who";
+    who.textContent = turn.speaker;
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = turn.line;
+    t.append(who, bubble);
+    dialogueEl.appendChild(t);
   });
   dialogueEl.style.display = (level.dialogue && level.dialogue.length) ? "" : "none";
 

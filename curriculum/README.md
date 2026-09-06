@@ -1,6 +1,6 @@
 # 课程创作源（新版）
 
-> 当前30课仍按 `three-by-ten-v2` 运行。下一轮内容重写必须先遵循[连续对话内容与三段视频生产规范](../docs/specs/2026-09-06-continuous-dialogue-content-design.md)：Lesson 保存一段完整自然对话，三个约10秒 clip 只在 production 中切分。本文下方的 A/B/C 配额仅描述当前实现，不再是未来创作目标。
+> 30/30 课已于 2026-09-06 全部迁移到 `continuous-dialogue-v1`：每个 Lesson 在 `dialogue.turns` 保存一段完整自然对话，`core/stretch/repair` 三字段已删除，三个约 10 秒 clip 只在 `production.json` 的 `clips` 中切分。写作风格遵循[连续对话内容与三段视频生产规范](../docs/specs/2026-09-06-continuous-dialogue-content-design.md)与[内容生成风格手册](../docs/specs/2026-09-06-dialogue-authoring-style.md)。本文下方的历史 A/B/C 配额描述仅作旧版参考。
 
 `curriculum/` 是分年龄、可审查、可持续演进的新版课程唯一创作源。当前首先建设 `04/`：目标是让已有较好英文理解力的 4 岁非母语孩子，从“听懂并作出反应”逐步走到“能用合适句式参与日常对话”。
 

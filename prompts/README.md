@@ -1,6 +1,6 @@
 # Video Prompts — 三段式视频生成提示词
 
-> 当前90份 A/B/C 文件仍对应 `three-by-ten-v2`。下一轮将按[连续对话内容与三段视频生产规范](../docs/specs/2026-09-06-continuous-dialogue-content-design.md)改为“完整 canonical 对话＋production 中三个灵活 clip”；在样板课获批并实施前，以下内容继续准确描述现有提示词和导出工具。
+> 2026-09-06 起全部 30 课已迁移到 `continuous-dialogue-v1`：canonical 台词是一段完整对话（`lesson.json` 的 `dialogue.turns`），`production.json` 用 `clips[3]` 按话轮索引切出三个约 10 秒生成任务，导出仍写为每课三份 `a/b/c.txt`（每份对应一个 clip，无逐段词数配额）。写作风格见[内容生成风格手册](../docs/specs/2026-09-06-dialogue-authoring-style.md)，切分规则见[连续对话内容与三段视频生产规范](../docs/specs/2026-09-06-continuous-dialogue-content-design.md)。
 
 新版 Stage 04 已提供 **30 课 × A/B/C 三段 = 90 份**独立提示词。每份都含本段完整台词、固定角色、场景、起始状态、动作与反应、结束状态、语音和时长约束。
 

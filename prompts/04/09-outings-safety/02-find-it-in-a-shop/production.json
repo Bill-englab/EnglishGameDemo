@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
+  "content_revision": 3,
   "scene": "A simple, quiet grocery setting with Mom screen left and Child screen right, standing together beside one short shelf unit. Use a locked 16:9 medium-wide two-shot showing both faces, Child's knees, the bottom shelf and basket. There is exactly one red pasta bag: a small upright packet with a clear rectangular window showing short yellow pasta tubes. It begins on the bottom shelf at Child's knee height, immediately to his right and always visible to the camera. There are no other packages, aisle signs, hidden shelves, workers or shoppers. Mom wears her coral cardigan over a cream top; Child is the same four-year-old tiger boy in his yellow T-shirt, he/him if needed. Mom's right hand holds the basket's rigid handle, keeping the open basket level beside her right hip at Child's waist height; it begins empty. Her left hand rests at her side. Child can grasp the bag with a shallow knee bend and place it directly into the nearby basket without a step, climb or stretch. Preserve the same package color, window, pasta shape and basket throughout.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Mom and Child are focused on a small shared shopping task and speak at an ordinary conversational volume.",
     "allowed_shift": "Child's eyes follow the shelf clue, then show mild recognition of the red bag and a small sense of competence during the transfer. Mom's acknowledgment is quiet and matter-of-fact.",
     "forbidden": "No exaggerated discovery, squealing, bouncing, frantic pointing, package grabbing, racing through aisles, climbing or pulling away from Mom. Do not turn successful shopping into a loud celebration."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Mom and Child stand together beside the shelf, looking at each other; the red pasta bag stands on the bottom shelf and Mom holds the empty basket level in her right hand beside her right hip. Child's hands are at his sides.",
       "action": "Mom names the dinner need, and Child asks her where to look before scanning the shelf. Mom gives the bottom-shelf clue with a small glance toward it, keeping the basket steady in her right hand. Child follows her gaze to the already visible red packet. The item was never concealed; the question directs his search. Neither character steps away or touches the bag yet.",
       "end": "Mom and Child look toward the red pasta bag on the bottom shelf; Mom holds the empty basket level in her right hand beside her right hip, and Child's hands remain at his sides."
     },
-    "B": {
-      "start": "Mom and Child look toward the red pasta bag on the bottom shelf; Mom holds the empty basket level in her right hand beside her right hip, and Child's hands remain at his sides.",
-      "action": "Child makes one small right-hand indication toward the red bag and its clear window while asking for confirmation. Mom looks at that same packet and confirms it. Child observes that it is within reach, then lets his right hand return to his side. Leave the package on the shelf until the next part; no other item is introduced and Mom does not pick it up.",
+    {
+      "turns": [3, 4, 5],
+      "start": "Mom and Child look toward the red pasta bag on the bottom shelf; Mom holds the empty basket level in her right hand beside her right hip, and Child's hands remain at their sides.",
+      "action": "Child makes one small right-hand indication toward the red bag and its clear window while asking for confirmation. Mom looks at that same packet and confirms it. Child observes that he can reach the bottom shelf by himself, then lets his right hand return to his side. Leave the package on the shelf until the next clip; no other item is introduced and Mom does not pick it up.",
       "end": "The confirmed red pasta bag remains on the bottom shelf; Mom holds the empty basket level in her right hand beside her right hip, and Child stands beside her with both hands at his sides."
     },
-    "C": {
+    {
+      "turns": [6, 7],
       "start": "The confirmed red pasta bag remains on the bottom shelf; Mom holds the empty basket level in her right hand beside her right hip, and Child stands beside her with both hands at his sides.",
-      "action": "After Mom invites the transfer, Child makes one shallow knee bend, takes the single red bag with both hands and places it inside the basket during his reply. Mom holds the basket steady at its established height and waits until the bag is inside before acknowledging the completed task. Child releases the bag and returns his hands to his sides. Keep the action small and concurrent with the exchange; no step, handoff to Mom or additional item is needed.",
+      "action": "After Mom invites the transfer, Child makes one shallow knee bend, takes the single red bag with both hands and places it inside the basket during his reply, connecting it back to tonight's dinner. Mom holds the basket steady at its established height and waits until the bag is inside before acknowledging the completed task. Child releases the bag and returns his hands to his sides. Keep the action small and concurrent with the exchange; no step, handoff to Mom or additional item is needed.",
       "end": "The same red pasta bag is inside the basket in Mom's right hand; the bottom shelf is empty, and Child stands beside Mom with both hands at his sides."
     }
-  }
+  ]
 }

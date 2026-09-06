@@ -3,45 +3,24 @@
   "title_zh": "我改要水",
   "can_do": "在行动尚未完成前自然地改变选择。",
   "conversation_move": {"id": "change-choice", "label": "change a choice"},
-  "trigger": "Mom is about to fill one empty cup with milk when Child realizes he wants water and changes his choice before pouring.",
-  "core_response": "Actually, can I have water instead?",
-  "stretch_response": "I changed my mind. Can I have water instead?",
-  "repair_response": "Water, please, not milk.",
+  "trigger": "Mom is about to pour milk when Child changes his choice to water, and the park race he tells her about explains why.",
   "recycle": ["request-item", "specify-choice"],
   "roles": ["child", "mom"],
   "setting": "At the kitchen table.",
   "essential_props": ["milk and water pitchers beside one empty transparent cup"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {
-      "id": "A",
-      "beat": "goal",
-      "turns": [
-        {"speaker": "mom", "line": "Milk or water in your cup?", "kind": "input"},
-        {"speaker": "child", "line": "Can I have milk, please?", "kind": "input"},
-        {"speaker": "mom", "line": "Sure. I'll pour some milk.", "kind": "input"}
-      ]
-    },
-    {
-      "id": "B",
-      "beat": "change",
-      "turns": [
-        {"speaker": "mom", "line": "Just a little?", "kind": "input"},
-        {"speaker": "child", "line": "Actually, can I have water instead?", "kind": "core"},
-        {"speaker": "mom", "line": "Water, not milk?", "kind": "input"},
-        {"speaker": "child", "line": "Yes, water, please.", "kind": "input"}
-      ]
-    },
-    {
-      "id": "C",
-      "beat": "resolve",
-      "turns": [
-        {"speaker": "mom", "line": "Here's your water. Is that enough?", "kind": "action"},
-        {"speaker": "child", "line": "Yes, thank you. That's enough for me.", "kind": "input"},
-        {"speaker": "mom", "line": "You're welcome.", "kind": "input"}
-      ]
-    }
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "mom", "line": "Dinner's nearly ready. What would you like to drink?"},
+      {"speaker": "child", "line": "Milk, please."},
+      {"speaker": "mom", "line": "Milk it is."},
+      {"speaker": "child", "line": "Actually, can I have water instead? I ran and ran today."},
+      {"speaker": "mom", "line": "Where did you run?"},
+      {"speaker": "child", "line": "At the park with Dad. We raced to the big tree."},
+      {"speaker": "mom", "line": "Water for the champion, then."},
+      {"speaker": "child", "line": "Thank you. A big cup for one thirsty tiger."}
+    ]
+  },
   "replay_cards": [
     {"title": "Choose a picnic drink", "setting": "Packing a drink bottle before going outside", "change": "Child first picks milk but wants water before Dad fills the still-empty bottle", "challenge": "Child says, 'I changed my mind. Can I have water instead?' Dad pauses to check which drink he should pack; Child clarifies, 'Water, please, not milk.' Dad confirms the new choice, fills the bottle with water, and puts it in his picnic bag."},
     {"title": "Switch the bedtime book", "setting": "Before the story begins", "change": "Change from the train book to the bear book while both books are still available", "challenge": "Dad opens the train book but has not begun reading. Child asks for the bear book instead. Dad checks the new choice, Child confirms, and they close the train book and begin the bear story."}
@@ -49,5 +28,5 @@
   "parent_support": ["Keep the cup visibly empty while he chooses; pause with the pitcher upright before pouring.", "Treat changing his mind as ordinary. Stop the first action, confirm his new choice, and only then pour.", "Accept the choice in a warm normal voice. Do not pour milk just to create a reversal, require a reason, or turn the change into a performance of surprise."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

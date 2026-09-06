@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "One continuous after-school conversation at home. Dad stays seated screen left and Child stays seated screen right, facing each other in a locked 16:9 medium two-shot. No essential props; both have empty hands and the space between them is clear. Painting and washing brushes happened earlier at school. The red bus is a detail in the remembered picture, not a vehicle or prop. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles or generated school materials. Small illustrative hand gestures only; remain in this home conversation without a time jump.",
+  "content_revision": 3,
+  "scene": "One continuous after-school conversation at home. Dad stays seated screen left and Child stays seated screen right, facing each other in a locked 16:9 medium two-shot. No essential props; both have empty hands and the space between them is clear. Painting the sun and hunting for bugs happened earlier at school. The yellow-and-orange sun and the small bug under a leaf are details in Child's remembered day, not visible objects. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles or generated school materials. Small illustrative hand gestures only; remain in this home conversation without a time jump.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline; Dad is interested in Child's school experience and Child tells it at ordinary family conversation volume.",
-    "allowed_shift": "Child may pause briefly to recall the sequence and show mild pleasure about the picture. Dad responds with a small interested nod. Gestures stay short and relaxed.",
-    "forbidden": "No excited art reveal, dramatic memory struggle, quiz posture, exaggerated applause, sudden bus animation or noisy washing performance. No facial stretching or large arm movements."
+    "allowed_shift": "Child may pause briefly to recall the sequence and show mild pleasure about the bright sun and the bug find. Dad responds with a small interested nod and one playful closing line. Gestures stay short and relaxed.",
+    "forbidden": "No excited art reveal, dramatic memory struggle, quiz posture, exaggerated applause, sudden bug animation or noisy hunting performance. No facial stretching or large arm movements."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1],
       "start": "Dad remains seated screen left and Child seated screen right at home, facing each other with empty hands near their laps and no objects between them.",
-      "action": "Dad invites the school account. Child makes one small empty-hand mark for the painting event. Dad's short continuation gives him room to name washing the brushes; Child makes a second small mark beside the first. Do not mime a full painting or washing routine, summon art supplies or move into a classroom.",
+      "action": "Dad invites the school account. Child makes one small empty-hand circle for the painted sun and a second small gesture toward the outside play, marking first and then within his answer. Do not mime a full painting routine, summon art supplies or move into a classroom.",
       "end": "Dad and Child remain seated in the same home positions with empty hands lowered near their laps after Child's two small sequence gestures."
     },
-    "B": {
+    {
+      "turns": [2, 3],
       "start": "Dad and Child remain seated in the same home positions with empty hands lowered near their laps after Child's two small sequence gestures.",
-      "action": "Dad asks what Child painted. Child suggests the bus's shape with a short open-hand gesture close to his body while giving the one picture detail. Dad shows interest in seeing the picture later. Neither fetches a picture or points offscreen; no bus, drawing, teacher or brush appears.",
-      "end": "Dad and Child remain seated at home with empty hands relaxed near their laps; Dad's attention stays on Child after the bus detail."
+      "action": "Dad asks what Child painted the sun with. Child names yellow and orange and explains with so that it looked really bright, suggesting the colors with one small open-hand gesture close to his body. Dad listens with a small interested nod. Neither fetches a picture or points offscreen; no sun, drawing, teacher or brush appears.",
+      "end": "Dad and Child remain seated at home with empty hands relaxed near their laps; Dad's attention stays on Child after the color detail."
     },
-    "C": {
-      "start": "Dad and Child remain seated at home with empty hands relaxed near their laps; Dad's attention stays on Child after the bus detail.",
-      "action": "Dad restates painting followed by washing the brushes, showing that he understood. Child gives one small confirming nod during his reply. Dad acknowledges the account and settles. Child does not repeat the sequence, demonstrate school activities or leave to retrieve the picture.",
-      "end": "Dad and Child remain seated in the unchanged home setting with empty hands near their laps, relaxed after agreeing on the two-event account."
+    {
+      "turns": [4, 5, 6],
+      "start": "Dad and Child remain seated at home with empty hands relaxed near their laps; Dad's attention stays on Child after the color detail.",
+      "action": "Dad asks what happened outside. Child recalls looking for bugs and finding a small one under a leaf, with one small peeking hand gesture near the floor. Dad responds with his playful bug-hunter line and invites the story again at dinner, smiling warmly. Child does not repeat the sequence, demonstrate hunting or leave to retrieve anything; the account closes in conversation.",
+      "end": "Dad and Child remain seated in the unchanged home setting with empty hands near their laps, relaxed and smiling slightly after the complete two-event account."
     }
-  }
+  ]
 }

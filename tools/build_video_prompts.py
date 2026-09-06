@@ -15,7 +15,7 @@ APP_ROOT = Path(__file__).resolve().parents[1] / "app"
 if str(APP_ROOT) not in sys.path:
     sys.path.insert(0, str(APP_ROOT))
 
-from curriculum import THREE_BY_TEN_CONTRACT, _dialogue_word_count
+from curriculum import THREE_BY_TEN_CONTRACT, CONTINUOUS_DIALOGUE_CONTRACT, _dialogue_word_count
 
 
 CAST = {
@@ -283,9 +283,126 @@ def _reject_unsafe_positive_direction(text, name):
             )
 
 
+def _render_continuous(lesson, production, source):
+    """Render three clip prompts for a continuous-dialogue-v1 lesson.
+
+    The canonical lesson stores one uninterrupted ``dialogue.turns`` sequence;
+    ``production.clips`` (exactly three) splits it into ~10s generation tasks by
+    referencing turn indices. Keys stay ``a/b/c`` so the existing prompt files
+    and the /api/prompts route keep working unchanged.
+    """
+    revision = lesson.get("content_revision")
+    production_revision = production.get("content_revision")
+    if type(revision) is not int or revision < 1 or type(production_revision) is not int or production_revision != revision:
+        raise ValueError("production content_revision must match source revision")
+
+    turns = lesson.get("dialogue", {}).get("turns", [])
+    if not isinstance(turns, list) or not turns:
+        raise ValueError("continuous dialogue needs at least one spoken turn")
+    clips = production.get("clips")
+    if not isinstance(clips, list) or len(clips) != 3:
+        raise ValueError("exactly three clips are required")
+
+    roles = lesson.get("roles", [])
+    if len(roles) != 2 or len(set(roles)) != 2 or "child" not in roles or any(r not in CAST for r in roles):
+        raise ValueError("exactly child and one known partner role are required")
+
+    covered = []
+    for index, clip in enumerate(clips):
+        if not isinstance(clip, dict):
+            raise ValueError(f"clip {index} must be an object")
+        for field in ("start", "action", "end"):
+            _required_text(clip.get(field), f"clip {index}.{field}")
+        for turn_index in clip.get("turns", []):
+            if not isinstance(turn_index, int) or not 0 <= turn_index < len(turns):
+                raise ValueError(f"clip {index} turn index {turn_index} out of range")
+            covered.append(turn_index)
+    if covered != list(range(len(turns))):
+        raise ValueError("clips must cover every turn exactly once, in order")
+
+    for turn in turns:
+        if turn.get("speaker") not in roles:
+            raise ValueError("spoken role not in lesson cast")
+        _required_text(turn.get("line"), "dialogue line")
+
+    setting = _required_text(lesson.get("setting"), "setting")
+    if any(
+        assigns_girl_specific_garment_to_child(text)
+        for text in _text_values((lesson, production))
+    ):
+        raise ValueError("child-garment-assignment: girl-specific garment assigned to Child")
+    scene = _required_text(production.get("scene"), "scene")
+    emotion = production.get("emotion")
+    if not isinstance(emotion, dict):
+        raise ValueError("production-emotion: emotion must be an object")
+    emotion_lines = [
+        _required_text(emotion.get(field), f"production-emotion.{field}")
+        for field in ("baseline", "allowed_shift", "forbidden")
+    ]
+    _reject_unsafe_positive_direction(setting, "setting")
+    _reject_unsafe_positive_direction(scene, "scene")
+    for field, line in zip(("baseline", "allowed_shift", "forbidden"), emotion_lines):
+        _reject_unsafe_positive_direction(line, f"emotion.{field}")
+    emotion_block = "EMOTIONAL PERFORMANCE\n" + "\n".join(emotion_lines) + (
+        "\nNo screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.\n\n"
+    )
+
+    digest = hashlib.sha256(json.dumps(lesson, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+    cast = "\n".join(CAST[role] for role in roles)
+
+    result = {}
+    for clip_index, clip in enumerate(clips):
+        key = "abc"[clip_index]
+        clip_turns = [turns[i] for i in clip["turns"]]
+        word_count = sum(len(str(t["line"]).split()) for t in clip_turns)
+        speech = "\n".join(f'{t["speaker"].title()}: "{t["line"]}"' for t in clip_turns)
+        pacing = (
+            "Fit this clip within about 10 seconds at a natural conversational pace. "
+            "Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip."
+        )
+        result[key] = f"""{lesson['title']} — Clip {clip_index + 1}
+Production prompt draft | Source: {source} | Content revision: {revision}
+Source SHA256: {digest}
+The source/revision above are production metadata, not spoken words or on-screen text.
+
+VIDEO AND SOUND
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+
+FIXED CAST (only these two)
+{cast}
+
+{emotion_block}SETTING
+{setting}
+
+SCENE AND PROP CONTINUITY
+{scene}
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
+
+START FRAME
+{clip['start']}
+
+ACTION AND REACTIONS
+{clip['action']}
+
+SPOKEN DIALOGUE (verbatim, in order):
+{speech}
+
+END FRAME
+{clip['end']}
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
+
+PACING ({word_count} spoken words)
+{pacing}
+Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.
+"""
+    return result
+
+
 def render_prompts(lesson, production, source):
     """Return a/b/c text, rejecting stale revisions and discontinuous staging."""
     dialogue_contract = lesson.get("dialogue_contract")
+    if dialogue_contract == CONTINUOUS_DIALOGUE_CONTRACT:
+        return _render_continuous(lesson, production, source)
     if dialogue_contract not in (None, "", THREE_BY_TEN_CONTRACT):
         raise ValueError(f"dialogue-contract: unsupported {dialogue_contract!r}")
     is_three_by_ten = dialogue_contract == THREE_BY_TEN_CONTRACT

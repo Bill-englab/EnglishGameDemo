@@ -3,46 +3,22 @@
   "title_zh": "恐龙上衣",
   "can_do": "用颜色或明显特征说清楚自己要哪一个。",
   "conversation_move": {"id": "specify-choice", "label": "specify a choice"},
-  "trigger": "Dad offers two red shirts, one striped and one with a dinosaur, so color alone does not identify Child's choice.",
-  "core_response": "I want the red one.",
-  "stretch_response": "The one with the dinosaur, please.",
-  "repair_response": "No, the one with the stars.",
+  "trigger": "Dad offers two red shirts, one striped and one with a dinosaur, so color alone does not identify Child's choice and he must name the pattern.",
   "recycle": ["request-item"],
   "roles": ["child", "dad"],
   "setting": "Getting dressed at home.",
   "essential_props": ["two red shirts: one striped and one with a dinosaur"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {
-      "id": "A",
-      "beat": "goal",
-      "turns": [
-        {"speaker": "dad", "line": "Time to choose a shirt. Which one do you want?", "kind": "input"},
-        {"speaker": "child", "line": "I want the red one.", "kind": "core"},
-        {"speaker": "dad", "line": "Both shirts are red.", "kind": "input"}
-      ]
-    },
-    {
-      "id": "B",
-      "beat": "change",
-      "turns": [
-        {"speaker": "dad", "line": "Stripes or dinosaurs?", "kind": "input"},
-        {"speaker": "child", "line": "The one with the dinosaur, please.", "kind": "stretch"},
-        {"speaker": "dad", "line": "This one?", "kind": "input"},
-        {"speaker": "child", "line": "Yes, that one!", "kind": "input"}
-      ]
-    },
-    {
-      "id": "C",
-      "beat": "resolve",
-      "turns": [
-        {"speaker": "dad", "line": "Here you go.", "kind": "action"},
-        {"speaker": "child", "line": "Thanks, Dad. That's the one I wanted.", "kind": "input"},
-        {"speaker": "dad", "line": "Ready to put it on?", "kind": "input"},
-        {"speaker": "child", "line": "Yes, I'm ready.", "kind": "action"}
-      ]
-    }
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "dad", "line": "Time to get dressed. Two shirts are ready."},
+      {"speaker": "child", "line": "I want the dinosaur one, please."},
+      {"speaker": "dad", "line": "Both are red. Which one do you mean?"},
+      {"speaker": "child", "line": "The one with the big dinosaur. The other one only has stripes."},
+      {"speaker": "dad", "line": "Good pick. Here you go."},
+      {"speaker": "child", "line": "Thank you. I'll wear it right away."}
+    ]
+  },
   "replay_cards": [
     {"title": "Pick a pajama top", "setting": "Getting ready for bed", "change": "Choose between two blue pajama tops, one with stars and one with stripes", "challenge": "Child asks, 'Can I have the blue one, please?' Dad checks the striped top. Child says, 'No, the one with the stars.' Dad confirms the star pattern, hands him that top, and helps him get ready to change."},
     {"title": "Find the cup", "setting": "At the kitchen table", "change": "Choose between two green cups, one with a handle and one without", "challenge": "Child requests the green cup. Mom asks which one; he identifies the handle. Mom points to that cup for confirmation, then hands it to him for his drink."}
@@ -50,5 +26,5 @@
   "parent_support": ["Show only the two red choices. If his color choice still fits both, ask about their visible patterns.", "Accept any detail that truly identifies the object, then check once before handing it over.", "Keep the yellow T-shirt on during the recorded scene; he receives the dinosaur shirt and agrees to get dressed next. A small smile or nod is enough."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

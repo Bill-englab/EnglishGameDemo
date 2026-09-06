@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
+  "content_revision": 3,
   "scene": "After quiet play at the home table, Mom sits screen-left and Child sits screen-right. Child is the four-year-old tiger boy in his unchanged yellow T-shirt and blue shorts. One tray at table-center holds one blue cup already filled with drinking water and one small snack on a plain dish. The cup is nearest Child; no pouring, extra cup, temperature choice or additional food is needed. A locked 16:9 medium two-shot shows both faces, hands and the tray. Mom makes the water available immediately when he reports thirst; it is never withheld for a polite or complete sentence.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline at ordinary family conversation volume. Both are settled after quiet play, with small natural gestures.",
-    "allowed_shift": "Child matter-of-factly notices thirst and specifies water first. After a comfortable sip he shows quiet relief; Mom accepts his preference without pressing the snack.",
+    "allowed_shift": "Child matter-of-factly notices thirst and specifies water first. After a comfortable sip he shows quiet relief; Mom accepts his plan without pressing the snack.",
     "forbidden": "No breathless arrival, frantic reaching, exaggerated thirst, gulping, bouncing, emotional bargaining or triumphant reaction to the drink. No distorted faces or bodies; never make Child earn water through speech."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1],
       "start": "Mom sits left and Child sits right at the table with empty hands. A single tray rests at center, holding the filled blue water cup nearest Child and the untouched snack on its plain dish farther left.",
-      "action": "Mom suggests a break with a small open-hand gesture. As soon as Child states thirst, Mom immediately acknowledges him, slides the tray slightly toward him and offers the already available water and snack. Keep the cup within his easy reach; do not hold it away while awaiting another line.",
+      "action": "Mom suggests a break with a small open-hand gesture and names what is on the tray. As soon as Child states thirst and asks for the water first, Mom immediately slides the tray slightly toward him. Keep the cup within his easy reach; do not hold it away while awaiting another line.",
       "end": "The tray is within Child's easy reach. The filled blue cup remains nearest him and the snack stays on the dish to its left; Mom's open right hand rests beside the cup and Child's hands are empty."
     },
-    "B": {
+    {
+      "turns": [2, 3],
       "start": "The tray is within Child's easy reach. The filled blue cup remains nearest him and the snack stays on the dish to its left; Mom's open right hand rests beside the cup and Child's hands are empty.",
-      "action": "Child indicates the cup with one small gesture while saying what he wants first. Mom promptly lifts the cup with her right hand and offers it low across the short gap during her response. Child receives it in both hands before thanking her. His mouth stays clear while he speaks; he then prepares to sip without a second permission request. Leave the snack untouched.",
-      "end": "Child holds the single blue cup in both hands just below his mouth, ready for a small sip. Mom's hands are empty. The tray and untouched snack remain on the table."
+      "action": "Mom promptly lifts the cup with her right hand and offers it low across the short gap during her response. Child receives it in both hands before thanking her, then states his small-drink plan. His mouth stays clear while he speaks; he then takes one comfortable sip without a second permission request. Leave the snack untouched.",
+      "end": "Child holds the single blue cup in both hands just below his chin after one comfortable sip. Mom's hands are empty. The tray and untouched snack remain on the table."
     },
-    "C": {
-      "start": "Child holds the single blue cup in both hands just below his mouth, ready for a small sip. Mom's hands are empty. The tray and untouched snack remain on the table.",
-      "action": "While Mom briefly mentions the available snack, Child takes one comfortable sip without speaking. He lowers the cup, finishes swallowing and then reports that his thirst is met. Mom accepts that response and leaves the snack on the tray, with no further offer or pressure. Keep drinking and speaking separate and use only a small relieved expression.",
+    {
+      "turns": [4, 5],
+      "start": "Child holds the single blue cup in both hands just below his chin after one comfortable sip. Mom's hands are empty. The tray and untouched snack remain on the table.",
+      "action": "Mom settles back with a patient posture during her short line. Child takes one more comfortable sip, lowers the cup and reports that his thirst is met, glancing once at the snack and leaving it on the tray for later. Mom accepts the plan with a warm nod and no further offer or pressure. Keep drinking and speaking separate and use only a small relieved expression.",
       "end": "Child sits comfortably holding the blue cup below his chin in both hands after drinking. Mom's hands remain empty; the snack stays untouched on its dish on the tray. The water need is met and the quiet break continues."
     }
-  }
+  ]
 }

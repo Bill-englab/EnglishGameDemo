@@ -3,33 +3,24 @@
   "title_zh": "在床底下吗",
   "can_do": "用位置词提出能实际检查的猜测，排除一个位置后再换地方，并说出找到的位置。",
   "conversation_move": {"id": "check-location", "label": "check a possible location"},
-  "trigger": "Child has one sock on but cannot find the other; Mom helps him look beside the bed.",
-  "core_response": "Is it under the bed?",
-  "stretch_response": "Maybe it's on the chair.",
-  "repair_response": "No, I mean in the pocket.",
+  "trigger": "Child has one sock on but cannot find the other; he checks under the bed first, then guesses the chair.",
   "recycle": ["ask-location", "repair-meaning"],
   "roles": ["child", "mom"],
   "setting": "Finding the other sock while getting ready in the bedroom.",
   "essential_props": ["one pair of blue socks with yellow toes, with one worn and one missing"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {"id": "A", "beat": "goal", "turns": [
-      {"speaker": "mom", "line": "We're missing your other sock.", "kind": "input"},
-      {"speaker": "child", "line": "Is it under the bed?", "kind": "core"},
-      {"speaker": "mom", "line": "Let's have a look.", "kind": "action"}
-    ]},
-    {"id": "B", "beat": "change", "turns": [
-      {"speaker": "mom", "line": "No, it's not under here.", "kind": "input"},
-      {"speaker": "child", "line": "Maybe it's on the chair.", "kind": "stretch"},
-      {"speaker": "mom", "line": "Let's check the seat.", "kind": "action"}
-    ]},
-    {"id": "C", "beat": "resolve", "turns": [
-      {"speaker": "child", "line": "It's here, on the chair!", "kind": "core"},
-      {"speaker": "mom", "line": "There's your missing blue sock.", "kind": "input"},
-      {"speaker": "child", "line": "I've got it now.", "kind": "action"},
-      {"speaker": "mom", "line": "Now you have both socks.", "kind": "input"}
-    ]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "mom", "line": "One sock is on, one sock is missing."},
+      {"speaker": "child", "line": "Is it under the bed?"},
+      {"speaker": "mom", "line": "Let's have a look."},
+      {"speaker": "child", "line": "Not under the bed. Maybe it's on the chair."},
+      {"speaker": "mom", "line": "Good thinking. Check the seat."},
+      {"speaker": "child", "line": "Found it, on the chair! I sat right on it."},
+      {"speaker": "mom", "line": "There's your blue sock with yellow toes."},
+      {"speaker": "child", "line": "Now I have both socks. Ready for shoes."}
+    ]
+  },
   "replay_cards": [
     {
       "title": "Check the coat pocket",
@@ -50,5 +41,5 @@
   ],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

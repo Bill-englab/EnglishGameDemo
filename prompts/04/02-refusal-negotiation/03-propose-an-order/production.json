@@ -1,26 +1,29 @@
 {
-  "content_revision": 3,
-  "scene": "In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. Exactly two large blocks lie at table-left and two toy cars at table-right; one item in each group is within easy reach of each person. A single open divided storage box sits at center-back within both characters' reach, with an empty left compartment for blocks and an empty right compartment for cars. This is one small toy-cleanup arrangement. Locked 16:9 medium two-shot shows both faces, hands and all four toys. Keep counts and compartments stable; no extra toys, cooking scene or wardrobe change.",
+  "content_revision": 4,
+  "scene": "In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low table. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. Exactly two large blocks lie at table-left, a red toy car and a blue toy car at table-right. One open blue storage box for blocks and one open red storage box for cars sit at center-back within both characters' reach. This is one small toy-cleanup arrangement. Locked 16:9 medium two-shot shows both faces, hands and all four toys. Keep counts, colors and box identities stable; no extra toys, cooking scene or wardrobe change.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Dad and Child cooperate at normal family conversation volume with relaxed bodies and small gestures.",
     "allowed_shift": "Child thoughtfully proposes a different order. Dad checks and accepts it because both groups will still be put away. Child takes quiet initiative for the second group after the first is finished.",
     "forbidden": "No whining spectacle, shouting, stomping, arm flinging, angry distortion, victory posing or exaggerated excitement. No scolding, nagging or unexplained adult capitulation; neither cleanup job is dropped."
   },
-  "parts": {
-    "A": {
-      "start": "Two blocks lie at table-left, two cars at table-right, and the empty divided box at center-back; Dad and Child have empty hands.",
-      "action": "Dad indicates cars and then blocks with one small sequential gesture during his cleanup suggestion. Child proposes reversing the order while pointing gently to the blocks. Dad checks the proposed first group. Leave all four toys on the table until the full order is agreed.",
-      "end": "Both blocks and both cars remain outside the empty divided box in their original groups; Dad and Child look toward the blocks at table-left with empty hands."
+  "clips": [
+    {
+      "turns": [0, 1, 2],
+      "start": "Two blocks lie at table-left, the red and blue cars at table-right, and the empty blue and red boxes at center-back; Dad and Child have empty hands.",
+      "action": "Dad indicates the cars and then the blocks with one small sequential gesture during his cleanup suggestion. Child proposes reversing the order while gesturing gently toward the bigger blocks. Dad accepts the new order and asks which box holds the blocks. Leave all four toys on the table until the boxes are identified.",
+      "end": "Both blocks and both cars remain on the table in their original groups; both boxes stand empty at center-back; Dad and Child look toward the blocks at table-left with empty hands."
     },
-    "B": {
-      "start": "Both blocks and both cars remain outside the empty divided box in their original groups; Dad and Child look toward the blocks at table-left with empty hands.",
-      "action": "Child confirms that the cars will follow. Dad accepts, then lifts his nearest block toward the left compartment. Child takes the other block during his final turn and places it into the same compartment; Dad lowers his block just after Child's, finishing the group. Each moves only one block. Both cars remain untouched on the right, preserving the agreed order.",
-      "end": "Both blocks rest in the box's left compartment; both cars remain at table-right and the right compartment is empty; Dad has just released the last block, and Child has empty hands."
+    {
+      "turns": [3, 4, 5],
+      "start": "Both blocks and both cars remain on the table in their original groups; both boxes stand empty at center-back; Dad and Child look toward the blocks at table-left with empty hands.",
+      "action": "Child points once to the blue box while naming both box jobs — blue for blocks, red for cars. Dad approves the plan and invites the blocks. Child lifts one block with each hand in turn and places both into the blue box, finishing the group before reporting it done and naming the red car as his next job. The cars remain untouched on the right, preserving the agreed order.",
+      "end": "Both blocks rest inside the blue box; the red and blue cars remain at table-right and the red box is empty; Child has just placed the second block and Dad has empty hands."
     },
-    "C": {
-      "start": "Both blocks rest in the box's left compartment; both cars remain at table-right and the right compartment is empty; Dad has just released the last block, and Child has empty hands.",
-      "action": "Dad withdraws his empty hand during his observation that the blocks are finished. Child independently initiates the car group and gestures toward it. Dad takes the car nearest him and places it into the right compartment during his turn. Child takes the remaining car and places it beside Dad's during his final turn. Keep the two small transfers continuous with speech and show both groups physically stored by the end.",
-      "end": "Both blocks are stored in the left compartment and both cars in the right; the table is clear of loose toys and Dad and Child have empty hands."
+    {
+      "turns": [6, 7],
+      "start": "Both blocks rest inside the blue box; the red and blue cars remain at table-right and the red box is empty; Child has just placed the second block and Dad has empty hands.",
+      "action": "Dad takes the blue car and places it into the red box during his turn. Child takes the remaining red car and places it beside the blue one during his final line, then rests his hands on the table with a small satisfied look at the clear surface. Keep the two small transfers continuous with speech and show both groups physically stored by the end.",
+      "end": "Both blocks are stored in the blue box and both cars in the red box; the table is clear of loose toys and Dad and Child have empty hands."
     }
-  }
+  ]
 }

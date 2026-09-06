@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "In a quiet bedroom, Mom sits screen-left and Child sits screen-right against bed pillows with a blanket already over his legs. The four-year-old tiger boy keeps his yellow T-shirt and navy pajama pants throughout. Two thin picture books lie face-up on the bed between them in front of their knees: the blue sleeping-bear book nearest Child and the cream wide-awake-bear book nearest Mom. They are the one essential prop group. A warm bedside lamp is within Mom's left-hand reach; soft ambient hallway light is present from the start so faces remain readable after the lamp is switched off. Lock a 16:9 medium two-shot on both faces, laps, books and lamp. Part C uses a brief, clear passage-of-time dissolve to show the story has been read at a normal pace; no sped-up reading, page-flipping montage, added story speech or sudden room reset.",
+  "content_revision": 3,
+  "scene": "In a quiet bedroom, Mom sits screen-left and Child sits screen-right against bed pillows with a blanket already over his legs. The four-year-old tiger boy keeps his yellow T-shirt and navy pajama pants throughout. Two thin picture books lie face-up on the bed between them in front of their knees: the blue sleeping-bear book nearest Child and the cream wide-awake-bear book nearest Mom. They are the one essential prop group. A warm bedside lamp is within Mom's left-hand reach; soft ambient hallway light is present from the start so faces remain readable after the lamp is switched off. Lock a 16:9 medium two-shot on both faces, laps, books and lamp. The third clip uses a brief, clear passage-of-time dissolve to show the story has been read at a normal pace; no sped-up reading, page-flipping montage, added story speech or sudden room reset.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Mom is reassuring and Child is quietly attentive at bedtime.",
     "allowed_shift": "A small pleased response to the chosen bear book, gentle settling against the pillows and relaxed acceptance of lights out.",
     "forbidden": "No nagging, whining, bedtime struggle, exaggerated sleepiness, extreme delight, fear of darkness, sudden emotional reset or distorted faces and bodies."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Mom sits screen-left with empty hands on her lap; Child sits screen-right against the pillows in his yellow T-shirt and navy pajama pants, blanket over his legs and hands resting on it. Both bear books lie face-up between them in front of their knees, blue nearest Child and cream nearest Mom. The bedside lamp is on with steady ambient hallway light.",
-      "action": "Mom offers one story with a clear lights-out boundary. Child looks at Mom to request the bear book. Mom warmly confirms the one-book agreement, then both glance at the two covers. Neither book moves and neither character changes position.",
+      "action": "Mom offers one story with a clear lights-out boundary. Child looks at Mom to request the bear book. Mom warmly points out that there are two bear books and asks which one. Neither book moves and neither character changes position.",
       "end": "Mom sits screen-left and Child screen-right, both looking at the two face-up books in front of their knees; the blue sleepy-bear book is nearest Child and the cream awake-bear book nearest Mom. Both have empty hands on their laps, Child's blanket stays over his legs, and the bedside lamp is on with steady ambient hallway light."
     },
-    "B": {
+    {
+      "turns": [3, 4],
       "start": "Mom sits screen-left and Child screen-right, both looking at the two face-up books in front of their knees; the blue sleepy-bear book is nearest Child and the cream awake-bear book nearest Mom. Both have empty hands on their laps, Child's blanket stays over his legs, and the bedside lamp is on with steady ambient hallway light.",
-      "action": "Child identifies the blue cover with one small point and returns his hand to the blanket. Mom picks up only that book with her right hand, supports it with her left and tilts its sleeping-bear cover toward Child while confirming the choice. After Child confirms and asks her to read, Mom opens the first spread on her own lap where both can see it. Child settles slightly against the same pillows. Finish before reading begins; the cream book stays in place.",
+      "action": "Child identifies the blue cover with one small point and names the sleepy bear, not the wide-awake bear, then returns his hand to the blanket. Mom picks up only the blue book with her right hand, supports it with her left and confirms the choice while inviting him to snuggle in. She opens the first spread on her own lap where both can see it. Child settles slightly against the same pillows. Finish before reading begins; the cream book stays in place.",
       "end": "Mom sits screen-left holding the blue book open to its first spread on her lap, left hand supporting the left edge and right hand the right edge. Child sits screen-right against the pillows looking at it, hands on the blanket over his legs. The cream book remains face-up in front of their knees; the bedside lamp is on with steady ambient hallway light, and both outfits are unchanged."
     },
-    "C": {
+    {
+      "turns": [5, 6],
       "start": "Mom sits screen-left holding the blue book open to its first spread on her lap, left hand supporting the left edge and right hand the right edge. Child sits screen-right against the pillows looking at it, hands on the blanket over his legs. The cream book remains face-up in front of their knees; the bedside lamp is on with steady ambient hallway light, and both outfits are unchanged.",
-      "action": "Begin with a brief passage-of-time dissolve, a clear time ellipsis representing the full story read together at a comfortable pace. Match the same camera, seating, clothes, blanket and book-hand positions; after the dissolve the blue book is open to its final illustrated spread. No rapid page flipping or extra speech occurs. Only now Mom says the ending and asks about lights out. During Child's accepting reply Mom closes the blue book onto her lap with her right hand. The closed book rests securely there under her right hand, freeing her left hand. After Child's goodnight, Mom says her final goodnight and uses her left hand to switch off the nearby lamp, then lowers that hand. Child relaxes against the same pillows. Keep the soft ambient light and the cream book in place.",
+      "action": "Begin with a brief passage-of-time dissolve, a clear time ellipsis representing the full story read together at a comfortable pace. Match the same camera, seating, clothes, blanket and book-hand positions; after the dissolve the blue book is open to its final illustrated spread. No rapid page flipping or extra speech occurs. Only now Mom says the ending and asks about lights out. During Child's accepting reply Mom closes the blue book onto her lap with her right hand. After Child's goodnight to the sleepy bear and to Mom, Mom says her warm goodnight and uses her left hand to switch off the nearby lamp, then lowers that hand. Child relaxes against the same pillows. Keep the soft ambient light and the cream book in place.",
       "end": "Mom remains screen-left with the closed blue book on her lap under her right hand and her left hand lowered beside her. Child remains screen-right relaxed against the same pillows, hands on the blanket, with yellow T-shirt and navy pajama pants unchanged. The cream book is still face-up in front of their knees. The bedside lamp is off; steady soft ambient hallway light keeps both faces readable."
     }
-  }
+  ]
 }

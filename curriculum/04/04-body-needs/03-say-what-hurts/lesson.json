@@ -3,40 +3,23 @@
   "title_zh": "我的膝盖疼",
   "can_do": "说出轻微不适的位置和感觉，让成人立即停止活动并提供照护。",
   "conversation_move": {"id": "describe-discomfort", "label": "describe where it hurts"},
-  "trigger": "During ordinary quiet play, he lightly bumps his right knee on the low table and tells Mom it hurts.",
-  "core_response": "My knee hurts, Mom.",
-  "stretch_response": "It stings right here, Mom.",
-  "repair_response": "Not my thumb. This finger hurts.",
+  "trigger": "After a light bump on the low table during quiet play, Child tells Mom his right knee hurts and accepts a cold cloth.",
   "recycle": ["specify-choice", "request-help"],
   "roles": ["child", "mom"],
   "setting": "At home just after a small knee bump during quiet play beside the sofa.",
   "essential_props": ["one clean soft cold cloth"],
-  "parts": [
-    {
-      "id": "A", "beat": "goal",
-      "turns": [
-        {"speaker": "mom", "line": "You bumped your knee.", "kind": "input"},
-        {"speaker": "child", "line": "My knee hurts, Mom.", "kind": "core"},
-        {"speaker": "mom", "line": "We're stopping now. Let me look.", "kind": "action"}
-      ]
-    },
-    {
-      "id": "B", "beat": "change",
-      "turns": [
-        {"speaker": "child", "line": "It stings right here, Mom.", "kind": "stretch"},
-        {"speaker": "mom", "line": "Here on your knee?", "kind": "input"},
-        {"speaker": "child", "line": "Yes. Can you help me?", "kind": "stretch"}
-      ]
-    },
-    {
-      "id": "C", "beat": "resolve",
-      "turns": [
-        {"speaker": "mom", "line": "Would you like a cold cloth?", "kind": "input"},
-        {"speaker": "child", "line": "Yes, please. That would help.", "kind": "action"},
-        {"speaker": "mom", "line": "I'll hold it gently on your knee.", "kind": "action"}
-      ]
-    }
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "child", "line": "Ow. My knee hurts, Mom."},
+      {"speaker": "mom", "line": "Let me see. Which knee?"},
+      {"speaker": "child", "line": "The right one. I bumped it on the table."},
+      {"speaker": "mom", "line": "A small bump. Would a cold cloth help?"},
+      {"speaker": "child", "line": "Just for a little while, please."},
+      {"speaker": "mom", "line": "I'll hold it gently on your knee."},
+      {"speaker": "child", "line": "The cloth feels nice. Thank you, Mom."}
+    ]
+  },
   "replay_cards": [
     {
       "title": "A sore finger",
@@ -62,6 +45,6 @@
     "character_continuity": true, "emotion_stability": true
   },
   "status": "language_reviewed",
-  "content_revision": 2,
-  "dialogue_contract": "three-by-ten-v2"
+  "content_revision": 3,
+  "dialogue_contract": "continuous-dialogue-v1"
 }

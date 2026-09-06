@@ -1,18 +1,25 @@
 {
   "title":"Can I Build Too?","title_zh":"我也能一起搭吗","can_do":"请求加入同伴的搭建，回应他需要桥的想法，并商量连接位置后一起把路接通。",
   "conversation_move":{"id":"join-play","label":"ask to join play"},
-  "trigger":"Peer is building a road, and Child wants to join. Peer still needs a bridge that connects to his road.",
-  "core_response":"Can I play with you?","stretch_response":"I can build the bridge.","repair_response":"No, I mean beside your house.",
+  "trigger":"Peer is building a road that still needs a bridge; Child asks to join and offers to build the blue bridge at the road's end.",
   "recycle":["request-item","check-location"],"roles":["child","peer"],"setting":"Two friends join wide toy road and bridge pieces on a home play mat.","essential_props":["one road-and-bridge set: four tan road pieces and one blue bridge piece"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"I'm building a road here.","kind":"input"},{"speaker":"child","line":"Can I play with you?","kind":"core"},{"speaker":"peer","line":"We still need a bridge.","kind":"input"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"I can build the bridge.","kind":"stretch"},{"speaker":"peer","line":"Will it join my road?","kind":"input"},{"speaker":"child","line":"Yes, right here.","kind":"confirmation"},{"speaker":"peer","line":"Okay, let's build.","kind":"input"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"I'll add this road piece.","kind":"action"},{"speaker":"child","line":"Here's the bridge. They fit together.","kind":"action"},{"speaker":"peer","line":"We made a longer road.","kind":"input"}]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker":"peer","line":"I'm building a road. It needs a bridge."},
+      {"speaker":"child","line":"Can I play with you? I can build the bridge."},
+      {"speaker":"peer","line":"Will your bridge join my road?"},
+      {"speaker":"child","line":"Yes. The blue bridge fits at the end, so the road goes on."},
+      {"speaker":"peer","line":"Okay, let's build. I'll add this road piece."},
+      {"speaker":"child","line":"The bridge and road fit together."},
+      {"speaker":"peer","line":"We made a longer road together."},
+      {"speaker":"child","line":"Your road plus my bridge."}
+    ]
+  },
   "replay_cards":[
     {"title":"Join the animal home","setting":"Pretend animal play on the floor","change":"Peer has built one house and wants it to stay intact; Child offers to add another home beside it","challenge":"Ask to join and hear that the first house must stay. Child offers a second home, but Peer thinks Child means building on top of his house. Child repairs with \"No, I mean beside your house.\" Peer chooses a clear side for the new home; Child agrees, builds there, and both move their animals between the two homes."},
     {"title":"Join the chalk road","setting":"Drawing together on a clear outdoor paving patch","change":"Peer is finishing a chalk road and wants its current line left intact; Child wants to add a parking place","challenge":"Ask to join, propose a parking place, and let Peer choose a space that keeps his road clear. Child checks \"Is it beside your road?\" and requests \"Can I have the chalk, please?\" Peer finishes the short line and passes the chalk. Child draws the agreed parking place and both trace a route into it with their fingers."}
   ],
   "parent_support":["Keep Peer's road plan real: he asks whether the offered bridge will connect before accepting.","Let Child choose a useful contribution and show the proposed place. A small nod is enough; agreement does not require cheering or giving up either child's idea."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2,"dialogue_contract":"three-by-ten-v2"
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":3
 }

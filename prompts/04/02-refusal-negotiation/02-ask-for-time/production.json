@@ -1,26 +1,29 @@
 {
-  "content_revision": 4,
+  "content_revision": 5,
   "scene": "At a low drawing table near the home doorway, Mom stands screen-left and Child stands screen-right. Child is the four-year-old tiger boy, in his same yellow T-shirt and already wearing shoes suitable for leaving. One sheet shows a simple house with an empty upper-right corner where a sun is still missing; one yellow crayon rests beside the sheet. This drawing and crayon are the only essential prop group. Use one locked 16:9 medium two-shot showing faces, hands, the drawing surface and the nearby doorway at frame-left. Mom allows up to two minutes for just the sun; Child finishes early and they leave immediately. The three clips are continuous: no elapsed-two-minutes claim, timer, countdown, accelerated clock or time jump.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Mom and Child speak at normal family conversation volume with relaxed bodies and small facial movements.",
     "allowed_shift": "Child makes an earnest, mild request to finish a concrete task. Mom listens and grants a specific short boundary. Child accepts the limit, concentrates quietly and reports readiness with a small satisfied smile.",
     "forbidden": "No whining spectacle, shouting, stomping, arm flinging, angry distortion, frantic drawing, nagging or exaggerated excitement. No unexplained adult capitulation or extra drawing tasks; no rushing or running to the doorway."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Mom stands left and Child stands right at the low table; the sheet shows a house but no sun, and the yellow crayon lies beside it; the doorway is nearby at frame-left.",
-      "action": "Mom gives a small gesture toward the doorway during her departure reminder. Child looks up to request extra time. Mom asks what remains while looking at Child and the unfinished drawing. Leave the paper and crayon still during these three short turns.",
+      "action": "Mom gives a small gesture toward the doorway during her departure reminder. Child looks up and requests two more minutes, glancing at the empty corner of his sheet. Mom asks what the sun still needs while looking at Child and the unfinished drawing. Leave the paper and crayon still during these three short turns.",
       "end": "Mom and Child face each other at the table; the sheet still shows a house with an empty upper-right corner; the yellow crayon remains beside the sheet and the doorway stays at frame-left."
     },
-    "B": {
+    {
+      "turns": [3, 4, 5],
       "start": "Mom and Child face each other at the table; the sheet still shows a house with an empty upper-right corner; the yellow crayon remains beside the sheet and the doorway stays at frame-left.",
-      "action": "Child points to the empty corner while identifying the missing sun. Mom gives a calm two-minute maximum for only that task. After her agreement, Child picks up the yellow crayon in his right hand and acknowledges the limit. During his final turn he draws one small, nearly closed circle in the empty corner, leaving a short gap. Keep the movement unhurried and the house drawing unchanged.",
+      "action": "Child points to the empty corner while naming the yellow lines around the sun. Mom gives a calm two-minute maximum for only that task. After her agreement, Child picks up the yellow crayon in his right hand and acknowledges the limit. During his final turn he draws one small, nearly closed circle in the empty corner, leaving a short gap. Keep the movement unhurried and the house drawing unchanged.",
       "end": "Child holds the yellow crayon in his right hand beside a nearly closed yellow circle in the sheet's upper-right corner; the circle has one short gap and no rays; the house is unchanged, Mom stands left and the doorway stays at frame-left."
     },
-    "C": {
+    {
+      "turns": [6, 7],
       "start": "Child holds the yellow crayon in his right hand beside a nearly closed yellow circle in the sheet's upper-right corner; the circle has one short gap and no rays; the house is unchanged, Mom stands left and the doorway stays at frame-left.",
-      "action": "In the first two seconds Child uses his right hand to close the short circle gap and add three small rays. Only once the sun is visibly complete does Mom make her opening observation. Child puts the crayon beside the sheet while reporting readiness. Mom turns toward the nearby doorway on her invitation and Child follows on his final response; both take one or two calm steps through the doorway within the locked frame. They finish early, so there is no timer or claim that two minutes passed. Keep the fourteen spoken words fluid to leave room for the drawing finish and departure.",
-      "end": "The completed house-and-sun drawing and yellow crayon remain on the table; Mom and Child have passed together through the nearby doorway at frame-left at a calm walking pace."
+      "action": "Mom moves one calm step toward the doorway and waits with a patient posture during her line. In the first seconds of this clip Child uses his right hand to close the short circle gap, adds three small rays and a tiny smiling face inside the sun. Only once the sun is visibly complete does he report readiness with a small satisfied smile, putting the crayon beside the sheet. Both take one or two calm steps toward the doorway within the locked frame; they finish early, with no timer or claim that two minutes passed.",
+      "end": "The completed house-and-smiling-sun drawing and yellow crayon remain on the table; Mom and Child are stepping together toward the doorway at frame-left at a calm walking pace."
     }
-  }
+  ]
 }

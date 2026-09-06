@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "At a quiet kitchen table, Mom sits screen-left and Child screen-right. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. Exactly two empty cups stand within Mom's easy reach: a green cup without a handle at table-left and a blue cup with one clearly visible camera-facing handle at table-center. Neither cup changes color or gains a handle. Use a locked 16:9 medium two-shot showing both faces, hands, both cups and the blue handle. Mom mishears the color once and reaches toward green; the cups stay on the table until Child corrects her and adds the handle. No drink, pitcher, pouring, third cup or extra character.",
+  "content_revision": 3,
+  "scene": "At a quiet kitchen table, Mom sits screen-left and Child screen-right. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. Exactly two empty cups stand within Mom's easy reach: a green cup without a handle at table-left and a blue cup with one clearly visible camera-facing handle at table-center. Neither cup changes color or gains a handle. Use a locked 16:9 medium two-shot showing both faces, hands, both cups and the blue handle. Mom mishears the color once and lifts the green cup; the cups stay with Mom until Child corrects her and adds the handle. No drink, pitcher, pouring, third cup or extra character.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline with ordinary kitchen conversation volume. Mom is attentive but briefly mishears a word; Child expects that a clear correction will help.",
-    "allowed_shift": "Child may show a brief puzzled look and one small head shake at the wrong reach. Mom pauses and acknowledges her mistake without drama. Child supplies the visible handle and confirms the cup with quiet assurance.",
+    "allowed_shift": "Child may show a brief puzzled look and one small head shake at the wrong cup. Mom pauses and acknowledges her mistake without drama. Child supplies the visible handle and confirms the cup with quiet assurance.",
     "forbidden": "No shouting to repeat a word, accusatory pointing, eye rolling, ashamed posture, angry distortion, exaggerated surprise or repeated intentional misunderstanding. Mom does not insist on green or demand an apology; no oversized relief or victory gesture."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "The empty green handleless cup stands at table-left and the empty blue handled cup at table-center with its handle facing the camera. Mom and Child have empty hands beside the cups.",
-      "action": "Mom indicates the two available cups with a small open-hand gesture. Child requests blue while looking at Mom, without pointing out the handle yet. Mom agrees to get the cup and looks back toward the table, having heard the color incorrectly. Neither cup is moved or lifted during this part.",
-      "end": "Both empty cups remain in their original positions: green without a handle at table-left, blue with its visible handle at center. Mom looks toward the cups with her right hand resting in front of them; Child waits with empty hands."
+      "action": "Mom indicates the two available cups with a small open-hand gesture during her question. Child requests blue while looking at Mom, without pointing out the handle yet. Mom agrees, looks toward the table having heard the color wrong, lifts the green cup in her right hand and offers it halfway.",
+      "end": "Mom holds the empty green cup in her right hand just above table-left; the empty blue handled cup remains at table-center; Child waits with empty hands."
     },
-    "B": {
-      "start": "Both empty cups remain in their original positions: green without a handle at table-left, blue with its visible handle at center. Mom looks toward the cups with her right hand resting in front of them; Child waits with empty hands.",
-      "action": "As Mom names the mistaken green choice, her right hand reaches toward the green cup at table-left. Child makes one small head shake and clearly corrects the color. Mom stops before grasping or lifting green, acknowledges the mistake and withdraws her right hand to the space between the cups. She looks at the choices without lifting blue yet, allowing Child's next detail to guide the check.",
-      "end": "The green and blue cups remain untouched in their original positions with the blue handle visible. Mom's empty right hand rests between the cups after stopping the wrong reach; Child watches Mom with empty hands."
+    {
+      "turns": [3, 4, 5],
+      "start": "Mom holds the empty green cup in her right hand just above table-left; the empty blue handled cup remains at table-center; Child waits with empty hands.",
+      "action": "Child makes one small head shake and corrects the color, naming the blue cup and its handle. Mom stops at once, sets the green cup back in its original place, and repeats the corrected detail while looking at the blue cup. Child adds the comparison about the green cup with a small gesture toward it, without pointing accusingly.",
+      "end": "The green cup rests back at table-left; Mom's right hand rests beside the blue handled cup at table-center, ready to lift it; Child watches with empty hands."
     },
-    "C": {
-      "start": "The green and blue cups remain untouched in their original positions with the blue handle visible. Mom's empty right hand rests between the cups after stopping the wrong reach; Child watches Mom with empty hands.",
-      "action": "Child adds the visible handle, indicating it with one small finger gesture. Mom lifts the blue cup slightly by its body with her right hand, leaving the handle visible, and checks the choice. Child confirms and opens both hands to receive it. Only then, during her final handoff turn, Mom moves the blue cup the short distance into Child's waiting hands and releases it once he supports it. Keep the empty green cup fixed at table-left. The correction, feature, check, confirmation and transfer must occur in that order.",
-      "end": "Child holds the empty blue cup with both hands near his table edge, its single handle still visible. The empty green cup without a handle remains at table-left; Mom has released blue and has empty hands."
+    {
+      "turns": [6, 7],
+      "start": "The green cup rests back at table-left; Mom's right hand rests beside the blue handled cup at table-center, ready to lift it; Child watches with empty hands.",
+      "action": "Mom lifts the blue cup by its body with the handle still visible and moves it the short distance into Child's waiting hands during her line. Child receives it with both hands, looks at it with a small pleased smile and thanks her, holding it below his face.",
+      "end": "Child holds the empty blue cup with both hands near his table edge, its single handle still visible. The empty green cup without a handle remains at table-left; Mom has empty hands and a warm smile."
     }
-  }
+  ]
 }

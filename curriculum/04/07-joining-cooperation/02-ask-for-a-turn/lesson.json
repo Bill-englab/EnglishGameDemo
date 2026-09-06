@@ -2,17 +2,24 @@
   "title":"After Your Turn","title_zh":"你玩完后轮到我","can_do":"请求同伴之后的一轮，商定最后一次滚球，等约定完成后接过球并开始自己的回合。",
   "conversation_move":{"id":"request-turn","label":"request the next turn"},
   "trigger":"Peer is rolling the only ball. Child asks for the following turn, and Peer requests one last roll first.",
-  "core_response":"Can I have a turn after you?","stretch_response":"You first, then me.","repair_response":"No, I mean after your turn.",
   "recycle":["request-item","sequence-actions"],"roles":["child","peer"],"setting":"Two friends sit close together on a clear home play mat and share one ball.","essential_props":["one small red rolling ball"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"I'm rolling the ball.","kind":"input"},{"speaker":"child","line":"Can I have a turn after you?","kind":"core"},{"speaker":"peer","line":"Can I roll it once more?","kind":"input"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"You first, then me.","kind":"stretch"},{"speaker":"peer","line":"Just one more roll.","kind":"input"},{"speaker":"child","line":"Okay, I'll wait here.","kind":"confirmation"},{"speaker":"peer","line":"That was my last roll.","kind":"action"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Here you go. Your turn.","kind":"action"},{"speaker":"child","line":"Thanks. I'll roll it back.","kind":"action"},{"speaker":"peer","line":"I'll catch it right here.","kind":"input"}]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker":"peer","line":"Watch me roll the red ball."},
+      {"speaker":"child","line":"Can I have a turn after you?"},
+      {"speaker":"peer","line":"Can I roll it once more first?"},
+      {"speaker":"child","line":"You first, then me. I'll watch how you roll it."},
+      {"speaker":"peer","line":"That was my last roll. Here you go."},
+      {"speaker":"child","line":"Thanks. Now I roll it back to you."},
+      {"speaker":"peer","line":"I'll catch it with both paws."},
+      {"speaker":"child","line":"Ready, set, roll!"}
+    ]
+  },
   "replay_cards":[
     {"title":"Turn with the marker","setting":"Drawing one shared poster","change":"Peer is finishing a sun with the only yellow marker and thinks Child is asking to take it immediately","challenge":"Child requests the next turn. When Peer offers the marker before finishing, Child repairs with \"No, I mean after your turn.\" Peer chooses one last ray as the endpoint; Child agrees to wait. Peer draws the ray and hands over the marker, then Child thanks him and begins a yellow flower."},
     {"title":"Turn with the rolling pin","setting":"Making pretend food from play dough","change":"Peer is flattening one piece of dough with the only rolling pin; Child wants it for a separate piece","challenge":"Ask for the next turn. Peer requests one final pass over his dough, and Child confirms \"You first, then me.\" Peer completes that pass and puts the pin within Child's reach. Child takes it, thanks Peer, and starts rolling his own piece while Peer shapes the flattened dough by hand."}
   ],
   "parent_support":["Play Peer's request for one final roll as a real, finite preference. Child can agree on the order without grabbing or being pressured to smile.","Complete exactly the agreed roll, then hand over the ball. Keep the short handoff distinct from Child's first roll so both turns are visible."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2,"dialogue_contract":"three-by-ten-v2"
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":3
 }

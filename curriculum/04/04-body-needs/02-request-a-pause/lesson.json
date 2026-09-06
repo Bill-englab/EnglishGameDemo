@@ -3,41 +3,24 @@
   "title_zh": "我要去上厕所",
   "can_do": "需要上厕所时，立即让成人暂停活动，并在回来后按自己的准备情况继续。",
   "conversation_move": {"id": "request-a-pause", "label": "request a pause for a body need"},
-  "trigger": "While Dad prepares another round of the tabletop game, Child notices he needs the bathroom and interrupts.",
-  "core_response": "I need to use the bathroom.",
-  "stretch_response": "I'll come back.",
-  "repair_response": "Wait, I need to go now.",
+  "trigger": "It is Child's turn in the animal-card game when he notices he needs the bathroom; he pauses the game, and Dad saves his tiger card and his turn.",
   "recycle": ["delay-boundary", "request-time"],
   "roles": ["child", "dad"],
   "setting": "A tabletop animal-card game at home, paused for a bathroom break and resumed only after a later return.",
   "essential_props": ["one animal-card game"],
-  "parts": [
-    {
-      "id": "A", "beat": "goal",
-      "turns": [
-        {"speaker": "child", "line": "I need to use the bathroom.", "kind": "core"},
-        {"speaker": "dad", "line": "We're stopping now.", "kind": "action"},
-        {"speaker": "child", "line": "I'll come back.", "kind": "stretch"},
-        {"speaker": "dad", "line": "Okay. I'll keep everything here.", "kind": "action"}
-      ]
-    },
-    {
-      "id": "B", "beat": "change",
-      "turns": [
-        {"speaker": "dad", "line": "Welcome back. Your card's still here.", "kind": "input"},
-        {"speaker": "child", "line": "Thanks for saving my turn.", "kind": "stretch"},
-        {"speaker": "dad", "line": "Ready to play again?", "kind": "input"}
-      ]
-    },
-    {
-      "id": "C", "beat": "resolve",
-      "turns": [
-        {"speaker": "child", "line": "Yes. It's my turn now.", "kind": "stretch"},
-        {"speaker": "dad", "line": "Go ahead. Put your card here.", "kind": "input"},
-        {"speaker": "child", "line": "Here's my tiger card.", "kind": "action"}
-      ]
-    }
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "dad", "line": "Your turn now."},
+      {"speaker": "child", "line": "Wait. I need to use the bathroom first."},
+      {"speaker": "dad", "line": "Of course. Wash your hands, then come back."},
+      {"speaker": "child", "line": "I will. Don't look at my cards!"},
+      {"speaker": "dad", "line": "Welcome back. Your tiger card's safe."},
+      {"speaker": "child", "line": "Good. Thank you for saving my turn."},
+      {"speaker": "dad", "line": "Go ahead. Put your card in the middle."},
+      {"speaker": "child", "line": "My tiger card. Just what I needed."}
+    ]
+  },
   "replay_cards": [
     {
       "title": "A rest during dancing",
@@ -64,6 +47,6 @@
     "character_continuity": true, "emotion_stability": true
   },
   "status": "language_reviewed",
-  "content_revision": 2,
-  "dialogue_contract": "three-by-ten-v2"
+  "content_revision": 3,
+  "dialogue_contract": "continuous-dialogue-v1"
 }

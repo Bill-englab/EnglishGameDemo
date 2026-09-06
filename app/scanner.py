@@ -1,7 +1,7 @@
 from pathlib import Path
 import json
 
-from curriculum import load_stage
+from curriculum import load_stage, CONTINUOUS_DIALOGUE_CONTRACT
 
 # Supported video file extensions. The in-browser recorder (MediaRecorder)
 # produces .webm on Chrome/Firefox and .mp4 on Safari; legacy file uploads
@@ -98,18 +98,29 @@ def scan_curriculum_library(
         for lesson in chapter.get("lessons", []):
             lesson_id = lesson["id"]
             dialogue = []
-            for part in lesson.get("parts", []):
-                for turn in part.get("turns", []):
+            if lesson.get("dialogue_contract") == CONTINUOUS_DIALOGUE_CONTRACT:
+                for turn in lesson.get("dialogue", {}).get("turns", []):
                     dialogue.append(
                         {
                             **turn,
                             "speaker": ROLE_LABELS.get(
                                 turn.get("speaker"), str(turn.get("speaker", "")).title()
                             ),
-                            "part": part.get("id"),
-                            "beat": part.get("beat"),
                         }
                     )
+            else:
+                for part in lesson.get("parts", []):
+                    for turn in part.get("turns", []):
+                        dialogue.append(
+                            {
+                                **turn,
+                                "speaker": ROLE_LABELS.get(
+                                    turn.get("speaker"), str(turn.get("speaker", "")).title()
+                                ),
+                                "part": part.get("id"),
+                                "beat": part.get("beat"),
+                            }
+                        )
             levels.append(
                 {
                     "stage": stage_id,

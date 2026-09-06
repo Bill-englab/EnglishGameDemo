@@ -3,34 +3,24 @@
   "title_zh": "先穿鞋，再穿夹克",
   "can_do": "说清先穿鞋、再穿夹克的顺序，找到眼前的衣物，完成后报告准备好了。",
   "conversation_move": {"id": "sequence-actions", "label": "sequence two actions"},
-  "trigger": "Dad asks what is still needed before the park; the shoes and jacket are visible beside the entry bench.",
-  "core_response": "First my shoes, then my jacket.",
-  "stretch_response": "First I'll put on my pajamas, then brush my teeth.",
-  "repair_response": "No, pajamas first. Teeth come next.",
+  "trigger": "Dad asks what is still needed before the park; Child names the shoes-then-jacket order and explains why.",
   "recycle": ["propose-order", "request-help"],
   "roles": ["child", "dad"],
   "setting": "Calmly getting ready for the park on a low bench inside the front door.",
   "essential_props": ["one dressing set: easy slip-on shoes and an open lightweight jacket"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {"id": "A", "beat": "goal", "turns": [
-      {"speaker": "dad", "line": "What else before the park?", "kind": "input"},
-      {"speaker": "child", "line": "First my shoes, then my jacket.", "kind": "core"},
-      {"speaker": "dad", "line": "They're by your feet.", "kind": "input"}
-    ]},
-    {"id": "B", "beat": "change", "turns": [
-      {"speaker": "child", "line": "Here they are.", "kind": "action"},
-      {"speaker": "dad", "line": "I'll hold them steady.", "kind": "action"},
-      {"speaker": "child", "line": "Thanks. Where's my jacket?", "kind": "stretch"},
-      {"speaker": "dad", "line": "Right beside you.", "kind": "input"}
-    ]},
-    {"id": "C", "beat": "resolve", "turns": [
-      {"speaker": "dad", "line": "Shoes on. Here's your jacket.", "kind": "action"},
-      {"speaker": "child", "line": "Can you help me?", "kind": "stretch"},
-      {"speaker": "dad", "line": "There you go.", "kind": "action"},
-      {"speaker": "child", "line": "I'm ready for the park.", "kind": "action"}
-    ]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "dad", "line": "Almost time for the park. What else do you need?"},
+      {"speaker": "child", "line": "First my shoes, then my jacket."},
+      {"speaker": "dad", "line": "Why that order?"},
+      {"speaker": "child", "line": "Shoes go on my feet. The jacket goes on top."},
+      {"speaker": "dad", "line": "Clever. Put your shoes on first."},
+      {"speaker": "child", "line": "Shoes are on. Can you help with the jacket?"},
+      {"speaker": "dad", "line": "Arms in. There you go."},
+      {"speaker": "child", "line": "Shoes and jacket. I'm ready for the park!"}
+    ]
+  },
   "replay_cards": [
     {"title": "Wash and eat", "setting": "Before a snack", "change": "Hands need washing before carrying the snack plate", "challenge": "Say wash first, then carry the plate; wash and dry hands, carry the plate, and say you are ready to eat"},
     {"title": "Pajamas and teeth", "setting": "Getting ready for bed", "change": "A pajama top and pants are on the bed. Mom mishears the order and points toward the bathroom for toothbrushing first", "challenge": "Say, \"First I'll put on my pajamas, then brush my teeth.\" When Mom checks, \"Teeth first?\", correct her: \"No, pajamas first. Teeth come next.\" Mom accepts the correction and waits while Child gets changed, then helps with brushing; Child reports ready for bed"}
@@ -41,5 +31,5 @@
   ],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 3
+  "content_revision": 4
 }

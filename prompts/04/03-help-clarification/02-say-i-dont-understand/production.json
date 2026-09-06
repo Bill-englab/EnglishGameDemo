@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "In a quiet uncluttered school corner, Rabbit Teacher sits cross-legged on the floor screen-left and Child sits cross-legged screen-right, angled slightly toward each other. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. Use a locked 16:9 medium two-shot wide enough to show both faces, both pairs of hands and both pairs of knees throughout. The pattern is one gentle hand clap followed by one simultaneous light tap of both palms on their own knees. Teacher demonstrates once in B; Child performs once in C. There are no props, furniture, cards, cups, instruments, written cues or extra pupils. Keep the same floor positions and clothes across all parts.",
+  "content_revision": 3,
+  "scene": "In a quiet uncluttered school corner, Rabbit Teacher sits cross-legged on the floor screen-left and Child sits cross-legged screen-right, angled slightly toward each other. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. Use a locked 16:9 medium two-shot wide enough to show both faces, both pairs of hands and both pairs of knees throughout. The pattern is one gentle hand clap followed by one simultaneous light tap of both palms on their own knees. Teacher demonstrates once in the second clip; Child performs it in the third clip and may repeat it once more, gently, at the end. There are no props, furniture, cards, cups, instruments, written cues or extra pupils. Keep the same floor positions and clothes across all clips.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Rabbit Teacher is patient and ordinary, speaking at normal conversation volume with relaxed posture. Child can ask for help without shame.",
-    "allowed_shift": "Child shows only a brief puzzled look when the spoken order is unclear, then watches the visible demonstration with interest. Teacher accepts the admission without fuss. Understanding brings a small assured nod or quiet smile.",
+    "allowed_shift": "Child shows only a brief puzzled look when the spoken order is unclear, then watches the visible demonstration with interest. Teacher accepts the admission without fuss. Understanding brings a small assured nod or quiet smile, and one gentle happy repeat at the end.",
     "forbidden": "No theatrical teaching voice, oversized praise, chanting, exaggerated clapping, forced smiles, embarrassment, scolding, guessing test or physical guidance of Child's hands. No dramatic surprise, frightened eyes, frantic movement or facial distortion."
   },
-  "parts": {
-    "A": {
-      "start": "Teacher sits cross-legged on the left and Child on the right, each with empty hands resting on their own knees. They look toward each other and no movement pattern has been demonstrated.",
-      "action": "Teacher gives the short spoken pattern without performing it yet. Child looks briefly puzzled, keeps his hands on his knees, and says that he does not understand. Teacher responds in an ordinary reassuring voice with a small nod. Neither person starts clapping or tapping; leave room for Child to request the kind of help he needs.",
-      "end": "Teacher and Child remain seated in the same positions with empty hands on their own knees. Child looks at Teacher for help; the pattern has not yet been demonstrated."
+  "clips": [
+    {
+      "turns": [0, 1],
+      "start": "Teacher sits cross-legged on the left and Child on the right, each with empty hands resting on their own knees, looking toward each other; no pattern has been demonstrated yet.",
+      "action": "Teacher gives the short spoken pattern without performing it. Child looks briefly puzzled, keeps his hands on his knees, and says he does not understand while asking to see it. Neither person claps or taps yet.",
+      "end": "Teacher and Child remain seated in the same positions with empty hands on their own knees. Child looks at Teacher's hands, waiting for the demonstration."
     },
-    "B": {
-      "start": "Teacher and Child remain seated in the same positions with empty hands on their own knees. Child looks at Teacher for help; the pattern has not yet been demonstrated.",
-      "action": "Child asks for a demonstration. During Teacher's response, Teacher raises both hands only to chest height, makes one gentle clap, then lowers both palms to tap both knees once. Show the two movements slowly and distinctly within the short spoken explanation. Child watches without copying yet, then checks the order aloud while looking from Teacher's hands back to Teacher's face. Teacher listens without adding a second demonstration or extra speech.",
-      "end": "Teacher's single clap-then-tap demonstration is complete and both of Teacher's hands rest on Teacher's knees. Child has just asked to confirm the order, still with his hands on his own knees; he has not performed the pattern yet."
+    {
+      "turns": [2, 3],
+      "start": "Teacher and Child remain seated in the same positions with empty hands on their own knees. Child looks at Teacher's hands, waiting for the demonstration.",
+      "action": "Teacher raises both hands only to chest height, makes one gentle clap, then lowers both palms to tap both knees once, showing the two movements slowly and distinctly during her line. Child watches without copying yet, then checks the order aloud while looking from Teacher's hands back to Teacher's face.",
+      "end": "Teacher's single clap-then-tap demonstration is complete and both of Teacher's hands rest on Teacher's knees. Child has just asked to confirm the order, still with his hands on his own knees."
     },
-    "C": {
-      "start": "Teacher's single clap-then-tap demonstration is complete and both of Teacher's hands rest on Teacher's knees. Child has just asked to confirm the order, still with his hands on his own knees; he has not performed the pattern yet.",
-      "action": "Teacher immediately confirms Child's order check and invites his attempt. During his short action turn Child raises his hands to chest height for one gentle clap, then taps both palms once on his own knees in the correct order. Teacher watches with hands still on Teacher's knees and acknowledges only after the tap is finished. Child reports understanding with a small nod. No repeated pattern, adult clapping along, touch correction, prop or celebratory flourish.",
-      "end": "Child has completed one clap followed by one tap on his knees. Both remain seated with hands resting on their own knees; Child looks quietly assured and Teacher remains attentive."
+    {
+      "turns": [4, 5, 6, 7],
+      "start": "Teacher's single clap-then-tap demonstration is complete and both of Teacher's hands rest on Teacher's knees. Child has just asked to confirm the order, still with his hands on his own knees.",
+      "action": "Teacher confirms the order and invites his attempt. Child raises his hands to chest height, makes one gentle clap, then taps both palms once on his own knees in the correct order before reporting that he understands. Teacher acknowledges with a warm nod and hands still on her own knees. On his final line Child repeats the pattern once more, gently and with a small happy bounce in his seat, without loud clapping or big gestures.",
+      "end": "Child has completed the clap-and-tap pattern once more; both remain seated with hands near their own knees; Child looks happily assured and Teacher smiles warmly."
     }
-  }
+  ]
 }

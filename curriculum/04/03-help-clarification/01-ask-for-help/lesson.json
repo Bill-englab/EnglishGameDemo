@@ -3,51 +3,30 @@
   "title_zh": "帮我接好轨道",
   "can_do": "遇到具体困难时，请求恰好够用的帮助，同时保留自己完成任务的机会。",
   "conversation_move": {"id": "request-help", "label": "ask for specific help"},
-  "trigger": "A loose track piece will not connect, so the train cannot continue. Child asks Dad for help and must specify which side Dad should hold.",
-  "core_response": "This won't fit. Can you help me?",
-  "stretch_response": "Can you help me hold the box?",
-  "repair_response": "This side. Hold it here, please.",
+  "trigger": "The ring of train track is missing its final curve piece, so Child asks Dad for help and they split the job between them.",
   "recycle": ["request-item", "propose-order"],
   "roles": ["child", "dad"],
-  "setting": "Connecting a short toy train track at a low table.",
-  "essential_props": ["a short toy train track with one loose connecting piece and one train"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {
-      "id": "A",
-      "beat": "goal",
-      "turns": [
-        {"speaker": "dad", "line": "Your train stops here.", "kind": "input"},
-        {"speaker": "child", "line": "This won't fit. Can you help me?", "kind": "core"},
-        {"speaker": "dad", "line": "Which side needs help?", "kind": "input"}
-      ]
-    },
-    {
-      "id": "B",
-      "beat": "change",
-      "turns": [
-        {"speaker": "child", "line": "This side. Hold it here, please.", "kind": "repair"},
-        {"speaker": "dad", "line": "I'll hold this end still.", "kind": "input"},
-        {"speaker": "child", "line": "Then I'll push these together.", "kind": "action"}
-      ]
-    },
-    {
-      "id": "C",
-      "beat": "resolve",
-      "turns": [
-        {"speaker": "dad", "line": "That fits. Try your train now.", "kind": "input"},
-        {"speaker": "child", "line": "Can I have it, please?", "kind": "input"},
-        {"speaker": "dad", "line": "Here you go.", "kind": "action"},
-        {"speaker": "child", "line": "It works. Thanks, Dad!", "kind": "action"}
-      ]
-    }
-  ],
+  "setting": "Connecting a toy train track at a low table.",
+  "essential_props": ["a toy train track ring with one loose curve piece and one train"],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "dad", "line": "Your train track looks long today."},
+      {"speaker": "child", "line": "One piece won't fit. Can you help me, please?"},
+      {"speaker": "dad", "line": "Which piece is the trouble?"},
+      {"speaker": "child", "line": "The curvy one. Its ends won't click together."},
+      {"speaker": "dad", "line": "I'll hold the track. You push the curve in."},
+      {"speaker": "child", "line": "It clicked! Now the track goes all the way around."},
+      {"speaker": "dad", "line": "All joined. Try your train now."},
+      {"speaker": "child", "line": "Here comes the train! Thank you, Dad."}
+    ]
+  },
   "replay_cards": [
     {"title": "Open the lunch box", "setting": "At the kitchen table", "change": "The box slides when Child tries to lift its latch", "challenge": "Child says, 'Can you help me hold the box?' Dad asks where to hold it. Child points to the side away from the latch. Dad steadies that side, Child lifts the latch and opens the lid, then confirms it is open."},
     {"title": "Zip the coat", "setting": "Before going outside", "change": "The zipper has been started but its bottom lifts when Child pulls", "challenge": "Child asks Mom for help and points to the bottom of the zipper. Mom holds the joined base steady while Child pulls the zipper up. Child checks that the coat is closed, and they go outside together."}
   ],
-  "parent_support": ["Let him show the join that will not connect; ask which side needs support if his first request is unclear.", "Hold only the side he identifies and let him connect the piece. The useful sequence is adult support first, then his own action.", "Keep the train near Dad until he requests it, then let him test the repaired track. A brief puzzled look is enough; help is ordinary and does not require visible distress."],
+  "parent_support": ["Let him show the join that will not connect; ask which piece needs support if his first request is unclear.", "Hold only the side he identifies and let him do the connecting. The useful sequence is adult support first, then his own action.", "Once the ring closes, let him test it with the train himself. A brief puzzled look is enough; help is ordinary and does not require visible distress."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

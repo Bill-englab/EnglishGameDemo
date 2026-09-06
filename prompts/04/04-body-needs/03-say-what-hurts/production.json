@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "In the home living room, Child sits screen-right on the low sofa and Mom is beside him screen-left. Child is the four-year-old tiger boy in his unchanged yellow T-shirt and blue shorts; his right knee is the affected knee in every segment. Immediately before the first frame he lightly bumped that knee on the nearby low table during ordinary quiet play. Do not replay the bump or show an impact. His feet have comfortable support, and no further weight-bearing or movement test is needed. One clean soft cold cloth lies folded on the sofa arm within Mom's reach; it is the only handled care item. Use a locked 16:9 medium two-shot showing faces, hands and the right knee without a close-up. Fur and skin remain intact, with no blood, swelling, wound, ice cube, diagnosis or promised cure.",
+  "content_revision": 3,
+  "scene": "In the home living room, Child sits screen-right on the low sofa and Mom is beside him screen-left. Child is the four-year-old tiger boy in his unchanged yellow T-shirt and blue shorts; his right knee is the affected knee in every clip. Immediately before the first frame he lightly bumped that knee on the nearby low table during ordinary quiet play. Do not replay the bump or show an impact. His feet have comfortable support, and no further weight-bearing or movement test is needed. One clean soft cold cloth lies folded on the sofa arm within Mom's reach; it is the only handled care item. Use a locked 16:9 medium two-shot showing faces, hands and the right knee without a close-up. Fur and skin remain intact, with no blood, swelling, wound, ice cube, diagnosis or promised cure.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline at ordinary family conversation volume. Mom is attentive and reassuring; Child can state discomfort plainly and is allowed to look uncomfortable.",
-    "allowed_shift": "The mild bump produces one small wince and a slightly quieter voice. Child points to the knee and describes a stinging feeling; receiving care brings a little relaxation without forcing a smile or implying the pain is gone.",
+    "allowed_shift": "The mild bump produces one small wince and a slightly quieter voice at the start. Child points to the knee and describes what happened; receiving the cold cloth brings a little relaxation without forcing a smile or implying the pain is gone.",
     "forbidden": "No screaming, sobbing spectacle, graphic injury, severe-pain acting, distorted face, dramatic collapse or frantic movement. Mom does not dismiss the pain, diagnose it, ask Child to repeat a painful movement or withhold comfort until he supplies more English."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Child sits on the sofa at frame-right just after the mild bump, both feet comfortably supported and his right knee still. Mom is beside him at frame-left with empty hands. The single folded clean cold cloth lies on the sofa arm within her reach; no play movement is occurring.",
-      "action": "Mom calmly acknowledges the small bump. As Child first reports pain, Mom immediately stops her play gesture, turns fully toward him and begins a calm visual check of the indicated knee during her response, without waiting for another Child line. Child gives a small wince and indicates his right knee without moving or testing it. Mom stays close and available; do not prod the knee or ask him to prove it hurts.",
-      "end": "Child remains seated with his right knee still and feet supported. Mom is close beside him, already attending to the knee with both hands empty. The folded cold cloth remains on the sofa arm within her reach."
+      "action": "Child gives one small wince and reports his knee hurting in a slightly quieter voice. Mom immediately turns fully toward him during her response and begins a calm visual check, asking which knee. Child points with one finger to his right knee and explains the small bump on the table, without moving or testing the knee. Mom stays close and does not prod the knee or ask him to prove it hurts.",
+      "end": "Child remains seated with his right knee still and feet supported, his pointing hand lowering to his lap. Mom is close beside him, already attending to the knee with both hands empty. The folded cold cloth remains on the sofa arm within her reach."
     },
-    "B": {
-      "start": "Child remains seated with his right knee still and feet supported. Mom is close beside him, already attending to the knee with both hands empty. The folded cold cloth remains on the sofa arm within her reach.",
-      "action": "While Mom is already checking and supporting the pause, Child points with one finger to the front of his right knee and describes the stinging feeling. Mom uses a small open-hand indication to confirm the location without touching a painful spot. Child confirms and asks for help; Mom's attention and care do not begin only after that request. Keep the knee still and avoid any suggestion of a diagnosis.",
-      "end": "Child has indicated the front of his right knee and lowers his hand to his lap. He remains seated with feet supported. Mom stays close with empty hands, and the single folded cold cloth remains on the sofa arm."
+    {
+      "turns": [3, 4],
+      "start": "Child remains seated with his right knee still and feet supported, his hand resting in his lap. Mom is close beside him, already attending to the knee with both hands empty. The folded cold cloth remains on the sofa arm within her reach.",
+      "action": "Mom picks up the clean cold cloth with her right hand and shows it low beside the knee while offering it. Child accepts with a small nod and a quiet voice, asking for just a little while. Mom's attention and care do not wait for a second request; keep the knee still and avoid any suggestion of a diagnosis.",
+      "end": "Mom holds the folded cold cloth in her right hand, ready beside Child's still right knee; her left hand rests lightly on the sofa beside him; Child watches calmly with hands in his lap."
     },
-    "C": {
-      "start": "Child has indicated the front of his right knee and lowers his hand to his lap. He remains seated with feet supported. Mom stays close with empty hands, and the single folded cold cloth remains on the sofa arm.",
-      "action": "Mom picks up the clean cold cloth with her right hand and shows it low beside the knee while offering it. Child accepts with a small nod and a quiet voice. With his agreement, Mom gently lays the soft cloth against the front of the same right knee and holds it lightly during her final line. Do not press, rub or use ice directly. Child stays comfortably seated and may relax slightly; the activity remains stopped and the scene makes no claim that the pain is cured.",
+    {
+      "turns": [5, 6],
+      "start": "Mom holds the folded cold cloth in her right hand, ready beside Child's still right knee; her left hand rests lightly on the sofa beside him; Child watches calmly with hands in his lap.",
+      "action": "With his agreement, Mom gently lays the soft cloth against the front of the same right knee and holds it lightly during her line. Do not press, rub or use ice directly. Child stays comfortably seated, relaxes slightly and reports that the cloth feels nice with a small quiet smile of relief, without implying the pain is gone. Play does not resume.",
       "end": "Child remains seated beside Mom with both feet supported and his right knee still. Mom's right hand gently holds the single soft cold cloth against the front of that knee, with her left hand relaxed beside him. Quiet care and rest continue; play has not resumed."
     }
-  }
+  ]
 }

@@ -1,10 +1,10 @@
-Tomorrow's Plan — Part C (resolve)
-Production prompt draft | Source: curriculum/04/10-recounting-planning/03-plan-tomorrow/lesson.json | Content revision: 2
-Source SHA256: c8374c03c269fb82048f865293d7125dd44228278f1fc4121f980f6726e22976
+Tomorrow's Plan — Clip 3
+Production prompt draft | Source: curriculum/04/10-recounting-planning/03-plan-tomorrow/lesson.json | Content revision: 3
+Source SHA256: 29f557174fff69e51c20241baf03aa65b9e441a56f0a5d4b71625620934c7dda
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -21,24 +21,22 @@ A calm evening conversation at home, with Mom and Child seated together to plan 
 
 SCENE AND PROP CONTINUITY
 One continuous evening planning conversation at home. Mom stays seated screen left and Child stays seated screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No essential props; both have empty hands. Park, swings, library, rain and animal books are future possibilities mentioned in speech, never visible destinations or activities. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles, generated books or weather effects. Small illustrative hand gestures only; stay in this same home setting with unchanged lighting and no time jump.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Mom and Child remain seated at home with empty hands lowered near their laps after agreeing on the library as the rainy-day alternative.
+Mom and Child remain seated at home with empty hands lowered near their laps after agreeing on the library, the rainy-day alternative, and the animal-book idea.
 
 ACTION AND REACTIONS
-Child adds his interest in animal books while looking at Mom. Mom agrees and restates the dry-weather park and rainy-weather library options with a small two-option hand gesture. Child gives one relaxed confirming nod during his final turn. End with a shared plan, without books, travel, pretend reading or additional speech.
+Mom restates the dry-weather park and rainy-weather library options with a small two-option hand gesture. Child gives one relaxed confirming nod during his final turn, restating tomorrow's plan with a small pleased smile. End with the shared plan, without books, travel, pretend reading or additional speech.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Child: "Can we look for animal books?"
-Mom: "Yes. Park if dry, library if it rains."
-Child: "That's our plan for tomorrow."
+Mom: "Yes. Park if it's dry, library if it's wet."
+Child: "Tomorrow we're going to the park! Library if it rains."
 
 END FRAME
 Mom and Child remain seated in the unchanged home setting with empty hands relaxed near their laps, sharing a calm look after confirming tomorrow's conditional plan.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
 PACING (19 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

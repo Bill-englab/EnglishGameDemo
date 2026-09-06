@@ -1,10 +1,10 @@
-Let's Build It Again — Part C (resolve)
-Production prompt draft | Source: curriculum/04/08-feelings-repair/03-apologize-and-repair/lesson.json | Content revision: 2
-Source SHA256: a67bb963575b8a131d5c80a295dcdb8aa5244d1daa63ce1da2762819565f891d
+Let's Build It Again — Clip 3
+Production prompt draft | Source: curriculum/04/08-feelings-repair/03-apologize-and-repair/lesson.json | Content revision: 3
+Source SHA256: 6f27ee3d1905d94dbdd906cb8c3c078a403d8641bf54dc89250b8bb44f020bb1
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -21,25 +21,23 @@ Child and the same Bear Peer from the cooperation chapter kneel beside a small b
 
 SCENE AND PROP CONTINUITY
 A shared home play mat with Peer kneeling screen left and Child kneeling screen right. Peer is the same small brown bear, age four, in his teal T-shirt from every Chapter 7 peer lesson; Child is the four-year-old tiger boy in his yellow T-shirt. Exactly three wide, easy-to-stack blocks form one small tower between them: tan base, blue middle, red top. The tower is within both children's reach. When Child accidentally brushes the two upper blocks, the tan base stays put and the blue and red blocks fall a short distance onto the soft mat toward Child, without hitting anyone. No truck, bridge, additional blocks or props. Locked 16:9 medium two-shot shows faces, hands and all three blocks throughout.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-The tan base is still upright, and the blue and red blocks remain fallen in their same positions toward Child. Child's left hand is open beside the tan base without touching it; Peer looks toward the base with both hands beside his knees after accepting help.
+The tan base is still upright with Child's left hand steadying it; the blue and red blocks remain fallen in their same positions toward Child. Peer looks toward the base with both hands beside his knees, ready to stack.
 
 ACTION AND REACTIONS
-During Peer's first request Child steadies the tan base with his left hand, keeping his right hand on his knee. While Child confirms rebuilding together, Peer lifts the fallen blue block once and places it on the tan base. During Peer's next line he lifts the fallen red block once and places it on the blue block, then releases it. Both pieces are within easy reach, so the two short placements happen during speech without a montage or rushed movement. Child's final observation follows the restored stack. Keep the same three blocks, their color order and a calm, sincere expression; the joint repair closes the scene without requiring smiles or affection.
+While stating the color order, Peer lifts the fallen blue block once and places it on the tan base, then lifts the fallen red block once and places it on the blue block, releasing it as he names the top. Both short placements happen during speech without a montage or rushed movement. Child's left hand stays on the base until the red top is secure, then he releases it and observes the restored tower, adding that he is glad Peer is okay. Peer agrees warmly that building together is fun. Keep the same three blocks, their color order and calm, sincere expressions; the joint repair closes the scene without requiring smiles or affection.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Peer: "Hold this block, please."
-Child: "Let's build it again together."
-Peer: "I'll put this one on top."
-Child: "There. It's standing again."
+Peer: "Blue in the middle, red on top."
+Child: "There. Tall again. I'm glad you're okay."
+Peer: "Me too. Building together is fun."
 
 END FRAME
-The three-block tower is restored in the same place and order: tan base, blue middle and red top. Child gently steadies the tan base with his left hand and rests his right hand on his knee; Peer has released the red top, and both calmly look at the standing tower.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+The three-block tower is restored in the same place and order: tan base, blue middle and red top. Child's hands rest in his lap and Peer has released the red top; both calmly look at the standing tower.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (19 spoken words)
+PACING (20 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

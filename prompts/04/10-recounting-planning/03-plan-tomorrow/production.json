@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
+  "content_revision": 3,
   "scene": "One continuous evening planning conversation at home. Mom stays seated screen left and Child stays seated screen right on nearby chairs, facing each other in a locked 16:9 medium two-shot. No essential props; both have empty hands. Park, swings, library, rain and animal books are future possibilities mentioned in speech, never visible destinations or activities. No flashback montage, no extra voices, no imagined-location cutaways, thought bubbles, generated books or weather effects. Small illustrative hand gestures only; stay in this same home setting with unchanged lighting and no time jump.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline; Mom and Child make an ordinary family decision together at natural conversation volume.",
     "allowed_shift": "A small pleased smile for the park choice, a brief thoughtful pause for rain, and a relaxed nod as they agree. Mom gives Child room to contribute without testing or prompting a memorized answer.",
     "forbidden": "No cheering, disappointment tantrum, fear of rain, frantic swinging or pretending to travel, dramatic weather change or triumphant agreement pose. Keep faces and bodies proportionate and gestures small."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Mom remains seated screen left and Child seated screen right at home in evening light, facing each other with empty hands resting near their laps.",
-      "action": "Mom offers two destinations with a small open-palm gesture. Child chooses the park and gives his reason with a modest smile, keeping his body still rather than imitating a swing. Mom acknowledges his preference. No destination appears and neither character looks toward an imagined location.",
-      "end": "Mom and Child remain seated in the same home positions with empty hands near their laps after agreeing that the park sounds appealing."
+      "action": "Mom offers two destinations with a small open-palm gesture. Child chooses the park and gives his swing reason with a modest smile, keeping his body still rather than imitating a swing. Mom approves the reason and introduces rain as a possible condition in normal conversation. No destination appears and neither character looks toward an imagined location.",
+      "end": "Mom and Child remain seated in the same home positions with empty hands near their laps, Child taking a brief thoughtful pause at the rain question."
     },
-    "B": {
-      "start": "Mom and Child remain seated in the same home positions with empty hands near their laps after agreeing that the park sounds appealing.",
-      "action": "Mom introduces rain as a possible condition in normal conversation, then listens. After a brief thoughtful pause, Child offers the library with one small open-hand gesture. Mom accepts indoor reading as the alternative. No rain starts, no lighting changes, and no one supplies Child's proposal for him.",
-      "end": "Mom and Child remain seated at home with empty hands lowered near their laps after agreeing on the library as the rainy-day alternative."
+    {
+      "turns": [3, 4, 5],
+      "start": "Mom and Child remain seated in the same home positions with empty hands near their laps, Child taking a brief thoughtful pause at the rain question.",
+      "action": "After the pause, Child offers the library as the rainy-day alternative with one small open-hand gesture and his if-sentence. Mom accepts indoor reading as the rainy-day plan. Child then adds his interest in animal books while looking at Mom, and she agrees warmly. No rain starts, no lighting changes, and no one supplies Child's proposal for him.",
+      "end": "Mom and Child remain seated at home with empty hands lowered near their laps after agreeing on the library, the rainy-day alternative, and the animal-book idea."
     },
-    "C": {
-      "start": "Mom and Child remain seated at home with empty hands lowered near their laps after agreeing on the library as the rainy-day alternative.",
-      "action": "Child adds his interest in animal books while looking at Mom. Mom agrees and restates the dry-weather park and rainy-weather library options with a small two-option hand gesture. Child gives one relaxed confirming nod during his final turn. End with a shared plan, without books, travel, pretend reading or additional speech.",
+    {
+      "turns": [6, 7],
+      "start": "Mom and Child remain seated at home with empty hands lowered near their laps after agreeing on the library, the rainy-day alternative, and the animal-book idea.",
+      "action": "Mom restates the dry-weather park and rainy-weather library options with a small two-option hand gesture. Child gives one relaxed confirming nod during his final turn, restating tomorrow's plan with a small pleased smile. End with the shared plan, without books, travel, pretend reading or additional speech.",
       "end": "Mom and Child remain seated in the unchanged home setting with empty hands relaxed near their laps, sharing a calm look after confirming tomorrow's conditional plan."
     }
-  }
+  ]
 }

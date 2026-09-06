@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "At home, Dad sits screen-left and Child screen-right at a low animal-card table. Child is the four-year-old tiger boy in his unchanged yellow T-shirt and blue shorts. One small deck lies beside Dad and one face-up tiger card lies directly in front of Child. The adjacent doorway is immediately beyond Child's chair at frame-right, only two ordinary steps away; there is no walk across the room. A locked 16:9 medium two-shot includes the table, both faces and this nearby exit. Dad stops at the first bathroom signal. Child finishes leaving in Part A while Dad agrees to save the game. Part B contains one explicit time ellipsis to a later return after an ordinary bathroom break and handwashing off-screen. The real break has no time limit and is not portrayed as lasting ten seconds. No bathroom interior, toileting, racing, extra character or caption is shown.",
+  "content_revision": 3,
+  "scene": "At home, Dad sits screen-left and Child screen-right at a low animal-card table. Child is the four-year-old tiger boy in his unchanged yellow T-shirt and blue shorts. One small deck lies beside Dad and one face-up tiger card lies directly in front of Child. The adjacent doorway is immediately beyond Child's chair at frame-right, only two ordinary steps away; there is no walk across the room. A locked 16:9 medium two-shot includes the table, both faces and this nearby exit. Dad stops at the first bathroom signal. Child finishes leaving in the first clip while Dad agrees to save the game. The second clip contains one explicit time ellipsis to a later return after an ordinary bathroom break and handwashing off-screen. The real break has no time limit and is not portrayed as lasting ten seconds. No bathroom interior, toileting, racing, extra character or caption is shown.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline at ordinary family conversation volume. Child states the need plainly and Dad responds with matter-of-fact care.",
-    "allowed_shift": "Child briefly promises to return while already leaving. At the later return he notices that his turn was saved and responds with quiet appreciation before choosing to resume.",
+    "allowed_shift": "Child briefly promises to return while already leaving, with one small playful smile about his cards. At the later return he notices that his turn was saved and responds with quiet appreciation before choosing to resume.",
     "forbidden": "No visible desperation, panic, bathroom dance, embarrassment, urgency comedy, shouting or frantic running. Dad must not bargain, demand a complete sentence, require a return promise, ask for another game move or hold Child in frame before bathroom access. Never stretch the departure or rush the off-screen bathroom break."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2, 3],
       "start": "Dad and Child sit at the low table, Dad left and Child right. The deck rests beside Dad and the single tiger card lies face-up in front of Child. The nearby doorway just beyond Child's chair at frame-right is clear; Dad's hands are near but not on the deck.",
-      "action": "Child gives the bathroom signal and rises immediately during his first line. Dad immediately withdraws his hands from the game and acknowledges the stop. Child says the brief return promise during his two ordinary steps toward the adjacent doorway, without pausing or turning back. He passes out of view while Dad agrees from the table to keep the game in place. Keep Child's face visible only for his own two short lines; Dad's final line can finish after Child has already left. The return promise is optional reassurance, never a condition for departure. No card is moved.",
+      "action": "Dad opens with Child's turn. Child gives the bathroom signal and rises immediately during his line. Dad immediately withdraws his hands from the game, agrees and adds the handwashing plan. Child gives his small no-peeking smile during his two ordinary steps toward the adjacent doorway, without pausing or turning back. He passes out of view while Dad sits still. The return promise is optional reassurance, never a condition for departure. No card is moved.",
       "end": "Child has left the room through the adjacent doorway at frame-right. Dad remains by the table at frame-left with hands away from the untouched deck and face-up tiger card; Child's chair is empty and the game is paused."
     },
-    "B": {
+    {
+      "turns": [4, 5],
       "start": "Child has left the room through the adjacent doorway at frame-right. Dad remains by the table at frame-left with hands away from the untouched deck and face-up tiger card; Child's chair is empty and the game is paused.",
-      "action": "Begin with the paused table and empty chair, then use one brief dip to black and return to the identical locked view: this explicit time ellipsis marks a later moment after the bathroom break and handwashing have finished off-screen at an ordinary unhurried pace. Only after the transition does Child re-enter from the adjacent doorway. He takes the same two ordinary steps to his chair and sits during Dad's welcome. Child notices the saved tiger card and thanks Dad once seated. Dad then checks whether he wants to continue, without reaching for any card or presuming readiness. The short transition is an editorial time skip, not the duration of the bathroom visit.",
+      "action": "Begin with the paused table and empty chair, then use one brief dip to black and return to the identical locked view: this explicit time ellipsis marks a later moment after the bathroom break and handwashing have finished off-screen at an ordinary unhurried pace. Only after the transition does Child re-enter from the adjacent doorway. He takes the same two ordinary steps to his chair and sits during Dad's welcome. Child notices the saved tiger card and thanks Dad once seated, without reaching for any card yet. The short transition is an editorial time skip, not the duration of the bathroom visit.",
       "end": "Dad and Child are both seated at the table again, Dad left and Child right, with empty hands. The deck is still beside Dad and the face-up tiger card remains untouched in front of Child; the game is waiting for Child's readiness."
     },
-    "C": {
+    {
+      "turns": [6, 7],
       "start": "Dad and Child are both seated at the table again, Dad left and Child right, with empty hands. The deck is still beside Dad and the face-up tiger card remains untouched in front of Child; the game is waiting for Child's readiness.",
-      "action": "Child confirms that he wants to resume and that his saved turn is next. Dad indicates a clear spot at table-center with one small open-hand gesture during his response. Only after that exchange does Child slide his single face-up tiger card from in front of his seat to that center spot with his right hand while naming it. No new card is drawn and the deck stays fixed beside Dad. Keep both people settled throughout this segment; the game restarts because Child is ready after the completed break.",
+      "action": "Dad indicates a clear spot at table-center with one small open-hand gesture during his response. Only after that exchange does Child slide his single face-up tiger card from in front of his seat to that center spot with his right hand while naming it, then rests his hand beside it with a small satisfied smile. No new card is drawn and the deck stays fixed beside Dad. Keep both people settled throughout this clip; the game resumes because Child is ready after the completed break.",
       "end": "Both remain seated. The single face-up tiger card now rests at table-center after Child's turn, with his right hand relaxed beside it. Dad's hands are empty and the deck remains beside him; the saved game has resumed calmly."
     }
-  }
+  ]
 }

@@ -1,10 +1,10 @@
-How Much Longer? — Part B (change)
-Production prompt draft | Source: curriculum/04/09-outings-safety/01-how-much-longer/lesson.json | Content revision: 2
-Source SHA256: 75314fed7e13c8981f2ccf0e140487a0053a95790b88f70ec011b8ce06a03c6b
+How Much Longer? — Clip 2
+Production prompt draft | Source: curriculum/04/09-outings-safety/01-how-much-longer/lesson.json | Content revision: 3
+Source SHA256: 4ec9f40031901f4cb2d79ffd2c49f883ee13ed4ded532b15828be21aa531a7a8
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -20,25 +20,24 @@ SETTING
 A continuous conversation in the family car; Dad is belted and watches the road, and Child stays in his fitted rear-seat child restraint.
 
 SCENE AND PROP CONTINUITY
-Inside the same family car on a familiar daytime route. A locked 16:9 medium two-shot from the front passenger-side dashboard looks diagonally toward Dad, screen left in the driver's seat, and Child, screen right in the rear seat. Dad stays correctly belted, eyes forward on the road and both hands on the wheel. Child is the same four-year-old tiger boy in his yellow T-shirt, securely seated in a correctly fitted age-appropriate child restraint; he/him if a pronoun is needed. Frame both faces at three-quarter angles without either turning toward the camera. Keep restrained exterior motion, unchanged daylight and no other occupants or handheld props. A/B/C are continuous, with no time jump: the five-minute estimate is not elapsed time, and neither the bridge nor arrival is reached during these clips. They only choose a familiar song; no music player, extra lyrics, melody, humming or new singing starts inside the demo.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Inside the same family car on a familiar daytime route. A locked 16:9 medium two-shot from the front passenger-side dashboard looks diagonally toward Dad, screen left in the driver's seat, and Child, screen right in the rear seat. Dad stays correctly belted, eyes forward on the road and both hands on the wheel. Child is the same four-year-old tiger boy in his yellow T-shirt, securely seated in a correctly fitted age-appropriate child restraint; he/him if a pronoun is needed. Frame both faces at three-quarter angles without either turning toward the camera. Keep restrained exterior motion, unchanged daylight and no other occupants or handheld props. The three clips are continuous, with no time jump: the five-minute estimate is not elapsed time, and neither the bridge nor arrival is reached during these clips. They only choose a familiar song; no music player, extra lyrics, melody, humming or new singing starts inside the demo.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Dad remains belted and forward-facing with both hands on the wheel; Child remains correctly restrained in the rear seat, attentive to Dad with his hands on his own lap.
 
 ACTION AND REACTIONS
-Child asks whether arrival is after the familiar bridge without pointing, leaning or reaching. Dad confirms while his eyes remain on the road and both hands stay on the wheel. Child accepts the estimate with a small easing of his brow and lets his gaze return to the side window. No time is skipped and no bridge, song or arrival starts in this clip; everyone stays in the same safe seated position.
+Child asks whether arrival is after the familiar bridge without pointing, leaning or reaching. Dad confirms while his eyes remain on the road and both hands stay on the wheel. Child connects the landmark to being close with a small easing of his brow and lets his gaze return to the side window. No time is skipped and no bridge, song or arrival starts in this clip; everyone stays in the same safe seated position.
 
 SPOKEN DIALOGUE (verbatim, in order):
 Child: "Will we get there after the bridge?"
-Dad: "Yes, just after the bridge."
-Child: "Okay. That's not far now."
+Dad: "Yes, just after the big bridge."
+Child: "When I see the bridge, we're close."
 
 END FRAME
 Dad remains belted and forward-facing with both hands on the wheel; Child sits correctly restrained in the rear seat, looking toward the side window with his hands on his own lap.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (17 spoken words)
+PACING (20 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

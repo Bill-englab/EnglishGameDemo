@@ -1,5 +1,7 @@
 # Stage 1（`curriculum/04`）三段十秒完整内容审查
 
+> **迁移说明（2026-09-06）**：本文的全部结论只覆盖 `three-by-ten-v2` 旧 contract（revision 2–4 时代）。同日全部 30 课已按[连续对话内容与三段视频生产规范](../../docs/specs/2026-09-06-continuous-dialogue-content-design.md)与[内容生成风格手册](../../docs/specs/2026-09-06-dialogue-authoring-style.md)迁移到 `continuous-dialogue-v1`：一段完整对话 + production 三个 clip，`core/stretch/repair` 三字段删除。本文保留为旧版结构、负担统计与审查口径的历史依据，不构成新 contract 的验收结论；新 contract 的逐课验收由 `test_all_lessons_meet_continuous_dialogue_contract`（结构、clips 覆盖、关键句式由孩子说出）与提示词同步检查承担。
+
 审查范围：10 章、30 课、90 段 canonical 对话、30 份 `production.json` 与 90 份生成提示词。最终审查日期：2026-09-06。
 
 ## 发布结论

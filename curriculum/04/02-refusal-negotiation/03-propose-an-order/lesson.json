@@ -1,47 +1,26 @@
 {
   "title": "Blocks First",
   "title_zh": "先收积木",
-  "dialogue_contract": "three-by-ten-v2",
+  "dialogue_contract": "continuous-dialogue-v1",
   "can_do": "面对两个都要完成的任务时，提出一个可行顺序。",
   "conversation_move": {"id": "propose-order", "label": "propose an order"},
-  "trigger": "Dad suggests putting away the cars and then the blocks; Child proposes the reverse order while keeping both cleanup jobs.",
-  "core_response": "What if we do blocks first?",
-  "stretch_response": "Yes, then the cars.",
-  "repair_response": "I mean books first, then animals.",
+  "trigger": "Dad suggests putting the cars away first and the blocks second; Child proposes the reverse order and knows which box holds each group.",
   "recycle": ["change-choice"],
   "roles": ["child", "dad"],
   "setting": "Tidying two small toy groups together at home.",
-  "essential_props": ["one toy-cleanup arrangement: two blocks, two cars and their divided storage box"],
-  "parts": [
-    {
-      "id": "A",
-      "beat": "goal",
-      "turns": [
-        {"speaker": "dad", "line": "Let's put the cars away, then the blocks.", "kind": "input"},
-        {"speaker": "child", "line": "What if we do blocks first?", "kind": "core"},
-        {"speaker": "dad", "line": "Blocks first?", "kind": "input"}
-      ]
-    },
-    {
-      "id": "B",
-      "beat": "change",
-      "turns": [
-        {"speaker": "child", "line": "Yes, then the cars.", "kind": "stretch"},
-        {"speaker": "dad", "line": "Okay. Let's put these blocks in.", "kind": "input"},
-        {"speaker": "child", "line": "I'll take this one.", "kind": "action"}
-      ]
-    },
-    {
-      "id": "C",
-      "beat": "resolve",
-      "turns": [
-        {"speaker": "dad", "line": "That's the last block.", "kind": "input"},
-        {"speaker": "child", "line": "Now let's do the cars.", "kind": "action"},
-        {"speaker": "dad", "line": "I'll take this car.", "kind": "input"},
-        {"speaker": "child", "line": "I'll take the other.", "kind": "action"}
-      ]
-    }
-  ],
+  "essential_props": ["one toy-cleanup arrangement: two blocks, one red car, one blue car, a blue block box and a red car box"],
+  "dialogue": {
+    "turns": [
+      {"speaker": "dad", "line": "Dinner's nearly ready. Cars away first, then the blocks."},
+      {"speaker": "child", "line": "What if we do blocks first? The blocks are bigger."},
+      {"speaker": "dad", "line": "Blocks first, then. Which box holds the blocks?"},
+      {"speaker": "child", "line": "The blue one. The red box is for cars."},
+      {"speaker": "dad", "line": "Good plan. Put the two blocks in."},
+      {"speaker": "child", "line": "Done. Now the cars. I'll take the red one."},
+      {"speaker": "dad", "line": "I'll take the blue one."},
+      {"speaker": "child", "line": "All tidy. Dinner time at last."}
+    ]
+  },
   "replay_cards": [
     {"title": "Coats and shoes", "setting": "At the front door", "change": "Both coat and shoes are needed", "challenge": "Propose shoes first, then coat; Dad agrees and both steps are completed"},
     {"title": "Books and animals", "setting": "Tidying the bedroom", "change": "Two groups belong in different places, and Mom initially reverses Child's proposed order", "challenge": "Child proposes books before animals. When Mom checks animals first, Child repairs, \"I mean books first, then animals.\" Mom accepts the complete order; they shelve the books together, then begin putting the animals away."}
@@ -49,5 +28,5 @@
   "parent_support": ["Keep the real boundary: both toy groups go away. The child may change the order, not cancel a job.", "Accept a safe order, finish the first group together, and leave space for the child to initiate the second."],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 3
+  "content_revision": 4
 }

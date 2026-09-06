@@ -1,18 +1,25 @@
 {
   "title":"Space Pirates","title_zh":"太空海盗","can_do":"说出自己的玩法，保留同伴寻找宝藏的想法，协商飞船驾驶和寻宝分工后开始共同游戏。",
   "conversation_move":{"id":"suggest-shared-play","label":"suggest a shared play idea"},
-  "trigger":"Peer wants pirate treasure play, while Child wants space play. A shared idea still needs both children to agree on their roles.",
-  "core_response":"How about we play space pirates?","stretch_response":"Okay, I'll find the treasure.","repair_response":"No, we'll keep your castle.",
+  "trigger":"Peer wants pirate treasure play, while Child wants space play; Child proposes combining both into space pirates and they split the roles.",
   "recycle":["propose-order","change-choice"],"roles":["child","peer"],"setting":"Two friends plan a pretend voyage while seated on one blanket in a home play area.","essential_props":["one pretend ship set: a flat blanket and one paper treasure map"],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"peer","line":"Let's play pirates.","kind":"input"},{"speaker":"child","line":"I want to play in space.","kind":"input"},{"speaker":"peer","line":"But I want to find treasure.","kind":"input"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"child","line":"How about we play space pirates?","kind":"core"},{"speaker":"peer","line":"If I can fly the spaceship.","kind":"input"},{"speaker":"child","line":"Okay, I'll find the treasure.","kind":"stretch"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"peer","line":"Where should we fly first?","kind":"input"},{"speaker":"child","line":"To this treasure planet.","kind":"confirmation"},{"speaker":"peer","line":"Then I'll steer us there.","kind":"action"},{"speaker":"child","line":"I'll check the map.","kind":"action"}]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker":"peer","line":"Let's play pirates and find treasure."},
+      {"speaker":"child","line":"I want to play in space."},
+      {"speaker":"peer","line":"But I like my treasure plan."},
+      {"speaker":"child","line":"How about we play space pirates?"},
+      {"speaker":"peer","line":"Space pirates! Can I fly the spaceship?"},
+      {"speaker":"child","line":"Yes. I'll be the treasure finder."},
+      {"speaker":"peer","line":"Where should we fly first?"},
+      {"speaker":"child","line":"To the treasure planet. I'll check the map."}
+    ]
+  },
   "replay_cards":[
     {"title":"Castle train","setting":"Block and train play","change":"Peer wants to keep his castle; Child proposes a visitor train, but Peer thinks the railway will replace his castle","challenge":"Child repairs the misunderstanding with \"No, we'll keep your castle.\" Peer asks for the track to go beside the gate, and Child chooses to run a station there. Agree on the space and roles, connect the track beside the unchanged castle, and send the first train to the station."},
     {"title":"Animal restaurant","setting":"Pretend kitchen play","change":"Peer wants to play with toy animals, while Child wants to cook a pretend meal","challenge":"Child changes the separate cooking plan with \"Actually, let's cook for your animals.\" Peer keeps a real choice by asking to feed the dog first. Child proposes \"What if we feed the dog first, then the cat?\" They agree that Child cooks while Peer brings the animals, then serve the dog's first pretend meal."}
   ],
   "parent_support":["Peer wants treasure play and chooses to pilot the spaceship; Child keeps the space idea and chooses the treasure-finder role. Let each preference matter before the voyage starts.","Use an ordinary thinking pause and small smiles. A combined idea is an invitation that the partner can negotiate, not a cue for automatic or exuberant agreement."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2,"dialogue_contract":"three-by-ten-v2"
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":3
 }

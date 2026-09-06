@@ -1,10 +1,10 @@
-I Still Need My Bottle — Part B (change)
-Production prompt draft | Source: curriculum/04/05-routines-transitions/03-check-readiness/lesson.json | Content revision: 4
-Source SHA256: a94c26a93d48aeef4bfa89a827bdf7dcf01e2149f5f9dd09ca9e9aeae02f2d6f
+I Still Need My Bottle — Clip 2
+Production prompt draft | Source: curriculum/04/05-routines-transitions/03-check-readiness/lesson.json | Content revision: 5
+Source SHA256: 0e2396d452fd8571a31284bb9986d293d689e85618318f03b345767921cff763
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -12,7 +12,7 @@ Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt
 
 EMOTIONAL PERFORMANCE
 Calm, warm and regulated baseline. Dad makes an ordinary readiness check and gives Child time to finish packing.
-A brief thoughtful look at the missing item, mild recognition on finding it and a small confident nod after packing.
+A brief thoughtful look into the bag, mild recognition on finding the bottle and a small confident nod after packing.
 No nagging, impatient departure, whining, panic about the bottle, exaggerated discovery, running, frantic searching or distorted body shapes.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
@@ -21,24 +21,22 @@ Inside the front door before a car ride, with the bottle and bag both within eas
 
 SCENE AND PROP CONTINUITY
 Inside a compact home entry, Dad stands screen-left and Child stands screen-right beside the closed front door. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts, cream socks and navy shoes throughout. A small open canvas carry bag with short handles rests upright on a low stool just in front of Child's left side. A single capped water bottle stands on a low little table immediately to his right, at a comfortable reach without climbing or crossing Dad. Bottle and bag form the one essential prop group; the bag is meant to stay open and has no fastening task. The bottle is visible to the camera from the start but Child initially looks into his bag. Lock a 16:9 medium two-shot wide enough for both faces, hands, the bag and the whole bottle. Keep both characters in the entry; no search montage, other room, car interior or extra bottles.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Dad stands screen-left and Child screen-right looking at each other with empty hands. The carry bag remains open and upright on the stool in front of Child's left side, and the capped bottle stays on the little table immediately to his right. The front door is closed and Child's outfit is unchanged.
 
 ACTION AND REACTIONS
-Child asks for help. Dad looks toward the little table and gives its useful location clue with one small point, then lowers his hand. Child follows the clue, recognizes the visible bottle and reports finding it. He reaches with his right hand, lifts the capped bottle from the table and brings it beside his body. His left hand stays free and the bag remains on the stool.
+Dad looks toward the little table and gives its useful location clue with one small point, then lowers his hand. Child follows the clue, recognizes the visible bottle with mild recognition and reports finding it. He reaches with his right hand, lifts the capped bottle from the table and brings it beside his body, stating that he will pack it himself. His left hand stays free and the bag remains on the stool.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Child: "Can you help me?"
 Dad: "It's on the little table beside you."
-Child: "There it is."
+Child: "There it is! I'll put it in myself."
 
 END FRAME
 Child stands screen-right holding the single capped bottle in his right hand beside his body, left hand free; its former place on the little table to his right is empty. Dad stands screen-left with empty hands. The carry bag is still open on the stool in front of Child's left side, the door is closed and both outfits are unchanged.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (14 spoken words)
+PACING (15 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

@@ -1,10 +1,10 @@
-Please Stop — Part C (resolve)
-Production prompt draft | Source: curriculum/04/08-feelings-repair/02-ask-to-stop/lesson.json | Content revision: 2
-Source SHA256: 76070e342e6ef97f93d57f745db369cd0f4fb8b8f99dc8faddb7a4634049e596
+Please Stop — Clip 3
+Production prompt draft | Source: curriculum/04/08-feelings-repair/02-ask-to-stop/lesson.json | Content revision: 3
+Source SHA256: 49a00126226bfaeeddec2219b9b57bd2afe587c3377a5e5d42c2310846f77b4c
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -21,25 +21,23 @@ A brief playful moment while Dad and Child sit on a broad sofa at home.
 
 SCENE AND PROP CONTINUITY
 A broad home sofa with Dog Dad screen left and Child screen right, both seated upright and with a full cushion of available space to Dad's left. Dad is the warm brown dog with floppy ears and an olive-green T-shirt; Child is the four-year-old tiger boy in his yellow T-shirt. No props. Dad gives only one light tickle with his right hand near Child's left side, over the shirt; he never pins, grabs, chases or blocks Child. Locked 16:9 medium two-shot includes both faces, both sets of hands and enough sofa to show a clear gap. Respect for the first boundary is the central visible action.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Dad sits farther left with both hands down in his lap and one empty cushion-width gap between him and Child. Child remains in his original right-hand seat with hands on his own knees; there is no contact.
 
 ACTION AND REACTIONS
-Child briefly indicates the existing empty gap with his left hand while specifying the space he needs, then returns that hand to his knee. Dad gives a small nod and settles back in his own place, visibly keeping the same distance. Child reports being comfortable with a small release of shoulder tension, not a required smile. Dad's closing reassurance stays brief and warm. Keep the gap and Dad's hands down throughout; do not add tickling, a high five, a funny face or a hug.
+Child briefly indicates the existing empty gap with his left hand while confirming that this much space is just right, then returns that hand to his knee. Dad gives a small nod, settles back in his own place, visibly keeping the same distance, and gives his brief warm reassurance that Child can tell him anytime. Child reports being comfortable with a small release of shoulder tension, not a required smile. Keep the gap and Dad's hands down throughout; do not add tickling, a high five, a funny face or a hug.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Child: "I need this much space."
-Dad: "I'll stay over here."
-Child: "Thanks. I'm comfortable now."
-Dad: "You can tell me anytime."
+Child: "This much space is just right."
+Dad: "I'll stay here. You can tell me anytime."
+Child: "Thanks, Dad. I'm comfortable now."
 
 END FRAME
 Dad and Child remain separated by the same empty cushion-width gap, with no contact. Dad's hands stay down in his own lap and Child's hands rest on his own knees; both have calm faces and Child sits comfortably.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (18 spoken words)
+PACING (19 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

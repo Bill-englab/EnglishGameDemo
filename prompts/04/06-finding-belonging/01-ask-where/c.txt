@@ -1,10 +1,10 @@
-Where Is My Car? — Part C (resolve)
-Production prompt draft | Source: curriculum/04/06-finding-belonging/01-ask-where/lesson.json | Content revision: 2
-Source SHA256: 23561845d81abc78f9348a83dcf4d811edfd137783cc2db255d59b4165134802
+Where Is My Car? — Clip 3
+Production prompt draft | Source: curriculum/04/06-finding-belonging/01-ask-where/lesson.json | Content revision: 3
+Source SHA256: f9d5890a514ca04b2f398e7023bc2ebd9c49f47d86dac025e2ac364d857dcab4
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -12,7 +12,7 @@ Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt
 
 EMOTIONAL PERFORMANCE
 Calm, warm and regulated baseline. Dad notices an ordinary search and listens with relaxed posture.
-Child may look mildly puzzled while searching, then show a small smile of recognition. Dad responds with one gentle point and a small acknowledging smile.
+Child may look mildly puzzled while searching, a brief thinking look while remembering, then a small smile of recognition. Dad responds with one gentle point and a small acknowledging smile.
 No frantic searching, alarm, theatrical guessing, exaggerated discovery, shouting, jumping, grabbing or distorted expressions.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
@@ -20,26 +20,23 @@ SETTING
 Looking for a toy car beside a low shelf at home.
 
 SCENE AND PROP CONTINUITY
-A quiet home play corner. Dad kneels screen-left and Child kneels screen-right on a rug, directly in front of a low shelf that both can reach without climbing. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts and cream socks throughout. One small red toy car with black wheels rests at the back-right of the shelf behind a small opaque blue storage box. The box blocks Child's initial view of the car; the car is already there and stays there until retrieved in C. The shelf has clear space immediately to the box's left so Dad can slide it sideways without pushing the car. The car and its single box obstacle are the only movable props. Lock a 16:9 medium two-shot including both faces, hands, the rug and the whole low shelf. No second car, other room or search montage.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+A quiet home play corner. Dad kneels screen-left and Child kneels screen-right on a rug, directly in front of a low shelf that both can reach without climbing. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts and cream socks throughout. One small red toy car with black wheels rests at the back-right of the shelf behind a small opaque blue storage box. The box blocks Child's initial view of the car; the car is already there and stays there until retrieved in the final clip. The shelf has clear space immediately to the box's left so Dad can slide it sideways without pushing the car. The car and its single box obstacle are the only movable props. Lock a 16:9 medium two-shot including both faces, hands, the rug and the whole low shelf. No second car, other room or search montage.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Dad and Child remain kneeling screen-left and screen-right, now looking toward the space behind the blue box with empty hands. The blue box remains at the shelf's front-right, the red car with black wheels is hidden at the back-right, and the space to the box's left is clear. Child's outfit is unchanged.
 
 ACTION AND REACTIONS
-During his opening turn Dad uses his right hand to slide the blue box a short distance left into the already clear shelf space, visibly revealing the red car without touching it. Child recognizes the car during his next turn, reaches with his right hand and lifts that same car from the back-right of the shelf. Dad acknowledges the find while Child brings it close. Child's final confirmation happens with the car already secure in his right hand. Dad releases the box and returns his right hand to his lap. These small actions overlap the speech; neither character stands or starts another game.
+During his opening turn Dad uses his right hand to slide the blue box a short distance left into the already clear shelf space, visibly revealing the red car without touching it. Child recognizes the car, reaches with his right hand and lifts that same car from the back-right of the shelf, reporting where it was. Dad acknowledges the find with a small smile while Child brings it close. Dad releases the box and returns his right hand to his lap. These small actions overlap the speech; neither character stands or starts another game.
 
 SPOKEN DIALOGUE (verbatim, in order):
 Dad: "Let's move the box and see."
-Child: "There it is!"
-Dad: "You've found your red car."
-Child: "Thanks, Dad. I've got it."
+Child: "There it is! My red car was under the box."
 
 END FRAME
 Child kneels screen-right holding the single red car with black wheels in his right hand, with his left hand free. Dad kneels screen-left with empty hands. The blue box now stands farther left on the low shelf and the car's former back-right spot is empty. Child's yellow T-shirt, navy shorts and cream socks are unchanged.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (19 spoken words)
+PACING (16 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

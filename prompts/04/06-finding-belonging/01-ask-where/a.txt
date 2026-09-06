@@ -1,10 +1,10 @@
-Where Is My Car? — Part A (goal)
-Production prompt draft | Source: curriculum/04/06-finding-belonging/01-ask-where/lesson.json | Content revision: 2
-Source SHA256: 23561845d81abc78f9348a83dcf4d811edfd137783cc2db255d59b4165134802
+Where Is My Car? — Clip 1
+Production prompt draft | Source: curriculum/04/06-finding-belonging/01-ask-where/lesson.json | Content revision: 3
+Source SHA256: f9d5890a514ca04b2f398e7023bc2ebd9c49f47d86dac025e2ac364d857dcab4
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -12,7 +12,7 @@ Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt
 
 EMOTIONAL PERFORMANCE
 Calm, warm and regulated baseline. Dad notices an ordinary search and listens with relaxed posture.
-Child may look mildly puzzled while searching, then show a small smile of recognition. Dad responds with one gentle point and a small acknowledging smile.
+Child may look mildly puzzled while searching, a brief thinking look while remembering, then a small smile of recognition. Dad responds with one gentle point and a small acknowledging smile.
 No frantic searching, alarm, theatrical guessing, exaggerated discovery, shouting, jumping, grabbing or distorted expressions.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
@@ -20,25 +20,25 @@ SETTING
 Looking for a toy car beside a low shelf at home.
 
 SCENE AND PROP CONTINUITY
-A quiet home play corner. Dad kneels screen-left and Child kneels screen-right on a rug, directly in front of a low shelf that both can reach without climbing. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts and cream socks throughout. One small red toy car with black wheels rests at the back-right of the shelf behind a small opaque blue storage box. The box blocks Child's initial view of the car; the car is already there and stays there until retrieved in C. The shelf has clear space immediately to the box's left so Dad can slide it sideways without pushing the car. The car and its single box obstacle are the only movable props. Lock a 16:9 medium two-shot including both faces, hands, the rug and the whole low shelf. No second car, other room or search montage.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+A quiet home play corner. Dad kneels screen-left and Child kneels screen-right on a rug, directly in front of a low shelf that both can reach without climbing. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts and cream socks throughout. One small red toy car with black wheels rests at the back-right of the shelf behind a small opaque blue storage box. The box blocks Child's initial view of the car; the car is already there and stays there until retrieved in the final clip. The shelf has clear space immediately to the box's left so Dad can slide it sideways without pushing the car. The car and its single box obstacle are the only movable props. Lock a 16:9 medium two-shot including both faces, hands, the rug and the whole low shelf. No second car, other room or search montage.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Dad kneels screen-left and Child screen-right beside the low shelf; both have empty hands. Child looks over the empty rug. The blue box stands at the shelf's front-right, hiding the stationary red car with black wheels at the back-right. Child wears his yellow T-shirt, navy shorts and cream socks.
 
 ACTION AND REACTIONS
-Dad notices Child searching the rug and asks what he needs. Child looks up and names his missing car. Dad gives the low-shelf clue with one small point. Child follows that clue by turning his gaze from the rug to the shelf and checking its visible front edge. Neither character touches the box or car.
+Dad notices Child searching the rug and asks what is missing. Child looks up, asks about his red car and mentions having it at story time. Dad asks where he played with it last. Child remembers the rug and putting it near the shelf, glancing from the rug to the low shelf during his answer. Neither character touches the box or car.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Dad: "What are you looking for?"
-Child: "Where's my red car?"
-Dad: "Try the low shelf beside you."
+Dad: "You keep looking around. What's missing?"
+Child: "Where's my red car? I had it at story time."
+Dad: "Where did you play with it last?"
+Child: "On the rug. Then I put it near the shelf."
 
 END FRAME
 Dad kneels screen-left and Child screen-right, both looking at the front of the low shelf with empty hands. The blue box is still at the front-right, hiding the red car with black wheels at the back-right; the clear shelf space to the box's left is empty. Child's outfit is unchanged.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (15 spoken words)
+PACING (33 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

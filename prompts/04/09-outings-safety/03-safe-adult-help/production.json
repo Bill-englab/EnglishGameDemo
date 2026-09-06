@@ -1,26 +1,29 @@
 {
-  "content_revision": 3,
-  "scene": "A clearly domestic living room during calm pretend practice. Mom sits screen left and Child screen right at adjacent sides of a small home desk, within easy conversational distance. A recognizable home sofa stays visible behind them in every A/B/C clip. Use a locked 16:9 medium two-shot of their faces, resting hands and desk. Mom remains the same pink pig in her coral cardigan over a cream top, with one pretend store-worker badge pinned to the cardigan. Child is the same four-year-old tiger boy in his yellow T-shirt; he/him if needed. Mom explicitly announces her pretend role in A and is understood as the same Mom playing that worker in B/C. She never disappears, hides or changes identity. Both remain seated together at home throughout; the desk stands in for a customer-service desk without transforming the room into a shop. No stranger, actual separation, extra helper, outdoor location, phone, call audio or reunion appears. The badge signals a pre-agreed pretend role; it is not a claim that any person with a badge is trustworthy. Leo is only a fictional practice first name.",
+  "content_revision": 4,
+  "scene": "A clearly domestic living room during calm pretend practice. Mom sits screen left and Child screen right at adjacent sides of a small home desk, within easy conversational distance. A recognizable home sofa stays visible behind them in every clip. Use a locked 16:9 medium two-shot of their faces, resting hands and desk. Mom remains the same pink pig in her coral cardigan over a cream top, with one pretend store-worker badge pinned to the cardigan. Child is the same four-year-old tiger boy in his yellow T-shirt; he/him if needed. Mom explicitly announces her pretend role in the first clip and is understood as the same Mom playing that worker afterward. She never disappears, hides or changes identity. Both remain seated together at home throughout; the desk stands in for a customer-service desk without transforming the room into a shop. No stranger, actual separation, extra helper, outdoor location, phone, call audio or reunion appears. The badge signals a pre-agreed pretend role; it is not a claim that any person with a badge is trustworthy. Leo is only a fictional practice first name.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Both know this is a home rehearsal. Child is attentive and may look mildly serious when practicing the help request; Mom listens supportively at normal volume.",
     "allowed_shift": "A small serious look can ease slightly when Mom explains the stay-and-contact plan. Child's agreement is a quiet nod and remaining in place, with no required smile or relief spectacle.",
     "forbidden": "No real separation, hiding, parking lot movement, stranger touch, panic, crying spectacle, terrified staring, frantic searching, rescue drama, forced hug or cheering reunion. Do not add surnames, addresses, phone numbers, quizzes or personal-information displays."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Mom and Child are seated together at the small desk at home, with the familiar sofa behind them; Mom's pretend worker badge is visible, and each rests their own hands on the desk.",
-      "action": "Mom announces the practice and that she will pretend to be a store worker, briefly indicating her own badge with her right hand and returning it to the desk. Only then does Child begin the rehearsed missing-parent statement toward Mom, at normal volume with an attentive or slightly serious face. Mom-as-worker responds by asking his name. Keep Mom and the domestic background visible without hiding, searching, leaving a seat or touching Child.",
+      "action": "Mom announces the practice and that she will pretend to be a store worker, briefly indicating her own badge with her right hand and returning it to the desk. Only then does Child begin the rehearsed missing-parent statement toward Mom, at normal volume with an attentive or slightly serious face. Mom-as-worker responds by reassuring him and asking his name. Keep Mom and the domestic background visible without hiding, searching, leaving a seat or touching Child.",
       "end": "Mom and Child remain seated together at the same desk at home, with the sofa and badge visible; both have their own hands resting on the desk as Child prepares to answer Mom's name question."
     },
-    "B": {
+    {
+      "turns": [3, 4],
       "start": "Mom and Child remain seated together at the same desk at home, with the sofa and badge visible; both have their own hands resting on the desk as Child prepares to answer Mom's name question.",
-      "action": "Child gives only the scripted first name Leo. Mom, still playing the agreed worker role, acknowledges him warmly; Child then asks for help. Keep the exchange low-key, with ordinary eye contact and hands resting separately on the desk. Mom stays visible at home throughout; no surname, address, number, quiz, information display or additional adult is introduced.",
+      "action": "Child gives only the scripted first name Leo and asks for help. Mom, still playing the agreed worker role, accepts warmly and states that she will call his mom now. Keep the exchange low-key, with ordinary eye contact and hands resting separately on the desk. Mom stays visible at home throughout; no surname, address, number, quiz, information display or additional adult is introduced, and no device or actual call is used.",
       "end": "Mom and Child remain seated together at the same desk at home after the first-name and help request; the sofa and badge are visible and both rest their own hands on the desk."
     },
-    "C": {
+    {
+      "turns": [5, 6, 7],
       "start": "Mom and Child remain seated together at the same desk at home after the first-name and help request; the sofa and badge are visible and both rest their own hands on the desk.",
-      "action": "Mom-as-worker briefly lowers her gaze toward the same desk while explaining that they will stay there and that she will call his mom. This describes the pretend next step only: she does not leave, use a device or place an actual call. Child gives a small nod during his agreement to stay with her and remains seated at that exact desk. Mom confirms they will wait together. Keep hands on their own side of the desk and end calmly with no touch, reunion, added speech or new person.",
-      "end": "Mom and Child remain seated together at the same desk at home, calmly waiting in the pretend practice; the familiar sofa and worker badge stay visible and their hands rest separately on the desk."
+      "action": "Child agrees to stay at the desk with her with a small nod, remaining seated at that exact desk. Mom-as-worker briefly lowers her gaze toward the same desk while explaining that they will wait together until his mom comes. This describes the pretend next step only: she does not leave, use a device or place an actual call. Child ends by naming it as a game he likes, acknowledging the rehearsal frame with a small relaxed smile. Keep hands on their own side of the desk and end calmly with no touch, reunion, added speech or new person.",
+      "end": "Mom and Child remain seated together at the same desk at home, calmly finishing the pretend practice; the familiar sofa and worker badge stay visible and their hands rest separately on the desk."
     }
-  }
+  ]
 }

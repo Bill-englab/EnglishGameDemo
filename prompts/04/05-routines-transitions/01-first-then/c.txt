@@ -1,10 +1,10 @@
-Shoes, Then Jacket — Part C (resolve)
-Production prompt draft | Source: curriculum/04/05-routines-transitions/01-first-then/lesson.json | Content revision: 3
-Source SHA256: 1f7d8c54fb23997254718c54cf9933459d26f7a995f139c5254ffecdc2dd0cb0
+Shoes, Then Jacket — Clip 3
+Production prompt draft | Source: curriculum/04/05-routines-transitions/01-first-then/lesson.json | Content revision: 4
+Source SHA256: 7d3c0836952f3ee8dab98228a8fcbda5cd20f6a6173d4b2d06de521b4149170b
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -12,7 +12,7 @@ Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt
 
 EMOTIONAL PERFORMANCE
 Calm, warm and regulated baseline. Dad and Child attend to an ordinary park routine at an easy pace.
-A small searching glance, a straightforward request for help and a modest satisfied smile when dressed.
+A small thinking pause before naming the order, a straightforward request for help and a modest satisfied smile when dressed.
 No nagging, impatient adult lecture, whining, exaggerated triumph, rushed dressing, bouncing, frantic gestures or distorted body shapes.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
@@ -21,25 +21,22 @@ Calmly getting ready for the park on a low bench inside the front door.
 
 SCENE AND PROP CONTINUITY
 Inside the home front door, Dad kneels screen-left and Child sits screen-right on a low entry bench with both feet reaching the floor. Child is the same four-year-old tiger boy in his yellow T-shirt, navy shorts and cream ankle socks throughout. A matching pair of navy easy slip-on shoes sits side by side directly in front of his feet, toes facing forward; a pale-blue lightweight jacket lies open on the bench immediately to Child's left between him and Dad. These clothes are the one essential prop group. The jacket needs no button or zipper work. Keep a locked 16:9 medium two-shot wide enough for faces, hands, feet and the jacket. All dressing stays seated; the front door stays closed. Give the simple movements real time without a dressing montage or wardrobe jump.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-Child sits screen-right with both navy shoes fully on and looks at the open pale-blue jacket immediately to his left on the bench. Dad kneels screen-left with empty hands lowered after pointing; the yellow T-shirt, navy shorts and cream socks are unchanged, and the front door is closed.
+Child sits screen-right with both navy shoes fully on and looks at the open pale-blue jacket immediately to his left on the bench. Dad kneels screen-left with empty hands; the yellow T-shirt, navy shorts and cream socks are unchanged, and the front door is closed.
 
 ACTION AND REACTIONS
-Dad notes the completed shoes and lifts the open jacket from its established spot with both hands, holding it beside Child. Child asks for help. Still kneeling, Dad supports the jacket behind Child's shoulders as the seated boy slips one arm and then the other into its open sleeves. Dad settles the shoulders before his brief reassurance and releases the jacket. Only after both arms are through does Child report readiness. Keep the jacket open over the yellow T-shirt; no standing, fastening or departure action is added.
+Dad lifts the open jacket from its established spot with both hands, holds it beside Child, and supports it behind Child's shoulders as the seated boy slips one arm and then the other into its open sleeves. Dad settles the shoulders and releases the jacket. Only after both arms are through does Child report readiness with a small satisfied smile. Keep the jacket open over the yellow T-shirt; no standing, fastening or departure action is added.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Dad: "Shoes on. Here's your jacket."
-Child: "Can you help me?"
-Dad: "There you go."
-Child: "I'm ready for the park."
+Dad: "Arms in. There you go."
+Child: "Shoes and jacket. I'm ready for the park!"
 
 END FRAME
 Child remains seated screen-right wearing both navy shoes and the open pale-blue jacket over his yellow T-shirt, with navy shorts and cream socks unchanged. Both arms are inside the sleeves. Dad kneels screen-left with empty hands. The jacket's former place on the bench is empty and the front door is still closed.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (17 spoken words)
+PACING (13 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

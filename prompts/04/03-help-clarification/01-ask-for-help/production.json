@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "At a low home play table, Dad sits screen-left and Child screen-right. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. Exactly two broad blue plastic track sections run left to right: the existing section rests at table-left with one toy train parked near its left end; Child holds the loose continuation section at table-right. Their simple horizontal push-fit connectors meet at table-center. The existing section skids away under an unsupported push, so Dad needs to steady it while Child connects the loose section. Only one joint must be made. Keep a locked 16:9 medium two-shot showing faces, hands, the joint and the train. No extra track, train, tool or scenery prop. Dad does not connect the track for Child.",
+  "content_revision": 3,
+  "scene": "At a low home play table, Dad sits screen-left and Child kneels screen-right. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. A toy train track forms a nearly complete ring on the table, with one clearly visible gap where the final curve piece is missing; that loose curve piece rests beside the gap, and one small train is parked on the track nearby. This track set is the only essential prop group. Locked 16:9 medium two-shot shows both faces, hands, the gap and the train. Keep the single gap and the loose curve piece stable until they click together; no extra toys, tools or people. Dad steadies the track but never connects the piece for Child.",
   "emotion": {
-    "baseline": "Calm, warm and regulated baseline at ordinary family conversation volume. Dad is available and matter-of-fact; Child is focused on making his train continue.",
-    "allowed_shift": "The failed join brings only a brief puzzled look. Child asks and specifies the useful help with one small pointing gesture, then shows quiet satisfaction when his own connection works.",
+    "baseline": "Calm, warm and regulated baseline at ordinary family conversation volume. Dad is available and matter-of-fact; Child is focused on finishing his track ring.",
+    "allowed_shift": "The failed join brings only a brief puzzled look. Child asks for help at normal volume and shows quiet satisfaction when his own push makes the ring close.",
     "forbidden": "No frustrated shouting, whining spectacle, angry faces, arm flinging, pounding the track or exaggerated victory gestures. Dad does not scold, take over, withhold help or turn the repair into a test. Keep face and body proportions stable."
   },
-  "parts": {
-    "A": {
-      "start": "Dad and Child sit at the low table. The existing blue track section rests at table-left with the single train parked near its left end; Child's right hand holds the loose section at table-right, close to the unjoined connectors at center. Dad has empty hands.",
-      "action": "Dad indicates the unfinished end that stops the train's route. During his first response Child tries one gentle push with his right hand; the unsupported existing section slides slightly away and the joint remains open. Child stops and asks for help, looking from the join to Dad with a brief puzzled expression. Dad checks which side needs support without touching either section yet. Keep the train parked and the two sections in view.",
-      "end": "The existing section remains on the left with the train parked near its left end; Child's right hand holds the loose section on the right with a small gap between the aligned connectors. Child's left hand and both of Dad's hands are empty."
+  "clips": [
+    {
+      "turns": [0, 1, 2],
+      "start": "The nearly complete track ring lies on the table with one gap; the loose curve piece rests beside the gap and the train waits on the track; Dad and Child have empty hands.",
+      "action": "Dad glances along the track ring during his opening line. Child tries to press the curve piece into the gap once with both hands, feels it not click, and asks for help at normal volume. Dad leans in slightly and asks which piece is the trouble.",
+      "end": "The curve piece still rests unconnected beside the gap; the train waits on the track; Child's hands rest beside the curve and Dad looks at the gap."
     },
-    "B": {
-      "start": "The existing section remains on the left with the train parked near its left end; Child's right hand holds the loose section on the right with a small gap between the aligned connectors. Child's left hand and both of Dad's hands are empty.",
-      "action": "Child uses his empty left index finger to indicate the broad side of the existing section beside the join, then lowers that hand. Dad places his right hand on that indicated section and holds it steady during his response. Only after that support is in place, Child pushes the loose section horizontally with his right hand during his last turn. The broad connectors fit with one short movement. Do not make Dad push the loose piece or move the train.",
-      "end": "The two blue sections are joined at center. Dad's right hand still steadies the left section; Child's right hand rests on the newly connected right section and his left hand is empty beside it. The train remains parked near the left end."
+    {
+      "turns": [3, 4, 5],
+      "start": "The curve piece still rests unconnected beside the gap; the train waits on the track; Child's hands rest beside the curve and Dad looks at the gap.",
+      "action": "Child taps the curve piece lightly while naming it and the ends that will not click. Dad places one steady hand on the track beside the gap during his plan. Only after that support is in place, Child grips the curve piece with both hands and pushes it into the gap until the ends visibly click together. The ring closes before Child reports it.",
+      "end": "The track ring is complete with no gap; Child has empty hands above the closed join and Dad's hand still rests on the track beside it; the train waits on the ring."
     },
-    "C": {
-      "start": "The two blue sections are joined at center. Dad's right hand still steadies the left section; Child's right hand rests on the newly connected right section and his left hand is empty beside it. The train remains parked near the left end.",
-      "action": "Dad releases the stable track as he acknowledges the fit and invites a test. Child lifts his right hand off the track and asks for the train, which is nearest Dad. During his handoff turn Dad uses his right hand to lift the train and offer it low beside the joint. Child receives it in his right hand, places it on the left section immediately before the joint, and rolls it a short distance across onto the right section during his last turn. Give the train only this short test run; keep the joined track still and show a small satisfied smile once the wheels cross.",
-      "end": "The track remains connected. The single train rests on the right section just beyond the joint with Child's right hand lightly on it; Child's left hand and Dad's hands are empty beside the track."
+    {
+      "turns": [6, 7],
+      "start": "The track ring is complete with no gap; Child has empty hands above the closed join and Dad's hand still rests on the track beside it; the train waits on the ring.",
+      "action": "Dad releases the track and gestures toward the waiting train. Child picks up the train with his right hand and pushes it slowly along the ring across the closed join, watching it pass. He looks up at Dad with a small pleased smile during his thanks.",
+      "end": "Child holds the train on the completed ring just past the closed join; Dad has empty hands and smiles warmly; the track ring lies fully connected on the table."
     }
-  }
+  ]
 }

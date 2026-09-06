@@ -1,45 +1,42 @@
-Help With the Track — Part C (resolve)
-Production prompt draft | Source: curriculum/04/03-help-clarification/01-ask-for-help/lesson.json | Content revision: 2
-Source SHA256: 0bcdf7b74cfde34f1506e21d0a20b8b724d7dec9223aeeb104fa70a68df7e9b7
+Help With the Track — Clip 3
+Production prompt draft | Source: curriculum/04/03-help-clarification/01-ask-for-help/lesson.json | Content revision: 3
+Source SHA256: 1dfc82a23cee11f98ec21d26d513b0ce2da69d730bdd95a7d6216f49e5fadfad
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
 Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt, gentle natural adult male voice.
 
 EMOTIONAL PERFORMANCE
-Calm, warm and regulated baseline at ordinary family conversation volume. Dad is available and matter-of-fact; Child is focused on making his train continue.
-The failed join brings only a brief puzzled look. Child asks and specifies the useful help with one small pointing gesture, then shows quiet satisfaction when his own connection works.
+Calm, warm and regulated baseline at ordinary family conversation volume. Dad is available and matter-of-fact; Child is focused on finishing his track ring.
+The failed join brings only a brief puzzled look. Child asks for help at normal volume and shows quiet satisfaction when his own push makes the ring close.
 No frustrated shouting, whining spectacle, angry faces, arm flinging, pounding the track or exaggerated victory gestures. Dad does not scold, take over, withhold help or turn the repair into a test. Keep face and body proportions stable.
 No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
 
 SETTING
-Connecting a short toy train track at a low table.
+Connecting a toy train track at a low table.
 
 SCENE AND PROP CONTINUITY
-At a low home play table, Dad sits screen-left and Child screen-right. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. Exactly two broad blue plastic track sections run left to right: the existing section rests at table-left with one toy train parked near its left end; Child holds the loose continuation section at table-right. Their simple horizontal push-fit connectors meet at table-center. The existing section skids away under an unsupported push, so Dad needs to steady it while Child connects the loose section. Only one joint must be made. Keep a locked 16:9 medium two-shot showing faces, hands, the joint and the train. No extra track, train, tool or scenery prop. Dad does not connect the track for Child.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+At a low home play table, Dad sits screen-left and Child kneels screen-right. Child is the four-year-old tiger boy in his unchanged yellow T-shirt. A toy train track forms a nearly complete ring on the table, with one clearly visible gap where the final curve piece is missing; that loose curve piece rests beside the gap, and one small train is parked on the track nearby. This track set is the only essential prop group. Locked 16:9 medium two-shot shows both faces, hands, the gap and the train. Keep the single gap and the loose curve piece stable until they click together; no extra toys, tools or people. Dad steadies the track but never connects the piece for Child.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
-The two blue sections are joined at center. Dad's right hand still steadies the left section; Child's right hand rests on the newly connected right section and his left hand is empty beside it. The train remains parked near the left end.
+The track ring is complete with no gap; Child has empty hands above the closed join and Dad's hand still rests on the track beside it; the train waits on the ring.
 
 ACTION AND REACTIONS
-Dad releases the stable track as he acknowledges the fit and invites a test. Child lifts his right hand off the track and asks for the train, which is nearest Dad. During his handoff turn Dad uses his right hand to lift the train and offer it low beside the joint. Child receives it in his right hand, places it on the left section immediately before the joint, and rolls it a short distance across onto the right section during his last turn. Give the train only this short test run; keep the joined track still and show a small satisfied smile once the wheels cross.
+Dad releases the track and gestures toward the waiting train. Child picks up the train with his right hand and pushes it slowly along the ring across the closed join, watching it pass. He looks up at Dad with a small pleased smile during his thanks.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Dad: "That fits. Try your train now."
-Child: "Can I have it, please?"
-Dad: "Here you go."
-Child: "It works. Thanks, Dad!"
+Dad: "All joined. Try your train now."
+Child: "Here comes the train! Thank you, Dad."
 
 END FRAME
-The track remains connected. The single train rests on the right section just beyond the joint with Child's right hand lightly on it; Child's left hand and Dad's hands are empty beside the track.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Child holds the train on the completed ring just past the closed join; Dad has empty hands and smiles warmly; the track ring lies fully connected on the table.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (18 spoken words)
+PACING (13 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

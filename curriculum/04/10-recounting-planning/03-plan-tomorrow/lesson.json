@@ -1,19 +1,25 @@
 {
   "title":"Tomorrow's Plan","title_zh":"明天的计划","can_do":"为明天的家庭出行贡献一个选择和理由，遇到下雨条件时提出室内替代，并一起确认计划。",
-  "dialogue_contract":"three-by-ten-v2",
+  "dialogue_contract": "continuous-dialogue-v1",
   "conversation_move":{"id":"contribute-to-plan","label":"contribute one idea to a plan"},
   "trigger":"Mom offers the park or library for tomorrow. After Child gives his choice and reason, she asks how rain would change their plan.",
-  "core_response":"The park, because I like the swings.","stretch_response":"Then let's go to the library.","repair_response":"Only if it rains.",
   "recycle":["sequence-actions","report-readiness"],"roles":["child","mom"],"setting":"A calm evening conversation at home, with Mom and Child seated together to plan tomorrow's outing.","essential_props":[],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"mom","line":"Tomorrow let's go out. Park or library?","kind":"input"},{"speaker":"child","line":"The park, because I like the swings.","kind":"core"},{"speaker":"mom","line":"That sounds fun.","kind":"confirmation"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"mom","line":"What if it rains?","kind":"input"},{"speaker":"child","line":"Then let's go to the library.","kind":"stretch"},{"speaker":"mom","line":"We can read indoors.","kind":"confirmation"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"child","line":"Can we look for animal books?","kind":"input"},{"speaker":"mom","line":"Yes. Park if dry, library if it rains.","kind":"confirmation"},{"speaker":"child","line":"That's our plan for tomorrow.","kind":"action"}]}
-  ],
+  "dialogue": {
+    "turns": [
+      {"speaker":"mom","line":"Tomorrow we're going out. Park or library?"},
+      {"speaker":"child","line":"The park, because I like the swings."},
+      {"speaker":"mom","line":"Good reason. What if it rains?"},
+      {"speaker":"child","line":"If it rains, we can go to the library."},
+      {"speaker":"mom","line":"The library it is, on a rainy day."},
+      {"speaker":"child","line":"Can we look for animal books there?"},
+      {"speaker":"mom","line":"Yes. Park if it's dry, library if it's wet."},
+      {"speaker":"child","line":"Tomorrow we're going to the park! Library if it rains."}
+    ]
+  },
   "replay_cards":[
     {"title":"A picnic with a rain plan","setting":"Planning tomorrow's picnic with Dad at home","change":"Rain would move the snack from the garden to the kitchen table","challenge":"Dad offers fruit or crackers. Child chooses fruit because he likes apples. When Dad asks about rain, Child suggests the kitchen table. Dad checks whether they should eat indoors whatever the weather, and Child clarifies, \"Only if it rains.\" Dad agrees. Child contributes the preparation order, \"First wash the fruit, then pack it.\" They settle the plan without acting out tomorrow's picnic."},
     {"title":"Ready to pack a library book","setting":"Planning and packing for tomorrow with Mom at home","change":"The library might be closed, and Child's borrowed book is still outside the bag","challenge":"Mom suggests a library visit tomorrow. Child wants animal books. When Mom says the library may be closed, Child proposes reading their own books at home. Mom accepts that alternative, then asks if he is ready to pack for a possible library visit. Child says, \"I'm ready, but I still need my library book.\" Mom helps him find the book; he puts it in the bag and they agree to check the opening hours before leaving tomorrow."}
   ],
   "parent_support":["Offer two real, available choices and let his reason influence the plan. The library alternative must come from Child after Mom mentions rain; she can wait or gesture without supplying his answer.","Introduce only one simple condition. If he needs help, repeat the rain cue once and accept a short library suggestion. The goal is joining a family decision, not predicting weather or reciting an if-sentence.","Keep tomorrow in the future. Confirm the dry and rainy options with a small nod, then finish the conversation. No outing, weather change, pretend ride or reading sequence happens inside the demo."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":3
 }

@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
-  "scene": "Inside the same family car on a familiar daytime route. A locked 16:9 medium two-shot from the front passenger-side dashboard looks diagonally toward Dad, screen left in the driver's seat, and Child, screen right in the rear seat. Dad stays correctly belted, eyes forward on the road and both hands on the wheel. Child is the same four-year-old tiger boy in his yellow T-shirt, securely seated in a correctly fitted age-appropriate child restraint; he/him if a pronoun is needed. Frame both faces at three-quarter angles without either turning toward the camera. Keep restrained exterior motion, unchanged daylight and no other occupants or handheld props. A/B/C are continuous, with no time jump: the five-minute estimate is not elapsed time, and neither the bridge nor arrival is reached during these clips. They only choose a familiar song; no music player, extra lyrics, melody, humming or new singing starts inside the demo.",
+  "content_revision": 3,
+  "scene": "Inside the same family car on a familiar daytime route. A locked 16:9 medium two-shot from the front passenger-side dashboard looks diagonally toward Dad, screen left in the driver's seat, and Child, screen right in the rear seat. Dad stays correctly belted, eyes forward on the road and both hands on the wheel. Child is the same four-year-old tiger boy in his yellow T-shirt, securely seated in a correctly fitted age-appropriate child restraint; he/him if a pronoun is needed. Frame both faces at three-quarter angles without either turning toward the camera. Keep restrained exterior motion, unchanged daylight and no other occupants or handheld props. The three clips are continuous, with no time jump: the five-minute estimate is not elapsed time, and neither the bridge nor arrival is reached during these clips. They only choose a familiar song; no music player, extra lyrics, melody, humming or new singing starts inside the demo.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Child is quietly curious about the wait; Dad answers attentively while giving driving his full visual attention.",
     "allowed_shift": "A small questioning brow may soften after the landmark confirmation. Child shows quiet interest in choosing the song and gives one tiny nod; no smile is required.",
     "forbidden": "No whining performance, shouting, panic, exaggerated impatience, bouncing, seat climbing, unbuckling, reaching between seats or distracting the driver. Dad never looks back, gestures, points or handles a device while driving."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Dad sits belted and faces forward with both hands on the wheel; Child sits securely restrained in the rear seat, looking out the side window with his hands on his own lap.",
-      "action": "Dad names the destination while keeping his eyes on the road and both hands on the wheel. Child shifts his eyes slightly toward Dad for the time question while his torso and hands remain settled. Dad gives the short estimate and familiar-song comparison without counting on his fingers. No song starts, bridge passes, arrival occurs or restraint changes; the quiet conversation itself fills the segment.",
+      "action": "Dad names the destination while keeping his eyes on the road and both hands on the wheel. Child shifts his eyes slightly toward Dad for the time question while his torso and hands remain settled. Dad gives the short estimate and the two-songs comparison without counting on his fingers. No song starts, bridge passes, arrival occurs or restraint changes; the quiet conversation itself fills the clip.",
       "end": "Dad remains belted and forward-facing with both hands on the wheel; Child remains correctly restrained in the rear seat, attentive to Dad with his hands on his own lap."
     },
-    "B": {
+    {
+      "turns": [3, 4, 5],
       "start": "Dad remains belted and forward-facing with both hands on the wheel; Child remains correctly restrained in the rear seat, attentive to Dad with his hands on his own lap.",
-      "action": "Child asks whether arrival is after the familiar bridge without pointing, leaning or reaching. Dad confirms while his eyes remain on the road and both hands stay on the wheel. Child accepts the estimate with a small easing of his brow and lets his gaze return to the side window. No time is skipped and no bridge, song or arrival starts in this clip; everyone stays in the same safe seated position.",
+      "action": "Child asks whether arrival is after the familiar bridge without pointing, leaning or reaching. Dad confirms while his eyes remain on the road and both hands stay on the wheel. Child connects the landmark to being close with a small easing of his brow and lets his gaze return to the side window. No time is skipped and no bridge, song or arrival starts in this clip; everyone stays in the same safe seated position.",
       "end": "Dad remains belted and forward-facing with both hands on the wheel; Child sits correctly restrained in the rear seat, looking toward the side window with his hands on his own lap."
     },
-    "C": {
+    {
+      "turns": [6, 7],
       "start": "Dad remains belted and forward-facing with both hands on the wheel; Child sits correctly restrained in the rear seat, looking toward the side window with his hands on his own lap.",
-      "action": "Dad offers a choice of song without turning or touching a control. Child names the familiar animal song at normal speaking volume; Dad agrees while watching the road. During his final readiness line, Child gives one tiny nod and stays settled in his restraint. No sung words, humming or melody follow: the choice is complete, and singing can begin only after the demo ends. The bridge and arrival remain ahead.",
+      "action": "Dad offers a choice of song without turning or touching a control. Child names the familiar animal song at normal speaking volume and states his two-songs-then-Grandma plan; Dad agrees while watching the road. Child gives one tiny nod and stays settled in his restraint. No sung words, humming or melody follow: the choice is complete, and singing can begin only after the demo ends. The bridge and arrival remain ahead.",
       "end": "Dad continues belted and forward-facing with both hands on the wheel; Child stays correctly restrained in the rear seat, calmly ready for the chosen song with his hands on his own lap."
     }
-  }
+  ]
 }

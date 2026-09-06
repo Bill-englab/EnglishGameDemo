@@ -1,26 +1,29 @@
 {
-  "content_revision": 2,
+  "content_revision": 3,
   "scene": "A quiet classroom collection table at the end of the school day. Rabbit Teacher sits screen-left and Child sits screen-right facing partly toward each other. Child is the same four-year-old tiger boy in a yellow T-shirt, navy shorts and cream socks throughout; Teacher keeps the same lavender cardigan. There are exactly two small light-blue water bottles with cream screw caps. One has a single green dinosaur sticker and belongs to Child; the other has a single yellow star sticker and is not his. The stickers are physical, distinct and fixed to their original bottles; no names or text labels are needed. Teacher initially holds the star bottle in the right hand and the dinosaur bottle in the left hand nearer Child, just above the table. The stickered sides face diagonally toward the camera, so checking each only needs a small wrist turn. Lock a 16:9 medium two-shot showing both faces, all hands and both whole bottles. No bag, drinking, other pupils or third object is added.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Teacher and Child cooperatively check the bottles' visible features at normal conversation volume.",
-    "allowed_shift": "Child can give a small head shake when excluding the star bottle and a quiet smile when recognizing the dinosaur. Teacher listens and checks with small deliberate wrist movements.",
+    "allowed_shift": "Child can show a small remembering smile when recalling the first day, a small head shake when assigning the star bottle to his friend, and a quiet smile when recognizing the dinosaur. Teacher listens and checks with small deliberate wrist movements.",
     "forbidden": "No accusation, ownership dispute, testing tone, suspicious stare, grabbing, tugging, theatrical surprise, large gestures or distorted expressions."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2, 3],
       "start": "Teacher sits screen-left holding the capped light-blue star bottle in the right hand and the capped light-blue dinosaur bottle in the left hand nearer Child, both just above the table with their stickers angled toward the camera. Child sits screen-right with empty hands, wearing his yellow T-shirt, navy shorts and cream socks. Teacher wears the lavender cardigan.",
-      "action": "Teacher indicates the right-hand bottle with a small lift while asking whose it is. Child describes his own dinosaur sticker without claiming the indicated bottle or reaching for either one. Teacher acknowledges that the two bottles need checking and lowers the raised bottle to its previous height. Neither bottle is handed over, and neither sticker changes or disappears.",
+      "action": "Teacher lifts the right-hand bottle slightly while asking whose bottles are left. Child describes his own green dinosaur sticker without reaching for either bottle. Teacher asks how he knows it is his. Child recalls picking the green dinosaur on the first day with a small remembering smile. Neither bottle is handed over, and neither sticker changes or disappears.",
       "end": "Teacher still holds the capped light-blue star bottle in the right hand and the capped light-blue dinosaur bottle in the left hand nearer Child, side by side just above the table. Child's hands are empty as he watches the bottles. Both stickers, the screen-left/screen-right seating and both outfits are unchanged."
     },
-    "B": {
+    {
+      "turns": [4, 5],
       "start": "Teacher still holds the capped light-blue star bottle in the right hand and the capped light-blue dinosaur bottle in the left hand nearer Child, side by side just above the table. Child's hands are empty as he watches the bottles. Both stickers, the screen-left/screen-right seating and both outfits are unchanged.",
-      "action": "Teacher turns the right-hand bottle slightly to inspect and show its yellow star during the first turn. Child calmly excludes that bottle. Teacher sets the star bottle upright on the table immediately in front of the right hand, then turns the left-hand bottle slightly so both characters can see the green dinosaur. During the question about this second bottle Teacher looks directly at its sticker; Child recognizes and confirms that feature. Teacher holds the verified dinosaur bottle securely without offering it until C. Keep every movement small and simultaneous with speech.",
+      "action": "Teacher turns the right-hand bottle slightly to inspect and show its yellow star during her question. Child calmly gives a small head shake and assigns that bottle to his friend, mentioning that she loves yellow stars. Teacher sets the star bottle upright on the table immediately in front of her right hand and turns the left-hand bottle slightly so both characters can see the green dinosaur. Keep every movement small and simultaneous with speech; the dinosaur bottle is not offered yet.",
       "end": "Teacher sits screen-left holding the capped light-blue dinosaur bottle in the left hand nearer Child, its green dinosaur sticker visible to both; the right hand is empty beside the capped light-blue star bottle now standing upright on the table. Child sits screen-right with empty hands looking at the dinosaur sticker. Both outfits and both sticker identities are unchanged."
     },
-    "C": {
+    {
+      "turns": [6, 7],
       "start": "Teacher sits screen-left holding the capped light-blue dinosaur bottle in the left hand nearer Child, its green dinosaur sticker visible to both; the right hand is empty beside the capped light-blue star bottle now standing upright on the table. Child sits screen-right with empty hands looking at the dinosaur sticker. Both outfits and both sticker identities are unchanged.",
-      "action": "Teacher offers the already verified dinosaur bottle with the left hand. Child looks at its sticker once more, confirms ownership and takes the bottle securely in his right hand during his thank-you. Teacher releases only after his grip is secure, then returns the left hand to the table while giving a quiet farewell. Child keeps his left hand free and remains seated holding his bottle; no exit or extra packing action is needed. The star bottle stays upright in its established table position throughout.",
+      "action": "Teacher confirms the star bottle will go back to his friend and offers the already verified dinosaur bottle with her left hand. Child looks at its sticker once more, claims it happily and takes the bottle securely in his right hand during his line. Teacher releases only after his grip is secure, then returns the left hand to the table. Child keeps his left hand free and remains seated holding his bottle; no exit or extra packing action is needed. The star bottle stays upright in its established table position throughout.",
       "end": "Child sits screen-right holding his capped light-blue bottle with its green dinosaur sticker in his right hand, left hand free. Teacher sits screen-left with both hands empty on the table. The capped light-blue bottle with the yellow star sticker remains upright beside Teacher's right hand. Their seating and clothing are unchanged."
     }
-  }
+  ]
 }

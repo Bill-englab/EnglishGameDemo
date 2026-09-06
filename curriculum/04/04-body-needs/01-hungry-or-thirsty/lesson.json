@@ -3,40 +3,22 @@
   "title_zh": "我想先喝水",
   "can_do": "说出身体需要，并说明先要什么，让成人及时提供帮助。",
   "conversation_move": {"id": "state-body-need", "label": "state a body need"},
-  "trigger": "After quiet play, Mom suggests a break and he notices that he is thirsty.",
-  "core_response": "I'm thirsty, Mom.",
-  "stretch_response": "Can I have water first, please?",
-  "repair_response": "Water first, please, not a snack.",
+  "trigger": "During a quiet break, Mom offers water and a small snack; Child states his thirst and chooses the water first.",
   "recycle": ["request-item", "specify-choice"],
   "roles": ["child", "mom"],
   "setting": "A quiet break at the home table after play.",
   "essential_props": ["one tray with a blue cup of water and a small snack"],
-  "parts": [
-    {
-      "id": "A", "beat": "goal",
-      "turns": [
-        {"speaker": "mom", "line": "Shall we take a break?", "kind": "input"},
-        {"speaker": "child", "line": "I'm thirsty, Mom.", "kind": "core"},
-        {"speaker": "mom", "line": "I have water and a snack.", "kind": "input"}
-      ]
-    },
-    {
-      "id": "B", "beat": "change",
-      "turns": [
-        {"speaker": "child", "line": "Can I have water first, please?", "kind": "stretch"},
-        {"speaker": "mom", "line": "Of course. Here's your water.", "kind": "action"},
-        {"speaker": "child", "line": "Thanks. I'll have a drink.", "kind": "action"}
-      ]
-    },
-    {
-      "id": "C", "beat": "resolve",
-      "turns": [
-        {"speaker": "mom", "line": "There's a snack here, too.", "kind": "input"},
-        {"speaker": "child", "line": "That's better. I'm not thirsty now.", "kind": "action"},
-        {"speaker": "mom", "line": "Okay. I'll leave it here.", "kind": "action"}
-      ]
-    }
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "mom", "line": "Let's take a break. There's water and a little snack."},
+      {"speaker": "child", "line": "I'm thirsty, Mom. Can I have the water first?"},
+      {"speaker": "mom", "line": "Water first, sure. Here's your cup."},
+      {"speaker": "child", "line": "Thank you. Just a little drink, then the snack."},
+      {"speaker": "mom", "line": "Take your time."},
+      {"speaker": "child", "line": "I'm not thirsty now. I'll save the snack for later."}
+    ]
+  },
   "replay_cards": [
     {
       "title": "A snack after drawing",
@@ -62,6 +44,6 @@
     "character_continuity": true, "emotion_stability": true
   },
   "status": "language_reviewed",
-  "content_revision": 2,
-  "dialogue_contract": "three-by-ten-v2"
+  "content_revision": 3,
+  "dialogue_contract": "continuous-dialogue-v1"
 }

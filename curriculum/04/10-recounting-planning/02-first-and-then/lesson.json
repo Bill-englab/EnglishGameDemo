@@ -1,19 +1,24 @@
 {
-  "title":"First We Painted","title_zh":"我们先画画","can_do":"在爸爸的接话支持下，用 first/then 讲两个连续事件，补充一个具体画面并确认顺序。",
-  "dialogue_contract":"three-by-ten-v2",
+  "title":"First We Painted","title_zh":"我们先画画","can_do":"用 first/then 讲今天两个连续事件，回答细节追问并补充一个具体画面。",
+  "dialogue_contract": "continuous-dialogue-v1",
   "conversation_move":{"id":"recount-two-events","label":"recount two linked events"},
-  "trigger":"Dad asks what happened at school. Child starts with painting, and Dad leaves room for the following cleanup event.",
-  "core_response":"First we painted.","stretch_response":"I painted a big red bus.","repair_response":"No, we painted first.",
+  "trigger":"Dad asks about school, and Child recounts two events in order — painting a big sun and hunting for bugs outside.",
   "recycle":["recount-one-event","request-help"],"roles":["child","dad"],"setting":"A relaxed after-school conversation at home, with Dad and Child seated facing each other.","essential_props":[],
-  "parts":[
-    {"id":"A","beat":"goal","turns":[{"speaker":"dad","line":"What happened at school today?","kind":"input"},{"speaker":"child","line":"First we painted.","kind":"core"},{"speaker":"dad","line":"And then?","kind":"input"},{"speaker":"child","line":"Then we washed the brushes.","kind":"recycle"}]},
-    {"id":"B","beat":"change","turns":[{"speaker":"dad","line":"What did you paint?","kind":"input"},{"speaker":"child","line":"I painted a big red bus.","kind":"stretch"},{"speaker":"dad","line":"A red bus. I'd like to see it.","kind":"confirmation"}]},
-    {"id":"C","beat":"resolve","turns":[{"speaker":"dad","line":"So first you painted, then you washed the brushes.","kind":"confirmation"},{"speaker":"child","line":"Yes, that's what we did.","kind":"action"},{"speaker":"dad","line":"Thanks for telling me.","kind":"confirmation"}]}
-  ],
+  "dialogue": {
+    "turns": [
+      {"speaker":"dad","line":"How was school today?"},
+      {"speaker":"child","line":"It was good. First we painted a big sun, and then we played outside."},
+      {"speaker":"dad","line":"What did you paint the sun with?"},
+      {"speaker":"child","line":"I used yellow and orange, so it looked really bright."},
+      {"speaker":"dad","line":"Nice. What happened outside?"},
+      {"speaker":"child","line":"We looked for bugs. I found a small one under a leaf."},
+      {"speaker":"dad","line":"A bug hunter! Tell me again at dinner."}
+    ]
+  },
   "replay_cards":[
     {"title":"Paint, then water","setting":"A chat with Mom after a garden activity","change":"Mom accidentally reverses painting a plant pot and watering the flowers","challenge":"Child tells Mom, \"First we painted a pot, then we watered flowers.\" Mom restates the watering first. Child repairs the order with \"No, we painted first.\" Mom acknowledges the corrected sequence. Child adds one detail, \"My pot is blue.\" Mom accepts the account without asking for every garden activity."},
     {"title":"Remembering our rolls","setting":"Talking with Dad after baking together","change":"Child remembers mixing but wants a cue for what followed","challenge":"Child says he mixed dough with Dad, then asks, \"Can you help me remember?\" Dad offers one shared cue about the oven. Child continues, \"First we mixed, then we baked.\" He adds, \"The rolls were round.\" Dad restates those two events and Child confirms. Give a cue only when needed; no baking reenactment or third event is required."}
   ],
-  "parent_support":["Accept his first event before inviting the next. First and then can be separate short answers; he does not need to deliver a memorized two-clause sentence.","Ask one genuine detail question about the picture he mentioned. Dad's final restatement shows he listened; it is not a request for Child to repeat the account or prove the order again.","Keep the red bus in the spoken memory. A small empty-hand shape and a nod are enough. Fetching the picture, painting, washing and a whole-day recap are not part of this conversation."],
-  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":2
+  "parent_support":["Accept his first event before inviting the next. First and then can be separate short answers; he does not need to deliver a memorized two-clause sentence.","Ask one genuine detail question about each event — what he painted with, what happened outside. Dad's playful closing shows he listened; it is not a request for Child to repeat the account or prove the order again.","Keep the sun and the bug in the spoken memory. Small empty-hand gestures and a nod are enough. Fetching artwork, painting, bug hunting and a whole-day recap are not part of this conversation."],
+  "reviews":{"motivation":true,"causality":true,"physical":true,"adult_behavior":true,"child_language":true,"knowledge_safety":true,"resolution":true,"replay_logic":true,"character_continuity":true,"emotion_stability":true},"status":"language_reviewed","content_revision":3
 }

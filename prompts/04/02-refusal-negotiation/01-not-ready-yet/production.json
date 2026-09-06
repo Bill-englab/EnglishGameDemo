@@ -1,26 +1,29 @@
 {
-  "content_revision": 4,
+  "content_revision": 5,
   "scene": "In a quiet home play area, Dad kneels screen-left and Child kneels screen-right at a low play table. Child is the four-year-old tiger boy and keeps his yellow T-shirt throughout. A tiny stable house of three large blocks at center lacks only one red roof piece, which lies directly to its right. A single open storage box sits left of the house within both characters' reach; together these form one block set. Locked 16:9 medium two-shot shows faces, hands, house and box. Keep the roof red and the house stable, with no extra toys or people.",
   "emotion": {
     "baseline": "Calm, warm and regulated baseline. Both use normal family conversation volume, relaxed bodies and small facial movements.",
     "allowed_shift": "Child briefly looks reluctant to stop and matter-of-factly names the unfinished roof. Dad listens and sets a calm, specific one-piece limit. Child accepts, enjoys one small satisfied look at the roof and willingly joins cleanup.",
     "forbidden": "No whining spectacle, shouting, stomping, arm flinging, angry distortion, exaggerated disappointment or celebratory bouncing. No scolding, forced grabbing or unexplained adult capitulation; the cleanup boundary stays in place."
   },
-  "parts": {
-    "A": {
+  "clips": [
+    {
+      "turns": [0, 1, 2],
       "start": "Dad and Child kneel beside the table; the unfinished house stands at center, its one roof piece lies to the right, and the open box waits to the left.",
-      "action": "Dad gestures gently toward the storage box during the cleanup announcement without touching the house. Child pauses and expresses mild reluctance at normal volume. Dad asks about the unfinished task while looking at Child and the roof gap. Keep all blocks still and give the Child space to answer.",
+      "action": "Dad gestures gently toward the storage box during the cleanup announcement without touching the house. Child pauses and expresses mild reluctance at normal volume. Dad asks about the unfinished task while looking at Child and the roof gap. Keep all blocks still and give Child space to answer.",
       "end": "The house still lacks its roof; the loose roof remains to its right and the box to its left; Child's hands rest beside the house and Dad listens."
     },
-    "B": {
+    {
+      "turns": [3, 4, 5],
       "start": "The house still lacks its roof; the loose roof remains to its right and the box to its left; Child's hands rest beside the house and Dad listens.",
-      "action": "Child points once to the loose red roof piece while naming the unfinished roof. Dad indicates that same piece when allowing one final placement and gestures toward the box for the cleanup boundary. Child acknowledges the one-piece agreement and lifts only the red roof piece with his right hand, holding it low beside the house. Do not place it yet.",
+      "action": "Child points once to the loose red roof piece while naming the roof and its place on top. Dad indicates that same piece when allowing one final placement and gestures toward the box for the cleanup boundary. Child accepts the deal and lifts only the red roof piece with his right hand, holding it low beside the house. Do not place it yet.",
       "end": "Child holds the single red roof piece in his right hand beside the unfinished house; its three supporting blocks remain at center, the open empty box remains left, and Dad's hands are clear of the house."
     },
-    "C": {
+    {
+      "turns": [6, 7],
       "start": "Child holds the single red roof piece in his right hand beside the unfinished house; its three supporting blocks remain at center, the open empty box remains left, and Dad's hands are clear of the house.",
-      "action": "During Dad's opening invitation Child places the roof steadily into the visible gap with his right hand. Complete this placement before Child reports the roof finished. Both briefly look at the complete house while Dad asks about tidying. After Child agrees to help, he calmly lifts the roof into the nearby storage box during his final turn; Dad rests a hand beside a supporting block, ready to continue. This is a brief satisfied finish followed by real cleanup, not a forced demolition. Use only these two small roof movements; no full-house dismantling montage.",
-      "end": "The red roof piece rests inside the storage box; the three supporting blocks remain on the table; Child has empty hands and Dad is ready to help put away the remaining blocks."
+      "action": "Child places the roof steadily into the visible gap with his right hand, completing the placement before Dad observes the finished house. Both briefly share one small satisfied look at the complete house. Child then turns toward the storage box, ready to begin the agreed cleanup; the remaining blocks stay on the table for the next step.",
+      "end": "The block house stands complete with its red roof on top; the open storage box waits to the left; Child has empty hands and turns toward the box with Dad ready to help."
     }
-  }
+  ]
 }

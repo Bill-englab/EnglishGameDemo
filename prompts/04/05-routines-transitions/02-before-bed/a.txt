@@ -1,10 +1,10 @@
-One Book Before Bed — Part A (goal)
-Production prompt draft | Source: curriculum/04/05-routines-transitions/02-before-bed/lesson.json | Content revision: 2
-Source SHA256: 8e203c805ac30825d8c5189f7ceb82256b05d2e3331246456e1ee230ea2909fb
+One Book Before Bed — Clip 1
+Production prompt draft | Source: curriculum/04/05-routines-transitions/02-before-bed/lesson.json | Content revision: 3
+Source SHA256: 2eddb86b25d13eb48011968ab767080d0b107bebf78d4697781b317821cc7268
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
@@ -20,25 +20,24 @@ SETTING
 A quiet bedtime story together; a brief time transition leads from opening the book to finishing it later.
 
 SCENE AND PROP CONTINUITY
-In a quiet bedroom, Mom sits screen-left and Child sits screen-right against bed pillows with a blanket already over his legs. The four-year-old tiger boy keeps his yellow T-shirt and navy pajama pants throughout. Two thin picture books lie face-up on the bed between them in front of their knees: the blue sleeping-bear book nearest Child and the cream wide-awake-bear book nearest Mom. They are the one essential prop group. A warm bedside lamp is within Mom's left-hand reach; soft ambient hallway light is present from the start so faces remain readable after the lamp is switched off. Lock a 16:9 medium two-shot on both faces, laps, books and lamp. Part C uses a brief, clear passage-of-time dissolve to show the story has been read at a normal pace; no sped-up reading, page-flipping montage, added story speech or sudden room reset.
-Keep base character designs, garment identities, lighting, set and camera consistent across A/B/C; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this segment's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding segment's final frame; text instructions alone do not guarantee visual consistency.
+In a quiet bedroom, Mom sits screen-left and Child sits screen-right against bed pillows with a blanket already over his legs. The four-year-old tiger boy keeps his yellow T-shirt and navy pajama pants throughout. Two thin picture books lie face-up on the bed between them in front of their knees: the blue sleeping-bear book nearest Child and the cream wide-awake-bear book nearest Mom. They are the one essential prop group. A warm bedside lamp is within Mom's left-hand reach; soft ambient hallway light is present from the start so faces remain readable after the lamp is switched off. Lock a 16:9 medium two-shot on both faces, laps, books and lamp. The third clip uses a brief, clear passage-of-time dissolve to show the story has been read at a normal pace; no sped-up reading, page-flipping montage, added story speech or sudden room reset.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
 
 START FRAME
 Mom sits screen-left with empty hands on her lap; Child sits screen-right against the pillows in his yellow T-shirt and navy pajama pants, blanket over his legs and hands resting on it. Both bear books lie face-up between them in front of their knees, blue nearest Child and cream nearest Mom. The bedside lamp is on with steady ambient hallway light.
 
 ACTION AND REACTIONS
-Mom offers one story with a clear lights-out boundary. Child looks at Mom to request the bear book. Mom warmly confirms the one-book agreement, then both glance at the two covers. Neither book moves and neither character changes position.
+Mom offers one story with a clear lights-out boundary. Child looks at Mom to request the bear book. Mom warmly points out that there are two bear books and asks which one. Neither book moves and neither character changes position.
 
 SPOKEN DIALOGUE (verbatim, in order):
-Mom: "One story, then lights out."
+Mom: "Bedtime. One story, then lights out."
 Child: "Can we read the bear book before bed?"
-Mom: "Yes, just one."
+Mom: "We have two bear books. Which one?"
 
 END FRAME
 Mom sits screen-left and Child screen-right, both looking at the two face-up books in front of their knees; the blue sleepy-bear book is nearest Child and the cream awake-bear book nearest Mom. Both have empty hands on their laps, Child's blanket stays over his legs, and the bedside lamp is on with steady ambient hallway light.
-Leave a short natural settling beat, without adding speech. Do not repeat earlier segments' lines.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
 
-PACING (16 spoken words)
+PACING (21 spoken words)
 Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
-The clip must fit about 10 seconds; shorten source dialogue before export rather than rushing or extending the clip.
 Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

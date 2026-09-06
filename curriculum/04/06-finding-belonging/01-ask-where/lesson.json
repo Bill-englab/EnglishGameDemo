@@ -3,33 +3,24 @@
   "title_zh": "我的小车在哪里",
   "can_do": "找不到熟悉物品时主动询问位置，依据线索缩小寻找范围，并确认找到。",
   "conversation_move": {"id": "ask-location", "label": "ask where something is"},
-  "trigger": "Child is looking for his red toy car on the rug, and Dad notices his empty hands and searching gaze.",
-  "core_response": "Where's my red car?",
-  "stretch_response": "I can't see it. Can you help?",
-  "repair_response": "Not that one. Mine is red.",
+  "trigger": "Child cannot find his red car on the rug; Dad's memory question helps him trace where he last put it.",
   "recycle": ["request-help", "specify-choice"],
   "roles": ["child", "dad"],
   "setting": "Looking for a toy car beside a low shelf at home.",
   "essential_props": ["one red toy car and a blue storage box hiding it on a low shelf"],
-  "dialogue_contract": "three-by-ten-v2",
-  "parts": [
-    {"id": "A", "beat": "goal", "turns": [
-      {"speaker": "dad", "line": "What are you looking for?", "kind": "input"},
-      {"speaker": "child", "line": "Where's my red car?", "kind": "core"},
-      {"speaker": "dad", "line": "Try the low shelf beside you.", "kind": "input"}
-    ]},
-    {"id": "B", "beat": "change", "turns": [
-      {"speaker": "child", "line": "I can't see it. Can you help?", "kind": "stretch"},
-      {"speaker": "dad", "line": "Check near the blue box.", "kind": "input"},
-      {"speaker": "child", "line": "Is it behind the box?", "kind": "stretch"}
-    ]},
-    {"id": "C", "beat": "resolve", "turns": [
-      {"speaker": "dad", "line": "Let's move the box and see.", "kind": "action"},
-      {"speaker": "child", "line": "There it is!", "kind": "core"},
-      {"speaker": "dad", "line": "You've found your red car.", "kind": "input"},
-      {"speaker": "child", "line": "Thanks, Dad. I've got it.", "kind": "action"}
-    ]}
-  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {"speaker": "dad", "line": "You keep looking around. What's missing?"},
+      {"speaker": "child", "line": "Where's my red car? I had it at story time."},
+      {"speaker": "dad", "line": "Where did you play with it last?"},
+      {"speaker": "child", "line": "On the rug. Then I put it near the shelf."},
+      {"speaker": "dad", "line": "Look near the blue box."},
+      {"speaker": "child", "line": "It might be behind the blue box."},
+      {"speaker": "dad", "line": "Let's move the box and see."},
+      {"speaker": "child", "line": "There it is! My red car was under the box."}
+    ]
+  },
   "replay_cards": [
     {
       "title": "Find the hairbrush",
@@ -50,5 +41,5 @@
   ],
   "reviews": {"motivation": true, "causality": true, "physical": true, "adult_behavior": true, "child_language": true, "knowledge_safety": true, "resolution": true, "replay_logic": true, "character_continuity": true, "emotion_stability": true},
   "status": "language_reviewed",
-  "content_revision": 2
+  "content_revision": 3
 }

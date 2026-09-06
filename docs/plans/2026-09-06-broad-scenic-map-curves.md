@@ -31,7 +31,7 @@
 - Consumes: the global zero-based lesson index already calculated by `renderMap`.
 - Keeps: `buildSmoothPath(points, options)` and its completed/current segment behavior unchanged.
 
-- [ ] **Step 1: Write the failing route-rhythm tests**
+- [x] **Step 1: Write the failing route-rhythm tests**
 
 Add tests that import `getScenicRouteOffset`, sample indexes `0..29`, and assert:
 
@@ -51,23 +51,23 @@ assert.notEqual(offsets[5].desktopPx, -offsets[6].desktopPx);
 
 Also freeze the returned objects in the test and confirm later calls are unaffected, so callers cannot mutate the authored rhythm.
 
-- [ ] **Step 2: Run the focused test and confirm RED**
+- [x] **Step 2: Run the focused test and confirm RED**
 
 Run: `cd app && node --test tests-js/map-path.test.mjs`
 
 Expected: FAIL because `getScenicRouteOffset` is not exported.
 
-- [ ] **Step 3: Implement the minimal pure layout function**
+- [x] **Step 3: Implement the minimal pure layout function**
 
 In `map-path.mjs`, define seven uneven turning anchors at global indexes `0, 4, 8, 13, 18, 24, 29`, interpolate between them with smoothstep, and scale the normalized value to `150px` desktop and `46px` mobile. Clamp invalid indexes to the available `0..29` range and return a fresh object.
 
-- [ ] **Step 4: Run the focused test and confirm GREEN**
+- [x] **Step 4: Run the focused test and confirm GREEN**
 
 Run: `cd app && node --test tests-js/map-path.test.mjs`
 
 Expected: PASS with the pre-existing smooth-path tests unchanged.
 
-- [ ] **Step 5: Integrate global offsets without changing path drawing**
+- [x] **Step 5: Integrate global offsets without changing path drawing**
 
 Import `getScenicRouteOffset` in `app.js`. When each node wrapper is created, set:
 
@@ -79,13 +79,13 @@ wrap.style.setProperty("--route-x-mobile", `${routeOffset.mobilePx}px`);
 
 Replace both chapter/nth-child transform rule groups with one rule using `--route-x-desktop`; inside the existing mobile media query, switch to `--route-x-mobile`. Keep hover transforms on `.level-node`, not the wrapper, so SVG center measurement remains stable.
 
-- [ ] **Step 6: Run syntax and complete Node verification**
+- [x] **Step 6: Run syntax and complete Node verification**
 
 Run: `cd app && node --check static/app.js && node --check static/map-path.mjs && npm test`
 
 Expected: all Node tests pass with no syntax errors.
 
-- [ ] **Step 7: Commit the behavior change**
+- [x] **Step 7: Commit the behavior change**
 
 ```bash
 git add app/static/map-path.mjs app/tests-js/map-path.test.mjs app/static/app.js app/static/style.css
@@ -103,19 +103,19 @@ git commit -m "fix: shape the map into broad scenic curves"
 - Consumes: the rendered map at `/` and the existing isolated browser fixture.
 - Produces: a concise acceptance record in this plan; no production API changes.
 
-- [ ] **Step 1: Run the existing isolated rendered-map QA**
+- [x] **Step 1: Run the existing isolated rendered-map QA**
 
 Run the repository's `tests-browser/modern-toy-ui.cjs` flow against its temporary curriculum, account, profile and media roots. Do not start production Electron or scan the real media directories.
 
-- [ ] **Step 2: Inspect desktop and mobile route screenshots**
+- [x] **Step 2: Inspect desktop and mobile route screenshots**
 
 At desktop `1440×960` and mobile `390×844`, verify the path passes through every rendered node center, no node or path overflows horizontally, and chapter boundaries continue the existing arc rather than restarting a three-node zigzag.
 
-- [ ] **Step 3: Exercise the target interaction**
+- [x] **Step 3: Exercise the target interaction**
 
 Use `Current lesson`, confirm the viewport centers the real current node, open that node, return to the map, and verify the same route layout is restored without horizontal shift.
 
-- [ ] **Step 4: Record evidence and complete verification**
+- [x] **Step 4: Record evidence and complete verification**
 
 Append the tested viewports, browser path, route continuity result, console result and any intentional limitation to this plan. Then run:
 
@@ -126,9 +126,20 @@ npm test
 git diff --check
 ```
 
-- [ ] **Step 5: Commit the acceptance record**
+- [x] **Step 5: Commit the acceptance record**
 
 ```bash
 git add docs/plans/2026-09-06-broad-scenic-map-curves.md
 git commit -m "docs: record broad curve map acceptance"
 ```
+
+## Acceptance Record — 2026-09-06
+
+- TDD evidence: the new visible-sweep assertion failed against the first eased implementation, because only seven chapters showed at least 70px of horizontal movement. Linear point interpolation then passed while the existing Catmull-Rom SVG retained smooth visual curves.
+- Pure-module verification: 46 Node tests passed, including six focused path/layout cases. The global rhythm changes direction after lessons 5, 9, 14, 19, 25 and uses the same direction sequence on desktop and mobile.
+- Browser path: the Browser plugin skill was unavailable, so the repository's approved isolated Playwright/Edge harness was used with its temporary curriculum, account, profile and media roots.
+- Focused rendered QA: `--focus=scenic-route` passed at 1536×1024 and 390×844. It verified all 30 wrappers use responsive offsets, only one chapter boundary reverses direction, every target remains inside the viewport, Current lesson stays comfortably visible, and detail/back restores the same position.
+- Visual inspection: lessons 6, 15 and 25 were inspected at desktop and mobile sizes. The route visibly sweeps across each scene, keeps the same left/right flow on mobile, retains the six-layer 3D stone treatment and does not repeat a three-lesson Z template.
+- Full rendered QA: 1440×960, 800×600, 390×844 and 844×390 all passed with 30 lessons, 10 chapters, no horizontal overflow, working drawer/detail/focus flows, real 0/30→2/30 progression, and no page or console errors. Route overlay deviation remained below 0.001px on desktop and mobile.
+- Screenshot evidence was retained outside the repository under `C:/Users/q00679663/AppData/Local/Temp/codex-route-qa-b-20260906-final/`; no real family media was read or modified.
+- Remaining limitation: Safari/iOS and a physical touch device were not exercised in this Windows acceptance run.

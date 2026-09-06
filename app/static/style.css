@@ -231,7 +231,7 @@ body {
 }
 
 /* User menu — trigger button + popup bubble */
-.topbar .user-menu { position: absolute; top: 50%; right: -34px; z-index: 3; flex: none; transform: translateY(-50%); -webkit-app-region: no-drag; }
+.topbar .user-menu { position: relative; z-index: 3; flex: none; -webkit-app-region: no-drag; }
 .course-drawer .user-menu, .detail-header .user-menu { position: relative; flex: none; -webkit-app-region: no-drag; }
 .user-menu__trigger {
   display: flex; align-items: center; gap: 6px;
@@ -797,7 +797,6 @@ body {
   .chapter-heading { margin-top: 8px; }
 }
 @media (max-width: 767px) {
-  .topbar .user-menu { right:-29px; }
   .topbar .user-menu__trigger { width:48px; height:48px; min-height:48px; min-width:48px; padding:4px; border-width:2px; }
   .topbar .user-avatar { width:36px; height:36px; flex-basis:36px; border-width:1px; }
   .chapter-world { min-height: 0; }

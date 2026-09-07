@@ -18,9 +18,16 @@ if str(APP_ROOT) not in sys.path:
 from curriculum import THREE_BY_TEN_CONTRACT, CONTINUOUS_DIALOGUE_CONTRACT, _dialogue_word_count
 
 
+VISUAL_STYLE = (
+    "Pixar-style 3D animated cartoon, soft warm lighting, cozy pastel color palette, cute, wholesome, family-friendly. "
+    "Soft rounded character designs, expressive but restrained faces. "
+    "Large round eyes and rounded cheeks describe fixed anatomy, not surprise or excitement; "
+    "keep facial movements small and natural, following EMOTIONAL PERFORMANCE when provided."
+)
+
 CAST = {
-    "child": "Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.",
-    "dad": "Dog Dad — a warm brown cartoon dog with large floppy ears, olive-green T-shirt, gentle natural adult male voice.",
+    "child": "Child — a small four-year-old cartoon tiger boy, bright orange fur with bold black stripes, big round sparkly eyes, chubby round cheeks, tiny rounded ears, wearing a little yellow T-shirt, short chubby toddler proportions; clear natural child voice.",
+    "dad": "Dog Dad — a friendly cartoon dog father, warm tan-brown fur, big floppy droopy ears, soft round snout, gentle tired-but-loving eyes, wearing an olive-green casual T-shirt; calm warm dad energy, gentle natural adult male voice.",
     "mom": "Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.",
     "teacher": "Rabbit Teacher — a cream rabbit with upright ears and a lavender cardigan, calm natural adult voice.",
     "peer": "Bear Peer — the same small brown bear in a teal T-shirt in every peer lesson; age four, child-sized proportions and a distinct natural child voice, never an adult.",
@@ -366,7 +373,7 @@ Source SHA256: {digest}
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. {VISUAL_STYLE} A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 {cast}
@@ -490,7 +497,7 @@ Source SHA256: {digest}
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. {VISUAL_STYLE} A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. An explicit time ellipsis below is an allowed exception to continuous time. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
 {cast}

@@ -4,10 +4,10 @@ Source SHA256: 29f557174fff69e51c20241baf03aa65b9e441a56f0a5d4b71625620934c7dda
 The source/revision above are production metadata, not spoken words or on-screen text.
 
 VIDEO AND SOUND
-Create one 16:9 animated clip for a preschool family role-play. Polished warm 3D family-animation style, soft pastel materials, warm light, expressive but restrained faces. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+Create one 16:9 animated clip for a preschool family role-play. Pixar-style 3D animated cartoon, soft warm lighting, cozy pastel color palette, cute, wholesome, family-friendly. Soft rounded character designs, expressive but restrained faces. Large round eyes and rounded cheeks describe fixed anatomy, not surprise or excitement; keep facial movements small and natural, following EMOTIONAL PERFORMANCE when provided. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
 
 FIXED CAST (only these two)
-Child — a four-year-old cartoon tiger boy, orange fur with black stripes, yellow T-shirt, short rounded toddler proportions; clear natural child voice.
+Child — a small four-year-old cartoon tiger boy, bright orange fur with bold black stripes, big round sparkly eyes, chubby round cheeks, tiny rounded ears, wearing a little yellow T-shirt, short chubby toddler proportions; clear natural child voice.
 Pig Mom — a pink pig with a coral cardigan over a cream top, gentle natural adult female voice.
 
 EMOTIONAL PERFORMANCE

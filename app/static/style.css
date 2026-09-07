@@ -1,5 +1,5 @@
 /* ============================================================
-   My English Adventure —chapter-world map
+   TigerTales —chapter-world map
    Ten deterministic chapter worlds, each a 3-column grid.
    ============================================================ */
 
@@ -118,14 +118,14 @@ body {
 /* ---------- top bar ---------- */
 .topbar {
   position: sticky; top: 0; z-index: 8;
-  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: start;
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: start;
   height: 88px; gap: 18px; padding: 22px 30px 8px;
   background: transparent;
   pointer-events: none;
 }
 .topbar > * { pointer-events: auto; }
 .shell-left { grid-column: 1; justify-self: start; min-width: 0; max-width: 100%; }
-.shell-progress { position: relative; grid-column: 2; justify-self: center; display: flex; align-items: center; }
+.shell-progress { position: relative; grid-column: 2; justify-self: start; display: flex; align-items: center; gap: 14px; }
 .shell-actions { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: 10px; min-width: 0; }
 .shell-group { background: linear-gradient(180deg,#fffef9 0%,#f4e9d7 58%,#ead7b9 100%); border: 2px solid rgba(255,250,239,.94); border-radius: var(--shell-radius); box-shadow: var(--shell-shadow); }
 .adventure-brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
@@ -142,9 +142,9 @@ body {
 }
 .topbar .progress {
   font-family: "Fredoka", system-ui, sans-serif;
-  display: flex; align-items: center; gap: 16px; height: 58px; min-height: 58px; width:340px; min-width:340px;
+  display: flex; align-items: center; gap: 12px; height: 58px; min-height: 58px; width:220px; min-width:220px;
   font-weight: 700; font-size: 18px; color: var(--shell-ink);
-  padding: 0 24px;
+  padding: 0 18px;
   white-space: nowrap;
 }
 .shell-progress-label { display:none; }
@@ -207,7 +207,7 @@ body {
   .adventure-brand { gap: 8px; }
   .adventure-brand__stage { min-width: 205px; height: 56px; padding-inline: 18px; }
   .shell-stage-label { font-size: 17px; }
-  .topbar .progress { width:130px; min-width:130px; height:56px; min-height:56px; padding:0 14px; font-size:16px; gap:10px; }
+  .topbar .progress { width:120px; min-width:120px; height:56px; min-height:56px; padding:0 14px; font-size:16px; gap:10px; }
   .shell-progress-label { display: none; }
   #adventure-progress { width: 60px; }
   .topbar #user-name, .topbar .user-menu__trigger > svg { display: none; }
@@ -221,7 +221,8 @@ body {
   .shell-stage-label { max-width:100%; font-size:0; overflow:visible; text-overflow:clip; }
   .shell-stage-label::after { content:attr(data-short-label); font-size:14px; }
   .shell-icon-button { width: 48px; height: 48px; padding: 12px; }
-  .topbar .progress { min-width:86px; width:86px; height:48px; min-height:48px; padding:0 28px 0 10px; justify-content:flex-start; font-size:14px; }
+  .shell-progress { gap: 10px; }
+  .topbar .progress { min-width:68px; width:68px; height:48px; min-height:48px; padding:0 10px; justify-content:center; font-size:14px; }
   #adventure-progress { display: none; }
   .topbar #user-name, .topbar .user-menu__trigger > svg { display: none; }
   .topbar .user-menu__trigger { height: 48px; min-height: 48px; min-width: 48px; padding: 5px; }
@@ -230,7 +231,7 @@ body {
 }
 
 /* User menu — trigger button + popup bubble */
-.topbar .user-menu { position: absolute; top: 50%; right: -34px; z-index: 3; flex: none; transform: translateY(-50%); -webkit-app-region: no-drag; }
+.topbar .user-menu { position: relative; z-index: 3; flex: none; -webkit-app-region: no-drag; }
 .course-drawer .user-menu, .detail-header .user-menu { position: relative; flex: none; -webkit-app-region: no-drag; }
 .user-menu__trigger {
   display: flex; align-items: center; gap: 6px;
@@ -452,6 +453,9 @@ body {
 .detail-disclosure > summary::-webkit-details-marker { display: none; }
 .detail-disclosure[open] > summary svg { transform: rotate(180deg); }
 .videogen-toggle .prompt-section { padding: 8px 16px 16px; }
+.videogen-link { display: block; margin-top: 12px; padding: 8px 0; min-height: 44px; border: 0; background: transparent; color: var(--accent-deep); font: 700 15px/1.4 "Nunito", sans-serif; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.videogen-help { margin: 0; padding: 8px 16px; color: var(--ink-2); font-size: 15px; line-height: 1.5; }
+.prompt-error { color: var(--ink-2); font-size: 15px; }
 
 /* A shared page scroll. Neither reading nor media creates an inner scroller. */
 .detail-body {
@@ -790,7 +794,6 @@ body {
   .chapter-heading { margin-top: 8px; }
 }
 @media (max-width: 767px) {
-  .topbar .user-menu { right:-29px; }
   .topbar .user-menu__trigger { width:48px; height:48px; min-height:48px; min-width:48px; padding:4px; border-width:2px; }
   .topbar .user-avatar { width:36px; height:36px; flex-basis:36px; border-width:1px; }
   .chapter-world { min-height: 0; }

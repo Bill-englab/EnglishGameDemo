@@ -1,4 +1,4 @@
-# My English Adventure — 项目说明文档
+# TigerTales — 项目说明文档
 
 > **课程设计主线：** 4–6 岁长期课程及当前 4 岁阶段的指导规范见 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](docs/specs/2026-09-04-curriculum-architecture-design.md)。新版 4 岁 30 课已写入 [`curriculum/04`](curriculum/04)、完成内容审查，并已由网站直接读取。
 

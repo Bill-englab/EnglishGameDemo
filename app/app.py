@@ -571,6 +571,20 @@ def upload(chapter, level, kind):
     return jsonify({"ok": True, "path": str(target.relative_to(base_resolved)), "ext": ext})
 
 
+def _generation_prompt_text(text):
+    """Expose generation instructions while keeping export provenance on disk."""
+    header, separator, body = text.partition("\n\nVIDEO AND SOUND\n")
+    if not separator:
+        return text  # Plain/legacy prompts have no generated metadata header.
+    internal_prefixes = (
+        "Production prompt draft | Source:",
+        "Source SHA256:",
+        "The source/revision above are production metadata,",
+    )
+    header = "\n".join(line for line in header.splitlines() if not line.startswith(internal_prefixes))
+    return header + separator + body
+
+
 @app.route("/api/prompts/<chapter>/<level>")
 def api_prompts(chapter, level):
     """Return optional A/B/C video prompts for a canonical Lesson."""
@@ -589,7 +603,7 @@ def api_prompts(chapter, level):
         f = prompts_dir / f"{part}.txt"
         if not f.is_file():
             return ""
-        return f.read_text(encoding="utf-8")
+        return _generation_prompt_text(f.read_text(encoding="utf-8"))
 
     return jsonify({part: _read(part) for part in ("a", "b", "c")})
 

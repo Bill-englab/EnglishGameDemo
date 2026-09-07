@@ -613,7 +613,7 @@ async function main() {
     // write only generated recordings inside this fixture's temporary media root.
     await page.route('**/upload/**', route => route.fulfill({ status: 409, json: { error: 'QA upload interception' } }));
     await login(page, url);
-    assert.equal(await page.title(), 'My English Adventure');
+    assert.equal(await page.title(), 'TigerTales');
     assert.equal(new URL(page.url()).pathname, '/');
     assert.equal(await page.locator('#star-count').innerText(), '0');
     assert.equal(await page.locator('#star-total').innerText(), '30');

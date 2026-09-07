@@ -5,8 +5,8 @@
 ### 1. 拉代码
 
 ```bash
-git clone https://github.com/Bill-englab/EnglishGameDemo.git
-cd EnglishGameDemo
+git clone https://github.com/Bill-englab/TigerTales.git
+cd TigerTales
 ```
 
 ### 2. 安装 Python 依赖
@@ -67,7 +67,7 @@ cd app
 ### 1. 拉代码
 
 ```bash
-cd EnglishGameDemo
+cd TigerTales
 git pull
 ```
 

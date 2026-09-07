@@ -2,6 +2,9 @@ const { app, BrowserWindow, ipcMain, session } = require("electron");
 const { spawn, execSync } = require("child_process");
 const path = require("path");
 const http = require("http");
+const { applyBranding } = require("./branding.cjs");
+
+applyBranding(app);
 
 const APP_DIR = path.join(__dirname, "..", "app");
 const PYTHON = path.join(APP_DIR, ".venv", "Scripts", "python.exe");
@@ -64,6 +67,7 @@ async function createWindow() {
   const preloadPath = path.join(__dirname, "preload.cjs");
   console.log("preload path:", preloadPath, "exists:", require("fs").existsSync(preloadPath));
   mainWindow = new BrowserWindow({
+    title: "TigerTales",
     width: 1280,
     height: 800,
     frame: false,

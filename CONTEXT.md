@@ -1,4 +1,4 @@
-# My English Adventure Domain Language
+# TigerTales Domain Language
 
 This glossary defines the curriculum language used across product, content, and implementation work.
 

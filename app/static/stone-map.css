@@ -1,0 +1,127 @@
+/* Shared scrolling sandstone map; detail and recording layouts stay independent. */
+.stone-map #path-svg { display: none; }
+.stone-map #map-scroll { padding-bottom: 160px; }
+.stone-map #bg-layer { position: absolute; inset: 0; background: #657b29 url('/static/worlds-map/terrain.png') repeat; background-size: 512px 512px; }
+.stone-map #bg-layer::before { content: ''; position: absolute; inset: -64px 0 0; background: inherit; }
+.stone-map .bg-layer__slide { bottom: auto; background-position: center top; opacity: 1; transition: none; }
+.stone-map .bg-layer__slide[data-art="map"] { background-size: 0 0; }
+.stone-world-art { position: absolute; inset: 0; overflow: hidden; }
+.bg-layer__slide:not([data-art="map"]) .stone-world-art { display: none; }
+.stone-world-strip { position: absolute; inset-inline: 0; height: var(--strip-height); background-image: var(--scene-image); background-size: cover; background-position: center top; background-repeat: no-repeat; mask-image: linear-gradient(to bottom, transparent, #000 120px, #000 calc(100% - 120px), transparent); }
+.stone-world-strip:first-child { mask-image: linear-gradient(to bottom, #000, #000 calc(100% - 120px), transparent); }
+.stone-map .bg-layer__slide:not(:first-child) { mask-image: linear-gradient(to bottom, transparent, #000 120px); }
+.stone-map #map { position: relative; }
+.stone-map .stone-chapter:not(:last-child) { padding-bottom: 260px; }
+.stone-map .chapter-world { min-height: calc(100vh - 88px); }
+.stone-map .chapter-main { padding: 10px 12px 0; }
+.stone-map .chapter-heading { margin-bottom: 62px; }
+.stone-map .chapter-levels { max-width: 780px; gap: 216px; }
+.stone-map .level-node-wrap {
+  --frame-width: 320px;
+  --base-width: 440px;
+  width: var(--base-width); margin: 0; padding: 0;
+  display: flex; align-items: center; flex-direction: column;
+  transform: none; scroll-margin-block: 116px;
+}
+.stone-map .level-node-wrap:nth-child(2) { transform: translateX(24px); }
+.stone-map .level-node-wrap:nth-child(3) { transform: translateX(-12px); }
+.stone-map .level-node,
+.stone-map .level-node-wrap--current .level-node {
+  display: block; position: relative; width: var(--base-width); height: 312px;
+  padding: 0; border: 0; border-radius: 0; background: none;
+  box-shadow: none; filter: none; animation: none; transform: none;
+}
+.stone-map .level-node::before,
+.stone-map .level-node::after { display: none; }
+.stone-map .level-node-wrap:hover .level-node,
+.stone-map .level-node-wrap:active .level-node { transform: none; box-shadow: none; }
+.stone-frame {
+  display: block; position: relative; z-index: 2;
+  width: var(--frame-width); aspect-ratio: 16 / 9; margin: 0 auto;
+  box-sizing: content-box; border: 8px solid #eee5cf; border-radius: 9px;
+  background: #dfd0b1;
+  box-shadow: 0 0 0 2px #a99a7c, 0 2px 0 2px #fff8e5,
+    0 6px 4px #58452555, 4px 13px 15px #3c321e55;
+  transition: filter .16s ease;
+}
+.stone-frame::after { content: ''; position: absolute; inset: 0; border-radius: 3px; pointer-events: none; box-shadow: inset 0 0 0 1px #6a563155, inset 0 2px 4px #2b211e38; }
+.level-node-wrap--current .stone-frame { box-shadow: 0 0 0 3px #368f87, 0 2px 0 4px #e6ead0, 0 7px 5px #4b513866, 4px 14px 16px #30392255; }
+.stone-thumbnail { display: block; width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 3px; pointer-events: none; }
+.stone-placeholder { position: absolute; inset: 0; display: grid; place-items: center; color: #967b4b; background: radial-gradient(ellipse at 30% 20%,#f7edd2,#d9c7a0); }
+.stone-placeholder svg { width: 62px; height: 48px; stroke: currentColor; fill: none; stroke-width: 2; }
+.stone-pedestal { position: absolute; z-index: 1; display: block; left: 0; width: 100%; aspect-ratio: 2092 / 752; top: 147px; background: url('/static/stone-map/pedestal.png') center / contain no-repeat; pointer-events: none; }
+.stone-pedestal { filter: drop-shadow(1px 4px 2px #241d13a8) drop-shadow(8px 15px 8px #25301775); }
+.stone-number { position: absolute; top: 83px; left: 0; right: 0; text-align: center; font: 600 38px/1 'Fredoka',sans-serif; color: #816643; text-shadow: 0 1px 0 #fff3d3,0 -1px 1px #584226aa; }
+.stone-title { position: relative; display: block; z-index: 3; max-width: 330px; min-width: 230px; padding: 10px 18px; border-radius: 9px; border: 1px solid #d5bd94; background: linear-gradient(#fff0d3b3,#e4cda3d9), url('/static/stone-map/pedestal.png') 50% 32% / 260% auto; color: #4c3523; font: 800 19px/1.25 'Nunito',sans-serif; text-align: center; box-shadow: inset 0 2px 0 #fff5dfbb, 0 3px 0 #b59b6e,2px 7px 7px #382e1f55; }
+.stone-badge { position: absolute; display: block; z-index: 5; right: -40px; top: -31px; width: 58px; height: 68px; pointer-events: none; filter: drop-shadow(2px 4px 2px #30352177); }
+.stone-badge svg { width: 100%; height: 100%; }
+.stone-badge--completed { width: 102px; height: 102px; right: -49px; top: -43px; filter: drop-shadow(2px 5px 2px #58421570); }
+.stone-star { display: block; width: 100%; height: 100%; }
+.stone-badge--locked { width: 52px; height: 52px; right: -28px; top: -23px; }
+.stone-route { position: absolute; z-index: 2; inset: 0; pointer-events: none; }
+.stone-paver { position: absolute; width: 68px; height: 44px; object-fit: contain; pointer-events: none; }
+.stone-paver { filter: drop-shadow(1px 3px 1px #251b12bd) drop-shadow(5px 8px 3px #2530148c); }
+.stone-map .stone-lesson:focus-visible { outline: none; }
+.stone-map .stone-lesson:focus-visible .stone-frame { outline: 3px solid #fff7ce; outline-offset: 7px; }
+.stone-map .stone-lesson:hover .stone-frame { filter: brightness(1.04); }
+.stone-map .stone-lesson:active .stone-frame { filter: brightness(.97); }
+@media (max-width: 767px) {
+  .stone-map .chapter-heading { margin-bottom: 52px; }
+  .stone-map .chapter-levels { max-width: 100%; gap: 194px; }
+  .stone-map .level-node-wrap { --frame-width: min(222px, 58vw); --base-width: min(310px, 82vw); }
+  .stone-map .level-node-wrap:nth-child(2) { transform: translateX(8px); }
+  .stone-map .level-node-wrap:nth-child(3) { transform: translateX(-5px); }
+  .stone-map .level-node, .stone-map .level-node-wrap--current .level-node { height: 225px; }
+  .stone-frame { border-width: 6px; border-radius: 7px; }
+  .stone-pedestal { top: 107px; }
+  .stone-number { top: 57px; font-size: 29px; }
+  .stone-title { min-width: 180px; max-width: 260px; padding: 8px 12px; font-size: 16px; }
+  .stone-badge { width: 46px; height: 56px; top: -27px; right: -29px; }
+  .stone-badge--completed { width: 76px; height: 76px; top: -33px; right: -36px; }
+  .stone-badge--locked { width: 43px; height: 43px; top: -20px; right: -24px; }
+  .stone-paver { width: 50px; height: 33px; }
+  .stone-paver { filter: drop-shadow(1px 2px 1px #251b12bd) drop-shadow(4px 6px 3px #2530148c); }
+  .stone-pedestal { filter: drop-shadow(1px 3px 2px #241d13a8) drop-shadow(5px 10px 6px #25301775); }
+}
+@media (prefers-reduced-motion: reduce) { .stone-frame { transition: none; } }
+
+/* A quieter, compact header above the game map. */
+.stone-map .topbar { height: 64px; padding: 10px 18px; gap: 12px; }
+.stone-map .adventure-brand { gap: 10px; }
+.stone-map .adventure-brand__stage { min-width: 0; width: 238px; height: 44px; padding-inline: 18px; }
+.stone-map .shell-stage-label { font-size: 16px; }
+.stone-map .shell-icon-button { width: 44px; height: 44px; padding: 10px; }
+.stone-map .shell-icon-button svg { width: 23px; height: 23px; }
+.stone-map .shell-progress { gap: 12px; }
+.stone-map .topbar .progress { width: 180px; min-width: 180px; height: 44px; min-height: 44px; padding-inline: 14px; gap: 10px; font-size: 15px; }
+.stone-map #adventure-progress { min-width: 0; height: 8px; }
+.stone-map .topbar .user-menu__trigger { width: 48px; min-width: 48px; height: 48px; min-height: 48px; padding: 4px; border-width: 2px; }
+.stone-map .topbar .user-avatar { width: 36px; height: 36px; flex-basis: 36px; border-width: 1px; }
+.stone-map .topbar .shell-actions .window-controls,
+.stone-map .topbar .shell-actions .window-controls button { height: 44px; }
+.stone-map .chapter-heading { font-size: 18px; padding: 8px 16px; border-radius: 20px; }
+.stone-map .current-lesson-button { min-height: 44px; padding-inline: 16px; font-size: 14px; gap: 7px; }
+.stone-map .level-node-wrap--just-completed .stone-badge--completed { animation: completedStarSettle 620ms cubic-bezier(.2,.8,.25,1) both; }
+@media (max-width: 1023px) {
+  .stone-map .topbar { height: 60px; padding: 6px 12px; gap: 8px; }
+  .stone-map .adventure-brand__stage { width: 210px; padding-inline: 14px; }
+  .stone-map .shell-stage-label { font-size: 15px; }
+  .stone-map .topbar .progress { width: 120px; min-width: 120px; padding-inline: 12px; }
+}
+@media (max-width: 767px) {
+  .stone-map .topbar { height: 56px; padding: 5px 7px; gap: 5px; }
+  .stone-map .adventure-brand { gap: 5px; }
+  .stone-map .adventure-brand__stage { width: 76px; padding-inline: 8px; }
+  .stone-map .shell-stage-label { font-size: 0; }
+  .stone-map .shell-stage-label::after { font-size: 13px; }
+  .stone-map .topbar .progress { width: 62px; min-width: 62px; padding-inline: 8px; font-size: 13px; }
+  .stone-map .shell-progress { gap: 9px; }
+  .stone-map .topbar .user-menu__trigger { width: 44px; min-width: 44px; height: 44px; min-height: 44px; }
+  .stone-map .topbar .user-avatar { width: 32px; height: 32px; flex-basis: 32px; }
+  .stone-map .chapter-heading { font-size: 15px; padding: 8px 10px; }
+  .stone-map .ch-no { font-size: 11px; }
+}
+@media (min-width: 1024px) { .stone-map .current-lesson-button { top: 86px; right: 18px; } }
+@media (prefers-reduced-motion: reduce) {
+  .stone-map .level-node-wrap--just-completed .stone-badge--completed { animation: none; }
+}

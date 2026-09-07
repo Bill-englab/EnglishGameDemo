@@ -1,7 +1,7 @@
 ' ============================================================
-'  My English Adventure -- desktop shortcut installer
+'  TigerTales -- desktop shortcut installer
 '
-'  Creates a "My English Adventure" shortcut on the Desktop that
+'  Creates a "TigerTales" shortcut on the Desktop that
 '  launches the Electron app directly. The shortcut uses the app's
 '  favicon.ico as its icon.
 '
@@ -27,19 +27,19 @@ faviconIco  = fso.BuildPath(appDir, "static\favicon.ico")
 If Not fso.FileExists(electronExe) Then
     MsgBox "Electron binary not found at:" & vbCrLf & vbCrLf & _
            electronExe & vbCrLf & vbCrLf & _
-           "Run:  cd app && npm install", vbCritical, "My English Adventure"
+           "Run:  cd app && npm install", vbCritical, "TigerTales"
     WScript.Quit(1)
 End If
 
 desktopPath = sh.SpecialFolders("Desktop")
-lnkPath     = fso.BuildPath(desktopPath, "My English Adventure.lnk")
+lnkPath     = fso.BuildPath(desktopPath, "TigerTales.lnk")
 
 Set lnk = sh.CreateShortcut(lnkPath)
 lnk.TargetPath       = electronExe
 lnk.Arguments        = """" & electronMain & """"
 lnk.WorkingDirectory = repoRoot
 lnk.WindowStyle      = 1
-lnk.Description      = "Launch My English Adventure"
+lnk.Description      = "Launch TigerTales"
 
 If fso.FileExists(faviconIco) Then
     lnk.IconLocation = faviconIco & ",0"
@@ -53,4 +53,4 @@ MsgBox "Shortcut created on your Desktop:" & vbCrLf & vbCrLf & _
        lnkPath & vbCrLf & vbCrLf & _
        "Double-click it to start the app." & vbCrLf & _
        "Tip: right-click it and 'Pin to taskbar' for one-click launch.", _
-       vbInformation, "My English Adventure"
+       vbInformation, "TigerTales"

@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fffaf2">
-  <title>My English Adventure</title>
+  <title>TigerTales</title>
   <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/profile.css">
+  <link rel="stylesheet" href="/static/stone-map.css">
   <link rel="icon" type="image/png" sizes="128x128" href="/static/icon.png">
   <link rel="icon" href="/static/favicon.ico">
 </head>
-<body>
+<body class="stone-map">
   <div id="app">
     <!-- MAP VIEW -->
     <main id="map-view" class="view">
@@ -18,7 +19,7 @@
         <div class="shell-left">
           <div class="adventure-brand">
             <button id="adventure-menu-button" class="shell-icon-button" type="button" aria-label="Open course menu" aria-expanded="false" aria-controls="course-drawer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-            <div class="adventure-brand__stage"><h1 class="title">My English Adventure</h1><span id="adventure-stage-label" class="shell-stage-label">Stage 1 · I can take part</span></div>
+            <div class="adventure-brand__stage"><h1 class="title">TigerTales</h1><span id="adventure-stage-label" class="shell-stage-label">Stage 1 · I can take part</span></div>
           </div>
         </div>
         <div class="shell-progress">
@@ -93,6 +94,7 @@
             <section id="media-panel-demo" class="media-panel" aria-labelledby="media-tab-demo">
               <h2 class="section-label">Watch &amp; Learn</h2>
               <div id="detail-demo" class="video-slot-wrap"></div>
+              <button id="videogen-open" class="videogen-link" type="button" aria-controls="detail-videogen">VideoGen · Get prompts</button>
             </section>
           </aside>
 
@@ -116,9 +118,10 @@
                 </div>
                 <ul id="detail-parent-support"></ul>
               </details>
-              <details class="videogen-toggle detail-disclosure">
+              <details id="detail-videogen" class="videogen-toggle detail-disclosure">
                 <summary>VideoGen · 3 clips<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-                <div id="detail-prompts" class="prompt-section"></div>
+                <p class="videogen-help">Copy the three prompts into your video tool. Combine the clips, then use Add demo or Replace to upload your video.</p>
+                <div id="detail-prompts" class="prompt-section" aria-live="polite"></div>
               </details>
             </section>
           </div>

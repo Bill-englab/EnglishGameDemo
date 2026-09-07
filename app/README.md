@@ -1,8 +1,12 @@
-# app/ — My English Adventure 网站
+# app/ — TigerTales 网站
+
+产品介绍与截图见[根 README](../README.md)；首次安装、架构概览和内容维护入口见[开发指南 / Development guide](../DEVELOPMENT.md)。本文保留应用接口和验收细节。
+
+应用显示名为 **TigerTales**，npm包名为 `tigertales`。Electron在设置新名称前保留现有 `userData` / `sessionData` 路径，避免因品牌改名切换登录和缓存目录。桌面入口由根目录 `install-shortcut.vbs` 创建 `TigerTales.lnk`。GitHub仓库为 [Bill-englab/TigerTales](https://github.com/Bill-englab/TigerTales)；已有本地目录无需改名。
 
 本地 Flask 应用：把家庭与同伴英语 role-play 录像排成「阶段 → 章 → 课」向上闯关地图。每章一幅整幅背景插画，路和关卡节点叠在上面。通过页面录制，或放一个 `performance.mp4` 到 `recordings/<用户名>/<阶段>/<章>/<课>/`，即可点亮该课、解锁下一课。
 
-新版 4 岁 30 课已按 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md) 写入 `curriculum/04` 并通过审查。应用直接读取该结构，支持年龄阶段、A/B/C 对话、完整 Replay Card、家长提示和内容版本；旧 `content/` 仅保留为 v1 参考。
+新版 4 岁 30 课已按 [`docs/specs/2026-09-04-curriculum-architecture-design.md`](../docs/specs/2026-09-04-curriculum-architecture-design.md) 写入 `curriculum/04` 并通过审查。应用直接读取该结构，当前采用完整连续对话、完整 Replay Card、家长提示和内容版本；三段拆分只用于视频制作。旧 `content/` 仅保留为 v1 参考。
 
 ## Setup（一次性）
 
@@ -51,7 +55,7 @@ cd app
 
 ## 课程详情
 
-桌面采用 56px 单行标题栏、左 340px 媒体栏/右对话；小于768px切换为视频页签＋单列阅读。**Your Show → Start recording** 进入摄像头，**Watch & Learn → Add demo** 添加示范。完整A/B/C、完整复练顺序展示，只让页面滚动。家长说明与 **VideoGen · A/B/C prompts** 默认独立折叠；[30课90份提示词](../prompts/04/README.md)均可复制。暖白、可可、青绿与杏色 token 与地图、目录和资料页共用。
+桌面采用 56px 单行标题栏、左 340px 媒体栏/右对话；小于768px切换为视频页签＋单列阅读。**Your Show → Start recording** 进入摄像头，**Watch & Learn → Add demo** 添加示范。完整连续对话、完整复练顺序展示，只让页面滚动。家长说明与 **VideoGen · 3 clips** 默认独立折叠；[30课90份提示词](../prompts/04/README.md)以 Clip 1/2/3 展示，均可复制。暖白、可可、青绿与杏色 token 与地图、目录和资料页共用。
 
 详情重排不改变地图、课程、进度或文件存储。返回地图/换课会释放摄像头和预览资源；没有新增未保存确认或录像历史。设计与验证见[实施记录](../docs/plans/2026-09-04-detail-reading-redesign.md)。
 
@@ -71,13 +75,13 @@ cd app
 
 ## 地图、目录与响应式背景
 
-`/api/library` 经 `adventure-navigation.mjs` 投影真实完成数、章节计数与 current；`adventure-shell.mjs` 管理浮动外壳和目录焦点。顶部是固定 56px 三列轨道：品牌居左、真实进度严格居中、账户（及 Electron 窗口控制）居右；手机保持单行，品牌可紧凑截断而进度与头像不压缩。账户弹层在可用高度内独立纵向滚动。**Current lesson** 只滚动并聚焦当前节点。完成为一颗金色星章（只表示已有 performance，不是评分）、current 为定位针、locked 为锁；所有节点都可查看。新完成的 performance 在本次页面会话仅触发一次非阻断星章/章节庆祝，刷新或重录不重复。只有当前用户的 performance 文件改变进度。Stage 1 对应 `curriculum/04`，Stage 2/3 为禁用的 Planned 占位。
+`/api/library` 经 `adventure-navigation.mjs` 投影真实完成数、章节计数与 current；`adventure-shell.mjs` 管理浮动外壳和目录焦点。顶部菜单、Stage、窄进度条和独立头像紧凑排列在左侧；桌面高度64px、平板60px、手机56px。账户弹层在可用高度内独立纵向滚动。**Current lesson** 只滚动并聚焦当前节点。完成为一颗金色星章（只表示已有 performance，不是评分）、current 为定位针、locked 为锁；所有节点都可查看。新完成的 performance 在本次页面会话仅触发一次非阻断星章/章节庆祝，刷新或重录不重复。只有当前用户的 performance 文件改变进度。Stage 1 对应 `curriculum/04`，Stage 2/3 为禁用的 Planned 占位。
 
-十章各有独立桌面/手机背景，共20张：`static/worlds-v2/<world>-desktop.webp`（1920×1200）与 `<world>-mobile.webp`（1080×1920），完整文件索引见 [worlds-v2/README.md](static/worlds-v2/README.md)。小于768px选择手机图，resize只换背景，不重建节点或录制DOM。`world-assets.mjs` 提供候选：v2 WebP → 本章旧 WebP/PNG/JPG → 材质底色；不循环其他章的图。代码独立绘制节点与三层象牙白路径、已走低饱和金色内线和通往 current 的青绿内线。
+十章使用 [worlds-map 的细节场景](static/worlds-map/README.md)：桌面选择原生1536×1024横图，手机选择1024×1536竖图，完整覆盖地图宽度，没有左右草地拼接。纵向按图像比例分条重叠，避免一张图拉伸覆盖整章。场景接近视口800px时才加载，和路径等速滚动。石台与踏石均有贴地阴影和右下投影。桌面图缺失先尝试本章竖图，再回退到本章 [v2桌面/手机图](static/worlds-v2/README.md)、旧WebP/PNG/JPG、材质底色；不循环其他章的图。768px断点重选横竖图，不重建节点或录制DOM。
 
 ## 测试
 
-2026-09-05 当前基线：Python **160**、Node **44**。本轮修正与可重复命令见[当前 UI 验收记录](../docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
+测试数量以当前命令输出为准。旧版地图的修正记录见[2026-09-05 UI 验收记录](../docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)，当前石头地图验收入口见下文。
 
 ```bash
 cd app
@@ -114,6 +118,31 @@ Remove-Item Env:TOY_QA_FINAL_FIX
 
 脚本自启临时端口 Flask，复制课程到临时根，隔离账号、配置、资料和媒体。演示及故障上传场景会拦截请求，成功表演回归只把生成的测试视频写入临时媒体根；不执行 `app.py` 主入口或媒体扫描。最终清理自有浏览器、服务和临时根，不复用用户窗口。默认不启动 Electron；启用后用真实二进制、真实 preload 和独立 userData 的隐藏窗口检查最小化/最大化/关闭、拖动区与800×600布局。浏览器检查1440×960、800×600、390×844、844×390、目录焦点、真实0/30→2/30与延迟demo上传时的录制保留。人工摄像头、Safari/iOS不在自动验收范围。
 
+## 石台地图与独立预览
+
+普通入口已使用完整 30 关石台地图：矩形缩略图、单颗完成星章、左右交替踏石；每章背景与路径同步滚动，章节标题前留出通路。顶部菜单、Stage、进度与独立头像保持左侧紧凑排列。详情、录制与课程状态沿用原有流程。
+
+从仓库根运行 `app/.venv/Scripts/python tools/preview_stone_map.py`，打开输出的本地地址即可查看隔离预览。`?map-sample=1` 仍可只展示前三关作对照。
+
+独立预览使用临时课程副本、独立登录 Cookie 和前三关的虚构示例画面，禁止写入，不读取家庭录像或真实账号配置。日常使用仍通过正常 Web/Electron 入口读取自己的媒体；完成关优先显示表演首帧，其他关显示 demo 缩略图，缺媒体时保留编号石台与占位画框。媒体接近屏幕时才加载。
+
+预览同时复制 Stage 04 的全部 30 课 / 90 份提示词。详情页 Watch & Learn 下的 **VideoGen · Get prompts** 会展开并定位到 A/B/C 提示词；分别 Copy 到视频制作工具生成三段，拼接后用 Add demo / Replace 上传。网站本身不连接视频生成服务；隔离预览只允许查看和复制。预览运行期间修改课程或提示词后，需要重启预览更新临时副本。请求失败提供 **Retry prompts**，成功返回空内容才显示缺少提示词。
+
+可选验收（先保持上述预览运行；使用已有 Playwright 和 Edge）：
+
+```powershell
+cd app
+$env:NODE_PATH='<existing Playwright node_modules>'
+$env:STONE_QA_URL='<printed preview URL including ?map-sample=1>'
+$env:STONE_QA_OUTPUT='<QA screenshot directory>'
+$env:STONE_QA_ELECTRON='1' # 可选，需本地已安装 Electron
+node tests-browser/stone-map-sample.cjs
+node tests-browser/stone-map-full.cjs
+node tests-browser/videogen.cjs
+```
+
+覆盖 30 关编号、10 章衔接、左右交替路径、同步滚动、六种窗口尺寸、详情往返、当前关定位、资料菜单、完成反馈、全完成/空课程、背景回退，以及独立隐藏 Electron 窗口和真实 preload。保存验收只在测试浏览器拦截请求，不向预览或家庭媒体目录写入。
+
 ## 结构
 
 ```
@@ -123,7 +152,7 @@ app/
   profile_store.py  # 头像解码与隐私处理、昵称校验、原子存储与文件锁
   templates/map.html
   static/
-    app.js          # 主逻辑：渲染地图、A/B/C 详情、录制与上传 UI
+    app.js          # 主逻辑：渲染地图、完整对话详情、录制与上传 UI
     profile.mjs     # 独立的资料面板、草稿、上传与账号显示
     profile-model.mjs # 昵称纯校验（与后端语义一致）
     profile.css     # 资料面板样式，不重排地图
@@ -136,6 +165,8 @@ app/
     map-path.mjs    # 纯：保留完整邻点的 Catmull-Rom 路径，支持按端点区间绘制内线
     map-interactions.mjs # DOM：current 焦点、待庆祝队列、动效取消/视图清理与加载错误
     style.css       # 现代玩具剧场共享 token、地图/详情/目录 + 自托管字体
+    stone-map.mjs   # 30 关石台地图、媒体延迟加载、章节背景尺寸与踏石布局
+    stone-map.css   # 石台美术、同步滚动场景、紧凑顶部控件
     fonts/          # 自托管 woff2（Fredoka/Nunito，离线可用）
     worlds/         # 本章旧图回退
     worlds-v2/      # 10 世界 × desktop/mobile WebP

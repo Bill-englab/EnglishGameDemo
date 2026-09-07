@@ -1,6 +1,6 @@
 @echo off
 REM ============================================================
-REM  My English Adventure -- launch the map server
+REM  TigerTales -- launch the map server
 REM  Double-click this file, or run it from any terminal.
 REM  Stop: press Ctrl+C, or just close this window.
 REM
@@ -23,7 +23,7 @@ if not exist ".venv\Scripts\python.exe" (
 )
 
 echo.
-echo  Starting My English Adventure ...
+echo  Starting TigerTales ...
 echo  Opening http://127.0.0.1:5000 in your browser.
 echo  (Stop with Ctrl+C.)
 echo.

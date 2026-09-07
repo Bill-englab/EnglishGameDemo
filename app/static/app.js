@@ -1,15 +1,18 @@
 // ============================================================
-// My English Adventure — chapter-world map
+// TigerTales — chapter-world map
 // Ten chapter worlds, each painted by a full background illustration.
 // ============================================================
 
-import { getChapterTheme, resolveMapPresentation, resolveMapBackground, isFrameDark } from "./map-model.mjs";
-import { buildSmoothPath, getScenicRouteOffset } from "./map-path.mjs";
-import { groupDialogueByPart, normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
+import { getChapterTheme, resolveMapBackground } from "./map-model.mjs";
+import { renderStoneMap, disposeStoneMedia, drawStonePath } from "./stone-map.mjs";
+import { stoneWorldCandidates } from "./stone-worlds.mjs";
+import { normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
 import { resolveMediaView } from "./detail-media.mjs";
 import { summarizeAdventure } from "./adventure-navigation.mjs";
 import { createAdventureShell } from "./adventure-shell.mjs";
 import { createCelebrationQueue, createCelebrationEffects, createCurrentLessonAction, resolveCompletionTransition, showMapLoadState, showMapLoadError } from "./map-interactions.mjs";
+
+const mapSample = new URLSearchParams(window.location.search).get("map-sample") === "1";
 
 const scrollToCurrentLesson = createCurrentLessonAction({ root: document, view: window });
 const celebrationQueue = createCelebrationQueue();
@@ -64,7 +67,6 @@ function prettyChapter(raw) {
   return s.split("-").filter(Boolean)
     .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 }
-const chapterIndex = (name) => parseInt((name.match(/^(\d+)/) || [0, 1])[1], 10);
 const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}?t=${Date.now()}`;
 const uploadURL = (chapter, level, kind) => `/upload/${chapter}/${level}/${kind}`;
 const levelKey = ({ chapter, level }) => `${chapter}/${level}`;
@@ -513,29 +515,7 @@ function renderRecordError(container, level, err) {
 }
 
 
-// ===== frame extraction for the level cover =====
-// Tries to load a pre-generated server-side thumbnail. Falls back to null
-// (which triggers the accent-color fallback) if the thumbnail is missing.
-const frameCache = new Map();
-const frameKey = (ch, lv) => `${ch}/${lv}`;
-function extractSafeCover(level, theme) {
-  const key = frameKey(level.chapter, level.level);
-  if (frameCache.has(key)) return Promise.resolve(frameCache.get(key));
-  return new Promise(resolve => {
-    const img = new Image();
-    let done = false;
-    const finish = (val) => {
-      if (done) return; done = true;
-      frameCache.set(key, val); resolve(val);
-    };
-    img.onload = () => finish(`/thumb/${level.chapter}/${level.level}`);
-    img.onerror = () => finish(null);
-    img.src = `/thumb/${level.chapter}/${level.level}`;
-  });
-}
-
 // ===== map rendering =====
-let revealObserver = null;
 let mapScrollY = 0;
 let currentLibrary = [];        // full chapter tree, kept for detail navigation
 let flatLevels = [];            // flattened level list with chapter context for prev/next
@@ -567,81 +547,19 @@ async function refreshPerformanceSave(level, before) {
   return true;
 }
 
-const MAP_MARKERS = {
-  star: '<path d="m12 3.1 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.7l6.2-.9Z" fill="currentColor" stroke="none"/>',
-  locator: '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
-  lock: '<rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/>',
-};
-
-// Builds the level node for every state (completed / current / locked).
-// Any state with a demo shows the demo screenshot as its cover; the
-// state-specific marker (star / locator / lock) sits outside the cover.
-function createLevelNode(level, index, theme) {
-  const { state, number, showCover, marker } = resolveMapPresentation(level, index);
-
-  const wrap = document.createElement("button");
-  wrap.type = "button";
-  wrap.className = `level-node-wrap level-node-wrap--${state}`;
-  wrap.dataset.levelKey = levelKey(level);
-  const stateLabel = { completed: "Completed", current: "Current lesson", locked: "Locked" }[state];
-  wrap.setAttribute("aria-label", `${level.title} — ${stateLabel}`);
-  if (state === "current") {
-    wrap.dataset.currentLesson = `${level.chapter}/${level.level}`;
-    wrap.setAttribute("aria-current", "step");
-  }
-
-  const node = document.createElement("span");
-  node.className = `level-node level-node--${state}`;
-  const numberEl = document.createElement("span");
-  numberEl.className = "level-node__number";
-  numberEl.textContent = number;
-  numberEl.setAttribute("aria-hidden", "true");
-  node.appendChild(numberEl);
-
-  // Demo screenshot cover — shown for any state that has a demo so
-  // uncompleted levels aren't just blank white.
-  if (showCover) {
-    const cover = document.createElement("span");
-    cover.className = "level-node__cover";
-    node.appendChild(cover);
-
-    extractSafeCover(level, theme).then(url => {
-      if (url) {
-        cover.style.backgroundImage = `url("${url}")`;
-      } else {
-        cover.remove();
-      }
-      requestAnimationFrame(drawMapPath);
-    });
-  }
-
-  const markerEl = document.createElement("span");
-  markerEl.className = `level-node__marker level-node__marker--${marker}`;
-  markerEl.setAttribute("aria-hidden", "true");
-  markerEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${MAP_MARKERS[marker]}</svg>`;
-  node.appendChild(markerEl);
-
-  const title = document.createElement("span");
-  title.className = "level-title";
-  title.textContent = level.title;
-  if (state === "current") {
-    const label = document.createElement("span");
-    label.className = "level-title__status";
-    label.textContent = "Current lesson";
-    title.prepend(label);
-  }
-
-  wrap.appendChild(node);
-  wrap.appendChild(title);
-  wrap.addEventListener("click", () => openDetail(level));
-
-  return wrap;
-}
-
-// Background images stay untinted on a fixed layer. Each world owns its fallback.
+// Each chapter owns a scrolling scene and its responsive fallback candidates.
 const bgImageCache = new Set();  // URLs known to load successfully
 const mapMobile = window.matchMedia("(max-width: 767px)");
 let backgroundGeneration = 0;
+let backgroundObserver;
+let pendingBackgrounds = new Set();
+function observeMapBackgrounds() {
+  // Wait for chapter bounds: observing zero-height slides before layout would
+  // place every chapter at the top and eagerly download the entire library.
+  for (const slide of pendingBackgrounds) {
+    if (parseFloat(slide.style.height) > 0) backgroundObserver?.observe(slide);
+  }
+}
 function probeBackgroundCandidates(urls) {
   return new Promise(resolve => {
     let i = 0;
@@ -659,20 +577,31 @@ function probeBackgroundCandidates(urls) {
 }
 
 function selectMapBackgrounds(slides) {
+  backgroundObserver?.disconnect();
+  pendingBackgrounds = new Set(slides);
   const generation = ++backgroundGeneration;
   const width = mapMobile.matches ? 767 : 768;
-  slides.forEach(slide => {
-    probeBackgroundCandidates(resolveMapBackground(slide.dataset.world, width)).then(url => {
+  const load = slide => {
+    if (!pendingBackgrounds.delete(slide)) return;
+    backgroundObserver?.unobserve(slide);
+    probeBackgroundCandidates(stoneWorldCandidates(slide.dataset.world, resolveMapBackground(slide.dataset.world, width), width)).then(url => {
       if (generation !== backgroundGeneration || !slide.isConnected) return;
       slide.classList.toggle("bg-layer__slide--placeholder", !url);
       slide.style.backgroundImage = url ? `url("${url}")` : "";
+      slide.dataset.art = url?.startsWith('/static/worlds-map/') ? 'map' : 'legacy';
+      slide.style.setProperty('--scene-image', url ? `url("${url}")` : 'none');
     });
-  });
+  };
+  if (typeof IntersectionObserver === 'function') {
+    backgroundObserver = new IntersectionObserver(entries => {
+      if (generation !== backgroundGeneration) return;
+      entries.filter(entry => entry.isIntersecting).forEach(entry => load(entry.target));
+    }, { root: document.getElementById('map-view'), rootMargin: '800px' });
+    requestAnimationFrame(observeMapBackgrounds);
+  } else slides.forEach(load);
 }
 mapMobile.addEventListener("change", () => selectMapBackgrounds(bgSlides));
 
-let bgScrollTicking = false;
-let activeChapter = null;
 function buildBgLayer(library) {
   const layer = document.getElementById("bg-layer");
   layer.innerHTML = "";
@@ -695,184 +624,23 @@ function buildBgLayer(library) {
   return slides;
 }
 
-// Background cross-fade: on scroll, find which chapter section's vertical
-// span contains the viewport center point, and activate its slide. Using a
-// scroll listener (not IntersectionObserver) because IO only reports *changed*
-// entries per callback — it can miss the chapter that's still closest to center,
-// causing mid-chapter flicker.
-function updateBgOnScroll(slides) {
-  const centerY = window.innerHeight / 2;
-  const sections = document.querySelectorAll(".chapter-world");
-  let found = null;
-  for (const s of sections) {
-    const r = s.getBoundingClientRect();
-    // Chapter is "active" if the viewport center falls within its bounds.
-    if (centerY >= r.top && centerY <= r.bottom) { found = s.dataset.chapter; break; }
-  }
-  if (found && found !== activeChapter) {
-    slides.forEach(s => s.classList.toggle("is-active", s.dataset.chapter === found));
-    activeChapter = found;
-  }
-}
-
-let removeBgScrollListeners = () => {};
-function observeBgSwitch(slides) {
-  removeBgScrollListeners();
-  activeChapter = null;
-  // Run once immediately to set the initial slide.
-  updateBgOnScroll(slides);
-  // Throttled scroll listener — listen on #map-view (the actual scroll container)
-  // AND window (fallback for non-Electron browsers where body scrolls).
-  const scrollHandler = () => {
-    if (bgScrollTicking) return;
-    bgScrollTicking = true;
-    requestAnimationFrame(() => { updateBgOnScroll(slides); bgScrollTicking = false; });
-  };
-  const mapView = document.getElementById("map-view");
-  if (mapView) mapView.addEventListener("scroll", scrollHandler, { passive: true });
-  window.addEventListener("scroll", scrollHandler, { passive: true });
-  removeBgScrollListeners = () => {
-    mapView?.removeEventListener("scroll", scrollHandler);
-    window.removeEventListener("scroll", scrollHandler);
-  };
-}
-
 function renderMap(library) {
   celebrationEffects.clear();
+  disposeStoneMedia();
   const map = document.getElementById("map");
-  map.innerHTML = "";
-
-  // Keep the library for detail-view navigation (prev/next).
+  map.replaceChildren();
   currentLibrary = library;
   flatLevels = library.flatMap(ch => ch.levels.map(lv => withChapterContext(lv, ch)));
-
   adventureShell.render(summarizeAdventure(library));
-
-  // ---- chapters top-to-bottom, level 1 at the top ----
-  let gIdx = 0;
-  for (const chapter of library) {
-    const ci = chapterIndex(chapter.name);
-    const theme = getChapterTheme(chapter.name);
-
-    const section = document.createElement("section");
-    section.className = "chapter-world";
-    section.dataset.chapter = chapter.name;
-    section.style.setProperty("--chapter-accent", theme.accent);
-    section.dataset.world = theme.world;
-
-    const main = document.createElement("div");
-    main.className = "chapter-main";
-
-    const heading = document.createElement("header");
-    heading.className = "chapter-heading";
-    const chapterNumberEl = document.createElement("span");
-    chapterNumberEl.className = "ch-no";
-    chapterNumberEl.textContent = `CHAPTER ${String(ci).padStart(2, "0")}`;
-    const chapterNameEl = document.createElement("span");
-    chapterNameEl.className = "ch-name";
-    chapterNameEl.textContent = chapter.title || prettyChapter(chapter.name);
-    const chapterProgressEl = document.createElement("span");
-    chapterProgressEl.className = "ch-progress";
-    const completed = chapter.levels.filter(level => level.has_performance).length;
-    chapterProgressEl.textContent = `★ ${completed}/${chapter.levels.length}`;
-    heading.append(chapterNumberEl, chapterNameEl, chapterProgressEl);
-    main.appendChild(heading);
-
-    const levelsCol = document.createElement("div");
-    levelsCol.className = "chapter-levels";
-
-    let inChapter = 0;
-    for (const rawLevel of chapter.levels) {
-      const level = withChapterContext(rawLevel, chapter);
-      const i = gIdx++;
-      const wrap = createLevelNode(level, i, theme);
-      const routeOffset = getScenicRouteOffset(i);
-      wrap.style.setProperty("--route-x-desktop", `${routeOffset.desktopPx}px`);
-      wrap.style.setProperty("--route-x-mobile", `${routeOffset.mobilePx}px`);
-      wrap.style.setProperty("--d", (inChapter++ * 0.07).toFixed(2) + "s");
-      levelsCol.appendChild(wrap);
-    }
-
-    main.appendChild(levelsCol);
-    section.appendChild(main);
-    map.appendChild(section);
-  }
-
-  // Build the fixed background layer and wire cross-fade on scroll.
-  bgSlides = buildBgLayer(library);
-
-  requestAnimationFrame(() => {
-    drawMapPath();
-    observeReveal();
-    observeBgSwitch(bgSlides);
-  });
+  renderStoneMap(map, library, openDetail, { sample: mapSample });
+  bgSlides = buildBgLayer(mapSample ? library.slice(0, 1) : library);
+  requestAnimationFrame(drawMapPath);
   document.fonts?.ready.then(() => requestAnimationFrame(drawMapPath));
 }
 
-function observeReveal() {
-  if (revealObserver) revealObserver.disconnect();
-  revealObserver = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) {
-        e.target.classList.add("seen");
-        revealObserver.unobserve(e.target);
-      }
-    }
-  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
-  document.querySelectorAll(".chapter-world, .level-node-wrap").forEach(el => revealObserver.observe(el));
-}
-
-// Reads every .level-node center in DOM order and draws the trail. The path
-// has an ivory body with a gold completed inner line and a teal current transition.
-// Centers are measured from raw layout —
-// .level-node carries no ambient transform, so hover/scene animations can
-// never shift the measured points.
 function drawMapPath() {
-  const svg = document.getElementById("path-svg");
-  const scroll = document.getElementById("map-scroll");
-  if (!svg || !scroll) return;
-
-  const w = scroll.clientWidth, h = scroll.scrollHeight;
-  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
-  svg.setAttribute("width", w);
-  svg.setAttribute("height", h);
-
-  const base = scroll.getBoundingClientRect();
-  const nodes = scroll.querySelectorAll(".level-node");
-  const pts = [];
-  let splitIdx = nodes.length;  // index of first locked level (default: no split)
-
-  nodes.forEach((node, i) => {
-    const r = node.getBoundingClientRect();
-    if (!r.width && !r.height) return;
-    pts.push({
-      x: r.left + r.width / 2 - base.left + scroll.scrollLeft,
-      y: r.top + r.height / 2 - base.top + scroll.scrollTop,
-    });
-    // The first locked node marks where "upcoming" begins.
-    if (splitIdx === nodes.length && node.classList.contains("level-node--locked")) {
-      splitIdx = i;
-    }
-  });
-
-  if (pts.length < 2) { svg.innerHTML = ""; return; }
-
-  // All layers retain the full route's control points. Only the emitted
-  // segment range changes; the connector after current remains ivory.
-  const d = buildSmoothPath(pts);
-  let html = "";
-  for (const layer of ["ground-shadow", "contact-shadow", "sidewall", "surface", "highlight", "seams"]) {
-    html += `<path class="trail trail--${layer}" d="${d}"/>`;
-  }
-  const hasCurrent = [...nodes].some(node => node.classList.contains("level-node--current"));
-  const completedEnd = splitIdx - (hasCurrent ? 2 : 1);
-  if (completedEnd >= 1) {
-    html += `<g class="trail--done"><path class="trail trail__progress" d="${buildSmoothPath(pts, { endIndex: completedEnd })}"/></g>`;
-  }
-  if (hasCurrent && completedEnd >= 0) {
-    html += `<path class="trail trail--current" d="${buildSmoothPath(pts, { startIndex: completedEnd, endIndex: completedEnd + 1 })}"/>`;
-  }
-  svg.innerHTML = html;
+  drawStonePath();
+  observeMapBackgrounds();
 }
 
 // ===== level detail view =====
@@ -1019,53 +787,75 @@ function openDetail(level) {
 
   // Fetch and render optional Sora prompts (A/B/C) for this level.
   const promptWrap = document.getElementById("detail-prompts");
-  promptWrap.innerHTML = `<div class="prompt-loading">Loading prompts…</div>`;
-  fetch(`/api/prompts/${level.chapter}/${level.level}`)
-    .then(r => r.ok ? r.json() : null)
-    .then(data => {
-      if (!isCurrent()) return;
-      promptWrap.innerHTML = "";
-      const parts = data ? promptParts(data) : [];
-      if (parts.length === 0) {
-        promptWrap.innerHTML = `<div class="prompt-empty">No prompts available</div>`;
-        return;
-      }
-      const makeBlock = (label, text) => {
-        if (!text) return null;
-        const wrap = document.createElement("details");
-        wrap.className = "prompt-block";
-        // Summary acts as the collapsible header: label + copy button.
-        // Clicking copy won't toggle (e.stopPropagation), only label toggles.
-        const summary = document.createElement("summary");
-        const labelEl = document.createElement("span");
-        labelEl.className = "prompt-block__label";
-        labelEl.textContent = label;
-        const copyBtn = document.createElement("button");
-        copyBtn.className = "prompt-copy-btn";
-        copyBtn.type = "button";
-        copyBtn.textContent = "Copy";
-        copyBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const done = () => { copyBtn.textContent = "Copied!"; setTimeout(() => { copyBtn.textContent = "Copy"; }, 1500); };
-          if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(text).then(done).catch(() => _fallbackCopy(text, done));
-          } else {
-            _fallbackCopy(text, done);
-          }
+  document.getElementById("videogen-open").onclick = () => {
+    const disclosure = document.getElementById("detail-videogen");
+    disclosure.open = true;
+    disclosure.querySelector("summary").focus({ preventScroll: true });
+    disclosure.scrollIntoView({ block: "start", behavior: "instant" });
+  };
+  const loadPrompts = () => {
+    if (!isCurrent()) return;
+    promptWrap.innerHTML = `<div class="prompt-loading">Loading prompts…</div>`;
+    fetch(`/api/prompts/${level.chapter}/${level.level}`, { cache: "no-store" })
+      .then(r => {
+        if (!r.ok) throw new Error(`Prompts request failed: ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        if (!isCurrent()) return;
+        promptWrap.innerHTML = "";
+        const parts = data ? promptParts(data) : [];
+        if (parts.length === 0) {
+          promptWrap.innerHTML = `<div class="prompt-empty">No prompts available for this lesson yet.</div>`;
+          return;
+        }
+        const makeBlock = (label, text) => {
+          if (!text) return null;
+          const wrap = document.createElement("details");
+          wrap.className = "prompt-block";
+          // Summary acts as the collapsible header: label + copy button.
+          // Clicking copy won't toggle (e.stopPropagation), only label toggles.
+          const summary = document.createElement("summary");
+          const labelEl = document.createElement("span");
+          labelEl.className = "prompt-block__label";
+          labelEl.textContent = label;
+          const copyBtn = document.createElement("button");
+          copyBtn.className = "prompt-copy-btn";
+          copyBtn.type = "button";
+          copyBtn.textContent = "Copy";
+          copyBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const done = () => { copyBtn.textContent = "Copied!"; setTimeout(() => { copyBtn.textContent = "Copy"; }, 1500); };
+            if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(text).then(done).catch(() => _fallbackCopy(text, done));
+            } else {
+              _fallbackCopy(text, done);
+            }
+          });
+          summary.append(labelEl, copyBtn);
+          const pre = document.createElement("pre");
+          pre.textContent = text;
+          wrap.append(summary, pre);
+          return wrap;
+        };
+        parts.forEach(part => {
+          const block = makeBlock(part.label, part.text);
+          if (block) promptWrap.appendChild(block);
         });
-        summary.append(labelEl, copyBtn);
-        const pre = document.createElement("pre");
-        pre.textContent = text;
-        wrap.append(summary, pre);
-        return wrap;
-      };
-      parts.forEach(part => {
-        const block = makeBlock(part.label, part.text);
-        if (block) promptWrap.appendChild(block);
+      })
+      .catch(() => {
+        if (!isCurrent()) return;
+        promptWrap.innerHTML = `<div class="prompt-error" role="alert">Could not load prompts. Please try again.</div>`;
+        const retry = document.createElement("button");
+        retry.type = "button";
+        retry.className = "action-btn";
+        retry.textContent = "Retry prompts";
+        retry.addEventListener("click", loadPrompts);
+        promptWrap.appendChild(retry);
       });
-    })
-    .catch(() => { if (isCurrent()) promptWrap.innerHTML = `<div class="prompt-empty">No prompts available</div>`; });
+  };
+  loadPrompts();
 
   // Prev / Next navigation — find this level in the flat list and wire buttons.
   const navWrap = document.getElementById("detail-nav");
@@ -1117,9 +907,6 @@ function closeDetail() {
   requestAnimationFrame(() => {
     drawMapPath();
     mapView.scrollTop = mapScrollY;
-    activeChapter = null;
-    // Delay bg refresh slightly so scroll position is restored first
-    setTimeout(() => updateBgOnScroll(bgSlides), 50);
   });
 }
 
@@ -1128,11 +915,11 @@ function celebratePendingCompletion() {
   if (map.classList.contains("hidden")) return;
 
   const lessons = new Map([...map.querySelectorAll(".level-node-wrap--completed")]
-    .filter(wrap => wrap.querySelector(".level-node__marker--star"))
+    .filter(wrap => wrap.querySelector(".stone-badge--completed"))
     .map(wrap => [wrap.dataset.levelKey, wrap]));
   for (const key of celebrationQueue.drain(lessons.keys())) {
     const wrap = lessons.get(key);
-    celebrationEffects.play(wrap, "level-node-wrap--just-completed", wrap.querySelector(".level-node__marker--star"));
+    celebrationEffects.play(wrap, "level-node-wrap--just-completed", wrap.querySelector(".stone-badge--completed"));
   }
 
   const chapters = new Map([...map.querySelectorAll(".chapter-world")]

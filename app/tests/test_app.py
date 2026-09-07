@@ -340,6 +340,20 @@ def test_prompts_returns_a_b_and_c_text(client):
     assert data["c"] == "prompt C text"
 
 
+def test_prompts_hide_internal_header_but_preserve_generation_content(client):
+    path = app_module.PROMPTS_ROOT / "04/01-c/01-s/a.txt"
+    body = 'VIDEO AND SOUND\nPixar-style 3D animated cartoon.\n\nSPOKEN DIALOGUE\nChild: "Source SHA256: is printed on the box."\n'
+    path.write_text(
+        'Example — Clip 1\n'
+        'Production prompt draft | Source: curriculum/04/01-c/01-s/lesson.json | Content revision: 3\n'
+        'Source SHA256: ' + 'a' * 64 + '\n'
+        'The source/revision above are production metadata, not spoken words or on-screen text.\n\n' + body,
+        encoding="utf-8",
+    )
+    assert client.get("/api/prompts/01-c/01-s").get_json()["a"] == 'Example — Clip 1\n\n' + body
+    assert 'Production prompt draft' in path.read_text(encoding="utf-8")
+
+
 def test_prompts_404_for_missing_chapter(client):
     res = client.get("/api/prompts/99-nope/01-s")
     assert res.status_code == 404

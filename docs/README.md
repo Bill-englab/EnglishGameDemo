@@ -1,11 +1,14 @@
 # docs/ — 设计文档
 
+产品介绍与截图见 [English README](../README.md) / [中文 README](../README.zh-CN.md)，开发资料见 [DEVELOPMENT.md](../DEVELOPMENT.md)。
+
 | 路径 | 内容 |
 | --- | --- |
 | `specs/` | 设计规格（课程体系、chapter-world-map、living-chapter-worlds） |
 | `plans/` | 实施计划（对应 specs） |
 | `archive/` | 冻结的历史基线（原始诉求、设计提案、首轮计划） |
 | `twodots-reference.jpeg` | Two Dots 风格参考图 |
+| [screenshots/](screenshots/README.md) | README 产品截图与演示素材说明 / Product screenshots and sample-media notes |
 
 历史地图设计：[`specs/2026-08-12-living-chapter-worlds-design.md`](specs/2026-08-12-living-chapter-worlds-design.md)（动态章节世界；视觉已由现代玩具剧场规格接替）。
 
@@ -27,3 +30,7 @@ UI 改造主线：[`specs/2026-09-05-modern-toy-theatre-ui-design.md`](specs/202
 
 Stage 1 旧 contract 实施记录：[`specs/2026-09-05-stage-1-dialogue-expansion.md`](specs/2026-09-05-stage-1-dialogue-expansion.md)（当前30课 `three-by-ten-v2` 与90份提示词的历史设计和验收依据；其固定分段内容规则已被上述连续对话规范取代，保留用于理解现状）。
 对应实施计划：[`plans/2026-09-05-stage-1-dialogue-expansion.md`](plans/2026-09-05-stage-1-dialogue-expansion.md)。
+
+当前地图实现：[`superpowers/plans/2026-09-07-stone-map-rollout.md`](superpowers/plans/2026-09-07-stone-map-rollout.md)（矩形缩略图石台、单星章、全30关左右交替踏石、分章背景同步滚动与紧凑顶部）。对应隔离预览及验收入口见 `app/README.md`。
+
+后续细化：[`superpowers/plans/2026-09-07-stone-map-detail-pass.md`](superpowers/plans/2026-09-07-stone-map-detail-pass.md)（清晰密集背景、石头阴影、VideoGen入口与提示词恢复）。

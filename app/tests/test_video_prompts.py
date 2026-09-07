@@ -69,6 +69,26 @@ def test_exports_exact_lines_in_their_own_parts_with_only_the_used_cast(source):
         assert "16:9" in text and "10 seconds" in text
 
 
+def test_all_stage_prompts_restore_original_art_and_anatomy_but_keep_restrained_acting():
+    original_style = (ROOT / "prompts/01-wants-requests/D1a.txt").read_text(encoding="utf-8").splitlines()[0]
+    outputs = renderer().collect_outputs(ROOT, "04")
+    assert len(outputs) == 90
+    for path, text in outputs.items():
+        assert original_style in text, path
+        for feature in ("bright orange fur with bold black stripes", "big round sparkly eyes",
+                        "chubby round cheeks", "tiny rounded ears", "short chubby toddler proportions"):
+            assert feature in text, (path, feature)
+        if "Dog Dad —" in text:
+            for feature in ("warm tan-brown fur", "big floppy droopy ears", "soft round snout", "gentle tired-but-loving eyes"):
+                assert feature in text, (path, feature)
+        assert "bouncy playful energy" not in text and "tail wags when excited" not in text
+        assert "expressive but restrained faces" in text
+        assert "No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running." in text
+        production = json.loads((path.parent / "production.json").read_text(encoding="utf-8"))
+        for direction in production["emotion"].values():
+            assert direction in text, path
+
+
 @pytest.mark.parametrize("mutation, message", [
     (lambda l, p: p.update(content_revision=0), "revision"),
     (lambda l, p: p.update(content_revision=True), "revision"),
@@ -389,5 +409,7 @@ def test_every_real_lesson_serves_all_three_prompts_to_the_detail_page(tmp_path,
         assert response.status_code == 200
         assert set(response.json) == {"a", "b", "c"}
         for part, text in response.json.items():
-            assert text == (ROOT / "prompts/04" / chapter / lesson / f"{part}.txt").read_text(encoding="utf-8")
+            source = (ROOT / "prompts/04" / chapter / lesson / f"{part}.txt").read_text(encoding="utf-8")
+            assert text == source.splitlines()[0] + '\n\nVIDEO AND SOUND\n' + source.split('\n\nVIDEO AND SOUND\n', 1)[1]
+            assert "Production prompt draft" not in text and "Source SHA256:" not in text
             assert text.strip()

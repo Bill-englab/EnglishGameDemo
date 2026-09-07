@@ -7,7 +7,7 @@
 
 ## 1. 这个项目是什么
 
-**My English Adventure** —— 一个**本地运行**的小网站，把父子线下英语 role-play 的录像排成一条「章 → 关」的向上闯关地图（参考 Two Dots）。每过一关，地图上那个点就亮起来，变成**孩子自己录像里的画面**。
+**TigerTales** —— 一个**本地运行**的小网站，把父子线下英语 role-play 的录像排成一条「章 → 关」的向上闯关地图（参考 Two Dots）。每过一关，地图上那个点就亮起来，变成**孩子自己录像里的画面**。
 
 ### 必须先理解的三个产品认知（违反这些会做错方向）
 
@@ -302,6 +302,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 | 文件 | 角色 | 依赖 |
 | --- | --- | --- |
+| `stone-map.mjs` / `stone-map.css` | **共享地图**：矩形媒体画框、石台/单颗星章、全局编号、媒体接近视口加载、章节背景尺寸与左右交替踏石；紧凑顶部样式 | lesson-view、map-model |
 | `map-model.mjs` | **纯数据/纯函数**：`CHAPTER_THEMES`（10 章：world + accent）、`getChapterTheme`、`getLevelVisualState`、`getStableRotation`、`isFrameDark` | 无 |
 | `map-path.mjs` | **纯函数**：`buildSmoothPath(points, { startIndex, endIndex })`，区间端点包含在内，控制点始终使用完整邻点；不修改输入 | 无 |
 | `map-interactions.mjs` | **DOM 边界/纯队列**：current 焦点、待庆祝队列、动效结束/取消/视图清理和加载错误 | 无 |
@@ -314,33 +315,34 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ### 两层视图
 
-1. **地图视图**（`#map-view`）：10章×3课，真实编号1–30。completed 为 demo 封面或材质节点＋一颗金色星章（只表示完成，绝非评分），current 为青绿环＋定位针，locked 为封面或编号＋锁；都可点详情。浮动 shell 是56px三列轨道：品牌居左、真实进度居中、账号和 Electron 窗口控制居右；账号弹层在可用高度内独立滚动。手机保持单行，品牌可紧凑截断而进度和头像不压缩。保存新 performance 后本次会话仅短促庆祝一次；刷新或重录不重复。**Current lesson** 仅用户点击后滚动并聚焦当前节点；不打开详情，不改变进度；全完成时隐藏并显示完成提示。
+1. **地图视图**（`#map-view`）：10章×3课，真实编号1–30；`stone-map.mjs` 渲染矩形媒体画框＋砂岩石台＋独立标题牌。completed 优先显示表演首帧，并挂一颗金色完成星章；current 显示青绿描边、定位针与可见标签；locked 显示锁，仍可点击预习。无媒体保留占位画框与编号，状态只由真实 performance 决定。每章背景和左右交替踏石在同一滚动层，章节边缘柔和衔接。顶部菜单、Stage、窄进度条和独立头像固定于左侧；桌面高度64px、平板60px、手机56px。保存新 performance 后本次会话仅短促庆祝一次；刷新或重录不重复。**Current lesson** 仅滚动并聚焦目标；全完成隐藏并显示完成提示。`?map-sample=1` 只截取前三关用于视觉对照，正常入口始终渲染全课程。
 2. **详情视图**（`#detail-view`）：56px标题栏；桌面左340px媒体栏（Your Show在上、Watch & Learn在下）、右侧完整A/B/C→完整Replay→默认独立折叠家长说明/VideoGen；底部Prev/Next。小于768px使用媒体页签＋单列正文，只页面整体滚动。未录时点 **Start recording**，示范为空点 **Add demo**。Can-Do、Trigger和句式放在家长说明内，不挤标题。
 
 运行时：`/api/library` → `summarizeAdventure` → 地图与 shell 同一份真实计数；目录选择只打开 Lesson，不写入课程状态。Stage 1 是 `curriculum/04` 的展示名，Stage 2/3 为禁用 Planned。目录打开时背景 inert、地图锁滚动、焦点进入并圈定抽屉；Escape/关闭/遮罩恢复菜单焦点，选课释放锁后打开详情。
 
 ### 关键实现细节（改时注意）
 
-- **响应式背景**：固定 `#bg-layer`，每章一张 slide，滚动交叉淡入淡出。`/static/worlds-v2/<world>-desktop.webp`（1920×1200）和 `-mobile.webp`（1080×1920）共20张，完整清单见 `app/static/worlds-v2/README.md`。`<768`切手机图；失败按本章旧WebP/PNG/JPG尝试，全部失败保留主题材质，不循环别章。resize仅重选背景，generation token阻止旧响应覆盖新尺寸；详情为暖白阅读面。
-- **封面** `extractSafeCover()`：改为加载服务端缩略图 `/thumb/<ch>/<lv>`（替代原 canvas 抽帧——大视频 seek 慢且暗帧多）。加载失败 → null → 主题色渐变 fallback。有 frameCache，地图/详情共用。缩略图由后端在上传和启动扫描时用 ffmpeg 生成（见 §6）。
-- **路径绘制** `drawMapPath()`：测所有 `.level-node` 中心，三层底路共用完整 `buildSmoothPath`；金色已完成内线与青绿 current 内线只限制输出区间，不能先截短点数组，否则 Catmull–Rom 控制点会改变。`splitPathPoints` 仅保留兼容接口，不参与运行时曲线绘制；之字形偏移在 CSS。
+- **响应式背景**：`#bg-layer` 位于 `#map-scroll`，章节 slide 和路径等速滚动。`worlds-map/` 提供十张1536×1024横图和十张1024×1536竖图，768px断点切换；`stone-worlds.mjs` 铺满地图宽度，纵向重叠条带覆盖长章节。禁止恢复1024px居中宽度限制或左右草地拼接。草地仅作底层加载回退，章节边缘提前120px渐入。背景接近视口800px时加载，布局完成后才开始观察。桌面图失败先尝试本章竖图，再尝试本章v2、旧WebP/PNG/JPG、主题材质；generation token阻止旧响应覆盖新尺寸。
+- **封面**：completed 使用表演视频首帧（静音、不自动播放），否则使用 `/thumb/<ch>/<lv>` 的demo缩略图。不裁切成特殊形状；缺图/视频错误保留占位。IntersectionObserver 在距离视口600px内才赋媒体地址；地图重建时断开观察、释放旧视频。
+- **路径绘制**：`drawMapPath()` 委托 `stone-map.mjs` 的 `drawStonePath()`，测标题/画框边界，关与关之间五块独立踏石，按全局索引左右交替。跨章路径终点在下一章标题之前，避免穿过标题。`map-path.mjs` 保留历史纯函数和兼容测试，不再参与正式地图绘制。
 - **完成反馈**：地图可见时，按已渲染的 completed 节点与完整章节一次取出所有待庆祝 key，不依赖最后浏览的 Lesson。`createCelebrationEffects` 在 `animationend`、`animationcancel`、打开详情和重建地图时清理类及监听；已消耗的庆祝不重播，reduced motion 不启动动效。关卡按钮无障碍名称包含 Completed / Current lesson / Locked，current 标题附近另有可见标签。
 - **录制** `startRecordingSession()`：`getUserMedia` 开摄像头+麦克风 → 镜像预览 → 一钮两态（红圆开始/方块停止）+ 闪红计时 + 5 分钟硬上限自动停 → `MediaRecorder` 产 webm → 现场回放 + Redo/Save。Save 时 `uploadRecording()` 把 blob + mimeType POST 到 `/upload`，后端按 mimeType 存 `.webm`/`.mp4`。`pickRecorderMime()` 探测浏览器支持的最佳格式（Chrome→webm，Safari→mp4），console 打印实际 mimeType。摄像头被拒/缺失时回退到文件上传。
 - **详情导航**：`openDetail` 底部渲染 Prev/Next（跨全宽），从 `flatLevels` 找相邻关卡。上传后 `reopenDetail` 重新打开当前关。
 - **demo 封面**：有 demo 时节点尝试显示缩略图，缺图使用材质与编号回退；locked 关仍显示锁，可点击预习，不再单独叠加播放徽标。
 - **demo 上传**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。使用 **Add demo / Replace**；取消选择不会触发刷新或显示成功。
-- **背景图刷新**：`closeDetail` 返回地图时强制重置 `activeChapter` 并调 `updateBgOnScroll(bgSlides)`，修了从详情页返回时背景图不显示的 bug（`#map-view` 被 `display:none` 期间 scroll listener 检测不到章节）。
-- **VideoGen**：`GET /api/prompts/<chapter>/<level>` 返回可选的 a/b/c 文本。Part A/B/C 是可折叠 `<details>`，summary 里有 Copy 按钮。
+- **背景图刷新**：`closeDetail` 恢复滚动层可见性后重新计算踏石与章节背景尺寸，再恢复 `mapScrollY`；不再依赖 `activeChapter` 或固定背景滚动监听。
+- **VideoGen**：Watch & Learn 下的 **VideoGen · Get prompts** 展开并定位到 A/B/C 提示词；`GET /api/prompts/<chapter>/<level>` 返回 a/b/c，Copy复制到外部视频工具使用。请求失败显示 Retry prompts，和成功返回空内容区分。隔离预览必须同时复制 `prompts/04`，否则所有课都会显示缺少提示词。
 - **可重试加载**：`loadLibrary()` 三态切换，`fetch("/api/library", { cache: "no-store" })`。
 - **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`。
 - **动效约束**：current 关发光呼吸；`prefers-reduced-motion: reduce` 关闭。
 
-### 布局尺寸（2026-09-06）
+### 布局尺寸（2026-09-07）
 
-- 桌面（≥768px）：中央节点列最大760px，之字形偏移104–150px；空编号顶面112×88px、current 178×142px；有封面时184×150px、current 194×158px。
-- 手机（<768px）：节点列最大340px，之字形偏移30–46px；空编号顶面94×78px、current 144×120px；有封面时134×112px、current 154×128px。
-- 路线与节点统一采用倾斜玩具沙盘视角：左上来光、右下投影；路线六层（地面影/接触影/侧壁/顶面/高光/分缝），节点为椭圆顶面＋分层底座。数字与状态图标保持正视。
-- 旧18/64/18、12/76/12三列网格已由此布局替代；背景、详情页签统一用768px断点。800×600允许整体纵向滚动，禁止横向溢出。
+- 桌面媒体内容320px宽、16:9，画框8px边；石台440px宽。关卡纵向间距216px，每段五块68×44px踏石。
+- 手机媒体宽 `min(222px,58vw)`、石台宽 `min(310px,82vw)`；关卡间距194px，踏石50×33px。标题可换行。
+- 左上来光、右下投影；石台、踏石、金星使用本地透明PNG，编号与文案保持真实DOM文本。
+- 前端无新增依赖；Web和Electron共用模板与样式。800×600及320px窄屏允许纵向滚动，不横向溢出。
+- 隔离验收与预览命令见 `app/README.md`；本轮 Node 48 / Python 346 通过，完整地图浏览器验收见 `app/tests-browser/stone-map-full.cjs`，30课90份提示词与复制操作见 `app/tests-browser/videogen.cjs`。旧 `modern-toy-ui.cjs` 的全量视觉断言属于上一版地图，不能作为新地图的全量验收入口。
 
 ---
 
@@ -481,7 +483,7 @@ refactor: split content, demo, and recordings into separate trees
 | 关卡不解锁 | 上一关没有 `performance` 视频；新版路径是 `recordings/<用户名>/04/<章>/<课>/` |
 | 改了 `app.py` 不生效 | debug 模式应自动重载；没重载就重启 `app.py`（Electron 版要关窗重开，它会自己拉起 Flask） |
 | 封面显示不出来 | `/thumb/<章>/<关>` 404（缺 `thumb.jpg`）会回退主题色；重启服务触发 `_scan_and_optimize` 补生成，或检查 ffmpeg 是否可用 |
-| 从详情页返回背景图消失 | 已修复：`closeDetail` 强制重置 `activeChapter` 并刷新 `updateBgOnScroll` |
+| 从详情页返回背景图消失 | `closeDetail` 恢复滚动层、重算背景/踏石尺寸并恢复滚动位置 |
 | 录制后关卡没亮 | 检查 console 打印的 mimeType；确认 `/upload` 返回 `ext`；scanner 认 `.mp4`+`.webm` |
 | 改 `CHAPTER_THEMES` 后 JS 测试红 | 测试钉死了 10 个唯一 world + hex accent；同步改测试或符合约束 |
 | 手机仍用桌面图 | 切图断点为768px；检查 v2 mobile 请求与同章候选，不改课程 background_asset |

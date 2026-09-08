@@ -168,7 +168,7 @@ async function uploadVideo(level, kind, onProgress, isCurrent = () => true) {
   if (!file || !isCurrent()) return false;
   const fd = new FormData();
   fd.append("file", file, file.name || "video.mp4");
-  fd.append("mimeType", file.type || (file.name?.toLowerCase().endsWith(".webm") ? "video/webm" : "video/mp4"));
+  fd.append("mimeType", file.type || ((file.name && file.name.toLowerCase().endsWith(".webm")) ? "video/webm" : "video/mp4"));
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", uploadURL(level.chapter, level.level, kind));
@@ -525,10 +525,10 @@ let bgSlides = [];              // background slides, kept so closeDetail can re
 
 function getCompletionSnapshot(level) {
   const chapter = currentLibrary.find(item => item.name === level.chapter);
-  const levels = chapter?.levels || [];
+  const levels = (chapter && chapter.levels) || [];
   const current = levels.find(item => item.level === level.level);
   return {
-    hasPerformance: Boolean(current?.has_performance ?? level.has_performance),
+    hasPerformance: Boolean(current && current.has_performance != null ? current.has_performance : level.has_performance),
     chapterCompleted: levels.filter(item => item.has_performance).length,
     chapterTotal: levels.length,
   };
@@ -559,7 +559,7 @@ function observeMapBackgrounds() {
   // Wait for chapter bounds: observing zero-height slides before layout would
   // place every chapter at the top and eagerly download the entire library.
   for (const slide of pendingBackgrounds) {
-    if (parseFloat(slide.style.height) > 0) backgroundObserver?.observe(slide);
+    if (parseFloat(slide.style.height) > 0 && backgroundObserver) backgroundObserver.observe(slide);
   }
 }
 function probeBackgroundCandidates(urls) {
@@ -579,18 +579,18 @@ function probeBackgroundCandidates(urls) {
 }
 
 function selectMapBackgrounds(slides) {
-  backgroundObserver?.disconnect();
+  if (backgroundObserver) backgroundObserver.disconnect();
   pendingBackgrounds = new Set(slides);
   const generation = ++backgroundGeneration;
   const width = mapMobile.matches ? 767 : 768;
   const load = slide => {
     if (!pendingBackgrounds.delete(slide)) return;
-    backgroundObserver?.unobserve(slide);
+    if (backgroundObserver) backgroundObserver.unobserve(slide);
     probeBackgroundCandidates(stoneWorldCandidates(slide.dataset.world, resolveMapBackground(slide.dataset.world, width), width)).then(url => {
       if (generation !== backgroundGeneration || !slide.isConnected) return;
       slide.classList.toggle("bg-layer__slide--placeholder", !url);
       slide.style.backgroundImage = url ? `url("${url}")` : "";
-      slide.dataset.art = url?.startsWith('/static/map-assets/') ? 'map' : 'legacy';
+      slide.dataset.art = url && url.startsWith('/static/map-assets/') ? 'map' : 'legacy';
       slide.style.setProperty('--scene-image', url ? `url("${url}")` : 'none');
     });
   };
@@ -630,14 +630,14 @@ function renderMap(library) {
   celebrationEffects.clear();
   disposeStoneMedia();
   const map = document.getElementById("map");
-  map.replaceChildren();
+  map.textContent = '';
   currentLibrary = library;
   flatLevels = library.flatMap(ch => ch.levels.map(lv => withChapterContext(lv, ch)));
   adventureShell.render(summarizeAdventure(library));
   renderStoneMap(map, library, openDetail, { sample: mapSample });
   bgSlides = buildBgLayer(mapSample ? library.slice(0, 1) : library);
   requestAnimationFrame(drawMapPath);
-  document.fonts?.ready.then(() => requestAnimationFrame(drawMapPath));
+  if (document.fonts) document.fonts.ready.then(() => requestAnimationFrame(drawMapPath));
 }
 
 function drawMapPath() {
@@ -1049,7 +1049,7 @@ async function init() {
   // Logout
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) logoutBtn.addEventListener("click", () => {
-    profileUI?.clear();
+    if (profileUI) profileUI.clear();
     fetch("/logout", { credentials: "same-origin" }).then(() => {
       window.location.href = "/login";
     });

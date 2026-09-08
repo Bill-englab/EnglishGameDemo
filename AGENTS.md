@@ -296,6 +296,8 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 
 ## 7. 前端架构
 
+**浏览器兼容基线（2026-09-08）：** 手机实际使用 Chrome 78。共享 `static/*.js` / `*.mjs` 必须保持其可解析，禁止重新引入可选链、空值合并；不要直接依赖 `replaceChildren`、`Array.at`、`Object.hasOwn`。用原生旧语法和等价 DOM 操作，无需打包或全局 polyfill。`compat.css` 仅按功能检测补充旧浏览器布局。修改启动/地图代码时运行 Node 兼容回归，原生 Chromium 78 验收入口见 `app/README.md`。
+
 **无框架、无构建。** `map.html` 用 `<script type="module" src="/static/app.js">` 加载，app.js 再 import 纯 `.mjs` 模块。
 
 ### 模块职责

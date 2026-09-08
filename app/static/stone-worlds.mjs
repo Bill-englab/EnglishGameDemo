@@ -26,7 +26,8 @@ export function layoutSceneStrips(slide, height) {
   art.style.width = `${layout.width}px`;
   art.style.setProperty('--strip-height', `${layout.height}px`);
   if (art.children.length !== layout.tops.length) {
-    art.replaceChildren(...layout.tops.map(() => {
+    art.textContent = '';
+    art.append(...layout.tops.map(() => {
       const strip = document.createElement('div');
       strip.className = 'stone-world-strip';
       return strip;

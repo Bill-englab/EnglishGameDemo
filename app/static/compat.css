@@ -1,0 +1,50 @@
+/* Chrome 78: retain the same map geometry without newer CSS layout features.
+   Modern browsers keep the existing styles above this compatibility layer. */
+@supports not (inset: 0) {
+  #map-view::after { top: 7px; right: 7px; bottom: 7px; left: 7px; }
+  .stone-map #bg-layer, .stone-world-art, .stone-route,
+  .stone-placeholder, .stone-frame::after, .drawer-backdrop {
+    top: 0; right: 0; bottom: 0; left: 0;
+  }
+  .stone-map #bg-layer::before { top: -64px; right: 0; bottom: 0; left: 0; }
+  .bg-layer__slide { top: 0; right: 0; left: 0; }
+  .stone-world-strip { right: 0; left: 0; }
+  .stone-world-strip { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 120px, #000 calc(100% - 120px), transparent); }
+  .stone-world-strip:first-child { -webkit-mask-image: linear-gradient(to bottom, #000, #000 calc(100% - 120px), transparent); }
+  .stone-map .bg-layer__slide:not(:first-child) { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 120px); }
+  .course-drawer { top: 12px; bottom: 12px; left: 12px; }
+  .current-lesson-button, .adventure-complete { bottom: 24px; }
+  .stone-map .chapter-heading { max-width: 100%; font-family: Fredoka, sans-serif; font-weight: 700; }
+  .stone-map .chapter-heading > * + * { margin-left: 12px; }
+  .stone-map .chapter-levels > * + * { margin-top: 216px; }
+  .stone-map .adventure-brand > * + * { margin-left: 10px; }
+  .stone-map .shell-progress > * + * { margin-left: 12px; }
+  .stone-map .topbar .progress > * + * { margin-left: 10px; }
+  .current-lesson-button > * + * { margin-left: 7px; }
+  .dialogue > * + *, .prompt-section > * + *, .video-slot-wrap > * + * { margin-top: 8px; }
+  .detail-header__left > * + * { margin-left: 20px; }
+  .profile-photo-row > * + * { margin-left: 20px; }
+  .profile-actions > * + * { margin-left: 10px; }
+  .profile-dialog { width: 440px; max-width: calc(100vw - 32px); }
+  .profile-dialog form { padding: 28px; }
+  .detail-nav { padding: 16px 12px; }
+  #adventure-progress { -webkit-appearance: none; }
+  @media (max-width: 767px) {
+    #map-view::after { top: 3px; right: 3px; bottom: 3px; left: 3px; }
+    .stone-map .level-node-wrap { --frame-width: 222px; --base-width: 310px; }
+    .stone-map .chapter-levels > * + * { margin-top: 194px; }
+    .stone-map .adventure-brand > * + * { margin-left: 5px; }
+    .stone-map .shell-progress > * + * { margin-left: 9px; }
+    .stone-map .chapter-heading > * + * { margin-left: 8px; }
+    .detail-header__left > * + * { margin-left: 12px; }
+    .media-tabs > * + * { margin-left: 4px; }
+    .detail-nav { padding: 16px 20px; }
+    .profile-dialog form { padding: 24px 20px; }
+  }
+  @media (max-width: 382px) { .stone-map .level-node-wrap { --frame-width: 58vw; } }
+  @media (max-width: 378px) { .stone-map .level-node-wrap { --base-width: 82vw; } }
+}
+@supports not (aspect-ratio: 1) {
+  .stone-frame { height: calc(var(--frame-width) * .5625); }
+  .stone-pedestal { height: calc(var(--base-width) * .3594646); }
+}

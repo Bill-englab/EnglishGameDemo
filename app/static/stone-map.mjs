@@ -27,7 +27,7 @@ const make = (tag, className, text) => {
 };
 
 export function disposeStoneMedia() {
-  mediaObserver?.disconnect();
+  if (mediaObserver) mediaObserver.disconnect();
   document.querySelectorAll('.stone-frame video').forEach(video => {
     video.pause();
     video.removeAttribute('src');
@@ -155,7 +155,7 @@ export function drawStonePath() {
   });
   const lessons = [...document.querySelectorAll('.stone-lesson')];
   const mobile = window.innerWidth < 768;
-  route.replaceChildren();
+  route.textContent = '';
   for (let gap = 0; gap < lessons.length - 1; gap++) {
     const title = lessons[gap].querySelector('.stone-title').getBoundingClientRect();
     const next = lessons[gap + 1].querySelector('.stone-frame').getBoundingClientRect();

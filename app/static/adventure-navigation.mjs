@@ -5,11 +5,11 @@ export const STAGES = Object.freeze([
 ]);
 
 function chapterSummary(chapter) {
-  const levels = Array.isArray(chapter?.levels) ? chapter.levels : [];
+  const levels = Array.isArray(chapter && chapter.levels) ? chapter.levels : [];
   return {
-    name: chapter?.name,
-    title: chapter?.title || chapter?.name,
-    completed: levels.filter(level => level?.has_performance).length,
+    name: chapter ? chapter.name : undefined,
+    title: (chapter && chapter.title) || (chapter ? chapter.name : undefined),
+    completed: levels.filter(level => level && level.has_performance).length,
     total: levels.length,
     levels: levels.map(level => ({ ...level })),
   };
@@ -22,8 +22,8 @@ export function summarizeAdventure(library = []) {
 
   let current = null;
   for (const chapter of library || []) {
-    if (!Array.isArray(chapter?.levels)) continue;
-    const level = chapter.levels.find(item => item?.current === true && !item?.has_performance);
+    if (!Array.isArray(chapter && chapter.levels)) continue;
+    const level = chapter.levels.find(item => item && item.current === true && !item.has_performance);
     if (level) {
       current = {
         ...level,
@@ -41,9 +41,9 @@ export function globalLessonNumber(library = [], chapterName, levelName) {
   if (!Array.isArray(library)) return null;
   let number = 0;
   for (const chapter of library) {
-    for (const level of Array.isArray(chapter?.levels) ? chapter.levels : []) {
+    for (const level of Array.isArray(chapter && chapter.levels) ? chapter.levels : []) {
       number += 1;
-      if (chapter?.name === chapterName && level?.level === levelName) return number;
+      if ((chapter ? chapter.name : undefined) === chapterName && (level ? level.level : undefined) === levelName) return number;
     }
   }
   return null;

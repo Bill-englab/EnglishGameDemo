@@ -15,7 +15,7 @@ export const WORLD_LEGACY_ASSETS = Object.freeze({
 
 /** Ordered local candidates; unknown worlds use the first chapter. */
 export function getWorldAssetUrls(world, mobile) {
-  const safeWorld = Object.hasOwn(WORLD_LEGACY_ASSETS, world) ? world : "morning-picnic";
+  const safeWorld = Object.prototype.hasOwnProperty.call(WORLD_LEGACY_ASSETS, world) ? world : "morning-picnic";
   const legacy = WORLD_LEGACY_ASSETS[safeWorld];
   return [
     `${WORLD_ASSET_ROOT}/${safeWorld}-${mobile ? "mobile" : "desktop"}.webp`,

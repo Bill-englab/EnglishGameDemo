@@ -2,6 +2,20 @@
 
 产品介绍与截图见[根 README](../README.md)；首次安装、架构概览和内容维护入口见[开发指南 / Development guide](../DEVELOPMENT.md)。本文保留应用接口和验收细节。
 
+## Chrome 78 兼容验收
+
+共享脚本保持 Chrome 78 可解析，不使用可选链、空值合并、`replaceChildren`、`Array.at` 或 `Object.hasOwn`。`static/compat.css` 为缺少新版 CSS 功能的浏览器补充封面尺寸、关卡间距和背景定位；新版浏览器继续使用原样式。未增加打包步骤或运行时依赖。
+
+先按本文的隔离预览方式启动 `tools/preview_stone_map.py`，再运行：
+
+```powershell
+$env:CHROMIUM78_EXECUTABLE='旧版 Chromium 测试副本的 chrome.exe 完整路径'
+$env:STONE_QA_URL='http://127.0.0.1:42173/'
+node app/tests-browser/chromium78.cjs
+```
+
+测试要求 Node 22+，使用独立浏览器资料目录和临时截图目录，不使用生产账号。`STONE_QA_WIDTH` / `STONE_QA_HEIGHT` 可覆盖默认 390×844。原生 Chromium 78 与现代 Playwright 的协议不完全兼容，所以该测试直接使用 CDP。问题复现、测试结果与限制见 [Chrome 78 验收记录](../docs/plans/2026-09-08-chrome78-compatibility.md)。
+
 应用显示名为 **TigerTales**，npm包名为 `tigertales`。Electron在设置新名称前保留现有 `userData` / `sessionData` 路径，避免因品牌改名切换登录和缓存目录。桌面入口由根目录 `install-shortcut.vbs` 创建 `TigerTales.lnk`。GitHub仓库为 [Bill-englab/TigerTales](https://github.com/Bill-englab/TigerTales)；已有本地目录无需改名。
 
 本地 Flask 应用：把家庭与同伴英语 role-play 录像排成「阶段 → 章 → 课」向上闯关地图。每章一幅整幅背景插画，路和关卡节点叠在上面。通过页面录制，或放一个 `performance.mp4` 到 `recordings/<用户名>/<阶段>/<章>/<课>/`，即可点亮该课、解锁下一课。

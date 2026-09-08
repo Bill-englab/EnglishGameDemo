@@ -60,7 +60,7 @@ export function initProfile(initialProfile) {
   }
 
   async function jsonRequest(options = {}) {
-    requestController?.abort();
+    if (requestController) requestController.abort();
     requestController = new AbortController();
     const controller = requestController;
     const timer = setTimeout(() => controller.abort(), 30000);
@@ -94,7 +94,7 @@ export function initProfile(initialProfile) {
 
   dialog.addEventListener('close', () => {
     generation++;
-    requestController?.abort();
+    if (requestController) requestController.abort();
     releasePreview();
     token = '';
     document.body.classList.remove('profile-open');
@@ -157,7 +157,7 @@ export function initProfile(initialProfile) {
   });
 
   photo.addEventListener('change', async () => {
-    const selected = photo.files?.[0];
+    const selected = photo.files && photo.files[0];
     if (!selected) return;
     const currentImage = ++imageGeneration;
     selecting = true;
@@ -221,7 +221,7 @@ export function initProfile(initialProfile) {
   function clear() {
     generation++;
     identity = null;
-    requestController?.abort();
+    if (requestController) requestController.abort();
     setBusy(false);
     if (dialog.open) dialog.close();
     releasePreview();

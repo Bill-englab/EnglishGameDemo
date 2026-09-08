@@ -29,11 +29,11 @@ export function getScenicRouteOffset(index) {
   const numericIndex = Number.isFinite(index) ? Math.trunc(index) : 0;
   const clampedIndex = Math.max(
     SCENIC_ROUTE_ANCHORS[0].index,
-    Math.min(SCENIC_ROUTE_ANCHORS.at(-1).index, numericIndex),
+    Math.min(SCENIC_ROUTE_ANCHORS[SCENIC_ROUTE_ANCHORS.length - 1].index, numericIndex),
   );
 
   let left = SCENIC_ROUTE_ANCHORS[0];
-  let right = SCENIC_ROUTE_ANCHORS.at(-1);
+  let right = SCENIC_ROUTE_ANCHORS[SCENIC_ROUTE_ANCHORS.length - 1];
   for (let anchorIndex = 1; anchorIndex < SCENIC_ROUTE_ANCHORS.length; anchorIndex += 1) {
     if (clampedIndex <= SCENIC_ROUTE_ANCHORS[anchorIndex].index) {
       right = SCENIC_ROUTE_ANCHORS[anchorIndex];
@@ -76,7 +76,7 @@ export function splitPathPoints(points, firstLockedIndex) {
 //   the full route's neighbors, so overlays share the underlying curve exactly.
 //
 // points: Array<{x:number, y:number}>
-export function buildSmoothPath(points, { startIndex = 0, endIndex = points?.length - 1 } = {}) {
+export function buildSmoothPath(points, { startIndex = 0, endIndex = (points == null ? undefined : points.length) - 1 } = {}) {
   if (!Array.isArray(points) || points.length < 2 || endIndex <= startIndex) return "";
 
   // Work on a defensive copy so neighbor lookups never touch the caller's array.

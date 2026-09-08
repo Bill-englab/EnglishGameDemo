@@ -58,7 +58,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     trigger.setAttribute("aria-expanded", "false");
     map.style.overflowY = previousOverflow;
     [map.inert, detail.inert] = previousInert;
-    const destination = origin?.isConnected && !origin.closest('[hidden], [inert], .hidden') ? origin : trigger;
+    const destination = origin && origin.isConnected && !origin.closest('[hidden], [inert], .hidden') ? origin : trigger;
     destination.focus({ preventScroll: true });
   }
 
@@ -70,7 +70,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     } else if (event.key === "Tab") {
       const focusable = getFocusableElements(drawer);
       const first = focusable[0];
-      const last = focusable.at(-1);
+      const last = focusable[focusable.length - 1];
       if (!first) {
         event.preventDefault();
         drawer.focus();
@@ -94,7 +94,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
   function render(summary) {
     if (destroyed) return;
     const hadFocus = opened && drawer.contains(doc.activeElement);
-    const focusedKey = doc.activeElement?.dataset.lessonKey;
+    const focusedKey = doc.activeElement && doc.activeElement.dataset.lessonKey;
     const currentStage = STAGES.find(stage => stage.available);
     const stageLabel = find("adventure-stage-label");
     stageLabel.textContent = `${currentStage.label} · ${currentStage.theme}`;
@@ -109,7 +109,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     currentButton.disabled = !summary.current || !onCurrentLesson;
     find("adventure-complete").hidden = !(summary.total > 0 && summary.completed === summary.total);
 
-    stages.replaceChildren();
+    stages.textContent = '';
     for (const stage of STAGES) {
       const button = make("button", "course-stage");
       button.type = "button";
@@ -123,13 +123,13 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
 
     const expanded = new Set([...chapters.querySelectorAll("details[open]")].map(item => item.dataset.chapter));
     const initialRender = chapters.childElementCount === 0;
-    chapters.replaceChildren();
+    chapters.textContent = '';
     lessons = new Map();
     let number = 0;
     for (const chapter of summary.chapters) {
       const group = make("details", "course-chapter");
       group.dataset.chapter = chapter.name;
-      group.open = initialRender ? summary.current?.chapter === chapter.name : expanded.has(chapter.name);
+      group.open = initialRender ? (summary.current && summary.current.chapter === chapter.name) : expanded.has(chapter.name);
       const heading = make("summary", "course-chapter__heading");
       heading.append(make("span", "", chapter.title), make("span", "course-chapter__count", `${chapter.completed} / ${chapter.total}`));
       group.append(heading);
@@ -137,7 +137,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
       for (const level of chapter.levels) {
         number += 1;
         const key = `${chapter.name}/${level.level}`;
-        const isCurrent = summary.current?.chapter === chapter.name && summary.current?.level === level.level;
+        const isCurrent = summary.current && summary.current.chapter === chapter.name && summary.current.level === level.level;
         const status = level.has_performance ? "Completed" : isCurrent ? "Current lesson" : level.state === "locked" ? "Locked · preview available" : "Available";
         const item = make("li");
         const button = make("button", "course-lesson");
@@ -172,7 +172,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
   }
 
   listen(trigger, "click", open);
-  listen(currentButton, "click", () => onCurrentLesson?.({ behavior: "smooth" }));
+  listen(currentButton, "click", () => onCurrentLesson && onCurrentLesson({ behavior: "smooth" }));
   listen(closeButton, "click", close);
   listen(backdrop, "click", close);
   listen(doc, "keydown", trapKeys);
@@ -181,7 +181,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
   });
   listen(chapters, "click", event => {
     const button = event.target.closest("[data-lesson-key]");
-    const lesson = lessons.get(button?.dataset.lessonKey);
+    const lesson = lessons.get(button && button.dataset.lessonKey);
     if (!lesson) return;
     selectLesson(lesson);
     close();
@@ -189,7 +189,7 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
   });
   listen(find("course-profile-button"), "click", () => {
     close();
-    onProfile?.();
+    if (onProfile) onProfile();
   });
 
   function destroy() {

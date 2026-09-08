@@ -37,9 +37,9 @@ python3 -m venv .venv
 .venv/bin/python app.py
 ```
 
-浏览器打开 <http://127.0.0.1:5000>。开发重载可设置 `FLASK_DEBUG=1`，默认关闭。Windows 后续可从仓库根运行 `run.bat`。
+浏览器打开 <http://127.0.0.1:18050>。开发重载可设置 `FLASK_DEBUG=1`，默认关闭。Windows 后续可从仓库根运行 `run.bat`。
 
-Open <http://127.0.0.1:5000>. Set `FLASK_DEBUG=1` for development reloads; it is off by default. On Windows, use the root `run.bat` for subsequent browser launches.
+Open <http://127.0.0.1:18050>. Set `FLASK_DEBUG=1` for development reloads; it is off by default. On Windows, use the root `run.bat` for subsequent browser launches.
 
 ### Windows 桌面版 · Windows desktop
 
@@ -165,9 +165,9 @@ node app/tests-browser/stone-map-full.cjs
 node app/tests-browser/videogen.cjs
 ```
 
-依赖位置与 Electron 验收设置见 [app/README.md](app/README.md)。旧 `modern-toy-ui.cjs` 全量视觉断言属于旧地图；当前使用 `stone-map-full.cjs`。不要为 QA 运行 `electron/main.cjs`，它会操作生产服务和 5000 端口；使用测试脚本的独立 Electron 环境。
+依赖位置与 Electron 验收设置见 [app/README.md](app/README.md)。旧 `modern-toy-ui.cjs` 全量视觉断言属于旧地图；当前使用 `stone-map-full.cjs`。不要为 QA 运行 `electron/main.cjs`，它会操作生产服务和 18050 端口；使用测试脚本的独立 Electron 环境。
 
-See [app/README.md](app/README.md) for dependency paths and Electron checks. Full visual assertions in `modern-toy-ui.cjs` belong to the older map; use `stone-map-full.cjs` for the current one. Do not run `electron/main.cjs` for QA: it manages the production service and port 5000. Use the harness's isolated Electron environment.
+See [app/README.md](app/README.md) for dependency paths and Electron checks. Full visual assertions in `modern-toy-ui.cjs` belong to the older map; use `stone-map-full.cjs` for the current one. Do not run `electron/main.cjs` for QA: it manages the production service and port 18050. Use the harness's isolated Electron environment.
 
 ## 4. 课程与示范维护 · Curriculum and demo maintenance
 

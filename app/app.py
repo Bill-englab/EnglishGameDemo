@@ -80,6 +80,7 @@ class ProfileLimitedRequest(Request):
 
 # Python/Windows MIME tables can omit WebP or inherit a generic registry type.
 mimetypes.add_type("image/webp", ".webp")
+mimetypes.add_type("text/javascript", ".mjs")
 
 app = Flask(__name__)
 app.request_class = ProfileLimitedRequest
@@ -268,6 +269,28 @@ def api_me():
         except (OSError, ValueError):
             app.logger.warning('Profile unavailable; keeping account display defaults.')
     return jsonify({"username": username, "isAdmin": username == ADMIN_USERNAME, **profile})
+
+
+@app.after_request
+def resource_cache_policy(response):
+    if request.endpoint == 'static':
+        filename = (request.view_args or {}).get('filename', '')
+        if response.status_code in (200, 206, 304):
+            if filename.endswith(('.js', '.mjs')):
+                response.mimetype = 'text/javascript'
+            if re.fullmatch(r'map-assets/[\w-]+\.[a-f0-9]{16}\.webp', filename):
+                response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+            else:
+                # Stable source filenames must revalidate after a deployment.
+                response.headers['Cache-Control'] = 'no-cache'
+    elif request.endpoint in ('video', 'thumb'):
+        # Stable URLs can reuse bytes after validation, including after a re-record.
+        response.headers['Cache-Control'] = 'private, no-cache'
+        response.vary.add('Cookie')
+    elif request.endpoint == 'api_library':
+        response.headers['Cache-Control'] = 'private, no-store'
+        response.vary.add('Cookie')
+    return response
 
 
 @app.after_request
@@ -641,5 +664,5 @@ def _scan_and_optimize():
 if __name__ == "__main__":
     _scan_and_optimize()
     debug = os.environ.get("FLASK_DEBUG", "").lower() in ("1", "true", "yes")
-    port = int(os.environ.get("PORT", "5000"))
+    port = int(os.environ.get("PORT", "18050"))
     app.run(host="0.0.0.0", debug=debug, port=port)

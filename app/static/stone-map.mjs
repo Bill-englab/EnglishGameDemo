@@ -3,6 +3,7 @@
 import { withChapterContext } from './lesson-view.mjs';
 import { getLevelVisualState, getChapterTheme } from './map-model.mjs';
 import { layoutSceneStrips } from './stone-worlds.mjs';
+import { mapAsset } from './map-assets.mjs';
 
 const ASSETS = '/static/stone-map/';
 let mediaObserver;
@@ -60,21 +61,21 @@ function createStoneLesson(level, index, onOpen) {
     video.setAttribute('aria-hidden', 'true');
     video.addEventListener('loadeddata', () => placeholder.hidden = true);
     video.addEventListener('error', () => { video.hidden = true; placeholder.hidden = false; });
-    loadNearMap(video, `/video/${level.chapter}/${level.level}/performance?t=${Date.now()}#t=0.1`);
+    loadNearMap(video, `/video/${level.chapter}/${level.level}/performance#t=0.1`);
     frame.appendChild(video);
   } else if (level.has_demo) {
     const img = make('img', 'stone-thumbnail');
     img.alt = '';
     img.addEventListener('load', () => placeholder.hidden = true);
     img.addEventListener('error', () => { img.hidden = true; placeholder.hidden = false; });
-    loadNearMap(img, `/thumb/${level.chapter}/${level.level}?t=${Date.now()}`);
+    loadNearMap(img, `/thumb/${level.chapter}/${level.level}`);
     frame.appendChild(img);
   }
   const badge = make('span', `stone-badge stone-badge--${state}`);
   badge.setAttribute('aria-hidden', 'true');
   if (state === 'completed') {
     const star = make('img', 'stone-star');
-    star.src = `${ASSETS}star.png`;
+    star.src = mapAsset(`${ASSETS}star.png`);
     star.alt = '';
     badge.appendChild(star);
   } else badge.innerHTML = ICONS[state];
@@ -176,7 +177,7 @@ export function drawStonePath() {
       const x = x0 + (x1 - x0) * t + direction * radius * arc;
       const y = y0 + (y1 - y0) * t;
       const stone = make('img', 'stone-paver');
-      stone.src = `${ASSETS}paver.png`;
+      stone.src = mapAsset(`${ASSETS}paver.png`);
       stone.alt = '';
       stone.dataset.gap = String(gap);
       stone.style.left = `${x}px`;

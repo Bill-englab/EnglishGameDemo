@@ -1,0 +1,4 @@
+/* Generated delivery assets; geometry and shadows stay in stone-map.css. */
+.stone-map #bg-layer { background-image: url("/static/map-assets/worlds-map-terrain.573405f3606b7db9.webp"); }
+.stone-pedestal { background-image: url("/static/map-assets/stone-map-pedestal.221e7a8e3659ed61.webp"); }
+.stone-title { background-image: linear-gradient(#fff0d3b3,#e4cda3d9), url("/static/map-assets/stone-map-pedestal.221e7a8e3659ed61.webp"); }

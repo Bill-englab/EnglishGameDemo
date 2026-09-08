@@ -58,7 +58,7 @@ cd app
 # Linux:  .venv/bin/python app.py
 ```
 
-打开 `http://服务器IP:5000`，用 `admin` / 你设的密码登录。
+打开 `http://服务器IP:18050`，用 `admin` / 你设的密码登录。
 
 ---
 
@@ -72,6 +72,10 @@ git pull
 ```
 
 **这不影响视频文件**——`demo/`、`recordings/`、`config.json`、`users.json` 都被 gitignore 排除，`git pull` 只更新代码和文案（`app/`、`curriculum/`、归档 `content/`、`prompts/` 等）。
+
+### 静态资源更新
+
+地图使用 `app/static/map-assets/` 中带内容哈希的 WebP。同步更新全部静态文件、`map-assets.mjs`、`map-assets.css` 和后端代码，再重启服务。哈希图片允许长期缓存；不要给JS/CSS配置不验证的长期缓存。若由反向代理直接托管静态文件，确保 `.mjs` 返回 `text/javascript`，不要被页面回退规则替换成HTML。旧哈希图片可保留，供尚未刷新的页面使用。
 
 ### 2. 如果有新的 demo 视频
 

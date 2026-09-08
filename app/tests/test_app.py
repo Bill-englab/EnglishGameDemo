@@ -191,8 +191,8 @@ def test_map_shell_has_module_entry_and_resilient_states(client):
 
 def test_app_registers_retryable_library_loading(client):
     javascript = client.get("/static/app.js").get_data(as_text=True)
-    assert 'fetch("/api/library"' in javascript and 'credentials: "same-origin"' in javascript
-    assert 'getElementById("map-retry").addEventListener("click", loadLibrary)' in javascript
+    assert 'requestJSON("/api/library")' in javascript
+    assert 'getElementById("map-retry").addEventListener("click",' in javascript
     # Error visibility/preservation is exercised by the imported DOM helper and
     # the real browser refresh/retry regression, independent of function spelling.
 
@@ -556,3 +556,44 @@ def test_admin_me_reports_isAdmin(app_env):
     _login(app_env, username="admin", password=app_module.ADMIN_PASSWORD)
     me = app_env.get("/api/me").get_json()
     assert me["isAdmin"] is True
+
+
+def test_hashed_map_art_can_be_cached_but_scripts_are_revalidated(client):
+    asset = next((Path(app_module.app.static_folder) / 'map-assets').glob('*.webp'))
+    response = client.get('/static/map-assets/' + asset.name)
+    assert response.status_code == 200
+    assert response.mimetype == 'image/webp'
+    assert 'public' in response.headers['Cache-Control']
+    assert 'max-age=31536000' in response.headers['Cache-Control']
+    assert 'immutable' in response.headers['Cache-Control']
+    for name in ('app.js', 'map-assets.mjs', 'map-assets.css'):
+        script = client.get('/static/' + name)
+        assert 'no-cache' in script.headers['Cache-Control']
+        if name.endswith(('.js', '.mjs')):
+            assert script.mimetype == 'text/javascript'
+
+
+def test_performance_cache_revalidates_and_varies_by_account(client):
+    root = app_module.RECORDINGS_ROOT / TEST_USERNAME / '04' / '01-c' / '01-s'
+    root.mkdir(parents=True, exist_ok=True)
+    video = root / 'performance.mp4'
+    video.write_bytes(b'first-performance')
+    url = '/video/01-c/01-s/performance'
+    first = client.get(url)
+    assert 'private' in first.headers['Cache-Control']
+    assert 'no-cache' in first.headers['Cache-Control']
+    assert 'Cookie' in first.headers['Vary']
+    headers = {'If-None-Match': first.headers['ETag']}
+    assert client.get(url, headers=headers).status_code == 304
+    video.write_bytes(b'a-new-recording-with-a-different-length')
+    changed = client.get(url, headers=headers)
+    assert changed.status_code == 200
+    assert changed.data == video.read_bytes()
+    client.get('/logout')
+    assert client.get(url, headers=headers).status_code == 302
+
+
+def test_module_mime_is_correct_even_with_generic_host_mime_table(client, monkeypatch):
+    monkeypatch.setitem(app_module.mimetypes.types_map, '.mjs', 'application/octet-stream')
+    response = client.get('/static/request-json.mjs')
+    assert response.mimetype == 'text/javascript'

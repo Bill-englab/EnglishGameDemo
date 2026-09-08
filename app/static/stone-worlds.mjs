@@ -1,7 +1,9 @@
 // Full-width landscape scenes on desktop, portrait scenes on mobile. Repeat
 // vertically with overlap instead of stretching artwork to the chapter height.
+import { mapAsset } from './map-assets.mjs';
+
 export function stoneWorldCandidates(world, fallback, width = 767) {
-  return [...(width >= 768 ? [`/static/worlds-map/${world}-desktop.png`] : []), `/static/worlds-map/${world}.png`, ...fallback];
+  return [...(width >= 768 ? [mapAsset(`/static/worlds-map/${world}-desktop.png`)] : []), mapAsset(`/static/worlds-map/${world}.png`), ...fallback];
 }
 
 export function sceneStripLayout(width, height) {

@@ -65,7 +65,7 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │   └── .venv/                         # 本地虚拟环境（gitignored）
 │
 ├── electron/                          # Electron 桌面壳
-│   ├── main.cjs                       # 主进程：spawn Flask → 等就绪 → 加载 localhost:5000；自动授权摄像头/麦克风；退出杀 Flask
+│   ├── main.cjs                       # 主进程：spawn Flask → 等就绪 → 加载 localhost:18050；自动授权摄像头/麦克风；退出杀 Flask
 │   └── preload.cjs                    # contextBridge 暴露 window.electronAPI（窗口最小化/最大化/关闭）
 │
 ├── curriculum/                        # 新版课程唯一创作源（分年龄、结构化、可校验）
@@ -125,7 +125,7 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 | 层 | 技术 | 关键约束 |
 | --- | --- | --- |
 | 后端 | Python / Flask（单文件 `app/app.py`） | 无数据库、无构建；有登录/用户管理、页面内上传（流式写盘）、服务端 ffmpeg 处理（压缩+缩略图） |
-| 桌面壳 | Electron 31（`electron/` + `app/node_modules/electron`） | 仅 Windows 本地用；spawn Flask → 加载 `localhost:5000`；自动授权摄像头/麦克风 |
+| 桌面壳 | Electron 31（`electron/` + `app/node_modules/electron`） | 仅 Windows 本地用；spawn Flask → 加载 `localhost:18050`；自动授权摄像头/麦克风 |
 | 数据 | 文件系统（三棵树 = 数据库） | 文件夹名零填充前缀，字符串排序即预期顺序；三棵树的 `<章>/<关>` 同名；performance 按用户名多一层 |
 | 前端 | 原生 HTML/CSS/JS（ES Modules） | **无构建步骤、无打包器、无前端 npm 依赖**。`.mjs` 直接由浏览器加载 |
 | 字体 | 自托管 woff2（`app/static/fonts/`） | 离线可用，不走 Google CDN |
@@ -150,13 +150,13 @@ python -m venv .venv
 
 ### 启动方式（三选一）
 
-1. **桌面版**（日常给孩子的入口）：仓库根双击 `launch.vbs` —— Electron 拉起 Flask（venv 内 `app.py`）→ 等就绪 → 无边框窗口加载 `localhost:5000`，退出时杀掉 Flask。跑一次 `install-shortcut.vbs` 可装桌面快捷方式。前提：`cd app && npm install`（装 electron）。
+1. **桌面版**（日常给孩子的入口）：仓库根双击 `launch.vbs` —— Electron 拉起 Flask（venv 内 `app.py`）→ 等就绪 → 无边框窗口加载 `localhost:18050`，退出时杀掉 Flask。跑一次 `install-shortcut.vbs` 可装桌面快捷方式。前提：`cd app && npm install`（装 electron）。
 2. **浏览器版**：仓库根双击 `run.bat`（保留一个能看 Flask 日志的黑窗口）。
 3. **开发服务器**：
 
 ```bash
 cd app
-.venv/Scripts/python app.py          # 然后开 http://127.0.0.1:5000
+.venv/Scripts/python app.py          # 然后开 http://127.0.0.1:18050
 ```
 
 默认不开 debug；开发时可设置 `FLASK_DEBUG=1` 开启自动重载。Electron 用 `localhost` 而不是 `127.0.0.1`（secure context，摄像头需要），两者都指向同一服务。
@@ -182,8 +182,8 @@ cd app
 ### 调试单接口
 
 ```bash
-curl -s http://127.0.0.1:5000/api/library | head    # 未登录会 302 到 /login
-curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:5000/login
+curl -s http://127.0.0.1:18050/api/library | head    # 未登录会 302 到 /login
+curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:18050/login
 ```
 
 ---
@@ -217,7 +217,7 @@ node --test tests-js/map-path.test.mjs # 单文件
 ### 当前测试覆盖什么
 
 - 2026-09-06 基线：Python 376、Node 44；包含 Stage 1 全量对话/提示词聚合、未知 contract、正负安全方向与 Child 服装归属检查、20张资产HTTP验证、导航计数/不可变输入、drawer焦点、Electron挂载幂等、current跳转、同章背景回退、上传所有权、路径共享曲线和庆祝队列/取消生命周期。当前验收与命令见 [`docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`](docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md)。
-- 可选 `tests-browser/modern-toy-ui.cjs`：已有 Playwright/Edge/Python 环境下运行；具体环境变量见 `app/README.md`。使用临时课程副本、账号、配置、资料与媒体根，拦截上传且不执行启动扫描。`TOY_QA_ELECTRON=1` 启用真实 Electron/preload、独立 userData、隐藏800×600窗口。不要为测试启动 `electron/main.cjs`（它拉起生产服务并会清理5000端口），不要复用用户窗口。
+- 可选 `tests-browser/modern-toy-ui.cjs`：已有 Playwright/Edge/Python 环境下运行；具体环境变量见 `app/README.md`。使用临时课程副本、账号、配置、资料与媒体根，拦截上传且不执行启动扫描。`TOY_QA_ELECTRON=1` 启用真实 Electron/preload、独立 userData、隐藏800×600窗口。不要为测试启动 `electron/main.cjs`（它拉起生产服务并会清理18050端口），不要复用用户窗口。
 
 - `test_scanner.py`：扫描排序、`meta.json` 回退、`has_demo`/`has_performance` 跨树检测、**webm 格式检测**、三态机、跨章状态传递、全完成无 current、**按用户名隔离 performance 路径**。
 - `test_app.py`：登录（admin/普通用户/错误密码）、用户管理 API、地图/详情 GET 路由、缩略图路由（`/thumb`）、视频 404 边界（缺文件 / 非法 kind / 路径越界）、上传路由（写盘 / 路径越界 / 非法 kind / 无文件 / 建目录）、**webm 上传存正确扩展名 + serve 正确 mimetype + 重录换格式删旧文件**、HTML 外壳含所有关键 `id`、可重试加载逻辑、静态模块可 serve、字体自托管。
@@ -335,6 +335,13 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 - **可重试加载**：`loadLibrary()` 三态切换，`fetch("/api/library", { cache: "no-store" })`。
 - **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`。
 - **动效约束**：current 关发光呼吸；`prefers-reduced-motion: reduce` 关闭。
+
+### Web 加载与缓存（2026-09-08）
+
+- PNG 保留为原始美术素材；实际地图由 `map-assets.mjs` / `map-assets.css` 引用 `static/map-assets/` 内带内容哈希的 WebP。背景保持原分辨率，透明石台、踏石和金星按高清显示尺寸导出。更新素材后运行 `tools/optimize_map_assets.py`，同时部署派生文件与两个 URL 清单，无前端构建步骤。
+- 哈希图片长缓存；JS/CSS 与未版本化资源重新验证。封面、视频地址不带随机时间戳，服务端使用 `private, no-cache` 和 `Vary: Cookie`，保留重录更新与账号隔离。不要改成公开缓存用户视频。
+- 登录状态与课程请求由 `request-json.mjs` 限时15秒，包含读取JSON。独立启动保护在模块下载失败或30秒未初始化时显示重试，避免一直停在 Loading。`.mjs` 明确返回 JavaScript MIME；媒体查询兼容旧 `addListener`。
+- `preview_stone_map.py --login` 提供临时账号 `preview` / `preview-only`，只放行登录POST，其余变更仍禁止。移动登录、弱网、缓存和重试验收使用 `tests-browser/loading-cache.cjs`；结果与边界见 `docs/plans/2026-09-08-web-loading-acceptance.md`。
 
 ### 布局尺寸（2026-09-07）
 

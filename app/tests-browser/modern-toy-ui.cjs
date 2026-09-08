@@ -127,7 +127,7 @@ server.serve_forever()
 `;
 
 // A separate main process avoids electron/main.cjs's production server/startup
-// scan and port-5000 cleanup. Uses the real preload and real native window APIs.
+// scan and port-18050 cleanup. Uses the real preload and real native window APIs.
 const electronProgram = `
 const { app, BrowserWindow, ipcMain } = require('electron');
 app.setPath('userData', process.env.TOY_QA_USER_DATA);

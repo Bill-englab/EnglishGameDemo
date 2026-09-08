@@ -6,6 +6,7 @@
 import { getChapterTheme, resolveMapBackground } from "./map-model.mjs";
 import { renderStoneMap, disposeStoneMedia, drawStonePath } from "./stone-map.mjs";
 import { stoneWorldCandidates } from "./stone-worlds.mjs";
+import { requestJSON, observeMediaQuery } from "./request-json.mjs";
 import { normalizeReplayCards, promptParts, withChapterContext } from "./lesson-view.mjs";
 import { resolveMediaView } from "./detail-media.mjs";
 import { summarizeAdventure } from "./adventure-navigation.mjs";
@@ -67,7 +68,8 @@ function prettyChapter(raw) {
   return s.split("-").filter(Boolean)
     .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 }
-const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}?t=${Date.now()}`;
+// Stable addresses allow conditional reuse; the server validates media changes.
+const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}`;
 const uploadURL = (chapter, level, kind) => `/upload/${chapter}/${level}/${kind}`;
 const levelKey = ({ chapter, level }) => `${chapter}/${level}`;
 
@@ -588,7 +590,7 @@ function selectMapBackgrounds(slides) {
       if (generation !== backgroundGeneration || !slide.isConnected) return;
       slide.classList.toggle("bg-layer__slide--placeholder", !url);
       slide.style.backgroundImage = url ? `url("${url}")` : "";
-      slide.dataset.art = url?.startsWith('/static/worlds-map/') ? 'map' : 'legacy';
+      slide.dataset.art = url?.startsWith('/static/map-assets/') ? 'map' : 'legacy';
       slide.style.setProperty('--scene-image', url ? `url("${url}")` : 'none');
     });
   };
@@ -600,7 +602,7 @@ function selectMapBackgrounds(slides) {
     requestAnimationFrame(observeMapBackgrounds);
   } else slides.forEach(load);
 }
-mapMobile.addEventListener("change", () => selectMapBackgrounds(bgSlides));
+observeMediaQuery(mapMobile, () => selectMapBackgrounds(bgSlides));
 
 function buildBgLayer(library) {
   const layer = document.getElementById("bg-layer");
@@ -942,9 +944,7 @@ async function loadLibrary({ isCurrent = () => true } = {}) {
   // if the family navigates away before that request finishes.
   if (!currentLibrary.length && !document.getElementById("map-view").classList.contains("hidden")) showOnly("map-loading");
   try {
-    const response = await fetch("/api/library", { cache: "no-store", credentials: "same-origin" });
-    if (!response.ok) throw new Error(`library ${response.status}`);
-    const library = await response.json();
+    const library = await requestJSON("/api/library");
     if (!isCurrent()) return false;
     renderMap(library);
     showOnly("map-scroll");
@@ -956,7 +956,10 @@ async function loadLibrary({ isCurrent = () => true } = {}) {
     return false;
   }
 }
-document.getElementById("map-retry").addEventListener("click", loadLibrary);
+let initialized = false;
+document.getElementById("map-retry").addEventListener("click", () => {
+  if (initialized) loadLibrary();
+});
 
 // ===== admin user management (popup) =====
 async function loadAdminUsers() {
@@ -993,8 +996,7 @@ async function init() {
   let profileUI;
   // Check login status before loading the app
   try {
-    const res = await fetch("/api/me", { credentials: "same-origin" });
-    const data = await res.json();
+    const data = await requestJSON("/api/me");
     if (!data.username) {
       window.location.href = "/login";
       return;
@@ -1005,8 +1007,9 @@ async function init() {
     const adminSection = document.getElementById("admin-section");
     if (adminSection) adminSection.style.display = "";
   }
-  } catch (_) {
-    window.location.href = "/login";
+  } catch (error) {
+    if (error.status === 401) window.location.href = "/login";
+    else showMapLoadError(document, { hasLibrary: false });
     return;
   }
 
@@ -1025,7 +1028,7 @@ async function init() {
       if (!target.disabled) { target.click(); target.focus(); }
     });
   }
-  mobileMedia.addEventListener("change", updateMediaView);
+  observeMediaQuery(mobileMedia, updateMediaView);
   window.addEventListener("pagehide", disposeDetailMedia);
 
   // User menu popup — toggle on click, close on outside click
@@ -1085,6 +1088,11 @@ async function init() {
     rt = setTimeout(drawMapPath, 120);
   });
 
-  loadLibrary();
+  initialized = true;
+  window.dispatchEvent(new Event('adventure:initialized'));
+  return loadLibrary();
 }
-init();
+init().catch(error => {
+  console.error('Unable to start adventure', error);
+  showMapLoadError(document, { hasLibrary: false });
+});

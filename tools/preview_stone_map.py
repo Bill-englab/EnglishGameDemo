@@ -18,6 +18,7 @@ from unittest.mock import patch
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=0)
+    parser.add_argument('--login', action='store_true', help='Exercise login with the temporary preview / preview-only account')
     args = parser.parse_args()
     project = Path(__file__).resolve().parent.parent
     app_dir = project / 'app'
@@ -41,7 +42,7 @@ def main():
         # Cookies are scoped by host, not port: never replace the family's login.
         application.app.config['SESSION_COOKIE_NAME'] = 'stone_map_preview_session'
         application.app.config['TEMPLATES_AUTO_RELOAD'] = True
-        account_hash = generate_password_hash(secrets.token_urlsafe(24))
+        account_hash = generate_password_hash('preview-only' if args.login else secrets.token_urlsafe(24))
         application.USERS_FILE = root / 'users.json'
         application.USERS_FILE.write_text(json.dumps({'preview': account_hash}), encoding='utf-8')
         stamp = application._account_stamp('preview', account_hash)
@@ -49,10 +50,13 @@ def main():
         @application.app.before_request
         def preview_session():
             # This hook exists ONLY on this separate loopback preview process.
+            if args.login and request.path == '/login' and request.method == 'POST':
+                return None
             if request.method not in ('GET', 'HEAD', 'OPTIONS'):
                 return jsonify(error='This visual preview is read-only.'), 403
-            session['username'] = 'preview'
-            session['profile_account_stamp'] = stamp
+            if not args.login:
+                session['username'] = 'preview'
+                session['profile_account_stamp'] = stamp
 
         chapter = sorted((root / 'curriculum' / '04').glob('*/chapter.json'))[0].parent
         lessons = sorted(chapter.glob('*/lesson.json'))[:3]

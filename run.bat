@@ -24,11 +24,11 @@ if not exist ".venv\Scripts\python.exe" (
 
 echo.
 echo  Starting TigerTales ...
-echo  Opening http://127.0.0.1:5000 in your browser.
+echo  Opening http://127.0.0.1:18050 in your browser.
 echo  (Stop with Ctrl+C.)
 echo.
 
-start "" http://127.0.0.1:5000
+start "" http://127.0.0.1:18050
 ".venv\Scripts\python.exe" app.py
 
 echo.

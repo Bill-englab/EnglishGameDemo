@@ -21,7 +21,7 @@ python -m venv .venv
 
 ```bash
 cd app
-.venv/Scripts/python app.py      # 开 http://127.0.0.1:5000
+.venv/Scripts/python app.py      # 开 http://127.0.0.1:18050
 ```
 
 或从仓库根双击 `run.bat`（Windows，自动开浏览器）。
@@ -78,6 +78,14 @@ cd app
 `/api/library` 经 `adventure-navigation.mjs` 投影真实完成数、章节计数与 current；`adventure-shell.mjs` 管理浮动外壳和目录焦点。顶部菜单、Stage、窄进度条和独立头像紧凑排列在左侧；桌面高度64px、平板60px、手机56px。账户弹层在可用高度内独立纵向滚动。**Current lesson** 只滚动并聚焦当前节点。完成为一颗金色星章（只表示已有 performance，不是评分）、current 为定位针、locked 为锁；所有节点都可查看。新完成的 performance 在本次页面会话仅触发一次非阻断星章/章节庆祝，刷新或重录不重复。只有当前用户的 performance 文件改变进度。Stage 1 对应 `curriculum/04`，Stage 2/3 为禁用的 Planned 占位。
 
 十章使用 [worlds-map 的细节场景](static/worlds-map/README.md)：桌面选择原生1536×1024横图，手机选择1024×1536竖图，完整覆盖地图宽度，没有左右草地拼接。纵向按图像比例分条重叠，避免一张图拉伸覆盖整章。场景接近视口800px时才加载，和路径等速滚动。石台与踏石均有贴地阴影和右下投影。桌面图缺失先尝试本章竖图，再回退到本章 [v2桌面/手机图](static/worlds-v2/README.md)、旧WebP/PNG/JPG、材质底色；不循环其他章的图。768px断点重选横竖图，不重建节点或录制DOM。
+
+## Web 弱网加载与缓存
+
+地图实际加载 `static/map-assets/` 中带内容哈希的 WebP，原PNG只保留为素材源。24张派生图合计17.07MB（原图86.17MB）；背景不降低分辨率。图片可长期缓存，脚本和样式重新验证。封面和录像使用稳定URL及私有重新验证，上传替换后仍能取得新内容。
+
+会话与课程请求15秒超时后显示重试；模块加载失败也会显示错误，模块迟迟不返回时30秒结束等待。服务端明确返回 `.mjs` 的JavaScript类型。部署必须同时更新后端、全部静态文件与两个素材清单，并重启服务。如果反向代理自行托管静态资源，应保留上述缓存与MIME策略。
+
+移动登录验收：从仓库根运行 `app/.venv/Scripts/python tools/preview_stone_map.py --port 42172 --login`，使用临时账号 `preview` / `preview-only`。保持预览运行，设置 `STONE_QA_URL=http://127.0.0.1:42172/`，运行 `node app/tests-browser/loading-cache.cjs`。该脚本依赖已有Playwright/Edge，验证真实登录、2Mbps网络、刷新缓存、接口/模块挂起与重试。完整结果见[验收记录](../docs/plans/2026-09-08-web-loading-acceptance.md)。
 
 ## 测试
 

@@ -8,7 +8,7 @@ applyBranding(app);
 
 const APP_DIR = path.join(__dirname, "..", "app");
 const PYTHON = path.join(APP_DIR, ".venv", "Scripts", "python.exe");
-const URL = "http://localhost:5000/";
+const URL = "http://localhost:18050/";
 let flaskProcess = null;
 let mainWindow = null;
 
@@ -55,9 +55,9 @@ function killFlask() {
     try { flaskProcess.kill("SIGTERM"); } catch (_) {}
     flaskProcess = null;
   }
-  // Belt-and-suspenders: kill anything on port 5000
+  // Belt-and-suspenders: kill anything on port 18050
   try {
-    const out = execSync('netstat -ano -p TCP | findstr ":5000" | findstr "LISTENING"', { encoding: "utf8" });
+    const out = execSync('netstat -ano -p TCP | findstr ":18050" | findstr "LISTENING"', { encoding: "utf8" });
     const pid = out.trim().split(/\s+/).pop();
     if (pid) execSync(`taskkill /F /T /PID ${pid}`, { windowsHide: true });
   } catch (_) {}

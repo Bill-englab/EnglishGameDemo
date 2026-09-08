@@ -76,7 +76,7 @@ async function geometry(page) {
       await page.goto(url);
       await ready(page);
       await geometry(page);
-      assert.equal(await page.locator('.bg-layer__slide').first().evaluate(s => s.style.backgroundImage.includes('-desktop.png')), viewport.width >= 768, 'Desktop uses landscape art; mobile keeps portrait art');
+      assert.equal(await page.locator('.bg-layer__slide').first().evaluate(s => s.style.backgroundImage.includes('-desktop.')), viewport.width >= 768, 'Desktop uses landscape art; mobile keeps portrait art');
       await page.screenshot({path:path.join(output,`full-${viewport.width}x${viewport.height}.png`)});
       const seam = page.locator('.chapter-heading').nth(1);
       await seam.scrollIntoViewIfNeeded();
@@ -155,7 +155,7 @@ async function geometry(page) {
 
     // Failed world art stays within that chapter's fallback chain.
     const missing = await browser.newPage();
-    await missing.route('**/worlds-map/color-market*.png',r => r.fulfill({status:404,body:''}));
+    await missing.route('**/map-assets/worlds-map-color-market*.webp',r => r.fulfill({status:404,body:''}));
     await missing.route('**/worlds-v2/color-market-*',r => r.fulfill({status:404,body:''}));
     await missing.goto(url);
     await missing.locator('.chapter-heading').nth(1).scrollIntoViewIfNeeded();

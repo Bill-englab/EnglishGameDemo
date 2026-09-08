@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/profile.css">
   <link rel="stylesheet" href="/static/stone-map.css">
+  <link rel="stylesheet" href="/static/map-assets.css">
   <link rel="icon" type="image/png" sizes="128x128" href="/static/icon.png">
   <link rel="icon" href="/static/favicon.ico">
 </head>
@@ -58,7 +59,7 @@
       <p id="adventure-complete" class="adventure-complete" role="status" hidden>Every lesson has a performance. Enjoy your adventure again!</p>
       <div id="map-loading" class="status-card" role="status">Loading your adventure…</div>
       <div id="map-error" class="status-card hidden" role="alert">
-        <strong>The map is taking a nap.</strong>
+        <strong>Could not load your adventure. Check your connection and try again.</strong>
         <button id="map-retry" type="button">Try again</button>
       </div>
       <div id="bg-layer" class="bg-layer" aria-hidden="true"></div>
@@ -169,7 +170,35 @@
       </div>
     </form>
   </dialog>
-  <script src="/static/titlebar.js"></script>
+  <script>
+    // Independent of ES modules: failed or stalled script downloads must be retryable.
+    (function () {
+      var loading = document.getElementById('map-loading');
+      var error = document.getElementById('map-error');
+      var retry = document.getElementById('map-retry');
+      var initialized = false;
+      function failed() {
+        if (initialized || loading.classList.contains('hidden')) return;
+        loading.classList.add('hidden');
+        error.classList.remove('hidden');
+      }
+      var timer = setTimeout(failed, 30000);
+      function onError(event) {
+        if (event.target && event.target.tagName === 'SCRIPT') failed();
+      }
+      window.addEventListener('error', onError, true);
+      window.addEventListener('adventure:initialized', function () {
+        initialized = true;
+        clearTimeout(timer);
+        window.removeEventListener('error', onError, true);
+      }, { once: true });
+      retry.addEventListener('click', function () {
+        if (!initialized) window.location.reload();
+      });
+    }());
+  </script>
+  <script src="/static/titlebar.js" defer></script>
+  <noscript><p>Enable JavaScript to load your adventure.</p></noscript>
   <script type="module" src="/static/app.js"></script>
 </body>
 </html>

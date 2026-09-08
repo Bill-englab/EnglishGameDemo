@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { sceneStripLayout, stoneWorldCandidates } from '../static/stone-worlds.mjs';
+import { mapAsset } from '../static/map-assets.mjs';
 
 test('scene strips fill wide screens without grass sidebars and cover tall chapters', () => {
   for (const width of [320, 390, 800, 1280, 1920, 2560]) {
@@ -16,7 +17,7 @@ test('scene strips fill wide screens without grass sidebars and cover tall chapt
 });
 test('map art is preferred while preserving the exact same-world fallback order', () => {
   const fallback=['/static/worlds-v2/color-market-mobile.webp','/static/worlds/02-refusing-bargaining.png'];
-  assert.deepEqual(stoneWorldCandidates('color-market',fallback),['/static/worlds-map/color-market.png',...fallback]);
+  assert.deepEqual(stoneWorldCandidates('color-market',fallback),[mapAsset('/static/worlds-map/color-market.png'),...fallback]);
   assert.equal(fallback.length,2);
-  assert.deepEqual(stoneWorldCandidates('color-market',fallback,1440),['/static/worlds-map/color-market-desktop.png','/static/worlds-map/color-market.png',...fallback]);
+  assert.deepEqual(stoneWorldCandidates('color-market',fallback,1440),[mapAsset('/static/worlds-map/color-market-desktop.png'),mapAsset('/static/worlds-map/color-market.png'),...fallback]);
 });

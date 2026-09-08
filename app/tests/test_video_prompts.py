@@ -64,7 +64,7 @@ def test_exports_exact_lines_in_their_own_parts_with_only_the_used_cast(source):
     for part, text in result.items():
         dialogue = text.split("SPOKEN DIALOGUE (verbatim, in order):\n")[1].split("\n\n")[0]
         assert dialogue == expected[part]
-        assert "pink pig" in text and "tiger" in text
+        assert "Pig Mom" in text and "pig mother" in text and "tiger" in text
         assert "Dog Dad" not in text and "Rabbit Teacher" not in text and "Bear Peer" not in text
         assert "16:9" in text and "10 seconds" in text
 

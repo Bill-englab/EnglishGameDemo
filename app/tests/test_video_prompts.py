@@ -79,7 +79,7 @@ def test_all_stage_prompts_restore_original_art_and_anatomy_but_keep_restrained_
                         "chubby round cheeks", "tiny rounded ears", "short chubby toddler proportions"):
             assert feature in text, (path, feature)
         if "Dog Dad —" in text:
-            for feature in ("warm tan-brown fur", "big floppy droopy ears", "soft round snout", "gentle tired-but-loving eyes"):
+            for feature in ("warm tan-brown fur", "big soft floppy ears", "soft round snout", "bright round eyes with a lively spark"):
                 assert feature in text, (path, feature)
         assert "bouncy playful energy" not in text and "tail wags when excited" not in text
         assert "expressive but restrained faces" in text

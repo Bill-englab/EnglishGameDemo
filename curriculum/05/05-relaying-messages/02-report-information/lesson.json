@@ -1,0 +1,89 @@
+{
+  "title": "No School Friday",
+  "title_zh": "周五不上学",
+  "can_do": "把学校或外面听来的消息完整转述给家人，并回答追问。",
+  "conversation_move": {
+    "id": "report-information",
+    "label": "report heard news to the family"
+  },
+  "trigger": "Child comes home with real news from Teacher, and Mom has not heard it yet.",
+  "recycle": [
+    "relay-a-message"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "After school, in the kitchen.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "How was school, my dear?"
+      },
+      {
+        "speaker": "child",
+        "line": "Good! Teacher says there's no school on Friday."
+      },
+      {
+        "speaker": "mom",
+        "line": "No school? Why is that?"
+      },
+      {
+        "speaker": "child",
+        "line": "She says the teachers have a big meeting."
+      },
+      {
+        "speaker": "mom",
+        "line": "So Friday is a family day. What should we do?"
+      },
+      {
+        "speaker": "child",
+        "line": "She also says to bring our rain boots tomorrow."
+      },
+      {
+        "speaker": "mom",
+        "line": "Rain boots? Is it a water-play day?"
+      },
+      {
+        "speaker": "child",
+        "line": "Yes, for the leaf hunt in the garden!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The class plant",
+      "setting": "School gets a new class plant by the window.",
+      "change": "Mom has not heard about it yet.",
+      "challenge": "Child reports what Teacher says about watering days and where the plant sits, and answers Mom's follow-up questions."
+    },
+    {
+      "title": "The shoe shop",
+      "setting": "Mom comes home from shopping without new shoes.",
+      "change": "The shop had none in her size.",
+      "challenge": "Child reports what happened and what Mom bought instead, then answers Dad's questions about it at dinner."
+    }
+  ],
+  "parent_support": [
+    "放学后先问“学校有什么新消息”，把报道的机会留给孩子。",
+    "孩子转述时故意追问一两个细节：“老师还说什么了？”",
+    "把“老师说了什么”当正经新闻听，认真回应，孩子会更愿意当小记者。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

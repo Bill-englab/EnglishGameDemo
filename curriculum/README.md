@@ -2,6 +2,8 @@
 
 > 30/30 课已于 2026-09-06 全部迁移到 `continuous-dialogue-v1`：每个 Lesson 在 `dialogue.turns` 保存一段完整自然对话，`core/stretch/repair` 三字段已删除，三个约 10 秒 clip 只在 `production.json` 的 `clips` 中切分。写作风格遵循[连续对话内容与三段视频生产规范](../docs/specs/2026-09-06-continuous-dialogue-content-design.md)与[内容生成风格手册](../docs/specs/2026-09-06-dialogue-authoring-style.md)。本文下方的历史 A/B/C 配额描述仅作旧版参考。
 
+**Stage 2（`05/`，"I can keep it going"）** 于 2026-09-11 创建：10 章 × 3 课共 30 课，`continuous-dialogue-v1`，状态全部为 `draft`（revision 1）。台词总量 1844 词 / 253 turns，Child 1012 词 / 成人 832 词；家庭伙伴 23/30（76.7%）；validator `--complete` 0 issue，90 份提示词已同步导出（见 [`../prompts/05/README.md`](../prompts/05/README.md)）。设计与 NCE1 场景映射见 [Stage 2 内容计划](../docs/specs/2026-09-11-stage2-content-plan.md)。**内容尚未经用户逐课人工复核，未提升 `language_reviewed`，禁止制作 demo**；复核流程与 Stage 1 相同（十项结构化 review + 逐课人工审查）。网站已支持阶段切换：目录里点击 "Open" 的 Stage 即可进入（`?stage=` URL 参数保持当前阶段），无需改环境变量重启。
+
 `curriculum/` 是分年龄、可审查、可持续演进的新版课程唯一创作源。当前首先建设 `04/`：目标是让已有较好英文理解力的 4 岁非母语孩子，从“听懂并作出反应”逐步走到“能用合适句式参与日常对话”。
 
 目录层级固定为：

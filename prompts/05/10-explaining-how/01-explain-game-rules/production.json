@@ -1,0 +1,41 @@
+{
+  "content_revision": 1,
+  "scene": "Playroom with a clear open floor. Child and Peer stand facing each other, Child at screen-right and Peer at screen-left, with empty hands and room to move in place. Locked 16:9 medium two-shot; movements stay small and in place.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child teaches with playful confidence; Peer copies each step eagerly; both end with light giggles and wiggling fingers, ready to play.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Child and Peer stand facing each other with empty hands on the open floor.",
+      "action": "Child announces his game with proud open arms. Peer scratches his head once while asking; Child wiggles his fingers like little bug legs and mimes running in place.",
+      "end": "Both stand with hands relaxed, smiling."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Both stand with hands relaxed, smiling.",
+      "action": "Peer freezes mid-gesture like a statue while asking. Child demonstrates the statue pose with stiff arms, then counts on five fingers slowly; Peer wiggles one shoulder while asking his rule question.",
+      "end": "Child holds up one finger for the rule; Peer waits to hear it."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8
+      ],
+      "start": "Child holds up one finger for the rule; Peer waits to hear it.",
+      "action": "Child points at Peer, then at himself, for the caller change. Peer counts the three steps on his fingers and nods; they wiggle their fingers together like bug feet, facing each other, ready to start.",
+      "end": "Both stand with wiggling fingers and big grins on the open playroom floor."
+    }
+  ]
+}

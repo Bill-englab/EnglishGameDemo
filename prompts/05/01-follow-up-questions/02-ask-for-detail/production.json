@@ -1,0 +1,42 @@
+{
+  "content_revision": 1,
+  "scene": "Home entry counter. A plain brown delivery box sits at center; a small white card and a pair of small green winter gloves appear only when the box is opened. Mom stands screen-left and Child stands screen-right. Locked 16:9 medium two-shot with both faces and the countertop visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child shows brief curiosity while asking about the box and a small happy smile when the gloves appear; Mom stays warm and unhurried.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "The closed brown box rests at counter center; Mom stands screen-left and Child screen-right, both with empty hands.",
+      "action": "Mom rests one hand on the box lid. Child looks at the box, points at it once with an open hand, and asks what is inside and where it came from.",
+      "end": "The box stays closed at center; Mom's hand rests on the lid; Child waits with empty hands."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "The box stays closed at center; Mom's hand rests on the lid; Child waits with empty hands.",
+      "action": "Child and Mom open the box lid together; Mom lifts out the small white card and reads it; the folded green gloves stay inside the box. Child asks about the card, looking between the card and Mom.",
+      "end": "The box is open at center; Mom holds the small card in one hand; the folded green gloves remain visible inside the box."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "start": "The box is open at center; Mom holds the small card in one hand; the folded green gloves remain visible inside the box.",
+      "action": "Mom sets the card on the counter, lifts the green gloves from the box, and offers them; Child takes them with both hands, holds them up briefly, and asks his last question while holding them.",
+      "end": "Child holds the small green gloves with both hands at chest height; the open box and card rest at center; Mom has empty hands and a warm smile."
+    }
+  ]
+}

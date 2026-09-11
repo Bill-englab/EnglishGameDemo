@@ -1,0 +1,91 @@
+{
+  "title": "One Lap Each",
+  "title_zh": "一人跑一圈",
+  "can_do": "游戏规则不公平时，提出“怎么样才公平”的修改方案。",
+  "conversation_move": {
+    "id": "negotiate-a-rule",
+    "label": "negotiate a fairer rule for a game"
+  },
+  "trigger": "The truck game rule feels unfair, so Child proposes a taking-turns rule.",
+  "recycle": [
+    "counter-an-offer"
+  ],
+  "roles": [
+    "child",
+    "peer"
+  ],
+  "setting": "Playroom floor with the truck track.",
+  "essential_props": [
+    "one toy truck"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "peer",
+        "line": "I want to be the driver every time!"
+      },
+      {
+        "speaker": "child",
+        "line": "Every time is not fair for me."
+      },
+      {
+        "speaker": "peer",
+        "line": "But it's my truck and my track."
+      },
+      {
+        "speaker": "child",
+        "line": "How about you drive first, then me after one lap?"
+      },
+      {
+        "speaker": "peer",
+        "line": "One lap is so long though."
+      },
+      {
+        "speaker": "child",
+        "line": "Okay, one fast lap each, then we switch."
+      },
+      {
+        "speaker": "peer",
+        "line": "One lap each... that sounds fair."
+      },
+      {
+        "speaker": "child",
+        "line": "And we both say switch out loud, so nobody forgets."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Castle colors",
+      "setting": "Building a block castle with Max.",
+      "change": "Max wants all the red blocks.",
+      "challenge": "Child proposes taking turns by color — red for the roof, blue for the walls — and Max agrees to a fair split."
+    },
+    {
+      "title": "The finish line",
+      "setting": "A backyard race with Max.",
+      "change": "They argue about where the finish line is.",
+      "challenge": "Child proposes the big tree as the finish line and adds a rematch rule so the loser picks the next game."
+    }
+  ],
+  "parent_support": [
+    "和同伴玩时大人退后，只在僵持时提示“能想个两人都行的办法吗”。",
+    "孩子提出规则后帮他确认：“你们都说好了吗？”让协议立住。",
+    "换局时提醒执行约定，让“说出口的规则”真的算数。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

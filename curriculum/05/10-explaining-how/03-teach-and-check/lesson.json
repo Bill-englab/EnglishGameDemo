@@ -1,0 +1,100 @@
+{
+  "title": "The Stacking Cups Lesson",
+  "title_zh": "教老师搭杯子",
+  "can_do": "教别人一样新本领时，边讲边确认“你听懂了吗”，并回答问题。",
+  "conversation_move": {
+    "id": "teach-and-check",
+    "label": "teach a skill and check understanding"
+  },
+  "trigger": "Teacher has not seen the new stacking game, so Child teaches her and checks her steps.",
+  "recycle": [
+    "explain-how-it-works",
+    "answer-clarifying-questions"
+  ],
+  "roles": [
+    "child",
+    "teacher"
+  ],
+  "setting": "Show-and-tell time at the school table.",
+  "essential_props": [
+    "one set of three stacking cups"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "teacher",
+        "line": "Show me your new stacking game!"
+      },
+      {
+        "speaker": "child",
+        "line": "First, the big cup goes down, like this."
+      },
+      {
+        "speaker": "teacher",
+        "line": "Big cup down, got it. Then what?"
+      },
+      {
+        "speaker": "child",
+        "line": "Then the middle cup, small end up."
+      },
+      {
+        "speaker": "teacher",
+        "line": "Small end up. Like this?"
+      },
+      {
+        "speaker": "child",
+        "line": "Almost! Turn it, so the stripes match."
+      },
+      {
+        "speaker": "teacher",
+        "line": "The stripes match. Then the last one?"
+      },
+      {
+        "speaker": "child",
+        "line": "Tiny cup on top. Your turn to try!"
+      },
+      {
+        "speaker": "teacher",
+        "line": "Look, I did it! Good teaching?"
+      },
+      {
+        "speaker": "child",
+        "line": "Star student! You get a gold sticker."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Show and tell",
+      "setting": "Child brings the stacking cups to school.",
+      "change": "His classmates have not seen the game.",
+      "challenge": "Child teaches the steps to a small group, checks understanding, and praises a classmate's first try."
+    },
+    {
+      "title": "The paper plane",
+      "setting": "Craft table with paper.",
+      "change": "Max's planes always nose-dive.",
+      "challenge": "Child teaches the fold steps, checks that the wings are even, and Max's plane finally glides."
+    }
+  ],
+  "parent_support": [
+    "鼓励孩子教伙伴或长辈一样小本领，教比学更巩固。",
+    "教的过程中提醒他确认“你听懂了吗”，别一口气讲完。",
+    "被教的人要给真实反馈：“这步我没看明白。”让孩子补充解释。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

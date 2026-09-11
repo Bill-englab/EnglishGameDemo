@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Dinner table in the evening. Dad sits at screen-left; Child sits at screen-right; both rest their hands on the table between turns. Locked 16:9 medium two-shot across the table corner with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child tells his news with lively but calm pride; Dad reacts with warm surprise; both share gentle laughs at the end.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Dad and Child sit at the table with hands resting on the tabletop.",
+      "action": "Dad leans toward Child with his question. Child holds up two fingers for two things; Dad points at the first finger to ask for the first one.",
+      "end": "Child keeps two fingers up, ready to start."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Child keeps two fingers up, ready to start.",
+      "action": "Child wiggles his fingertips downward like rain while telling the weather song. Dad echoes the surprise with open hands and asks for the second thing; Child digs one finger in a small circle on the table like tunnel digging.",
+      "end": "Both hands rest on the table; Dad smiles wide."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Both hands rest on the table; Dad smiles wide.",
+      "action": "Dad raises one finger for each title — rain singer, tunnel digger. Child places two fists side by side on the table for the two tunnel rooms and taps each once; they share a warm laugh.",
+      "end": "Both sit back relaxed with happy faces and hands resting on the table."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "title": "Today's Plan",
+  "title_zh": "今天的计划",
+  "can_do": "主动问“今天做什么、几点、接下来呢”，把一天的安排问清楚。",
+  "conversation_move": {
+    "id": "ask-the-schedule",
+    "label": "ask what happens when in a day"
+  },
+  "trigger": "The day's plan has not been announced yet, so Child asks for the order and the times.",
+  "recycle": [
+    "ask-about-arrangement"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "A weekday morning at the breakfast table.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "child",
+        "line": "Mom, what are we doing today?"
+      },
+      {
+        "speaker": "mom",
+        "line": "We have music class, then the market."
+      },
+      {
+        "speaker": "child",
+        "line": "What time is my music class?"
+      },
+      {
+        "speaker": "mom",
+        "line": "At ten, right after breakfast."
+      },
+      {
+        "speaker": "child",
+        "line": "What comes after the market?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Home for lunch and a big nap."
+      },
+      {
+        "speaker": "child",
+        "line": "Then can we paint in the afternoon?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Yes, if the table is tidy first."
+      },
+      {
+        "speaker": "child",
+        "line": "I'll tidy it fast, so we can paint."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The Saturday morning",
+      "setting": "Saturday breakfast with no plan announced.",
+      "change": "Child wants to know the whole day.",
+      "challenge": "Child asks what happens first, what time, and adds one idea of his own for the afternoon."
+    },
+    {
+      "title": "The after-school change",
+      "setting": "Teacher says Grandpa picks up Child today instead of Dad.",
+      "change": "Child wants to check the plan at home.",
+      "challenge": "Child asks Mom what time Grandpa comes and what happens after pickup, and adds his own request for the car ride."
+    }
+  ],
+  "parent_support": [
+    "早晨别一次性报完计划，等孩子问一句答一句。",
+    "孩子问“几点”时给真实时间，并联系生活：“十点，就是吃完早饭那会儿。”",
+    "他的提议可行就采纳，让他体验“问清楚安排”的好处。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

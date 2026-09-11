@@ -1,0 +1,91 @@
+{
+  "title": "The Top Shelf",
+  "title_zh": "最上面那层架子",
+  "can_do": "用“哪一层、旁边有什么、哪个盒子”把位置说清楚，让没去找过的人找到。",
+  "conversation_move": {
+    "id": "describe-a-location",
+    "label": "describe a place clearly enough for someone to act"
+  },
+  "trigger": "Mom does not know where the trains are stored now and needs Child's directions.",
+  "recycle": [
+    "describe-an-item"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "Child's bedroom doorway before tidy-up time.",
+  "essential_props": [
+    "one white box of trains"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "Can you tell me where your trains go?"
+      },
+      {
+        "speaker": "child",
+        "line": "They live on the top shelf, by the big bear."
+      },
+      {
+        "speaker": "mom",
+        "line": "Which shelf do you mean?"
+      },
+      {
+        "speaker": "child",
+        "line": "The tall one behind my door, in the white box."
+      },
+      {
+        "speaker": "mom",
+        "line": "Is it the white box or the blue basket?"
+      },
+      {
+        "speaker": "child",
+        "line": "The white box. The blue basket holds my blocks."
+      },
+      {
+        "speaker": "mom",
+        "line": "Found them! You're a good guide."
+      },
+      {
+        "speaker": "child",
+        "line": "The long train goes on top, so it stays straight."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Where the crayons live",
+      "setting": "Mom tidies up and asks where the crayons belong now.",
+      "change": "They moved from the old basket last week.",
+      "challenge": "Child describes the new place as the second drawer, under the paper stack, clearly enough for Mom to put them away."
+    },
+    {
+      "title": "The watering can",
+      "setting": "Grandma waters the plants but cannot find the watering can.",
+      "change": "It changed spots after the balcony was cleaned.",
+      "challenge": "Child describes its spot on the balcony shelf, behind the small pots, so Grandma finds it without help."
+    }
+  ],
+  "parent_support": [
+    "收纳换位置后，请孩子当“小向导”，只用嘴带大人找到东西。",
+    "大人故意问“是白盒还是蓝篮”，逼出更精确的位置描述。",
+    "找到后让孩子补一句“长的放上面”这类摆法细节，练习交代规则。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

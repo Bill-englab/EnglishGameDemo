@@ -1,0 +1,93 @@
+{
+  "title": "Ten More Minutes",
+  "title_zh": "还有十分钟",
+  "can_do": "问“还要多久”，听懂大人的时长解释，并把它变成可等待的时间。",
+  "conversation_move": {
+    "id": "ask-how-long",
+    "label": "ask how much longer and understand the answer"
+  },
+  "trigger": "The family is on a car ride and Child wants to know how much longer until they arrive.",
+  "recycle": [
+    "ask-the-schedule"
+  ],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "Driving to the pool on a weekend morning.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "We're on our way to the pool."
+      },
+      {
+        "speaker": "child",
+        "line": "How long until we get there?"
+      },
+      {
+        "speaker": "dad",
+        "line": "About ten more minutes of driving."
+      },
+      {
+        "speaker": "child",
+        "line": "Is ten minutes a long time?"
+      },
+      {
+        "speaker": "dad",
+        "line": "About as long as two songs."
+      },
+      {
+        "speaker": "child",
+        "line": "Then let's sing the shark song twice!"
+      },
+      {
+        "speaker": "dad",
+        "line": "Good thinking. First songs, then swimming."
+      },
+      {
+        "speaker": "child",
+        "line": "After the pool, will we eat lunch? Because I'll be hungry!"
+      },
+      {
+        "speaker": "dad",
+        "line": "We will, so swim hard and have fun."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Baking with Grandma",
+      "setting": "Cookies are in the oven.",
+      "change": "Child wants to know how long until they are ready.",
+      "challenge": "Child asks how long, understands 'ten minutes' as one cleanup of the table, and fills the wait by setting the plates."
+    },
+    {
+      "title": "Waiting at the clinic",
+      "setting": "The waiting room before a check-up.",
+      "change": "The receptionist says the doctor needs a few more minutes.",
+      "challenge": "Child asks Dad how long, understands the answer, and picks one book for the wait."
+    }
+  ],
+  "parent_support": [
+    "被问“还要多久”时给可感的参照：“两首歌那么长”，不用精确到分。",
+    "等孩子复述一遍你的答案，确认他真的理解了时长。",
+    "把等待变成他提议的小活动，而不是干等。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

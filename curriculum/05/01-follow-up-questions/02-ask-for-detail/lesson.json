@@ -1,0 +1,97 @@
+{
+  "title": "The Box from Grandma",
+  "title_zh": "奶奶寄来的大箱子",
+  "can_do": "面对没见过的新东西，主动问“里面是什么、谁寄的”等细节问题。",
+  "conversation_move": {
+    "id": "ask-for-detail",
+    "label": "ask detail questions about something new"
+  },
+  "trigger": "A delivery box arrives and Mom does not know what is inside, so Child's questions are the way to find out.",
+  "recycle": [],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "A package delivery moment at the entry counter.",
+  "essential_props": [
+    "one delivery box with a small card and green winter gloves"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "A big box came for us today."
+      },
+      {
+        "speaker": "child",
+        "line": "What's inside it, Mom?"
+      },
+      {
+        "speaker": "mom",
+        "line": "I don't know yet. It's from Grandma."
+      },
+      {
+        "speaker": "child",
+        "line": "From Grandma? What did she send?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Open it with me and find out."
+      },
+      {
+        "speaker": "child",
+        "line": "What does the little card say?"
+      },
+      {
+        "speaker": "mom",
+        "line": "It says, \"A surprise for brave helpers.\""
+      },
+      {
+        "speaker": "child",
+        "line": "A surprise for helpers! Is it for me?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Winter gloves, for helping outside."
+      },
+      {
+        "speaker": "child",
+        "line": "I love them! What can I help with first?"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The neighbor's new car",
+      "setting": "A shiny car stops in front of the house.",
+      "change": "Dad only says it belongs to someone on the street.",
+      "challenge": "Child asks whose car it is and what the blue badge means, and learns it is the neighbor's new blue car."
+    },
+    {
+      "title": "A package for Max",
+      "setting": "A package arrives at Max's house while Child is visiting.",
+      "change": "Nobody knows what is inside.",
+      "challenge": "Child asks what is inside and who sent it, then helps open it and finds a kite for windy days."
+    }
+  ],
+  "parent_support": [
+    "收快递时把“打开前猜一猜”的环节留给孩子，用他的提问推动揭晓。",
+    "孩子问出一个细节就回答一个，保持你一句我一句的节奏。",
+    "揭晓后让孩子复述一句“这是谁寄的、用来做什么”，巩固信息。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

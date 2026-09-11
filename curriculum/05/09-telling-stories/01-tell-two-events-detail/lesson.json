@@ -1,0 +1,87 @@
+{
+  "title": "The Rain and the Tunnel",
+  "title_zh": "下雨歌和隧道",
+  "can_do": "把一天里的两件事按顺序讲出来，并带上“在哪儿、和谁”的细节。",
+  "conversation_move": {
+    "id": "tell-two-events-detail",
+    "label": "tell two events in order with details"
+  },
+  "trigger": "Dad asks about the school day, and Child organizes two events with time and place details.",
+  "recycle": [],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "Dinner time at home.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "Tell me about your day at school!"
+      },
+      {
+        "speaker": "child",
+        "line": "Two big things happened today, Daddy."
+      },
+      {
+        "speaker": "dad",
+        "line": "Two things! Start with the first one."
+      },
+      {
+        "speaker": "child",
+        "line": "At morning circle, we sang the weather song. I was the rain!"
+      },
+      {
+        "speaker": "dad",
+        "line": "You were the rain! What was second?"
+      },
+      {
+        "speaker": "child",
+        "line": "At the sand table, I dug a deep tunnel with Sam."
+      },
+      {
+        "speaker": "dad",
+        "line": "A rain singer and a tunnel digger!"
+      },
+      {
+        "speaker": "child",
+        "line": "The tunnel had two rooms, like our house."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The school garden",
+      "setting": "Dinner table talk.",
+      "change": "Dad asks about the new school garden.",
+      "challenge": "Child tells two things — planting seeds and finding a worm — in order, with details about where and who helped."
+    },
+    {
+      "title": "Grandma's weekend question",
+      "setting": "Grandma visits after the weekend.",
+      "change": "She asks what Child did.",
+      "challenge": "Child tells two events from the weekend in order and answers her follow-up question about his favorite part."
+    }
+  ],
+  "parent_support": [
+    "问“今天学校怎么样”后忍住别追问太快，让孩子自己组织两件事。",
+    "孩子讲完一件时用“然后呢”推进，不替他总结。",
+    "夸细节而不是夸流利：“你说清了在哪儿、和谁一起。”"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

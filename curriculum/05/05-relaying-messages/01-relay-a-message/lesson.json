@@ -1,0 +1,89 @@
+{
+  "title": "The Dinner Messenger",
+  "title_zh": "晚饭小信使",
+  "can_do": "把一个人的话准确带给另一个人，并把回话带回来。",
+  "conversation_move": {
+    "id": "relay-a-message",
+    "label": "carry a message between two people"
+  },
+  "trigger": "Mom calls that dinner is ready, and Child becomes the messenger between the kitchen and Dad's study.",
+  "recycle": [],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "Dinner time, between the kitchen and Dad's study.",
+  "essential_props": [
+    "one small table lamp"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "I'm almost done fixing this lamp."
+      },
+      {
+        "speaker": "child",
+        "line": "Daddy, Mom says dinner is ready."
+      },
+      {
+        "speaker": "dad",
+        "line": "Please tell her I'll come after one minute."
+      },
+      {
+        "speaker": "child",
+        "line": "She says the soup won't wait one minute!"
+      },
+      {
+        "speaker": "dad",
+        "line": "Then tell Mom I'm coming right now."
+      },
+      {
+        "speaker": "child",
+        "line": "She says wash your hands first, then come."
+      },
+      {
+        "speaker": "dad",
+        "line": "Deal. Tell her I'm the fastest hand-washer."
+      },
+      {
+        "speaker": "child",
+        "line": "Mom says dinner is on the table, come see!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The garden message",
+      "setting": "Dad waters plants in the garden.",
+      "change": "Mom calls that lunch is ready.",
+      "challenge": "Child carries the message outside, brings Dad's answer back, and adds the wash-hands rule himself."
+    },
+    {
+      "title": "The doorbell message",
+      "setting": "The neighbor drops by while Dad is upstairs.",
+      "change": "She leaves a message about returning a ladder on Sunday.",
+      "challenge": "Child delivers the message to Dad word-for-word and reports his answer back to Mom."
+    }
+  ],
+  "parent_support": [
+    "让孩子当真实的传话筒：真的把话带过去、把回话带回来。",
+    "传话走样时别急着纠正，问一句“妈妈原话是怎么说的”，让他自己修。",
+    "传完一轮可以玩“加一句”：允许孩子在消息里加自己的一句小提醒。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

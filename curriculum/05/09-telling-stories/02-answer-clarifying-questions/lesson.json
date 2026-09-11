@@ -1,0 +1,93 @@
+{
+  "title": "The Goat Slide",
+  "title_zh": "山羊滑滑梯",
+  "can_do": "讲述中听懂大人的澄清问题（哪个、然后呢），给出准确的回答。",
+  "conversation_move": {
+    "id": "answer-clarifying-questions",
+    "label": "answer clarifying questions while telling a story"
+  },
+  "trigger": "Child tells Teacher about the farm trip, and Teacher asks small clarifying questions along the way.",
+  "recycle": [
+    "tell-two-events-detail"
+  ],
+  "roles": [
+    "child",
+    "teacher"
+  ],
+  "setting": "A quiet reading corner at school.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "teacher",
+        "line": "I heard you went to the farm on Saturday!"
+      },
+      {
+        "speaker": "child",
+        "line": "Yes! We saw so many animals, Teacher."
+      },
+      {
+        "speaker": "teacher",
+        "line": "Which animal did you see first?"
+      },
+      {
+        "speaker": "child",
+        "line": "The goats, because their house is by the gate."
+      },
+      {
+        "speaker": "teacher",
+        "line": "And what did the goats do?"
+      },
+      {
+        "speaker": "child",
+        "line": "One little goat climbed on its mom's back!"
+      },
+      {
+        "speaker": "teacher",
+        "line": "On its mom's back? Then what happened?"
+      },
+      {
+        "speaker": "child",
+        "line": "It slid down and jumped off, like at the pool!"
+      },
+      {
+        "speaker": "teacher",
+        "line": "A pool-slide goat! What a day."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The new bike",
+      "setting": "Child tells Teacher about riding without training wheels.",
+      "change": "Teacher was not there and keeps asking.",
+      "challenge": "Child answers precisely — where he rode, who held the seat at first, and how it felt."
+    },
+    {
+      "title": "The library visit",
+      "setting": "Mom asks about the school library trip.",
+      "change": "She has not heard about it yet.",
+      "challenge": "Child answers her clarifying questions about which book he picked and why he picked it."
+    }
+  ],
+  "parent_support": [
+    "听孩子讲事后，故意问两个小问题：“最先看到的是哪个？”“后来呢？”",
+    "孩子答得笼统时提示“在哪儿、和谁”，把细节问出来。",
+    "把问答变成聊天，别让他觉得在被考。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

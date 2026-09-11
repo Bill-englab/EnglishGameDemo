@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Living-room rug in the afternoon. A bin of building blocks sits at the rug's edge; a small plate with two berry cakes rests on the side table behind them. Child stands at screen-right and Peer at screen-left, both with empty hands. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Both friends show light, friendly energy while arranging; the mood stays calm and cooperative; the ending is happily ready.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1
+      ],
+      "start": "Child and Peer stand by the block bin with empty hands; the snack plate rests on the side table.",
+      "action": "Child opens with his invitation, gesturing once toward the block bin. Peer bounces once on his toes and asks about starting now.",
+      "end": "Both look toward the snack plate on the side table."
+    },
+    {
+      "turns": [
+        2,
+        3,
+        4
+      ],
+      "start": "Both look toward the snack plate on the side table.",
+      "action": "Child points at the plate, then at the bin, laying out the order. Peer rubs his tummy happily. Child points off-frame toward his room while saying where they will build.",
+      "end": "Both stand with relaxed hands, imagining the rug."
+    },
+    {
+      "turns": [
+        5,
+        6,
+        7
+      ],
+      "start": "Both stand with relaxed hands, imagining the rug.",
+      "action": "Peer stacks his hands high for the tall tower. Child points one finger straight up toward the ceiling for the flag; Peer opens his arms wide with delight and they share a small high five.",
+      "end": "Both stand facing each other with happy faces; the block bin waits at the rug's edge; the snack plate stays on the side table."
+    }
+  ]
+}

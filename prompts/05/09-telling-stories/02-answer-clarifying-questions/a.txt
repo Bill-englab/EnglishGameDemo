@@ -1,0 +1,43 @@
+The Goat Slide — Clip 1
+Production prompt draft | Source: curriculum/05/09-telling-stories/02-answer-clarifying-questions/lesson.json | Content revision: 1
+Source SHA256: 286fb6e0df4338225bb0fbe1d8c67a783454ab454892c05fd814a00171984d9b
+The source/revision above are production metadata, not spoken words or on-screen text.
+
+VIDEO AND SOUND
+Create one 16:9 animated clip for a preschool family role-play. Pixar-style 3D animated cartoon, soft warm lighting, cozy pastel color palette, cute, wholesome, family-friendly. Soft rounded character designs, expressive but restrained faces. Large round eyes and rounded cheeks describe fixed anatomy, not surprise or excitement; keep facial movements small and natural, following EMOTIONAL PERFORMANCE when provided. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+
+FIXED CAST (only these two)
+Child — a small four-year-old cartoon tiger boy, bright orange fur with bold black stripes, big round sparkly eyes, chubby round cheeks, tiny rounded ears, wearing a little yellow T-shirt, short chubby toddler proportions; clear natural child voice.
+Rabbit Teacher — a cream rabbit with upright ears and a lavender cardigan, calm natural adult voice.
+
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.
+Child tells his story with bright, proud energy; Teacher listens with calm interest and one soft surprised laugh; both end amused and warm.
+No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
+SETTING
+A quiet reading corner at school.
+
+SCENE AND PROP CONTINUITY
+A quiet school reading corner. Teacher sits on a low chair at screen-left; Child sits on the rug at screen-right facing her with his hands in his lap. Locked 16:9 medium two-shot with both faces visible.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
+
+START FRAME
+Teacher sits on the low chair; Child sits on the rug facing her with hands in his lap.
+
+ACTION AND REACTIONS
+Teacher opens with the farm news. Child opens both arms wide for so many animals; Teacher leans forward and asks which came first.
+
+SPOKEN DIALOGUE (verbatim, in order):
+Teacher: "I heard you went to the farm on Saturday!"
+Child: "Yes! We saw so many animals, Teacher."
+Teacher: "Which animal did you see first?"
+
+END FRAME
+Child's arms return to his lap; he thinks for a beat.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
+
+PACING (22 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

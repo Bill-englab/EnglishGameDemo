@@ -1,0 +1,89 @@
+{
+  "title": "The Hugging Dragon",
+  "title_zh": "会拥抱的龙",
+  "can_do": "不同意朋友的玩法时，说“我喜欢你的想法，但是……”，并提出融合方案。",
+  "conversation_move": {
+    "id": "disagree-politely",
+    "label": "disagree politely and offer a blend"
+  },
+  "trigger": "The two friends imagine their pretend dragon differently, and Child speaks up kindly.",
+  "recycle": [
+    "counter-an-offer"
+  ],
+  "roles": [
+    "child",
+    "peer"
+  ],
+  "setting": "A pretend game on the playroom rug.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "peer",
+        "line": "Let's pretend our dragon is scary and mean!"
+      },
+      {
+        "speaker": "child",
+        "line": "I like your idea, but scary dragons make me worried."
+      },
+      {
+        "speaker": "peer",
+        "line": "Not even a little bit scary?"
+      },
+      {
+        "speaker": "child",
+        "line": "Maybe a tiny bit scary, but mostly friendly."
+      },
+      {
+        "speaker": "peer",
+        "line": "Friendly dragons can't guard treasure!"
+      },
+      {
+        "speaker": "child",
+        "line": "They can. Our dragon guards it with big hugs."
+      },
+      {
+        "speaker": "peer",
+        "line": "A hugging dragon... that's funny!"
+      },
+      {
+        "speaker": "child",
+        "line": "And nobody steals treasure from a hug."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Which movie tonight",
+      "setting": "Family movie night with two choices.",
+      "change": "Child wants the dinosaur movie, Mom the cooking one.",
+      "challenge": "Child disagrees politely with a reason and proposes one movie tonight and the other tomorrow."
+    },
+    {
+      "title": "The tower height",
+      "setting": "Building with Max.",
+      "change": "Max wants a sky-high tower, Child a strong one.",
+      "challenge": "Child disagrees kindly, explains the wobble problem, and they settle on a wide base first."
+    }
+  ],
+  "parent_support": [
+    "孩子说“我不太同意”时先夸礼貌，再讨论内容。",
+    "引导他说出不同意的原因，而不是只说“不好”。",
+    "家庭里示范不同意：“爸爸喜欢A，但你说B也有道理。”"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

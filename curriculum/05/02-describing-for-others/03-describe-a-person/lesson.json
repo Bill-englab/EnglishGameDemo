@@ -1,0 +1,89 @@
+{
+  "title": "Sam and the Dinosaurs",
+  "title_zh": "山姆和恐龙",
+  "can_do": "向没见过的人描述一个新朋友的外貌和喜好，并回答追问。",
+  "conversation_move": {
+    "id": "describe-a-person",
+    "label": "describe a person's looks and likes"
+  },
+  "trigger": "Mom has not met the new classmate and asks Child what he is like.",
+  "recycle": [
+    "describe-an-item"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "Evening chat in the living room.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "You said a new kid joined your class today."
+      },
+      {
+        "speaker": "child",
+        "line": "Yes! His name is Sam, and he loves dinosaurs."
+      },
+      {
+        "speaker": "mom",
+        "line": "What does he look like?"
+      },
+      {
+        "speaker": "child",
+        "line": "He has brown curly fur and a green backpack."
+      },
+      {
+        "speaker": "mom",
+        "line": "A green backpack like yours?"
+      },
+      {
+        "speaker": "child",
+        "line": "No, mine is blue. His has a T-rex on it."
+      },
+      {
+        "speaker": "mom",
+        "line": "Did you two play together?"
+      },
+      {
+        "speaker": "child",
+        "line": "We dug in the sandbox. He knows every dinosaur!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The new music teacher",
+      "setting": "A new music teacher starts at school.",
+      "change": "Mom has not met her yet.",
+      "challenge": "Child describes her as the tall one with gray fur who plays guitar, and tells one thing she did in class."
+    },
+    {
+      "title": "Max's baby sister",
+      "setting": "Max got a baby sister last week.",
+      "change": "Dad has not heard the news yet.",
+      "challenge": "Child describes the baby as tiny with brown fur who sleeps a lot, and answers Dad's follow-up questions."
+    }
+  ],
+  "parent_support": [
+    "听孩子讲新朋友时，追问“长什么样、喜欢什么”两个维度。",
+    "孩子描述卡住时，提示“他的书包是什么样”，不替他总结。",
+    "最后留一个开放问题“你们一起玩了什么”，让描述落到事上。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

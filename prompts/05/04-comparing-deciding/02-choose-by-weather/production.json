@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Home entryway. The open door shows a softly moving tree outside; a small cap hangs on the hook at screen-left. Child's yellow hoodie lies folded on the bench at center. Dad stands screen-left near the door; Child stands screen-right. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child shows brief thinking while choosing; both keep a light, prepared-for-outdoors mood; the ending is quietly pleased.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Dad stands near the open door; Child stands at screen-right with empty hands; the folded hoodie rests on the bench; the cap hangs on the hook.",
+      "action": "Dad tips his head toward the windy door. Child looks outside, then at his cap on the hook while asking his question; Dad answers with a small tug gesture at an imaginary cap.",
+      "end": "The hoodie stays folded on the bench; the cap stays on the hook; Child looks at the hoodie."
+    },
+    {
+      "turns": [
+        3,
+        4
+      ],
+      "start": "The hoodie stays folded on the bench; the cap stays on the hook; Child looks at the hoodie.",
+      "action": "Child picks up the folded hoodie with both hands and holds it against his chest while explaining his choice. Dad nods once, approving.",
+      "end": "Child holds the hoodie against his chest with both hands; Dad stands with empty hands."
+    },
+    {
+      "turns": [
+        5,
+        6,
+        7
+      ],
+      "start": "Child holds the hoodie against his chest with both hands; Dad stands with empty hands.",
+      "action": "Child pulls the hoodie on over his yellow T-shirt and flips the hood up with both hands, covering his ears. Dad gives a small thumbs-up; Child pats his own hooded ears once and stands tall.",
+      "end": "Child wears the hoodie with the hood up; the cap stays on the hook; both face the open door, ready to leave."
+    }
+  ]
+}

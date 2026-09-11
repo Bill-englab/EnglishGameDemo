@@ -1,0 +1,42 @@
+{
+  "content_revision": 1,
+  "scene": "School activity table. A set of three stacking cups — big, middle and tiny — lies flat at table center. Teacher sits at screen-left; Child stands at screen-right; both can reach the cups. Locked 16:9 medium two-shot with both faces and the cups visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "A playful teacher-and-student reversal; Child guides with small polite gestures; Teacher follows with good-humored concentration; both end with warm praise and a small imaginary sticker moment.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "The three cups lie flat at table center; Teacher sits and Child stands with empty hands.",
+      "action": "Teacher opens her palms toward the cups. Child places the big cup upright at center with both hands; Teacher nods once and repeats the step.",
+      "end": "The big cup stands upright at center; both hands return."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "The big cup stands upright at center; both hands return to rest.",
+      "action": "Child points at the middle cup, small end up. Teacher picks it up and places it carefully; Child tilts one hand slightly while saying almost, guiding the small turn; Teacher adjusts the cup until the stripes line up.",
+      "end": "The middle cup sits on the big one with stripes aligned; Teacher keeps her hands near."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "start": "The middle cup sits on the big one with stripes aligned; Teacher keeps her hands near.",
+      "action": "Child points at the tiny cup. Teacher places it on top and spreads her arms with a happy question face; Child claps once softly and presses an imaginary sticker onto the back of Teacher's hand with one thumb.",
+      "end": "The three cups stand stacked at center; Teacher rests her hand with the invisible sticker; both beam at the finished tower."
+    }
+  ]
+}

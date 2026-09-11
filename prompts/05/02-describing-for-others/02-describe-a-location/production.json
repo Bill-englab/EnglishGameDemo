@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Child's bedroom doorway. A tall white shelf stands behind the open door; a white box and a blue basket sit on its top shelf, and a big plush bear leans beside the box. Mom stands screen-left just inside the room; Child stands screen-right. Locked 16:9 medium two-shot with the top shelf in frame.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Mom shows a brief searching focus; Child gives directions with small pointing gestures and one proud smile when the trains are found.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Mom stands just inside the doorway with empty hands; Child faces her with empty hands; the top shelf with the white box and blue basket stays in view.",
+      "action": "Mom asks her question with open hands. Child points up toward the top shelf while naming the big bear beside the box.",
+      "end": "Mom looks up toward the top shelf; Child's pointing hand relaxes."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Mom looks up toward the top shelf; Child faces her with empty hands.",
+      "action": "Mom holds up one finger for each question. Child points first at the tall shelf behind the door, then clearly at the white box, then at the blue basket for contrast.",
+      "end": "Mom reaches both hands toward the white box on the top shelf."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Mom's hands reach the white box on the top shelf.",
+      "action": "Mom lifts the white box down and looks inside with a pleased nod. Child draws a straight line in the air with one finger while explaining where the long train goes.",
+      "end": "Mom holds the white box of trains at chest height; Child stands beside her with empty hands and a small proud smile."
+    }
+  ]
+}

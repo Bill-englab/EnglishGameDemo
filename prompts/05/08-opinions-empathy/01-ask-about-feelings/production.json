@@ -1,0 +1,39 @@
+{
+  "content_revision": 1,
+  "scene": "Living room in the early evening. Mom sits on the sofa at screen-left, leaning back and rubbing her legs slowly; a pair of cozy slippers rests on the floor beside the sofa. Child stands at screen-right. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "A soft, caring mood throughout; Child speaks gently with small helpful gestures; Mom shows one tired smile turning warm; the ending is tender.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1
+      ],
+      "start": "Mom sits rubbing her legs slowly; the slippers rest on the floor by the sofa; Child stands facing her with empty hands.",
+      "action": "Child tilts his head with a caring look and asks his question. Mom pats her legs lightly twice while answering.",
+      "end": "Mom rests her hands on her knees; Child looks at the slippers by the sofa."
+    },
+    {
+      "turns": [
+        2,
+        3,
+        4
+      ],
+      "start": "Mom rests her hands on her knees; Child looks at the slippers by the sofa.",
+      "action": "Child points at the sofa seat while offering rest. Mom glances toward the kitchen with a small sigh; Child points off-frame toward the kitchen, then bends down and picks up the slippers with both hands.",
+      "end": "Child holds the slippers with both hands, turning toward Mom."
+    },
+    {
+      "turns": [
+        5,
+        6
+      ],
+      "start": "Child holds the slippers with both hands, turning toward Mom.",
+      "action": "Child sets the slippers neatly by Mom's feet and looks up at her. Mom reaches out and strokes Child's head once gently; Child stands tall with his hands on his chest, proud to care.",
+      "end": "Mom's feet rest beside the neatly placed slippers; she smiles warmly; Child stands close by her side."
+    }
+  ]
+}

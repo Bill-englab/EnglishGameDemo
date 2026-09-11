@@ -1,0 +1,41 @@
+{
+  "content_revision": 1,
+  "scene": "Kitchen table in the afternoon. Mom sits at screen-left; Child stands beside the table at screen-right. A small paper shopping list lies flat at table center and is only touched at the end. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child asks with warm, lively interest about the family trip; Mom answers in a planning tone; both end satisfied with the plan.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Mom sits with the paper list flat at center; Child stands beside the table with empty hands.",
+      "action": "Mom announces the picnic. Child counts the coming people on his fingers while asking who; Mom raises three fingers in answer.",
+      "end": "Mom sits with one hand near the list; Child's counting hand relaxes."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Mom sits with one hand near the list; Child stands with empty hands.",
+      "action": "Child taps the table edge twice while asking the leaving time; Mom points at her watch. Child opens both palms while asking what to bring; Mom gestures a small sharing bowl with cupped hands.",
+      "end": "Mom's cupped hands rest near the list; Child looks at her, thinking."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8
+      ],
+      "start": "Mom's cupped hands rest near the list; Child looks at her, thinking.",
+      "action": "Child mimes placing two small cakes into cupped hands while offering his berry cakes. Mom turns the paper list toward Child and adds a short note; Child watches the pencil move.",
+      "end": "The paper list lies turned toward Child with a new short note; Mom's pencil rests on the table; Child stands with empty hands and a pleased smile."
+    }
+  ]
+}

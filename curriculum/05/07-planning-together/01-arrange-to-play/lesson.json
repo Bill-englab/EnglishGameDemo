@@ -1,0 +1,91 @@
+{
+  "title": "Castle After Snack",
+  "title_zh": "吃完点心搭城堡",
+  "can_do": "和朋友商量“什么时候玩、在哪儿玩、玩什么”，把约定说清楚。",
+  "conversation_move": {
+    "id": "arrange-to-play",
+    "label": "arrange when, where and what to play"
+  },
+  "trigger": "A playdate begins and the two friends need to settle snack, place and plan.",
+  "recycle": [
+    "ask-about-arrangement"
+  ],
+  "roles": [
+    "child",
+    "peer"
+  ],
+  "setting": "An afternoon playdate at home.",
+  "essential_props": [
+    "one bin of blocks"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "child",
+        "line": "Max, do you want to build a castle with me?"
+      },
+      {
+        "speaker": "peer",
+        "line": "Yes! Can we start right now?"
+      },
+      {
+        "speaker": "child",
+        "line": "Snack first, then we build. Mom made berry cakes."
+      },
+      {
+        "speaker": "peer",
+        "line": "Berry cakes! Then building?"
+      },
+      {
+        "speaker": "child",
+        "line": "Yes! We'll build on the big rug in my room."
+      },
+      {
+        "speaker": "peer",
+        "line": "Where should the tall tower go?"
+      },
+      {
+        "speaker": "child",
+        "line": "In the middle, so the flag can touch the ceiling."
+      },
+      {
+        "speaker": "peer",
+        "line": "A ceiling flag! Best castle ever."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The sandbox meeting",
+      "setting": "Recess, one sandbox, two crews.",
+      "change": "Both crews want the digging spot.",
+      "challenge": "Child arranges to share it — his crew digs first, then they swap when the bell rings."
+    },
+    {
+      "title": "The sleepover evening",
+      "setting": "Max sleeps over on Friday.",
+      "change": "The evening is unplanned.",
+      "challenge": "Child leads the arrangement — blocks after bath, tent reading, pancakes in the morning — and checks that Mom agrees."
+    }
+  ],
+  "parent_support": [
+    "约玩时让孩子主导安排：“什么时候、在哪儿、玩什么”让他说了算一半。",
+    "大人只补安全问题，其余细节交给孩子互相商量。",
+    "事后问一句“你们商量好怎么搭了吗”，强化安排的完成感。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

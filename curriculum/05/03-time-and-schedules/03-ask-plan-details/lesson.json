@@ -1,0 +1,94 @@
+{
+  "title": "The Sunday Picnic",
+  "title_zh": "周日的野餐",
+  "can_do": "对家庭出行问出“谁来、几点走、我带什么”，并主动准备自己的一份。",
+  "conversation_move": {
+    "id": "ask-plan-details",
+    "label": "ask for the details of a plan and prepare one's part"
+  },
+  "trigger": "A family outing is planned and the details are not settled, so Child asks and contributes.",
+  "recycle": [
+    "ask-the-schedule",
+    "ask-about-arrangement"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "Planning a picnic at the kitchen table.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "We're having a picnic on Sunday."
+      },
+      {
+        "speaker": "child",
+        "line": "Who is coming with us?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Dad, Grandma, and your cousin Max."
+      },
+      {
+        "speaker": "child",
+        "line": "What time do we leave the house?"
+      },
+      {
+        "speaker": "mom",
+        "line": "At nine, before it gets too warm."
+      },
+      {
+        "speaker": "child",
+        "line": "What should I bring for the picnic?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Something to share with Max."
+      },
+      {
+        "speaker": "child",
+        "line": "Then I'll bring my berry cakes, so Max can try them."
+      },
+      {
+        "speaker": "mom",
+        "line": "Perfect. Max loves berries."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The birthday party",
+      "setting": "A friend's party is coming on Saturday.",
+      "change": "Child needs the details.",
+      "challenge": "Child asks what time it starts, where it is, and what gift to bring, then helps wrap the gift."
+    },
+    {
+      "title": "The camping night",
+      "setting": "The family plans one night of camping.",
+      "change": "Dad lists what everyone must bring.",
+      "challenge": "Child asks about his own bag and adds his flashlight and his bear book to the packing list."
+    }
+  ],
+  "parent_support": [
+    "做计划时留两三个空位（时间、带什么）专门等孩子问。",
+    "孩子问完细节后追问“你打算带什么”，让他贡献一样真实的东西。",
+    "出发前让孩子向全家复述一遍计划，练习整合信息。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

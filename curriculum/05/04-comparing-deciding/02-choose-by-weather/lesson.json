@@ -1,0 +1,91 @@
+{
+  "title": "The Windy Walk",
+  "title_zh": "大风的散步",
+  "can_do": "根据天气（风、冷）选衣服，并说出“因为……所以……”的理由。",
+  "conversation_move": {
+    "id": "choose-by-weather",
+    "label": "choose clothing for the weather with a reason"
+  },
+  "trigger": "It is windy outside and the family is about to leave, so Child connects the weather to his clothing choice.",
+  "recycle": [
+    "compare-options"
+  ],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "The entryway before a walk.",
+  "essential_props": [
+    "one hoodie"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "Look outside. It's really windy today."
+      },
+      {
+        "speaker": "child",
+        "line": "Will the wind blow my hat away?"
+      },
+      {
+        "speaker": "dad",
+        "line": "It might, if it's not on tight."
+      },
+      {
+        "speaker": "child",
+        "line": "Then I'll wear my hoodie, so my ears stay warm."
+      },
+      {
+        "speaker": "dad",
+        "line": "Good choice. Hood up or down?"
+      },
+      {
+        "speaker": "child",
+        "line": "Up, please! The wind makes my ears cold."
+      },
+      {
+        "speaker": "dad",
+        "line": "Perfect. Ready for our walk?"
+      },
+      {
+        "speaker": "child",
+        "line": "Yes! Windy days need warm ears."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The sunny hat",
+      "setting": "Bright sun before a garden walk.",
+      "change": "Child must choose head wear.",
+      "challenge": "Child connects the strong sun to the wide-brim hat and explains why he picks it over the cap."
+    },
+    {
+      "title": "Snowy morning",
+      "setting": "The first snowy day of winter.",
+      "change": "Gloves or mittens.",
+      "challenge": "Child chooses mittens with a reason — warmer fingers together — and accepts the scarf Mom adds."
+    }
+  ],
+  "parent_support": [
+    "出门前把天气说给孩子听，让他自己决定穿什么。",
+    "孩子的选择可行就照办；明显不行时问“风这么大，帽子会怎样”，引导他自己修正。",
+    "复述一句“冷天穿连帽衫”，把选择变成一句因果。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

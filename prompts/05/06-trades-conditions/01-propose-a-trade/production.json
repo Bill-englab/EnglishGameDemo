@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Child's bedroom in the evening. A low bin of building blocks sits at center-right; a small stack of two picture books rests on the bed at screen-left. Mom stands screen-left; Child stands screen-right near the block bin. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child negotiates with eager but controlled energy; Mom weighs the offer with playful seriousness; both end with a warm agreed deal.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1
+      ],
+      "start": "Mom stands by the bed with one hand near the two picture books; Child stands by the block bin with empty hands.",
+      "action": "Mom taps an imaginary watch lightly. Child holds up two fingers toward the books and makes one quick pointing gesture at the blocks while making his offer.",
+      "end": "Mom's hand rests near the books; Child waits with both hands open."
+    },
+    {
+      "turns": [
+        2,
+        3,
+        4
+      ],
+      "start": "Mom's hand rests near the books; Child waits with both hands open.",
+      "action": "Mom tilts her head weighing the offer. Child mimes a quick toothbrush stroke with one finger and stands tall while adding his second offer; Mom nods slowly, smiling at the help.",
+      "end": "Mom stands relaxed with a soft smile; Child looks at her hopefully."
+    },
+    {
+      "turns": [
+        5,
+        6,
+        7
+      ],
+      "start": "Mom stands relaxed with a soft smile; Child looks at her hopefully.",
+      "action": "Child counts the three deal parts on his fingers. Mom shakes his hand once gently and points at the bin. Child crouches and sweeps two blocks into the bin with quick small moves, glancing up with a happy grin.",
+      "end": "Child kneels by the bin with both hands busy; Mom stands watching with folded arms and a warm smile; the two books wait on the bed."
+    }
+  ]
+}

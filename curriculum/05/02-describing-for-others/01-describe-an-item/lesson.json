@@ -1,0 +1,89 @@
+{
+  "title": "Daddy's Blue Mug",
+  "title_zh": "爸爸的蓝杯子",
+  "can_do": "帮没找到东西的大人说清物品特征（颜色、图案、位置），直到找到。",
+  "conversation_move": {
+    "id": "describe-an-item",
+    "label": "describe an item clearly enough to find it"
+  },
+  "trigger": "Dad cannot find his own mug and does not remember what it looks like, so Child describes it.",
+  "recycle": [],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "A busy morning in the kitchen.",
+  "essential_props": [
+    "two blue mugs"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "I can't find my mug anywhere this morning."
+      },
+      {
+        "speaker": "child",
+        "line": "Did you look next to the coffee maker?"
+      },
+      {
+        "speaker": "dad",
+        "line": "Not yet. What does my mug look like?"
+      },
+      {
+        "speaker": "child",
+        "line": "It's dark blue, with a little white cloud on it."
+      },
+      {
+        "speaker": "dad",
+        "line": "Oh, the one from our beach trip!"
+      },
+      {
+        "speaker": "child",
+        "line": "Yes, that one. I put it back last night."
+      },
+      {
+        "speaker": "dad",
+        "line": "There it is. Thank you, my helper!"
+      },
+      {
+        "speaker": "child",
+        "line": "The light-blue mug is Mom's. Don't mix them up!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Mom's missing keys",
+      "setting": "Mom cannot find her keys before shopping.",
+      "change": "Two key rings sit in the bowl by the door.",
+      "challenge": "Child describes Mom's ring as the round one with the blue bead, and remembers where he last saw it."
+    },
+    {
+      "title": "The lost remote",
+      "setting": "Dad wants his show but the remote is gone.",
+      "change": "The sofa has many cushions and blankets.",
+      "challenge": "Child describes the remote as the thin black one with the red button, and suggests looking between the middle cushions."
+    }
+  ],
+  "parent_support": [
+    "大人偶尔“记不清”自己的东西，把描述的机会让给孩子。",
+    "孩子说了颜色后追问一句“还有什么记号”，帮他凑齐两个特征。",
+    "找到后一句话总结：“你说清了颜色和云朵，就找到了。”"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

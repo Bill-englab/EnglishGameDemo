@@ -1,0 +1,91 @@
+{
+  "title": "Every Block Needs a Friend",
+  "title_zh": "每块积木都需要朋友",
+  "can_do": "朋友难过时先问感受、陪一会儿，再提议一起做点什么。",
+  "conversation_move": {
+    "id": "comfort-a-friend",
+    "label": "comfort a sad friend and suggest doing something together"
+  },
+  "trigger": "Max's tower falls and he is sad, so Child comforts him and offers help.",
+  "recycle": [
+    "ask-about-feelings"
+  ],
+  "roles": [
+    "child",
+    "peer"
+  ],
+  "setting": "Playroom floor after a tumble.",
+  "essential_props": [
+    "one pile of fallen blocks"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "peer",
+        "line": "My tower fell down. All of it."
+      },
+      {
+        "speaker": "child",
+        "line": "Oh no. Are you okay, Max?"
+      },
+      {
+        "speaker": "peer",
+        "line": "I'm fine, but my tower is ruined."
+      },
+      {
+        "speaker": "child",
+        "line": "It was really tall. I saw you build it."
+      },
+      {
+        "speaker": "peer",
+        "line": "Now it's just a pile of blocks."
+      },
+      {
+        "speaker": "child",
+        "line": "Tall towers can be built twice. Want to try together?"
+      },
+      {
+        "speaker": "peer",
+        "line": "Together? You'd help me?"
+      },
+      {
+        "speaker": "child",
+        "line": "Every block needs a friend. Let's start with the base!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The lost marble",
+      "setting": "Max loses his favorite marble at school.",
+      "change": "He is quiet and sad all morning.",
+      "challenge": "Child notices, asks, keeps him company, and offers to search the sand table together after snack."
+    },
+    {
+      "title": "The last runner",
+      "setting": "Sports day on the field.",
+      "change": "A classmate finishes last and tears up.",
+      "challenge": "Child says something kind, names one thing the classmate did well, and walks to the water station with him."
+    }
+  ],
+  "parent_support": [
+    "同伴难过时别急着哄好或给建议，先让孩子陪着问一句“你还好吗”。",
+    "安慰的语言不用高级，“我在呢”“我帮你”就是最好的。",
+    "事后和孩子聊聊“朋友难过时可以做什么”，沉淀经验。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

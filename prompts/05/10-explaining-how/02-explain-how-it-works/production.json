@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Living-room table. A small wind-up penguin toy sits at table center with a tiny key door on its back. Dad sits at screen-left; Child stands at screen-right, both within reach of the toy. Locked 16:9 medium two-shot with both faces and the toy visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child explains with patient little-teacher confidence; Dad follows each step attentively; both share quiet delight when the penguin walks.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "The penguin toy stands at table center; Dad sits and Child stands with empty hands.",
+      "action": "Dad turns the toy slightly toward Child with one finger. Child points at the little door on the penguin's back while giving the first step; Dad taps the door gently, checking.",
+      "end": "Dad's finger rests on the little door; Child nods."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Dad's finger rests on the little door; Child nods.",
+      "action": "Child mimes three turning twists with his fist. Dad opens the door, inserts the tiny key, and turns it three times, counting on his fingers; Child points down at the table for the next step.",
+      "end": "Dad's hands hover over the penguin at table center, ready to release."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Dad's hands hover over the penguin at table center, ready to release.",
+      "action": "Dad lets go; the penguin takes small waddling steps across the table while both watch. Child raises one finger for his tip about starting again, turning an invisible key in the air once.",
+      "end": "The penguin stands mid-table after its short walk; Dad and Child lean toward it with warm smiles."
+    }
+  ]
+}

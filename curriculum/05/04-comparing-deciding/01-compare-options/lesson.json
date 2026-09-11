@@ -1,0 +1,91 @@
+{
+  "title": "Red or Green?",
+  "title_zh": "红苹果还是绿苹果",
+  "can_do": "在两个选项之间比较（味道、大小），说出选择的理由。",
+  "conversation_move": {
+    "id": "compare-options",
+    "label": "compare two options and choose with a reason"
+  },
+  "trigger": "Two kinds of apples are offered and Child does not yet know the difference, so he asks and compares.",
+  "recycle": [
+    "describe-an-item"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "Grocery day at the kitchen counter.",
+  "essential_props": [
+    "two bowls of apples"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "Red apples or green apples today?"
+      },
+      {
+        "speaker": "child",
+        "line": "What's the difference between them?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Green ones are sour, red ones are sweet."
+      },
+      {
+        "speaker": "child",
+        "line": "I want red ones because I like sweet things."
+      },
+      {
+        "speaker": "mom",
+        "line": "The red ones are a little smaller though."
+      },
+      {
+        "speaker": "child",
+        "line": "That's okay. Small apples fit my hands."
+      },
+      {
+        "speaker": "mom",
+        "line": "Then red it is. Grab four, please."
+      },
+      {
+        "speaker": "child",
+        "line": "Four red apples, one for each of us and Max."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Two kinds of bread",
+      "setting": "Bakery counter with a round loaf and a long loaf.",
+      "change": "Child must choose one for the family.",
+      "challenge": "Child compares the soft round one and the crunchy long one, and picks with a reason."
+    },
+    {
+      "title": "Rain boots",
+      "setting": "Store shelf with red and yellow boots.",
+      "change": "Both pairs fit.",
+      "challenge": "Child compares and chooses with a reason, and accepts Mom's reminder about which color shows mud less."
+    }
+  ],
+  "parent_support": [
+    "给两个真实选项，先等孩子问区别再解释。",
+    "孩子只说“我要这个”时，追问一句“为什么选它”，逼出理由。",
+    "接受孩子气的原因（“小的拿得稳”），这就是比较思维的起点。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

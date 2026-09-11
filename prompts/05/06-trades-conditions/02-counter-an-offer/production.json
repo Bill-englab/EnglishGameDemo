@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Kitchen counter for afternoon snack. A cookie jar with star-shaped and round cookies sits at center; a small empty cup stands beside it. Dad stands screen-left; Child stands screen-right. Locked 16:9 medium two-shot with both faces and the jar visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child negotiates with a light, hopeful tone; Dad plays the fair judge; both end cheerful with the agreed snack.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "The cookie jar and small empty cup stand at center; Dad stands screen-left and Child screen-right with empty hands.",
+      "action": "Dad gestures toward the jar and the fridge while listing the options. Child holds up two fingers asking for both; Dad waves one gentle no and points toward the dinner hour.",
+      "end": "The jar and cup stay in place; Child's two fingers lower as he thinks."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "The jar and cup stay in place; Child's fingers lower as he thinks.",
+      "action": "Child pinches his fingers for one small cookie and mimes pouring milk into the cup. Dad nods slowly, agreeing. Child points at the jar and traces a small star shape in the air with one finger.",
+      "end": "Dad reaches one hand toward the cookie jar lid."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Dad reaches one hand toward the cookie jar lid.",
+      "action": "Dad opens the jar, takes out the star cookie, and places it in Child's open hands. Child holds it up beside the cup and grins; Dad raises the small cup in a tiny toast.",
+      "end": "Child holds the star cookie with both hands next to the filled cup; the jar is closed again; both smile."
+    }
+  ]
+}

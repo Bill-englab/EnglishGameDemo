@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Evening living room. Mom sits on the sofa at screen-left; Child sits on the rug at screen-right, facing her with hands in his lap. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child shares his news with a lively but calm voice and small gestures; Mom listens with warm interest and one soft laugh.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1
+      ],
+      "start": "Mom sits with hands folded; Child sits on the rug facing her with hands in his lap.",
+      "action": "Mom opens the topic. Child answers quickly, holding up one finger for the name and one for the dinosaur fact.",
+      "end": "Both relax; Child's hands return to his lap."
+    },
+    {
+      "turns": [
+        2,
+        3,
+        4
+      ],
+      "start": "Mom sits with hands folded; Child sits with hands in his lap.",
+      "action": "Mom leans in with her question. Child touches his own hair for curly fur and points at his own back for the backpack, then compares colors with a small head shake.",
+      "end": "Child ends with open hands; Mom nods, listening."
+    },
+    {
+      "turns": [
+        5,
+        6,
+        7
+      ],
+      "start": "Child ends with open hands; Mom nods, listening.",
+      "action": "Child taps his own blue backpack strap, then describes the T-rex with two claw fingers. Mom asks about playing; Child mimes two small digging scoops and spreads his arms wide for every dinosaur. Mom claps once softly.",
+      "end": "Child sits tall with a small proud smile; Mom's hands rest folded; both look at each other warmly."
+    }
+  ]
+}

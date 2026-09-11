@@ -1,0 +1,41 @@
+{
+  "content_revision": 1,
+  "scene": "Weekday-morning kitchen. Mom stands at the counter at screen-left; Child sits at the table at screen-right with his hands resting on the tabletop. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child asks with bright morning energy but a calm voice; Mom answers warmly and sets one gentle condition; both end pleased with the plan.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Mom stands at the counter with empty hands; Child sits with hands on the tabletop.",
+      "action": "Child sits up and asks about the day with one open-hand gesture. Mom counts the two plans on her fingers. Child asks the time question.",
+      "end": "Mom stands at the counter; Child waits with hands on the table."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Mom stands at the counter; Child waits with hands on the table.",
+      "action": "Mom points at an imaginary clock on her wrist while saying the hour. Child drums two soft fingertip taps on the table while asking what comes next; Mom lays one hand flat for the nap.",
+      "end": "Mom's hand rests flat on the counter; Child leans forward slightly."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8
+      ],
+      "start": "Mom's hand rests flat on the counter; Child leans forward slightly.",
+      "action": "Child mimes one small painting stroke in the air while asking about the afternoon. Mom points once at the table for the tidy condition. Child rubs the tabletop twice with his palm and finishes with a happy nod.",
+      "end": "Child's hand rests on the clean tabletop; Mom smiles with empty hands; both look at each other."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Home study at dinner time. Dad sits at the desk at screen-left with a small table lamp and one screwdriver in front of him; Child appears at the doorway at screen-right. The lamp and screwdriver stay on the desk. Locked 16:9 medium two-shot; Child's trips to the kitchen are shown as brief exits and returns with a short ellipsis.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "A light, playful urgency about the soup; Dad stays calm and warm; both end amused and moving toward dinner.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Dad sits at the desk with the small lamp and screwdriver in front of him; the doorway behind is empty.",
+      "action": "Dad turns the lamp slightly with one hand while speaking. Child pops into the doorway, delivers Mom's message with one eager hand gesture, and stands bouncing lightly on his toes while Dad answers.",
+      "end": "Dad sits at the desk holding the screwdriver; Child turns toward the doorway, about to run."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Dad sits at the desk holding the screwdriver; Child turns toward the doorway, about to run.",
+      "action": "Child dashes out of frame and returns in a moment with Mom's answer, holding up one finger. Dad sets the screwdriver down, stands up halfway, and gives his new answer; Child listens with both hands behind his back.",
+      "end": "Dad stands beside the desk with empty hands; Child turns to the doorway again for the last trip."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Dad stands beside the desk with empty hands; Child turns to the doorway for the last trip.",
+      "action": "Child runs out and returns once more, delivering the final message with a big welcoming gesture toward the door. Dad mimes rolling up his sleeves, and they walk toward the doorway together.",
+      "end": "Dad and Child exit through the doorway side by side; the desk, lamp and screwdriver stay behind in the quiet study."
+    }
+  ]
+}

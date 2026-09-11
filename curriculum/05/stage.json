@@ -1,0 +1,34 @@
+{
+  "id": "05",
+  "title": "I Can Keep It Going",
+  "age": 5,
+  "version": 1,
+  "status": "draft",
+  "dialogue_contract": "continuous-dialogue-v1",
+  "completed_phases": [],
+  "expected_chapters": 10,
+  "expected_lessons": 30,
+  "minimum_family_partner_ratio": 0.7,
+  "roles": [
+    "child",
+    "dad",
+    "mom",
+    "teacher",
+    "peer"
+  ],
+  "carry_forward_moves": [
+    "describe-a-person",
+    "compare-options",
+    "report-information",
+    "counter-an-offer",
+    "adapt-a-plan",
+    "ask-about-feelings",
+    "disagree-politely",
+    "tell-two-events-detail",
+    "answer-clarifying-questions",
+    "recount-an-outing",
+    "explain-game-rules",
+    "explain-how-it-works",
+    "teach-and-check"
+  ]
+}

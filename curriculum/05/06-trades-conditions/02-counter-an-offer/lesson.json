@@ -1,0 +1,91 @@
+{
+  "title": "The Star Cookie",
+  "title_zh": "小星星饼干",
+  "can_do": "给出的选项不合适时，礼貌提出第三方案（更小、换一种）。",
+  "conversation_move": {
+    "id": "counter-an-offer",
+    "label": "counter an offer with a third option"
+  },
+  "trigger": "The snack options do not fit, so Child proposes his own smaller version.",
+  "recycle": [
+    "compare-options"
+  ],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "Afternoon snack time at the kitchen counter.",
+  "essential_props": [
+    "one cookie jar"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "We have cookies or yogurt for snack today."
+      },
+      {
+        "speaker": "child",
+        "line": "Can I have both, Daddy?"
+      },
+      {
+        "speaker": "dad",
+        "line": "Both is too much before dinner time."
+      },
+      {
+        "speaker": "child",
+        "line": "Then what about one small cookie and some milk?"
+      },
+      {
+        "speaker": "dad",
+        "line": "One small cookie sounds fair to me."
+      },
+      {
+        "speaker": "child",
+        "line": "The star cookie, please, not the round one."
+      },
+      {
+        "speaker": "dad",
+        "line": "Good picking. Here is the star."
+      },
+      {
+        "speaker": "child",
+        "line": "Small cookie, big cup of milk. Best snack ever!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Pizza night",
+      "setting": "One last slice on the plate.",
+      "change": "Both Child and Dad want it.",
+      "challenge": "Child proposes splitting it into two pieces instead of taking it all, and Dad accepts happily."
+    },
+    {
+      "title": "The toy shelf",
+      "setting": "Store shelf with big and small diggers.",
+      "change": "Mom offers the small one today.",
+      "challenge": "Child counters by suggesting the big one for his birthday, and they agree on the plan with a handshake."
+    }
+  ],
+  "parent_support": [
+    "给选项时允许孩子提第三方案，这是协商不是顶嘴。",
+    "第三方案合理就接受；不合理时说明原因，再让他改一版。",
+    "成交后让孩子复述商定结果：“一个小饼干加一杯牛奶。”"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

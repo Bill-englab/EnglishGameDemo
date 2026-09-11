@@ -1,0 +1,87 @@
+{
+  "title": "Mom's Cozy Chair",
+  "title_zh": "妈妈累了",
+  "can_do": "注意到大人的状态，主动问“你累吗、需要什么”，并用行动关心。",
+  "conversation_move": {
+    "id": "ask-about-feelings",
+    "label": "notice and ask how someone feels"
+  },
+  "trigger": "Mom sits down slowly after a long day, and Child notices and asks about her.",
+  "recycle": [
+    "ask-for-detail"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "Early evening in the living room.",
+  "essential_props": [
+    "one pair of slippers"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "child",
+        "line": "Mom, are you feeling tired today?"
+      },
+      {
+        "speaker": "mom",
+        "line": "A little, my dear. My legs are heavy."
+      },
+      {
+        "speaker": "child",
+        "line": "Do you want to sit down and rest?"
+      },
+      {
+        "speaker": "mom",
+        "line": "I do, but dinner isn't started yet."
+      },
+      {
+        "speaker": "child",
+        "line": "Dad can start dinner. I can bring your slippers!"
+      },
+      {
+        "speaker": "mom",
+        "line": "You taking care of me? That's so sweet."
+      },
+      {
+        "speaker": "child",
+        "line": "You take care of me every day. Now it's my turn!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Dad's long day",
+      "setting": "Dad comes home quiet and tired.",
+      "change": "Child notices at the door.",
+      "challenge": "Child asks how Dad feels, fetches his slippers, and suggests resting before dinner."
+    },
+    {
+      "title": "Max's dropped ice cream",
+      "setting": "Playground snack time.",
+      "change": "Max drops his ice cream on the ground.",
+      "challenge": "Child notices, asks how Max feels, and offers to share his own cone or buy a new one together."
+    }
+  ],
+  "parent_support": [
+    "大人偶尔真实示弱（累了、腿酸），给孩子关心你的机会。",
+    "孩子问候后认真回应感受，并接受他的照顾提议。",
+    "点破一句：“你注意到妈妈累了，这叫关心。”给行为命名。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

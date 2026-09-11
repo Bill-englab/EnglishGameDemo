@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Kitchen counter on grocery day. One bowl of red apples sits at counter center-left and one bowl of green apples at center-right, both within Child's reach. Mom stands screen-left; Child stands screen-right. Locked 16:9 medium two-shot with both faces and the bowls visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child shows brief thinking focus while comparing; Mom offers facts evenly; both end with a light satisfied tone.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "The red-apple bowl sits at center-left and the green-apple bowl at center-right; Mom stands screen-left and Child screen-right with empty hands.",
+      "action": "Mom gestures toward both bowls with an open hand. Child looks from one bowl to the other and asks the difference; Mom gives a small sour face and a small sweet smile as she explains.",
+      "end": "Both bowls stay in place; Child keeps his hands empty, deciding."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Both bowls stay in place; Child keeps his hands empty, deciding.",
+      "action": "Child points at the red bowl while giving his reason. Mom lifts one red apple and one green apple side by side to show the size; Child cups his own hands together while explaining why small fits him.",
+      "end": "Mom sets both apples back; Child's cupped hands open toward the red bowl."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Mom sets both apples back; Child's cupped hands open toward the red bowl.",
+      "action": "Mom nods and steps back from the red bowl. Child picks red apples one at a time with his right hand and lines up four on the counter, counting softly with small taps.",
+      "end": "Four red apples stand in a line at counter center; the green bowl sits untouched; Mom has empty hands and a warm smile."
+    }
+  ]
+}

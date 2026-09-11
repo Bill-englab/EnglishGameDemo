@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Kitchen nook after an outing. Mom sits at screen-left; Child stands beside the table at screen-right with his hands resting on the table edge. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child recounts the day with happy energy; Mom reacts with warm interest and one soft laugh; the ending is cozy and amused.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Mom sits at the table; Child stands beside it with hands on the table edge.",
+      "action": "Mom leans in with her question. Child pats the table flat twice with one palm for the flat stones; Mom tilts her head, checking the detail.",
+      "end": "Child's palm rests on the table; Mom listens attentively."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Child's palm rests on the table; Mom listens attentively.",
+      "action": "Child flicks two fingers forward like a skipping stone. Mom asks her question with wide, curious eyes; Child holds up three fingers and mimes biting a sandwich with the other hand.",
+      "end": "Child's three fingers relax; both smile about the sandwiches."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Child's three fingers relax; both smile about the sandwiches.",
+      "action": "Mom rests her chin on her hand, charmed. Child cups one hand like a duck beak and turns it side to side, watching; then shrugs once with a grin; Mom laughs softly.",
+      "end": "Child stands by the table with a happy face; Mom sits with her chin resting on her hand, smiling."
+    }
+  ]
+}

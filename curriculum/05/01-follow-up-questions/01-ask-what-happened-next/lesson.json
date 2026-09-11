@@ -1,0 +1,95 @@
+{
+  "title": "Daddy's Missing Sandwich",
+  "title_zh": "爸爸的三明治不见了",
+  "can_do": "听大人讲一件事时，主动追问“后来呢”，把故事听完。",
+  "conversation_move": {
+    "id": "ask-what-happened-next",
+    "label": "ask what happened next in a story"
+  },
+  "trigger": "Dad starts telling a small true story from his day and pauses between parts, leaving space for Child to ask for more.",
+  "recycle": [],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "After dinner, in the cozy living room.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "Something funny happened at work today."
+      },
+      {
+        "speaker": "child",
+        "line": "What happened, Daddy? Tell me everything!"
+      },
+      {
+        "speaker": "dad",
+        "line": "I opened my bag, and my sandwich was gone."
+      },
+      {
+        "speaker": "child",
+        "line": "Your sandwich was gone? What happened next?"
+      },
+      {
+        "speaker": "dad",
+        "line": "I looked everywhere, then under my hat."
+      },
+      {
+        "speaker": "child",
+        "line": "What did you find under your hat?"
+      },
+      {
+        "speaker": "dad",
+        "line": "My sandwich! Sitting right there."
+      },
+      {
+        "speaker": "child",
+        "line": "That's so silly. Did you still eat it?"
+      },
+      {
+        "speaker": "dad",
+        "line": "I did, and it tasted fine."
+      },
+      {
+        "speaker": "child",
+        "line": "Tomorrow, please check your hat first!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Grandma's train story",
+      "setting": "Grandma visits and starts telling about her train ride.",
+      "change": "She pauses before the best part to sip her tea.",
+      "challenge": "Child asks what happened next until the story ends, then adds one comment of his own about the trip."
+    },
+    {
+      "title": "The found mitten",
+      "setting": "Teacher tells the class she found something funny on the playground.",
+      "change": "She stops before saying where she found it.",
+      "challenge": "Child asks follow-up questions to hear the whole small story, and the class learns it was a mitten in the slide tunnel."
+    }
+  ],
+  "parent_support": [
+    "爸爸讲一件真事，故意在关键处停一停，等孩子问“后来呢”再继续。",
+    "孩子忘了问时，用半句提示“然后呢……”留白，不替他问。",
+    "任何形式的追问都算成功，追问本身比问得漂亮更重要。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

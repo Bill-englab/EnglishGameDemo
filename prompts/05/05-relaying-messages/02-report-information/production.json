@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Kitchen after school. Mom stands at the counter at screen-left with empty hands; Child sits at the table at screen-right with his hands on the tabletop. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child reports his news with bright, proud energy; Mom reacts with warm interest and one soft surprised lift of the eyebrows; both end planning together.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Mom stands at the counter; Child sits at the table with hands on the tabletop.",
+      "action": "Mom turns toward Child with her question. Child raises one hand like a little reporter while announcing the Friday news; Mom leans in with mild surprise and asks why.",
+      "end": "Mom rests one hand on the counter; Child sits up straight."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Mom rests one hand on the counter; Child sits up straight.",
+      "action": "Child holds his hands like a small open book while reporting the teachers' meeting. Mom taps her chin thinking about Friday, then raises her eyebrows at the rain-boots news; Child nods clearly.",
+      "end": "Both look at each other, curious about the boots."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Both look at each other, curious about the boots.",
+      "action": "Mom points down at imaginary boots with both index fingers. Child mimes two small stomping steps in place and sweeps one hand across the table like falling leaves; Mom claps once softly, delighted.",
+      "end": "Child sits with hands flat on the table, pleased; Mom smiles with empty hands by the counter."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+No School Friday — Clip 1
+Production prompt draft | Source: curriculum/05/05-relaying-messages/02-report-information/lesson.json | Content revision: 1
+Source SHA256: 408f9b327161c0ac22017e29243392acf301d7d8b0cba10412059c34e543f093
+The source/revision above are production metadata, not spoken words or on-screen text.
+
+VIDEO AND SOUND
+Create one 16:9 animated clip for a preschool family role-play. Pixar-style 3D animated cartoon, soft warm lighting, cozy pastel color palette, cute, wholesome, family-friendly. Soft rounded character designs, expressive but restrained faces. Large round eyes and rounded cheeks describe fixed anatomy, not surprise or excitement; keep facial movements small and natural, following EMOTIONAL PERFORMANCE when provided. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+
+FIXED CAST (only these two)
+Child — a small four-year-old cartoon tiger boy, bright orange fur with bold black stripes, big round sparkly eyes, chubby round cheeks, tiny rounded ears, wearing a little yellow T-shirt, short chubby toddler proportions; clear natural child voice.
+Pig Mom — a young, pretty cartoon pig mother, soft rosy-pink fur, lighter blush on the cheeks, big warm round eyes with long lashes, small rounded snout, slim young-mother proportions, wearing a coral cardigan over a cream top; sweet gentle mom energy, warm natural adult female voice.
+
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.
+Child reports his news with bright, proud energy; Mom reacts with warm interest and one soft surprised lift of the eyebrows; both end planning together.
+No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
+SETTING
+After school, in the kitchen.
+
+SCENE AND PROP CONTINUITY
+Kitchen after school. Mom stands at the counter at screen-left with empty hands; Child sits at the table at screen-right with his hands on the tabletop. Locked 16:9 medium two-shot with both faces visible.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
+
+START FRAME
+Mom stands at the counter; Child sits at the table with hands on the tabletop.
+
+ACTION AND REACTIONS
+Mom turns toward Child with her question. Child raises one hand like a little reporter while announcing the Friday news; Mom leans in with mild surprise and asks why.
+
+SPOKEN DIALOGUE (verbatim, in order):
+Mom: "How was school, my dear?"
+Child: "Good! Teacher says there's no school on Friday."
+Mom: "No school? Why is that?"
+
+END FRAME
+Mom rests one hand on the counter; Child sits up straight.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
+
+PACING (18 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

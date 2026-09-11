@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Playroom floor. A toy truck sits on a short curved track at center; Child kneels at screen-right and Peer kneels at screen-left, both with empty hands. Locked 16:9 medium two-shot at floor level with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "A brief friendly disagreement stays calm; Child proposes with open hands; both end satisfied and ready to play.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "The truck rests on the track center; Child and Peer kneel facing each other with empty hands.",
+      "action": "Peer hugs the truck lightly to his chest while claiming every turn. Child holds both palms open while saying it is not fair; Peer points at the truck and track while explaining they are his.",
+      "end": "Peer keeps one hand on the truck; Child waits with open hands."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Peer keeps one hand on the truck; Child waits with open hands.",
+      "action": "Child traces one slow lap around the track with his finger while making his offer. Peer scrunches his face, then shrugs; Child draws one quick lap with his finger for the fast version.",
+      "end": "Both look at the truck on the track, nodding toward the plan."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Both look at the truck on the track, nodding toward the plan.",
+      "action": "Peer lifts the truck and offers it toward the middle of the track. Child taps the track once and mimes a small mouth for saying the switch word; both laugh gently and sit ready at their sides.",
+      "end": "The truck stands at track center between the two kneeling children; both rest their hands on their knees with friendly smiles."
+    }
+  ]
+}

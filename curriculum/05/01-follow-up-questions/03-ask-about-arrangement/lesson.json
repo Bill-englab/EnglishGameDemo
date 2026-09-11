@@ -1,0 +1,95 @@
+{
+  "title": "Grandma Visits Saturday",
+  "title_zh": "奶奶周六来我家",
+  "can_do": "对家庭安排主动问出“谁来、几点、做什么”，并补上自己的想法。",
+  "conversation_move": {
+    "id": "ask-about-arrangement",
+    "label": "ask who, when and what about a family plan"
+  },
+  "trigger": "Mom announces a family plan without the details, so Child asks for who, when and what.",
+  "recycle": [
+    "ask-for-detail"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "A weekday morning at the kitchen table.",
+  "essential_props": [
+    "one rainbow drawing"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "Grandma is visiting us on Saturday."
+      },
+      {
+        "speaker": "child",
+        "line": "Who is coming with her?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Just Grandma, and she stays for lunch."
+      },
+      {
+        "speaker": "child",
+        "line": "What time does she come?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Her train arrives at ten in the morning."
+      },
+      {
+        "speaker": "child",
+        "line": "What should I show her when she comes?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Your new drawing would make her happy."
+      },
+      {
+        "speaker": "child",
+        "line": "I'll show the big rainbow one! Can we make pancakes for lunch?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Grandma loves pancakes. Good plan, sweetheart."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The dentist visit",
+      "setting": "Mom says Child has a dentist appointment this week.",
+      "change": "Child does not know when it is or who takes him.",
+      "challenge": "Child asks who takes him, what time, and what happens there, then adds one thing he wants to do afterward."
+    },
+    {
+      "title": "Cousin Max sleeps over",
+      "setting": "The family plans for Max to sleep over on Friday.",
+      "change": "The evening details are not set yet.",
+      "challenge": "Child asks where Max will sleep and what they will eat, and offers his own idea for morning games."
+    }
+  ],
+  "parent_support": [
+    "宣布计划时只说一半，把“谁来、几点”留给孩子问。",
+    "孩子问完细节后，问他“你想加什么”，让安排里有他的贡献。",
+    "把孩子的提议当真写进计划（比如薄煎饼午餐），让他体验问出来的效果。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

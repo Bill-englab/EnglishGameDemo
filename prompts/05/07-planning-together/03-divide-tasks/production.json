@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Living-room floor after lunch. Flat-packed bookshelf pieces lean against the sofa: two side panels and one long white shelf. Dad kneels at screen-left; Child kneels at screen-right, both reachable to the pieces. Locked 16:9 medium two-shot at floor level with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "A calm, focused teamwork mood; Child works with small careful moves; both end with quiet pride in the finished job.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "The bookshelf pieces lean against the sofa; Dad and Child kneel facing each other with empty hands.",
+      "action": "Dad pats the two side panels lightly. Child raises his hand to volunteer; Dad points at the scattered pieces and explains the sorting job.",
+      "end": "Child moves toward the pieces; Dad watches with a smile."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Child kneels by the pieces; Dad watches with a smile.",
+      "action": "Child slides the big panels to one side and the small parts to the other with both hands, then dusts his palms once. Dad lifts one side panel upright and holds it; Child places both palms flat on it, holding steady while asking his question.",
+      "end": "Child's palms rest flat on the upright side panel; Dad holds the other end with one hand."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Child's palms rest flat on the upright side panel; Dad holds the other end with one hand.",
+      "action": "Dad picks up the long white shelf with his free hand and slides it onto the panel top. Child lets go, mimes stacking three books in the air at shelf height, and grins; Dad nods proudly.",
+      "end": "The side panel stands with the long white shelf resting on top; both kneel back with empty hands and warm smiles."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "title": "Freeze Bug",
+  "title_zh": "冻住的虫子",
+  "can_do": "把一个自创游戏的规则一步步讲给别人听，并确认对方听懂。",
+  "conversation_move": {
+    "id": "explain-game-rules",
+    "label": "explain the rules of a made-up game"
+  },
+  "trigger": "Child invents a game and teaches it to Max, step by step.",
+  "recycle": [
+    "negotiate-a-rule"
+  ],
+  "roles": [
+    "child",
+    "peer"
+  ],
+  "setting": "Open floor in the playroom.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "child",
+        "line": "Max, I made up a new game! It's called Freeze Bug."
+      },
+      {
+        "speaker": "peer",
+        "line": "Freeze Bug? How do you play it?"
+      },
+      {
+        "speaker": "child",
+        "line": "We run like bugs until someone says freeze."
+      },
+      {
+        "speaker": "peer",
+        "line": "Then what happens when we freeze?"
+      },
+      {
+        "speaker": "child",
+        "line": "You stop like a statue, and count to five slowly."
+      },
+      {
+        "speaker": "peer",
+        "line": "What if I move while counting?"
+      },
+      {
+        "speaker": "child",
+        "line": "Then you're the next bug caller. That's the rule!"
+      },
+      {
+        "speaker": "peer",
+        "line": "Run, freeze, count. Got it!"
+      },
+      {
+        "speaker": "child",
+        "line": "Ready? Wiggly bug feet, go!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Teaching Grandma the game",
+      "setting": "Grandma visits on Sunday.",
+      "change": "She has never played Freeze Bug.",
+      "challenge": "Child explains the rules step by step, checks that she understands, and they play one slow round in the living room."
+    },
+    {
+      "title": "The obstacle course",
+      "setting": "A rainy afternoon with pillows and a mat.",
+      "change": "Child invents a new course.",
+      "challenge": "Child explains the route to Dad, answers his questions, and watches him try it."
+    }
+  ],
+  "parent_support": [
+    "让孩子把自创游戏的规则教给大人，大人认真当学生。",
+    "听不懂的地方真实地追问，给孩子“再讲一遍”的机会。",
+    "规则讲完真的照玩一轮，让教学有结果。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

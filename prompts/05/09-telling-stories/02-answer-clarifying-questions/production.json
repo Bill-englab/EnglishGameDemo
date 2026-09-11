@@ -1,0 +1,41 @@
+{
+  "content_revision": 1,
+  "scene": "A quiet school reading corner. Teacher sits on a low chair at screen-left; Child sits on the rug at screen-right facing her with his hands in his lap. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child tells his story with bright, proud energy; Teacher listens with calm interest and one soft surprised laugh; both end amused and warm.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Teacher sits on the low chair; Child sits on the rug facing her with hands in his lap.",
+      "action": "Teacher opens with the farm news. Child opens both arms wide for so many animals; Teacher leans forward and asks which came first.",
+      "end": "Child's arms return to his lap; he thinks for a beat."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Child's hands rest in his lap while he thinks.",
+      "action": "Child points off-frame toward an imaginary gate while explaining the goats' house. Teacher asks what they did; Child stacks one fist on the other for the little goat on its mom's back.",
+      "end": "Child holds the stacked fists briefly; Teacher raises her eyebrows with interest."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8
+      ],
+      "start": "Child holds the stacked fists; Teacher raises her eyebrows.",
+      "action": "Teacher repeats the image with wonder. Child slides his top fist down and off with a small bounce for the jump, then spreads his hands like a pool splash; Teacher claps once softly and shakes her head smiling.",
+      "end": "Child sits tall with hands in his lap, pleased; Teacher rests one hand on her cheek, smiling."
+    }
+  ]
+}

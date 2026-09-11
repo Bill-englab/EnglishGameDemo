@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Morning kitchen counter. Two mugs stand on the shelf beside the coffee maker: one dark-blue mug with a small white cloud and one light-blue mug without a cloud. Dad stands screen-left near the shelf; Child stands screen-right. Locked 16:9 medium two-shot with both faces and the shelf visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Dad shows a brief searching focus; Child answers with small confident gestures; both end with warm thanks and a light smile.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1
+      ],
+      "start": "Both mugs stand on the shelf; Dad stands with empty hands, slightly turned toward the counter; Child faces him with empty hands.",
+      "action": "Dad scans the counter with a small head turn. Child points once toward the coffee maker shelf while asking his question.",
+      "end": "Dad looks toward the shelf where both mugs stand; Child's pointing hand relaxes."
+    },
+    {
+      "turns": [
+        2,
+        3,
+        4
+      ],
+      "start": "Dad looks toward the shelf where both mugs stand; Child faces him with empty hands.",
+      "action": "Dad asks his question with open hands. Child traces a small cloud shape in the air with two fingers while describing the mug. Dad's gaze lands on the dark-blue mug.",
+      "end": "Dad reaches one hand toward the dark-blue cloud mug; Child watches with empty hands."
+    },
+    {
+      "turns": [
+        5,
+        6,
+        7
+      ],
+      "start": "Dad's hand reaches toward the dark-blue cloud mug on the shelf.",
+      "action": "Dad takes the dark-blue mug and thanks Child with a warm nod. Child explains he put it back last night, then points gently at the light-blue mug for Mom; Dad raises the mug slightly.",
+      "end": "Dad holds the dark-blue cloud mug in one hand near his chest; the light-blue mug stays on the shelf; both smile."
+    }
+  ]
+}

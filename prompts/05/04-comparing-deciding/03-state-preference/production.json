@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Living-room sofa in the evening. Dad sits at screen-left; Child sits beside him at screen-right, both with empty hands and relaxed postures. Locked 16:9 medium two-shot.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "A warm, playful chat; Child shows small lively gestures while ranking his animals; both share gentle laughs.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1
+      ],
+      "start": "Dad and Child sit side by side on the sofa with empty hands.",
+      "action": "Dad turns toward Child with his question. Child sits up straight and answers with one raised finger for his top pick.",
+      "end": "Both sit relaxed; Child's raised finger relaxes."
+    },
+    {
+      "turns": [
+        2,
+        3
+      ],
+      "start": "Both sit relaxed on the sofa.",
+      "action": "Dad spreads one hand wide for 'every animal'. Child holds his hands far apart for big, then curves them into a gentle hug for the elephant babies.",
+      "end": "Child's hands return to his lap; Dad listens with a warm smile."
+    },
+    {
+      "turns": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "start": "Child's hands rest in his lap; Dad listens with a warm smile.",
+      "action": "Dad holds up two fingers for second-best. Child leans forward and mimes a penguin sliding with one flat hand. Dad asks his playful question with a grin; Child nods, then pats his own shoulders as if riding, and raises both arms in a small victory.",
+      "end": "Child sits back with a happy face; both laugh gently; hands return to their laps."
+    }
+  ]
+}

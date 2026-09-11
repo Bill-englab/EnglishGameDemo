@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Playroom rug. Child and Peer sit cross-legged facing each other, Child at screen-right and Peer at screen-left, both with empty hands. The dragon and the treasure are imaginary and never shown as props. Locked 16:9 medium two-shot at floor level.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "A mild friendly debate stays warm; both use small hand shapes for the imaginary dragon; the ending is a shared laugh.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Child and Peer sit cross-legged facing each other with empty hands.",
+      "action": "Peer raises claw hands for the scary dragon. Child holds one palm out gently while saying he likes the idea but feels worried; Peer shrugs with open hands while asking again.",
+      "end": "Both sit with relaxed hands, thinking."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Both sit with relaxed hands, thinking.",
+      "action": "Child pinches a tiny gap between finger and thumb for a tiny bit scary, then opens his arms wide for mostly friendly. Peer crosses his arms doubting a friendly guard; Child wraps his own arms around himself in one big gentle self-hug.",
+      "end": "Peer's crossed arms loosen into curiosity."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Peer's crossed arms loosen into curiosity.",
+      "action": "Peer laughs once softly and mimes his own small hug. Child holds up one finger for his treasure logic while wearing a clever smile; both giggle gently and bump fists once.",
+      "end": "Both sit facing each other with happy relaxed faces and empty hands."
+    }
+  ]
+}

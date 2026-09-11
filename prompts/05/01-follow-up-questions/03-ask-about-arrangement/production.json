@@ -1,0 +1,41 @@
+{
+  "content_revision": 1,
+  "scene": "Kitchen table on a weekday morning. Mom sits at screen-left; Child stands beside the table at screen-right. One rainbow drawing lies flat on the table and appears only when mentioned. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child asks with light, patient interest and shows one small proud smile about his drawing; Mom answers warmly.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Mom sits at the table with hands folded; Child stands beside the table with empty hands; the tabletop is clear.",
+      "action": "Mom shares the Saturday news. Child rests one hand on the table edge and asks who is coming with Grandma.",
+      "end": "Mom sits with hands folded; Child rests one hand on the table edge; the tabletop stays clear."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Mom sits with hands folded; Child rests one hand on the table edge; the tabletop stays clear.",
+      "action": "Mom draws a small clock circle in the air with one finger while giving the train time. Child asks what he should show Grandma; Mom slides the rainbow drawing into view and lays it flat at center.",
+      "end": "The rainbow drawing lies flat at table center; Mom's hand rests beside it; Child looks down at it."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8
+      ],
+      "start": "The rainbow drawing lies flat at table center; both look down at it.",
+      "action": "Child points at the rainbow drawing, then asks about pancakes while miming one small flip with his hand. Mom nods and gives a small thumbs-up.",
+      "end": "Child's hand rests on the drawing; Mom's thumbs-up relaxes to the table; both smile gently."
+    }
+  ]
+}

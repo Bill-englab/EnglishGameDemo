@@ -1,0 +1,91 @@
+{
+  "title": "The Indoor Park",
+  "title_zh": "室内的公园",
+  "can_do": "计划被打乱时（下雨），提出“那我们改做……”的替代方案。",
+  "conversation_move": {
+    "id": "adapt-a-plan",
+    "label": "adapt a plan when it is disrupted"
+  },
+  "trigger": "Rain cancels the park plan, and Child proposes an indoor version instead.",
+  "recycle": [
+    "counter-an-offer"
+  ],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "A rainy morning at the entryway.",
+  "essential_props": [
+    "two couch cushions"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "Bad news, buddy. It's raining outside."
+      },
+      {
+        "speaker": "child",
+        "line": "So we can't go to the park today?"
+      },
+      {
+        "speaker": "dad",
+        "line": "Not today. The slides would be all wet."
+      },
+      {
+        "speaker": "child",
+        "line": "What if we build an indoor park instead?"
+      },
+      {
+        "speaker": "dad",
+        "line": "An indoor park? How would that work?"
+      },
+      {
+        "speaker": "child",
+        "line": "Cushions for hills, and the mat for sliding!"
+      },
+      {
+        "speaker": "dad",
+        "line": "That sounds fun. Let's do it after lunch."
+      },
+      {
+        "speaker": "child",
+        "line": "Rainy days can't stop us now!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The closed pool",
+      "setting": "A planned swim afternoon.",
+      "change": "The pool is closed for cleaning.",
+      "challenge": "Child proposes the sprinkler park instead and helps pack the dry clothes and towels."
+    },
+    {
+      "title": "The missing flour",
+      "setting": "Baking day for banana bread.",
+      "change": "The flour jar is empty.",
+      "challenge": "Child suggests oat cookies instead and helps mash the bananas for the new plan."
+    }
+  ],
+  "parent_support": [
+    "计划被打断时别急着替孩子想替代方案，先问“那我们可以在家玩什么”。",
+    "孩子的替代方案哪怕奇怪也先试一轮，再一起修正。",
+    "把“下雨天也挺好”的态度传给孩子，比方案本身重要。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

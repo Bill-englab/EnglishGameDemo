@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Playroom floor after a tumble. A low scattered pile of blocks lies at center; Child kneels at screen-right and Peer kneels at screen-left with his shoulders dropped. Locked 16:9 medium two-shot at floor level with both faces and the pile visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Peer shows mild sadness with dropped shoulders and a small pout; Child stays gentle and steady; the sadness eases into hope and a small shared smile.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "The scattered block pile lies at center; Peer kneels with dropped shoulders looking at it; Child kneels facing him.",
+      "action": "Peer spreads both hands over the pile while telling the news. Child leans toward him and asks his caring question; Peer touches his own chest once, saying he is fine but the tower is ruined.",
+      "end": "Peer's hands rest on his knees; Child keeps looking at him kindly."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Peer's hands rest on his knees; Child keeps looking at him kindly.",
+      "action": "Child raises one hand high above the floor for how tall it was. Peer pats the pile once, flat-handed. Child picks one block from the pile, holds it up like a little start, and offers his together question.",
+      "end": "Child holds one block up between them; Peer looks at it, then at Child."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Child holds one block up between them; Peer looks at it, then at Child.",
+      "action": "Peer takes the offered block with both hands. Child picks a second block and places it flat on the rug as the first base piece; Peer adds his block beside it, and they exchange a small hopeful smile.",
+      "end": "Two blocks sit side by side on the rug as the new base; both children kneel close, gently smiling, with the rest of the pile waiting."
+    }
+  ]
+}

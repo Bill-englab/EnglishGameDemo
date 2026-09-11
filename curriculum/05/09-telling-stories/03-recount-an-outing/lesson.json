@@ -1,0 +1,90 @@
+{
+  "title": "Skipping Stones",
+  "title_zh": "打水漂",
+  "can_do": "按“先……然后……后来……”讲一次出游的经历，并补上感受细节。",
+  "conversation_move": {
+    "id": "recount-an-outing",
+    "label": "recount an outing in order"
+  },
+  "trigger": "Mom asks about the lake trip she missed, and Child recounts it in order.",
+  "recycle": [
+    "tell-two-events-detail",
+    "ask-what-happened-next"
+  ],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "Home again after the lake trip.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "How was the lake trip with Dad today?"
+      },
+      {
+        "speaker": "child",
+        "line": "So fun! First we found big flat stones."
+      },
+      {
+        "speaker": "mom",
+        "line": "Flat stones at the shore?"
+      },
+      {
+        "speaker": "child",
+        "line": "Yes! Then Dad taught me to skip them."
+      },
+      {
+        "speaker": "mom",
+        "line": "Did your stone jump on the water?"
+      },
+      {
+        "speaker": "child",
+        "line": "Three times! After that, we ate sandwiches."
+      },
+      {
+        "speaker": "mom",
+        "line": "Sandwiches by the water sound lovely."
+      },
+      {
+        "speaker": "child",
+        "line": "And a duck watched us eat the whole time."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The museum day",
+      "setting": "A class trip to the science museum.",
+      "change": "Mom asks about it at dinner.",
+      "challenge": "Child recounts the trip in order — bus, dinosaurs, gift shop — and names his favorite moment."
+    },
+    {
+      "title": "The birthday party",
+      "setting": "A friend's party on Sunday.",
+      "change": "Grandma missed it.",
+      "challenge": "Child recounts the party sequence and answers Grandma's questions about the cake and the games."
+    }
+  ],
+  "parent_support": [
+    "出游回来先问“最想讲哪一段”，从最有感觉的讲起。",
+    "用“先……然后……”帮他把顺序钉住，卡住时提示第一个词。",
+    "追一个感受问题“那时候你觉得怎么样”，让叙述有温度。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

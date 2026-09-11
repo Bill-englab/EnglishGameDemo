@@ -1,0 +1,89 @@
+{
+  "title": "Elephants First",
+  "title_zh": "最喜欢大象",
+  "can_do": "说出“我最喜欢……因为……”，也能给第二名一个理由。",
+  "conversation_move": {
+    "id": "state-preference",
+    "label": "state a favorite with a reason"
+  },
+  "trigger": "Dad asks about favorite animals, and Child explains his rankings with reasons.",
+  "recycle": [
+    "compare-options"
+  ],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "A relaxed chat on the living-room sofa.",
+  "essential_props": [],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "What's your favorite animal at the zoo?"
+      },
+      {
+        "speaker": "child",
+        "line": "I like the elephants the most."
+      },
+      {
+        "speaker": "dad",
+        "line": "Why elephants, out of every animal?"
+      },
+      {
+        "speaker": "child",
+        "line": "Because they're big and gentle with their babies."
+      },
+      {
+        "speaker": "dad",
+        "line": "What do you like second-best?"
+      },
+      {
+        "speaker": "child",
+        "line": "The penguins, because they slide on their bellies."
+      },
+      {
+        "speaker": "dad",
+        "line": "If you could slide like that, would you?"
+      },
+      {
+        "speaker": "child",
+        "line": "Yes! But elephants can give rides, so elephants win."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Favorite fruit",
+      "setting": "A fruit-bowl chat with Dad.",
+      "change": "Dad asks for a favorite and a second favorite.",
+      "challenge": "Child names both with reasons and asks Dad's favorite back."
+    },
+    {
+      "title": "Favorite game",
+      "setting": "Grandma asks about favorite games.",
+      "change": "Grandma does not know Child's games.",
+      "challenge": "Child names his favorite, gives a reason, and briefly says how the game works."
+    }
+  ],
+  "parent_support": [
+    "聊喜好时不满足于一个词的答案，追问“为什么最喜欢它”。",
+    "孩子给的理由再简单也接住，然后升级一问：“第二名是谁？”",
+    "反向问他“你猜爸爸最喜欢什么”，练习把问题抛回去。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

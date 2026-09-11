@@ -1,0 +1,89 @@
+{
+  "title": "The Bedtime Deal",
+  "title_zh": "睡前的约定",
+  "can_do": "主动提出“如果我做……能不能……”的交换条件，并接受合理条款。",
+  "conversation_move": {
+    "id": "propose-a-trade",
+    "label": "offer a trade with if and accept fair terms"
+  },
+  "trigger": "Bedtime is near and Child wants two books, so he offers something in return.",
+  "recycle": [],
+  "roles": [
+    "child",
+    "mom"
+  ],
+  "setting": "Bedtime routine in the bedroom.",
+  "essential_props": [
+    "one bin of blocks"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "mom",
+        "line": "Bedtime is in ten minutes, sweetheart."
+      },
+      {
+        "speaker": "child",
+        "line": "Mom, if I clean my blocks fast, can we read two books?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Two books is a lot for one night."
+      },
+      {
+        "speaker": "child",
+        "line": "But I'll brush my teeth without a reminder."
+      },
+      {
+        "speaker": "mom",
+        "line": "Hmm, that would help my evening a lot."
+      },
+      {
+        "speaker": "child",
+        "line": "So is it a deal? Blocks, teeth, two books?"
+      },
+      {
+        "speaker": "mom",
+        "line": "Deal, if the blocks are away by seven."
+      },
+      {
+        "speaker": "child",
+        "line": "Watch me zoom! Fastest cleanup tonight!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The morning trade",
+      "setting": "A rushed morning, shoes still to put on.",
+      "change": "Child wants one more cartoon before leaving.",
+      "challenge": "Child offers to dress super fast first; Mom agrees to one short episode after he is ready."
+    },
+    {
+      "title": "The park trade",
+      "setting": "Park time must end soon.",
+      "change": "Child is still digging a tunnel.",
+      "challenge": "Child offers to carry the bag home in exchange for five more minutes of digging, and both keep the deal."
+    }
+  ],
+  "parent_support": [
+    "孩子提交换条件时认真谈判：可以还价，但别一口否决。",
+    "成交后严格履约，让孩子体验“条件换来的”比“讨来的”更牢靠。",
+    "加一句复述：“我们的约定是什么？”让他完整说一遍条款。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

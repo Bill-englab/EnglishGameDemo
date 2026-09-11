@@ -1,0 +1,42 @@
+{
+  "content_revision": 1,
+  "scene": "After-dinner living room. Dad sits in his armchair at screen-left; Child stands facing him at screen-right, both with empty hands. A closed work bag rests on the floor beside the chair and stays closed. Locked 16:9 medium two-shot with both faces visible; the story is told with small hand gestures only.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child shows brief curiosity and quiet amusement while asking for more of the story; Dad tells it warmly with small gestures; both end with gentle smiles.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Dad sits in the armchair with hands on his knees; Child stands facing him with empty hands; the closed bag rests on the floor beside the chair.",
+      "action": "Dad opens the story with one small storytelling gesture. Child leans in slightly and asks to hear everything, moving only his hands while speaking.",
+      "end": "Dad sits with one hand on the armrest; Child stands attentively with empty hands; the bag stays closed on the floor."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Dad sits with one hand on the armrest; Child stands attentively with empty hands.",
+      "action": "Dad mimes opening a bag with both hands, then pats an imaginary hat on his head. Child tilts his head with mild surprise and asks what Dad found, keeping his hands near his chest.",
+      "end": "Dad keeps one hand lightly on top of his head; Child waits with empty hands, leaning in."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "start": "Dad keeps one hand lightly on top of his head; Child waits with empty hands, leaning in.",
+      "action": "Dad lifts an imaginary sandwich from his head with two fingers and sets it down with a smile. Child covers a small laugh with one hand, asks his final questions, and ends with a friendly pointing gesture toward Dad's head.",
+      "end": "Both share a gentle smile; Dad's hands rest on his knees; Child's hands return to his sides; the bag remains closed on the floor."
+    }
+  ]
+}

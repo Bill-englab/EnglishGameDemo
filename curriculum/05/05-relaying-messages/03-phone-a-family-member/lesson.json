@@ -1,0 +1,99 @@
+{
+  "title": "Calling Daddy",
+  "title_zh": "给爸爸打电话",
+  "can_do": "完成一次短通话：问好、说清事情、问一个问题、礼貌挂断。",
+  "conversation_move": {
+    "id": "phone-a-family-member",
+    "label": "make a short call to a family member"
+  },
+  "trigger": "Mom and Child are at the market and need Dad's answer about milk, so Child makes the call.",
+  "recycle": [
+    "relay-a-message"
+  ],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "A phone call between the market and home.",
+  "essential_props": [
+    "one phone"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "Hello, this is Daddy."
+      },
+      {
+        "speaker": "child",
+        "line": "Hi Daddy! It's me. We're at the market."
+      },
+      {
+        "speaker": "dad",
+        "line": "Hello, champ! What are you buying?"
+      },
+      {
+        "speaker": "child",
+        "line": "Mom wants to know: do we need milk?"
+      },
+      {
+        "speaker": "dad",
+        "line": "Yes, please. The big blue bottle."
+      },
+      {
+        "speaker": "child",
+        "line": "Mom says the big bottle is too heavy."
+      },
+      {
+        "speaker": "dad",
+        "line": "Then get two small ones instead."
+      },
+      {
+        "speaker": "child",
+        "line": "Okay! Two small bottles. Anything else, Daddy?"
+      },
+      {
+        "speaker": "dad",
+        "line": "Just you, home fast. I miss you!"
+      },
+      {
+        "speaker": "child",
+        "line": "We're coming! Bye, Daddy!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Checking the list",
+      "setting": "Child and Dad at the market; Mom waits at home.",
+      "change": "Mom wanted three things but Child remembers only two.",
+      "challenge": "Child phones Mom to check the list, repeats it back, and adds one question of his own about dinner."
+    },
+    {
+      "title": "The goodnight call",
+      "setting": "Child sleeps at Grandma's house.",
+      "change": "He misses Dad's goodnight.",
+      "challenge": "Child calls Dad, says goodnight, tells one thing about his day, and closes the call politely."
+    }
+  ],
+  "parent_support": [
+    "让孩子真的打一两个短电话（问爸爸要不要买东西）。",
+    "通话前和孩子排一遍骨架：问好、说事、问一句、说再见。",
+    "挂电话后复述要点：“爸爸要两小瓶奶，还要什么来着？”练习听记。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

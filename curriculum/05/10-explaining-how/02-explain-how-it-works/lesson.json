@@ -1,0 +1,91 @@
+{
+  "title": "The Wind-Up Penguin",
+  "title_zh": "会上发条的小企鹅",
+  "can_do": "用“先……然后……”解释一个玩具的操作步骤，让对方操作成功。",
+  "conversation_move": {
+    "id": "explain-how-it-works",
+    "label": "explain how a toy works step by step"
+  },
+  "trigger": "Dad does not know how the new toy works, so Child walks him through it.",
+  "recycle": [
+    "explain-game-rules"
+  ],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "The living-room table with a new toy.",
+  "essential_props": [
+    "one wind-up penguin toy"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "How does this penguin work?"
+      },
+      {
+        "speaker": "child",
+        "line": "First, you open the little door on its back."
+      },
+      {
+        "speaker": "dad",
+        "line": "This small door here?"
+      },
+      {
+        "speaker": "child",
+        "line": "Yes! Then you wind the key three times."
+      },
+      {
+        "speaker": "dad",
+        "line": "One, two, three. Now what?"
+      },
+      {
+        "speaker": "child",
+        "line": "Put it down, and let go. It walks by itself!"
+      },
+      {
+        "speaker": "dad",
+        "line": "Look at it go! Does it ever fall?"
+      },
+      {
+        "speaker": "child",
+        "line": "Sometimes. Then you start again with the key."
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "The music box",
+      "setting": "Grandma's music box stops mid-song.",
+      "change": "Child knows how to wind it.",
+      "challenge": "Child explains where the key goes and how many turns it needs, and Grandma restarts it herself."
+    },
+    {
+      "title": "The vacuum robot",
+      "setting": "The robot cleaner waits by its dock.",
+      "change": "Dad pretends he forgot how to start it.",
+      "challenge": "Child explains the button sequence, they check the result together, and the robot hums away."
+    }
+  ],
+  "parent_support": [
+    "家里的玩具、电器请孩子当“讲解员”，大人装笨提问。",
+    "孩子讲步骤时帮他用上“先、然后”，把顺序说清。",
+    "讲完让他看着你操作一遍，验收自己的教学。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

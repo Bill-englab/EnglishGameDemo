@@ -1,0 +1,91 @@
+{
+  "title": "Shelf Builders",
+  "title_zh": "书架小工人",
+  "can_do": "合作做事时分好“你做什么、我做什么”，并守好自己的部分。",
+  "conversation_move": {
+    "id": "divide-tasks",
+    "label": "divide tasks and hold one's own part"
+  },
+  "trigger": "A new bookshelf needs assembling, and Dad shares the work with Child.",
+  "recycle": [
+    "arrange-to-play"
+  ],
+  "roles": [
+    "child",
+    "dad"
+  ],
+  "setting": "Assembling furniture on the living-room floor.",
+  "essential_props": [
+    "flat-packed bookshelf pieces"
+  ],
+  "dialogue_contract": "continuous-dialogue-v1",
+  "dialogue": {
+    "turns": [
+      {
+        "speaker": "dad",
+        "line": "Our new bookshelf needs building today."
+      },
+      {
+        "speaker": "child",
+        "line": "Can I help? What do I do?"
+      },
+      {
+        "speaker": "dad",
+        "line": "You can sort the pieces by size."
+      },
+      {
+        "speaker": "child",
+        "line": "Big ones here, small ones there. Done!"
+      },
+      {
+        "speaker": "dad",
+        "line": "Now hold this side steady for me."
+      },
+      {
+        "speaker": "child",
+        "line": "Holding steady! Which piece comes next?"
+      },
+      {
+        "speaker": "dad",
+        "line": "The long white shelf goes on top."
+      },
+      {
+        "speaker": "child",
+        "line": "Then my dinosaur books get the top shelf!"
+      }
+    ]
+  },
+  "replay_cards": [
+    {
+      "title": "Garden helpers",
+      "setting": "Saturday morning planting.",
+      "change": "Many small jobs and only two helpers.",
+      "challenge": "Child divides the tasks — he waters, Dad digs — and they check the plan together before starting."
+    },
+    {
+      "title": "The craft cleanup",
+      "setting": "A big mess after crafting.",
+      "change": "Two bins and many scraps.",
+      "challenge": "Child assigns paper scraps to one bin and blocks to the other, and they finish the cleanup together."
+    }
+  ],
+  "parent_support": [
+    "家务和手工故意留一半给孩子：“你负责哪块？我负责哪块？”",
+    "分工后各干各的，中途不越界接管，让孩子守住自己的责任。",
+    "完工后击掌并各自复述“我做了什么”，体验合作成果。"
+  ],
+  "reviews": {
+    "motivation": true,
+    "causality": true,
+    "physical": true,
+    "adult_behavior": true,
+    "child_language": true,
+    "knowledge_safety": true,
+    "resolution": true,
+    "replay_logic": true,
+    "character_continuity": true,
+    "emotion_stability": true
+  },
+  "status": "draft",
+  "content_revision": 1
+}

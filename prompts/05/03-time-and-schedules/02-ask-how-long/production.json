@@ -1,0 +1,41 @@
+{
+  "content_revision": 1,
+  "scene": "Car interior on a quiet road. Dad drives at screen-left, hands on the wheel and eyes on the road throughout; Child sits buckled in the back seat at screen-right, visible above the front seatback. Locked 16:9 medium framing from the dashboard with both faces visible; no road changes or arrival are shown.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child asks with light eager energy and one small happy wiggle of the hands; Dad answers calmly while driving; both end cheerful about the plan.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Dad drives with both hands on the wheel; Child sits buckled, hands in his lap.",
+      "action": "Dad glances once at the mirror while announcing the trip. Child leans forward a little and asks how long; Dad answers while keeping his eyes on the road.",
+      "end": "Dad drives with both hands on the wheel; Child sits back with hands in his lap."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Dad drives with both hands on the wheel; Child sits back with hands in his lap.",
+      "action": "Child holds up both hands with fingers spread while asking about ten minutes. Dad compares it to two songs with a quick two-finger raise. Child claps once softly and suggests the shark song.",
+      "end": "Dad drives with both hands on the wheel; Child's hands settle back to his lap."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8
+      ],
+      "start": "Dad drives with both hands on the wheel; Child's hands settle back to his lap.",
+      "action": "Dad nods toward the mirror while confirming the order. Child rubs his tummy once while asking about lunch; Dad smiles and keeps his eyes on the road.",
+      "end": "Dad drives with both hands on the wheel; Child sits smiling with hands in his lap; the car stays in steady motion."
+    }
+  ]
+}

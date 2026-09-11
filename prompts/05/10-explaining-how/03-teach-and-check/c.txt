@@ -1,0 +1,44 @@
+The Stacking Cups Lesson — Clip 3
+Production prompt draft | Source: curriculum/05/10-explaining-how/03-teach-and-check/lesson.json | Content revision: 1
+Source SHA256: a6323bf892e42fceec894288e12fd92eb530bf0e3989411b8a55430cb54caa42
+The source/revision above are production metadata, not spoken words or on-screen text.
+
+VIDEO AND SOUND
+Create one 16:9 animated clip for a preschool family role-play. Pixar-style 3D animated cartoon, soft warm lighting, cozy pastel color palette, cute, wholesome, family-friendly. Soft rounded character designs, expressive but restrained faces. Large round eyes and rounded cheeks describe fixed anatomy, not surprise or excitement; keep facial movements small and natural, following EMOTIONAL PERFORMANCE when provided. A locked medium two-shot with both faces and task-relevant hands visible; use the scene-specific safe framing below when seats/props require it. No camera orbit, zoom, unrelated cutaways, montage, extra characters or extra voices. No music over speech, narrator, subtitles, captions, title cards or UI. A physical object label explicitly required by the scene is allowed. Clean natural English, exact speaker attribution, synchronized mouth movements; silent listener reacts without mouthing the other's line.
+
+FIXED CAST (only these two)
+Child — a small four-year-old cartoon tiger boy, bright orange fur with bold black stripes, big round sparkly eyes, chubby round cheeks, tiny rounded ears, wearing a little yellow T-shirt, short chubby toddler proportions; clear natural child voice.
+Rabbit Teacher — a cream rabbit with upright ears and a lavender cardigan, calm natural adult voice.
+
+EMOTIONAL PERFORMANCE
+Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.
+A playful teacher-and-student reversal; Child guides with small polite gestures; Teacher follows with good-humored concentration; both end with warm praise and a small imaginary sticker moment.
+No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady.
+No screaming, extreme excitement, rage, distorted facial or body shapes, frantic gestures or uncontrolled running.
+
+SETTING
+Show-and-tell time at the school table.
+
+SCENE AND PROP CONTINUITY
+School activity table. A set of three stacking cups — big, middle and tiny — lies flat at table center. Teacher sits at screen-left; Child stands at screen-right; both can reach the cups. Locked 16:9 medium two-shot with both faces and the cups visible.
+Keep base character designs, garment identities, lighting, set and camera consistent across the three clips; allow the explicitly scripted dressing or undressing actions. Track hands and props continuously through the scripted movements rather than freezing their positions. The START FRAME below specifies this clip's current state; do not reset to the scene's initial arrangement. If the generation workflow supports reference frames, reuse the established character references and the preceding clip's final frame; text instructions alone do not guarantee visual consistency.
+
+START FRAME
+The middle cup sits on the big one with stripes aligned; Teacher keeps her hands near.
+
+ACTION AND REACTIONS
+Child points at the tiny cup. Teacher places it on top and spreads her arms with a happy question face; Child claps once softly and presses an imaginary sticker onto the back of Teacher's hand with one thumb.
+
+SPOKEN DIALOGUE (verbatim, in order):
+Teacher: "The stripes match. Then the last one?"
+Child: "Tiny cup on top. Your turn to try!"
+Teacher: "Look, I did it! Good teaching?"
+Child: "Star student! You get a gold sticker."
+
+END FRAME
+The three cups stand stacked at center; Teacher rests her hand with the invisible sticker; both beam at the finished tower.
+Leave a short natural settling beat, without adding speech. Do not repeat earlier clips' lines.
+
+PACING (28 spoken words)
+Fit this clip within about 10 seconds at a natural conversational pace. Use brief turn-taking pauses; never rush, omit, paraphrase or extend the clip.
+Let simple gestures happen during speech; do not postpone all actions until after the final line. Keep emotionally important responses immediate. Review timing, lip-sync, physical continuity and child comfort before marking this lesson video_ready; this prompt is not a production approval.

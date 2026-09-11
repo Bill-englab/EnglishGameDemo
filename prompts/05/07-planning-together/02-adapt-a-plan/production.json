@@ -1,0 +1,40 @@
+{
+  "content_revision": 1,
+  "scene": "Home entryway on a rainy morning. The window at screen-left shows soft rain streaks; the front door stays closed. Two couch cushions lean against the wall at center. Dad stands screen-left; Child stands screen-right. Locked 16:9 medium two-shot with both faces visible.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Brief shared disappointment turns into playful planning; both end energized and agreeing on the new plan.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Dad stands by the rain-streaked window; Child stands facing him with empty hands; the two cushions lean against the wall.",
+      "action": "Dad tips his head toward the window with a sorry smile. Child looks at the rain and asks his checking question; Dad wiggles his fingers downward like rain while explaining the wet slides.",
+      "end": "Both look away from the window; Child glances at the cushions by the wall."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Both look away from the window; Child glances at the cushions by the wall.",
+      "action": "Child points at the cushions, then mimes a small slide motion with his hand. Dad crosses his arms with an interested face and asks how it works; Child arranges his palms like little hills and swoops one hand down like a slide.",
+      "end": "Both look at the two cushions leaning against the wall."
+    },
+    {
+      "turns": [
+        6,
+        7
+      ],
+      "start": "Both look at the two cushions leaning against the wall.",
+      "action": "Dad claps once softly and points toward the living room for the after-lunch plan. Child raises both fists in a small determined cheer; Dad chuckles and ruffles the air above Child's head.",
+      "end": "Both stand smiling by the entryway; the rain keeps streaking the window; the cushions wait against the wall."
+    }
+  ]
+}

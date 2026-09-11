@@ -1,0 +1,42 @@
+{
+  "content_revision": 1,
+  "scene": "A split-screen phone call in a still locked 16:9 frame. Left panel: the fruit market, where Child stands holding a phone to his ear beside a small shopping basket with one green apple inside. Right panel: the home garage, where Dad stands with the phone to his ear beside his tidy workbench. Each speaker stays in their own panel; no cuts between locations and no extra people.",
+  "emotion": {
+    "baseline": "Calm, warm and regulated baseline. Both speak at a normal family volume with small, natural facial movements and gestures.",
+    "allowed_shift": "Child speaks with bright phone manners and small listening nods; Dad answers warmly with a smile in his voice; both end the call warmly.",
+    "forbidden": "No exaggerated surprise, wide-eyed shock, bouncing, raised voices, impatience, blaming or teasing. Any disappointment, worry or sadness stays mild and brief, and the adult helps things stay steady."
+  },
+  "clips": [
+    {
+      "turns": [
+        0,
+        1,
+        2
+      ],
+      "start": "Left panel: Child stands by the basket holding the phone to his ear. Right panel: Dad stands by the workbench holding the phone to his ear.",
+      "action": "Child waves slightly at the phone while greeting Dad and naming the market; Dad leans comfortably against the workbench and asks his question; Child glances at the basket while answering.",
+      "end": "Both keep their phones at their ears; Child looks toward the milk shelf off-frame."
+    },
+    {
+      "turns": [
+        3,
+        4,
+        5
+      ],
+      "start": "Both keep their phones at their ears; Child looks toward the milk shelf off-frame.",
+      "action": "Child asks Mom's milk question while cupping his free hand by his mouth. Dad points once toward the fridge off-frame for the big blue bottle. Child looks down and pats the small basket, explaining it is too heavy.",
+      "end": "Both keep their phones at their ears; Child's free hand rests on the basket handle."
+    },
+    {
+      "turns": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "start": "Both keep their phones at their ears; Child's free hand rests on the basket handle.",
+      "action": "Dad counts two on his fingers for the small bottles; Child repeats with two fingers and asks his extra question. Dad says the warm closing line; Child waves a small goodbye at the phone and lowers it from his ear, smiling.",
+      "end": "Left panel: Child holds the lowered phone with both hands, smiling by the basket. Right panel: Dad lowers his phone with a warm smile beside the workbench."
+    }
+  ]
+}

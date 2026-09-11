@@ -70,10 +70,13 @@ D:/TaviusProject/                      # 仓库根（git: main 分支）
 │
 ├── curriculum/                        # 新版课程唯一创作源（分年龄、结构化、可校验）
 │   ├── README.md                      # schema、迁移状态、校验入口
-│   └── 04/                            # 4 岁 Stage：10 章 × 3 课，已通过语言/逻辑审查
-│       ├── stage.json                 # Stage 策略、状态、5 岁桥接 Moves
-│       ├── FINAL-REVIEW.md            # 30 课最终内容审查
-│       └── <章>/<课>/lesson.json      # 对话、Replay Cards、review gates
+│   ├── 04/                            # Stage 1（4 岁）：10 章 × 3 课，已通过语言/逻辑审查
+│   │   ├── stage.json                 # Stage 策略、状态、5 岁桥接 Moves
+│   │   ├── FINAL-REVIEW.md            # 30 课最终内容审查
+│   │   └── <章>/<课>/lesson.json      # 对话、Replay Cards、review gates
+│   └── 05/                            # Stage 2（5 岁 "I can keep it going"）：30 课 draft，待逐课人工复核
+│       ├── stage.json                 # 含 Stage 3 桥接 Moves
+│       └── <章>/<课>/lesson.json      # 同 04 的 continuous-dialogue-v1 结构
 │
 ├── content/                           # v1 文案归档（仅历史对照和兼容测试）
 │   ├── README.md                      # 章/关/meta.json 约定
@@ -251,15 +254,16 @@ PROMPTS_ROOT    = Path(os.environ.get("PROMPTS_ROOT",    _PROJECT / "prompts"))
 | --- | --- |
 | `GET/POST /login`、`GET /logout` | session 登录/登出。admin 密码来自 `config.json`（回退示例值），普通用户来自 `users.json`（werkzeug scrypt 哈希） |
 | `GET /api/me` | 当前用户名 + 是否 admin（前端用户菜单用） |
+| `GET /api/stages` | 阶段切换：返回磁盘上有 `stage.json` 的 stage id 列表 + 配置的默认 stage。前端据此决定目录里哪些 Stage 可点击 |
 | `GET/POST /admin`、`GET/POST /api/admin/users` | admin 用户管理（HTML 页 + JSON API，加/删用户） |
 | `GET /` | 渲染 `map.html`（需登录） |
-| `GET /api/library` | `annotate_states(scan_curriculum_library(CURRICULUM_ROOT, CURRICULUM_STAGE, ...))` → JSON。performance 按登录用户隔离 |
-| `GET /thumb/<chapter>/<level>` | 返回 `DEMO_ROOT/<stage>/<ch>/<lv>/thumb.jpg`，缺失 404 → 前端回退主题色。同一路径越界守卫 |
-| `GET /video/<chapter>/<level>/<kind>` | demo 查 `DEMO_ROOT/<stage>/<ch>/<lv>/demo.{mp4\|webm}`；performance 查 `RECORDINGS_ROOT/<用户名>/<stage>/<ch>/<lv>/performance.{mp4\|webm}`。按实际扩展名返回 mimetype，并执行路径越界守卫 |
-| `POST /upload/<chapter>/<level>/<kind>` | 流式上传到上述 Stage 路径。`mimeType` 决定 `.mp4`/`.webm`；换格式重录会删旧文件；>5MB 自动压缩，demo 自动生成缩略图 |
-| `GET /api/prompts/<chapter>/<level>` | 校验 canonical Lesson 后读取 `PROMPTS_ROOT/<stage>/<章>/<课>/{a,b,c}.txt`；缺少某一段允许为空，未知 Lesson 返回 404 |
+| `GET /api/library?stage=` | `annotate_states(scan_curriculum_library(...))` → JSON。performance 按登录用户隔离。`?stage=` 缺省回落 `CURRICULUM_STAGE`；非法/无课程的 stage 一律 404（`_resolve_stage` 守卫） |
+| `GET /thumb/<chapter>/<level>?stage=` | 返回 `DEMO_ROOT/<stage>/<ch>/<lv>/thumb.jpg`，缺失 404 → 前端回退主题色。同一路径越界守卫 |
+| `GET /video/<chapter>/<level>/<kind>?stage=` | demo 查 `DEMO_ROOT/<stage>/<ch>/<lv>/demo.{mp4\|webm}`；performance 查 `RECORDINGS_ROOT/<用户名>/<stage>/<ch>/<lv>/performance.{mp4\|webm}`。按实际扩展名返回 mimetype，并执行路径越界守卫 |
+| `POST /upload/<chapter>/<level>/<kind>?stage=` | 流式上传到上述 Stage 路径。`mimeType` 决定 `.mp4`/`.webm`；换格式重录会删旧文件；>5MB 自动压缩，demo 自动生成缩略图 |
+| `GET /api/prompts/<chapter>/<level>?stage=` | 校验 canonical Lesson 后读取 `PROMPTS_ROOT/<stage>/<章>/<课>/{a,b,c}.txt`；缺少某一段允许为空，未知 Lesson 返回 404 |
 
-URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落点）。
+URL 路由不变；所有阶段相关路由新增可选 `?stage=` 查询参数（缺省 = 环境配置的 `CURRICULUM_STAGE`），前端在切换阶段后为封面、视频、上传、提示词统一附带该参数。
 
 ### 服务端视频处理（ffmpeg，无外部服务）
 
@@ -320,7 +324,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 1. **地图视图**（`#map-view`）：10章×3课，真实编号1–30；`stone-map.mjs` 渲染矩形媒体画框＋砂岩石台＋独立标题牌。completed 优先显示表演首帧，并挂一颗金色完成星章；current 显示青绿描边、定位针与可见标签；locked 显示锁，仍可点击预习。无媒体保留占位画框与编号，状态只由真实 performance 决定。每章背景和左右交替踏石在同一滚动层，章节边缘柔和衔接。顶部菜单、Stage、窄进度条和独立头像固定于左侧；桌面高度64px、平板60px、手机56px。保存新 performance 后本次会话仅短促庆祝一次；刷新或重录不重复。**Current lesson** 仅滚动并聚焦目标；全完成隐藏并显示完成提示。`?map-sample=1` 只截取前三关用于视觉对照，正常入口始终渲染全课程。
 2. **详情视图**（`#detail-view`）：56px标题栏；桌面左340px媒体栏（Your Show在上、Watch & Learn在下）、右侧完整A/B/C→完整Replay→默认独立折叠家长说明/VideoGen；底部Prev/Next。小于768px使用媒体页签＋单列正文，只页面整体滚动。未录时点 **Start recording**，示范为空点 **Add demo**。Can-Do、Trigger和句式放在家长说明内，不挤标题。
 
-运行时：`/api/library` → `summarizeAdventure` → 地图与 shell 同一份真实计数；目录选择只打开 Lesson，不写入课程状态。Stage 1 是 `curriculum/04` 的展示名，Stage 2/3 为禁用 Planned。目录打开时背景 inert、地图锁滚动、焦点进入并圈定抽屉；Escape/关闭/遮罩恢复菜单焦点，选课释放锁后打开详情。
+运行时：`/api/library` → `summarizeAdventure` → 地图与 shell 同一份真实计数；目录选择只打开 Lesson，不写入课程状态。**阶段切换（2026-09-11）**：`adventure-navigation.mjs` 的 `STAGES` 是纯元数据（Stage 1–4，Stage 4 主题 "I can read and retell"、目录 id 预留 `07`）；可进入的 Stage 由 `GET /api/stages`（磁盘上有 `stage.json` 的目录）运行时驱动，目录里点击 "Open" 的 Stage 即切换——详情自动关闭、旧阶段的待庆祝清空、封面/视频/上传/提示词 URL 全部附带 `?stage=`、URL 用 `?stage=` 记住当前阶段（刷新保持，可分享）。无课程内容的 Stage 显示 Planned。目录打开时背景 inert、地图锁滚动、焦点进入并圈定抽屉；Escape/关闭/遮罩恢复菜单焦点，选课释放锁后打开详情。
 
 ### 关键实现细节（改时注意）
 
@@ -333,7 +337,7 @@ URL 路由不变 → **app.js 和路由测试不用改**（只改背后文件落
 - **demo 封面**：有 demo 时节点尝试显示缩略图，缺图使用材质与编号回退；locked 关仍显示锁，可点击预习，不再单独叠加播放徽标。
 - **demo 上传**：`pickVideoFile` 用 File System Access API（Chrome），文件夹记忆存 IndexedDB。回退 `<input type="file">`。使用 **Add demo / Replace**；取消选择不会触发刷新或显示成功。
 - **背景图刷新**：`closeDetail` 恢复滚动层可见性后重新计算踏石与章节背景尺寸，再恢复 `mapScrollY`；不再依赖 `activeChapter` 或固定背景滚动监听。
-- **VideoGen**：Watch & Learn 下的 **VideoGen · Get prompts** 展开并定位到 A/B/C 提示词；`GET /api/prompts/<chapter>/<level>` 返回 a/b/c，Copy复制到外部视频工具使用。请求失败显示 Retry prompts，和成功返回空内容区分。隔离预览必须同时复制 `prompts/04`，否则所有课都会显示缺少提示词。
+- **VideoGen**：Watch & Learn 下的 **VideoGen · Get prompts** 展开并定位到 A/B/C 提示词；`GET /api/prompts/<chapter>/<level>` 返回 a/b/c，Copy复制到外部视频工具使用。请求失败显示 Retry prompts，和成功返回空内容区分。隔离预览会复制整个 `prompts/` 树，切换阶段后提示词照常可用。
 - **可重试加载**：`loadLibrary()` 三态切换，`fetch("/api/library", { cache: "no-store" })`。
 - **字体离线**：`@font-face` 引 `/static/fonts/*.woff2`。
 - **动效约束**：current 关发光呼吸；`prefers-reduced-motion: reduce` 关闭。
@@ -453,9 +457,11 @@ refactor: split content, demo, and recordings into separate trees
 
 ## 11. 当前状态与进行中的工作
 
-### 内容进度（截至 2026-09-06）
+### 内容进度（截至 2026-09-11）
 
 - Stage 1（4 岁目录 `curriculum/04`）：**30 / 30** 统一为 `three-by-ten-v2`，共 1451 词 / 296 turns，Child 654 词 / 134 turns；30 课均完成十项结构化 review 和十一问人工复核，详见 `FINAL-REVIEW.md`。版本为 r2×23、r3×4、r4×3，全部保持 `language_reviewed`。
+- Stage 2（5 岁目录 `curriculum/05`，2026-09-11 创建）：**30 / 30** 为 `continuous-dialogue-v1` **draft**（revision 1），共 1844 词 / 253 turns，Child 1012 / 成人 832 词；家庭伙伴 23/30；30 个新 Move + 15 项 Stage 内复用；`validate_curriculum --complete` 0 issue。90 份提示词已导出（`prompts/05/`）。设计依据 `docs/specs/2026-09-11-stage2-content-plan.md`（含 NCE1 前半册场景映射）。**未经用户逐课人工复核，未提升 language_reviewed，禁止制作 demo。**
+- 阶段路线图（2026-09-11 确认）：Stage 1–3 自研 + Stage 4 以《新概念英语》第一册为课本桥接（"I can read and retell"）；多阶段运行时与地图主题泛化是启用 Stage 2 前的工程前置条件，见 `docs/specs/2026-09-11-stage-roadmap-nce-bridge.md`。
 - 网站运行时：已直接读取 `curriculum/04`，显示 A/B/C、Replay Cards 与 Parent Support。
 - v1 `content/`：30 关归档，只作历史对照和兼容测试。
 - v1 Sora demo 提示词：**60 份**，不再继续生产。
@@ -473,6 +479,7 @@ refactor: split content, demo, and recordings into separate trees
 - 现代玩具剧场：三层象牙白路径＋金色已走内线/青绿 current 内线、单一完成星章/current定位针/锁、56px外壳（52px胶囊、统一16px圆角）、真实计数和课程目录；当前验收记录见 `docs/plans/2026-09-05-adventure-feedback-ui-acceptance.md`。
 - webm/mp4 双格式支持（scanner + 路由 + 上传）：完成。
 - **多用户认证**（登录/session、admin 用户管理、performance 按用户隔离到 `recordings/<用户名>/`）：完成。
+- **多阶段切换**（2026-09-11：`/api/stages` + 全部阶段路由 `?stage=` 参数；目录点击切换、URL 记住阶段、封面/上传/提示词携带阶段身份；Stage 3/4 无内容前显示 Planned）：完成。浏览器实测覆盖 1↔2 切换、刷新保持、详情页内切换自动关闭；验收入口 `stone-map-full.cjs` / `loading-cache.cjs` 全过。
 - **Electron 桌面壳**（launch.vbs 一键启动、自定义标题栏、自动授权摄像头/麦克风、退出杀 Flask）：完成。
 - **服务端视频处理**（上传/启动时 ffmpeg 压缩 >5MB 视频 + 生成缩略图，`/thumb` 路由替代 canvas 抽帧封面）：完成。
 - **详情页重设计**（卡片布局，design/memo.md + design/plans/ 的产出）：完成。

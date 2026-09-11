@@ -1,8 +1,14 @@
+// Stage metadata only: which stages exist on the roadmap and what they are
+// called. Whether a stage can be opened is decided at runtime by the server
+// (/api/stages lists stages that have a curriculum on disk).
 export const STAGES = Object.freeze([
-  { id: "04", label: "Stage 1", theme: "I can take part", available: true },
-  { id: "05", label: "Stage 2", theme: "I can keep it going", available: false },
-  { id: "06", label: "Stage 3", theme: "I can explain and adapt", available: false },
+  { id: "04", label: "Stage 1", theme: "I can take part" },
+  { id: "05", label: "Stage 2", theme: "I can keep it going" },
+  { id: "06", label: "Stage 3", theme: "I can explain and adapt" },
+  { id: "07", label: "Stage 4", theme: "I can read and retell" },
 ]);
+
+export const getStageById = stageId => STAGES.find(stage => stage.id === stageId);
 
 function chapterSummary(chapter) {
   const levels = Array.isArray(chapter && chapter.levels) ? chapter.levels : [];

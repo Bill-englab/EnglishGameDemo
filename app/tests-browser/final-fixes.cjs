@@ -85,7 +85,7 @@ async function refresh(page, url) {
     await check.goto(url);
     await check.locator('.level-node').first().waitFor();
     await check.evaluate(() => { window.qaOriginalNodes = [...document.querySelectorAll('.level-node')]; });
-    await check.route('**/api/library', route => route.fulfill({ status: 200, body: 'deliberately invalid QA JSON' }));
+    await check.route('**/api/library*', route => route.fulfill({ status: 200, body: 'deliberately invalid QA JSON' }));
     // Exercise the real refresh event handler after a successful first load.
     await check.locator('#map-retry').dispatchEvent('click');
     await check.locator('#map-error').waitFor({ state: 'visible' });
@@ -96,7 +96,7 @@ async function refresh(page, url) {
     await check.locator('.level-node').nth(1).click();
     assert.equal(await check.locator('#detail-view').isVisible(), true);
     await check.locator('#back-btn').click();
-    await check.unroute('**/api/library');
+    await check.unroute('**/api/library*');
     await check.locator('#map-retry').click();
     await check.locator('#map-error').waitFor({ state: 'hidden' });
     assert.equal(await check.locator('#current-lesson-button').isVisible(), true);

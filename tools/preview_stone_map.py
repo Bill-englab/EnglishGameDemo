@@ -18,6 +18,7 @@ from unittest.mock import patch
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=0)
+    parser.add_argument('--stage', default='04', help="Stage directory id to preview, e.g. 04 or 05")
     parser.add_argument('--login', action='store_true', help='Exercise login with the temporary preview / preview-only account')
     args = parser.parse_args()
     project = Path(__file__).resolve().parent.parent
@@ -30,10 +31,13 @@ def main():
     with tempfile.TemporaryDirectory(prefix='english-stone-preview-') as temporary:
         root = Path(temporary)
         shutil.copytree(project / 'curriculum', root / 'curriculum')
-        shutil.copytree(project / 'prompts' / '04', root / 'prompts' / '04')
+        # Copy every stage's prompts so switching stages in the preview keeps
+        # the VideoGen panels working, not just the launched stage's.
+        shutil.copytree(project / 'prompts', root / 'prompts',
+                        ignore=shutil.ignore_patterns('V1-REFERENCE.md'))
         for name in ('CURRICULUM', 'DEMO', 'RECORDINGS', 'PROMPTS', 'PROFILES'):
             os.environ[name + '_ROOT'] = str(root / name.lower())
-        os.environ['CURRICULUM_STAGE'] = '04'
+        os.environ['CURRICULUM_STAGE'] = args.stage
         # Never even read real config or real account data.
         original_exists = Path.exists
         config = app_dir / 'config.json'
@@ -58,7 +62,7 @@ def main():
                 session['username'] = 'preview'
                 session['profile_account_stamp'] = stamp
 
-        chapter = sorted((root / 'curriculum' / '04').glob('*/chapter.json'))[0].parent
+        chapter = sorted((root / 'curriculum' / args.stage).glob('*/chapter.json'))[0].parent
         lessons = sorted(chapter.glob('*/lesson.json'))[:3]
         assets = app_dir / 'static' / 'stone-map' / 'sample'
         ffmpeg = application._ffmpeg_path()
@@ -72,10 +76,10 @@ def main():
                            check=True, timeout=30, creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
 
         for lesson, image in zip(lessons, ('choice.png', 'choice.png', 'water.png')):
-            demo = root / 'demo' / '04' / chapter.name / lesson.parent.name / 'demo.mp4'
+            demo = root / 'demo' / args.stage / chapter.name / lesson.parent.name / 'demo.mp4'
             make_video(assets / image, demo)
             application._generate_thumb(demo)
-        make_video(assets / 'performance.png', root / 'recordings' / 'preview' / '04' /
+        make_video(assets / 'performance.png', root / 'recordings' / 'preview' / args.stage /
                    chapter.name / lessons[0].parent.name / 'performance.mp4')
         server = make_server('127.0.0.1', args.port, application.app, threaded=True)
         print(f'PREVIEW_URL=http://127.0.0.1:{server.server_port}/', flush=True)

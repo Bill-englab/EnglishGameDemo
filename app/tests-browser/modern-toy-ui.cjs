@@ -746,10 +746,11 @@ async function main() {
         await page.locator('#adventure-menu-button').click();
         assert.equal(await page.locator('#course-drawer-close').evaluate(e => e === document.activeElement), true);
         assert.equal(await page.locator('#map-view').evaluate(e => e.inert && e.style.overflowY === 'hidden'), true);
-        assert.equal(await page.locator('.course-stage').count(), 3);
+        assert.equal(await page.locator('.course-stage').count(), 4);
         assert.equal(await page.locator('.course-stage:disabled').count(), 2);
-        assert.match(await page.locator('.course-stage').nth(1).innerText(), /Stage 2[\s\S]*Planned/);
+        assert.match(await page.locator('.course-stage').nth(1).innerText(), /Stage 2[\s\S]*Open/);
         assert.match(await page.locator('.course-stage').nth(2).innerText(), /Stage 3[\s\S]*Planned/);
+        assert.match(await page.locator('.course-stage').nth(3).innerText(), /Stage 4[\s\S]*Planned/);
         assert.equal(await page.locator('.course-chapter').count(), 10);
         await assertMinimumTargetSize(page, '#course-drawer button, #course-drawer summary',
           `Course drawer at ${width}×${height}`);
@@ -931,7 +932,7 @@ async function main() {
       await page.locator('.record-playback').waitFor();
       const inFlightKey = await page.locator('[data-current-lesson]').getAttribute('data-current-lesson');
       let inFlightSaved = false;
-      await page.route('**/api/library', async route => {
+      await page.route('**/api/library*', async route => {
         const response = await route.fetch();
         const data = await response.json();
         if (inFlightSaved) {
@@ -957,7 +958,7 @@ async function main() {
       await page.locator('.level-node-wrap--just-completed').waitFor();
       assert.equal(await page.locator('.level-node-wrap--just-completed .level-node__marker--star').count(), 1);
       await page.unroute('**/upload/**/performance');
-      await page.unroute('**/api/library');
+      await page.unroute('**/api/library*');
       results.push({ performanceSave: 'one-shot lesson and chapter celebration', refresh: 'no replay' });
 
       if (focus === 'celebration') {
@@ -980,7 +981,7 @@ async function main() {
       const optionalThumbnailUrl = `${url}/thumb/${library[0].name}/${library[0].levels[0].level}`;
       allowed404Urls.add(optionalThumbnailUrl);
       let uploaded = false;
-      await page.route('**/api/library', async route => {
+      await page.route('**/api/library*', async route => {
         const response = await route.fetch();
         const data = await response.json();
         data[0].levels[0].has_demo = uploaded;
@@ -1033,7 +1034,7 @@ async function main() {
       await page.waitForLoadState('networkidle');
       allowed404Urls.delete(optionalThumbnailUrl);
 
-      await page.unroute('**/api/library');
+      await page.unroute('**/api/library*');
       for (const chapter of library) for (const level of chapter.levels) {
         const directory = path.join(fixtureRoot, 'recordings', 'alice', '04', chapter.name, level.level);
         fs.mkdirSync(directory, { recursive: true });

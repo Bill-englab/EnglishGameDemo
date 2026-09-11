@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   STAGES,
+  getStageById,
   summarizeAdventure,
   globalLessonNumber,
 } from "../static/adventure-navigation.mjs";
@@ -61,11 +62,21 @@ test("numbers lessons in their real chapter and level order", () => {
   assert.equal(globalLessonNumber(fixture, "02-help", "missing"), null);
 });
 
-test("exposes exactly three stages with only Stage 1 available", () => {
+test("exposes four roadmap stages; availability is runtime-driven", () => {
   assert.deepEqual(STAGES, [
-    { id: "04", label: "Stage 1", theme: "I can take part", available: true },
-    { id: "05", label: "Stage 2", theme: "I can keep it going", available: false },
-    { id: "06", label: "Stage 3", theme: "I can explain and adapt", available: false },
+    { id: "04", label: "Stage 1", theme: "I can take part" },
+    { id: "05", label: "Stage 2", theme: "I can keep it going" },
+    { id: "06", label: "Stage 3", theme: "I can explain and adapt" },
+    { id: "07", label: "Stage 4", theme: "I can read and retell" },
   ]);
   assert.equal(Object.isFrozen(STAGES), true);
+  // Enterability is not part of the metadata: the server decides via /api/stages.
+  for (const stage of STAGES) assert.equal("available" in stage, false);
+});
+
+test("resolves stages by id and falls back to undefined", () => {
+  assert.equal(getStageById("05").label, "Stage 2");
+  assert.equal(getStageById("07").theme, "I can read and retell");
+  assert.equal(getStageById("99"), undefined);
+  assert.equal(getStageById(undefined), undefined);
 });

@@ -58,7 +58,7 @@ server.serve_forever()
     await page.locator('.level-node-wrap').first().waitFor();
 
     let uploaded = false;
-    await page.route('**/api/library', async route => {
+    await page.route('**/api/library*', async route => {
       const response = await route.fetch();
       const library = await response.json();
       library[0].levels[0].has_demo = uploaded;

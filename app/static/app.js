@@ -25,6 +25,7 @@ const adventureShell = createAdventureShell({
   onOpenLesson: openDetail,
   onCurrentLesson: scrollToCurrentLesson,
   onProfile: () => document.getElementById("profile-open").click(),
+  onSwitchStage: switchStage,
 });
 
 let detailVisit = 0;
@@ -63,14 +64,23 @@ function disposeDetailMedia() {
   });
 }
 
+// ===== stage switching =====
+// The active stage drives every stage-scoped URL (covers, videos, uploads,
+// prompts). Stages that can be opened come from /api/stages — a stage without
+// curriculum content on disk stays "Planned" in the drawer.
+let activeStage = null;
+let availableStages = [];
+
 function prettyChapter(raw) {
   const s = raw.replace(/^\d+-/, "");
   return s.split("-").filter(Boolean)
     .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 }
 // Stable addresses allow conditional reuse; the server validates media changes.
-const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}`;
-const uploadURL = (chapter, level, kind) => `/upload/${chapter}/${level}/${kind}`;
+// The stage query keeps media scoped to the loaded curriculum.
+const stageQuery = () => (activeStage ? `?stage=${encodeURIComponent(activeStage)}` : "");
+const videoURL = (chapter, level, kind) => `/video/${chapter}/${level}/${kind}${stageQuery()}`;
+const uploadURL = (chapter, level, kind) => `/upload/${chapter}/${level}/${kind}${stageQuery()}`;
 const levelKey = ({ chapter, level }) => `${chapter}/${level}`;
 
 function _fallbackCopy(text, onSuccess) {
@@ -626,15 +636,18 @@ function buildBgLayer(library) {
   return slides;
 }
 
-function renderMap(library) {
+function renderMap(library, stage) {
+  const firstChapter = library[0];
+  const firstLevel = firstChapter && firstChapter.levels && firstChapter.levels[0];
+  activeStage = stage || (firstLevel && firstLevel.stage) || activeStage;
   celebrationEffects.clear();
   disposeStoneMedia();
   const map = document.getElementById("map");
   map.textContent = '';
   currentLibrary = library;
   flatLevels = library.flatMap(ch => ch.levels.map(lv => withChapterContext(lv, ch)));
-  adventureShell.render(summarizeAdventure(library));
-  renderStoneMap(map, library, openDetail, { sample: mapSample });
+  adventureShell.render(summarizeAdventure(library), { availableStages });
+  renderStoneMap(map, library, openDetail, { sample: mapSample, stage: activeStage });
   bgSlides = buildBgLayer(mapSample ? library.slice(0, 1) : library);
   requestAnimationFrame(drawMapPath);
   if (document.fonts) document.fonts.ready.then(() => requestAnimationFrame(drawMapPath));
@@ -798,7 +811,7 @@ function openDetail(level) {
   const loadPrompts = () => {
     if (!isCurrent()) return;
     promptWrap.innerHTML = `<div class="prompt-loading">Loading prompts…</div>`;
-    fetch(`/api/prompts/${level.chapter}/${level.level}`, { cache: "no-store" })
+    fetch(`/api/prompts/${level.chapter}/${level.level}${stageQuery()}`, { cache: "no-store" })
       .then(r => {
         if (!r.ok) throw new Error(`Prompts request failed: ${r.status}`);
         return r.json();
@@ -939,14 +952,16 @@ function celebratePendingCompletion() {
 function showOnly(id) {
   showMapLoadState(document, id);
 }
-async function loadLibrary({ isCurrent = () => true } = {}) {
+async function loadLibrary({ isCurrent = () => true, stage } = {}) {
   // A detail upload refreshes in the background. Keep the existing map usable
-  // if the family navigates away before that request finishes.
+  // if the family navigates away before that request finishes. Without an
+  // explicit stage this reloads the active one.
+  const target = stage || activeStage;
   if (!currentLibrary.length && !document.getElementById("map-view").classList.contains("hidden")) showOnly("map-loading");
   try {
-    const library = await requestJSON("/api/library");
+    const library = await requestJSON(`/api/library${target ? `?stage=${encodeURIComponent(target)}` : ""}`);
     if (!isCurrent()) return false;
-    renderMap(library);
+    renderMap(library, target);
     showOnly("map-scroll");
     return true;
   } catch (error) {
@@ -954,6 +969,35 @@ async function loadLibrary({ isCurrent = () => true } = {}) {
     console.error("Unable to load library", error);
     showMapLoadError(document, { hasLibrary: currentLibrary.length > 0 });
     return false;
+  }
+}
+
+// Switch the whole map to another stage: close any open lesson, drop the old
+// stage's pending celebrations, reload the library for the new stage and keep
+// the choice in the URL so a refresh stays on the same stage.
+async function switchStage(stageId) {
+  if (!stageId || stageId === activeStage) return;
+  if (availableStages.indexOf(stageId) === -1) return;
+  const detail = document.getElementById("detail-view");
+  if (!detail.classList.contains("hidden")) {
+    disposeDetailMedia();
+    detail.classList.add("hidden");
+    detail.classList.remove("open");
+    document.getElementById("map-view").classList.remove("hidden");
+    document.getElementById("bg-layer").classList.remove("hidden");
+  }
+  celebrationQueue.clear();
+  chapterCelebrationQueue.clear();
+  celebrationEffects.clear();
+  showOnly("map-loading");
+  const params = new URLSearchParams(window.location.search);
+  params.set("stage", stageId);
+  window.history.replaceState(null, "", `?${params.toString()}`);
+  const ok = await loadLibrary({ stage: stageId });
+  if (ok) {
+    mapScrollY = 0;
+    document.getElementById("map-view").scrollTop = 0;
+    scrollToCurrentLesson();
   }
 }
 let initialized = false;
@@ -1088,9 +1132,22 @@ async function init() {
     rt = setTimeout(drawMapPath, 120);
   });
 
+  // Which stages can be opened comes from the server (curriculum on disk).
+  // The ?stage= URL param picks the initial stage; invalid ids fall back to
+  // the configured default.
+  try {
+    const data = await requestJSON("/api/stages");
+    availableStages = Array.isArray(data.stages) ? data.stages : [];
+  } catch (error) {
+    availableStages = [];
+  }
+  const requestedStage = new URLSearchParams(window.location.search).get("stage");
+  const initialStage = requestedStage && availableStages.indexOf(requestedStage) !== -1
+    ? requestedStage : null;
+
   initialized = true;
   window.dispatchEvent(new Event('adventure:initialized'));
-  return loadLibrary();
+  return loadLibrary({ stage: initialStage });
 }
 init().catch(error => {
   console.error('Unable to start adventure', error);

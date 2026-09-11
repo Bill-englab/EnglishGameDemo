@@ -122,7 +122,7 @@ async function geometry(page) {
       window.starAnimations = 0;
       document.addEventListener('animationstart', e => { if(e.animationName==='completedStarSettle') window.starAnimations++; });
     });
-    await scenario.route('**/api/library',r => r.fulfill({json:data}));
+    await scenario.route('**/api/library*',r => r.fulfill({json:data}));
     await scenario.route('**/video/**/performance*',r => r.fulfill({contentType:'video/mp4',body:video}));
     await scenario.route('**/upload/**',r => { setProgress(++completed); return r.fulfill({json:{ok:true}}); });
     await scenario.goto(url); await ready(scenario);

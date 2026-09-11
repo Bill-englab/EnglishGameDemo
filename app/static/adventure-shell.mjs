@@ -1,4 +1,4 @@
-import { STAGES } from "./adventure-navigation.mjs";
+import { STAGES, getStageById } from "./adventure-navigation.mjs";
 import { withChapterContext } from "./lesson-view.mjs";
 
 export function getFocusableElements(root) {
@@ -8,7 +8,7 @@ export function getFocusableElements(root) {
       element.ownerDocument.defaultView.getComputedStyle(element).visibility !== "hidden");
 }
 
-export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onProfile }) {
+export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onProfile, onSwitchStage }) {
   const doc = root.ownerDocument || root;
   const find = id => root.querySelector(`#${id}`);
   const map = find("map-view");
@@ -91,11 +91,17 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     return element;
   }
 
-  function render(summary) {
+  function render(summary, options = {}) {
     if (destroyed) return;
     const hadFocus = opened && drawer.contains(doc.activeElement);
     const focusedKey = doc.activeElement && doc.activeElement.dataset.lessonKey;
-    const currentStage = STAGES.find(stage => stage.available);
+    const firstChapter = summary.chapters[0];
+    const firstLevel = firstChapter && firstChapter.levels && firstChapter.levels[0];
+    const activeStageId = (firstLevel && firstLevel.stage) || null;
+    const currentStage = getStageById(activeStageId) || STAGES[0];
+    // Stages the server can load; without the list only the active stage is enterable.
+    const openStageIds = Array.isArray(options.availableStages) && options.availableStages.length
+      ? options.availableStages : (activeStageId ? [activeStageId] : []);
     const stageLabel = find("adventure-stage-label");
     stageLabel.textContent = `${currentStage.label} · ${currentStage.theme}`;
     stageLabel.dataset.shortLabel = currentStage.label;
@@ -113,11 +119,17 @@ export function createAdventureShell({ root, onOpenLesson, onCurrentLesson, onPr
     for (const stage of STAGES) {
       const button = make("button", "course-stage");
       button.type = "button";
-      button.disabled = !stage.available;
-      if (stage.available) button.setAttribute("aria-current", "page");
+      const isActive = stage.id === currentStage.id;
+      const isOpen = openStageIds.indexOf(stage.id) !== -1;
+      button.disabled = !isActive && !isOpen;
+      if (isActive) button.setAttribute("aria-current", "page");
       const label = make("span", "course-stage__text");
       label.append(make("strong", "", stage.label), make("span", "", stage.theme));
-      button.append(label, make("span", "course-stage__status", stage.available ? "Current" : "Planned"));
+      button.append(label, make("span", "course-stage__status", isActive ? "Current" : isOpen ? "Open" : "Planned"));
+      if (!isActive && isOpen && onSwitchStage) {
+        // Buttons are rebuilt on every render, so a plain listener is enough.
+        button.addEventListener("click", () => onSwitchStage(stage.id));
+      }
       stages.append(button);
     }
 

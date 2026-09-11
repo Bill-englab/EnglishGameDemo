@@ -8,6 +8,7 @@ import { mapAsset } from './map-assets.mjs';
 const ASSETS = '/static/stone-map/';
 let mediaObserver;
 let deferMedia = true;
+let stageQuery = '';
 const pendingMedia = new WeakMap();
 
 function loadNearMap(media, src) {
@@ -61,14 +62,14 @@ function createStoneLesson(level, index, onOpen) {
     video.setAttribute('aria-hidden', 'true');
     video.addEventListener('loadeddata', () => placeholder.hidden = true);
     video.addEventListener('error', () => { video.hidden = true; placeholder.hidden = false; });
-    loadNearMap(video, `/video/${level.chapter}/${level.level}/performance#t=0.1`);
+    loadNearMap(video, `/video/${level.chapter}/${level.level}/performance${stageQuery}#t=0.1`);
     frame.appendChild(video);
   } else if (level.has_demo) {
     const img = make('img', 'stone-thumbnail');
     img.alt = '';
     img.addEventListener('load', () => placeholder.hidden = true);
     img.addEventListener('error', () => { img.hidden = true; placeholder.hidden = false; });
-    loadNearMap(img, `/thumb/${level.chapter}/${level.level}`);
+    loadNearMap(img, `/thumb/${level.chapter}/${level.level}${stageQuery}`);
     frame.appendChild(img);
   }
   const badge = make('span', `stone-badge stone-badge--${state}`);
@@ -91,11 +92,12 @@ function createStoneLesson(level, index, onOpen) {
   return wrap;
 }
 
-export function renderStoneMap(map, library, onOpen, { sample = false } = {}) {
+export function renderStoneMap(map, library, onOpen, { sample = false, stage = null } = {}) {
   // The scenery and stones share one scrolling canvas, so their positions stay
   // attached without a delayed scroll-event transform. Keep the shared loader.
   map.parentElement.prepend(document.getElementById('bg-layer'));
   deferMedia = !sample;
+  stageQuery = stage ? `?stage=${encodeURIComponent(stage)}` : '';
   mediaObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
     for (const { target, isIntersecting } of entries) {
       if (!isIntersecting) continue;

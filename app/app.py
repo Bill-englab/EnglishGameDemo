@@ -468,6 +468,35 @@ def index():
     return render_template("map.html")
 
 
+def _available_stages():
+    """Stage ids that have a curriculum on disk, in display order."""
+    stages = []
+    if CURRICULUM_ROOT.is_dir():
+        for child in sorted(CURRICULUM_ROOT.iterdir()):
+            if child.is_dir() and (child / "stage.json").is_file():
+                stages.append(child.name)
+    return stages
+
+
+def _resolve_stage(value=None):
+    """Validate a requested stage id, defaulting to the configured stage.
+
+    A stage is only enterable when its curriculum directory exists, so a
+    stray or traversal-style id can never render an empty course.
+    """
+    stage = (value or "").strip() or CURRICULUM_STAGE
+    if len(stage) != 2 or not stage.isdigit() or stage not in _available_stages():
+        abort(404)
+    return stage
+
+
+@app.route("/api/stages")
+@login_required
+def api_stages():
+    """Stage ids the map can switch to, plus the configured default."""
+    return jsonify({"stages": _available_stages(), "default": CURRICULUM_STAGE})
+
+
 @app.route("/api/library")
 @login_required
 def api_library():
@@ -476,7 +505,7 @@ def api_library():
     return jsonify(annotate_states(
         scan_curriculum_library(
             CURRICULUM_ROOT,
-            CURRICULUM_STAGE,
+            _resolve_stage(request.args.get("stage")),
             DEMO_ROOT,
             RECORDINGS_ROOT,
             username=session["username"],
@@ -490,7 +519,7 @@ def thumb(chapter, level):
     Thumbnails live at demo_root/<stage>/<chapter>/<level>/thumb.jpg and are
     generated server-side via ffmpeg. Falls back to 404 if missing.
     """
-    base = DEMO_ROOT / CURRICULUM_STAGE
+    base = DEMO_ROOT / _resolve_stage(request.args.get("stage"))
     base_resolved = base.resolve()
     d = (base / chapter / level).resolve()
     if not d.is_relative_to(base_resolved):
@@ -516,10 +545,10 @@ def video(chapter, level, kind):
         username = session["username"]
         if not _valid_username(username):
             abort(404)
-        base = RECORDINGS_ROOT / username / CURRICULUM_STAGE
+        base = RECORDINGS_ROOT / username / _resolve_stage(request.args.get("stage"))
         name = "performance"
     elif kind == "demo":
-        base = DEMO_ROOT / CURRICULUM_STAGE
+        base = DEMO_ROOT / _resolve_stage(request.args.get("stage"))
         name = "demo"
     else:
         abort(404)
@@ -556,12 +585,13 @@ def upload(chapter, level, kind):
     Safari). Legacy file uploads without this field default to .mp4.
     """
     username = session["username"]
+    stage = _resolve_stage(request.args.get("stage"))
     if kind == "performance":
         if not _valid_username(username):
             abort(404)
-        base = RECORDINGS_ROOT / username / CURRICULUM_STAGE
+        base = RECORDINGS_ROOT / username / stage
     elif kind == "demo":
-        base = DEMO_ROOT / CURRICULUM_STAGE
+        base = DEMO_ROOT / stage
     else:
         abort(404)
     base_resolved = base.resolve()
@@ -611,13 +641,14 @@ def _generation_prompt_text(text):
 @app.route("/api/prompts/<chapter>/<level>")
 def api_prompts(chapter, level):
     """Return optional A/B/C video prompts for a canonical Lesson."""
-    stage_dir = (CURRICULUM_ROOT / CURRICULUM_STAGE).resolve()
+    stage = _resolve_stage(request.args.get("stage"))
+    stage_dir = (CURRICULUM_ROOT / stage).resolve()
     lesson_dir = (stage_dir / chapter / level).resolve()
     if not lesson_dir.is_relative_to(stage_dir):
         abort(404)
     if not (lesson_dir / "lesson.json").is_file():
         abort(404)
-    prompts_base = (PROMPTS_ROOT / CURRICULUM_STAGE).resolve()
+    prompts_base = (PROMPTS_ROOT / stage).resolve()
     prompts_dir = (prompts_base / chapter / level).resolve()
     if not prompts_dir.is_relative_to(prompts_base):
         abort(404)

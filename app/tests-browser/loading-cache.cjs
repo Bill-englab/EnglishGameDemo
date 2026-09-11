@@ -72,7 +72,7 @@ async function artReady(page) {
       });
       let blocked = true;
       let held;
-      const pattern = mode.includes('module') ? '**/stone-map.mjs' : mode === 'hung-session' ? '**/api/me' : '**/api/library';
+      const pattern = mode.includes('module') ? '**/stone-map.mjs' : mode === 'hung-session' ? '**/api/me' : '**/api/library*';
       if (mode === 'legacy-media-query') await p.addInitScript(() => {
         const match = window.matchMedia;
         window.matchMedia = query => { const media = match(query); media.addEventListener = undefined; return media; };

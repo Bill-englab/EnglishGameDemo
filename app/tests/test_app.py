@@ -61,6 +61,33 @@ def _build_lib(curriculum: Path, demo: Path, recordings: Path, prompts: Path):
     (prompt_dir / "a.txt").write_text("prompt A text", encoding="utf-8")
     (prompt_dir / "b.txt").write_text("prompt B text", encoding="utf-8")
     (prompt_dir / "c.txt").write_text("prompt C text", encoding="utf-8")
+    # A second stage so stage switching can be exercised end to end.
+    lesson5_dir = curriculum / "05" / "01-c5" / "01-s5"
+    lesson5_dir.mkdir(parents=True)
+    (curriculum / "05" / "stage.json").write_text(
+        json.dumps({"id": "05", "title": "Stage 5"}), encoding="utf-8")
+    (curriculum / "05" / "01-c5" / "chapter.json").write_text(
+        json.dumps({"title": "Chapter Five", "background_asset": "02-refusing-bargaining"}),
+        encoding="utf-8",
+    )
+    (lesson5_dir / "lesson.json").write_text(json.dumps({
+        "title": "S5",
+        "title_zh": "第五课",
+        "can_do": "Keep a story going with follow-up questions.",
+        "trigger": "Dad starts a story.",
+        "conversation_move": {"id": "ask-what-happened-next", "label": "ask what happened next"},
+        "parent_support": ["Pause before the good part."],
+        "replay_cards": [{"title": "Train", "setting": "Home", "change": "Tea pause", "challenge": "Ask again"}],
+        "status": "draft",
+        "content_revision": 1,
+        "parts": [
+            {"id": "A", "beat": "goal", "turns": [{"speaker": "dad", "line": "Something funny happened."}, {"speaker": "child", "line": "What happened next?"}]},
+            {"id": "B", "beat": "change", "turns": [{"speaker": "dad", "line": "My sandwich was gone."}, {"speaker": "child", "line": "Where was it?"}]},
+            {"id": "C", "beat": "resolve", "turns": [{"speaker": "dad", "line": "Under my hat."}, {"speaker": "child", "line": "So silly!"}]},
+        ],
+    }), encoding="utf-8")
+    (demo / "05" / "01-c5" / "01-s5").mkdir(parents=True)
+    (demo / "05" / "01-c5" / "01-s5" / "demo.mp4").write_bytes(b"fake-demo-5")
 
 
 def _write_users(users_file: Path, users: dict):
@@ -157,6 +184,44 @@ def test_api_library_returns_annotated_tree(client):
     assert lv["current"] is True
 
 
+def test_api_stages_lists_available_stages(client):
+    res = client.get("/api/stages")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["stages"] == ["04", "05"]
+    assert data["default"] == "04"
+
+
+def test_api_stages_requires_login(app_env):
+    assert app_env.get("/api/stages").status_code == 302
+
+
+def test_api_library_stage_param_switches_curriculum(client):
+    res = client.get("/api/library?stage=05")
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data[0]["name"] == "01-c5"
+    assert data[0]["title"] == "Chapter Five"
+    lv = data[0]["levels"][0]
+    assert lv["title"] == "S5"
+    assert lv["stage"] == "05"
+    assert lv["state"] == "unlocked"
+
+
+def test_api_library_rejects_unknown_stage(client):
+    assert client.get("/api/library?stage=99").status_code == 404
+    assert client.get("/api/library?stage=../04").status_code == 404
+    assert client.get("/api/library?stage=").status_code == 200
+
+
+def test_video_route_serves_stage_scoped_demo(client):
+    res = client.get("/video/01-c5/01-s5/demo?stage=05")
+    assert res.status_code == 200
+    assert res.data == b"fake-demo-5"
+    # Without the stage param the route stays on the default stage's tree.
+    assert client.get("/video/01-c5/01-s5/demo").status_code == 404
+
+
 def test_video_route_serves_existing_demo(client):
     res = client.get("/video/01-c/01-s/demo")
     assert res.status_code == 200
@@ -175,9 +240,11 @@ def test_video_route_404_for_unknown_kind(client):
 
 def test_video_route_rejects_path_traversal(client):
     # A ".." chapter segment must resolve outside its root and be refused,
-    # even if a file of that name happened to exist elsewhere.
-    with pytest.raises(werkzeug.exceptions.NotFound):
-        app_module.video("..", "01-s", "demo")
+    # even if a file of that name happened to exist elsewhere. The direct
+    # call runs inside a request context so ?stage= resolution works.
+    with app_module.app.test_request_context("/video"):
+        with pytest.raises(werkzeug.exceptions.NotFound):
+            app_module.video("..", "01-s", "demo")
 
 
 def test_map_shell_has_module_entry_and_resilient_states(client):
@@ -191,7 +258,7 @@ def test_map_shell_has_module_entry_and_resilient_states(client):
 
 def test_app_registers_retryable_library_loading(client):
     javascript = client.get("/static/app.js").get_data(as_text=True)
-    assert 'requestJSON("/api/library")' in javascript
+    assert "requestJSON(`/api/library${" in javascript
     assert 'getElementById("map-retry").addEventListener("click",' in javascript
     # Error visibility/preservation is exercised by the imported DOM helper and
     # the real browser refresh/retry regression, independent of function spelling.
@@ -239,6 +306,20 @@ def test_upload_writes_performance_to_recordings(upload_client):
     assert written.read_bytes() == b"fake-perf"
     # The uploaded video is now servable via the /video route.
     assert client.get("/video/01-c/01-s/performance").status_code == 200
+
+
+def test_upload_stage_param_isolates_performance_trees(upload_client):
+    client, roots = upload_client
+    res = client.post("/upload/01-c5/01-s5/performance?stage=05", data={
+        "file": (io.BytesIO(b"stage5-perf"), "performance.mp4"),
+    }, content_type="multipart/form-data")
+    assert res.status_code == 200
+    written = roots["recordings"] / TEST_USERNAME / "05" / "01-c5" / "01-s5" / "performance.mp4"
+    assert written.read_bytes() == b"stage5-perf"
+    # The stage-05 recording serves with its stage param and is invisible to
+    # the default stage's path (the same chapter does not exist there).
+    assert client.get("/video/01-c5/01-s5/performance?stage=05").status_code == 200
+    assert client.get("/video/01-c5/01-s5/performance").status_code == 404
 
 
 def test_upload_writes_demo_to_demo_root(upload_client):
@@ -365,8 +446,10 @@ def test_prompts_404_for_missing_level(client):
 
 
 def test_prompts_rejects_path_traversal(client):
-    with pytest.raises(werkzeug.exceptions.NotFound):
-        app_module.api_prompts("..", "01-s")
+    # Direct route call inside a request context so ?stage= resolution works.
+    with app_module.app.test_request_context("/api/prompts"):
+        with pytest.raises(werkzeug.exceptions.NotFound):
+            app_module.api_prompts("..", "01-s")
 
 
 def test_map_shell_has_detail_prompts_element(client):

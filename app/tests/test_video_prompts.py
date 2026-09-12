@@ -75,8 +75,8 @@ def test_all_stage_prompts_restore_original_art_and_anatomy_but_keep_restrained_
     assert len(outputs) == 90
     for path, text in outputs.items():
         assert original_style in text, path
-        for feature in ("bright orange fur with bold black stripes", "big round sparkly eyes",
-                        "chubby round cheeks", "tiny rounded ears", "short chubby toddler proportions"):
+        for feature in ("bright orange fur with bold black stripes", "bright attentive eyes full of curiosity",
+                        "chubby round cheeks", "tiny rounded ears", "short chubby toddler proportions", "alert, clever and quick to smile"):
             assert feature in text, (path, feature)
         if "Dog Dad —" in text:
             for feature in ("warm tan-brown fur", "big soft floppy ears", "soft round snout", "bright round eyes with a lively spark"):
